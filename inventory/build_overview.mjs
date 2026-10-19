@@ -3,6 +3,7 @@
 // Run: node inventory/build_overview.mjs     Every number on the page is read or computed here; none is typed into body.html.
 import { readFileSync, writeFileSync } from 'fs';
 import { packMesh } from '../review/mesh.mjs';
+import { buildElectrical } from './build_electrical.mjs';
 const r = p => readFileSync(new URL(p, import.meta.url), 'utf8');
 const INV = JSON.parse(r('./inventory.json')), S = INV.summary, ROWS = INV.rows;
 const NWA_MD = r('../docs/research/nautical-wings-props.md'), BEN_MD = r('../docs/research/budget-energy-test.md');
@@ -54,6 +55,12 @@ const sheetBtn = cls => `<a class="btnlink ${cls || ''}" href="${SHEET}" target=
 const findBtn = id => `<button type="button" class="linkbtn" data-find="${esc(id)}" aria-label="Find ${esc(id)} in the inventory table">${esc(id)}</button>`;
 const src = t => `<p class="src">${t}</p>`;
 const est = '<span class="est">EST</span>';
+// M-20 displayed note: the wheel axle block is a proposal (inventory.json is not changed)
+byId['M-20'].Process += ' | If wheels are adopted (proposal, §7 Landing gear): printed axle block at the leg tip carrying the 5/32 in axle (G-02) and collars (G-03)';
+const proposed = ROWS.filter(x => x.Type === 'Proposed');
+// electrical + landing-gear content (reads inventory/electrical/*.json, docs/research/electrical-architecture.md, analysis/results.json)
+const ELB = buildElectrical({ esc, usd, round2, chip, findBtn, src, est, ROWS, byId, S, REV, DATE: S.generated, sum, reserveTarget });
+const ET = ELB.T;
 
 // ---------- §1 overview ----------
 const kpi = (l, v, s, cls = '') => `<div class="kpi"><div class="l">${l}</div><div class="v ${cls}">${v}</div><div class="s">${s}</div></div>`;
@@ -63,7 +70,9 @@ ${kpi('Crash reserve (R7)', usd(S.reserve), `target ≥ $${reserveTarget}: met, 
 ${kpi('Lines to buy', buy.length, `${toOrder} to order, ${buy.length - toOrder} on hold (NWA swap) · goods ${usd(S.goods)}`)}
 ${kpi('Parts to make', make.length, `${toMake} to make in-house, ${toSource} to source (spinner)`)}
 ${kpi('Items received', `${received} <small>of ${ROWS.length} lines</small>`, (ROWS.some(x => +x['Qty ordered'] > 0) ? `${ROWS.filter(x => +x['Qty ordered'] > 0).length} lines ordered` : 'nothing ordered yet; every on-hand quantity is 0'), received ? 'ok' : 'warn')}
-${kpi('NWA props', `${nwaQty} <small>proposed</small>`, `${nwa.length} lines, not confirmed: terms in writing first`, 'warn')}
+${kpi('NWA props', `${nwaQty} <small>proposed</small>`, `${nwa.length} lines; founders offered to sponsor (verbal, team-reported); rules not yet in writing`, 'warn')}
+${kpi('Proposed spend (wheels, capacitors)', usd(S.proposed.goods), `${proposed.length} lines, not committed · ${usd(S.proposed.withTax)} with tax · reserve ${usd(S.proposed.reserveAfter)} after (${usd(S.proposed.reserveAfterWithNwa)} with NWA)`, 'warn')}
+${kpi('Worst electrical conflict', `${ET.EL_FULL_A} A`, `lift full throttle, 4 × ${ET.EL_A_WORST} A at full pack (${ET.EL_FULL_NOM} A nominal), vs the ${ET.EL_SENSOR_A} A FC current sensor (×${ET.EL_RATIO}) and the ${ET.EL_MOTOR_LIM} A motor limit: cap the lift throttle`, 'bad')}
 </div>`;
 const kitRows = KIT_IDS.map(k => {
   const rs = ROWS.filter(x => x.Kit === k), o = rs.filter(x => x.Status === 'To order').length, m = rs.filter(x => x.Status === 'To make').length;
@@ -97,13 +106,14 @@ const opt = (a) => a.map(v => `<option value="${esc(v)}">${esc(v)}</option>`).jo
 const statuses = [...new Set(ROWS.map(x => x.Status))];
 const invTable = `<div class="toolbar" role="search">
 <label>Search<input type="search" id="invQ" placeholder="ID, item, vendor, note" aria-label="Search the inventory table"></label>
-<label>Type<select id="invType"><option value="">All</option>${opt(['Buy', 'Make', 'NWA'])}</select></label>
+<label>Type<select id="invType"><option value="">All</option>${opt(['Buy', 'Make', 'NWA', 'Proposed'])}</select></label>
 <label>Kit<select id="invKit"><option value="">All</option>${KIT_IDS.map(k => `<option value="${k}">${k} ${esc(KITS[k])}</option>`).join('')}</select></label>
 <label>Status<select id="invStatus"><option value="">All</option>${opt(statuses)}</select></label>
 <button type="button" class="themebtn" id="invClear">Clear filters</button>
 <span class="count" id="invCount" aria-live="polite">${ROWS.length} of ${ROWS.length} lines</span></div>
 <div class="tbl" id="invWrap" tabindex="0" role="region" aria-label="Inventory table, scrolls sideways"><table id="invTable"><thead><tr>${head}</tr></thead><tbody>${body}</tbody>
-<tfoot><tr class="total"><td colspan="6" id="invTotLbl">Buy lines shown: ${buy.length}</td><td></td><td></td><td></td><td></td><td></td><td></td><td class="n" id="invTot">${goods.toFixed(2)}</td><td colspan="8">goods, before tax and shipping (Make and NWA lines are $0)</td></tr></tfoot></table></div>
+<tfoot><tr class="total"><td colspan="6" id="invTotLbl">Buy lines shown: ${buy.length}</td><td></td><td></td><td></td><td></td><td></td><td></td><td class="n" id="invTot">${goods.toFixed(2)}</td><td colspan="8">goods, before tax and shipping (Make and NWA lines are $0)</td></tr>
+<tr class="total"><td colspan="6" id="invPropLbl">Proposed lines shown: ${proposed.length}</td><td></td><td></td><td></td><td></td><td></td><td></td><td class="n" id="invPropTot">${sum(proposed.map(x => x['Ext USD'])).toFixed(2)}</td><td colspan="8">proposed goods, not in committed spend (counted separately)</td></tr></tfoot></table></div>
 <p class="tblnote">Click a row with a CAD part to show it in the 3D model. Dates and Location are blank until the sheet is filled in.</p>`;
 
 // ---------- §4 budget ----------
@@ -161,10 +171,10 @@ const L30 = 72 * IN, L31 = 96 * IN, L32 = 36 * IN, used31 = 2 * 0.8 + 4 * 0.205;
 const cutRows = `<tr><td>${findBtn('P-30')} booms, ${t30['Qty needed']} × 72 in</td><td>72 in × 0.0254 = ${m3(L30)} m per tube; cut list per tube 0.955 + 0.516 = ${m3(0.955 + 0.516)} m</td><td class="n">${m3(L30 - 0.955 - 0.516)} m</td><td>per tube, before kerf</td></tr>
 <tr><td>${findBtn('P-31')} sockets + legs, ${t31['Qty needed']} × 96 in</td><td>96 in × 0.0254 = ${m3(L31)} m; 2 × 0.8 + 4 × 0.205 = ${m3(used31)} m</td><td class="n">${m3(L31 - used31)} m</td><td>left for 5 cuts + squaring the ends: <b>tight</b>; kerf width —</td></tr>
 <tr><td>${findBtn('P-32')} joiner, ${t32['Qty needed']} × 36 in</td><td>36 in × 0.0254 = ${m3(L32)} m; joiner 0.76 m</td><td class="n">${m3(L32 - 0.76)} m</td><td>left after one cut, before kerf</td></tr>`;
-const kitCards = KIT_IDS.map(k => { const a = ROWS.filter(x => x.Kit === k), b = a.filter(x => x.Type === 'Buy'), m = a.filter(x => x.Type !== 'Buy');
+const kitCards = KIT_IDS.map(k => { const a = ROWS.filter(x => x.Kit === k), b = a.filter(x => x.Type === 'Buy'), m = a.filter(x => x.Type === 'Make' || x.Type === 'NWA'), pp = a.filter(x => x.Type === 'Proposed');
   const li = x => `<li><span class="mono-id">${x.ID}</span><span>${esc(x.Item)}</span><span>${x['Qty needed']}× ${chip(x.Status)}</span></li>`;
-  return `<div class="card kitcard"><h3><span class="mono-id">${k}</span> ${esc(KITS[k])}</h3><p class="meta">${a.length} lines: ${b.length} bought (${usd(sum(b.map(x => x['Ext USD'])))} goods), ${m.length} made or NWA. Bin ${k}.</p>
-<ul>${b.length ? '<li style="display:block"><b>Bought, goes in the bin on receipt</b></li>' + b.map(li).join('') : ''}${m.length ? '<li style="display:block"><b>Made or supplied, goes in the bin when finished</b></li>' + m.map(li).join('') : ''}</ul></div>`; }).join('');
+  return `<div class="card kitcard"><h3><span class="mono-id">${k}</span> ${esc(KITS[k])}</h3><p class="meta">${a.length} lines: ${b.length} bought (${usd(sum(b.map(x => x['Ext USD'])))} goods), ${m.length} made or NWA${pp.length ? `, ${pp.length} proposed (not committed)` : ''}. Bin ${k}.</p>
+<ul>${b.length ? '<li style="display:block"><b>Bought, goes in the bin on receipt</b></li>' + b.map(li).join('') : ''}${m.length ? '<li style="display:block"><b>Made or supplied, goes in the bin when finished</b></li>' + m.map(li).join('') : ''}${pp.length ? '<li style="display:block"><b>Proposed, only if adopted (not in committed spend)</b></li>' + pp.map(li).join('') : ''}</ul></div>`; }).join('');
 
 // ---------- §7 location proposal ----------
 const locRows = KIT_IDS.map(k => `<tr><td><span class="mono-id">${k}</span></td><td>${esc(KITS[k])}</td><td class="n">${ROWS.filter(x => x.Kit === k).length}</td><td>${k === 'K6' ? 'also holds the LiPo ammo can (P-26) and bag (P-18)' : k === 'K4' ? 'LiPo packs (P-12) live in the K6 ammo can, not the K4 bin' : k === 'K7' ? 'raw tube stock may be too long for a bin: store flat, label the tube' : '—'}</td></tr>`).join('');
@@ -179,7 +189,7 @@ for (const x of ROWS) if (x['CAD part']) {
   if (!e.kits.includes(x.Kit)) e.kits.push(x.Kit);
 }
 const PRI = ['bad', 'warn', 'open', 'make', 'ok'];
-for (const e of Object.values(INVP)) e.sc = PRI.find(p => e.rows.some(r => r.sc === p)) || 'none';
+for (const e of Object.values(INVP)) e.sc = PRI.find(p => e.rows.some(r => r.type !== 'Proposed' && r.sc === p)) || 'none';   // proposed lines are listed on the card but do not recolour the part
 const unmapped = Object.keys(INVP).filter(n => !MESH.parts[n]); if (unmapped.length) throw new Error('inventory CAD part not in mesh: ' + unmapped);
 const noRow = Object.keys(MESH.parts).filter(n => !INVP[n]);
 const kitBtns = ['All', ...KIT_IDS].map(k => `<button type="button" class="kit" data-kit="${k}" aria-pressed="${k === 'All'}" ${k === 'All' ? 'aria-label="Show all kits"' : `aria-label="Isolate kit ${k}, ${esc(KITS[k])}" title="${esc(KITS[k])}"`}>${k}</button>`).join('');
@@ -189,6 +199,33 @@ const partList = Object.keys(MESH.parts).sort().map(n => { const c = MESH.comps.
 const DATE = S.generated;
 const cadMeta = { parts: Object.keys(MESH.parts).length, comps: MESH.comps.length, tris: MESH.tris.toLocaleString('en-US') };
 
+// ready-to-send message to NWA (plain text; counts come from rows N-01 and N-02)
+const spl = () => { const m = byId['N-01'].Item.match(/(\d+) CW \+ (\d+) CCW \+ (\d+) spare/); if (!m) throw new Error('N-01 item wording changed'); return m; };
+const [, cw, ccw, spare] = spl();
+const NWA_MSG = `Subject: Thank you, and a few questions about the NWA sponsorship (UC Berkeley Design-Build-Fly)
+
+Hello,
+
+I am Tristan Hottier, writing for the UC Berkeley Design-Build-Fly capstone team that is building a lift + cruise VTOL aircraft. Thank you for offering, when we met you recently, to sponsor our team. We are very grateful and want to plan it properly.
+
+Could you please confirm the following in writing?
+
+1. What the sponsorship covers. Could you confirm whether the sponsorship would cover custom carbon propellers: ${byId['N-01']['Qty needed']} lift props of ${byId['N-01'].Item.match(/(\d+) in/)[1]} in (${cw} clockwise, ${ccw} counter-clockwise and ${spare} spares) and ${byId['N-02']['Qty needed']} pusher props of ${byId['N-02'].Item.match(/(\d+) in/)[1]} in? Is anything else included?
+2. Cost to the team. Is the sponsorship free of charge to us?
+3. Shipping and import. Who pays shipping and import duty from India?
+4. Lead time, and how design iteration works (who proposes the pitch, and how many revisions are possible).
+5. Design data you need from us. Our spec sheet (motor, prop sizes, rotation, hover design point, balance target) is attached; please tell us what else you need.
+6. Balance and test data supplied with the props (for example a balance report).
+7. Any obligations on our side: logo placement, acknowledgement, social media posts, data sharing, flight-test footage.
+8. Ownership of the prop designs (IP) and any limits on how we may use them.
+9. Liability and insurance expectations for flying the props.
+10. A named contact for the project.
+
+A short written reply is enough. Thank you again for your support.
+
+Best regards,
+Tristan Hottier
+UC Berkeley Design-Build-Fly capstone team`;
 const T = {
   DATE, REV, DOC: 'DBF-INV-001', SHEET_BTN_HEAD: sheetBtn(), SHEET_BTN_INV: sheetBtn(), SHEET_BTN_INV2: sheetBtn('ghost'),
   KPIS: kpis, KIT_TABLE: kitTable, LINES: ROWS.length, GOODS: usd(S.goods), COMMITTED: usd(S.committed), CAP: usd(S.cap, 0), RESERVE: usd(S.reserve), TARGET: '$' + reserveTarget,
@@ -200,9 +237,10 @@ const T = {
   INV_TABLE: invTable, BY_VENDOR: barSvg(byVendor, 'bar1', 'Goods by vendor, before tax'), BY_CAT: barSvg(byCat, 'bar2', 'Goods by category, before tax'), WATERFALL: wfSvg(), WATER_TABLE: waterTable, SWAP: swap,
   VENDOR_CARDS: vCards, N_VENDORS: vOrder.length, FAB_TABLES: fabTables, STOCK_ROWS: stockRows, CUT_ROWS: cutRows, KIT_CARDS: kitCards, LOC_ROWS: locRows,
   KIT_BTNS: kitBtns, PART_LIST: partList, CAD_PARTS: cadMeta.parts, CAD_COMPS: cadMeta.comps, CAD_TRIS: cadMeta.tris, NO_ROW: noRow.length ? noRow.map(n => n.replace(/_/g, ' ')).join(', ') : 'none',
-  RECEIVED: received, LOC_BLANK: ROWS.filter(x => !x.Location || x.Location === '—').length,
+  N_PROP: proposed.length, NWA_MSG: esc(NWA_MSG), RECEIVED: received, LOC_BLANK: ROWS.filter(x => !x.Location || x.Location === '—').length,
   P12_NOTE: esc(byId['P-12'].Notes), M19: esc(byId['M-19'].Item), M19_NOTE: esc(byId['M-19'].Notes),
   TEN: usd(byId['P-02']['Ext USD']), AMA: usd(amaFee.v), FAA: usd(faaFee.v),
+  ...ET,
   HOVER_N: '15.2', C150_A: (150 / 25.2).toFixed(2), PACK_H: (6.5 / (150 / 25.2)).toFixed(2),
 };
 let bodyHtml = r('./src/body.html');
@@ -212,14 +250,14 @@ const rest = bodyHtml.match(/\{\{/); if (rest) throw new Error('unresolved place
 const FONTS = 'https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600&family=Sofia+Sans+Semi+Condensed:wght@700&family=Red+Hat+Mono:wght@400;500;600&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap';
 const json = o => JSON.stringify(o).replace(/</g, '\\u003c');
 const html = `<title>DBF Inventory Overview</title>
-<meta name="description" content="Inventory Czar project overview: purchasing, stock, fabrication, kits and Nautical Wings props for a student lift + cruise VTOL">
+<meta name="description" content="Inventory and electrical overview: purchasing, stock, fabrication, kits, wiring and Nautical Wings props for a student lift + cruise VTOL">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="${FONTS}">
 <style>
 ${r('./src/style.css')}
 </style>
 ${bodyHtml}
-<script>const MESH = ${json(MESH)}; const INVP = ${json(INVP)}; const KITS = ${json(KITS)};</script>
+<script>const MESH = ${json(MESH)}; const INVP = ${json(INVP)}; const KITS = ${json(KITS)}; const EL = ${json(ELB.EL)};</script>
 <script>
 ${r('./src/viewer3d.js')}
 </script>

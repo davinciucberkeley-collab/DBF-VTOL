@@ -225,6 +225,8 @@ put(9, 1, 'Crash reserve'); put(9, 2, '=B3-B8')
 put(10, 1, 'Spent so far (Actual USD)'); put(10, 2, f'=SUM({rng("Actual USD")})')
 put(11, 1, 'NWA swap: retail props on hold, with tax'); put(11, 2, f'=SUMIFS({rng("Ext USD")},{rng("Status")},"Hold*")*(1+B4)')
 put(12, 1, 'Reserve if NWA props confirmed (EST: free, no shipping)'); put(12, 2, '=B9+B11')
+put(13, 1, 'Proposed additions with tax (not committed)'); put(13, 2, f'=SUMIFS({rng("Ext USD")},{rng("Type")},"Proposed")*(1+B4)')
+put(14, 1, 'Reserve after proposed additions (EST)'); put(14, 2, '=B9-B13')
 for i, k in enumerate(KITS):
     r = 3 + i
     put(r, 4, k); put(r, 3, S['kits'][k])

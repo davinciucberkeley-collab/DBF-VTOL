@@ -1,0 +1,69 @@
+{
+ "lines": [
+  {
+   "item": "Du-Bro Super Lite 3.00 in wheel pair (SKU 300SL, 16.8 g/wheel, 5/32 in axle)",
+   "qty": 2,
+   "unit_usd": 6.75,
+   "vendor": "Gator RC",
+   "url": "https://www.gator-rc.com/products/dubro-super-lite-wheels",
+   "kit": "K5",
+   "why": "Landing gear on the four existing legs (2 pairs = 4 wheels); raises ground plane 0.048 m EST (wheel radius 0.0381 m + 10 mm axle offset EST), pusher disc clearance 36 to 84 mm. Gator RC page read 2026-10-19: $6.75 per pair, 'Only 1 left' for the product, so one pair must come from another vendor; re-quote before ordering.",
+   "checked": "2026-10-19",
+   "ext_usd": 13.5
+  },
+  {
+   "item": "Du-Bro axle shaft 2-pack, 5/32 in x 2 in (DUB248), with 2 nylon-insert nuts",
+   "qty": 2,
+   "unit_usd": 9.05,
+   "vendor": "Gator RC",
+   "url": "https://www.gator-rc.com/products/du-bro-rc-airplane-axle-shafts-2-pack",
+   "kit": "K5",
+   "why": "Four axles for four wheels; thread size not published (—), fit-check against leg tip.",
+   "checked": "2026-10-19",
+   "ext_usd": 18.1
+  },
+  {
+   "item": "Du-Bro 5/32 in wheel collars 4-pack (DUB140)",
+   "qty": 2,
+   "unit_usd": 2.95,
+   "vendor": "Gator RC",
+   "url": "https://www.gator-rc.com/products/du-bro-wheel-shaft-collars-4-pack",
+   "kit": "K5",
+   "why": "Wheel retention; 8 collars, 4 needed, 4 spare.",
+   "checked": "2026-10-19",
+   "ext_usd": 5.9
+  },
+  {
+   "item": "Panasonic 470 uF 35 V low-ESR capacitor",
+   "qty": 6,
+   "unit_usd": 2.49,
+   "vendor": "Race Day Quads",
+   "url": "https://www.racedayquads.com/products/panasonic-470uf-low-esr-capacitor",
+   "kit": "K5",
+   "why": "FC battery-side cap (vendor guide) plus one per lift ESC and pusher ESC; stock, size, lead length not on page (—). Voltage 35 V from title only.",
+   "checked": "2026-10-19",
+   "ext_usd": 14.94
+  },
+  {
+   "item": "Servo extension leads (22 AWG, various lengths)",
+   "qty": null,
+   "unit_usd": null,
+   "vendor": "Gator RC",
+   "url": "https://www.gator-rc.com/products/servo-extensions-22-gauge-jr-universal-2-pack-various-lengths-gator-rc",
+   "kit": "K5",
+   "why": "Optional; need to be confirmed against servo lead lengths. Price not captured (—), excluded from totals.",
+   "checked": "2026-10-19",
+   "ext_usd": null
+  }
+ ],
+ "totals": {
+  "goods_usd": 52.44,
+  "tax_usd": 5.38,
+  "tax_basis": "10.25 % Berkeley, docs/purchasing/C0_BOM.csv line 44 (CDTFA 2026-10-01)",
+  "total_ex_shipping_usd": 57.82,
+  "shipping_usd": "—",
+  "reserve_usd": 102.08,
+  "reserve_after_ex_shipping_usd": 44.26,
+  "note": "Shipping for these lines not quoted (—); the $100 BOM allowance covers BOM orders only. Wheels: only 1 pair in stock at Gator RC on 2026-10-19."
+ }
+}

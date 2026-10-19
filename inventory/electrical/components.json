@@ -1,0 +1,869 @@
+[
+ {
+  "id": "BAT1",
+  "name": "Ovonic 6S 6500 mAh 100C LiPo, flight pack (2nd pack of the 2-pack is the spare)",
+  "bom_ref": "P-12",
+  "qty": 1,
+  "dims_mm": [
+   155,
+   48,
+   50
+  ],
+  "mass_g": 820,
+  "supply": "22.2 V nominal, 25.2 V full (6S; analysis/results.json base.Vpack = 22.2)",
+  "interfaces": "EC5 leads (re-terminate to XT90S); balance lead 7-pin JST-XH EST (not on pages read: -)",
+  "source_url_or_file": "docs/research/budget-energy-test.md \u00a71 row 1 (820 g); dims EST = cad/params.txt battL x battW x battH; sister pack Ovonic Roam is 137x44x57 mm, https://www.ovonicshop.com/products/ovonic-roam-series-6s-lipo-battery-6500mah-6s1p-150c-22-2v-long-range-lipo-battery-with-xt90-s-anti-spark-plug-for-6-10-inch-long-range-cenilifter-multirotor-x-class (2026-10-19)",
+  "est": true,
+  "placement": {
+   "x": 0.0605,
+   "y": -0.05,
+   "z": 0.0,
+   "parent": "Fuselage_Pod",
+   "note": "CAD part Battery_6S_LiPo origin; leads exit forward so the XT90S is reachable with the canopy hatch open (canopy x 0.07..0.33)",
+   "est": true
+  },
+  "dims_note": "EST box [L(X), W(Z), H(Y)]; P-12 pack dims not found (\u2014)",
+  "mass_note": "listing weight flagged unreliable in budget-energy-test.md; weigh on receipt"
+ },
+ {
+  "id": "XT90S_1",
+  "name": "XT90S anti-spark plug pair (physical disconnect, R20)",
+  "bom_ref": "P-04",
+  "qty": 1,
+  "dims_mm": [
+   20,
+   20,
+   20
+  ],
+  "mass_g": null,
+  "supply": "rating 50 A cont / 90 A peak (makerstore); esk8 wiki lists XT90 90 A cont (conflict)",
+  "interfaces": "pack half on pack leads; aircraft half on 10 AWG trunk; resistor (anti-spark) half on the aircraft side - confirm by continuity",
+  "source_url_or_file": "docs/research/budget-airframe.md \u00a73a (hardware kit, P-04) item 1 (https://www.amazon.com/dp/B0893CGLP7); rating https://www.makerstore.com.au/product/mb-elc-con-xt90s-mf-as/ and https://forum.esk8.news/t/wiki-connectors-and-plug-types/2021 (2026-10-19)",
+  "est": true,
+  "placement": {
+   "x": 0.165,
+   "y": -0.05,
+   "z": 0.0,
+   "parent": "Fuselage_Pod",
+   "note": "Pull-to-disconnect at the front of the pack, under the canopy hatch",
+   "est": true
+  },
+  "dims_note": "2 x 2 x 2 cm per makerstore (Amass kit pack: \u2014)",
+  "mass_note": "\u2014"
+ },
+ {
+  "id": "FC1",
+  "name": "CoreWing F405 Wing APP V2 stack (FC + Wing PDB + wireless/USB board)",
+  "bom_ref": "P-37",
+  "qty": 1,
+  "dims_mm": [
+   52,
+   32,
+   17
+  ],
+  "mass_g": 40,
+  "supply": "Battery 10-28 V (3S-6S) per ArduPilot page (RMRC says 7-36 V: conflict); BECs: peripherals 5.2 V 4 A, servo 5/6/7.2 V 8 A cont 14 A peak, VTX 5/9/12 V 2 A",
+  "interfaces": "12 PWM (1-10 DShot, 11-12 PWM only), UART5 GPS, UART6 RCIN, I2C on GPS/airspeed connector, USB-C, microSD, 30x30 mount, current sensor 90 A cont/215 A peak (BATT_AMP_PERVLT 64)",
+  "source_url_or_file": "https://ardupilot.org/plane/docs/common-CoreWingF405WingV2.html ; https://readymaderc.com/products/details/85786-speedybee-f405-wing-app-fixed-wing-flight-controller (2026-10-19)",
+  "est": false,
+  "placement": {
+   "x": 0.21,
+   "y": 0.0,
+   "z": 0.0,
+   "parent": "Fuselage_Pod",
+   "note": "Under the canopy so USB-C/microSD are reachable; S-pad header edge faces aft",
+   "est": true
+  },
+  "mass_note": "40 g per ArduPilot page; RMRC lists boards 8.9 + 11.4 + 4.2 = 24.5 g (conflict)"
+ },
+ {
+  "id": "BUS1",
+  "name": "Power splice: 10 AWG trunk to 5 x 12 AWG branches + 14 AWG UBEC branch (solder + heat-shrink)",
+  "bom_ref": null,
+  "qty": 1,
+  "dims_mm": [
+   40,
+   25,
+   15
+  ],
+  "mass_g": 8,
+  "supply": "battery",
+  "interfaces": "soldered junction after the PDB current-sensed output pads",
+  "source_url_or_file": "design choice (this file); PDB pad count/layout: \u2014 (not on pages read)",
+  "est": true,
+  "placement": {
+   "x": 0.2,
+   "y": -0.06,
+   "z": 0.0,
+   "parent": "Fuselage_Pod",
+   "note": "Below the FC; all ESC feeds start here, downstream of the PDB current sensor",
+   "est": true
+  },
+  "dims_note": "EST",
+  "mass_note": "EST"
+ },
+ {
+  "id": "UBEC1",
+  "name": "ZORZA UBEC 5 V 5 A, 2-7S input: dedicated supply for the Remote ID module",
+  "bom_ref": "P-04",
+  "qty": 1,
+  "dims_mm": [
+   40,
+   20,
+   10
+  ],
+  "mass_g": null,
+  "supply": "2-7S in, 5 V 5 A out (listing title)",
+  "interfaces": "input leads 14 AWG branch; 5 V output leads (gauge \u2014)",
+  "source_url_or_file": "docs/research/budget-airframe.md \u00a73a (hardware kit, P-04) item 12 (https://www.amazon.com/dp/B0CQ1R55BV; page not readable 2026-10-19)",
+  "est": true,
+  "placement": {
+   "x": 0.26,
+   "y": -0.055,
+   "z": 0.0,
+   "parent": "Fuselage_Pod",
+   "note": "Low in the pod, >= 8 cm from GPS1",
+   "est": true
+  },
+  "dims_note": "EST envelope; listing dims \u2014",
+  "mass_note": "\u2014"
+ },
+ {
+  "id": "GPS1",
+  "name": "HGLRC M100-5883 GPS + compass (u-blox M10, 10 Hz)",
+  "bom_ref": "P-33",
+  "qty": 1,
+  "dims_mm": [
+   21,
+   21,
+   8.02
+  ],
+  "mass_g": 7.73,
+  "supply": "3.3-5 V (current \u2014)",
+  "interfaces": "UART UBX 115200 + I2C compass (chip not named: \u2014); connector/pinout \u2014",
+  "source_url_or_file": "https://www.getfpv.com/electronics/flight-controllers/hglrc-m100-5883-gps-module.html (2026-10-19)",
+  "est": false,
+  "placement": {
+   "x": 0.2,
+   "y": 0.088,
+   "z": 0.0,
+   "parent": "Fuselage_Pod",
+   "note": "Mast on the canopy top, patch up, above all power leads; mast height EST 15 mm over canopy top (y 0.07)",
+   "est": true
+  }
+ },
+ {
+  "id": "RX1",
+  "name": "RadioMaster RP3 V2 ELRS 2.4 GHz receiver (ESP8285)",
+  "bom_ref": "P-36",
+  "qty": 1,
+  "dims_mm": [
+   22,
+   13,
+   4
+  ],
+  "mass_g": 4.6,
+  "supply": "5 V (range, current \u2014)",
+  "interfaces": "CRSF UART (TX/RX/5V/GND); 2 x 65 mm UFL antennas",
+  "source_url_or_file": "https://www.radiomasterrc.com/products/rp3-expresslrs-2-4ghz-nano-receiver (2026-10-19)",
+  "est": false,
+  "placement": {
+   "x": 0.3,
+   "y": 0.03,
+   "z": -0.03,
+   "parent": "Fuselage_Pod",
+   "note": "Forward in the canopy; antennas EST: one along the pod top, one at 90 deg to it, away from the aluminium booms",
+   "est": true
+  }
+ },
+ {
+  "id": "RID1",
+  "name": "NewBeeDrone BeeID v1.1 Remote ID + M10Q GPS (FAA DoC RID000001995)",
+  "bom_ref": "P-34",
+  "qty": 1,
+  "dims_mm": [
+   22,
+   15.6,
+   8
+  ],
+  "mass_g": 5.2,
+  "supply": "5 V (current \u2014)",
+  "interfaces": "5 V + GND only; TX/RX (UART 115200) left unconnected; BLE broadcast; WiFi config",
+  "source_url_or_file": "https://newbeedrone.com/products/newbeedrone-beeid-v1-1-m10q-gps-module-with-remoteid-drone-tracker (2026-10-19); DoC: docs/research/budget-avionics.md \u00a74",
+  "est": false,
+  "placement": {
+   "x": 0.12,
+   "y": 0.045,
+   "z": 0.04,
+   "parent": "Fuselage_Pod",
+   "note": "Under the forward canopy, >= 9 cm from GPS1, far from the pusher ESC",
+   "est": true
+  }
+ },
+ {
+  "id": "ASPD1",
+  "name": "Holybro MS5525DSO airspeed sensor module",
+  "bom_ref": "P-27",
+  "qty": 1,
+  "dims_mm": [
+   20,
+   22,
+   11.4
+  ],
+  "mass_g": 2.6,
+  "supply": "4.75-5.25 V (page DLVR column; MS5525 row \u2014), ~1.4 mA",
+  "interfaces": "I2C 0x76; 4-pin GH cable supplied (length \u2014)",
+  "source_url_or_file": "https://holybro.com/products/digital-air-speed-sensor-standard (2026-10-19)",
+  "est": false,
+  "placement": {
+   "x": -0.13,
+   "y": 0.005,
+   "z": -0.11,
+   "parent": "Wing_Panel_L",
+   "note": "Left-panel root beside joint J1_L; two ~1.0 m silicone tubes run spanwise ahead of the spar to the pitot (kit tubing length: \u2014); the GH cable plugs in at J1_L",
+   "est": true
+  }
+ },
+ {
+  "id": "PITOT1",
+  "name": "Holybro PT40 pitot probe",
+  "bom_ref": "P-27",
+  "qty": 1,
+  "dims_mm": [
+   250,
+   6
+  ],
+  "mass_g": null,
+  "supply": "-",
+  "interfaces": "2 pneumatic ports",
+  "source_url_or_file": "cad/params.txt comp=Pitot_Tube (pitotD 0.006, pitotL 0.25, CAD EST); PT40 dims on vendor page: \u2014",
+  "est": true,
+  "placement": {
+   "x": -0.05,
+   "y": -0.02,
+   "z": -1.0,
+   "parent": "Wing_Panel_L",
+   "note": "CAD comp=Pitot_Tube origin; probe extends forward (+X) to x=+0.20",
+   "est": true
+  },
+  "dims_note": "CAD envelope [D, L]",
+  "mass_note": "\u2014"
+ },
+ {
+  "id": "ESC_L1",
+  "name": "SoloGood 45A BLHeli_S ESC, lift motor 1 (front right)",
+  "bom_ref": "P-15",
+  "qty": 1,
+  "dims_mm": [
+   45,
+   25,
+   8
+  ],
+  "mass_g": 15,
+  "supply": "2-6S; DShot150/300/600 (listing title)",
+  "interfaces": "12 AWG power in, 3-pin signal (red lead isolated), 3 phase leads; BEC: \u2014",
+  "source_url_or_file": "docs/research/budget-lift.md ESC table (SoloGood 45A BLHeli_S, 2-6S, DShot) + Amazon listing title https://www.amazon.com/SoloGood-Brushless-Electronic-Controller-Quadcopter/dp/B0DJQVGSBC (page body blocked by robots 2026-10-19: dims, weight, leads, BEC = \"\u2014\")",
+  "est": true,
+  "placement": {
+   "x": 0.2,
+   "y": -0.03,
+   "z": 0.4527,
+   "parent": "Boom_Front_R",
+   "note": "Outboard face of the boom under the rotor disc (downwash cooling); clear of the gear clamp (x 0.264..0.298, -0.432..-0.398) and the motor mount",
+   "est": true
+  },
+  "dims_note": "EST envelope for the 3D viewer; listing dims/weight/leads: \u2014",
+  "mass_note": "EST; weigh on receipt"
+ },
+ {
+  "id": "ESC_L2",
+  "name": "SoloGood 45A BLHeli_S ESC, lift motor 2 (rear left)",
+  "bom_ref": "P-15",
+  "qty": 1,
+  "dims_mm": [
+   45,
+   25,
+   8
+  ],
+  "mass_g": 15,
+  "supply": "2-6S; DShot150/300/600 (listing title)",
+  "interfaces": "12 AWG power in, 3-pin signal (red lead isolated), 3 phase leads; BEC: \u2014",
+  "source_url_or_file": "docs/research/budget-lift.md ESC table (SoloGood 45A BLHeli_S, 2-6S, DShot) + Amazon listing title https://www.amazon.com/SoloGood-Brushless-Electronic-Controller-Quadcopter/dp/B0DJQVGSBC (page body blocked by robots 2026-10-19: dims, weight, leads, BEC = \"\u2014\")",
+  "est": true,
+  "placement": {
+   "x": -0.36,
+   "y": -0.03,
+   "z": -0.4527,
+   "parent": "Boom_Front_L",
+   "note": "Outboard face of the boom under the rotor disc (downwash cooling); clear of the gear clamp (x 0.264..0.298, -0.432..-0.398) and the motor mount",
+   "est": true
+  },
+  "dims_note": "EST envelope for the 3D viewer; listing dims/weight/leads: \u2014",
+  "mass_note": "EST; weigh on receipt"
+ },
+ {
+  "id": "ESC_L3",
+  "name": "SoloGood 45A BLHeli_S ESC, lift motor 3 (front left)",
+  "bom_ref": "P-15",
+  "qty": 1,
+  "dims_mm": [
+   45,
+   25,
+   8
+  ],
+  "mass_g": 15,
+  "supply": "2-6S; DShot150/300/600 (listing title)",
+  "interfaces": "12 AWG power in, 3-pin signal (red lead isolated), 3 phase leads; BEC: \u2014",
+  "source_url_or_file": "docs/research/budget-lift.md ESC table (SoloGood 45A BLHeli_S, 2-6S, DShot) + Amazon listing title https://www.amazon.com/SoloGood-Brushless-Electronic-Controller-Quadcopter/dp/B0DJQVGSBC (page body blocked by robots 2026-10-19: dims, weight, leads, BEC = \"\u2014\")",
+  "est": true,
+  "placement": {
+   "x": 0.2,
+   "y": -0.03,
+   "z": -0.4527,
+   "parent": "Boom_Front_L",
+   "note": "Outboard face of the boom under the rotor disc (downwash cooling); clear of the gear clamp (x 0.264..0.298, -0.432..-0.398) and the motor mount",
+   "est": true
+  },
+  "dims_note": "EST envelope for the 3D viewer; listing dims/weight/leads: \u2014",
+  "mass_note": "EST; weigh on receipt"
+ },
+ {
+  "id": "ESC_L4",
+  "name": "SoloGood 45A BLHeli_S ESC, lift motor 4 (rear right)",
+  "bom_ref": "P-15",
+  "qty": 1,
+  "dims_mm": [
+   45,
+   25,
+   8
+  ],
+  "mass_g": 15,
+  "supply": "2-6S; DShot150/300/600 (listing title)",
+  "interfaces": "12 AWG power in, 3-pin signal (red lead isolated), 3 phase leads; BEC: \u2014",
+  "source_url_or_file": "docs/research/budget-lift.md ESC table (SoloGood 45A BLHeli_S, 2-6S, DShot) + Amazon listing title https://www.amazon.com/SoloGood-Brushless-Electronic-Controller-Quadcopter/dp/B0DJQVGSBC (page body blocked by robots 2026-10-19: dims, weight, leads, BEC = \"\u2014\")",
+  "est": true,
+  "placement": {
+   "x": -0.36,
+   "y": -0.03,
+   "z": 0.4527,
+   "parent": "Boom_Front_R",
+   "note": "Outboard face of the boom under the rotor disc (downwash cooling); clear of the gear clamp (x 0.264..0.298, -0.432..-0.398) and the motor mount",
+   "est": true
+  },
+  "dims_note": "EST envelope for the 3D viewer; listing dims/weight/leads: \u2014",
+  "mass_note": "EST; weigh on receipt"
+ },
+ {
+  "id": "ESC_P",
+  "name": "SoloGood 45A BLHeli_S ESC, pusher",
+  "bom_ref": "P-15",
+  "qty": 1,
+  "dims_mm": [
+   45,
+   25,
+   8
+  ],
+  "mass_g": 15,
+  "supply": "2-6S; DShot",
+  "interfaces": "12 AWG power in, signal, 3 phase leads",
+  "source_url_or_file": "docs/research/budget-lift.md ESC table (SoloGood 45A BLHeli_S, 2-6S, DShot) + Amazon listing title https://www.amazon.com/SoloGood-Brushless-Electronic-Controller-Quadcopter/dp/B0DJQVGSBC (page body blocked by robots 2026-10-19: dims, weight, leads, BEC = \"\u2014\")",
+  "est": true,
+  "placement": {
+   "x": -0.34,
+   "y": -0.03,
+   "z": 0.0,
+   "parent": "Fuselage_Pod",
+   "note": "Rear pod boat-tail (pod radius 0.034 at x -0.34, cad mesh Fuselage_Pod.STL); needs a vent/cut-out for cruise airflow",
+   "est": true
+  },
+  "dims_note": "EST envelope",
+  "mass_note": "EST"
+ },
+ {
+  "id": "MOT_L1",
+  "name": "SunnySky X4110S 400KV, lift motor 1 (front right)",
+  "bom_ref": "P-39",
+  "qty": 1,
+  "dims_mm": [
+   47.5,
+   32
+  ],
+  "mass_g": 165,
+  "supply": "6S; max 45 A (30 s), 1125 W; KV400 Rm 107 mOhm",
+  "interfaces": "3 phase leads (length/gauge/bullet size: \u2014)",
+  "source_url_or_file": "https://sunnyskyusa.com/collections/multirotor-motors/products/sunnysky-x4110s-motors (2026-10-19)",
+  "est": false,
+  "placement": {
+   "x": 0.37092,
+   "y": -0.009,
+   "z": 0.4337,
+   "parent": "Boom_Front_R",
+   "note": "CAD part origin of comp=Lift_Motor; body spans y -0.009..+0.041; spin CCW (QuadPlane Quad X motor 1)",
+   "est": true
+  },
+  "dims_note": "rotor D x body L (without shaft)"
+ },
+ {
+  "id": "MOT_L2",
+  "name": "SunnySky X4110S 400KV, lift motor 2 (rear left)",
+  "bom_ref": "P-39",
+  "qty": 1,
+  "dims_mm": [
+   47.5,
+   32
+  ],
+  "mass_g": 165,
+  "supply": "6S; max 45 A (30 s), 1125 W; KV400 Rm 107 mOhm",
+  "interfaces": "3 phase leads (length/gauge/bullet size: \u2014)",
+  "source_url_or_file": "https://sunnyskyusa.com/collections/multirotor-motors/products/sunnysky-x4110s-motors (2026-10-19)",
+  "est": false,
+  "placement": {
+   "x": -0.50458,
+   "y": -0.009,
+   "z": -0.4337,
+   "parent": "Boom_Front_L",
+   "note": "CAD part origin of comp=Lift_Motor; body spans y -0.009..+0.041; spin CCW (QuadPlane Quad X motor 2)",
+   "est": true
+  },
+  "dims_note": "rotor D x body L (without shaft)"
+ },
+ {
+  "id": "MOT_L3",
+  "name": "SunnySky X4110S 400KV, lift motor 3 (front left)",
+  "bom_ref": "P-39",
+  "qty": 1,
+  "dims_mm": [
+   47.5,
+   32
+  ],
+  "mass_g": 165,
+  "supply": "6S; max 45 A (30 s), 1125 W; KV400 Rm 107 mOhm",
+  "interfaces": "3 phase leads (length/gauge/bullet size: \u2014)",
+  "source_url_or_file": "https://sunnyskyusa.com/collections/multirotor-motors/products/sunnysky-x4110s-motors (2026-10-19)",
+  "est": false,
+  "placement": {
+   "x": 0.37092,
+   "y": -0.009,
+   "z": -0.4337,
+   "parent": "Boom_Front_L",
+   "note": "CAD part origin of comp=Lift_Motor; body spans y -0.009..+0.041; spin CW (QuadPlane Quad X motor 3)",
+   "est": true
+  },
+  "dims_note": "rotor D x body L (without shaft)"
+ },
+ {
+  "id": "MOT_L4",
+  "name": "SunnySky X4110S 400KV, lift motor 4 (rear right)",
+  "bom_ref": "P-39",
+  "qty": 1,
+  "dims_mm": [
+   47.5,
+   32
+  ],
+  "mass_g": 165,
+  "supply": "6S; max 45 A (30 s), 1125 W; KV400 Rm 107 mOhm",
+  "interfaces": "3 phase leads (length/gauge/bullet size: \u2014)",
+  "source_url_or_file": "https://sunnyskyusa.com/collections/multirotor-motors/products/sunnysky-x4110s-motors (2026-10-19)",
+  "est": false,
+  "placement": {
+   "x": -0.50458,
+   "y": -0.009,
+   "z": 0.4337,
+   "parent": "Boom_Front_R",
+   "note": "CAD part origin of comp=Lift_Motor; body spans y -0.009..+0.041; spin CW (QuadPlane Quad X motor 4)",
+   "est": true
+  },
+  "dims_note": "rotor D x body L (without shaft)"
+ },
+ {
+  "id": "MOT_P",
+  "name": "SunnySky X4110S 400KV, pusher",
+  "bom_ref": "P-38",
+  "qty": 1,
+  "dims_mm": [
+   47.5,
+   32
+  ],
+  "mass_g": 165,
+  "supply": "6S",
+  "interfaces": "3 phase leads (\u2014)",
+  "source_url_or_file": "https://sunnyskyusa.com/collections/multirotor-motors/products/sunnysky-x4110s-motors (2026-10-19)",
+  "est": false,
+  "placement": {
+   "x": -0.4,
+   "y": -0.03,
+   "z": 0.0,
+   "parent": "Fuselage_Pod",
+   "note": "CAD part origin of comp=Pusher_Motor (motor spans x -0.45..-0.40)",
+   "est": true
+  },
+  "dims_note": "rotor D x body L"
+ },
+ {
+  "id": "SRV_AIL_L",
+  "name": "EMAX ES3005HV digital metal-gear servo, left aileron",
+  "bom_ref": "P-24",
+  "qty": 1,
+  "dims_mm": [
+   38.6,
+   18.8,
+   34.9
+  ],
+  "mass_g": 43.2,
+  "supply": "6.0-8.4 V; 8 kg.cm @6 V, 10 @7.4 V; running 450 mA @6 V; max 2.5 A @6 V, 3.2 A @7.4 V; idle 9.5 mA",
+  "interfaces": "3-wire, 240 mm lead (connector type: \u2014); PWM 500-2500 us",
+  "source_url_or_file": "https://readymaderc.com/products/details/85971-emax-es3005-analog-waterproof-servo (2026-10-19)",
+  "est": false,
+  "placement": {
+   "x": -0.12,
+   "y": 0.005,
+   "z": -0.8,
+   "parent": "Wing_Panel_L",
+   "note": "Inboard end of the aileron (aileron z -0.586..-1.198), ahead of the hinge (x -0.1766); wing thickness 31 mm at x -0.12 (cad foil)",
+   "est": true
+  },
+  "dims_note": "as listed; axis order not stated on the page"
+ },
+ {
+  "id": "SRV_AIL_R",
+  "name": "EMAX ES3005HV digital metal-gear servo, right aileron",
+  "bom_ref": "P-24",
+  "qty": 1,
+  "dims_mm": [
+   38.6,
+   18.8,
+   34.9
+  ],
+  "mass_g": 43.2,
+  "supply": "6.0-8.4 V; 8 kg.cm @6 V, 10 @7.4 V; running 450 mA @6 V; max 2.5 A @6 V, 3.2 A @7.4 V; idle 9.5 mA",
+  "interfaces": "3-wire, 240 mm lead (connector type: \u2014); PWM 500-2500 us",
+  "source_url_or_file": "https://readymaderc.com/products/details/85971-emax-es3005-analog-waterproof-servo (2026-10-19)",
+  "est": false,
+  "placement": {
+   "x": -0.12,
+   "y": 0.005,
+   "z": 0.8,
+   "parent": "Wing_Panel_R",
+   "note": "mirror of SRV_AIL_L",
+   "est": true
+  },
+  "dims_note": "as listed; axis order not stated on the page"
+ },
+ {
+  "id": "SRV_ELEV",
+  "name": "EMAX ES3005HV digital metal-gear servo, elevator",
+  "bom_ref": "P-24",
+  "qty": 1,
+  "dims_mm": [
+   38.6,
+   18.8,
+   34.9
+  ],
+  "mass_g": 43.2,
+  "supply": "6.0-8.4 V; 8 kg.cm @6 V, 10 @7.4 V; running 450 mA @6 V; max 2.5 A @6 V, 3.2 A @7.4 V; idle 9.5 mA",
+  "interfaces": "3-wire, 240 mm lead (connector type: \u2014); PWM 500-2500 us",
+  "source_url_or_file": "https://readymaderc.com/products/details/85971-emax-es3005-analog-waterproof-servo (2026-10-19)",
+  "est": false,
+  "placement": {
+   "x": -0.79,
+   "y": -0.03,
+   "z": 0.4,
+   "parent": "Boom_Rear_Stub",
+   "note": "Printed saddle on the right boom stub, inboard side: H_Tail is only 6.8 mm thick (cad tailT) so the 18.8 mm servo cannot sit in it",
+   "est": true
+  },
+  "dims_note": "as listed; axis order not stated on the page"
+ },
+ {
+  "id": "SRV_RUD_L",
+  "name": "EMAX ES3005HV digital metal-gear servo, left rudder",
+  "bom_ref": "P-24",
+  "qty": 1,
+  "dims_mm": [
+   38.6,
+   18.8,
+   34.9
+  ],
+  "mass_g": 43.2,
+  "supply": "6.0-8.4 V; 8 kg.cm @6 V, 10 @7.4 V; running 450 mA @6 V; max 2.5 A @6 V, 3.2 A @7.4 V; idle 9.5 mA",
+  "interfaces": "3-wire, 240 mm lead (connector type: \u2014); PWM 500-2500 us",
+  "source_url_or_file": "https://readymaderc.com/products/details/85971-emax-es3005-analog-waterproof-servo (2026-10-19)",
+  "est": false,
+  "placement": {
+   "x": -0.85,
+   "y": -0.03,
+   "z": -0.4116,
+   "parent": "Boom_Rear_Stub",
+   "note": "Printed saddle inboard of the left boom: Fin is 13.4 mm thick at the root (cad mesh Fin.STL), too thin for the servo",
+   "est": true
+  },
+  "dims_note": "as listed; axis order not stated on the page"
+ },
+ {
+  "id": "SRV_RUD_R",
+  "name": "EMAX ES3005HV digital metal-gear servo, right rudder",
+  "bom_ref": "P-24",
+  "qty": 1,
+  "dims_mm": [
+   38.6,
+   18.8,
+   34.9
+  ],
+  "mass_g": 43.2,
+  "supply": "6.0-8.4 V; 8 kg.cm @6 V, 10 @7.4 V; running 450 mA @6 V; max 2.5 A @6 V, 3.2 A @7.4 V; idle 9.5 mA",
+  "interfaces": "3-wire, 240 mm lead (connector type: \u2014); PWM 500-2500 us",
+  "source_url_or_file": "https://readymaderc.com/products/details/85971-emax-es3005-analog-waterproof-servo (2026-10-19)",
+  "est": false,
+  "placement": {
+   "x": -0.85,
+   "y": -0.03,
+   "z": 0.4116,
+   "parent": "Boom_Rear_Stub",
+   "note": "mirror of SRV_RUD_L",
+   "est": true
+  },
+  "dims_note": "as listed; axis order not stated on the page"
+ },
+ {
+  "id": "CAP_L1",
+  "name": "470 uF 35 V low-ESR capacitor across the ESC input (recommended; ArduPilot page: ESCs may need 200-470 uF)",
+  "bom_ref": null,
+  "qty": 1,
+  "dims_mm": null,
+  "mass_g": null,
+  "supply": "35 V",
+  "interfaces": "2 leads, solder to the ESC 12 AWG input",
+  "source_url_or_file": "New line NL-02 in proposed_lines.json; https://ardupilot.org/plane/docs/common-CoreWingF405WingV2.html",
+  "est": true,
+  "placement": {
+   "x": 0.2,
+   "y": -0.03,
+   "z": 0.4647,
+   "parent": "Boom_Front_R",
+   "note": "On the ESC input leads next to ESC_L1",
+   "est": true
+  },
+  "dims_note": "\u2014",
+  "mass_note": "\u2014"
+ },
+ {
+  "id": "CAP_L2",
+  "name": "470 uF 35 V low-ESR capacitor across the ESC input (recommended; ArduPilot page: ESCs may need 200-470 uF)",
+  "bom_ref": null,
+  "qty": 1,
+  "dims_mm": null,
+  "mass_g": null,
+  "supply": "35 V",
+  "interfaces": "2 leads, solder to the ESC 12 AWG input",
+  "source_url_or_file": "New line NL-02 in proposed_lines.json; https://ardupilot.org/plane/docs/common-CoreWingF405WingV2.html",
+  "est": true,
+  "placement": {
+   "x": -0.36,
+   "y": -0.03,
+   "z": -0.4647,
+   "parent": "Boom_Front_L",
+   "note": "On the ESC input leads next to ESC_L2",
+   "est": true
+  },
+  "dims_note": "\u2014",
+  "mass_note": "\u2014"
+ },
+ {
+  "id": "CAP_L3",
+  "name": "470 uF 35 V low-ESR capacitor across the ESC input (recommended; ArduPilot page: ESCs may need 200-470 uF)",
+  "bom_ref": null,
+  "qty": 1,
+  "dims_mm": null,
+  "mass_g": null,
+  "supply": "35 V",
+  "interfaces": "2 leads, solder to the ESC 12 AWG input",
+  "source_url_or_file": "New line NL-02 in proposed_lines.json; https://ardupilot.org/plane/docs/common-CoreWingF405WingV2.html",
+  "est": true,
+  "placement": {
+   "x": 0.2,
+   "y": -0.03,
+   "z": -0.4647,
+   "parent": "Boom_Front_L",
+   "note": "On the ESC input leads next to ESC_L3",
+   "est": true
+  },
+  "dims_note": "\u2014",
+  "mass_note": "\u2014"
+ },
+ {
+  "id": "CAP_L4",
+  "name": "470 uF 35 V low-ESR capacitor across the ESC input (recommended; ArduPilot page: ESCs may need 200-470 uF)",
+  "bom_ref": null,
+  "qty": 1,
+  "dims_mm": null,
+  "mass_g": null,
+  "supply": "35 V",
+  "interfaces": "2 leads, solder to the ESC 12 AWG input",
+  "source_url_or_file": "New line NL-02 in proposed_lines.json; https://ardupilot.org/plane/docs/common-CoreWingF405WingV2.html",
+  "est": true,
+  "placement": {
+   "x": -0.36,
+   "y": -0.03,
+   "z": 0.4647,
+   "parent": "Boom_Front_R",
+   "note": "On the ESC input leads next to ESC_L4",
+   "est": true
+  },
+  "dims_note": "\u2014",
+  "mass_note": "\u2014"
+ },
+ {
+  "id": "CAP_P",
+  "name": "470 uF 35 V low-ESR capacitor across the pusher ESC input",
+  "bom_ref": null,
+  "qty": 1,
+  "dims_mm": null,
+  "mass_g": null,
+  "supply": "35 V",
+  "interfaces": "2 leads",
+  "source_url_or_file": "New line NL-02 in proposed_lines.json",
+  "est": true,
+  "placement": {
+   "x": -0.34,
+   "y": -0.05,
+   "z": 0.0,
+   "parent": "Fuselage_Pod",
+   "note": "Next to ESC_P",
+   "est": true
+  },
+  "dims_note": "\u2014",
+  "mass_note": "\u2014"
+ },
+ {
+  "id": "JB_J1_R",
+  "name": "Wing-root joint R: 2 x XT60H + JR 3-pin lines",
+  "bom_ref": "P-08",
+  "qty": 2,
+  "dims_mm": null,
+  "mass_g": null,
+  "supply": "-",
+  "interfaces": "XT60H x2 (ESC feeds), JR 3-pin x5 (2 ESC sig, aileron, elevator, rudder)",
+  "source_url_or_file": "docs/purchasing/C0_BOM.csv (XT60H 12 pairs); docs/research/budget-airframe.md \u00a73a (hardware kit, P-04)",
+  "est": true,
+  "placement": {
+   "x": -0.12,
+   "y": 0.0,
+   "z": 0.09,
+   "parent": "Wing_Panel_R",
+   "note": "Wing root just outboard of the saddle (saddle z +/-0.08); this is the pod/wing breakdown joint",
+   "est": true
+  },
+  "dims_note": "\u2014",
+  "mass_note": "\u2014"
+ },
+ {
+  "id": "JB_J2_R",
+  "name": "Boom/wing joint R at the rear boom clamp: 2 x XT60H + JR 3-pin lines",
+  "bom_ref": "P-08",
+  "qty": 2,
+  "dims_mm": null,
+  "mass_g": null,
+  "supply": "-",
+  "interfaces": "XT60H x2, JR 3-pin x4",
+  "source_url_or_file": "docs/purchasing/C0_BOM.csv",
+  "est": true,
+  "placement": {
+   "x": -0.19094,
+   "y": -0.03,
+   "z": 0.4337,
+   "parent": "Boom_Front_R",
+   "note": "Cable enters the boom tube through a hole at Boom_Clamp_Rear (x -0.19094); this is the boom breakdown joint",
+   "est": true
+  },
+  "dims_note": "\u2014",
+  "mass_note": "\u2014"
+ },
+ {
+  "id": "JB_J3_R",
+  "name": "Boom/tail-stub joint R at the rear motor mount: JR 3-pin lines",
+  "bom_ref": "P-04",
+  "qty": 1,
+  "dims_mm": null,
+  "mass_g": null,
+  "supply": "-",
+  "interfaces": "JR 3-pin x2 (elevator, rudder)",
+  "source_url_or_file": "docs/research/budget-airframe.md \u00a73a (hardware kit, P-04) item 4",
+  "est": true,
+  "placement": {
+   "x": -0.505,
+   "y": -0.03,
+   "z": 0.4337,
+   "parent": "Boom_Rear_Stub",
+   "note": "Inside Motor_Mount at x -0.50458 (the boom splice)",
+   "est": true
+  },
+  "dims_note": "\u2014",
+  "mass_note": "\u2014"
+ },
+ {
+  "id": "JB_J1_L",
+  "name": "Wing-root joint L: 2 x XT60H, JR 3-pin lines, GH plug",
+  "bom_ref": "P-08",
+  "qty": 2,
+  "dims_mm": null,
+  "mass_g": null,
+  "supply": "-",
+  "interfaces": "XT60H x2 (ESC feeds), JR 3-pin x4 (2 ESC sig, aileron, rudder), 4-pin GH (airspeed)",
+  "source_url_or_file": "docs/purchasing/C0_BOM.csv (XT60H 12 pairs); docs/research/budget-airframe.md \u00a73a (hardware kit, P-04)",
+  "est": true,
+  "placement": {
+   "x": -0.12,
+   "y": 0.0,
+   "z": -0.09,
+   "parent": "Wing_Panel_L",
+   "note": "Wing root just outboard of the saddle (saddle z +/-0.08); this is the pod/wing breakdown joint",
+   "est": true
+  },
+  "dims_note": "\u2014",
+  "mass_note": "\u2014"
+ },
+ {
+  "id": "JB_J2_L",
+  "name": "Boom/wing joint L at the rear boom clamp: 2 x XT60H + JR 3-pin lines",
+  "bom_ref": "P-08",
+  "qty": 2,
+  "dims_mm": null,
+  "mass_g": null,
+  "supply": "-",
+  "interfaces": "XT60H x2, JR 3-pin x3",
+  "source_url_or_file": "docs/purchasing/C0_BOM.csv",
+  "est": true,
+  "placement": {
+   "x": -0.19094,
+   "y": -0.03,
+   "z": -0.4337,
+   "parent": "Boom_Front_L",
+   "note": "Cable enters the boom tube through a hole at Boom_Clamp_Rear (x -0.19094); this is the boom breakdown joint",
+   "est": true
+  },
+  "dims_note": "\u2014",
+  "mass_note": "\u2014"
+ },
+ {
+  "id": "JB_J3_L",
+  "name": "Boom/tail-stub joint L at the rear motor mount: JR 3-pin lines",
+  "bom_ref": "P-04",
+  "qty": 1,
+  "dims_mm": null,
+  "mass_g": null,
+  "supply": "-",
+  "interfaces": "JR 3-pin x1 (rudder)",
+  "source_url_or_file": "docs/research/budget-airframe.md \u00a73a (hardware kit, P-04) item 4",
+  "est": true,
+  "placement": {
+   "x": -0.505,
+   "y": -0.03,
+   "z": -0.4337,
+   "parent": "Boom_Rear_Stub",
+   "note": "Inside Motor_Mount at x -0.50458 (the boom splice)",
+   "est": true
+  },
+  "dims_note": "\u2014",
+  "mass_note": "\u2014"
+ }
+]

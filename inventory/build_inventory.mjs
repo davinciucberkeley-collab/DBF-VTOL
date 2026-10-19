@@ -110,21 +110,38 @@ for (const [part, kit, from, proc] of MAKE) {
 }
 
 // ---------- Nautical Wings Aerospace carbon props (proposed, free) ----------
-const NWA_SRC = 'docs/research/nautical-wings-props.md';
+const NWA_SRC = 'docs/research/nautical-wings-props.md; sponsorship: team-reported (founders, in person, Oct 2026)';
+const NWA_NOTE = 'NWA founders offered to sponsor the team (met in person; team-reported, Oct 2026). Sponsorship rules not yet confirmed in writing. ';
 out.push({
   ID: 'N-01', Item: 'Carbon lift prop 17 in (design on demand, 2 CW + 2 CCW + 2 spare)', Type: 'NWA', Category: 'Lift propulsion', Kit: 'K2',
-  'CAD part': 'Lift_Prop', 'Qty needed': 6, 'Qty ordered': 0, 'Qty on hand': 0, Status: 'Proposed: confirm with NWA',
+  'CAD part': 'Lift_Prop', 'Qty needed': 6, 'Qty ordered': 0, 'Qty on hand': 0, Status: 'Proposed: NWA sponsor offer (verbal)',
   Vendor: 'Nautical Wings Aerospace', 'Unit USD': 0, 'Ext USD': 0, 'Made from': '', Process: 'Send spec sheet; designer proposes pitch',
   Location: '—', 'Order date': '', 'Received date': '', Inspected: '', Source: NWA_SRC,
-  Notes: 'Replaces JeeFly 1755 x 6 if confirmed. Fit to X4110S bolt-on adapter (4 mm shaft); hover point 15.2 N per rotor',
+  Notes: NWA_NOTE + 'Replaces JeeFly 1755 x 6 if confirmed. Fit to X4110S bolt-on adapter (4 mm shaft); hover point 15.2 N per rotor',
 });
 out.push({
   ID: 'N-02', Item: 'Carbon pusher prop 14 in (design on demand)', Type: 'NWA', Category: 'Cruise propulsion', Kit: 'K4',
-  'CAD part': 'Pusher_Prop_14in', 'Qty needed': 2, 'Qty ordered': 0, 'Qty on hand': 0, Status: 'Proposed: confirm with NWA',
+  'CAD part': 'Pusher_Prop_14in', 'Qty needed': 2, 'Qty ordered': 0, 'Qty on hand': 0, Status: 'Proposed: NWA sponsor offer (verbal)',
   Vendor: 'Nautical Wings Aerospace', 'Unit USD': 0, 'Ext USD': 0, 'Made from': '', Process: 'Send spec sheet; APC 14x8.5EP is the baseline',
   Location: '—', 'Order date': '', 'Received date': '', Inspected: '', Source: NWA_SRC,
-  Notes: 'Replaces APC 14x8.5EP x 3 if confirmed; keep one APC as thrust-stand baseline (team call)',
+  Notes: NWA_NOTE + 'Replaces APC 14x8.5EP x 3 if confirmed; keep one APC as thrust-stand baseline (team call)',
 });
+
+// ---------- proposed additions (not in the committed BOM): wheeled gear + electrical ----------
+// in: inventory/electrical/proposed_lines.json (docs/research/electrical-architecture.md)
+const prop = JSON.parse(r('./electrical/proposed_lines.json'));
+let g = 0;
+for (const l of prop.lines) {
+  if (l.unit_usd == null || l.qty == null) continue;          // unpriced optional lines stay in the research file
+  const isCap = /capacitor/i.test(l.item);
+  out.push({
+    ID: 'G-' + String(++g).padStart(2, '0'), Item: l.item, Type: 'Proposed', Category: isCap ? 'Electrical' : 'Landing gear',
+    Kit: isCap ? 'K2' : l.kit, 'CAD part': isCap ? '' : 'Landing_Leg', 'Qty needed': l.qty, 'Qty ordered': 0, 'Qty on hand': 0,
+    Status: isCap ? 'Proposed: electrical' : 'Proposed: wheeled gear', Vendor: l.vendor, 'Unit USD': l.unit_usd, 'Ext USD': l.ext_usd,
+    'Made from': '', Process: '', Location: '—', 'Order date': '', 'Received date': '', Inspected: '',
+    Source: `inventory/electrical/proposed_lines.json: ${l.url} (checked ${l.checked})`, Notes: l.why,
+  });
+}
 
 // ---------- budget summary + swap arithmetic ----------
 const goods = out.filter(o => o.Type === 'Buy').reduce((s, o) => s + o['Ext USD'], 0);
@@ -142,8 +159,13 @@ const summary = {
     reserveIfConfirmed: round(2000 - (goods * (1 + taxRate) + totals['Shipping allowance (estimate)']) + propRetail * (1 + taxRate)),
     note: 'EST: assumes NWA props are free with no shipping or import cost to the team; shipping allowance left unchanged',
   },
+  proposed: (() => { const pg = out.filter(o => o.Type === 'Proposed').reduce((t, o) => t + o['Ext USD'], 0);
+    return { goods: round(pg), withTax: round(pg * (1 + taxRate)),
+      reserveAfter: round(2000 - (goods * (1 + taxRate) + totals['Shipping allowance (estimate)']) - pg * (1 + taxRate)),
+      reserveAfterWithNwa: round(2000 - (goods * (1 + taxRate) + totals['Shipping allowance (estimate)']) - pg * (1 + taxRate) + propRetail * (1 + taxRate)),
+      note: 'EST: proposed lines are not in the committed BOM; shipping for them not quoted (—); wheel price conflict noted in proposed_lines.json' }; })(),
   kits: KITS,
-  counts: { buy: out.filter(o => o.Type === 'Buy').length, make: out.filter(o => o.Type === 'Make').length, nwa: out.filter(o => o.Type === 'NWA').length },
+  counts: { proposed: out.filter(o => o.Type === 'Proposed').length, buy: out.filter(o => o.Type === 'Buy').length, make: out.filter(o => o.Type === 'Make').length, nwa: out.filter(o => o.Type === 'NWA').length },
 };
 if (Math.abs(summary.goods - totals['Goods subtotal']) > 0.01) throw new Error(`goods ${summary.goods} != BOM subtotal ${totals['Goods subtotal']}`);
 

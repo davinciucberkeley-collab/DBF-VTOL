@@ -43,23 +43,29 @@ Interactive content: sortable tables, sensitivity sliders and charts that run th
 
 The review embeds a rotatable model of all 27 SOLIDWORKS parts. `cad/ExportMesh.cs` exports each part as STL (`cad/mesh/`, with colour and description in `meta.json`), and `review/mesh.mjs` packs them into the page. Static renders are in `cad/images/`, and the five-sheet drawing set is `cad/drawings/DBF-DRW-001.PDF`.
 
-### 3. Inventory overview and live inventory (Inventory Czar: Tristan Hottier)
+### 3. Inventory & electrical overview (Tristan Hottier: inventory and electrical)
 
-**[`Inventory-Overview.html`](Inventory-Overview.html)** (DBF-INV-001) is the project overview from the purchasing and physical-parts side. It is built like the design review, from the same sources, and has seven sections:
+**[`Inventory-Overview.html`](Inventory-Overview.html)** (DBF-INV-001) is the project overview from the purchasing, physical-parts and electrical side. It is built like the design review, from the same sources, and has nine sections:
 
 | § | Section | What it covers |
 |---|---|---|
-| 1 | Overview | Spend vs the $2,000 cap, crash reserve, lines to buy and make, status by kit, open decisions |
-| 2 | 3D model | The SOLIDWORKS parts coloured by inventory status, exploded-view slider, isolate by kit, click a part for its inventory line |
-| 3 | Inventory | Every stock line (40 buy, 21 make, 2 Nautical Wings): search, filters, sortable |
-| 4 | Budget & orders | Spend by vendor and category, goods → tax → shipping → reserve, one order card per vendor |
-| 5 | Fabrication & kits | What the team makes, from which stock line, by which process; tube cut lists; kit bins K1–K7 |
-| 6 | Nautical Wings props | Carbon props designed on demand (team-reported as free): spec sheet to send, budget effect, acceptance tests |
-| 7 | Receiving & storage | Receiving checklist, LiPo storage, bin locations |
+| 1 | Overview | Spend vs the $2,000 cap, crash reserve, proposed additions, worst electrical conflict, status by kit, open decisions |
+| 2 | 3D model | The SOLIDWORKS parts coloured by inventory status, plus the avionics, ESCs, servos, wire runs and the proposed wheels (each layer can be switched off); exploded view, isolate by kit, click any part, component or wire for its card |
+| 3 | Electrical | Power and signal trees, flight-controller output and port map, power budget, ratings conflicts and actions |
+| 4 | Wiring & tests | Wiring blueprint DBF-ELE-001 (every wire pin to pin, with the wing and boom breakdown joints), wire schedule, wire to buy by gauge, harness by joint, electrical test plan |
+| 5 | Inventory | Every stock line (40 buy, 21 make, 2 Nautical Wings, 4 proposed): search, filters, sortable |
+| 6 | Budget & orders | Spend by vendor and category, goods → tax → shipping → reserve, proposed additions kept separate, one order card per vendor |
+| 7 | Fabrication & kits | What the team makes, from which stock line, by which process; cut lists; kit bins K1–K7; wheeled landing-gear proposal |
+| 8 | Nautical Wings props | Sponsorship status, a ready-to-send message to NWA, spec sheet, budget effect, acceptance tests |
+| 9 | Receiving & storage | Receiving checklist, LiPo storage, bin locations |
 
 **Live inventory:** the editable copy is the Google Sheet [DBF Inventory (DBF-INV-001)](https://docs.google.com/spreadsheets/d/1nKiNBmtv2FeFGMaZjcKlNWKAuCMhC6uzteGTA2Iy9WE/edit). Budget totals and kit counts are formulas, so they update as quantities and statuses change. It is private: ask Tristan for access. The page shows a snapshot of it from the date in its header.
 
-**Nautical Wings carbon props:** the team reports free access to carbon propellers designed on demand by Nautical Wings Aerospace; this is not yet in writing, and no public source confirms the offer. They are a proposed swap for the six JeeFly 1755 lift props and three APC 14x8.5EP pushers, which stay on hold as the fallback. If confirmed, the reserve rises from $102.08 to $186.05 (EST: free props, no shipping or import cost). The design baseline is unchanged until the team confirms the terms in writing. Research and the spec sheet: [`docs/research/nautical-wings-props.md`](docs/research/nautical-wings-props.md).
+**Electrical design:** [`docs/research/electrical-architecture.md`](docs/research/electrical-architecture.md) with the machine-readable component list, wire list and connectors in `inventory/electrical/`. Placements and lengths are estimates until the harness is built. Open conflicts the team must resolve on the bench: lift motors at full throttle can draw up to 133 A against the 90 A current sensor and the motors' 26 A/30 s limit (cap lift throttle), and the transition current exceeds the XT90S continuous rating.
+
+**Landing gear (proposal):** 3 in wheels on the four existing legs, so the aircraft can land vertically or roll in as a fixed wing. Pusher ground clearance rises from 36 to 84 mm (EST), the leg length is unchanged, and the parts cost $57.82 with tax, not yet in committed spend.
+
+**Nautical Wings carbon props:** the Nautical Wings Aerospace founders offered in person to sponsor the team (team-reported, October 2026); the sponsorship rules still need confirming in writing, and §8 has the message to send. The props would replace the six JeeFly 1755 lift props and three APC 14x8.5EP pushers, which stay on hold as the fallback. If the props are free, the reserve rises from $102.08 to $186.05 (EST: no shipping or import cost). Research and spec sheet: [`docs/research/nautical-wings-props.md`](docs/research/nautical-wings-props.md).
 
 ### 4. 3D flight simulator (browser game)
 
@@ -126,6 +132,8 @@ CFD was not run (Flow Simulation would not load on this licence). `analysis/veri
 | `analysis/verify.py` | Independent re-derivation of every formula, the BOM, FEA vs hand and VLM vs sizing |
 | `cad/` | SOLIDWORKS model generator, drawings, meshes, simulations and outputs. See [`cad/README.md`](cad/README.md) |
 | `Inventory-Overview.html` | Inventory Czar overview (standalone; rebuilt by `inventory/build_overview.mjs`) |
+| `docs/research/electrical-architecture.md` | Electrical architecture, pin map, power budget, wiring rules, test plan, landing-gear geometry |
+| `inventory/electrical/` | Components with placements, wire list (routes, gauges, connectors) and proposed purchase lines |
 | `inventory/` | Inventory master list (`inventory.csv`, `inventory.json`), its builder, the Google Sheet seed (`DBF-Inventory-sheet.csv`), a formatted offline workbook (`DBF-Inventory.xlsx`), the overview page sources and the sheet link (`sheet.json`) |
 | `sim/` | Browser flight game (three.js), copied from the published Sim artifact; not used by the engineering |
 | `PRODUCT.md`, `DESIGN.md` | Who the review is for, and its visual design system |
@@ -167,8 +175,10 @@ These come from review §1, and each technical section ends with "What the team 
 1. **Flying site and legal path.** Ask UCPD/Risk Services by 2026-11-06 whether the capstone qualifies, and request Richmond Field Station.
 2. **Flight controller firmware.** The CoreWing ArduPilot target is beta-only today; the Matek F405-WMO is the stable fallback.
 3. **Thrust stand first.** Qualify every motor/ESC (tests T1–T6) before any flight; C0 has no hover motor-out tolerance.
-4. **Nautical Wings props.** Get the free-prop offer, price and lead time in writing and send the spec sheet (inventory overview §6). Until then the retail props stay on hold.
-5. **Cart totals.** Price shipping at checkout. If the reserve drops under $100: borrow a hot-wire cutter, then drop the spare motor, then the airspeed sensor.
-6. **Flight build-up.** Follow review §13 (SITL → bench → tethered → free hover → partial → full transition → mission).
+4. **Nautical Wings sponsorship.** Send the message in inventory overview §8 to confirm the sponsorship rules in writing, with the spec sheet. Until then the retail props stay on hold.
+5. **Electrical bench checks.** Cap lift throttle so each motor stays at or below 26 A on the thrust stand, and measure the servo-rail stall current (inventory overview §3–4).
+6. **Landing gear.** Decide on the wheeled gear proposal (inventory overview §7).
+7. **Cart totals.** Price shipping at checkout. If the reserve drops under $100: borrow a hot-wire cutter, then drop the spare motor, then the airspeed sensor.
+8. **Flight build-up.** Follow review §13 (SITL → bench → tethered → free hover → partial → full transition → mission).
 
 v0.3.1 incorporates a six-reviewer project audit (79 confirmed findings; review §12).

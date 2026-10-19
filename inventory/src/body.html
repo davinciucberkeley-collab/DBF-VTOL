@@ -2,12 +2,12 @@
 <div class="wrap">
 <header class="top">
   <div class="cover">
-    <h1>Inventory Overview</h1>
-    <p class="subtitle">Project overview for the Inventory Czar: purchasing, receiving, stock, fabricated parts, kits per subassembly and the Nautical Wings carbon props. Lift + cruise VTOL, student capstone.</p>
+    <h1>Inventory &amp; Electrical Overview</h1>
+    <p class="subtitle">Project overview for inventory and electrical: purchasing, receiving, stock, fabricated parts, kits per subassembly, the wiring harness and the Nautical Wings carbon props. Lift + cruise VTOL, student capstone.</p>
     <dl class="facts f6">
       <div><dt>Project</dt><dd>Design-Build-Fly</dd></div>
       <div><dt>Document</dt><dd>{{DOC}}</dd></div>
-      <div><dt>Owner</dt><dd>Tristan Hottier<br><code>Inventory Czar</code></dd></div>
+      <div><dt>Owner</dt><dd>Tristan Hottier<br><code>Inventory &amp; electrical</code></dd></div>
       <div><dt>Issue</dt><dd>1 · {{DATE}}</dd></div>
       <div><dt>Design revision</dt><dd>{{REV}}</dd></div>
       <div><dt>Stage</dt><dd>Concept · pre-purchase</dd></div>
@@ -24,11 +24,11 @@
 <!-- ============================ 1 OVERVIEW ============================ -->
 <section class="sec" id="overview" data-title="Overview" data-n="1">
   <div class="sechead"><h2><span class="secno">1</span> Overview</h2></div>
-  <p class="verdict lede"><b>The Inventory Czar owns every physical thing between a purchase decision and a flight.</b> That is buying, receiving, stock, the parts the team makes from raw stock, one kit bin per subassembly (K1 to K7), and the carbon propellers Nautical Wings Aerospace (NWA) designs on demand, which the team reports it can get free. <b class="ok-t">Verdict: the plan fits the cap, with a thin margin.</b> Committed spend is {{COMMITTED}} of the {{CAP}} cap, which leaves a {{RESERVE}} crash reserve against a target of {{TARGET}}. As of {{DATE}} the master list has {{LINES}} lines ({{N_BUY}} to buy, {{N_MAKE}} to make, {{N_NWA}} NWA prop lines) and {{RECEIVED}} are received. Two items block or erode the plan: the NWA terms, which are not confirmed, and the {{SHIP}} shipping allowance, which is an estimate.</p>
+  <p class="verdict lede"><b>Inventory &amp; electrical owns every physical thing between a purchase decision and a flight, and the wiring that connects it.</b> That is buying, receiving, stock, the parts the team makes from raw stock, one kit bin per subassembly (K1 to K7), the harness ({{EL_N_WIRE}} wires, {{EL_LEN}} m <span class="est">EST</span>), and the carbon propellers Nautical Wings Aerospace (NWA) designs on demand: the NWA founders offered in person to sponsor the team (team-reported, Oct 2026). <b class="ok-t">Verdict: the committed plan fits the cap, with a thin margin.</b> Committed spend is {{COMMITTED}} of the {{CAP}} cap, which leaves a {{RESERVE}} crash reserve against a target of {{TARGET}}. As of {{DATE}} the master list has {{LINES}} lines ({{N_BUY}} to buy, {{N_MAKE}} to make, {{N_NWA}} NWA prop lines, {{N_PROP}} proposed wheel and capacitor lines that are not committed) and {{RECEIVED}} are received. Three items need action: the NWA sponsorship rules, which are not in writing; the {{SHIP}} shipping allowance, which is an estimate; and the electrical conflict between lift full-throttle current and the {{EL_SENSOR_A}} A sensor (§3).</p>
   <p class="src">inventory/inventory.json (summary, rows; snapshot {{DATE}}) ← docs/purchasing/C0_BOM.csv; docs/DESIGN-BASIS.md R6, R7 (reserve target)</p>
 
   {{KPIS}}
-  <p class="src">inventory/inventory.json summary.cap, committed, reserve, counts; rows by Type and Status. Items received = lines with Qty on hand above 0. NWA props = sum of Qty needed on the Type NWA lines (N-01, N-02).</p>
+  <p class="src">inventory/inventory.json summary.cap, committed, reserve, proposed, counts; rows by Type and Status. Items received = lines with Qty on hand above 0. NWA props = sum of Qty needed on the Type NWA lines (N-01, N-02). Proposed spend = summary.proposed (rows G-01 to G-04, not in committed spend). Electrical conflict: docs/research/electrical-architecture.md §4 and inventory/electrical/components.json FC1 (current sensor rating).</p>
 
   <h3 id="ov-kits">Status by kit</h3>
   <p>Seven kits, one bin each. Every line carries a kit; the Kit column in the sheet is the filter.</p>
@@ -37,10 +37,10 @@
 
   <h3 id="ov-decisions">Open decisions</h3>
   <div class="decision red">
-    <b class="q">Confirm the Nautical Wings prop terms in writing</b>
-    <div>Nothing public confirms that NWA offers free or on-demand props to students: the company is a Bengaluru electric-motor maker, and the only prop range found is a 14 to 40 in standard series, cited in a Tyto Robotics customer story. The inventory proposes {{NWA_QTY}} NWA props ({{NWA_LIFT}} lift, {{NWA_PUSH}} pusher) that replace the retail JeeFly 1755 and APC 14x8.5EP lines, and those retail lines are on hold until it is settled. <b>Blocking for prop ordering.</b></div>
-    <div class="rec"><b>Recommended:</b> email NWA the spec sheet (§6) and ask for price, lead time, shipping and import cost, and balance report in writing. Keep the retail lines on hold, not deleted, until the reply arrives.<br><b>Alternative:</b> release the on-hold retail lines (JeeFly 1755 and APC 14x8.5EP, {{HOLD_GOODS}} goods) now and treat NWA props as an optional upgrade. Cost: reserve stays at {{RESERVE}}, not {{RES_IF}} ({{PRICES_CHECKED}} prices).</div>
-    <p class="src">inventory/inventory.json rows P-14, P-16, P-23, N-01, N-02 and summary.nwaSwap; docs/research/nautical-wings-props.md §1</p>
+    <b class="q">Confirm the Nautical Wings sponsorship rules in writing</b>
+    <div>The NWA founders offered in person to sponsor the team (team-reported, Oct 2026). What the sponsorship covers, its cost, shipping and import from India, lead time and obligations are not confirmed in writing. Nothing public describes a student prop offer: the company is a Bengaluru electric-motor maker, and the only prop range found is a 14 to 40 in standard series, cited in a Tyto Robotics customer story. The inventory proposes {{NWA_QTY}} NWA props ({{NWA_LIFT}} lift, {{NWA_PUSH}} pusher) that replace the retail JeeFly 1755 and APC 14x8.5EP lines, and those retail lines are on hold until it is settled. <b>Blocking for prop ordering.</b></div>
+    <div class="rec"><b>Recommended:</b> send the drafted message (§8) asking NWA to confirm scope, cost, shipping and import, lead time, data needs, obligations, IP, liability and a named contact, with the spec sheet attached. Keep the retail lines on hold, not deleted, until the reply arrives. If confirmed free, the reserve rises from {{RESERVE}} to {{RES_IF}} <span class="est">EST</span>.<br><b>Alternative:</b> release the on-hold retail lines (JeeFly 1755 and APC 14x8.5EP, {{HOLD_GOODS}} goods) now and treat NWA props as an optional upgrade. Cost: reserve stays at {{RESERVE}}, not {{RES_IF}} ({{PRICES_CHECKED}} prices).</div>
+    <p class="src">inventory/inventory.json rows P-14, P-16, P-23, N-01, N-02 (notes: sponsorship team-reported) and summary.nwaSwap; docs/research/nautical-wings-props.md §1</p>
   </div>
   <div class="decision">
     <b class="q">The {{SHIP}} shipping allowance is an estimate</b>
@@ -62,19 +62,22 @@
 <!-- ============================ 2 3D MODEL ============================ -->
 <section class="sec" id="model3d" data-title="3D model" data-n="2">
   <div class="sechead"><h2><span class="secno">2</span> 3D model</h2></div>
-  <p class="verdict lede"><b>The SOLIDWORKS model, coloured by what you still have to buy or make.</b> Switch to <b>Inventory status</b> to see which parts are on order, to make, on hold or unsourced. Click or tap a part for its inventory line, or isolate one kit to see what goes in its bin.</p>
-  <p class="src">cad/mesh/*.STL and cad/mesh/meta.json via review/mesh.mjs ({{CAD_PARTS}} parts, {{CAD_COMPS}} placed components, {{CAD_TRIS}} triangles; placements from cad/params.txt); statuses from inventory/inventory.json column CAD part</p>
+  <p class="verdict lede"><b>The SOLIDWORKS model, coloured by what you still have to buy or make, with the electronics, wires and proposed wheels laid in.</b> Switch to <b>Inventory status</b> to see which parts are on order, to make, on hold or unsourced. Click or tap a part, an electronic component or a wire for its card, or isolate one kit to see what goes in its bin. The Layers and Gear buttons switch the {{EL_N_RENDER}} electronic components, the {{EL_N_WIRE}} wires and the wheels.</p>
+  <p class="src">cad/mesh/*.STL and cad/mesh/meta.json via review/mesh.mjs ({{CAD_PARTS}} parts, {{CAD_COMPS}} placed components, {{CAD_TRIS}} triangles; placements from cad/params.txt); statuses from inventory/inventory.json column CAD part; electronics inventory/electrical/components.json (placements EST); wires inventory/electrical/wiring.json (routes EST); wheels docs/research/electrical-architecture.md §11, inventory/electrical/proposed_lines.json</p>
   <div class="v3dgrid">
   <div class="viewer cadview" id="v3d" data-card="v3dCard">
     <canvas id="v3dCanvas" aria-label="Rotatable SOLIDWORKS model of the aircraft, coloured by inventory status; drag to orbit, scroll to zoom, click a part for its inventory card"></canvas>
     <span class="lbl">SOLIDWORKS · C0 v{{REV}}</span>
     <div class="tip" hidden></div>
     <div class="legend" hidden aria-label="Colour legend"></div>
-    <div class="fallback" hidden><p>The 3D viewer needs an internet connection to load its graphics library (three.js). The inventory table (§3) lists the same parts.</p><button type="button" id="v3dRetry">Try again</button></div>
+    <div class="elegend" id="v3dEl" aria-label="Electrical layer legend"></div>
+    <div class="fallback" hidden><p>The 3D viewer needs an internet connection to load its graphics library (three.js). The inventory table (§5) lists the same parts.</p><button type="button" id="v3dRetry">Try again</button></div>
     <p class="loadmsg">Loading the 3D model…</p>
     <div class="ctl" role="group" aria-label="3D model controls">
       <div class="grp" role="group" aria-label="Colour mode"><span class="glabel">Colour</span><button type="button" data-colour="cad" aria-pressed="true">CAD colours</button><button type="button" data-colour="inv" aria-pressed="false">Inventory status</button></div>
       <div class="grp" role="group" aria-label="Camera view"><span class="glabel">View</span><button type="button" data-cview="iso">Iso</button><button type="button" data-cview="top">Top</button><button type="button" data-cview="side">Side</button><button type="button" data-cview="front">Front</button></div>
+      <div class="grp" role="group" aria-label="Electrical layers"><span class="glabel">Layers</span><button type="button" data-layer="el" aria-pressed="true">Electronics</button><button type="button" data-layer="wires" aria-pressed="true">Wires</button></div>
+      <div class="grp" role="group" aria-label="Landing gear"><span class="glabel">Gear</span><button type="button" data-gear="feet" aria-pressed="false">Feet (CAD)</button><button type="button" data-gear="wheels" aria-pressed="true">Wheels (proposed)</button></div>
       <div class="grp" role="group" aria-label="Kit isolation"><span class="glabel">Kit</span>{{KIT_BTNS}}</div>
       <div class="grp" role="group" aria-label="Display options"><button type="button" data-act="xray" aria-pressed="false">X-ray</button><button type="button" data-act="edges" aria-pressed="true">Edges</button><button type="button" data-act="reset">Reset</button>
         <label class="slide"><span>Explode</span><input type="range" min="0" max="100" value="0" step="1" data-explode aria-label="Explode the assembly, 0 to 100 percent"><output data-explode>0 %</output></label></div>
@@ -82,23 +85,99 @@
   </div>
   <aside class="pcard" id="v3dCard" aria-live="polite" aria-label="Selected part inventory card"></aside>
   </div>
-  <p class="v3dnote">Drag to orbit, right-drag or two-finger drag to pan, scroll or pinch to zoom. On a touch screen, tap the model once to start; swipes before that scroll the page. The lift props are shown parked fore-aft. <b>Motor, battery pack and pod proportions are estimates</b> <span class="est">EST</span> (cad/mesh/meta.json). <b>Avionics, ESCs, servos and wiring are not modelled</b>; those lines are in the table (§3) but not in the view. Parts with no inventory row: {{NO_ROW}}. A part drawn once may be several lines (for example the lift prop is both a JeeFly line and an NWA line); the colour shows the line that needs the most attention.</p>
+  <p class="v3dnote">Drag to orbit, right-drag or two-finger drag to pan, scroll or pinch to zoom. On a touch screen, tap the model once to start; swipes before that scroll the page. The lift props are shown parked fore-aft. <b>Motor, battery pack and pod proportions are estimates</b> <span class="est">EST</span> (cad/mesh/meta.json). With the electrical layers on, the pod and wing shells are drawn see-through so the parts inside show; wires hide while the model is exploded. Parts with no inventory row: {{NO_ROW}}. A part drawn once may be several lines (for example the lift prop is both a JeeFly line and an NWA line); the colour shows the line that needs the most attention.</p>
+  <p class="v3dnote"><b>Not in the SOLIDWORKS model:</b> the added electronics, wires and wheels are <span class="est">EST</span> envelopes and placements from inventory/electrical/*.json and the research file; cad/BuildVtol.cs was not rebuilt. Motors, the battery pack and the pitot probe come from the CAD model and are not drawn twice. Wheels are a proposal (§7 Landing gear); Feet (CAD) shows the model as built.</p>
   <details class="cadparts"><summary>Parts list ({{CAD_PARTS}} parts)</summary><ul id="v3dParts">{{PART_LIST}}</ul></details>
   <p class="src">Colour key: cad/mesh/meta.json (part names, descriptions, EST flags); inventory/inventory.json (Status, Kit, CAD part). Priority when a part has several lines: to source, to order, hold or proposed, to make, on hand.</p>
 </section>
 
-<!-- ============================ 3 INVENTORY ============================ -->
-<section class="sec" id="inventory" data-title="Inventory" data-n="3">
-  <div class="sechead"><h2><span class="secno">3</span> Inventory</h2></div>
+<!-- ============================ 3 ELECTRICAL ============================ -->
+<section class="sec" id="electrical" data-title="Electrical" data-n="3">
+  <div class="sechead"><h2><span class="secno">3</span> Electrical architecture</h2></div>
+  <p class="verdict lede"><b>One {{EL_VP}} V pack feeds a sensed bus, five ESCs and a UBEC; one conflict needs action before first flight.</b> Lift full-throttle current is up to {{EL_FULL_A}} A (4 × {{EL_A_WORST}} A at full pack; {{EL_FULL_NOM}} A at nominal) against the {{EL_SENSOR_A}} A continuous current sensor (×{{EL_RATIO}}), and each motor's {{EL_A_WORST}} A exceeds its {{EL_MOTOR_LIM}} A / 30 s limit, so cap the lift motor output on the thrust stand. The pack goes through the XT90S (the R20 disconnect) into the FC power board, then a star splice. The design has {{EL_N_COMP}} components and {{EL_N_WIRE}} wires, {{EL_LEN}} m of harness <span class="est">EST</span>. More items are flagged below: the XT90S rating (transition ×{{EL_XT_RATIO}}), servo stall against the BEC, the trunk passing {{EL_GPS_D}} m from the GPS, the S12 and LED pin, the unverified pusher DShot and the FC input range.</p>
+  <p class="src">docs/research/electrical-architecture.md (checked 2026-10-19); inventory/electrical/components.json ({{EL_N_COMP}} components), wiring.json ({{EL_N_WIRE}} wires); analysis/results.json (C0.sized, base.Vpack)</p>
+
+  <h3 id="el-trees">Power and signal trees</h3>
+  <p>Top: where the current goes. Bottom: which FC output, serial port or bus drives each device. Wire IDs match the wiring blueprint (§4).</p>
+  <figure class="chart"><figcaption>Power tree (top) and signal tree (bottom)</figcaption><div class="svgwrap dgwrap" tabindex="0" role="region" aria-label="Power and signal tree diagram, scrolls sideways">{{EL_DIAGRAM}}</div></figure>
+  <p class="src">docs/research/electrical-architecture.md §1–3 (power and signal trees); inventory/electrical/wiring.json (wire IDs, nets); inventory/electrical/components.json FC1 (rail ratings, sensor rating). Full pack voltage = 6 cells × 4.2 V (pack nominal 22.2 V = 6 × 3.7 V, analysis/results.json base.Vpack).</p>
+  <ul class="tight">
+    <li>Remote ID has its own UBEC, so a servo brownout cannot drop the FAA broadcast.</li>
+    <li>A 470 µF 35 V capacitor goes at the FC battery pads and at each of the five ESCs (inventory line G-04, proposed, not committed).</li>
+    <li>Single star ground at the splice (BUS1); the UBEC ground returns to the same star.</li>
+  </ul>
+  <p class="src">docs/research/electrical-architecture.md §1, §9; inventory/inventory.json row G-04</p>
+
+  <h3 id="el-fc">FC outputs and ports</h3>
+  <p>Outputs 1 to 10 can run DShot; servos sit on timer groups 8 to 12 so analog PWM never shares a timer with DShot.</p>
+  {{EL_FCMAP}}
+  <p class="src">docs/research/electrical-architecture.md §3 (ArduPilot quadplane-frame-setup and common-rcoutput-mapping pages, 2026-10-19); device and wire ID from inventory/electrical/wiring.json (the SERVOn_FUNCTION in each wire's function text is checked against this table at build time)</p>
+  {{EL_UART}}
+  <p class="src">docs/research/electrical-architecture.md §3 (UART line); inventory/electrical/wiring.json W31, W34, W35</p>
+
+  <h3 id="el-budget">Power budget</h3>
+  <p>Hover and cruise currents are recomputed at build time from analysis/results.json; the table shows each formula.</p>
+  {{EL_BUDGET}}
+  <p class="src">analysis/results.json concepts.C0.sized (P_hover, P_hover_per_motor, P_trans, P_cruise) and base.Vpack; docs/research/budget-lift.md A3 and docs/research/electrical-architecture.md §4 for the full-throttle and servo figures. The build fails if a recomputed figure disagrees with the research file.</p>
+  <p>Against the ratings:</p>
+  {{EL_LIMITS}}
+  <p class="src">Ratings: inventory/electrical/components.json FC1 (current sensor {{EL_SENSOR_A}} A continuous, servo rail {{EL_BEC_C}} A continuous / {{EL_BEC_P}} A peak); XT90S {{EL_XT_C}} A continuous (makerstore, the lower of two conflicting listings) from docs/research/electrical-architecture.md §3 R-D. Verdict = computed current above the rating.</p>
+
+  <h3 id="el-conflicts">Conflicts and risks</h3>
+  <p>Flagged, not resolved. Severity chips are this page's triage; the recommended actions are the research file's, and "—" means it gives none.</p>
+  {{EL_CONFLICTS}}
+  <p class="src">docs/research/electrical-architecture.md §3 (R-A to R-D), §4 (margin paragraph), §10 (test 7); severity is this page's triage</p>
+  <p><b>Unknowns:</b> {{EL_UNKNOWNS}}.</p>
+  <p class="src">docs/research/electrical-architecture.md §12</p>
+</section>
+
+<!-- ============================ 4 WIRING & TESTS ============================ -->
+<section class="sec" id="wiring" data-title="Wiring &amp; tests" data-n="4">
+  <div class="sechead"><h2><span class="secno">4</span> Wiring &amp; tests</h2></div>
+  <p class="verdict lede"><b>{{EL_N_WIRE}} wires, {{EL_LEN}} m <span class="est">EST</span>, cross up to three breakdown joints per side, so the aircraft separates into pod, wing and boom without cutting wire.</b> The blueprint is generated from the wiring data, so it cannot drift from the schedule. The schedule gives what to cut and buy; the joint list gives what plugs together for transport (R4).</p>
+  <p class="src">inventory/electrical/wiring.json (wires, connectors, nets; checked 2026-10-19); docs/research/electrical-architecture.md §5–8</p>
+
+  <h3 id="wi-blueprint">Wiring blueprint</h3>
+  <p>Each component is a block with its pins; each wire runs pin to pin with its ID, gauge and colour. Breakdown joints appear as connector symbols. Scroll the drawing sideways.</p>
+  <figure class="chart bpfig"><figcaption>Wiring blueprint DBF-ELE-001, sheet 1</figcaption>{{EL_WKEY}}<div class="svgwrap dgwrap" tabindex="0" role="region" aria-label="Wiring blueprint, scrolls sideways">{{EL_BLUEPRINT}}</div></figure>
+  <p class="src">Generated by inventory/build_overview.mjs (inventory/build_electrical.mjs) from inventory/electrical/wiring.json (from, to, pins, gauge, colour, joints, connectors) and components.json (names). Pin names are the data's own words; lengths are EST (route × 1.10); capacitors have no wire entry and are drawn under their ESC from components.json CAP_*.</p>
+
+  <h3 id="wi-schedule">Wire schedule</h3>
+  <p>Sortable; filter by zone (where the wire ends) or by function.</p>
+  {{EL_WSCHED}}
+  <p class="src">inventory/electrical/wiring.json wires[]; zone is this page's grouping from the destination's placement in components.json; "—" = not on any page read</p>
+
+  <h3 id="wi-gauge">What to buy and cut</h3>
+  {{EL_GAUGE}}
+  <p class="src">inventory/electrical/wiring.json length_m_est, conductors, gauge_awg (sums computed here); research file §5 for the 12 AWG ampacity basis and the unknown lead gauges</p>
+
+  <h3 id="wi-joints">Harness by joint</h3>
+  <p>When assembling for transport (R4: the largest piece fits a standard car), these pairs unplug and plug. Each joint carries an XT60H or JR pair so the wing, boom and pod separate without cutting wire.</p>
+  <div class="grid2">{{EL_JOINTS}}</div>
+  <p><b>Fixed connections</b> (not broken for transport):</p>
+  <ul class="tight">{{EL_FIXED}}</ul>
+  <p class="src">inventory/electrical/wiring.json connectors[] and wires[].joint; docs/research/electrical-architecture.md §6, §8; R4 in docs/DESIGN-BASIS.md</p>
+
+  <h3 id="wi-tests">Electrical tests</h3>
+  <p>In this order, before the first flight. The checkboxes are not saved; record results in the sheet.</p>
+  {{EL_TESTS}}
+  <p class="src">docs/research/electrical-architecture.md §10 (test plan, verbatim); the stall test is M3 of docs/research/budget-avionics.md</p>
+  {{EL_MEASURE}}
+  <p class="src">docs/research/electrical-architecture.md §3, §4, §10; thresholds are the sources' own, "—" where none is given. IDs E1 to E7 are this page's labels.</p>
+</section>
+
+<!-- ============================ 5 INVENTORY ============================ -->
+<section class="sec" id="inventory" data-title="Inventory" data-n="5">
+  <div class="sechead"><h2><span class="secno">5</span> Inventory</h2></div>
   <p class="verdict lede"><b>{{LINES}} lines, {{N_BUY}} bought, {{N_MAKE}} made, {{N_NWA}} from NWA.</b> Goods total {{GOODS}} before tax and shipping. {{RECEIVED}} lines are received.</p>
   <div class="snapshot"><b>This table is a snapshot</b> generated from inventory/inventory.json on {{DATE}}. The live, editable copy is the Google Sheet; record orders, receipts and inspections there.<br>{{SHEET_BTN_INV2}}</div>
   {{INV_TABLE}}
   <p class="src">inventory/inventory.json (rows) ← inventory/build_inventory.mjs ← docs/purchasing/C0_BOM.csv (prices checked {{PRICES_CHECKED}}) and cad/params.txt; "CAD part" links a line to cad/mesh/meta.json</p>
 </section>
 
-<!-- ============================ 4 BUDGET & ORDERS ============================ -->
-<section class="sec" id="budget" data-title="Budget &amp; orders" data-n="4">
-  <div class="sechead"><h2><span class="secno">4</span> Budget &amp; orders</h2></div>
+<!-- ============================ 6 BUDGET & ORDERS ============================ -->
+<section class="sec" id="budget" data-title="Budget &amp; orders" data-n="6">
+  <div class="sechead"><h2><span class="secno">6</span> Budget &amp; orders</h2></div>
   <p class="verdict lede"><b>{{COMMITTED}} committed under the {{CAP}} cap; {{RESERVE}} left.</b> The cap is fixed and includes tax and shipping. The reserve is {{MARGIN}} above the {{TARGET}} target, so shipping and tax at checkout decide whether it holds.</p>
   <p class="src">inventory/inventory.json summary; docs/purchasing/C0_BOM.csv totals; docs/DESIGN-BASIS.md R6, R7</p>
 
@@ -124,9 +203,9 @@
   <p class="src">inventory/inventory.json rows with Type Buy, grouped by Vendor; summary.bomPricesChecked; docs/purchasing/C0_BOM.csv columns Order date, Actual USD</p>
 </section>
 
-<!-- ============================ 5 FABRICATION & KITS ============================ -->
-<section class="sec" id="fabrication" data-title="Fabrication &amp; kits" data-n="5">
-  <div class="sechead"><h2><span class="secno">5</span> Fabrication &amp; kits</h2></div>
+<!-- ============================ 7 FABRICATION & KITS ============================ -->
+<section class="sec" id="fabrication" data-title="Fabrication &amp; kits" data-n="7">
+  <div class="sechead"><h2><span class="secno">7</span> Fabrication &amp; kits</h2></div>
   <p class="verdict lede"><b>{{N_MAKE}} parts are made from {{GOODS}} of bought stock, plus a printer and hand tools.</b> Every Make line names the stock line it is cut or printed from. One part, the spinner, has no source yet.</p>
   <p class="src">inventory/inventory.json rows with Type Make (columns Made from, Process); DESIGN-BASIS.md R6 (3D printer and hand tools on hand at $0)</p>
 
@@ -144,22 +223,54 @@
   <div class="tbl cuts"><table><thead><tr><th>Stock</th><th>Arithmetic</th><th class="n">Left over</th><th>Remark</th></tr></thead><tbody>{{CUT_ROWS}}</tbody></table></div>
   <p class="src">Cut lists quoted from the Notes of P-30, P-31, P-32 in inventory/inventory.json (← docs/purchasing/C0_BOM.csv); tube lengths from the item names; leftovers computed here</p>
 
+  <h3 id="fa-gear">Landing gear: wheels (proposal)</h3>
+  <p class="verdict"><b>Wheels cost {{GEAR_GOODS}} and raise the ground plane {{GEAR_DROP_MM}} mm <span class="est">EST</span>; pusher disc clearance goes from {{GEAR_PUSH_BEFORE}} to {{GEAR_PUSH_AFTER}} mm <span class="est">EST</span>.</b> The legs keep their length. The wheels are a proposal and are not in the SOLIDWORKS model; the 3D view (§2) draws them with the Wheels (proposed) button.</p>
+  <p class="src">docs/research/electrical-architecture.md §11; inventory/inventory.json rows G-01 to G-03; inventory/electrical/proposed_lines.json</p>
+  <h4 class="kh">What changes</h4>
+  <ul class="tight">
+    <li>Du-Bro Super Lite {{GEAR_D_IN}} in wheels (SKU 300SL, {{GEAR_G}} g each) on the four existing legs, with 5/32 in axles and collars. An axle block at the leg tip replaces the printed foot of M-20 (proposal; design —).</li>
+    <li>Leg length does not change: tube slack {{GEAR_SLACK1}} mm, {{GEAR_SLACK2}} mm after five kerfs.</li>
+    <li>Added mass about {{GEAR_MASS}} g <span class="est">EST</span>.</li>
+    <li>Wheel width and axle thread size: — (not published on the pages read). The 3D view draws the wheel at a display width only.</li>
+    <li>Axle offset e = {{GEAR_E}} mm below the tube end is <span class="est">EST</span> (axle block design: —). The {{GEAR_DROP_MM}} mm drop and every clearance and angle derived from it are <span class="est">EST</span>.</li>
+    <li>Stock: ${{GEAR_PRICE}} per pair at Gator RC, which shows "Only 1 left" on 2026-10-19. Two pairs are needed, so one pair must come from another vendor (—).</li>
+  </ul>
+  <h4 class="kh">Geometry results</h4>
+  {{GEAR_GEO}}
+  <p>The governing nose-up pitch limits are the boom end ({{GEAR_BOOM}}°) and the stabiliser ({{GEAR_STAB}}°), not the pusher disc (strike at {{GEAR_PUSHSTRIKE}}). Roll-over angle {{GEAR_ROLL}}°. A VTOL lands vertically by default; a rolling landing is a fallback only. Fallback rollout at 12 m/s <span class="est">EST</span>, friction values assumed: {{GEAR_ROLLOUT}}. Brakes are not evaluated.</p>
+  <p class="src">docs/research/electrical-architecture.md §11 (geometry table and paragraph; the calculation script is not in the repo)</p>
+  <h4 class="kh">Cost and reserve</h4>
+  {{GEAR_COST}}
+  <p class="src">inventory/inventory.json rows G-01 to G-04 and summary.proposed (goods, withTax, reserveAfter, reserveAfterWithNwa), summary.nwaSwap.retailPropWithTax; proposed lines are not in committed spend and shipping for them is not quoted</p>
+  <div class="decision">
+    <b class="q">Adopt wheeled gear?</b>
+    <div>Wheels lift the pusher disc off the ground by {{GEAR_PUSH_AFTER}} mm instead of {{GEAR_PUSH_BEFORE}} mm and keep the leg length, at {{GEAR_GOODS}} goods for the gear lines. They raise the CG from {{GEAR_CG0}} to {{GEAR_CG}} and cut the tip-back angle from {{GEAR_TIPBACK0}} to {{GEAR_TIPBACK}}. The reserve falls to {{PROP_AFTER}} with the capacitors included ({{PROP_AFTER_NWA}} if the NWA props are free), against the {{TARGET}} target.</div>
+    <div class="rec"><b>Recommended:</b> adopt the 300SL wheels, re-quote the price, and fit-check the axle against the leg tip before ordering. Order the capacitors (G-04) either way, because the FC and each ESC need one.<br><b>Alternative:</b> keep the printed feet: $0, but the pusher disc stays {{GEAR_PUSH_BEFORE}} mm from the ground. Treaded wheels (DUB300T, {{GEAR_ALT1}} g each, ${{GEAR_ALT1P}}) are the research file's other option.</div>
+    <p class="src">docs/research/electrical-architecture.md §11; inventory/inventory.json summary.proposed; docs/DESIGN-BASIS.md R7 (reserve target)</p>
+  </div>
+
   <h3 id="fa-kits">Kits K1 to K7</h3>
   <p>Each kit is one bin. Bought lines go in on receipt; made parts go in when finished and inspected.</p>
   <div class="grid2">{{KIT_CARDS}}</div>
   <p class="src">inventory/inventory.json rows grouped by Kit; kit names from summary.kits</p>
 </section>
 
-<!-- ============================ 6 NAUTICAL WINGS PROPS ============================ -->
-<section class="sec" id="nwa" data-title="Nautical Wings props" data-n="6">
-  <div class="sechead"><h2><span class="secno">6</span> Nautical Wings props</h2></div>
-  <p class="verdict lede"><b>The free NWA props are team-reported and not yet in writing.</b> Nothing public links NWA to a free or on-demand student prop offer, so get the terms in writing before any retail prop line is dropped. If confirmed, {{NWA_QTY}} props replace the on-hold retail lines and the reserve rises from {{RESERVE}} to {{RES_IF}} <span class="est">EST</span>.</p>
-  <p class="src">docs/research/nautical-wings-props.md (all sources checked 2026-10-19); inventory/inventory.json rows N-01, N-02, summary.nwaSwap</p>
+<!-- ============================ 8 NAUTICAL WINGS PROPS ============================ -->
+<section class="sec" id="nwa" data-title="Nautical Wings props" data-n="8">
+  <div class="sechead"><h2><span class="secno">8</span> Nautical Wings props</h2></div>
+  <p class="verdict lede"><b>The NWA founders offered in person to sponsor the team (team-reported, Oct 2026); the sponsorship rules are not yet in writing.</b> Next step: send the message below and get a written confirmation before any retail prop line is dropped. If confirmed free, {{NWA_QTY}} props replace the on-hold retail lines and the reserve rises from {{RESERVE}} to {{RES_IF}} <span class="est">EST</span>.</p>
+  <p class="src">inventory/inventory.json rows N-01, N-02 (status and notes), summary.nwaSwap; docs/research/nautical-wings-props.md (all sources checked 2026-10-19). The offer itself is team-reported, with no document.</p>
+
+  <h3 id="nw-msg">Message to send to NWA</h3>
+  <p>Draft from Tristan, ready to send. Attach the spec sheet below (motor, prop sizes, rotation, hover design point, balance target) before sending. It names no founder and gives no date.</p>
+  <div class="msgbox"><div class="msgbar"><b>Draft email</b><button type="button" class="themebtn" id="nwaCopy">Copy message</button><span id="nwaCopyMsg" class="meta" role="status" aria-live="polite"></span></div><pre id="nwaMsg" tabindex="0">{{NWA_MSG}}</pre></div>
+  <p class="src">Wording: this page. Quantities from inventory/inventory.json rows N-01 (item text, Qty needed) and N-02; the spec sheet is the table in "Spec sheet to send" below (docs/research/nautical-wings-props.md §3)</p>
 
   <h3 id="nw-who">Who NWA is</h3>
   <ul class="tight">
     <li>Nautical Wings Aerospace, Bengaluru, India: the most likely match, and the only company found under this exact name. It was founded in 2020 and sells B2B hardware to aircraft makers.</li>
     <li>It makes mainly electric motors: axial-flux drone motors and 30 to 40 kW motors, with a 1 MW-class VTOL motor planned.</li>
+    <li>Sponsorship: the founders offered in person to sponsor the team (team-reported, Oct 2026). What it covers, its cost and its obligations are not confirmed in writing.</li>
     <li>Props: a Tyto customer page lists “standard series propellers from 14 to 40 inches” and a 30 in fixed prop. Carbon layup, hub and bore, balancing, thrust data, lead time, ordering process and prices: — (not in any source found).</li>
     <li>Company website: —. UC Berkeley or student connection: —.</li>
   </ul>
@@ -167,7 +278,7 @@
 
   <h3 id="nw-spec">Spec sheet to send</h3>
   <p>Motor: SunnySky X4110S 400KV, 4 mm shaft, bolt-on prop adapter (not a collet), 48.2 mm OD, 149 g, 6S max, 577 W max continuous, 26 A for 30 s. Retailers list only 12 to 15 in props for it, so 17 in is beyond that list: ask the designer for the safe limit.</p>
-  <div class="tbl"><table><thead><tr><th>Item</th><th>Lift (4 + 1 spare)</th><th>Pusher (1 + spare)</th></tr></thead><tbody>
+  <div class="tbl"><table><thead><tr><th>Item</th><th>Lift (2 CW + 2 CCW + 2 spares = {{NWA_LIFT}})</th><th>Pusher ({{NWA_PUSH}})</th></tr></thead><tbody>
     <tr><td>Diameter</td><td>17 in (432 mm); confirm</td><td>14 in (APC 14x8.5EP baseline)</td></tr>
     <tr><td>Pitch</td><td>— (designer proposes from the design point)</td><td>8.5 in baseline</td></tr>
     <tr><td>Blades</td><td>2 <span class="est">EST</span></td><td>2</td></tr>
@@ -217,9 +328,9 @@
   <p class="src">docs/research/nautical-wings-props.md §3–4; hover thrust 6.18 kg / 4 = 1.545 kg = {{HOVER_N}} N as shown there</p>
 </section>
 
-<!-- ============================ 7 RECEIVING & STORAGE ============================ -->
-<section class="sec" id="receiving" data-title="Receiving &amp; storage" data-n="7">
-  <div class="sechead"><h2><span class="secno">7</span> Receiving &amp; storage</h2></div>
+<!-- ============================ 9 RECEIVING & STORAGE ============================ -->
+<section class="sec" id="receiving" data-title="Receiving &amp; storage" data-n="9">
+  <div class="sechead"><h2><span class="secno">9</span> Receiving &amp; storage</h2></div>
   <p class="verdict lede"><b>Every delivery is counted, inspected, recorded and binned the same day.</b> LiPo packs go in the bag and the ammo can, never loose in a kit bin. Locations are blank in the sheet today; this section proposes a scheme.</p>
   <p class="src">inventory/inventory.json (Location column is “—” on {{LOC_BLANK}} of {{LINES}} lines); docs/research/budget-energy-test.md §3</p>
 

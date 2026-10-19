@@ -1,0 +1,2224 @@
+{
+ "method": "length_geom_m = sum of straight segments between the route points (SOLIDWORKS frame, metres); length_m_est = 1.10 x length_geom_m (10 % slack). Route points are EST harness paths through the pod, wing core (behind the spar) and boom interior, not CAD geometry. gauge_awg null = not on any page read (\u2014).",
+ "date_checked": "2026-10-19",
+ "wires": [
+  {
+   "id": "W01",
+   "from": {
+    "component": "BAT1",
+    "pin": "+/- (pack leads)"
+   },
+   "to": {
+    "component": "XT90S_1",
+    "pin": "BAT half"
+   },
+   "function": "Pack leads re-terminated from EC5 to the XT90S pack half",
+   "signal_or_power": "power",
+   "gauge_awg": null,
+   "conductors": 2,
+   "colour": "red+black",
+   "connector_from": "solder (EC5 removed)",
+   "connector_to": "XT90S pack half",
+   "length_geom_m": 0.026,
+   "length_m_est": 0.029,
+   "route": [
+    [
+     0.1385,
+     -0.05,
+     0.0
+    ],
+    [
+     0.165,
+     -0.05,
+     0.0
+    ]
+   ],
+   "joint": null,
+   "current_A_max": 74.4,
+   "source": "pack leads supplied with P-12 (gauge/length: \u2014); length shown is only the stub to the plug",
+   "note": "gauge not on the P-12 listing; sister Ovonic Roam pack lists 10 AWG"
+  },
+  {
+   "id": "W02",
+   "from": {
+    "component": "XT90S_1",
+    "pin": "AIR half"
+   },
+   "to": {
+    "component": "FC1",
+    "pin": "PDB BAT+/-"
+   },
+   "function": "Main battery trunk into the PDB (current sensor in series)",
+   "signal_or_power": "power",
+   "gauge_awg": 10,
+   "conductors": 2,
+   "colour": "red+black",
+   "connector_from": "XT90S aircraft half",
+   "connector_to": "solder to PDB pad",
+   "length_geom_m": 0.06,
+   "length_m_est": 0.066,
+   "route": [
+    [
+     0.165,
+     -0.05,
+     0.0
+    ],
+    [
+     0.19,
+     -0.035,
+     0.0
+    ],
+    [
+     0.21,
+     -0.012,
+     0.0
+    ]
+   ],
+   "joint": null,
+   "current_A_max": 74.4,
+   "source": "analysis/results.json concepts.C0.sized (P_hover 831.98 W, P_trans 1562.45 W, I_trans 74.40 A, P_cruise 365.24 W); Engineering Toolbox AWG ampacity https://www.engineeringtoolbox.com/wire-gauges-d_419.html (2026-10-19)"
+  },
+  {
+   "id": "W03",
+   "from": {
+    "component": "FC1",
+    "pin": "PDB OUT+/- (after sensor)"
+   },
+   "to": {
+    "component": "BUS1",
+    "pin": "IN"
+   },
+   "function": "Sensed pack bus to the splice",
+   "signal_or_power": "power",
+   "gauge_awg": 10,
+   "conductors": 2,
+   "colour": "red+black",
+   "connector_from": "solder to PDB pad",
+   "connector_to": "solder splice",
+   "length_geom_m": 0.071,
+   "length_m_est": 0.078,
+   "route": [
+    [
+     0.235,
+     -0.012,
+     0.0
+    ],
+    [
+     0.235,
+     -0.045,
+     0.0
+    ],
+    [
+     0.2,
+     -0.06,
+     0.0
+    ]
+   ],
+   "joint": null,
+   "current_A_max": 74.4,
+   "source": "analysis/results.json concepts.C0.sized (P_hover 831.98 W, P_trans 1562.45 W, I_trans 74.40 A, P_cruise 365.24 W); Engineering Toolbox AWG ampacity https://www.engineeringtoolbox.com/wire-gauges-d_419.html (2026-10-19)",
+   "note": "PDB pad names are EST: the pages read do not show the pad layout (\u2014). Confirm the ESC-side pads are downstream of the current sensor"
+  },
+  {
+   "id": "W04",
+   "from": {
+    "component": "BUS1",
+    "pin": "OUT L1"
+   },
+   "to": {
+    "component": "ESC_L1",
+    "pin": "PWR"
+   },
+   "function": "ESC power feed, lift motor 1",
+   "signal_or_power": "power",
+   "gauge_awg": 12,
+   "conductors": 2,
+   "colour": "red+black",
+   "connector_from": "solder splice",
+   "connector_to": "XT60H J1+J2 then solder to ESC",
+   "length_geom_m": 1.172,
+   "length_m_est": 1.289,
+   "route": [
+    [
+     0.2,
+     -0.06,
+     0.0
+    ],
+    [
+     0.12,
+     -0.09,
+     0.02
+    ],
+    [
+     -0.02,
+     -0.09,
+     0.04
+    ],
+    [
+     -0.09,
+     -0.05,
+     0.065
+    ],
+    [
+     -0.12,
+     0.0,
+     0.09
+    ],
+    [
+     -0.125,
+     0.0,
+     0.25
+    ],
+    [
+     -0.1909,
+     0.0,
+     0.4337
+    ],
+    [
+     -0.1909,
+     -0.03,
+     0.4337
+    ],
+    [
+     0.2,
+     -0.03,
+     0.4337
+    ],
+    [
+     0.2,
+     -0.03,
+     0.4527
+    ]
+   ],
+   "joint": "J1_R, J2_R",
+   "current_A_max": 27.7,
+   "source": "hover 9.37 A @22.2 V (207.99 W/22.2, results.json P_hover_per_motor); full-throttle 27.7 A (docs/research/budget-lift.md A3 table, 17x5.8, 22.2 V); 12 AWG 34 A single core (Engineering Toolbox)"
+  },
+  {
+   "id": "W05",
+   "from": {
+    "component": "BUS1",
+    "pin": "OUT L2"
+   },
+   "to": {
+    "component": "ESC_L2",
+    "pin": "PWR"
+   },
+   "function": "ESC power feed, lift motor 2",
+   "signal_or_power": "power",
+   "gauge_awg": 12,
+   "conductors": 2,
+   "colour": "red+black",
+   "connector_from": "solder splice",
+   "connector_to": "XT60H J1+J2 then solder to ESC",
+   "length_geom_m": 0.95,
+   "length_m_est": 1.045,
+   "route": [
+    [
+     0.2,
+     -0.06,
+     0.0
+    ],
+    [
+     0.12,
+     -0.09,
+     -0.02
+    ],
+    [
+     -0.02,
+     -0.09,
+     -0.04
+    ],
+    [
+     -0.09,
+     -0.05,
+     -0.065
+    ],
+    [
+     -0.12,
+     0.0,
+     -0.09
+    ],
+    [
+     -0.125,
+     0.0,
+     -0.25
+    ],
+    [
+     -0.1909,
+     0.0,
+     -0.4337
+    ],
+    [
+     -0.1909,
+     -0.03,
+     -0.4337
+    ],
+    [
+     -0.36,
+     -0.03,
+     -0.4337
+    ],
+    [
+     -0.36,
+     -0.03,
+     -0.4527
+    ]
+   ],
+   "joint": "J1_L, J2_L",
+   "current_A_max": 27.7,
+   "source": "hover 9.37 A @22.2 V (207.99 W/22.2, results.json P_hover_per_motor); full-throttle 27.7 A (docs/research/budget-lift.md A3 table, 17x5.8, 22.2 V); 12 AWG 34 A single core (Engineering Toolbox)"
+  },
+  {
+   "id": "W06",
+   "from": {
+    "component": "BUS1",
+    "pin": "OUT L3"
+   },
+   "to": {
+    "component": "ESC_L3",
+    "pin": "PWR"
+   },
+   "function": "ESC power feed, lift motor 3",
+   "signal_or_power": "power",
+   "gauge_awg": 12,
+   "conductors": 2,
+   "colour": "red+black",
+   "connector_from": "solder splice",
+   "connector_to": "XT60H J1+J2 then solder to ESC",
+   "length_geom_m": 1.172,
+   "length_m_est": 1.289,
+   "route": [
+    [
+     0.2,
+     -0.06,
+     0.0
+    ],
+    [
+     0.12,
+     -0.09,
+     -0.02
+    ],
+    [
+     -0.02,
+     -0.09,
+     -0.04
+    ],
+    [
+     -0.09,
+     -0.05,
+     -0.065
+    ],
+    [
+     -0.12,
+     0.0,
+     -0.09
+    ],
+    [
+     -0.125,
+     0.0,
+     -0.25
+    ],
+    [
+     -0.1909,
+     0.0,
+     -0.4337
+    ],
+    [
+     -0.1909,
+     -0.03,
+     -0.4337
+    ],
+    [
+     0.2,
+     -0.03,
+     -0.4337
+    ],
+    [
+     0.2,
+     -0.03,
+     -0.4527
+    ]
+   ],
+   "joint": "J1_L, J2_L",
+   "current_A_max": 27.7,
+   "source": "hover 9.37 A @22.2 V (207.99 W/22.2, results.json P_hover_per_motor); full-throttle 27.7 A (docs/research/budget-lift.md A3 table, 17x5.8, 22.2 V); 12 AWG 34 A single core (Engineering Toolbox)"
+  },
+  {
+   "id": "W07",
+   "from": {
+    "component": "BUS1",
+    "pin": "OUT L4"
+   },
+   "to": {
+    "component": "ESC_L4",
+    "pin": "PWR"
+   },
+   "function": "ESC power feed, lift motor 4",
+   "signal_or_power": "power",
+   "gauge_awg": 12,
+   "conductors": 2,
+   "colour": "red+black",
+   "connector_from": "solder splice",
+   "connector_to": "XT60H J1+J2 then solder to ESC",
+   "length_geom_m": 0.95,
+   "length_m_est": 1.045,
+   "route": [
+    [
+     0.2,
+     -0.06,
+     0.0
+    ],
+    [
+     0.12,
+     -0.09,
+     0.02
+    ],
+    [
+     -0.02,
+     -0.09,
+     0.04
+    ],
+    [
+     -0.09,
+     -0.05,
+     0.065
+    ],
+    [
+     -0.12,
+     0.0,
+     0.09
+    ],
+    [
+     -0.125,
+     0.0,
+     0.25
+    ],
+    [
+     -0.1909,
+     0.0,
+     0.4337
+    ],
+    [
+     -0.1909,
+     -0.03,
+     0.4337
+    ],
+    [
+     -0.36,
+     -0.03,
+     0.4337
+    ],
+    [
+     -0.36,
+     -0.03,
+     0.4527
+    ]
+   ],
+   "joint": "J1_R, J2_R",
+   "current_A_max": 27.7,
+   "source": "hover 9.37 A @22.2 V (207.99 W/22.2, results.json P_hover_per_motor); full-throttle 27.7 A (docs/research/budget-lift.md A3 table, 17x5.8, 22.2 V); 12 AWG 34 A single core (Engineering Toolbox)"
+  },
+  {
+   "id": "W08",
+   "from": {
+    "component": "BUS1",
+    "pin": "OUT P"
+   },
+   "to": {
+    "component": "ESC_P",
+    "pin": "PWR"
+   },
+   "function": "Pusher ESC power feed",
+   "signal_or_power": "power",
+   "gauge_awg": 12,
+   "conductors": 2,
+   "colour": "red+black",
+   "connector_from": "solder splice",
+   "connector_to": "solder to ESC",
+   "length_geom_m": 0.558,
+   "length_m_est": 0.613,
+   "route": [
+    [
+     0.2,
+     -0.06,
+     0.0
+    ],
+    [
+     0.1,
+     -0.095,
+     -0.02
+    ],
+    [
+     -0.2,
+     -0.085,
+     -0.02
+    ],
+    [
+     -0.28,
+     -0.06,
+     -0.01
+    ],
+    [
+     -0.34,
+     -0.035,
+     -0.005
+    ]
+   ],
+   "joint": null,
+   "current_A_max": 30,
+   "source": "cruise 16.45 A (results.json I_cruise); full-throttle current of the 14x8.5EP pusher: \u2014 (docs/research/pusher-battery-servo.md M1); limit THR_MAX so bench current <= 30 A (12 AWG 34 A)"
+  },
+  {
+   "id": "W09",
+   "from": {
+    "component": "BUS1",
+    "pin": "OUT UBEC"
+   },
+   "to": {
+    "component": "UBEC1",
+    "pin": "IN"
+   },
+   "function": "UBEC input",
+   "signal_or_power": "power",
+   "gauge_awg": 14,
+   "conductors": 2,
+   "colour": "red+black",
+   "connector_from": "solder splice",
+   "connector_to": "solder to UBEC input",
+   "length_geom_m": 0.061,
+   "length_m_est": 0.067,
+   "route": [
+    [
+     0.2,
+     -0.06,
+     0.01
+    ],
+    [
+     0.26,
+     -0.055,
+     0.0
+    ]
+   ],
+   "joint": null,
+   "current_A_max": 0.5,
+   "source": "EST: BeeID 5 V load (\u2014 on page) well under 5 A; 14 AWG is the kit wire for BEC feeds (docs/purchasing/C0_BOM.csv)"
+  },
+  {
+   "id": "W10",
+   "from": {
+    "component": "UBEC1",
+    "pin": "5V/GND"
+   },
+   "to": {
+    "component": "RID1",
+    "pin": "5V/GND"
+   },
+   "function": "Remote ID supply (independent of the FC 5 V rail)",
+   "signal_or_power": "power",
+   "gauge_awg": null,
+   "conductors": 2,
+   "colour": "red+black",
+   "connector_from": "UBEC output leads",
+   "connector_to": "solder / BeeID leads",
+   "length_geom_m": 0.178,
+   "length_m_est": 0.196,
+   "route": [
+    [
+     0.26,
+     -0.055,
+     0.0
+    ],
+    [
+     0.2,
+     -0.01,
+     0.03
+    ],
+    [
+     0.12,
+     0.045,
+     0.04
+    ]
+   ],
+   "joint": null,
+   "current_A_max": 0.5,
+   "source": "BeeID page: \"5V input and ground connection\", current \u2014 (https://newbeedrone.com/products/newbeedrone-beeid-v1-1-m10q-gps-module-with-remoteid-drone-tracker)",
+   "note": "BeeID TX/RX not connected (RID broadcast only; HGLRC is the navigation GPS)"
+  },
+  {
+   "id": "W11",
+   "from": {
+    "component": "ESC_L1",
+    "pin": "PH A/B/C"
+   },
+   "to": {
+    "component": "MOT_L1",
+    "pin": "PH A/B/C"
+   },
+   "function": "Motor phase leads, lift 1",
+   "signal_or_power": "power",
+   "gauge_awg": null,
+   "conductors": 3,
+   "colour": "3 phase (per motor leads)",
+   "connector_from": "ESC pads or bullets (size \u2014)",
+   "connector_to": "motor leads / bullets (\u2014)",
+   "length_geom_m": 0.173,
+   "length_m_est": 0.191,
+   "route": [
+    [
+     0.2,
+     -0.03,
+     0.4527
+    ],
+    [
+     0.3709,
+     -0.009,
+     0.4337
+    ]
+   ],
+   "joint": null,
+   "current_A_max": 27.7,
+   "source": "https://sunnyskyusa.com/collections/multirotor-motors/products/sunnysky-x4110s-motors (lead gauge/length/bullet size: \u2014)",
+   "note": "ESC sits 0.14-0.17 m from the motor; if the stock leads are shorter, extend with 14 AWG (kit) and a bullet pair"
+  },
+  {
+   "id": "W12",
+   "from": {
+    "component": "ESC_L2",
+    "pin": "PH A/B/C"
+   },
+   "to": {
+    "component": "MOT_L2",
+    "pin": "PH A/B/C"
+   },
+   "function": "Motor phase leads, lift 2",
+   "signal_or_power": "power",
+   "gauge_awg": null,
+   "conductors": 3,
+   "colour": "3 phase (per motor leads)",
+   "connector_from": "ESC pads or bullets (size \u2014)",
+   "connector_to": "motor leads / bullets (\u2014)",
+   "length_geom_m": 0.147,
+   "length_m_est": 0.162,
+   "route": [
+    [
+     -0.36,
+     -0.03,
+     -0.4527
+    ],
+    [
+     -0.5046,
+     -0.009,
+     -0.4337
+    ]
+   ],
+   "joint": null,
+   "current_A_max": 27.7,
+   "source": "https://sunnyskyusa.com/collections/multirotor-motors/products/sunnysky-x4110s-motors (lead gauge/length/bullet size: \u2014)",
+   "note": "ESC sits 0.14-0.17 m from the motor; if the stock leads are shorter, extend with 14 AWG (kit) and a bullet pair"
+  },
+  {
+   "id": "W13",
+   "from": {
+    "component": "ESC_L3",
+    "pin": "PH A/B/C"
+   },
+   "to": {
+    "component": "MOT_L3",
+    "pin": "PH A/B/C"
+   },
+   "function": "Motor phase leads, lift 3",
+   "signal_or_power": "power",
+   "gauge_awg": null,
+   "conductors": 3,
+   "colour": "3 phase (per motor leads)",
+   "connector_from": "ESC pads or bullets (size \u2014)",
+   "connector_to": "motor leads / bullets (\u2014)",
+   "length_geom_m": 0.173,
+   "length_m_est": 0.191,
+   "route": [
+    [
+     0.2,
+     -0.03,
+     -0.4527
+    ],
+    [
+     0.3709,
+     -0.009,
+     -0.4337
+    ]
+   ],
+   "joint": null,
+   "current_A_max": 27.7,
+   "source": "https://sunnyskyusa.com/collections/multirotor-motors/products/sunnysky-x4110s-motors (lead gauge/length/bullet size: \u2014)",
+   "note": "ESC sits 0.14-0.17 m from the motor; if the stock leads are shorter, extend with 14 AWG (kit) and a bullet pair"
+  },
+  {
+   "id": "W14",
+   "from": {
+    "component": "ESC_L4",
+    "pin": "PH A/B/C"
+   },
+   "to": {
+    "component": "MOT_L4",
+    "pin": "PH A/B/C"
+   },
+   "function": "Motor phase leads, lift 4",
+   "signal_or_power": "power",
+   "gauge_awg": null,
+   "conductors": 3,
+   "colour": "3 phase (per motor leads)",
+   "connector_from": "ESC pads or bullets (size \u2014)",
+   "connector_to": "motor leads / bullets (\u2014)",
+   "length_geom_m": 0.147,
+   "length_m_est": 0.162,
+   "route": [
+    [
+     -0.36,
+     -0.03,
+     0.4527
+    ],
+    [
+     -0.5046,
+     -0.009,
+     0.4337
+    ]
+   ],
+   "joint": null,
+   "current_A_max": 27.7,
+   "source": "https://sunnyskyusa.com/collections/multirotor-motors/products/sunnysky-x4110s-motors (lead gauge/length/bullet size: \u2014)",
+   "note": "ESC sits 0.14-0.17 m from the motor; if the stock leads are shorter, extend with 14 AWG (kit) and a bullet pair"
+  },
+  {
+   "id": "W15",
+   "from": {
+    "component": "ESC_P",
+    "pin": "PH A/B/C"
+   },
+   "to": {
+    "component": "MOT_P",
+    "pin": "PH A/B/C"
+   },
+   "function": "Motor phase leads, pusher",
+   "signal_or_power": "power",
+   "gauge_awg": null,
+   "conductors": 3,
+   "colour": "3 phase",
+   "connector_from": "ESC pads / bullets (\u2014)",
+   "connector_to": "motor leads (\u2014)",
+   "length_geom_m": 0.039,
+   "length_m_est": 0.043,
+   "route": [
+    [
+     -0.3625,
+     -0.03,
+     0.0
+    ],
+    [
+     -0.4,
+     -0.03,
+     0.01
+    ]
+   ],
+   "joint": null,
+   "current_A_max": 30,
+   "source": "https://sunnyskyusa.com/collections/multirotor-motors/products/sunnysky-x4110s-motors (\u2014)"
+  },
+  {
+   "id": "W21",
+   "from": {
+    "component": "FC1",
+    "pin": "S1 (PWM1) sig+GND"
+   },
+   "to": {
+    "component": "ESC_L1",
+    "pin": "SIG"
+   },
+   "function": "DShot to lift ESC 1 (SERVO1_FUNCTION 33)",
+   "signal_or_power": "signal",
+   "gauge_awg": null,
+   "conductors": 2,
+   "colour": "white+black (servo red contact removed)",
+   "connector_from": "JR 3-pin at FC header",
+   "connector_to": "JR 3-pin x2 (J1, J2) + ESC plug",
+   "length_geom_m": 1.201,
+   "length_m_est": 1.321,
+   "route": [
+    [
+     0.185,
+     0.0,
+     -0.0145
+    ],
+    [
+     0.12,
+     -0.09,
+     0.02
+    ],
+    [
+     -0.02,
+     -0.09,
+     0.04
+    ],
+    [
+     -0.09,
+     -0.05,
+     0.065
+    ],
+    [
+     -0.12,
+     0.0,
+     0.09
+    ],
+    [
+     -0.125,
+     0.0,
+     0.25
+    ],
+    [
+     -0.1909,
+     0.0,
+     0.4337
+    ],
+    [
+     -0.1909,
+     -0.03,
+     0.4337
+    ],
+    [
+     0.2,
+     -0.03,
+     0.4337
+    ],
+    [
+     0.2,
+     -0.03,
+     0.4527
+    ]
+   ],
+   "joint": "J1_R, J2_R",
+   "current_A_max": 0.01,
+   "source": "ArduPilot motor function 33-36: https://ardupilot.org/plane/docs/quadplane-frame-setup.html (2026-10-19); timer groups: https://ardupilot.org/plane/docs/common-CoreWingF405WingV2.html",
+   "note": "Servo-lead gauge (kit 300 mm leads): \u2014. Pull the red (V+) contact at the FC end so the servo rail never feeds the ESC"
+  },
+  {
+   "id": "W22",
+   "from": {
+    "component": "FC1",
+    "pin": "S2 (PWM2) sig+GND"
+   },
+   "to": {
+    "component": "ESC_L2",
+    "pin": "SIG"
+   },
+   "function": "DShot to lift ESC 2 (SERVO2_FUNCTION 34)",
+   "signal_or_power": "signal",
+   "gauge_awg": null,
+   "conductors": 2,
+   "colour": "white+black (servo red contact removed)",
+   "connector_from": "JR 3-pin at FC header",
+   "connector_to": "JR 3-pin x2 (J1, J2) + ESC plug",
+   "length_geom_m": 0.974,
+   "length_m_est": 1.071,
+   "route": [
+    [
+     0.185,
+     0.0,
+     -0.0119
+    ],
+    [
+     0.12,
+     -0.09,
+     -0.02
+    ],
+    [
+     -0.02,
+     -0.09,
+     -0.04
+    ],
+    [
+     -0.09,
+     -0.05,
+     -0.065
+    ],
+    [
+     -0.12,
+     0.0,
+     -0.09
+    ],
+    [
+     -0.125,
+     0.0,
+     -0.25
+    ],
+    [
+     -0.1909,
+     0.0,
+     -0.4337
+    ],
+    [
+     -0.1909,
+     -0.03,
+     -0.4337
+    ],
+    [
+     -0.36,
+     -0.03,
+     -0.4337
+    ],
+    [
+     -0.36,
+     -0.03,
+     -0.4527
+    ]
+   ],
+   "joint": "J1_L, J2_L",
+   "current_A_max": 0.01,
+   "source": "ArduPilot motor function 33-36: https://ardupilot.org/plane/docs/quadplane-frame-setup.html (2026-10-19); timer groups: https://ardupilot.org/plane/docs/common-CoreWingF405WingV2.html",
+   "note": "Servo-lead gauge (kit 300 mm leads): \u2014. Pull the red (V+) contact at the FC end so the servo rail never feeds the ESC"
+  },
+  {
+   "id": "W23",
+   "from": {
+    "component": "FC1",
+    "pin": "S3 (PWM3) sig+GND"
+   },
+   "to": {
+    "component": "ESC_L3",
+    "pin": "SIG"
+   },
+   "function": "DShot to lift ESC 3 (SERVO3_FUNCTION 35)",
+   "signal_or_power": "signal",
+   "gauge_awg": null,
+   "conductors": 2,
+   "colour": "white+black (servo red contact removed)",
+   "connector_from": "JR 3-pin at FC header",
+   "connector_to": "JR 3-pin x2 (J1, J2) + ESC plug",
+   "length_geom_m": 1.196,
+   "length_m_est": 1.316,
+   "route": [
+    [
+     0.185,
+     0.0,
+     -0.0092
+    ],
+    [
+     0.12,
+     -0.09,
+     -0.02
+    ],
+    [
+     -0.02,
+     -0.09,
+     -0.04
+    ],
+    [
+     -0.09,
+     -0.05,
+     -0.065
+    ],
+    [
+     -0.12,
+     0.0,
+     -0.09
+    ],
+    [
+     -0.125,
+     0.0,
+     -0.25
+    ],
+    [
+     -0.1909,
+     0.0,
+     -0.4337
+    ],
+    [
+     -0.1909,
+     -0.03,
+     -0.4337
+    ],
+    [
+     0.2,
+     -0.03,
+     -0.4337
+    ],
+    [
+     0.2,
+     -0.03,
+     -0.4527
+    ]
+   ],
+   "joint": "J1_L, J2_L",
+   "current_A_max": 0.01,
+   "source": "ArduPilot motor function 33-36: https://ardupilot.org/plane/docs/quadplane-frame-setup.html (2026-10-19); timer groups: https://ardupilot.org/plane/docs/common-CoreWingF405WingV2.html",
+   "note": "Servo-lead gauge (kit 300 mm leads): \u2014. Pull the red (V+) contact at the FC end so the servo rail never feeds the ESC"
+  },
+  {
+   "id": "W24",
+   "from": {
+    "component": "FC1",
+    "pin": "S4 (PWM4) sig+GND"
+   },
+   "to": {
+    "component": "ESC_L4",
+    "pin": "SIG"
+   },
+   "function": "DShot to lift ESC 4 (SERVO4_FUNCTION 36)",
+   "signal_or_power": "signal",
+   "gauge_awg": null,
+   "conductors": 2,
+   "colour": "white+black (servo red contact removed)",
+   "connector_from": "JR 3-pin at FC header",
+   "connector_to": "JR 3-pin x2 (J1, J2) + ESC plug",
+   "length_geom_m": 0.977,
+   "length_m_est": 1.074,
+   "route": [
+    [
+     0.185,
+     0.0,
+     -0.0066
+    ],
+    [
+     0.12,
+     -0.09,
+     0.02
+    ],
+    [
+     -0.02,
+     -0.09,
+     0.04
+    ],
+    [
+     -0.09,
+     -0.05,
+     0.065
+    ],
+    [
+     -0.12,
+     0.0,
+     0.09
+    ],
+    [
+     -0.125,
+     0.0,
+     0.25
+    ],
+    [
+     -0.1909,
+     0.0,
+     0.4337
+    ],
+    [
+     -0.1909,
+     -0.03,
+     0.4337
+    ],
+    [
+     -0.36,
+     -0.03,
+     0.4337
+    ],
+    [
+     -0.36,
+     -0.03,
+     0.4527
+    ]
+   ],
+   "joint": "J1_R, J2_R",
+   "current_A_max": 0.01,
+   "source": "ArduPilot motor function 33-36: https://ardupilot.org/plane/docs/quadplane-frame-setup.html (2026-10-19); timer groups: https://ardupilot.org/plane/docs/common-CoreWingF405WingV2.html",
+   "note": "Servo-lead gauge (kit 300 mm leads): \u2014. Pull the red (V+) contact at the FC end so the servo rail never feeds the ESC"
+  },
+  {
+   "id": "W25",
+   "from": {
+    "component": "FC1",
+    "pin": "S5 (PWM5) sig+GND"
+   },
+   "to": {
+    "component": "ESC_P",
+    "pin": "SIG"
+   },
+   "function": "DShot to pusher ESC (SERVO5_FUNCTION 70)",
+   "signal_or_power": "signal",
+   "gauge_awg": null,
+   "conductors": 2,
+   "colour": "white+black",
+   "connector_from": "JR 3-pin at FC header",
+   "connector_to": "ESC plug",
+   "length_geom_m": 0.603,
+   "length_m_est": 0.664,
+   "route": [
+    [
+     0.185,
+     0.0,
+     -0.004
+    ],
+    [
+     0.15,
+     -0.09,
+     0.03
+    ],
+    [
+     -0.2,
+     -0.088,
+     0.03
+    ],
+    [
+     -0.28,
+     -0.06,
+     0.02
+    ],
+    [
+     -0.34,
+     -0.035,
+     0.01
+    ]
+   ],
+   "joint": null,
+   "current_A_max": 0.01,
+   "source": "function 70 = Throttle: https://ardupilot.org/plane/docs/common-rcoutput-mapping.html (2026-10-19); DShot on output 5 via SERVO_BLH_MASK is forum-sourced (https://discuss.ardupilot.org/t/dshot-for-the-horizontal-motor/63902): bench-verify, fallback PWM + ESC calibration"
+  },
+  {
+   "id": "W26",
+   "from": {
+    "component": "FC1",
+    "pin": "S8 (PWM8)"
+   },
+   "to": {
+    "component": "SRV_AIL_L",
+    "pin": "JR"
+   },
+   "function": "Left aileron (SERVO8_FUNCTION 4)",
+   "signal_or_power": "signal",
+   "gauge_awg": null,
+   "conductors": 3,
+   "colour": "yellow/red/brown",
+   "connector_from": "JR 3-pin at FC header",
+   "connector_to": "servo plug",
+   "length_geom_m": 1.113,
+   "length_m_est": 1.224,
+   "route": [
+    [
+     0.185,
+     0.0,
+     0.004
+    ],
+    [
+     0.12,
+     -0.09,
+     -0.02
+    ],
+    [
+     -0.02,
+     -0.09,
+     -0.04
+    ],
+    [
+     -0.09,
+     -0.05,
+     -0.065
+    ],
+    [
+     -0.12,
+     0.0,
+     -0.09
+    ],
+    [
+     -0.12,
+     0.005,
+     -0.8
+    ]
+   ],
+   "joint": "J1_L",
+   "current_A_max": 2.5,
+   "source": "EMAX max current 2.5 A @6 V (page); function 4 = Aileron (rcoutput-mapping)"
+  },
+  {
+   "id": "W27",
+   "from": {
+    "component": "FC1",
+    "pin": "S9 (PWM9)"
+   },
+   "to": {
+    "component": "SRV_AIL_R",
+    "pin": "JR"
+   },
+   "function": "Right aileron (SERVO9_FUNCTION 4, SERVO9_REVERSED as needed)",
+   "signal_or_power": "signal",
+   "gauge_awg": null,
+   "conductors": 3,
+   "colour": "yellow/red/brown",
+   "connector_from": "JR 3-pin at FC header",
+   "connector_to": "servo plug",
+   "length_geom_m": 1.111,
+   "length_m_est": 1.222,
+   "route": [
+    [
+     0.185,
+     0.0,
+     0.0066
+    ],
+    [
+     0.12,
+     -0.09,
+     0.02
+    ],
+    [
+     -0.02,
+     -0.09,
+     0.04
+    ],
+    [
+     -0.09,
+     -0.05,
+     0.065
+    ],
+    [
+     -0.12,
+     0.0,
+     0.09
+    ],
+    [
+     -0.12,
+     0.005,
+     0.8
+    ]
+   ],
+   "joint": "J1_R",
+   "current_A_max": 2.5,
+   "source": "as W25"
+  },
+  {
+   "id": "W28",
+   "from": {
+    "component": "FC1",
+    "pin": "S10 (PWM10)"
+   },
+   "to": {
+    "component": "SRV_ELEV",
+    "pin": "JR"
+   },
+   "function": "Elevator (SERVO10_FUNCTION 19)",
+   "signal_or_power": "signal",
+   "gauge_awg": null,
+   "conductors": 3,
+   "colour": "yellow/red/brown",
+   "connector_from": "JR 3-pin at FC header",
+   "connector_to": "servo plug",
+   "length_geom_m": 1.43,
+   "length_m_est": 1.573,
+   "route": [
+    [
+     0.185,
+     0.0,
+     0.0092
+    ],
+    [
+     0.12,
+     -0.09,
+     0.02
+    ],
+    [
+     -0.02,
+     -0.09,
+     0.04
+    ],
+    [
+     -0.09,
+     -0.05,
+     0.065
+    ],
+    [
+     -0.12,
+     0.0,
+     0.09
+    ],
+    [
+     -0.125,
+     0.0,
+     0.25
+    ],
+    [
+     -0.1909,
+     0.0,
+     0.4337
+    ],
+    [
+     -0.1909,
+     -0.03,
+     0.4337
+    ],
+    [
+     -0.505,
+     -0.03,
+     0.4337
+    ],
+    [
+     -0.8,
+     -0.03,
+     0.4337
+    ],
+    [
+     -0.79,
+     -0.03,
+     0.4
+    ]
+   ],
+   "joint": "J1_R, J2_R, J3_R",
+   "current_A_max": 2.5,
+   "source": "function 19 = Elevator (rcoutput-mapping)"
+  },
+  {
+   "id": "W29",
+   "from": {
+    "component": "FC1",
+    "pin": "S11 (PWM11)"
+   },
+   "to": {
+    "component": "SRV_RUD_L",
+    "pin": "JR"
+   },
+   "function": "Left rudder (SERVO11_FUNCTION 21)",
+   "signal_or_power": "signal",
+   "gauge_awg": null,
+   "conductors": 3,
+   "colour": "yellow/red/brown",
+   "connector_from": "JR 3-pin at FC header",
+   "connector_to": "servo plug",
+   "length_geom_m": 1.454,
+   "length_m_est": 1.599,
+   "route": [
+    [
+     0.185,
+     0.0,
+     0.0119
+    ],
+    [
+     0.12,
+     -0.09,
+     -0.02
+    ],
+    [
+     -0.02,
+     -0.09,
+     -0.04
+    ],
+    [
+     -0.09,
+     -0.05,
+     -0.065
+    ],
+    [
+     -0.12,
+     0.0,
+     -0.09
+    ],
+    [
+     -0.125,
+     0.0,
+     -0.25
+    ],
+    [
+     -0.1909,
+     0.0,
+     -0.4337
+    ],
+    [
+     -0.1909,
+     -0.03,
+     -0.4337
+    ],
+    [
+     -0.505,
+     -0.03,
+     -0.4337
+    ],
+    [
+     -0.8,
+     -0.03,
+     -0.4337
+    ],
+    [
+     -0.85,
+     -0.03,
+     -0.4116
+    ]
+   ],
+   "joint": "J1_L, J2_L, J3_L",
+   "current_A_max": 2.5,
+   "source": "function 21 = Rudder (rcoutput-mapping)"
+  },
+  {
+   "id": "W30",
+   "from": {
+    "component": "FC1",
+    "pin": "S12 (PWM12)"
+   },
+   "to": {
+    "component": "SRV_RUD_R",
+    "pin": "JR"
+   },
+   "function": "Right rudder (SERVO12_FUNCTION 21)",
+   "signal_or_power": "signal",
+   "gauge_awg": null,
+   "conductors": 3,
+   "colour": "yellow/red/brown",
+   "connector_from": "JR 3-pin at FC header",
+   "connector_to": "servo plug",
+   "length_geom_m": 1.449,
+   "length_m_est": 1.594,
+   "route": [
+    [
+     0.185,
+     0.0,
+     0.0145
+    ],
+    [
+     0.12,
+     -0.09,
+     0.02
+    ],
+    [
+     -0.02,
+     -0.09,
+     0.04
+    ],
+    [
+     -0.09,
+     -0.05,
+     0.065
+    ],
+    [
+     -0.12,
+     0.0,
+     0.09
+    ],
+    [
+     -0.125,
+     0.0,
+     0.25
+    ],
+    [
+     -0.1909,
+     0.0,
+     0.4337
+    ],
+    [
+     -0.1909,
+     -0.03,
+     0.4337
+    ],
+    [
+     -0.505,
+     -0.03,
+     0.4337
+    ],
+    [
+     -0.8,
+     -0.03,
+     0.4337
+    ],
+    [
+     -0.85,
+     -0.03,
+     0.4116
+    ]
+   ],
+   "joint": "J1_R, J2_R, J3_R",
+   "current_A_max": 2.5,
+   "source": "as W28",
+   "note": "Vendor listings call PWM12 the LED output (\"11 for servos/motors, 1 for LED\", getfpv/RMRC) while the ArduPilot page lists 12 PWM outputs. Fallback if S12 will not drive PWM: Y-lead W29 onto S11 (both rudders deflect the same way) and free S12"
+  },
+  {
+   "id": "W31",
+   "from": {
+    "component": "FC1",
+    "pin": "I2C (airspeed conn.) SDA/SCL/5V/GND"
+   },
+   "to": {
+    "component": "ASPD1",
+    "pin": "GH 4P"
+   },
+   "function": "I2C to the airspeed module",
+   "signal_or_power": "signal",
+   "gauge_awg": null,
+   "conductors": 4,
+   "colour": "GH cable colours \u2014",
+   "connector_from": "JST-GH 4-pin (FC; type assumed from the module cable)",
+   "connector_to": "GH plug at the module (J1_L)",
+   "length_geom_m": 0.373,
+   "length_m_est": 0.41,
+   "route": [
+    [
+     0.21,
+     0.0,
+     -0.016
+    ],
+    [
+     0.0,
+     -0.02,
+     -0.04
+    ],
+    [
+     -0.09,
+     -0.02,
+     -0.065
+    ],
+    [
+     -0.12,
+     0.0,
+     -0.09
+    ],
+    [
+     -0.13,
+     0.005,
+     -0.11
+    ]
+   ],
+   "joint": "J1_L",
+   "current_A_max": 0.01,
+   "source": "https://holybro.com/products/digital-air-speed-sensor-standard (GH 4P cable supplied, length \u2014); AP page: one I2C port, on the GPS connector (also \"I2C airspeed connector\")",
+   "note": "the supplied cable must reach ~0.45 m; if shorter, extend with a second 4-conductor lead"
+  },
+  {
+   "id": "W32",
+   "from": {
+    "component": "ASPD1",
+    "pin": "P_total"
+   },
+   "to": {
+    "component": "PITOT1",
+    "pin": "TOTAL"
+   },
+   "function": "Pitot total-pressure hose",
+   "signal_or_power": "pneumatic",
+   "gauge_awg": null,
+   "conductors": 1,
+   "colour": "silicone tube",
+   "connector_from": "nipple",
+   "connector_to": "pitot nipple",
+   "length_geom_m": 0.919,
+   "length_m_est": 1.011,
+   "route": [
+    [
+     -0.13,
+     0.005,
+     -0.11
+    ],
+    [
+     -0.03,
+     0.0,
+     -0.3
+    ],
+    [
+     -0.03,
+     0.0,
+     -0.9
+    ],
+    [
+     -0.05,
+     -0.02,
+     -1.0
+    ]
+   ],
+   "joint": null,
+   "current_A_max": 0,
+   "source": "PT40 kit tubing length/ID: \u2014 (https://holybro.com/products/digital-air-speed-sensor-standard)"
+  },
+  {
+   "id": "W33",
+   "from": {
+    "component": "ASPD1",
+    "pin": "P_static"
+   },
+   "to": {
+    "component": "PITOT1",
+    "pin": "STATIC"
+   },
+   "function": "Pitot static-pressure hose",
+   "signal_or_power": "pneumatic",
+   "gauge_awg": null,
+   "conductors": 1,
+   "colour": "silicone tube",
+   "connector_from": "nipple",
+   "connector_to": "pitot nipple",
+   "length_geom_m": 0.919,
+   "length_m_est": 1.011,
+   "route": [
+    [
+     -0.13,
+     0.005,
+     -0.11
+    ],
+    [
+     -0.03,
+     0.0,
+     -0.3
+    ],
+    [
+     -0.03,
+     0.0,
+     -0.9
+    ],
+    [
+     -0.05,
+     -0.02,
+     -1.0
+    ]
+   ],
+   "joint": null,
+   "current_A_max": 0,
+   "source": "as W31"
+  },
+  {
+   "id": "W34",
+   "from": {
+    "component": "FC1",
+    "pin": "GPS conn.: 5V, TX5, RX5, SCL, SDA, GND (UART5 + I2C)"
+   },
+   "to": {
+    "component": "GPS1",
+    "pin": "6-wire"
+   },
+   "function": "GPS + compass (SERIAL5 = GPS)",
+   "signal_or_power": "signal",
+   "gauge_awg": null,
+   "conductors": 6,
+   "colour": "\u2014",
+   "connector_from": "JST-GH 6-pin (assumed; pinout \u2014)",
+   "connector_to": "GPS plug",
+   "length_geom_m": 0.105,
+   "length_m_est": 0.116,
+   "route": [
+    [
+     0.236,
+     0.005,
+     0.0
+    ],
+    [
+     0.236,
+     0.07,
+     0.0
+    ],
+    [
+     0.2,
+     0.088,
+     0.0
+    ]
+   ],
+   "joint": null,
+   "current_A_max": 0.1,
+   "source": "https://ardupilot.org/plane/docs/common-CoreWingF405WingV2.html (UART5 = GPS connector); https://www.getfpv.com/electronics/flight-controllers/hglrc-m100-5883-gps-module.html (cable/pinout \u2014)"
+  },
+  {
+   "id": "W35",
+   "from": {
+    "component": "FC1",
+    "pin": "UART6 TX6/RX6, 5V, GND"
+   },
+   "to": {
+    "component": "RX1",
+    "pin": "CRSF"
+   },
+   "function": "RC link CRSF (SERIAL6 = RCIN, protocol 23)",
+   "signal_or_power": "signal",
+   "gauge_awg": null,
+   "conductors": 4,
+   "colour": "\u2014",
+   "connector_from": "JST-SH/GH (\u2014)",
+   "connector_to": "CRSF wire supplied with RP3 V2",
+   "length_geom_m": 0.073,
+   "length_m_est": 0.08,
+   "route": [
+    [
+     0.236,
+     0.0,
+     -0.012
+    ],
+    [
+     0.3,
+     0.03,
+     -0.03
+    ]
+   ],
+   "joint": null,
+   "current_A_max": 0.2,
+   "source": "https://ardupilot.org/plane/docs/common-CoreWingF405WingV2.html (CRSF/ELRS on TX6/RX6, SERIAL6_PROTOCOL default 23); https://www.radiomasterrc.com/products/rp3-expresslrs-2-4ghz-nano-receiver (\"CRSF wire\" in the box; pinout \u2014)"
+  }
+ ],
+ "connectors": [
+  {
+   "id": "CN01",
+   "type": "XT90S anti-spark pair",
+   "location": "front of battery",
+   "joint": null,
+   "wires": [
+    "W01",
+    "W02"
+   ],
+   "mated_pairs": 1,
+   "rating": "50 A cont / 90 A peak (makerstore); 90 A cont (esk8 wiki)",
+   "source": "https://www.makerstore.com.au/product/mb-elc-con-xt90s-mf-as/ ; https://forum.esk8.news/t/wiki-connectors-and-plug-types/2021"
+  },
+  {
+   "id": "CN_J1_R_PWR",
+   "type": "XT60H pair x2",
+   "location": "wing root R",
+   "joint": "J1_R",
+   "wires": [
+    "W04",
+    "W07"
+   ],
+   "mated_pairs": 2,
+   "rating": "XT60: 60 A rated (esk8 wiki) / 30 A cont, 60 A max (unverified forum claim); ESC branch hover 9.9 A, burst 27.7 A",
+   "source": "https://forum.esk8.news/t/wiki-connectors-and-plug-types/2021 (2026-10-19)"
+  },
+  {
+   "id": "CN_J2_R_PWR",
+   "type": "XT60H pair x2",
+   "location": "boom clamp R",
+   "joint": "J2_R",
+   "wires": [
+    "W04",
+    "W07"
+   ],
+   "mated_pairs": 2,
+   "rating": "as above",
+   "source": "as above"
+  },
+  {
+   "id": "CN_J1_R_SIG",
+   "type": "JR 3-pin pair",
+   "location": "wing root R",
+   "joint": "J1_R",
+   "wires": [
+    "W21",
+    "W24",
+    "W27",
+    "W28",
+    "W30"
+   ],
+   "mated_pairs": 5,
+   "rating": "servo lead connector; gauge of kit leads \u2014",
+   "source": "docs/research/budget-airframe.md \u00a73a (hardware kit, P-04) item 4"
+  },
+  {
+   "id": "CN_J2_R_SIG",
+   "type": "JR 3-pin pair",
+   "location": "boom clamp R",
+   "joint": "J2_R",
+   "wires": [
+    "W21",
+    "W24",
+    "W28",
+    "W30"
+   ],
+   "mated_pairs": 4,
+   "rating": "as above",
+   "source": "docs/research/budget-airframe.md \u00a73a (hardware kit, P-04) item 4"
+  },
+  {
+   "id": "CN_J3_R_SIG",
+   "type": "JR 3-pin pair",
+   "location": "boom splice R",
+   "joint": "J3_R",
+   "wires": [
+    "W28",
+    "W30"
+   ],
+   "mated_pairs": 2,
+   "rating": "as above",
+   "source": "docs/research/budget-airframe.md \u00a73a (hardware kit, P-04) item 4"
+  },
+  {
+   "id": "CN_J1_L_PWR",
+   "type": "XT60H pair x2",
+   "location": "wing root L",
+   "joint": "J1_L",
+   "wires": [
+    "W05",
+    "W06"
+   ],
+   "mated_pairs": 2,
+   "rating": "XT60: 60 A rated (esk8 wiki) / 30 A cont, 60 A max (unverified forum claim); ESC branch hover 9.9 A, burst 27.7 A",
+   "source": "https://forum.esk8.news/t/wiki-connectors-and-plug-types/2021 (2026-10-19)"
+  },
+  {
+   "id": "CN_J2_L_PWR",
+   "type": "XT60H pair x2",
+   "location": "boom clamp L",
+   "joint": "J2_L",
+   "wires": [
+    "W05",
+    "W06"
+   ],
+   "mated_pairs": 2,
+   "rating": "as above",
+   "source": "as above"
+  },
+  {
+   "id": "CN_J1_L_SIG",
+   "type": "JR 3-pin pair",
+   "location": "wing root L",
+   "joint": "J1_L",
+   "wires": [
+    "W22",
+    "W23",
+    "W26",
+    "W29",
+    "W31"
+   ],
+   "mated_pairs": 5,
+   "rating": "servo lead connector; gauge of kit leads \u2014",
+   "source": "docs/research/budget-airframe.md \u00a73a (hardware kit, P-04) item 4"
+  },
+  {
+   "id": "CN_J2_L_SIG",
+   "type": "JR 3-pin pair",
+   "location": "boom clamp L",
+   "joint": "J2_L",
+   "wires": [
+    "W22",
+    "W23",
+    "W29"
+   ],
+   "mated_pairs": 3,
+   "rating": "as above",
+   "source": "docs/research/budget-airframe.md \u00a73a (hardware kit, P-04) item 4"
+  },
+  {
+   "id": "CN_J3_L_SIG",
+   "type": "JR 3-pin pair",
+   "location": "boom splice L",
+   "joint": "J3_L",
+   "wires": [
+    "W29"
+   ],
+   "mated_pairs": 1,
+   "rating": "as above",
+   "source": "docs/research/budget-airframe.md \u00a73a (hardware kit, P-04) item 4"
+  },
+  {
+   "id": "CN_FC_HDR",
+   "type": "JR 3-pin female on the FC header pins (soldered-pin version)",
+   "location": "FC S-pad header",
+   "joint": null,
+   "wires": [
+    "W21",
+    "W22",
+    "W23",
+    "W24",
+    "W25",
+    "W26",
+    "W27",
+    "W28",
+    "W29",
+    "W30"
+   ],
+   "mated_pairs": 10,
+   "rating": "pins soldered on P-37 (\"soldered pins\" model F405WING-V2-PIN)",
+   "source": "https://readymaderc.com/products/details/85786-speedybee-f405-wing-app-fixed-wing-flight-controller"
+  },
+  {
+   "id": "CN_I2C",
+   "type": "JST-GH 4-pin",
+   "location": "FC I2C connector and ASPD1",
+   "joint": "J1_L",
+   "wires": [
+    "W31"
+   ],
+   "mated_pairs": 2,
+   "rating": "\u2014",
+   "source": "https://holybro.com/products/digital-air-speed-sensor-standard"
+  },
+  {
+   "id": "CN_GPS",
+   "type": "GH 6-pin (assumed)",
+   "location": "FC GPS connector and GPS1",
+   "joint": null,
+   "wires": [
+    "W34"
+   ],
+   "mated_pairs": 2,
+   "rating": "\u2014",
+   "source": "https://www.getfpv.com/electronics/flight-controllers/hglrc-m100-5883-gps-module.html"
+  },
+  {
+   "id": "CN_RX",
+   "type": "CRSF 4-pin (supplied wire)",
+   "location": "FC UART6 pads and RX1",
+   "joint": null,
+   "wires": [
+    "W35"
+   ],
+   "mated_pairs": 2,
+   "rating": "\u2014",
+   "source": "https://www.radiomasterrc.com/products/rp3-expresslrs-2-4ghz-nano-receiver"
+  }
+ ],
+ "nets": [
+  {
+   "id": "NET_VBAT",
+   "name": "Battery positive, before PDB sensor",
+   "nodes": [
+    {
+     "component": "BAT1",
+     "pin": "+"
+    },
+    {
+     "component": "XT90S_1",
+     "pin": "+"
+    },
+    {
+     "component": "FC1",
+     "pin": "PDB BAT+"
+    }
+   ]
+  },
+  {
+   "id": "NET_VBUS",
+   "name": "Sensed bus (22.2 V nom, 25.2 V max)",
+   "nodes": [
+    {
+     "component": "FC1",
+     "pin": "PDB OUT+"
+    },
+    {
+     "component": "BUS1",
+     "pin": "IN"
+    },
+    {
+     "component": "ESC_L1",
+     "pin": "PWR+"
+    },
+    {
+     "component": "ESC_L2",
+     "pin": "PWR+"
+    },
+    {
+     "component": "ESC_L3",
+     "pin": "PWR+"
+    },
+    {
+     "component": "ESC_L4",
+     "pin": "PWR+"
+    },
+    {
+     "component": "ESC_P",
+     "pin": "PWR+"
+    },
+    {
+     "component": "UBEC1",
+     "pin": "IN+"
+    }
+   ],
+   "note": "ESC feeds all downstream of the 90 A current sensor"
+  },
+  {
+   "id": "NET_GND",
+   "name": "Power ground / star at BUS1",
+   "nodes": [
+    {
+     "component": "BAT1",
+     "pin": "-"
+    },
+    {
+     "component": "XT90S_1",
+     "pin": "-"
+    },
+    {
+     "component": "FC1",
+     "pin": "PDB BAT-"
+    },
+    {
+     "component": "BUS1",
+     "pin": "GND"
+    },
+    {
+     "component": "ESC_L1",
+     "pin": "PWR-"
+    },
+    {
+     "component": "ESC_L2",
+     "pin": "PWR-"
+    },
+    {
+     "component": "ESC_L3",
+     "pin": "PWR-"
+    },
+    {
+     "component": "ESC_L4",
+     "pin": "PWR-"
+    },
+    {
+     "component": "ESC_P",
+     "pin": "PWR-"
+    },
+    {
+     "component": "UBEC1",
+     "pin": "IN-"
+    },
+    {
+     "component": "UBEC1",
+     "pin": "OUT-"
+    },
+    {
+     "component": "RID1",
+     "pin": "GND"
+    }
+   ]
+  },
+  {
+   "id": "NET_5V_PERIPH",
+   "name": "FC 5.2 V peripheral rail (4 A rated)",
+   "nodes": [
+    {
+     "component": "FC1",
+     "pin": "5V"
+    },
+    {
+     "component": "GPS1",
+     "pin": "5V"
+    },
+    {
+     "component": "RX1",
+     "pin": "5V"
+    },
+    {
+     "component": "ASPD1",
+     "pin": "5V"
+    }
+   ]
+  },
+  {
+   "id": "NET_VSERVO",
+   "name": "FC servo rail, 7.2 V selected (5/6/7.2 V selectable, 8 A cont/14 A peak)",
+   "nodes": [
+    {
+     "component": "FC1",
+     "pin": "V_SERVO"
+    },
+    {
+     "component": "SRV_AIL_L",
+     "pin": "V+"
+    },
+    {
+     "component": "SRV_AIL_R",
+     "pin": "V+"
+    },
+    {
+     "component": "SRV_ELEV",
+     "pin": "V+"
+    },
+    {
+     "component": "SRV_RUD_L",
+     "pin": "V+"
+    },
+    {
+     "component": "SRV_RUD_R",
+     "pin": "V+"
+    }
+   ]
+  },
+  {
+   "id": "NET_5V_RID",
+   "name": "UBEC 5 V to Remote ID",
+   "nodes": [
+    {
+     "component": "UBEC1",
+     "pin": "OUT+"
+    },
+    {
+     "component": "RID1",
+     "pin": "5V"
+    }
+   ]
+  },
+  {
+   "id": "NET_UART5",
+   "name": "SERIAL5 GPS (u-blox)",
+   "nodes": [
+    {
+     "component": "FC1",
+     "pin": "TX5/RX5"
+    },
+    {
+     "component": "GPS1",
+     "pin": "RX/TX"
+    }
+   ]
+  },
+  {
+   "id": "NET_UART6",
+   "name": "SERIAL6 RCIN CRSF",
+   "nodes": [
+    {
+     "component": "FC1",
+     "pin": "TX6/RX6"
+    },
+    {
+     "component": "RX1",
+     "pin": "TX/RX"
+    }
+   ]
+  },
+  {
+   "id": "NET_I2C",
+   "name": "External I2C (compass in GPS1 + MS5525 0x76)",
+   "nodes": [
+    {
+     "component": "FC1",
+     "pin": "SCL/SDA"
+    },
+    {
+     "component": "GPS1",
+     "pin": "SCL/SDA"
+    },
+    {
+     "component": "ASPD1",
+     "pin": "SCL/SDA"
+    }
+   ]
+  },
+  {
+   "id": "NET_DSHOT_L1",
+   "name": "S1 DShot to ESC L1",
+   "nodes": [
+    {
+     "component": "FC1",
+     "pin": "S1"
+    },
+    {
+     "component": "ESC_L1",
+     "pin": "SIG"
+    }
+   ]
+  },
+  {
+   "id": "NET_DSHOT_L2",
+   "name": "S2 DShot to ESC L2",
+   "nodes": [
+    {
+     "component": "FC1",
+     "pin": "S2"
+    },
+    {
+     "component": "ESC_L2",
+     "pin": "SIG"
+    }
+   ]
+  },
+  {
+   "id": "NET_DSHOT_L3",
+   "name": "S3 DShot to ESC L3",
+   "nodes": [
+    {
+     "component": "FC1",
+     "pin": "S3"
+    },
+    {
+     "component": "ESC_L3",
+     "pin": "SIG"
+    }
+   ]
+  },
+  {
+   "id": "NET_DSHOT_L4",
+   "name": "S4 DShot to ESC L4",
+   "nodes": [
+    {
+     "component": "FC1",
+     "pin": "S4"
+    },
+    {
+     "component": "ESC_L4",
+     "pin": "SIG"
+    }
+   ]
+  },
+  {
+   "id": "NET_DSHOT_P",
+   "name": "S5 DShot to pusher ESC",
+   "nodes": [
+    {
+     "component": "FC1",
+     "pin": "S5"
+    },
+    {
+     "component": "ESC_P",
+     "pin": "SIG"
+    }
+   ]
+  },
+  {
+   "id": "NET_PWM_AIL_L",
+   "name": "S8 PWM",
+   "nodes": [
+    {
+     "component": "FC1",
+     "pin": "S8"
+    },
+    {
+     "component": "SRV_AIL_L",
+     "pin": "SIG"
+    }
+   ]
+  },
+  {
+   "id": "NET_PWM_AIL_R",
+   "name": "S9 PWM",
+   "nodes": [
+    {
+     "component": "FC1",
+     "pin": "S9"
+    },
+    {
+     "component": "SRV_AIL_R",
+     "pin": "SIG"
+    }
+   ]
+  },
+  {
+   "id": "NET_PWM_ELEV",
+   "name": "S10 PWM",
+   "nodes": [
+    {
+     "component": "FC1",
+     "pin": "S10"
+    },
+    {
+     "component": "SRV_ELEV",
+     "pin": "SIG"
+    }
+   ]
+  },
+  {
+   "id": "NET_PWM_RUD_L",
+   "name": "S11 PWM",
+   "nodes": [
+    {
+     "component": "FC1",
+     "pin": "S11"
+    },
+    {
+     "component": "SRV_RUD_L",
+     "pin": "SIG"
+    }
+   ]
+  },
+  {
+   "id": "NET_PWM_RUD_R",
+   "name": "S12 PWM",
+   "nodes": [
+    {
+     "component": "FC1",
+     "pin": "S12"
+    },
+    {
+     "component": "SRV_RUD_R",
+     "pin": "SIG"
+    }
+   ]
+  }
+ ]
+}

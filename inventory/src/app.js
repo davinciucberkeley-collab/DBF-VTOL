@@ -62,13 +62,14 @@ const q = $('#invQ'), fT = $('#invType'), fK = $('#invKit'), fS = $('#invStatus'
 const fmt2 = v => v.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2});
 rows.forEach(r => r._txt = r.textContent.toLowerCase().replace(/\s+/g, ' '));
 function filter(){
-  const s = q.value.trim().toLowerCase(); let n = 0, buys = 0, tot = 0;
+  const s = q.value.trim().toLowerCase(); let n = 0, buys = 0, tot = 0, props = 0, ptot = 0;
   rows.forEach(r => {
     const ok = (!s || r._txt.includes(s)) && (!fT.value || r.dataset.type === fT.value) && (!fK.value || r.dataset.kit === fK.value) && (!fS.value || r.dataset.status === fS.value);
-    r.hidden = !ok; if(ok){ n++; if(r.dataset.type === 'Buy'){ buys++; tot += parseFloat(r.cells[12].dataset.v) || 0; } }
+    r.hidden = !ok; if(ok){ n++; if(r.dataset.type === 'Buy'){ buys++; tot += parseFloat(r.cells[12].dataset.v) || 0; } else if(r.dataset.type === 'Proposed'){ props++; ptot += parseFloat(r.cells[12].dataset.v) || 0; } }
   });
   $('#invCount').textContent = n + ' of ' + rows.length + ' lines';
   $('#invTotLbl').textContent = 'Buy lines shown: ' + buys; $('#invTot').textContent = fmt2(Math.round(tot * 100) / 100);
+  $('#invPropLbl').textContent = 'Proposed lines shown: ' + props; $('#invPropTot').textContent = fmt2(Math.round(ptot * 100) / 100);
 }
 [q, fT, fK, fS].forEach(e => e.addEventListener('input', filter));
 $('#invClear').addEventListener('click', () => { q.value = ''; fT.value = fK.value = fS.value = ''; filter(); });
@@ -110,6 +111,7 @@ function startModel(){
   CV = Viewer3D(view, MESH, INVP, KITS) || false;
   view.classList.toggle('offline', !CV); parts.hidden = !CV;
   if(!CV){ const r = $('#v3dRetry'); if(!r.dataset.bound){ r.dataset.bound = 1; r.addEventListener('click', () => { CV = null; view.querySelector('.fallback').hidden = true; $('#v3dCanvas').hidden = false; initModel(); }); } return; }
+  window.__inv3d = CV;   // test hook: layer and selection state
   touchGate(view);
   $$('#v3dParts button').forEach(b => b.addEventListener('click', () => CV.selectPart(b.dataset.partbtn)));
   view.addEventListener('findrow', e => findRow(e.detail));
@@ -128,6 +130,38 @@ function touchGate(view){
   document.addEventListener('pointerdown', e => { if(view.classList.contains('armed') && !view.contains(e.target)) arm(false); });
   if(window.IntersectionObserver) new IntersectionObserver(es => es.forEach(en => { if(!en.isIntersecting) arm(false); })).observe(view);
 }
+
+// ---------- generic sortable tables (wire schedule) and its filters ----------
+$$('table.sortable').forEach(t => {
+  const b = t.tBodies[0], rs = Array.from(b.rows);
+  $$('#' + t.id + ' thead th.sort').forEach((th, i) => {
+    const numeric = th.dataset.t === 'n';
+    th.querySelector('button').addEventListener('click', () => {
+      const asc = th.getAttribute('aria-sort') !== 'ascending';
+      t.querySelectorAll('thead th.sort').forEach(x => x.removeAttribute('aria-sort')); th.setAttribute('aria-sort', asc ? 'ascending' : 'descending');
+      const val = r => { const c = r.cells[i]; return c.dataset.v !== undefined ? c.dataset.v : c.textContent.trim(); };
+      rs.slice().sort((a, c) => { const x = val(a), y = val(c); const d = numeric ? (parseFloat(x) - parseFloat(y)) : String(x).localeCompare(String(y), undefined, {numeric:true}); return (asc ? d : -d) || rs.indexOf(a) - rs.indexOf(c); }).forEach(r => b.appendChild(r));
+    });
+  });
+});
+(function(){
+  const t = $('#wTable'); if(!t) return; const z = $('#wZone'), f = $('#wFn'), rs = Array.from(t.tBodies[0].rows);
+  function fw(){ let n = 0, len = 0; rs.forEach(r => { const ok = (!z.value || r.dataset.zone === z.value) && (!f.value || r.dataset.cat === f.value); r.hidden = !ok; if(ok){ n++; len += parseFloat(r.cells[8].dataset.v) || 0; } });
+    $('#wCount').textContent = n + ' of ' + rs.length + ' wires'; $('#wTotLbl').textContent = 'Route length shown (' + n + ' wires)'; $('#wTot').textContent = (Math.round(len * 1000) / 1000).toFixed(3); }
+  [z, f].forEach(e => e.addEventListener('input', fw)); $('#wClear').addEventListener('click', () => { z.value = f.value = ''; fw(); });
+})();
+
+// ---------- NWA message: copy button (clipboard API, falls back to selecting the text) ----------
+(function(){
+  const btn = $('#nwaCopy'), pre = $('#nwaMsg'), out = $('#nwaCopyMsg'); if(!btn) return;
+  const select = () => { const r = document.createRange(); r.selectNodeContents(pre); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); };
+  btn.addEventListener('click', () => {
+    const done = m => { out.textContent = m; setTimeout(() => { out.textContent = ''; }, 5000); };
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(pre.textContent).then(() => done('Copied to the clipboard.'), () => { select(); done('Copy was blocked: the text is selected, press Ctrl+C (Cmd+C on a Mac).'); });
+    } else { select(); done('Text selected: press Ctrl+C (Cmd+C on a Mac).'); }
+  });
+})();
 
 buildNav(); applyTheme(); route();
 })();
