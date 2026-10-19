@@ -1,0 +1,89 @@
+{
+ "params": {
+  "span": 2,
+  "AR": 6.95,
+  "taper": 0.7,
+  "Lf": 1.8,
+  "df": 0.2,
+  "Vh": 0.61,
+  "hcg": 30,
+  "payload": 2.5,
+  "elec": 1,
+  "fProp": 0.4,
+  "fBatt": 0.5,
+  "Dfront": 14,
+  "Drear": 8,
+  "TW": 1.5,
+  "ctrlRes": 10,
+  "FM": 0.65,
+  "etaMe": 0.85,
+  "eSpec": 150,
+  "Vc": 20,
+  "CD0": 0.045,
+  "oswald": 0.8,
+  "tHover": 3,
+  "rho": 1.225
+ },
+ "derived": {
+  "S": 0.5755395683453237,
+  "cr": 0.33855268726195514,
+  "ct": 0.23698688108336857,
+  "MAC": 0.2907570137661497,
+  "sweepLE": 5.799405125104467,
+  "Sh": 0.11585624405750035,
+  "bh": 0.6892101280710777,
+  "crh": 0.1867778124853869,
+  "xw": 0.756,
+  "xt": 1.6560000000000001,
+  "xcg": 0.7894569714470638,
+  "m": 9.152686066234924
+ },
+ "configs": {
+  "cruise_tilt0": {
+   "tilt_deg": 0,
+   "step": "TiltWing_cruise_tilt0.step",
+   "stl": [
+    "Fuselage.stl",
+    "Wing_S1223.stl",
+    "H_Tail_NACA0009.stl",
+    "Wing_Tilt_Spar.stl",
+    "Tail_Tilt_Spar.stl",
+    "Wing_Nacelle_1.stl",
+    "Wing_Prop_1.stl",
+    "Wing_Nacelle_2.stl",
+    "Wing_Prop_2.stl",
+    "Wing_Nacelle_3.stl",
+    "Wing_Prop_3.stl",
+    "Wing_Nacelle_4.stl",
+    "Wing_Prop_4.stl",
+    "Tail_Nacelle_1.stl",
+    "Tail_Prop_1.stl",
+    "Tail_Nacelle_2.stl",
+    "Tail_Prop_2.stl"
+   ]
+  },
+  "hover_tilt90": {
+   "tilt_deg": 90,
+   "step": "TiltWing_hover_tilt90.step",
+   "stl": [
+    "Fuselage.stl",
+    "Wing_S1223.stl",
+    "H_Tail_NACA0009.stl",
+    "Wing_Tilt_Spar.stl",
+    "Tail_Tilt_Spar.stl",
+    "Wing_Nacelle_1.stl",
+    "Wing_Prop_1.stl",
+    "Wing_Nacelle_2.stl",
+    "Wing_Prop_2.stl",
+    "Wing_Nacelle_3.stl",
+    "Wing_Prop_3.stl",
+    "Wing_Nacelle_4.stl",
+    "Wing_Prop_4.stl",
+    "Tail_Nacelle_1.stl",
+    "Tail_Prop_1.stl",
+    "Tail_Nacelle_2.stl",
+    "Tail_Prop_2.stl"
+   ]
+  }
+ }
+}

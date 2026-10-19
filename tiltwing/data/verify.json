@@ -1,0 +1,221 @@
+{
+ "source": "tiltwing/tools/verify.py",
+ "rows": [
+  {
+   "check": "G1 wing area",
+   "model": 0.5755395683453237,
+   "independent": 0.5755395683453237,
+   "diff": 0.0,
+   "pass": true,
+   "src": "b\u00b2/AR"
+  },
+  {
+   "check": "G2 root chord",
+   "model": 0.33855268726195514,
+   "independent": 0.33855268726195514,
+   "diff": 0.0,
+   "pass": true,
+   "src": "2S/(b(1+\u03bb))"
+  },
+  {
+   "check": "G3 MAC",
+   "model": 0.2907570137661497,
+   "independent": 0.2907570137661497,
+   "diff": 0.0,
+   "pass": true,
+   "src": "(2/3)c_r(1+\u03bb+\u03bb\u00b2)/(1+\u03bb)"
+  },
+  {
+   "check": "G4 LE sweep",
+   "model": 5.799405125104467,
+   "independent": 5.799405125104467,
+   "diff": 0.0,
+   "pass": true,
+   "src": "atan((c_r\u2212c_t)/(b/2))"
+  },
+  {
+   "check": "G5 tail area",
+   "model": 0.11585624405750035,
+   "independent": 0.11585624405750035,
+   "diff": 0.0,
+   "pass": true,
+   "src": "V_h S c\u0304 / l_t"
+  },
+  {
+   "check": "E1 ISA density at 1500 m",
+   "model": 1.0580771016468336,
+   "independent": 1.0568460322941937,
+   "diff": 0.0011648521307947184,
+   "pass": true,
+   "src": "AeroSandbox Atmosphere"
+  },
+  {
+   "check": "E1 ISA density at sea level",
+   "model": 1.2250122659906946,
+   "independent": 1.225,
+   "diff": 1.0013053628148733e-05,
+   "pass": true,
+   "src": "ISA 1.225 kg/m\u00b3"
+  },
+  {
+   "check": "M1 takeoff mass",
+   "model": 9.152686066234924,
+   "independent": 9.152686066234924,
+   "diff": 0.0,
+   "pass": true,
+   "src": "(m_s+m_e+m_p)/(1\u2212f_prop)"
+  },
+  {
+   "check": "M2 battery mass",
+   "model": 1.830537213246985,
+   "independent": 1.830537213246985,
+   "diff": 0.0,
+   "pass": true,
+   "src": ""
+  },
+  {
+   "check": "P1 wing-rotor thrust",
+   "model": 21.605129507518136,
+   "independent": 21.605129507518136,
+   "diff": 0.0,
+   "pass": true,
+   "src": "moment balance"
+  },
+  {
+   "check": "P2 slipstream (paper Eq. 11)",
+   "model": 9.422942207234714,
+   "independent": 9.422989383329448,
+   "diff": -5.006489216391876e-06,
+   "pass": true,
+   "src": "sqrt(T/(2\u03c1A))"
+  },
+  {
+   "check": "P3 wing-rotor shaft power",
+   "model": 313.2059795833304,
+   "independent": 313.20754765354025,
+   "diff": -5.006489216417327e-06,
+   "pass": true,
+   "src": "T^1.5/sqrt(2\u03c1A)/FM"
+  },
+  {
+   "check": "P5 cruise C_D",
+   "model": 0.06819650635912683,
+   "independent": 0.06819697089717686,
+   "diff": -6.811710900285826e-06,
+   "pass": true,
+   "src": ""
+  },
+  {
+   "check": "P6 cruise power",
+   "model": 323.23678341147075,
+   "independent": 323.235748645104,
+   "diff": 3.2012745219745626e-06,
+   "pass": true,
+   "src": ""
+  },
+  {
+   "check": "P7 cruise-only endurance",
+   "model": 40.77465378870794,
+   "independent": 40.77465378870794,
+   "diff": 0.0,
+   "pass": true,
+   "src": ""
+  },
+  {
+   "check": "S2 sim hover power vs sizing",
+   "model": 1531.4139414614351,
+   "independent": 1501.5842984381502,
+   "diff": 0.019865446817945394,
+   "pass": true,
+   "src": "sim at 79\u00b0 tilt vs 90\u00b0 momentum theory"
+  },
+  {
+   "check": "F1 FE tip deflection, tip load",
+   "model": 0.0033333333330261006,
+   "independent": 0.0033333333333333335,
+   "diff": -9.216989151072941e-11,
+   "pass": true,
+   "src": "PL\u00b3/3EI"
+  },
+  {
+   "check": "F1 FE tip deflection, uniform load",
+   "model": 0.0006251302082757321,
+   "independent": 0.000625,
+   "diff": 0.0002083332411712685,
+   "pass": true,
+   "src": "qL\u2074/8EI"
+  },
+  {
+   "check": "F7 first bending mode",
+   "model": 39.55772976724457,
+   "independent": 39.568902207644356,
+   "diff": -0.00028235406535062505,
+   "pass": true,
+   "src": "\u03b2\u2081L = 1.8751"
+  },
+  {
+   "check": "F7 second bending mode",
+   "model": 247.72844665471274,
+   "independent": 247.97609026284206,
+   "diff": -0.000998659216970609,
+   "pass": true,
+   "src": "\u03b2\u2082L = 4.6941"
+  },
+  {
+   "check": "F5 Pratt gust \u0394n",
+   "model": 2.4845192671960628,
+   "independent": 2.484499976246255,
+   "diff": 7.764520021022153e-06,
+   "pass": true,
+   "src": "\u03c1 V U a K_g/(2W/S)"
+  },
+  {
+   "check": "F1 hover spar root moment",
+   "model": 32.001760483466086,
+   "independent": 32.00176048346611,
+   "diff": -6.660971693671723e-16,
+   "pass": true,
+   "src": "\u03a3 F\u00b7arm about the bearing"
+  },
+  {
+   "check": "Paper: wing area",
+   "model": 0.5755395683453237,
+   "independent": 0.575,
+   "diff": 0.0009383797309978433,
+   "pass": true,
+   "src": "Table 1"
+  },
+  {
+   "check": "Paper: takeoff mass",
+   "model": 9.152686066234924,
+   "independent": 9.5,
+   "diff": -0.03655936144895534,
+   "pass": true,
+   "src": "\u00a72"
+  },
+  {
+   "check": "Paper: wing-rotor shaft power",
+   "model": 313.2059795833304,
+   "independent": 363.9,
+   "diff": -0.13930755816617083,
+   "pass": true,
+   "src": "Table 2"
+  },
+  {
+   "check": "Paper: C_L at \u03b1=0, \u03b4=0 (3-D VLM)",
+   "model": 0.7228,
+   "independent": 0.73,
+   "diff": -0.009863013698630116,
+   "pass": true,
+   "src": "Fig. 6 converged CFD"
+  },
+  {
+   "check": "Static margin positive in cruise",
+   "model": 0.11513907592089327,
+   "independent": 0.11513907592089327,
+   "diff": 0.0,
+   "pass": true,
+   "src": "paper: stable except vertical flight"
+  }
+ ]
+}
