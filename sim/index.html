@@ -1,0 +1,321 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Lift + Cruise VTOL Sim</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="src/styles.css">
+
+<noscript>
+  <div class="boot-card glass">
+    <h2>JavaScript is off</h2>
+    <p>This flight simulator runs entirely in your browser and needs JavaScript and WebGL. Turn JavaScript on, then reload the page.</p>
+  </div>
+</noscript>
+
+<div id="app">
+  <div id="stage"></div>
+
+  <!-- Top zone: HUD (PFD + systems), guided-flight coach line, annunciators.
+       Desktop: children are positioned individually (#top is display:contents).
+       Compact (phones, landscape phones): one stacked strip at the top. -->
+  <div id="top">
+    <div id="hud" class="glass">
+      <canvas id="pfd" width="252" height="189" role="img"
+        aria-label="Primary flight display: attitude, airspeed tape, altitude tape, vertical speed and heading"></canvas>
+      <div class="hud-side">
+        <div id="mode"><span class="lbl">Mode</span><span id="modeVal">OFF</span></div>
+        <div id="hAp" class="ap-line" aria-label="Autopilot"></div>
+        <div class="tiles">
+          <!-- Alt/IAS/VS/Hdg are drawn on the PFD; the text tiles stay for screen readers. -->
+          <div class="tile sr-only"><div class="lbl">Altitude</div><span class="num" id="hAlt">0</span><span class="u">ft</span></div>
+          <div class="tile sr-only"><div class="lbl">Airspeed</div><span class="num" id="hSpd">0</span><span class="u">kt</span></div>
+          <div class="tile sr-only"><div class="lbl">Vertical speed</div><span class="num" id="hVs">0</span><span class="u">fpm</span></div>
+          <div class="tile sr-only"><div class="lbl">Heading</div><span class="num" id="hHdg">360</span><span class="u">°</span></div>
+          <div class="tile"><div class="lbl">Thr</div><span class="num" id="hThr">0</span><span class="u">%</span></div>
+          <div class="tile"><div class="lbl">Power</div><span class="num" id="hPwr">0</span><span class="u">kW</span></div>
+          <div class="tile hide-compact"><div class="lbl">Endur.</div><span class="num" id="hEnd">--</span></div>
+        </div>
+        <div class="meter">
+          <div class="row"><span class="lbl">Battery <span id="hRng" class="rng-est"></span></span><span class="num" id="hBat">100%</span></div>
+          <div class="bar"><i id="batBar" style="width:100%;background:var(--green)"></i></div>
+        </div>
+        <div class="meter">
+          <div class="row"><span class="lbl">Lift</span><span class="split-legend"><span class="c-r">Rotor <b id="hRot">0%</b></span> <span class="c-w">Wing <b id="hWing">0%</b></span></span></div>
+          <div class="bar"><i id="splitR" style="width:0%;background:var(--amber)"></i><i id="splitW" style="width:0%;background:var(--cyan)"></i></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="coach" class="glass" hidden>
+      <p id="coachText"></p>
+      <button class="b go" id="coachDo" hidden>Do it</button>
+      <button class="icon-btn" id="coachClose" aria-label="Hide the flight guide">
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"/></svg>
+      </button>
+    </div>
+
+    <div id="annun" aria-hidden="true"></div>
+  </div>
+
+  <!-- Live regions: toast = polite status; srAlert = newly raised critical warnings only. -->
+  <div id="toast" class="glass" role="status" aria-live="polite" aria-atomic="true"></div>
+  <div id="srAlert" class="sr-only" aria-live="assertive" aria-atomic="true"></div>
+
+  <div id="tools" role="toolbar" aria-label="Sim">
+    <button class="tool" id="helpBtn" aria-label="Quick start guide" title="Quick start guide (?)">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.2 9a2.9 2.9 0 1 1 4.1 2.6c-.8.4-1.3 1.1-1.3 2v.6"/><circle cx="12" cy="17.6" r=".6" class="fill"/></svg>
+    </button>
+    <button class="tool" id="pauseBtn" aria-label="Pause" aria-pressed="false" title="Pause (Esc)">
+      <svg viewBox="0 0 24 24" aria-hidden="true" class="i-pause"><path d="M9 6v12M15 6v12"/></svg>
+      <svg viewBox="0 0 24 24" aria-hidden="true" class="i-play"><path d="M8 6l10 6-10 6z" class="fill"/></svg>
+    </button>
+    <button class="tool" id="muteBtn" aria-label="Sound" aria-pressed="true" title="Sound on / off (M)">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10v4h4l5 4V6L8 10z" class="fill"/><path class="i-on" d="M16 9.5a3.5 3.5 0 0 1 0 5M18.5 7a7 7 0 0 1 0 10"/><path class="i-off" d="M16.5 9.5l5 5M21.5 9.5l-5 5"/></svg>
+    </button>
+    <button class="tool" id="panelToggle" aria-controls="panel" aria-expanded="false" title="Controls">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></svg>
+      <span class="sr-only">Controls</span>
+    </button>
+  </div>
+
+  <aside id="panel" class="glass" aria-label="Controls">
+    <div class="panel-head">
+      <h1>Lift + Cruise VTOL</h1>
+      <button class="icon-btn" id="panelClose" aria-label="Close controls">
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"/></svg>
+      </button>
+    </div>
+    <p class="sub">8 lift rotors for vertical flight, a pusher prop and wing for cruise.</p>
+
+    <section aria-labelledby="secPower">
+      <h2 class="lbl" id="secPower">Power</h2>
+      <div class="row"><label id="lMaster" for="master">Master power</label><button class="sw" id="master" role="switch" aria-checked="false" aria-labelledby="lMaster"></button></div>
+      <div class="row"><label id="lLift" for="liftSw">Lift motors (8)</label><button class="sw" id="liftSw" role="switch" aria-checked="true" aria-labelledby="lLift"></button></div>
+      <div class="row"><label id="lCruise" for="cruiseSw">Cruise motor</label><button class="sw" id="cruiseSw" role="switch" aria-checked="true" aria-labelledby="lCruise"></button></div>
+    </section>
+
+    <section aria-labelledby="secFlight">
+      <h2 class="lbl" id="secFlight">Flight</h2>
+      <div class="rng">
+        <div class="row"><label for="thr">Cruise throttle</label><output class="num" id="thrVal" for="thr">0%</output></div>
+        <input type="range" id="thr" min="0" max="100" value="0">
+      </div>
+      <div class="btns">
+        <button class="b go" id="apTo">Auto takeoff</button>
+        <button class="b go" id="apLand">Auto land</button>
+        <button class="b" id="apHold">Hover hold</button>
+        <button class="b" id="reset">Reset to pad</button>
+      </div>
+      <div class="row"><span class="row-l" id="lSpeed">Sim speed <kbd>T</kbd></span><button class="b" id="simSpeed" aria-labelledby="lSpeed simSpeed">×1</button></div>
+    </section>
+
+    <section aria-labelledby="secMotors">
+      <div class="row"><h2 class="lbl" id="secMotors">Motors</h2><span class="hint">select a rotor to fail / restore it</span></div>
+      <svg id="schem" viewBox="0 0 160 96" role="group" aria-label="Rotor status diagram"></svg>
+      <div class="btns"><button class="b danger" id="failBtn">Fail a motor</button><button class="b" id="fixBtn">Clear faults</button></div>
+    </section>
+
+    <section aria-labelledby="secCam">
+      <h2 class="lbl" id="secCam">Camera</h2>
+      <div class="seg" id="camSeg" role="group" aria-label="Camera">
+        <button data-cam="orbit" aria-pressed="true">Orbit</button>
+        <button data-cam="chase" aria-pressed="false">Chase</button>
+        <button data-cam="cockpit" aria-pressed="false">Cockpit</button>
+        <button data-cam="tower" aria-pressed="false">Tower</button>
+      </div>
+      <div class="rng">
+        <div class="row"><label for="fov">Field of view</label><output class="num" id="fovVal" for="fov">60°</output></div>
+        <input type="range" id="fov" min="25" max="110" value="60">
+      </div>
+      <div class="btns"><button class="b" id="camReset">Reset view</button><button class="b" id="autoRot" aria-pressed="false">Auto-rotate</button></div>
+    </section>
+
+    <section aria-labelledby="secSys">
+      <h2 class="lbl" id="secSys">Systems</h2>
+      <div class="row"><label id="lGear" for="gearSw">Landing gear down</label><button class="sw" id="gearSw" role="switch" aria-checked="true" aria-labelledby="lGear"></button></div>
+      <div class="row"><label id="lLight" for="lightSw">Nav &amp; strobe lights</label><button class="sw" id="lightSw" role="switch" aria-checked="true" aria-labelledby="lLight"></button></div>
+    </section>
+
+    <section aria-labelledby="secDisp">
+      <h2 class="lbl" id="secDisp">Display &amp; environment</h2>
+      <div class="row"><label id="lDisc" for="discSw">Rotor discs</label><button class="sw" id="discSw" role="switch" aria-checked="true" aria-labelledby="lDisc"></button></div>
+      <div class="row"><label id="lVec" for="vecSw">Thrust vectors</label><button class="sw" id="vecSw" role="switch" aria-checked="false" aria-labelledby="lVec"></button></div>
+      <div class="row"><label id="lTrail" for="trailSw">Flight path trail</label><button class="sw" id="trailSw" role="switch" aria-checked="true" aria-labelledby="lTrail"></button></div>
+      <div class="seg three" id="todSeg" role="group" aria-label="Time of day">
+        <button data-tod="day" aria-pressed="true">Day</button>
+        <button data-tod="dusk" aria-pressed="false">Dusk</button>
+        <button data-tod="night" aria-pressed="false">Night</button>
+      </div>
+      <div class="rng">
+        <div class="row"><label for="wind">Wind</label><output class="num" id="windVal" for="wind">0 kt</output></div>
+        <input type="range" id="wind" min="0" max="30" value="0">
+      </div>
+      <div class="rng">
+        <div class="row"><label for="windDir">Wind from</label><output class="num" id="windDirVal" for="windDir">310°</output></div>
+        <input type="range" id="windDir" min="0" max="350" step="10" value="310">
+      </div>
+    </section>
+
+    <section aria-labelledby="secSettings">
+      <h2 class="lbl" id="secSettings">Sound &amp; accessibility</h2>
+      <div class="row"><label id="lSound" for="soundSw">Sound</label><button class="sw" id="soundSw" role="switch" aria-checked="true" aria-labelledby="lSound"></button></div>
+      <div class="rng">
+        <div class="row"><label for="vol">Volume</label><output class="num" id="volVal" for="vol">60%</output></div>
+        <input type="range" id="vol" min="0" max="100" value="60">
+      </div>
+      <div class="row"><label id="lRm" for="rmSw">Reduce motion</label><button class="sw" id="rmSw" role="switch" aria-checked="false" aria-labelledby="lRm"></button></div>
+      <div class="row"><span class="row-l" id="lTouch">Touch controls</span></div>
+      <div class="seg three" id="touchSeg" role="group" aria-labelledby="lTouch">
+        <button data-touch="auto" aria-pressed="true">Auto</button>
+        <button data-touch="on" aria-pressed="false">On</button>
+        <button data-touch="off" aria-pressed="false">Off</button>
+      </div>
+    </section>
+
+    <section aria-labelledby="secKeys" class="keys-sec">
+      <h2 class="lbl" id="secKeys">Keyboard</h2>
+      <div class="keys">
+        <kbd>P</kbd><span>Master power on / off</span>
+        <kbd>R</kbd><span>Climb (hold) &nbsp;<kbd>F</kbd> descend</span>
+        <kbd>W</kbd><span>Forward &nbsp;<kbd>S</kbd> back (hover)</span>
+        <kbd>A</kbd><span>Yaw / turn left &nbsp;<kbd>D</kbd> right</span>
+        <kbd>Q</kbd><span>Slide left &nbsp;<kbd>E</kbd> right</span>
+        <kbd>↑ ↓</kbd><span>Cruise throttle</span>
+        <kbd>V</kbd><span>Next camera</span>
+        <kbd>G</kbd><span>Landing gear</span>
+        <kbd>L</kbd><span>Lights</span>
+        <kbd>X</kbd><span>Fail a motor</span>
+        <kbd>M</kbd><span>Sound on / off</span>
+        <kbd>Esc</kbd><span>Pause menu</span>
+        <kbd>T</kbd><span>Sim speed ×¼ … ×4</span>
+        <kbd>?</kbd><span>Quick start guide</span>
+      </div>
+      <button class="b" id="helpBtn2">Open the quick start guide</button>
+    </section>
+  </aside>
+
+  <!-- Touch flight controls: left stick = climb/descend + yaw, right stick = forward/back + slide,
+       vertical throttle, and quick-action chips. Shown when touch is detected (or forced in settings). -->
+  <div id="touch" role="group" aria-label="Touch flight controls">
+    <div class="chips">
+      <button class="chip" data-k="KeyP">PWR</button>
+      <button class="chip go" data-act="takeoff">T/O</button>
+      <button class="chip go" data-act="land">LAND</button>
+      <button class="chip" data-act="hold">HOLD</button>
+      <button class="chip" data-k="KeyG">GEAR</button>
+      <button class="chip" data-k="KeyV">CAM</button>
+    </div>
+    <div class="stick" id="stickL" data-x="yaw" data-y="climb" role="img" aria-label="Left stick: up climbs, down descends, left and right yaw">
+      <span class="stick-cap t">CLIMB</span><span class="stick-cap b">DESC</span><span class="stick-cap l">YAW</span><span class="stick-cap r">YAW</span>
+      <div class="knob"></div>
+    </div>
+    <div id="tThr" role="slider" tabindex="0" aria-label="Cruise throttle" aria-orientation="vertical" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-valuetext="0%">
+      <div class="thr-fill"></div><span class="thr-lbl">THR</span><span class="thr-val num">0</span>
+    </div>
+    <div class="stick" id="stickR" data-x="strafe" data-y="fwd" role="img" aria-label="Right stick: up flies forward, down backward, left and right slide sideways">
+      <span class="stick-cap t">FWD</span><span class="stick-cap b">BACK</span><span class="stick-cap l">SLIDE</span><span class="stick-cap r">SLIDE</span>
+      <div class="knob"></div>
+    </div>
+  </div>
+
+  <!-- First-run quick start (also reopened from ? / Help). -->
+  <div id="intro" class="modal" role="dialog" aria-modal="true" aria-labelledby="introTitle" aria-describedby="introLede" hidden>
+    <div class="card glass">
+      <h2 id="introTitle">Fly a lift + cruise eVTOL</h2>
+      <p id="introLede">Eight rotors lift you straight up. A pusher prop then speeds you up until the wing carries the weight, and the rotors stop and lock.</p>
+      <ol class="steps">
+        <li><b>Power on.</b> <span data-ctl="kbd">Press <kbd>P</kbd>.</span><span data-ctl="touch">Tap <b>PWR</b>.</span></li>
+        <li><b>Auto takeoff</b> to a 100 ft hover. <span data-ctl="kbd">Use <i>Auto takeoff</i> in the panel.</span><span data-ctl="touch">Tap <b>T/O</b>.</span></li>
+        <li><b>Throttle to 100%.</b> <span data-ctl="kbd">Hold <kbd>↑</kbd>.</span><span data-ctl="touch">Drag the <b>THR</b> slider up.</span> Watch the <b>Lift</b> bar move from rotors (amber) to wing (cyan).</li>
+        <li><b>Auto land.</b> It slows down, restarts the rotors and descends vertically.</li>
+      </ol>
+      <p class="ctl-ref" data-ctl="kbd">Hand-flying: <kbd>R</kbd>/<kbd>F</kbd> climb and descend, <kbd>W</kbd>/<kbd>S</kbd> forward and back, <kbd>A</kbd>/<kbd>D</kbd> yaw, <kbd>Q</kbd>/<kbd>E</kbd> slide. <kbd>Esc</kbd> pauses.</p>
+      <p class="ctl-ref" data-ctl="touch">Hand-flying: the left stick climbs, descends and yaws. The right stick flies forward, back and sideways. Push further for more.</p>
+      <div class="btns">
+        <button class="b go" id="introGuide">Start guided flight</button>
+        <button class="b" id="introClose">Fly on my own</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pause menu / crash outcome. Visible while S.paused by the user, or after a crash. -->
+  <div id="menu" class="modal" role="dialog" aria-modal="true" aria-labelledby="menuTitle" aria-describedby="menuSub" hidden>
+    <div class="card glass">
+      <h2 id="menuTitle">Paused</h2>
+      <p id="menuSub">The simulation is stopped. Press Esc or Resume to continue.</p>
+      <div class="menu-btns">
+        <button class="b go" id="mResume">Resume</button>
+        <button class="b" id="mHover">Restart from last hover</button>
+        <button class="b" id="mReset">Reset to pad</button>
+        <button class="b" id="mHelp">Quick start guide</button>
+      </div>
+      <div class="menu-set">
+        <div class="row"><label id="lmSound" for="mSound">Sound</label><button class="sw" id="mSound" role="switch" aria-checked="true" aria-labelledby="lmSound"></button></div>
+        <div class="row"><label id="lmRm" for="mRm">Reduce motion</label><button class="sw" id="mRm" role="switch" aria-checked="false" aria-labelledby="lmRm"></button></div>
+        <div class="row"><span>Sim speed</span><button class="b" id="mSpeed">×1</button></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Graphics context lost (sim auto-paused until the browser restores it). -->
+  <div id="gfxNote" class="glass notice" role="alert" hidden>
+    <b>Graphics paused.</b> The browser reset the 3D context; the sim resumes when it is restored.
+  </div>
+
+  <!-- Boot failure card (filled by the boot guard below). -->
+  <div id="bootErr" class="modal" role="alertdialog" aria-modal="true" aria-labelledby="bootTitle" aria-describedby="bootMsg" hidden>
+    <div class="card glass">
+      <h2 id="bootTitle">The simulator couldn't start</h2>
+      <p id="bootMsg"></p>
+      <p class="hint" id="bootDetail"></p>
+      <div class="btns one"><button class="b go" id="bootRetry">Try again</button></div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script>
+/* Boot guard. The CDN scripts above are classic and blocking, so THREE is defined here or never.
+   1) 3D engine missing → error card.  2) No WebGL → error card.  3) Otherwise load src/main.js as a module;
+   any load or startup error before the first rendered frame (ui.js sets html[data-vtol-running]) → error card. */
+(function () {
+  var app = document.getElementById('app');
+  var MSG = {
+    lib: ["The 3D engine didn't load", 'The three.js library could not be downloaded. Check your connection, then try again.'],
+    webgl: ["WebGL isn't available", 'This simulator needs WebGL, which this browser or device has turned off or does not support. Turn on hardware acceleration or try another browser.'],
+    module: ["The simulator didn't load", 'Part of the app could not be downloaded. Check your connection, then try again.'],
+    boot: ["The simulator couldn't start", 'Something went wrong while starting up. Reloading usually fixes it.']
+  };
+  function fail(kind, detail) {
+    if (document.documentElement.hasAttribute('data-vtol-running')) return;
+    var m = MSG[kind] || MSG.boot, card = document.getElementById('bootErr');
+    document.getElementById('bootTitle').textContent = m[0];
+    document.getElementById('bootMsg').textContent = m[1];
+    document.getElementById('bootDetail').textContent = detail ? 'Details: ' + detail : '';
+    app.classList.add('boot-failed'); card.hidden = false;
+    var b = document.getElementById('bootRetry');
+    b.onclick = function () { location.reload(); };
+    try { b.focus(); } catch (e) {}
+  }
+  if (typeof THREE === 'undefined' || !THREE.OrbitControls) return fail('lib');
+  var gl = null;
+  try {
+    var c = document.createElement('canvas');
+    gl = c.getContext('webgl2') || c.getContext('webgl') || c.getContext('experimental-webgl');
+    var lose = gl && gl.getExtension('WEBGL_lose_context'); if (lose) lose.loseContext(); // free the probe context
+  } catch (e) { gl = null; }
+  if (!gl) return fail('webgl');
+  window.addEventListener('error', function (ev) {
+    var f = ev && ev.filename || '';
+    if (f && f.indexOf('/src/') < 0) return;           // ignore errors from unrelated scripts
+    var msg = (ev && ev.message) || '';
+    fail(/WebGL/i.test(msg) ? 'webgl' : 'boot', msg);
+  });
+  var s = document.createElement('script');
+  s.type = 'module'; s.src = 'src/main.js';
+  s.onerror = function () { fail('module', 'src/main.js or one of its imports failed to load'); };
+  (document.body || document.documentElement).appendChild(s);
+})();
+</script>
+
+</body></html>

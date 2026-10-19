@@ -47,7 +47,9 @@ The review embeds a rotatable model of all 27 SOLIDWORKS parts. `cad/ExportMesh.
 
 A browser flight game built with three.js, where you fly a lift + cruise eVTOL: power on, auto takeoff to a hover, throttle up the pusher until the wing takes the load and the rotors stop, then auto land. It has a primary flight display, a rotor-vs-wing lift split bar, battery and endurance readouts, motor-failure injection, wind, day/dusk/night, four camera modes, keyboard and touch controls, and a guided first flight.
 
-> **It is not an engineering tool.** It models an earlier **8-lift** layout, not the C0 4-lift baseline, and its numbers are not tied to `analysis/`. Nothing in the design review depends on it. Its source is not in this repository.
+> **It is not an engineering tool.** It flies a notional full-scale **8-lift** eVTOL (2,200 kg, 13 m span, per `sim/src/config.js`), not the C0 4-lift baseline, and its numbers are not tied to `analysis/`. Nothing in the design review depends on it.
+
+Source and run instructions: [`sim/`](sim/README.md) (needs a local web server, e.g. `python -m http.server` inside `sim/`).
 
 ### Published versions (Claude artifacts)
 
@@ -58,7 +60,7 @@ Both pages are also published as Claude artifacts, so they can be opened from a 
 | Lift + Cruise VTOL Review | https://claude.ai/artifact/5VFFp3Xv1u88pdJkyqS6dd |
 | Lift + Cruise VTOL Sim | https://claude.ai/artifact/221H8qjqH89NDempeZCqnT |
 
-Artifacts are private until their owner shares them from the page's Share menu. If a link asks you to sign in or says you lack access, ask the team for access or use the `VTOL-Review.html` file instead.
+If a link doesn't open for you, use `VTOL-Review.html` or `sim/` from this repo instead.
 
 ## Current design (v0.3.1, 2026-10-13)
 
@@ -104,6 +106,7 @@ CFD was not run (Flow Simulation would not load on this licence). `analysis/veri
 | `analysis/vlm.mjs` | Vortex-lattice aero check (lift slope, neutral point, span efficiency) → `aero.json` |
 | `analysis/verify.py` | Independent re-derivation of every formula, the BOM, FEA vs hand and VLM vs sizing |
 | `cad/` | SOLIDWORKS model generator, drawings, meshes, simulations and outputs. See [`cad/README.md`](cad/README.md) |
+| `sim/` | Browser flight game (three.js), copied from the published Sim artifact; not used by the engineering |
 | `PRODUCT.md`, `DESIGN.md` | Who the review is for, and its visual design system |
 
 ## Regenerate everything
@@ -131,7 +134,7 @@ After a CAD change, run `node review/build.mjs` again so the page picks up the n
 - Every number cites its source: a repo file, a formula shown in the review, or a URL with the date checked.
 - Estimates are labelled `est`. Unknowns are shown as "—" and never invented.
 - The review follows `docs/reference/REVIEW-STYLE.md`.
-- Scope is the real aircraft; the browser flight simulator is out of scope for engineering numbers.
+- Scope is the real aircraft; the browser flight simulator (`sim/`) is out of scope for engineering numbers.
 
 ## Open items for the team
 
