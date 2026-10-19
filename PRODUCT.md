@@ -24,7 +24,7 @@ The review is generated from the project's own analysis, CAD and simulation outp
 ## Operating Context
 
 - Delivered as a **shared link**: the published page, or the standalone `VTOL-Review.html` opened from File Explorer. Clients read it on their own screens.
-- Read alongside the GitHub repo `Dalcouffe1/Design-Build-Fly`, which holds the sources.
+- Read alongside the GitHub repo `davinciucberkeley-collab/DBF-VTOL`, which holds the sources (moved from `Dalcouffe1/Design-Build-Fly` on 2026-10-19).
 - The review is regenerated whenever the design changes: sizing (`analysis/sizing.mjs`), then the CAD (`cad/build.ps1`, SOLIDWORKS 2025 via its API), then the simulation (`cad/Sim.exe`), then `node review/build.mjs`.
 - The house structure for the document is set in `docs/reference/REVIEW-STYLE.md`: numbered sections, KPI strip, requirement status chips, source citations, open and blocking decision cards, and a "What the team must measure" box in each technical section.
 
