@@ -18,6 +18,20 @@ prop and fixed wing for cruise, lift rotors stopped in cruise.
 - Label estimates as estimates. Unknowns are "—", never invented.
 - Reports follow docs/reference/REVIEW-STYLE.md.
 
+## Team (commit attribution)
+The repo lives at davinciucberkeley-collab/DBF-VTOL. Claude sessions push from a
+shared account, so ask who is working (or use the name they give) and credit them
+with `git commit --author "<Name> <email>"`. Use `Co-Authored-By: <Name> <email>`
+trailers for work done together. Use these GitHub no-reply emails, never personal
+addresses.
+
+| Name | GitHub | Commit email |
+|---|---|---|
+| Tristan Hottier | TristanHottier | 185231225+TristanHottier@users.noreply.github.com |
+| Dillon Alcouffe | Dalcouffe1 | 130024709+Dalcouffe1@users.noreply.github.com |
+| James Guymon | JamesRop | 55683057+JamesRop@users.noreply.github.com |
+| Vaibhav Bagrodia | vaibhav1301-arch | 336305533+vaibhav1301-arch@users.noreply.github.com |
+
 ## Key files
 - docs/VTOL-REVIEW-PROMPT.md — the design-review task.
 - docs/reference/REVIEW-STYLE.md — house style for reviews.
