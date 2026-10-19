@@ -1,0 +1,64 @@
+ID,Item,Type,Category,Kit,CAD part,Qty needed,Qty ordered,Qty on hand,Status,Vendor,Unit USD,Ext USD,Made from,Process,Location,Order date,Received date,Inspected,Source,Notes
+P-01,Polymaker PA6-CF20 500 g (motor mounts: HDT 173 °C),Buy,Airframe,K7,,1,0,0,To order,—,39.99,39.99,,,—,,,,C0_BOM.csv: AM §2d,PETG too close to motor heat (sec. 12)
+P-02,"Hot-wire bow, nichrome + bench supply (wing cores)",Buy,Airframe,K7,,1,0,0,To order,—,40,40,,,—,,,,C0_BOM.csv: EST allowance,not priced; borrow if a makerspace has one
+P-03,"Scotch heavy-duty packing tape, 6 rolls (skin)",Buy,Airframe,K7,,1,0,0,To order,Amazon,19.98,19.98,,,—,,,,C0_BOM.csv: BF §2 amazon.com,
+P-04,"Hardware kit: XT90S, wire, extensions, screws, inserts, horns, pushrods, hinge tape, heat shrink, UBEC, epoxy",Buy,Airframe,K7,,1,0,0,To order,Amazon,124.01,124.01,,,—,,,,C0_BOM.csv: BF §3 amazon.com (itemised in file),
+P-05,"ELEGOO PETG 1 kg (clamps, pod frames, gear clamps)",Buy,Airframe,K7,,2,0,0,To order,Amazon,12.99,25.98,,,—,,,,C0_BOM.csv: BF §5,
+P-06,"BNTECHGO 12 AWG silicone wire, 2nd pack (ESC feeds)",Buy,Airframe,K7,,1,0,0,To order,Amazon,14.98,14.98,,,—,,,,C0_BOM.csv: BF §3a item 3 amazon.com,
+P-07,14 AWG silicone wire (pusher / BEC feeds),Buy,Airframe,K7,,1,0,0,To order,Amazon,9.99,9.99,,,—,,,,C0_BOM.csv: BF §3b amazon.com,
+P-08,XT60H connectors 12 pairs (boom harness disconnects),Buy,Airframe,K7,,1,0,0,To order,Amazon,6.99,6.99,,,—,,,,C0_BOM.csv: BF §3b amazon.com,
+P-09,"300 mm servo extension leads, 2nd pack",Buy,Airframe,K7,,1,0,0,To order,Amazon,6.99,6.99,,,—,,,,C0_BOM.csv: BF §3a item 4 amazon.com,
+P-10,Foam-safe glue 4 oz,Buy,Airframe,K7,,1,0,0,To order,Amazon,12.99,12.99,,,—,,,,C0_BOM.csv: BF §3b amazon.com,
+P-11,ShareGoo LiPo battery straps (10),Buy,Airframe,K7,,1,0,0,To order,Amazon,7.99,7.99,,,—,,,,C0_BOM.csv: BF §3b amazon.com,
+P-12,Ovonic 6S 6500 100C — 2-pack listing (2 packs),Buy,Energy,K4,Battery_6S_LiPo,1,0,0,To order,Amazon,138.99,138.99,,,—,,,,C0_BOM.csv: BE §1 amazon.com,second pack per R7; EC5 leads: re-terminate to XT90S
+P-13,"HTRC C150 charger (150 W, ~6 A on 6S)",Buy,Energy,K6,,1,0,0,To order,Amazon,56.99,56.99,,,—,,,,C0_BOM.csv: BE §2 amazon.com/dp/B0H4QLJYHY,
+P-14,JeeFly 1755 carbon prop (pair),Buy,Lift propulsion,K2,Lift_Prop,2,0,0,Hold: NWA swap pending,Amazon,18.6,37.2,,,—,,,,C0_BOM.csv: BL props amazon.com/dp/B0FJ21V736,"$4.99 delivery, likely CN; Retail fallback if the Nautical Wings carbon props are not confirmed"
+P-15,SoloGood 45A ESC (4-pack),Buy,Lift propulsion,K2,,2,0,0,To order,Amazon,39.99,79.98,,,—,,,,C0_BOM.csv: BL ESCs amazon.com,4 lift + pusher + 3 spare; low stock: fallback LANRC 35A
+P-16,JeeFly 1755 spare pair (amazon.com),Buy,Spares,K2,,1,0,0,Hold: NWA swap pending,Amazon,18.6,18.6,,,—,,,,C0_BOM.csv: BL,Retail fallback if the Nautical Wings carbon props are not confirmed
+P-17,Du-Bro 230 pushrod 5-pack (spares),Buy,Spares,K7,,1,0,0,To order,Amazon,12.48,12.48,,,—,,,,C0_BOM.csv: BF §3b amazon.com,
+P-18,Tenergy LiPo bag,Buy,Test & safety,K6,,1,0,0,To order,Amazon,8.99,8.99,,,—,,,,C0_BOM.csv: BE §3,
+P-19,Watt meter 150 A / 60 V,Buy,Test & safety,K6,,1,0,0,To order,Amazon,12.99,12.99,,,—,,,,C0_BOM.csv: BE §3,
+P-20,IR thermometer,Buy,Test & safety,K6,,1,0,0,To order,Amazon,8.98,8.98,,,—,,,,C0_BOM.csv: BE §3,
+P-21,20 kg load cell + HX711 kit (thrust stand),Buy,Test & safety,K6,,1,0,0,To order,Amazon,8.98,8.98,,,—,,,,C0_BOM.csv: BE §4,
+P-22,Arduino Nano clone (thrust stand),Buy,Test & safety,K6,,1,0,0,To order,Amazon,8.99,8.99,,,—,,,,C0_BOM.csv: BE §4,
+P-23,APC 14x8.5EP pusher prop,Buy,Cruise propulsion,K4,Pusher_Prop_14in,3,0,0,Hold: NWA swap pending,APC Propellers,6.79,20.37,,,—,,,,C0_BOM.csv: PB 1c,Retail fallback if the Nautical Wings carbon props are not confirmed
+P-24,EMAX ES3005HV servo,Buy,Controls,K1,,5,0,0,To order,EMAX USA,19.99,99.95,,,—,,,,C0_BOM.csv: BA §6 shop.emax-usa.com,"2 ailerons, elevator, 2 rudders"
+P-25,EMAX ES3005HV spare servo,Buy,Spares,K1,,1,0,0,To order,EMAX USA,19.99,19.99,,,—,,,,C0_BOM.csv: BA §6,
+P-26,Harbor Freight 0.50 cal ammo can (pack storage),Buy,Test & safety,K6,,1,0,0,To order,Harbor Freight,19.99,19.99,,,—,,,,C0_BOM.csv: BE §3,
+P-27,Holybro MS5525DSO + PT40 airspeed,Buy,Avionics,K4,Pitot_Tube,1,0,0,To order,Holybro (ships CN),59.99,59.99,,,—,,,,C0_BOM.csv: BA §3 holybro.com,ships CN
+P-28,FOAMULAR NGX F-250 2 in x 4 x 8 ft (wing cores),Buy,Airframe,K7,,1,0,0,To order,Home Depot,59.97,59.97,,,—,,,,C0_BOM.csv: BF §2 homedepot.com,
+P-29,"FOAMULAR 150 1 in x 4 x 8 ft (tail, pod)",Buy,Airframe,K7,,1,0,0,To order,Home Depot,30.97,30.97,,,—,,,,C0_BOM.csv: BF §2 homedepot.com,
+P-30,6061-T6 tube 1.000 x 0.035 in x 72 in (booms),Buy,Airframe,K7,,2,0,0,To order,OnlineMetals,26.2,52.4,,,—,,,,C0_BOM.csv: BF §1 onlinemetals.com,cut list 0.955 + 0.516 + 0.955 + 0.516 m
+P-31,6061-T6 tube 1.000 x 0.058 in x 96 in (spar sockets + gear legs),Buy,Airframe,K7,,1,0,0,To order,OnlineMetals,53.97,53.97,,,—,,,,C0_BOM.csv: BF §1,2 x 0.8 m sockets + 4 x 0.205 m legs + kerf
+P-32,6061-T6 tube 0.875 x 0.058 in x 36 in (joiner),Buy,Airframe,K7,,1,0,0,To order,OnlineMetals,18.45,18.45,,,—,,,,C0_BOM.csv: BF §1,"0.76 m joiner, 0.30 m engagement per side; 0.23 mm clearance"
+P-33,HGLRC M100-5883 GPS + compass,Buy,Avionics,K4,,1,0,0,To order,RaceDayQuads,20.49,20.49,,,—,,,,C0_BOM.csv: BA §2 racedayquads.com,
+P-34,NewBeeDrone BeeID v1.1 Remote ID (FAA DoC RID000001995),Buy,Avionics,K4,,1,0,0,To order,RaceDayQuads,36.99,36.99,,,—,,,,C0_BOM.csv: BA §4 racedayquads.com,
+P-35,RadioMaster Pocket Crush ELRS,Buy,Avionics,K6,,1,0,0,To order,RadioMaster,64.99,64.99,,,—,,,,C0_BOM.csv: BA §5 radiomasterrc.com,
+P-36,RadioMaster RP3 V2 ELRS receiver,Buy,Avionics,K4,,1,0,0,To order,RadioMaster,19.99,19.99,,,—,,,,C0_BOM.csv: BA §5,
+P-37,"CoreWing F405 Wing APP V2 (12 out, 90 A sensor)",Buy,Avionics,K4,,1,0,0,To order,ReadyMadeRC,67.26,67.26,,,—,,,,C0_BOM.csv: BA §2 readymaderc.com,ArduPilot target beta-only (4.7.2-beta); fallback Matek F405-WMO $69.99
+P-38,SunnySky X4110S 400KV (pusher),Buy,Cruise propulsion,K4,Pusher_Motor,1,0,0,To order,SunnySky USA,46.99,46.99,,,—,,,,C0_BOM.csv: BL A3,same motor as lift: one spare covers both
+P-39,SunnySky X4110S 400KV,Buy,Lift propulsion,K2,Lift_Motor,4,0,0,To order,SunnySky USA,46.99,187.96,,,—,,,,C0_BOM.csv: BL A3 sunnyskyusa.com,
+P-40,X4110S spare motor (lift or pusher),Buy,Spares,K4,,1,0,0,To order,SunnySky USA,46.99,46.99,,,—,,,,C0_BOM.csv: BL,
+M-01,"Left wing panel, NACA 2415 (EST), XPS core + tape skin, chord 239 mm",Make,Fabricated part,K1,Wing_Panel_L,1,,0,To make,In-house,0,0,P-28,"Hot-wire XPS core, packing-tape skin",—,,,,cad/params.txt comp= count; cad/mesh/meta.json,
+M-02,"Right wing panel, NACA 2415 (EST), XPS core + tape skin, chord 239 mm",Make,Fabricated part,K1,Wing_Panel_R,1,,0,To make,In-house,0,0,P-28,"Hot-wire XPS core, packing-tape skin",—,,,,cad/params.txt comp= count; cad/mesh/meta.json,
+M-03,"Left aileron, 26 % chord, 55 % of panel span",Make,Fabricated part,K1,Aileron_L,1,,0,To make,In-house,0,0,P-28,"Cut from wing panel trailing edge, tape hinge",—,,,,cad/params.txt comp= count; cad/mesh/meta.json,
+M-04,"Right aileron, 26 % chord, 55 % of panel span",Make,Fabricated part,K1,Aileron_R,1,,0,To make,In-house,0,0,P-28,"Cut from wing panel trailing edge, tape hinge",—,,,,cad/params.txt comp= count; cad/mesh/meta.json,
+M-05,"Wing centre-section saddle over the joiner: XPS block from the budgeted FOAMULAR sheet, taped, with printed PETG root plates (EST)",Make,Fabricated part,K1,Wing_Saddle,1,,0,To make,In-house,0,0,P-28,"XPS block, taped; printed PETG root plates; bore for joiner",—,,,,cad/params.txt comp= count; cad/mesh/meta.json,
+M-06,"6061-T6 1.000 x 0.058 in spar socket, 0.8 m",Make,Fabricated part,K1,Spar_Tube,2,,0,To make,In-house,0,0,P-31,Cut 0.8 m from 96 in tube,—,,,,cad/params.txt comp= count; cad/mesh/meta.json,
+M-07,"6061-T6 0.875 x 0.058 in joiner, 0.76 m",Make,Fabricated part,K1,Wing_Joiner,1,,0,To make,In-house,0,0,P-32,Cut 0.76 m from 36 in tube,—,,,,cad/params.txt comp= count; cad/mesh/meta.json,
+M-08,"M5 x 30 stainless button screw into a captive nut in the saddle (hardware kit, budget-airframe.md §3a item 5)",Make,Fabricated part,K1,Wing_Bolt,2,,0,To make,In-house,0,0,P-04,"M5 x 30 from hardware kit, captive nut in saddle",—,,,,cad/params.txt comp= count; cad/mesh/meta.json,
+M-09,"Front boom, 6061-T6 1.000 x 0.035 in",Make,Fabricated part,K2,Boom_Front,2,,0,To make,In-house,0,0,P-30,Cut 0.955 m from 72 in tube,—,,,,cad/params.txt comp= count; cad/mesh/meta.json,
+M-10,"Rear boom stub carrying the tail, 6061-T6",Make,Fabricated part,K2,Boom_Rear_Stub,2,,0,To make,In-house,0,0,P-30,Cut 0.516 m from 72 in tube,—,,,,cad/params.txt comp= count; cad/mesh/meta.json,
+M-11,Printed PETG boom-to-wing clamp at the spar; top meets the wing lower surface,Make,Fabricated part,K2,Boom_Clamp_Front,2,,0,To make,In-house,0,0,P-05,"3D print, PETG",—,,,,cad/params.txt comp= count; cad/mesh/meta.json,
+M-12,Printed PETG boom-to-wing clamp at 80 % chord; top meets the wing lower surface,Make,Fabricated part,K2,Boom_Clamp_Rear,2,,0,To make,In-house,0,0,P-05,"3D print, PETG",—,,,,cad/params.txt comp= count; cad/mesh/meta.json,
+M-13,"Printed PA6-CF motor mount on boom, covers the boom splice at the rear station (EST)",Make,Fabricated part,K2,Motor_Mount,4,,0,To make,In-house,0,0,P-01,"3D print, PA6-CF (motor heat)",—,,,,cad/params.txt comp= count; cad/mesh/meta.json,
+M-14,"Horizontal stabiliser, NACA 0009 (EST), area from V_h = 0.35",Make,Fabricated part,K3,H_Tail,1,,0,To make,In-house,0,0,P-29,"Hot-wire or sand XPS, tape skin",—,,,,cad/params.txt comp= count; cad/mesh/meta.json,
+M-15,"Elevator, 30 % chord, NACA 0009",Make,Fabricated part,K3,Elevator,1,,0,To make,In-house,0,0,P-29,"Cut XPS, tape hinge",—,,,,cad/params.txt comp= count; cad/mesh/meta.json,
+M-16,"Vertical fin, NACA 0009, lofted taper 65 % tip chord",Make,Fabricated part,K3,Fin,2,,0,To make,In-house,0,0,P-29,"Cut XPS, tape skin",—,,,,cad/params.txt comp= count; cad/mesh/meta.json,
+M-17,"Fuselage pod, 0.85 m x 0.16 m, foam + PETG frames + tape (EST)",Make,Fabricated part,K4,Fuselage_Pod,1,,0,To make,In-house,0,0,P-29,"XPS shell on printed PETG frames, taped",—,,,,cad/params.txt comp= count; cad/mesh/meta.json,
+M-18,Avionics hatch blister (EST),Make,Fabricated part,K4,Canopy,1,,0,To make,In-house,0,0,P-05,3D print or foam blister (EST),—,,,,cad/params.txt comp= count; cad/mesh/meta.json,
+M-19,Pusher spinner 42 mm (EST),Make,Fabricated part,K4,Spinner,1,,0,To source,—,0,0,—,Not in the BOM: buy or print (—),—,,,,cad/params.txt comp= count; cad/mesh/meta.json,
+M-20,Gear leg: 6061 1.000 x 0.058 in offcut + printed TPU/PETG foot (EST),Make,Fabricated part,K5,Landing_Leg,4,,0,To make,In-house,0,0,P-31,Cut 0.205 m from socket-tube offcut; printed TPU/PETG foot,—,,,,cad/params.txt comp= count; cad/mesh/meta.json,
+M-21,Printed PETG gear socket clamp under the boom,Make,Fabricated part,K5,Gear_Clamp,4,,0,To make,In-house,0,0,P-05,"3D print, PETG",—,,,,cad/params.txt comp= count; cad/mesh/meta.json,
+N-01,"Carbon lift prop 17 in (design on demand, 2 CW + 2 CCW + 2 spare)",NWA,Lift propulsion,K2,Lift_Prop,6,0,0,Proposed: confirm with NWA,Nautical Wings Aerospace,0,0,,Send spec sheet; designer proposes pitch,—,,,,docs/research/nautical-wings-props.md,Replaces JeeFly 1755 x 6 if confirmed. Fit to X4110S bolt-on adapter (4 mm shaft); hover point 15.2 N per rotor
+N-02,Carbon pusher prop 14 in (design on demand),NWA,Cruise propulsion,K4,Pusher_Prop_14in,2,0,0,Proposed: confirm with NWA,Nautical Wings Aerospace,0,0,,Send spec sheet; APC 14x8.5EP is the baseline,—,,,,docs/research/nautical-wings-props.md,Replaces APC 14x8.5EP x 3 if confirmed; keep one APC as thrust-stand baseline (team call)

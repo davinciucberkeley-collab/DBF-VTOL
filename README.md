@@ -19,7 +19,7 @@ Design phase. The baseline (C0, v0.3.1) is sized, modelled in SOLIDWORKS, checke
 
 ## What to open
 
-There are three interactive outputs. The first two are about the real aircraft; the third is a demonstration only.
+There are four interactive outputs. The first three are about the real aircraft; the fourth is a demonstration only.
 
 ### 1. Design review: the HTML project overview
 
@@ -43,7 +43,25 @@ Interactive content: sortable tables, sensitivity sliders and charts that run th
 
 The review embeds a rotatable model of all 27 SOLIDWORKS parts. `cad/ExportMesh.cs` exports each part as STL (`cad/mesh/`, with colour and description in `meta.json`), and `review/mesh.mjs` packs them into the page. Static renders are in `cad/images/`, and the five-sheet drawing set is `cad/drawings/DBF-DRW-001.PDF`.
 
-### 3. 3D flight simulator (browser game)
+### 3. Inventory overview and live inventory (Inventory Czar: Tristan Hottier)
+
+**[`Inventory-Overview.html`](Inventory-Overview.html)** (DBF-INV-001) is the project overview from the purchasing and physical-parts side. It is built like the design review, from the same sources, and has seven sections:
+
+| § | Section | What it covers |
+|---|---|---|
+| 1 | Overview | Spend vs the $2,000 cap, crash reserve, lines to buy and make, status by kit, open decisions |
+| 2 | 3D model | The SOLIDWORKS parts coloured by inventory status, exploded-view slider, isolate by kit, click a part for its inventory line |
+| 3 | Inventory | Every stock line (40 buy, 21 make, 2 Nautical Wings): search, filters, sortable |
+| 4 | Budget & orders | Spend by vendor and category, goods → tax → shipping → reserve, one order card per vendor |
+| 5 | Fabrication & kits | What the team makes, from which stock line, by which process; tube cut lists; kit bins K1–K7 |
+| 6 | Nautical Wings props | Carbon props designed on demand (team-reported as free): spec sheet to send, budget effect, acceptance tests |
+| 7 | Receiving & storage | Receiving checklist, LiPo storage, bin locations |
+
+**Live inventory:** the editable copy is the Google Sheet [DBF Inventory (DBF-INV-001)](https://docs.google.com/spreadsheets/d/1nKiNBmtv2FeFGMaZjcKlNWKAuCMhC6uzteGTA2Iy9WE/edit). Budget totals and kit counts are formulas, so they update as quantities and statuses change. It is private: ask Tristan for access. The page shows a snapshot of it from the date in its header.
+
+**Nautical Wings carbon props:** the team reports free access to carbon propellers designed on demand by Nautical Wings Aerospace; this is not yet in writing, and no public source confirms the offer. They are a proposed swap for the six JeeFly 1755 lift props and three APC 14x8.5EP pushers, which stay on hold as the fallback. If confirmed, the reserve rises from $102.08 to $186.05 (EST: free props, no shipping or import cost). The design baseline is unchanged until the team confirms the terms in writing. Research and the spec sheet: [`docs/research/nautical-wings-props.md`](docs/research/nautical-wings-props.md).
+
+### 4. 3D flight simulator (browser game)
 
 A browser flight game built with three.js, where you fly a lift + cruise eVTOL: power on, auto takeoff to a hover, throttle up the pusher until the wing takes the load and the rotors stop, then auto land. It has a primary flight display, a rotor-vs-wing lift split bar, battery and endurance readouts, motor-failure injection, wind, day/dusk/night, four camera modes, keyboard and touch controls, and a guided first flight.
 
@@ -53,14 +71,15 @@ Source and run instructions: [`sim/`](sim/README.md) (needs a local web server, 
 
 ### Published versions (Claude artifacts)
 
-Both pages are also published as Claude artifacts, so they can be opened from a link without downloading anything:
+The pages are also published as Claude artifacts, so they can be opened from a link without downloading anything:
 
 | Page | Link |
 |---|---|
 | Lift + Cruise VTOL Review | https://claude.ai/artifact/5VFFp3Xv1u88pdJkyqS6dd |
+| DBF Inventory Overview | https://claude.ai/artifact/C6JEuXWN4B4Aoay5zHU3Pg |
 | Lift + Cruise VTOL Sim | https://claude.ai/artifact/221H8qjqH89NDempeZCqnT |
 
-Both are shared as "anyone with the link" (view only, no Claude account needed). If a link doesn't open for you, use `VTOL-Review.html` or `sim/` from this repo instead.
+The links are view only. If one doesn't open for you, use `VTOL-Review.html`, `Inventory-Overview.html` or `sim/` from this repo instead.
 
 ## Current design (v0.3.1, 2026-10-13)
 
@@ -106,6 +125,8 @@ CFD was not run (Flow Simulation would not load on this licence). `analysis/veri
 | `analysis/vlm.mjs` | Vortex-lattice aero check (lift slope, neutral point, span efficiency) → `aero.json` |
 | `analysis/verify.py` | Independent re-derivation of every formula, the BOM, FEA vs hand and VLM vs sizing |
 | `cad/` | SOLIDWORKS model generator, drawings, meshes, simulations and outputs. See [`cad/README.md`](cad/README.md) |
+| `Inventory-Overview.html` | Inventory Czar overview (standalone; rebuilt by `inventory/build_overview.mjs`) |
+| `inventory/` | Inventory master list (`inventory.csv`, `inventory.json`), its builder, the Google Sheet seed (`DBF-Inventory-sheet.csv`), a formatted offline workbook (`DBF-Inventory.xlsx`), the overview page sources and the sheet link (`sheet.json`) |
 | `sim/` | Browser flight game (three.js), copied from the published Sim artifact; not used by the engineering |
 | `PRODUCT.md`, `DESIGN.md` | Who the review is for, and its visual design system |
 
@@ -117,6 +138,9 @@ node analysis/vlm.mjs           # aero check    -> analysis/aero.json
 node analysis/export_bom.mjs    # purchasing    -> docs/purchasing/C0_BOM.csv
 py -3 analysis/verify.py        # independent checks (expects "FAILED CHECKS: none")
 node review/build.mjs           # review page   -> VTOL-Review.html, review/vtol-review.html
+node inventory/build_inventory.mjs   # inventory     -> inventory/inventory.csv, inventory.json
+python3 inventory/build_sheet.py     # sheet seed    -> inventory/DBF-Inventory.xlsx, DBF-Inventory-sheet.csv
+node inventory/build_overview.mjs    # overview page -> Inventory-Overview.html
 ```
 
 The CAD and simulations need SOLIDWORKS 2025 with Simulation on Windows:
@@ -143,7 +167,8 @@ These come from review §1, and each technical section ends with "What the team 
 1. **Flying site and legal path.** Ask UCPD/Risk Services by 2026-11-06 whether the capstone qualifies, and request Richmond Field Station.
 2. **Flight controller firmware.** The CoreWing ArduPilot target is beta-only today; the Matek F405-WMO is the stable fallback.
 3. **Thrust stand first.** Qualify every motor/ESC (tests T1–T6) before any flight; C0 has no hover motor-out tolerance.
-4. **Cart totals.** Price shipping at checkout. If the reserve drops under $100: borrow a hot-wire cutter, then drop the spare motor, then the airspeed sensor.
-5. **Flight build-up.** Follow review §13 (SITL → bench → tethered → free hover → partial → full transition → mission).
+4. **Nautical Wings props.** Get the free-prop offer, price and lead time in writing and send the spec sheet (inventory overview §6). Until then the retail props stay on hold.
+5. **Cart totals.** Price shipping at checkout. If the reserve drops under $100: borrow a hot-wire cutter, then drop the spare motor, then the airspeed sensor.
+6. **Flight build-up.** Follow review §13 (SITL → bench → tethered → free hover → partial → full transition → mission).
 
 v0.3.1 incorporates a six-reviewer project audit (79 confirmed findings; review §12).

@@ -1,0 +1,256 @@
+<a class="skip" href="#main">Skip to content</a>
+<div class="wrap">
+<header class="top">
+  <div class="cover">
+    <h1>Inventory Overview</h1>
+    <p class="subtitle">Project overview for the Inventory Czar: purchasing, receiving, stock, fabricated parts, kits per subassembly and the Nautical Wings carbon props. Lift + cruise VTOL, student capstone.</p>
+    <dl class="facts f6">
+      <div><dt>Project</dt><dd>Design-Build-Fly</dd></div>
+      <div><dt>Document</dt><dd>{{DOC}}</dd></div>
+      <div><dt>Owner</dt><dd>Tristan Hottier<br><code>Inventory Czar</code></dd></div>
+      <div><dt>Issue</dt><dd>1 · {{DATE}}</dd></div>
+      <div><dt>Design revision</dt><dd>{{REV}}</dd></div>
+      <div><dt>Stage</dt><dd>Concept · pre-purchase</dd></div>
+    </dl>
+    <div class="headact">{{SHEET_BTN_HEAD}}<p class="meta">The sheet is the live, editable copy. This page is a snapshot of it from {{DATE}}.</p></div>
+  </div>
+  <button class="themebtn" id="themeBtn" type="button">Theme: system</button>
+</header>
+<nav class="tabs" id="tabs" aria-label="Sections"></nav>
+<div class="layout">
+<nav class="side" id="side" aria-label="Section index"></nav>
+<main id="main">
+
+<!-- ============================ 1 OVERVIEW ============================ -->
+<section class="sec" id="overview" data-title="Overview" data-n="1">
+  <div class="sechead"><h2><span class="secno">1</span> Overview</h2></div>
+  <p class="verdict lede"><b>The Inventory Czar owns every physical thing between a purchase decision and a flight.</b> That is buying, receiving, stock, the parts the team makes from raw stock, one kit bin per subassembly (K1 to K7), and the carbon propellers Nautical Wings Aerospace (NWA) designs on demand, which the team reports it can get free. <b class="ok-t">Verdict: the plan fits the cap, with a thin margin.</b> Committed spend is {{COMMITTED}} of the {{CAP}} cap, which leaves a {{RESERVE}} crash reserve against a target of {{TARGET}}. As of {{DATE}} the master list has {{LINES}} lines ({{N_BUY}} to buy, {{N_MAKE}} to make, {{N_NWA}} NWA prop lines) and {{RECEIVED}} are received. Two items block or erode the plan: the NWA terms, which are not confirmed, and the {{SHIP}} shipping allowance, which is an estimate.</p>
+  <p class="src">inventory/inventory.json (summary, rows; snapshot {{DATE}}) ← docs/purchasing/C0_BOM.csv; docs/DESIGN-BASIS.md R6, R7 (reserve target)</p>
+
+  {{KPIS}}
+  <p class="src">inventory/inventory.json summary.cap, committed, reserve, counts; rows by Type and Status. Items received = lines with Qty on hand above 0. NWA props = sum of Qty needed on the Type NWA lines (N-01, N-02).</p>
+
+  <h3 id="ov-kits">Status by kit</h3>
+  <p>Seven kits, one bin each. Every line carries a kit; the Kit column in the sheet is the filter.</p>
+  {{KIT_TABLE}}
+  <p class="src">inventory/inventory.json rows, grouped by Kit; kit names from summary.kits (inventory/build_inventory.mjs)</p>
+
+  <h3 id="ov-decisions">Open decisions</h3>
+  <div class="decision red">
+    <b class="q">Confirm the Nautical Wings prop terms in writing</b>
+    <div>Nothing public confirms that NWA offers free or on-demand props to students: the company is a Bengaluru electric-motor maker, and the only prop range found is a 14 to 40 in standard series, cited in a Tyto Robotics customer story. The inventory proposes {{NWA_QTY}} NWA props ({{NWA_LIFT}} lift, {{NWA_PUSH}} pusher) that replace the retail JeeFly 1755 and APC 14x8.5EP lines, and those retail lines are on hold until it is settled. <b>Blocking for prop ordering.</b></div>
+    <div class="rec"><b>Recommended:</b> email NWA the spec sheet (§6) and ask for price, lead time, shipping and import cost, and balance report in writing. Keep the retail lines on hold, not deleted, until the reply arrives.<br><b>Alternative:</b> release the on-hold retail lines (JeeFly 1755 and APC 14x8.5EP, {{HOLD_GOODS}} goods) now and treat NWA props as an optional upgrade. Cost: reserve stays at {{RESERVE}}, not {{RES_IF}} ({{PRICES_CHECKED}} prices).</div>
+    <p class="src">inventory/inventory.json rows P-14, P-16, P-23, N-01, N-02 and summary.nwaSwap; docs/research/nautical-wings-props.md §1</p>
+  </div>
+  <div class="decision">
+    <b class="q">The {{SHIP}} shipping allowance is an estimate</b>
+    <div>The BOM carries one {{SHIP}} allowance for all shipping; it is not a quote. The reserve is {{RESERVE}} against a {{TARGET}} target, a margin of {{MARGIN}}. Any shipping above the allowance pushes the reserve under target. The fallback order in the README open items (from review §1), if the reserve drops under {{TARGET}}: {{LADDER}}.</div>
+    <div class="rec"><b>Recommended:</b> price shipping and tax at each vendor's checkout, and write the real figures into the sheet.<br><b>Alternative:</b> —</div>
+    <p class="src">inventory/inventory.json summary.shipping, reserve; docs/purchasing/C0_BOM.csv (shipping allowance, estimate); README.md "Open items" 4</p>
+  </div>
+  <div class="decision">
+    <b class="q">The pusher spinner is not in the BOM</b>
+    <div>Line M-19 reads “{{M19}}”, status To source, vendor and cost —. The reserve margin is {{MARGIN}}, so a bought spinner is not free.</div>
+    <div class="rec"><b>Recommended:</b> print it from the budgeted PETG (P-05) or PA6-CF (P-01), and fit-check it on the motor adapter. This costs no new spend <span class="est">EST</span>, because the filament lines are already in the BOM.<br><b>Alternative:</b> buy one; price —, so look it up before choosing.</div>
+    <p class="src">inventory/inventory.json row M-19 (and P-01, P-05)</p>
+  </div>
+
+  <p>The live inventory sheet is the working copy for all of the above.</p>
+  <p>{{SHEET_BTN_INV}}</p>
+</section>
+
+<!-- ============================ 2 3D MODEL ============================ -->
+<section class="sec" id="model3d" data-title="3D model" data-n="2">
+  <div class="sechead"><h2><span class="secno">2</span> 3D model</h2></div>
+  <p class="verdict lede"><b>The SOLIDWORKS model, coloured by what you still have to buy or make.</b> Switch to <b>Inventory status</b> to see which parts are on order, to make, on hold or unsourced. Click or tap a part for its inventory line, or isolate one kit to see what goes in its bin.</p>
+  <p class="src">cad/mesh/*.STL and cad/mesh/meta.json via review/mesh.mjs ({{CAD_PARTS}} parts, {{CAD_COMPS}} placed components, {{CAD_TRIS}} triangles; placements from cad/params.txt); statuses from inventory/inventory.json column CAD part</p>
+  <div class="v3dgrid">
+  <div class="viewer cadview" id="v3d" data-card="v3dCard">
+    <canvas id="v3dCanvas" aria-label="Rotatable SOLIDWORKS model of the aircraft, coloured by inventory status; drag to orbit, scroll to zoom, click a part for its inventory card"></canvas>
+    <span class="lbl">SOLIDWORKS · C0 v{{REV}}</span>
+    <div class="tip" hidden></div>
+    <div class="legend" hidden aria-label="Colour legend"></div>
+    <div class="fallback" hidden><p>The 3D viewer needs an internet connection to load its graphics library (three.js). The inventory table (§3) lists the same parts.</p><button type="button" id="v3dRetry">Try again</button></div>
+    <p class="loadmsg">Loading the 3D model…</p>
+    <div class="ctl" role="group" aria-label="3D model controls">
+      <div class="grp" role="group" aria-label="Colour mode"><span class="glabel">Colour</span><button type="button" data-colour="cad" aria-pressed="true">CAD colours</button><button type="button" data-colour="inv" aria-pressed="false">Inventory status</button></div>
+      <div class="grp" role="group" aria-label="Camera view"><span class="glabel">View</span><button type="button" data-cview="iso">Iso</button><button type="button" data-cview="top">Top</button><button type="button" data-cview="side">Side</button><button type="button" data-cview="front">Front</button></div>
+      <div class="grp" role="group" aria-label="Kit isolation"><span class="glabel">Kit</span>{{KIT_BTNS}}</div>
+      <div class="grp" role="group" aria-label="Display options"><button type="button" data-act="xray" aria-pressed="false">X-ray</button><button type="button" data-act="edges" aria-pressed="true">Edges</button><button type="button" data-act="reset">Reset</button>
+        <label class="slide"><span>Explode</span><input type="range" min="0" max="100" value="0" step="1" data-explode aria-label="Explode the assembly, 0 to 100 percent"><output data-explode>0 %</output></label></div>
+    </div>
+  </div>
+  <aside class="pcard" id="v3dCard" aria-live="polite" aria-label="Selected part inventory card"></aside>
+  </div>
+  <p class="v3dnote">Drag to orbit, right-drag or two-finger drag to pan, scroll or pinch to zoom. On a touch screen, tap the model once to start; swipes before that scroll the page. The lift props are shown parked fore-aft. <b>Motor, battery pack and pod proportions are estimates</b> <span class="est">EST</span> (cad/mesh/meta.json). <b>Avionics, ESCs, servos and wiring are not modelled</b>; those lines are in the table (§3) but not in the view. Parts with no inventory row: {{NO_ROW}}. A part drawn once may be several lines (for example the lift prop is both a JeeFly line and an NWA line); the colour shows the line that needs the most attention.</p>
+  <details class="cadparts"><summary>Parts list ({{CAD_PARTS}} parts)</summary><ul id="v3dParts">{{PART_LIST}}</ul></details>
+  <p class="src">Colour key: cad/mesh/meta.json (part names, descriptions, EST flags); inventory/inventory.json (Status, Kit, CAD part). Priority when a part has several lines: to source, to order, hold or proposed, to make, on hand.</p>
+</section>
+
+<!-- ============================ 3 INVENTORY ============================ -->
+<section class="sec" id="inventory" data-title="Inventory" data-n="3">
+  <div class="sechead"><h2><span class="secno">3</span> Inventory</h2></div>
+  <p class="verdict lede"><b>{{LINES}} lines, {{N_BUY}} bought, {{N_MAKE}} made, {{N_NWA}} from NWA.</b> Goods total {{GOODS}} before tax and shipping. {{RECEIVED}} lines are received.</p>
+  <div class="snapshot"><b>This table is a snapshot</b> generated from inventory/inventory.json on {{DATE}}. The live, editable copy is the Google Sheet; record orders, receipts and inspections there.<br>{{SHEET_BTN_INV2}}</div>
+  {{INV_TABLE}}
+  <p class="src">inventory/inventory.json (rows) ← inventory/build_inventory.mjs ← docs/purchasing/C0_BOM.csv (prices checked {{PRICES_CHECKED}}) and cad/params.txt; "CAD part" links a line to cad/mesh/meta.json</p>
+</section>
+
+<!-- ============================ 4 BUDGET & ORDERS ============================ -->
+<section class="sec" id="budget" data-title="Budget &amp; orders" data-n="4">
+  <div class="sechead"><h2><span class="secno">4</span> Budget &amp; orders</h2></div>
+  <p class="verdict lede"><b>{{COMMITTED}} committed under the {{CAP}} cap; {{RESERVE}} left.</b> The cap is fixed and includes tax and shipping. The reserve is {{MARGIN}} above the {{TARGET}} target, so shipping and tax at checkout decide whether it holds.</p>
+  <p class="src">inventory/inventory.json summary; docs/purchasing/C0_BOM.csv totals; docs/DESIGN-BASIS.md R6, R7</p>
+
+  <h3 id="bu-waterfall">Goods to reserve</h3>
+  <figure class="chart"><figcaption>Goods, tax, shipping, committed, reserve (USD)</figcaption><div class="svgwrap">{{WATERFALL}}</div></figure>
+  {{WATER_TABLE}}
+  <p class="src">inventory/inventory.json summary (goods, tax, taxRate, shipping, committed, reserve, cap); docs/purchasing/C0_BOM.csv (tax basis, FAA and AMA fees outside the cap)</p>
+
+  <h3 id="bu-spend">Spend by vendor and by category</h3>
+  <figure class="chart"><figcaption>Goods by vendor, before tax (USD)</figcaption><div class="svgwrap">{{BY_VENDOR}}</div></figure>
+  <figure class="chart"><figcaption>Goods by category, before tax (USD)</figcaption><div class="svgwrap">{{BY_CAT}}</div></figure>
+  <p class="src">inventory/inventory.json rows with Type Buy, Ext USD summed by Vendor and by Category. "Not set (—)" is P-01 and P-02, which have no vendor in the BOM. Bars sum to the goods figure.</p>
+
+  <h3 id="bu-nwa">The NWA swap effect</h3>
+  <p>If NWA confirms the props, the three retail prop lines are not bought and their cost returns to the reserve.</p>
+  {{SWAP}}
+  <p class="src">inventory/inventory.json summary.nwaSwap; rows P-14, P-16, P-23</p>
+
+  <h3 id="bu-orders">Orders by vendor</h3>
+  <p>One card per vendor ({{N_VENDORS}} groups), so one order per vendor. Subtotals are goods before tax and shipping. On-hold lines wait for the NWA answer.</p>
+  <div class="callout"><p><b>Before each order:</b> prices were last checked {{PRICES_CHECKED}}. Re-check every price and stock status at checkout. After ordering, fill in Order date in the sheet and note the real total, tax and shipping. The sheet has no Actual USD column (docs/purchasing/C0_BOM.csv does); add one or use Notes.</p></div>
+  <div class="grid2">{{VENDOR_CARDS}}</div>
+  <p class="src">inventory/inventory.json rows with Type Buy, grouped by Vendor; summary.bomPricesChecked; docs/purchasing/C0_BOM.csv columns Order date, Actual USD</p>
+</section>
+
+<!-- ============================ 5 FABRICATION & KITS ============================ -->
+<section class="sec" id="fabrication" data-title="Fabrication &amp; kits" data-n="5">
+  <div class="sechead"><h2><span class="secno">5</span> Fabrication &amp; kits</h2></div>
+  <p class="verdict lede"><b>{{N_MAKE}} parts are made from {{GOODS}} of bought stock, plus a printer and hand tools.</b> Every Make line names the stock line it is cut or printed from. One part, the spinner, has no source yet.</p>
+  <p class="src">inventory/inventory.json rows with Type Make (columns Made from, Process); DESIGN-BASIS.md R6 (3D printer and hand tools on hand at $0)</p>
+
+  <h3 id="fa-make">Parts to make, by kit</h3>
+  {{FAB_TABLES}}
+  <p class="src">inventory/inventory.json rows M-01 to M-21. Made from links to the stock line; click an ID to find it in the table.</p>
+
+  <h3 id="fa-stock">Raw stock usage</h3>
+  <p>Which stock line feeds which parts. The Notes column is the BOM's own wording, quoted.</p>
+  <div class="tbl"><table><thead><tr><th>Stock line</th><th>Item</th><th class="n">Qty bought</th><th>Parts drawn from it</th><th>BOM note</th></tr></thead><tbody>{{STOCK_ROWS}}</tbody></table></div>
+  <p class="src">inventory/inventory.json rows P-xx (Notes) and the Made from column of the M-xx rows</p>
+
+  <h3 id="fa-cuts">Tube cut check</h3>
+  <p>Aluminium tube is the tightest stock. Length per tube and the BOM cut list, with the arithmetic shown (1 in = 0.0254 m).</p>
+  <div class="tbl cuts"><table><thead><tr><th>Stock</th><th>Arithmetic</th><th class="n">Left over</th><th>Remark</th></tr></thead><tbody>{{CUT_ROWS}}</tbody></table></div>
+  <p class="src">Cut lists quoted from the Notes of P-30, P-31, P-32 in inventory/inventory.json (← docs/purchasing/C0_BOM.csv); tube lengths from the item names; leftovers computed here</p>
+
+  <h3 id="fa-kits">Kits K1 to K7</h3>
+  <p>Each kit is one bin. Bought lines go in on receipt; made parts go in when finished and inspected.</p>
+  <div class="grid2">{{KIT_CARDS}}</div>
+  <p class="src">inventory/inventory.json rows grouped by Kit; kit names from summary.kits</p>
+</section>
+
+<!-- ============================ 6 NAUTICAL WINGS PROPS ============================ -->
+<section class="sec" id="nwa" data-title="Nautical Wings props" data-n="6">
+  <div class="sechead"><h2><span class="secno">6</span> Nautical Wings props</h2></div>
+  <p class="verdict lede"><b>The free NWA props are team-reported and not yet in writing.</b> Nothing public links NWA to a free or on-demand student prop offer, so get the terms in writing before any retail prop line is dropped. If confirmed, {{NWA_QTY}} props replace the on-hold retail lines and the reserve rises from {{RESERVE}} to {{RES_IF}} <span class="est">EST</span>.</p>
+  <p class="src">docs/research/nautical-wings-props.md (all sources checked 2026-10-19); inventory/inventory.json rows N-01, N-02, summary.nwaSwap</p>
+
+  <h3 id="nw-who">Who NWA is</h3>
+  <ul class="tight">
+    <li>Nautical Wings Aerospace, Bengaluru, India: the most likely match, and the only company found under this exact name. It was founded in 2020 and sells B2B hardware to aircraft makers.</li>
+    <li>It makes mainly electric motors: axial-flux drone motors and 30 to 40 kW motors, with a 1 MW-class VTOL motor planned.</li>
+    <li>Props: a Tyto customer page lists “standard series propellers from 14 to 40 inches” and a 30 in fixed prop. Carbon layup, hub and bore, balancing, thrust data, lead time, ordering process and prices: — (not in any source found).</li>
+    <li>Company website: —. UC Berkeley or student connection: —.</li>
+  </ul>
+  <p class="src">docs/research/nautical-wings-props.md §1–2 (idrw.org; Entrackr 5 Sep 2024; Tyto customer story 16 Apr 2026, as cited there)</p>
+
+  <h3 id="nw-spec">Spec sheet to send</h3>
+  <p>Motor: SunnySky X4110S 400KV, 4 mm shaft, bolt-on prop adapter (not a collet), 48.2 mm OD, 149 g, 6S max, 577 W max continuous, 26 A for 30 s. Retailers list only 12 to 15 in props for it, so 17 in is beyond that list: ask the designer for the safe limit.</p>
+  <div class="tbl"><table><thead><tr><th>Item</th><th>Lift (4 + 1 spare)</th><th>Pusher (1 + spare)</th></tr></thead><tbody>
+    <tr><td>Diameter</td><td>17 in (432 mm); confirm</td><td>14 in (APC 14x8.5EP baseline)</td></tr>
+    <tr><td>Pitch</td><td>— (designer proposes from the design point)</td><td>8.5 in baseline</td></tr>
+    <tr><td>Blades</td><td>2 <span class="est">EST</span></td><td>2</td></tr>
+    <tr><td>Rotation</td><td>2 CW + 2 CCW, plus a spare of each</td><td>one direction, matching the motor</td></tr>
+    <tr><td>Hub thickness</td><td>— (set by the adapter stack; measure)</td><td>APC baseline 11.2 mm thick, 20.3 mm dia.</td></tr>
+    <tr><td>Bore / interface</td><td>bore matched to the adapter, not the 4 mm shaft direct</td><td>APC baseline bore 6.35 mm with adapter rings</td></tr>
+    <tr><td>Max RPM</td><td>—; no-load about 10,000 RPM = 400 KV × 25.2 V <span class="est">EST</span>; designer states the safe limit</td><td>same</td></tr>
+    <tr><td>Design point</td><td>hover thrust per rotor 6.18 kg / 4 = 1.545 kg ({{HOVER_N}} N); ask for a peak margin (+50 % <span class="est">EST</span>)</td><td>cruise at 20 m/s; thrust required —</td></tr>
+    <tr><td>Balance</td><td>ISO 21940-11, G 6.3 or better; static and dynamic balance report</td><td>same</td></tr>
+    <tr><td>Quantity</td><td>{{NWA_LIFT}} (N-01)</td><td>{{NWA_PUSH}} (N-02)</td></tr>
+  </tbody></table></div>
+  <p>Parking: the lift props stop in cruise and must hold fore-aft, and ESCs cannot park them. Ask for fixed (not folding) blades, thin in the drag direction; the parking method (lock or brake) is —.</p>
+  <p class="src">docs/research/nautical-wings-props.md §3 (ReadymadeRC and GetFPV motor pages; APC 14x8.5E page; hover thrust from docs/DESIGN-BASIS.md) and lift-propulsion.md as cited there</p>
+
+  <h3 id="nw-prop">Proposal</h3>
+  <p>If NWA confirms, replace these lines. Until then they stay as they are.</p>
+  <div class="tbl"><table><thead><tr><th>Replace (on hold)</th><th>With (proposed)</th><th>Note</th></tr></thead><tbody>
+    <tr><td>P-14 JeeFly 1755 pair, P-16 JeeFly spare pair (lift)</td><td>N-01, {{NWA_LIFT}} carbon 17 in props</td><td>fit to the X4110S bolt-on adapter</td></tr>
+    <tr><td>P-23 APC 14x8.5EP, 3 off (pusher)</td><td>N-02, {{NWA_PUSH}} carbon 14 in props</td><td>keep one APC as the thrust-stand baseline (team call)</td></tr>
+  </tbody></table></div>
+  {{SWAP}}
+  <p class="src">inventory/inventory.json rows P-14, P-16, P-23, N-01, N-02, summary.nwaSwap</p>
+
+  <h3 id="nw-accept">Acceptance tests on receipt</h3>
+  <ul class="check">
+    <li><input type="checkbox" id="at1"><label for="at1"><b>Visual and tap.</b> Check for delamination, cracks, voids; tap and listen for dull spots. Wear eye protection.<span class="thr">Threshold: —</span></label></li>
+    <li><input type="checkbox" id="at2"><label for="at2"><b>Mass.</b> Weigh every prop; pairs matched, reject outliers.<span class="thr">Threshold: the designer's tolerance, —</span></label></li>
+    <li><input type="checkbox" id="at3"><label for="at3"><b>Static balance.</b> Low-friction balancer: no blade drops in any position.</label></li>
+    <li><input type="checkbox" id="at4"><label for="at4"><b>Dynamic balance.</b> Stand with vibration and RPM sensors.<span class="thr">Target: below G 6.3</span></label></li>
+    <li><input type="checkbox" id="at5"><label for="at5"><b>Adapter fit.</b> Concentric and straight; check runout by eye on the motor.</label></li>
+    <li><input type="checkbox" id="at6"><label for="at6"><b>Thrust stand vs baseline.</b> Carbon prop and the APC baseline on the same motor, ESC and battery; compare thrust, current and efficiency at hover and max throttle.<span class="thr">Limit: stay inside the motor's 26 A for 30 s</span></label></li>
+    <li><input type="checkbox" id="at7"><label for="at7"><b>RPM limit.</b> Step up to max RPM behind a shield; watch vibration, flutter and deformation.<span class="thr">Threshold: —</span></label></li>
+    <li><input type="checkbox" id="at8"><label for="at8"><b>Tip clearance.</b> Measure airframe and boom clearance to the disc.<span class="thr">Limit: —</span></label></li>
+  </ul>
+  <p class="src">docs/research/nautical-wings-props.md §4 (UST balancing article, ArduPilot vibration page, Tyto balancing guide, GetFPV motor page, as cited there). The checkboxes are not saved; record results in the sheet.</p>
+
+  <div class="measure">
+    <h4>What the team must measure</h4>
+    <ol>
+      <li><span class="id">M1</span><div><b>Prop mass match.</b> <span class="how">Weigh every received prop on one scale.</span> <span class="fail">Outliers beyond the designer's tolerance (—) are rejected.</span></div></li>
+      <li><span class="id">M2</span><div><b>Static and dynamic balance.</b> <span class="how">Static on a low-friction balancer, then dynamic on a stand with vibration and RPM sensors.</span> <span class="fail">A dynamic result above G 6.3 fails.</span></div></li>
+      <li><span class="id">M3</span><div><b>Thrust-stand comparison vs the JeeFly and APC baseline.</b> <span class="how">Same motor, ESC and battery; compare thrust, current and efficiency at the hover point of {{HOVER_N}} N per rotor and at max throttle.</span> <span class="fail">Pass or fail threshold: — (the sources give none). Stay inside 26 A for 30 s.</span></div></li>
+      <li><span class="id">M4</span><div><b>Max-RPM spin-up behind a shield.</b> <span class="how">Step up in RPM and look for vibration, blade flutter or deformation. No-load reference about 10,000 RPM <span class="est">EST</span>.</span> <span class="fail">Threshold: —.</span></div></li>
+      <li><span class="id">M5</span><div><b>Tip clearance.</b> <span class="how">Measure the gap between each prop disc and the airframe and boom.</span> <span class="fail">Numeric limit: —.</span></div></li>
+    </ol>
+  </div>
+  <p class="src">docs/research/nautical-wings-props.md §3–4; hover thrust 6.18 kg / 4 = 1.545 kg = {{HOVER_N}} N as shown there</p>
+</section>
+
+<!-- ============================ 7 RECEIVING & STORAGE ============================ -->
+<section class="sec" id="receiving" data-title="Receiving &amp; storage" data-n="7">
+  <div class="sechead"><h2><span class="secno">7</span> Receiving &amp; storage</h2></div>
+  <p class="verdict lede"><b>Every delivery is counted, inspected, recorded and binned the same day.</b> LiPo packs go in the bag and the ammo can, never loose in a kit bin. Locations are blank in the sheet today; this section proposes a scheme.</p>
+  <p class="src">inventory/inventory.json (Location column is “—” on {{LOC_BLANK}} of {{LINES}} lines); docs/research/budget-energy-test.md §3</p>
+
+  <h3 id="rc-check">Receiving checklist</h3>
+  <p>For each delivery:</p>
+  <ul class="check">
+    <li><input type="checkbox" id="rc1"><label for="rc1"><b>Count</b> every item against the packing slip and the sheet's Qty needed.</label></li>
+    <li><input type="checkbox" id="rc2"><label for="rc2"><b>Inspect</b> for damage and wrong parts. Photograph anything wrong and tell the team before the return window closes.</label></li>
+    <li><input type="checkbox" id="rc3"><label for="rc3"><b>Record</b> the Received date, Qty on hand and Inspected in the sheet.</label></li>
+    <li><input type="checkbox" id="rc4"><label for="rc4"><b>Label</b> the item with its inventory ID (P-xx).</label></li>
+    <li><input type="checkbox" id="rc5"><label for="rc5"><b>Bin</b> it in its kit bin and write the bin in Location.</label></li>
+  </ul>
+  <p class="src">Procedure is team practice, a proposal; columns Received date, Inspected, Location from inventory/inventory.json</p>
+
+  <h3 id="rc-lipo">LiPo handling and storage</h3>
+  <ul class="tight">
+    <li><b>Packs:</b> the Ovonic 6S 6500 mAh 2-pack (P-12) is the flight battery. Note: {{P12_NOTE}}.</li>
+    <li><b>Storage:</b> a LiPo bag (P-18, Tenergy B08QCMMGJT, 7 × 9 in; one 169 × 49 × 63 mm pack fits <span class="est">EST</span>) inside the Harbor Freight 0.50 cal ammo can (P-26; inside 283 × 140 × 175 mm). Two 49 mm packs side by side are 98 mm, under the 140 mm width.</li>
+    <li><b>Ammo-can caution:</b> a gasketed can is meant to seal. Teams commonly remove or slit the gasket so a venting cell cannot pressurise the can. That is general practice, not from the Harbor Freight page; confirm it against the university EH&amp;S LiPo guidance (—).</li>
+    <li><b>Charging:</b> the HTRC C150 (P-13) gives 150 W / 25.2 V = {{C150_A}} A on 6S. One 6.5 Ah pack takes 6.5 / {{C150_A}} = {{PACK_H}} h before the constant-voltage taper <span class="est">EST</span>.</li>
+    <li><b>Storage-charge level:</b> — (not in the repo sources; read it from the pack maker's sheet before the first storage). Do not leave packs charged or unattended on the charger.</li>
+  </ul>
+  <p class="src">docs/research/budget-energy-test.md §2 (charger arithmetic), §3 (bag and ammo can dimensions, gasket caution); inventory/inventory.json rows P-12, P-13, P-18, P-26. The last clause of the storage bullet is general practice, not from a repo source.</p>
+
+  <h3 id="rc-loc">Location scheme (proposal)</h3>
+  <p><b>Proposal:</b> one bin per kit, named by kit ID, so Location is K1 to K7. Write the bin in the sheet when an item is binned.</p>
+  <div class="tbl"><table><thead><tr><th>Bin</th><th>Kit</th><th class="n">Lines</th><th>Note</th></tr></thead><tbody>{{LOC_ROWS}}</tbody></table></div>
+  <p class="src">Kit names and line counts from inventory/inventory.json; the bin scheme and notes are a proposal, not a decision; docs/research/budget-energy-test.md §3 for the K6 storage items</p>
+  <p>{{SHEET_BTN_INV}}</p>
+</section>
+
+</main>
+</div>
+</div>
