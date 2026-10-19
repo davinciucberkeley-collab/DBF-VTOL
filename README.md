@@ -60,7 +60,7 @@ Both pages are also published as Claude artifacts, so they can be opened from a 
 | Lift + Cruise VTOL Review | https://claude.ai/artifact/5VFFp3Xv1u88pdJkyqS6dd |
 | Lift + Cruise VTOL Sim | https://claude.ai/artifact/221H8qjqH89NDempeZCqnT |
 
-If a link doesn't open for you, use `VTOL-Review.html` or `sim/` from this repo instead.
+Both are shared as "anyone with the link" (view only, no Claude account needed). If a link doesn't open for you, use `VTOL-Review.html` or `sim/` from this repo instead.
 
 ## Current design (v0.3.1, 2026-10-13)
 
