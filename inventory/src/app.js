@@ -31,6 +31,9 @@ function buildNav(){
   });
   $('#side').appendChild(side);
 }
+// deep links open any collapsed disclosure around their target (and those under a section heading link)
+function openAround(el){ for(let d = el && el.closest('details'); d; d = d.parentElement && d.parentElement.closest('details')) d.open = true;
+  if(el && el.tagName === 'H3'){ let x = el.nextElementSibling; while(x && x.tagName === 'P') x = x.nextElementSibling; if(x && x.tagName === 'DETAILS') x.open = true; } }
 function show(id, sub, focus){
   const target = secs.find(s => s.id === id) || secs[0];
   secs.forEach(s => s.classList.toggle('cur', s === target));
@@ -40,6 +43,7 @@ function show(id, sub, focus){
   try{ localStorage.setItem('invSec', target.id); }catch(e){}
   if(target.id === 'model3d') initModel();
   const dest = sub ? document.getElementById(sub) : null;
+  openAround(dest);
   if(dest) dest.scrollIntoView(); else window.scrollTo(0, 0);
   if(focus){ const f = dest || target.querySelector('h2'); if(f){ if(!f.hasAttribute('tabindex')) f.setAttribute('tabindex', '-1'); f.focus({preventScroll:true}); } }
 }
@@ -131,6 +135,9 @@ function touchGate(view){
   if(window.IntersectionObserver) new IntersectionObserver(es => es.forEach(en => { if(!en.isIntersecting) arm(false); })).observe(view);
 }
 
+// ---------- inventory table: show or hide the secondary columns ----------
+$('#invCols').addEventListener('click', e => { const on = tbl.classList.toggle('lesscols') === false; e.currentTarget.setAttribute('aria-pressed', on); e.currentTarget.textContent = on ? 'Show fewer columns' : 'Show all columns'; });
+
 // ---------- generic sortable tables (wire schedule) and its filters ----------
 $$('table.sortable').forEach(t => {
   const b = t.tBodies[0], rs = Array.from(b.rows);
@@ -162,6 +169,11 @@ $$('table.sortable').forEach(t => {
     } else { select(); done('Text selected: press Ctrl+C (Cmd+C on a Mac).'); }
   });
 })();
+
+// print shows everything: open every disclosure, then restore what was open
+let wasOpen = [];
+window.addEventListener('beforeprint', () => { wasOpen = $$('details').filter(d => d.open); $$('details').forEach(d => { d.open = true; }); });
+window.addEventListener('afterprint', () => { $$('details').forEach(d => { d.open = wasOpen.includes(d); }); });
 
 buildNav(); applyTheme(); route();
 })();

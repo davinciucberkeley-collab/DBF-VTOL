@@ -69,10 +69,9 @@ ${kpi('Committed spend vs cap (R6)', usd(S.committed), `of ${usd(S.cap, 0)} cap 
 ${kpi('Crash reserve (R7)', usd(S.reserve), `target ≥ $${reserveTarget}: met, thin (margin ${usd(S.reserve - reserveTarget)})`, 'warn')}
 ${kpi('Lines to buy', buy.length, `${toOrder} to order, ${buy.length - toOrder} on hold (NWA swap) · goods ${usd(S.goods)}`)}
 ${kpi('Parts to make', make.length, `${toMake} to make in-house, ${toSource} to source (spinner)`)}
-${kpi('Items received', `${received} <small>of ${ROWS.length} lines</small>`, (ROWS.some(x => +x['Qty ordered'] > 0) ? `${ROWS.filter(x => +x['Qty ordered'] > 0).length} lines ordered` : 'nothing ordered yet; every on-hand quantity is 0'), received ? 'ok' : 'warn')}
-${kpi('NWA props', `${nwaQty} <small>proposed</small>`, `${nwa.length} lines; founders offered to sponsor (verbal, team-reported); rules not yet in writing`, 'warn')}
+${kpi('Items received', `${received} <small>of ${ROWS.length} lines</small>`, ROWS.some(x => +x['Qty ordered'] > 0) ? `${ROWS.filter(x => +x['Qty ordered'] > 0).length} lines ordered` : 'nothing ordered yet', received ? 'ok' : 'warn')}
 ${kpi('Proposed spend (wheels, capacitors)', usd(S.proposed.goods), `${proposed.length} lines, not committed · ${usd(S.proposed.withTax)} with tax · reserve ${usd(S.proposed.reserveAfter)} after (${usd(S.proposed.reserveAfterWithNwa)} with NWA)`, 'warn')}
-${kpi('Worst electrical conflict', `${ET.EL_FULL_A} A`, `lift full throttle, 4 × ${ET.EL_A_WORST} A at full pack (${ET.EL_FULL_NOM} A nominal), vs the ${ET.EL_SENSOR_A} A FC current sensor (×${ET.EL_RATIO}) and the ${ET.EL_MOTOR_LIM} A motor limit: cap the lift throttle`, 'bad')}
+${kpi('Worst electrical conflict', `${ET.EL_FULL_A} A`, `lift full throttle (4 × ${ET.EL_A_WORST} A, full pack) vs the ${ET.EL_SENSOR_A} A FC sensor (×${ET.EL_RATIO}) and the ${ET.EL_MOTOR_LIM} A motor limit: cap the lift throttle. <a href="#el-conflicts">§3</a>`, 'bad')}
 </div>`;
 const kitRows = KIT_IDS.map(k => {
   const rs = ROWS.filter(x => x.Kit === k), o = rs.filter(x => x.Status === 'To order').length, m = rs.filter(x => x.Status === 'To make').length;
@@ -110,11 +109,12 @@ const invTable = `<div class="toolbar" role="search">
 <label>Kit<select id="invKit"><option value="">All</option>${KIT_IDS.map(k => `<option value="${k}">${k} ${esc(KITS[k])}</option>`).join('')}</select></label>
 <label>Status<select id="invStatus"><option value="">All</option>${opt(statuses)}</select></label>
 <button type="button" class="themebtn" id="invClear">Clear filters</button>
+<button type="button" class="themebtn" id="invCols" aria-pressed="false">Show all columns</button>
 <span class="count" id="invCount" aria-live="polite">${ROWS.length} of ${ROWS.length} lines</span></div>
-<div class="tbl" id="invWrap" tabindex="0" role="region" aria-label="Inventory table, scrolls sideways"><table id="invTable"><thead><tr>${head}</tr></thead><tbody>${body}</tbody>
+<div class="tbl" id="invWrap" tabindex="0" role="region" aria-label="Inventory table, scrolls sideways"><table id="invTable" class="lesscols"><thead><tr>${head}</tr></thead><tbody>${body}</tbody>
 <tfoot><tr class="total"><td colspan="6" id="invTotLbl">Buy lines shown: ${buy.length}</td><td></td><td></td><td></td><td></td><td></td><td></td><td class="n" id="invTot">${goods.toFixed(2)}</td><td colspan="8">goods, before tax and shipping (Make and NWA lines are $0)</td></tr>
 <tr class="total"><td colspan="6" id="invPropLbl">Proposed lines shown: ${proposed.length}</td><td></td><td></td><td></td><td></td><td></td><td></td><td class="n" id="invPropTot">${sum(proposed.map(x => x['Ext USD'])).toFixed(2)}</td><td colspan="8">proposed goods, not in committed spend (counted separately)</td></tr></tfoot></table></div>
-<p class="tblnote">Click a row with a CAD part to show it in the 3D model. Dates and Location are blank until the sheet is filled in.</p>`;
+<p class="tblnote">Click a row with a CAD part to show it in the 3D model. Hidden columns: Category, Made from, Process, Location, dates, Source, Notes. Dates and Location are blank until the sheet is filled in.</p>`;
 
 // ---------- §4 budget ----------
 const groupSum = key => { const m = new Map(); for (const x of buy) { const k = (x[key] === '' || x[key] === '—') ? 'Not set (—)' : x[key]; m.set(k, round2((m.get(k) || 0) + x['Ext USD'])); } return [...m].sort((a, b) => b[1] - a[1]); };
@@ -153,7 +153,7 @@ const vCards = vOrder.map(([k, a, sub]) => {
   const hold = sum(a.filter(x => x.sc === 'open').map(x => x['Ext USD']));
   const li = a.map(x => `<li><span class="mono-id">${x.ID}</span><span>${esc(x.Item)}${x.sc === 'open' ? ' ' + chip(x.Status) : ''}</span><span class="q">${x['Qty needed']} × ${Number(x['Unit USD']).toFixed(2)} = <b>${Number(x['Ext USD']).toFixed(2)}</b></span></li>`).join('');
   const foot = hold ? `Of this, ${usd(hold)} is on hold (NWA swap); order the rest now.` : (k.startsWith('Vendor not set') ? 'No vendor named in the BOM: choose one, or borrow (P-02 note).' : 'All lines ready to order.');
-  return `<div class="card vcard"><div class="vh"><h3>${esc(k)}</h3><span class="sub">${usd(sub)}</span></div><ul>${li}</ul><div class="foot">${a.length} line${a.length > 1 ? 's' : ''} · ${foot}</div></div>`;
+  return `<div class="card vcard"><div class="vh"><h4>${esc(k)}</h4><span class="sub">${usd(sub)}</span></div><ul>${li}</ul><div class="foot">${a.length} line${a.length > 1 ? 's' : ''} · ${foot}</div></div>`;
 }).join('');
 const vSum = sum(vOrder.map(v => v[2])); if (vSum !== goods) throw new Error('vendor subtotals do not add up');
 
@@ -173,8 +173,8 @@ const cutRows = `<tr><td>${findBtn('P-30')} booms, ${t30['Qty needed']} × 72 in
 <tr><td>${findBtn('P-32')} joiner, ${t32['Qty needed']} × 36 in</td><td>36 in × 0.0254 = ${m3(L32)} m; joiner 0.76 m</td><td class="n">${m3(L32 - 0.76)} m</td><td>left after one cut, before kerf</td></tr>`;
 const kitCards = KIT_IDS.map(k => { const a = ROWS.filter(x => x.Kit === k), b = a.filter(x => x.Type === 'Buy'), m = a.filter(x => x.Type === 'Make' || x.Type === 'NWA'), pp = a.filter(x => x.Type === 'Proposed');
   const li = x => `<li><span class="mono-id">${x.ID}</span><span>${esc(x.Item)}</span><span>${x['Qty needed']}× ${chip(x.Status)}</span></li>`;
-  return `<div class="card kitcard"><h3><span class="mono-id">${k}</span> ${esc(KITS[k])}</h3><p class="meta">${a.length} lines: ${b.length} bought (${usd(sum(b.map(x => x['Ext USD'])))} goods), ${m.length} made or NWA${pp.length ? `, ${pp.length} proposed (not committed)` : ''}. Bin ${k}.</p>
-<ul>${b.length ? '<li style="display:block"><b>Bought, goes in the bin on receipt</b></li>' + b.map(li).join('') : ''}${m.length ? '<li style="display:block"><b>Made or supplied, goes in the bin when finished</b></li>' + m.map(li).join('') : ''}${pp.length ? '<li style="display:block"><b>Proposed, only if adopted (not in committed spend)</b></li>' + pp.map(li).join('') : ''}</ul></div>`; }).join('');
+  return `<details class="kitcard"><summary><span class="mono-id">${k}</span> <b>${esc(KITS[k])}</b> <span class="meta">${a.length} lines: ${b.length} bought (${usd(sum(b.map(x => x['Ext USD'])))} goods), ${m.length} made or NWA${pp.length ? `, ${pp.length} proposed (not committed)` : ''}. Bin ${k}.</span></summary>
+<ul>${b.length ? '<li class="lh"><b>Bought, goes in the bin on receipt</b></li>' + b.map(li).join('') : ''}${m.length ? '<li class="lh"><b>Made or supplied, goes in the bin when finished</b></li>' + m.map(li).join('') : ''}${pp.length ? '<li class="lh"><b>Proposed, only if adopted (not in committed spend)</b></li>' + pp.map(li).join('') : ''}</ul></details>`; }).join('');
 
 // ---------- §7 location proposal ----------
 const locRows = KIT_IDS.map(k => `<tr><td><span class="mono-id">${k}</span></td><td>${esc(KITS[k])}</td><td class="n">${ROWS.filter(x => x.Kit === k).length}</td><td>${k === 'K6' ? 'also holds the LiPo ammo can (P-26) and bag (P-18)' : k === 'K4' ? 'LiPo packs (P-12) live in the K6 ammo can, not the K4 bin' : k === 'K7' ? 'raw tube stock may be too long for a bin: store flat, label the tube' : '—'}</td></tr>`).join('');
@@ -227,7 +227,7 @@ Best regards,
 Tristan Hottier
 UC Berkeley Design-Build-Fly capstone team`;
 const T = {
-  DATE, REV, DOC: 'DBF-INV-001', SHEET_BTN_HEAD: sheetBtn(), SHEET_BTN_INV: sheetBtn(), SHEET_BTN_INV2: sheetBtn('ghost'),
+  DATE, REV, DOC: 'DBF-INV-001', SHEET_BTN_HEAD: sheetBtn(), SHEET_URL: SHEET,
   KPIS: kpis, KIT_TABLE: kitTable, LINES: ROWS.length, GOODS: usd(S.goods), COMMITTED: usd(S.committed), CAP: usd(S.cap, 0), RESERVE: usd(S.reserve), TARGET: '$' + reserveTarget,
   MARGIN: usd(S.reserve - reserveTarget), SHIP: usd(S.shipping), TAX: usd(S.tax), TAXRATE: (S.taxRate * 100).toFixed(2), PRICES_CHECKED: S.bomPricesChecked,
   LADDER: ladder.map(x => `${x.Item.split(' (')[0].split(',')[0]} (${x.ID}, ${usd(x['Ext USD'])})`).join(', then '),
@@ -245,6 +245,8 @@ const T = {
 };
 let bodyHtml = r('./src/body.html');
 bodyHtml = bodyHtml.replace(/\{\{(\w+)\}\}/g, (m, k) => { if (!(k in T)) throw new Error('missing template value ' + k); return T[k]; });
+// every citation becomes a one-line disclosure: the Source line stays attached to its claim, one click away
+bodyHtml = bodyHtml.replace(/<p class="src">([\s\S]*?)<\/p>/g, '<details class="srcd"><summary>Source</summary><p class="src">$1</p></details>');
 const rest = bodyHtml.match(/\{\{/); if (rest) throw new Error('unresolved placeholder');
 
 const FONTS = 'https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600&family=Sofia+Sans+Semi+Condensed:wght@700&family=Red+Hat+Mono:wght@400;500;600&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap';

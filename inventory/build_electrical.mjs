@@ -198,7 +198,11 @@ export function buildElectrical(h) {
     ['warn', 'Risk', clean(rbul['R-F']), 'Measure contact heating at the stall test; the stall test is test 7.', 'R-F, §3'],
     ['open', 'Unresolved', clean(rbul['R-C']).replace(/\s*Unresolved which is right\.?/, ''), '— (both ranges pass at full pack voltage; which listing is right is unresolved)', 'R-C, §3'],
     ['open', 'Setup', 'ArduPilot QuadPlane defaults the lift motors to outputs 5–8; this design uses outputs 1–4 (functions 33–36) and the pusher on S5', 'Set SERVO1–4_FUNCTION = 33–36 and set SERVO5–8 explicitly (S5 = 70; S6, S7 spare).', '§3 (ardupilot.org/plane/docs/quadplane-frame-setup.html)']];
-  const confTable = `<div class="tbl"><table><thead><tr><th>Severity</th><th>Conflict</th><th>Recommended action</th><th>Source</th></tr></thead><tbody>${conflicts.map(c => `<tr><td><span class="chip ${c[0]}">${c[1]}</span></td><td>${esc(c[2])}</td><td>${esc(c[3])}</td><td><small>${esc(c[4])}</small></td></tr>`).join('')}</tbody></table></div>`;
+  const confRow = c => `<tr><td><span class="chip ${c[0]}">${c[1]}</span></td><td>${esc(c[2])}</td><td>${esc(c[3])}</td><td><small>${esc(c[4])}</small></td></tr>`;
+  const confTbl = cs => `<div class="tbl"><table><thead><tr><th>Severity</th><th>Conflict</th><th>Recommended action</th><th>Source</th></tr></thead><tbody>${cs.map(confRow).join('')}</tbody></table></div>`;
+  // safety-critical rows (exceeds a rating, or interference with the GPS) stay visible; the rest sit behind a disclosure
+  const critical = c => c[1] === 'Exceeds rating' || c[1] === 'Interference';
+  const confTable = confTbl(conflicts.filter(critical)) + `<details class="more"><summary>${conflicts.filter(c => !critical(c)).length} more risks and open items</summary>${confTbl(conflicts.filter(c => !critical(c)))}</details>`;
 
   // ===================== wiring blueprint (SVG generated from wiring.json) =====================
   const ENDP = /^(ESC|MOT|SRV|ASPD|PITOT)/, isEnd = id => ENDP.test(id);
@@ -322,7 +326,7 @@ ${T(tx0 + 8, ty0 + 17, 'DBF-ELE-001 · Wiring blueprint', 'idt')}${T(tx0 + 8, ty
   const jointIds = [...new Set(WIR.connectors.map(c => c.joint).filter(Boolean))].sort((a, b) => a[1] - b[1] || b[3].localeCompare(a[3]));
   const jcards = jointIds.map(j => { const cs = WIR.connectors.filter(c => c.joint === j), ws = [...new Set(cs.flatMap(c => c.wires))].sort();
     const side = j.endsWith('R') ? 'right' : 'left';
-    return `<div class="card jcard"><h3><span class="mono-id">${j.replace('_', ' ')}</span> ${side} · ${esc(cs[0].location)}</h3><p class="meta">${sum(cs.map(c => c.mated_pairs))} mated pairs · ${ws.length} wire${ws.length > 1 ? 's' : ''} cross</p><ul>${cs.map(c => `<li><span class="mono-id">${c.id}</span><span>${esc(c.type)}: ${c.wires.map(id => `${id} <small>${esc(shortName(wby[id].function))}</small>`).join(', ')}</span><span class="q">${c.mated_pairs}×</span></li>`).join('')}</ul></div>`; }).join('');
+    return `<div class="card jcard"><h4><span class="mono-id">${j.replace('_', ' ')}</span> ${side} · ${esc(cs[0].location)}</h4><p class="meta">${sum(cs.map(c => c.mated_pairs))} mated pairs · ${ws.length} wire${ws.length > 1 ? 's' : ''} cross</p><ul>${cs.map(c => `<li><span class="mono-id">${c.id}</span><span>${esc(c.type)}: ${c.wires.map(id => `${id} <small>${esc(shortName(wby[id].function))}</small>`).join(', ')}</span><span class="q">${c.mated_pairs}×</span></li>`).join('')}</ul></div>`; }).join('');
   const fixed = WIR.connectors.filter(c => !c.joint).map(c => `<li><span class="mono-id">${c.id}</span> ${esc(c.type)} (${esc(c.location)}): ${c.wires.join(', ')}</li>`).join('');
   need(/Harness segmentation \(R4\)/, MD, 'R4 harness heading');
 
