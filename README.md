@@ -21,6 +21,8 @@ Design phase. The baseline (C0, v0.3.1) is sized, modelled in SOLIDWORKS, checke
 
 There are four interactive outputs. The first three are about the real aircraft; the fourth is a demonstration only.
 
+**Open online, no download:** [Inventory & Electrical Overview](https://claude.ai/artifact/C6JEuXWN4B4Aoay5zHU3Pg) (public, view only). Links to the other pages are under [Published versions](#published-versions-claude-artifacts).
+
 ### 1. Design review: the HTML project overview
 
 **[`VTOL-Review.html`](VTOL-Review.html)** is the engineering design review and the main project overview. Download the file and double-click it; it is a single self-contained page (CSS, JS, data and images inline). It works offline except for web fonts and the three.js library used by the 3D viewer. Light and dark themes, desktop and phone widths.
@@ -45,7 +47,7 @@ The review embeds a rotatable model of all 27 SOLIDWORKS parts. `cad/ExportMesh.
 
 ### 3. Inventory & electrical overview (Tristan Hottier: inventory and electrical)
 
-**[`Inventory-Overview.html`](Inventory-Overview.html)** (DBF-INV-001) is the project overview from the purchasing, physical-parts and electrical side. It is built like the design review, from the same sources, and has nine sections:
+**[`Inventory-Overview.html`](Inventory-Overview.html)** (DBF-INV-001) is the project overview from the purchasing, physical-parts and electrical side. It is built like the design review, from the same sources, and has nine sections. **Open it online:** https://claude.ai/artifact/C6JEuXWN4B4Aoay5zHU3Pg (public, view only, no Claude account needed).
 
 | § | Section | What it covers |
 |---|---|---|
@@ -82,7 +84,7 @@ The pages are also published as Claude artifacts, so they can be opened from a l
 | Page | Link |
 |---|---|
 | Lift + Cruise VTOL Review | https://claude.ai/artifact/5VFFp3Xv1u88pdJkyqS6dd |
-| DBF Inventory Overview | https://claude.ai/artifact/C6JEuXWN4B4Aoay5zHU3Pg |
+| DBF Inventory Overview (public) | https://claude.ai/artifact/C6JEuXWN4B4Aoay5zHU3Pg |
 | Lift + Cruise VTOL Sim | https://claude.ai/artifact/221H8qjqH89NDempeZCqnT |
 
 The links are view only. If one doesn't open for you, use `VTOL-Review.html`, `Inventory-Overview.html` or `sim/` from this repo instead.
