@@ -52,12 +52,12 @@ The review embeds a rotatable model of all 27 SOLIDWORKS parts. `cad/ExportMesh.
 | § | Section | What it covers |
 |---|---|---|
 | 1 | Overview | Spend vs the $2,000 cap, crash reserve, proposed additions, worst electrical conflict, status by kit, open decisions |
-| 2 | 3D model | The SOLIDWORKS parts coloured by inventory status, plus the avionics, ESCs, servos, wire runs and the proposed wheels (each layer can be switched off); exploded view, isolate by kit, click any part, component or wire for its card |
+| 2 | 3D model | The SOLIDWORKS parts coloured by inventory status, plus the avionics, ESCs, servos, wire runs and the proposed wheels (each layer can be switched off); exploded view, isolate by kit, click any part, component or wire for its card. Below it, the full-detail Autodesk Fusion model with all 613 hardware pieces, the servos and linkages, and the wheel blocks; click a fastener group for its joint card |
 | 3 | Electrical | Power and signal trees, flight-controller output and port map, power budget, ratings conflicts and actions |
 | 4 | Wiring & tests | Wiring blueprint DBF-ELE-001 (every wire pin to pin, with the wing and boom breakdown joints), wire schedule, wire to buy by gauge, harness by joint, electrical test plan |
 | 5 | Inventory | Every stock line (40 buy, 21 make, 2 Nautical Wings, 4 proposed): search, filters, sortable |
 | 6 | Budget & orders | Spend by vendor and category, goods → tax → shipping → reserve, proposed additions kept separate, one order card per vendor |
-| 7 | Fabrication & kits | What the team makes, from which stock line, by which process; cut lists; kit bins K1–K7; wheeled landing-gear proposal |
+| 7 | Fabrication & kits | What the team makes, from which stock line, by which process; cut lists; kit bins K1–K7; wheeled landing-gear proposal; print fits, tolerance stack-ups and calibration coupons |
 | 8 | Nautical Wings props | Sponsorship status, a ready-to-send message to NWA, spec sheet, budget effect, acceptance tests |
 | 9 | Receiving & storage | Receiving checklist, LiPo storage, bin locations |
 
@@ -66,6 +66,10 @@ The review embeds a rotatable model of all 27 SOLIDWORKS parts. `cad/ExportMesh.
 **Electrical design:** [`docs/research/electrical-architecture.md`](docs/research/electrical-architecture.md) with the machine-readable component list, wire list and connectors in `inventory/electrical/`. Placements and lengths are estimates until the harness is built. Open conflicts the team must resolve on the bench: lift motors at full throttle can draw up to 133 A against the 90 A current sensor and the motors' 26 A/30 s limit (cap lift throttle), and the transition current exceeds the XT90S continuous rating.
 
 **Landing gear (proposal):** 3 in wheels on the four existing legs, so the aircraft can land vertically or roll in as a fixed wing. Pusher ground clearance rises from 36 to 84 mm (EST), the leg length is unchanged, and the parts cost $57.82 with tax, not yet in committed spend.
+
+**Fusion model (full detail):** the aircraft rebuilt in Autodesk Fusion by script, down to every screw, washer, nut, insert, servo, pushrod, clevis and hinge, with the wheel axle blocks and toleranced holes in the printed parts. It is saved in Fusion (project DBF-VTOL, document "VTOL C0 full"); the STEP file, Fusion archive, meshes and renders are in `inventory/fusion/`, and the build scripts are in `fusion/`. The interference check left no unintended overlaps (`fusion/interference_report.json`). The hardware schedule is [`docs/research/hardware-schedule.md`](docs/research/hardware-schedule.md) with `inventory/hardware/hardware.json` and `mechanisms.json`.
+
+**Print tolerances:** [`docs/research/tolerance-analysis.md`](docs/research/tolerance-analysis.md) and `inventory/hardware/tolerances.json`: 39 fits (7 fail and 9 are marginal as drawn) and 11 stack-ups. Print the calibration coupons first and size the joiner sockets and clamp bores to the measured tubes. The printer is assumed (the repo names none).
 
 **Nautical Wings carbon props:** the Nautical Wings Aerospace founders offered in person to sponsor the team (team-reported, October 2026); the sponsorship rules still need confirming in writing, and §8 has the message to send. The props would replace the six JeeFly 1755 lift props and three APC 14x8.5EP pushers, which stay on hold as the fallback. If the props are free, the reserve rises from $102.08 to $186.05 (EST: no shipping or import cost). Research and spec sheet: [`docs/research/nautical-wings-props.md`](docs/research/nautical-wings-props.md).
 
@@ -137,6 +141,9 @@ CFD was not run (Flow Simulation would not load on this licence). `analysis/veri
 | `docs/research/electrical-architecture.md` | Electrical architecture, pin map, power budget, wiring rules, test plan, landing-gear geometry |
 | `inventory/electrical/` | Components with placements, wire list (routes, gauges, connectors) and proposed purchase lines |
 | `inventory/` | Inventory master list (`inventory.csv`, `inventory.json`), its builder, the Google Sheet seed (`DBF-Inventory-sheet.csv`), a formatted offline workbook (`DBF-Inventory.xlsx`), the overview page sources and the sheet link (`sheet.json`) |
+| `fusion/` | Autodesk Fusion build scripts (airframe, hardware, export) and the interference report |
+| `inventory/fusion/` | Fusion exports: STEP, .f3d, per-part STL meshes with `manifest.json`, renders |
+| `inventory/hardware/` | Hardware schedule (`hardware.json`), mechanisms, print tolerances, new purchase lines |
 | `sim/` | Browser flight game (three.js), copied from the published Sim artifact; not used by the engineering |
 | `PRODUCT.md`, `DESIGN.md` | Who the review is for, and its visual design system |
 
@@ -179,7 +186,8 @@ These come from review §1, and each technical section ends with "What the team 
 3. **Thrust stand first.** Qualify every motor/ESC (tests T1–T6) before any flight; C0 has no hover motor-out tolerance.
 4. **Nautical Wings sponsorship.** Send the message in inventory overview §8 to confirm the sponsorship rules in writing, with the spec sheet. Until then the retail props stay on hold.
 5. **Electrical bench checks.** Cap lift throttle so each motor stays at or below 26 A on the thrust stand, and measure the servo-rail stall current (inventory overview §3–4).
-6. **Landing gear.** Decide on the wheeled gear proposal (inventory overview §7).
+6. **Landing gear.** Decide on the wheeled gear proposal (inventory overview §7). The Fusion model now has printed axle blocks for it.
+9. **Measure before printing.** The tube diameters, the X4110S bolt pattern and thread depth, the ES3005HV ear holes, the 300SL hub bore and the DUB248 thread are unknown; the joiner fit fails as drawn (docs/research/tolerance-analysis.md).
 7. **Cart totals.** Price shipping at checkout. If the reserve drops under $100: borrow a hot-wire cutter, then drop the spare motor, then the airspeed sensor.
 8. **Flight build-up.** Follow review §13 (SITL → bench → tethered → free hover → partial → full transition → mission).
 

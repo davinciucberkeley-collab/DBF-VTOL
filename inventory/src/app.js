@@ -121,6 +121,19 @@ function startModel(){
   view.addEventListener('findrow', e => findRow(e.detail));
   if(pending){ CV.selectPart(pending); pending = null; }
 }
+// Fusion model (every fastener): built only when asked, since it is about 0.4 M triangles
+let FV = null;
+$('#fvLoad').addEventListener('click', () => {
+  if(FV) return; FV = 'loading';
+  const view = $('#fv'); view.querySelector('.fvstart').hidden = true; view.classList.add('loading');
+  (window.THREE && THREE.OrbitControls ? Promise.resolve() : loadScript(THREE_SRC[0]).then(() => loadScript(THREE_SRC[1])))
+    .catch(() => {}).then(() => setTimeout(() => {   // let the loading message paint first
+      const F = JSON.parse(document.getElementById('fusionData').textContent);
+      FV = FusionViewer(view, F, INVP) || null; view.classList.remove('loading');
+      if(!FV){ view.querySelector('.fallback').hidden = false; view.querySelector('.fvstart').hidden = false; $('#fvCanvas').hidden = true; return; }
+      view.querySelector('.ctl').hidden = false; window.__fusion3d = FV; touchGate(view);
+    }, 30));
+});
 function showPart(name){ pending = name; if($('#model3d').classList.contains('cur') && CV && CV.selectPart){ CV.selectPart(name); pending = null; } else go('model3d'); }
 
 // touch screens: the canvas takes gestures only after a tap, so swipes over it scroll the page

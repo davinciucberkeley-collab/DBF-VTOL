@@ -512,3 +512,19 @@ figure.bpfig figcaption{padding-bottom:2px}
 .msgbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;padding:8px 12px;border-bottom:1px solid var(--line-2);background:var(--surface-2)}
 .msgbar .meta{margin:0}
 .msgbox pre{margin:0;padding:14px 16px;white-space:pre-wrap;word-break:break-word;font:.875rem/1.6 var(--f-mono);color:var(--fg);max-width:none;max-height:520px;overflow:auto;user-select:all}
+
+/* ---------- Fusion model viewer (every fastener) ---------- */
+.fvhead{margin-top:36px}
+.fview .fvstart{position:absolute;inset:0 0 auto 0;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:20px;text-align:center;color:var(--fg-2);background:var(--surface)}
+.fview .fvstart[hidden]{display:none}
+.fview .fvstart p{margin:0;max-width:52ch;font-size:.875rem}
+.fview .fvstart button{min-height:44px;padding:0 18px;border:1px solid var(--ink);background:var(--ink);color:var(--ink-fg);border-radius:var(--r-s);font:600 .875rem var(--f-body);cursor:pointer}
+.fview .fvstart button:hover{opacity:.9}
+.fview .ctl[hidden]{display:none}
+.pcard .hwwrap{max-height:320px;overflow:auto;margin:8px 0;border:1px solid var(--line-2);border-radius:var(--r-s)}
+.pcard table.hwlist{width:100%;border-collapse:collapse;font-size:.8125rem;line-height:1.35}
+.pcard table.hwlist th{position:sticky;top:0;background:var(--surface-2);text-align:left;font-weight:600;color:var(--fg-2);padding:6px 8px;border-bottom:1px solid var(--line-2)}
+.pcard table.hwlist td{padding:5px 8px;border-bottom:1px solid var(--line-1,var(--line-2));vertical-align:top;color:var(--fg-2)}
+.pcard table.hwlist td.num{text-align:right;font-variant-numeric:tabular-nums}
+.pcard table.hwlist .est{margin-left:4px}
+.tbl td.mono{white-space:nowrap}

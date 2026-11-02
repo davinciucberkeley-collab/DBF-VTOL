@@ -4,6 +4,7 @@
 import { readFileSync, writeFileSync } from 'fs';
 import { packMesh } from '../review/mesh.mjs';
 import { buildElectrical } from './build_electrical.mjs';
+import { packFusion } from './build_fusion.mjs';
 const r = p => readFileSync(new URL(p, import.meta.url), 'utf8');
 const INV = JSON.parse(r('./inventory.json')), S = INV.summary, ROWS = INV.rows;
 const NWA_MD = r('../docs/research/nautical-wings-props.md'), BEN_MD = r('../docs/research/budget-energy-test.md');
@@ -181,6 +182,14 @@ const locRows = KIT_IDS.map(k => `<tr><td><span class="mono-id">${k}</span></td>
 
 // ---------- 3D model data ----------
 const MESH = packMesh();
+const FUS = packFusion();
+const TOL = JSON.parse(readFileSync(new URL('./hardware/tolerances.json', import.meta.url), 'utf8'));
+const tolSc = v => /^fail/.test(v) && !/pass at/.test(v) ? 'bad' : /fail|marginal/.test(v) ? 'warn' : /^open/.test(v) ? 'open' : 'ok';
+const tolChip = v => { const w = String(v).split(':')[0]; return `<span class="chip ${tolSc(String(v))}" title="${esc(String(v))}">${esc(w.length > 34 ? w.slice(0, 32) + '…' : w)}</span>`; };
+const tdash = v => v === null || v === undefined || v === "" ? "—" : esc(String(v));
+const tolFits = TOL.fits.map(f => `<tr><td class="mono">${f.id}</td><td>${esc(f.feature)}${f.note ? `<br><span class="small">${esc(f.note)}</span>` : ''}</td><td>${tdash(f.nominal)}</td><td class="n">${tdash(f.cad)}</td><td class="n">${f.min_clear === null || f.min_clear === undefined ? '—' : esc(f.min_clear + ' to ' + f.max_clear)}</td><td>${tolChip(f.verdict)}</td></tr>`).join('');
+const tolStacks = TOL.stackups.map(x => `<tr><td class="mono">${x.id}</td><td>${esc(x.name)}</td><td class="n">${tdash(x.worst)}</td><td class="n">${tdash(x.rss)}</td><td class="n">${tdash(x.limit)}</td><td>${tolChip(x.verdict)}</td></tr>`).join('');
+const tolCoupons = TOL.coupons.map(c => `<li><b>${c.id} ${esc(c.name)}</b> (${esc(c.dims_mm || '—')}): ${esc(c.content || '')}. ${esc(c.measure || '')}</li>`).join('');   // Autodesk Fusion export + hardware schedule (inventory/build_fusion.mjs)
 for (const p of Object.values(MESH.parts)) p.d = p.d.replace(/Â§/g, '§');
 const INVP = {};
 for (const x of ROWS) if (x['CAD part']) {
@@ -241,6 +250,10 @@ const T = {
   P12_NOTE: esc(byId['P-12'].Notes), M19: esc(byId['M-19'].Item), M19_NOTE: esc(byId['M-19'].Notes),
   TEN: usd(byId['P-02']['Ext USD']), AMA: usd(amaFee.v), FAA: usd(faaFee.v),
   ...ET,
+  FV_PIECES: FUS.pieces, FV_TRIS: FUS.tris.toLocaleString('en-US'), FV_FILES: FUS.files, FV_DATE: FUS.generated, FV_JOINTS: Object.keys(FUS.joints).length,
+  FV_GROUPS: Object.entries(FUS.groups).map(([g, n]) => g + ' ' + n).join(', '),
+  TOL_FITS: tolFits, TOL_STACKS: tolStacks, TOL_COUPONS: tolCoupons, TOL_PRINTER: esc(TOL.process.printer.split(' (')[0].replace(/^ASSUMED /, '') + ' (the repo names no printer), ' + TOL.process.layer_mm + ' mm layers, PETG and PA6-CF'),
+  TOL_FAIL: TOL.fits.filter(f => tolSc(String(f.verdict)) === 'bad').length, TOL_MARG: TOL.fits.filter(f => tolSc(String(f.verdict)) === 'warn').length,
   HOVER_N: '15.2', C150_A: (150 / 25.2).toFixed(2), PACK_H: (6.5 / (150 / 25.2)).toFixed(2),
 };
 let bodyHtml = r('./src/body.html');
@@ -260,8 +273,12 @@ ${r('./src/style.css')}
 </style>
 ${bodyHtml}
 <script>const MESH = ${json(MESH)}; const INVP = ${json(INVP)}; const KITS = ${json(KITS)}; const EL = ${json(ELB.EL)};</script>
+<script type="application/json" id="fusionData">${json(FUS)}</script>
 <script>
 ${r('./src/viewer3d.js')}
+</script>
+<script>
+${r('./src/fusionviewer.js')}
 </script>
 <script>
 ${r('./src/app.js')}

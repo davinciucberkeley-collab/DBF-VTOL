@@ -1,0 +1,7050 @@
+{
+ "generated": "2026-11-02",
+ "tool": "Fusion design.analyzeInterference, sets: all airframe/propulsion/electronics bodies; each of 28 hardware joint components + 4 wheel legs vs the airframe bodies in their bounding box; swept prop discs (cylinders at blade-tip radius) vs all non-hardware bodies",
+ "threshold_note": "results below 0.02 cm3 are listed as contact slivers; initial first-pass volumes in the found-and-fixed rows are the pre-fix analysis totals",
+ "summary": {
+  "found_unintended_groups": 26,
+  "unintended_remaining": 0,
+  "remaining_results": 678,
+  "intended_remaining": 678,
+  "note": "volume_cm3 in found-and-fixed rows = first-pass analysis totals (sum over all instances); null = not totalled"
+ },
+ "entries": [
+  {
+   "pair": [
+    "Wing_Saddle",
+    "Fuselage_Pod"
+   ],
+   "volume_cm3": 715.897,
+   "intended": false,
+   "fix": "Pod is solid: wing saddle pocket cut into the pod",
+   "set": "found and fixed"
+  },
+  {
+   "pair": [
+    "Fuselage_Pod",
+    "Canopy"
+   ],
+   "volume_cm3": 1436.204,
+   "intended": false,
+   "fix": "Pod hatch pocket cut by the canopy",
+   "set": "found and fixed"
+  },
+  {
+   "pair": [
+    "Fuselage_Pod",
+    "Battery_6S_LiPo"
+   ],
+   "volume_cm3": 370.517,
+   "intended": false,
+   "fix": "battery pocket cut into pod",
+   "set": "found and fixed"
+  },
+  {
+   "pair": [
+    "Fuselage_Pod",
+    "FC1/BUS1/UBEC1/XT90S_1/RX1/RID1/ESC_P/CAP_P"
+   ],
+   "volume_cm3": 70.55,
+   "intended": false,
+   "fix": "electronics pockets cut into pod",
+   "set": "found and fixed"
+  },
+  {
+   "pair": [
+    "Canopy",
+    "FC1/Battery/RX1/RID1"
+   ],
+   "volume_cm3": 32.608,
+   "intended": false,
+   "fix": "pockets cut into canopy",
+   "set": "found and fixed"
+  },
+  {
+   "pair": [
+    "Wing_Panel_R/L",
+    "SRV_AIL_R/L (placeholder box)"
+   ],
+   "volume_cm3": 15.456,
+   "intended": false,
+   "fix": "placeholder servo boxes were duplicates of the detailed HW-129 servos: Electronics SRV_* x5 deleted; foam servo bays already follow HW-129",
+   "set": "found and fixed"
+  },
+  {
+   "pair": [
+    "SRV_RUD_R/L, SRV_ELEV vs HW-129..131 servos"
+   ],
+   "volume_cm3": 76.628,
+   "intended": false,
+   "fix": "duplicate servo bodies (Electronics SRV_* box + Hardware servo): 5 Electronics SRV_* deleted",
+   "set": "found and fixed"
+  },
+  {
+   "pair": [
+    "Wing_Panel_R/L",
+    "ASPD1"
+   ],
+   "volume_cm3": 5.016,
+   "intended": false,
+   "fix": "ASPD pocket cut into left panel",
+   "set": "found and fixed"
+  },
+  {
+   "pair": [
+    "Wing_Panel_R/L",
+    "JB_J1_R/L"
+   ],
+   "volume_cm3": 2.0,
+   "intended": false,
+   "fix": "harness box pockets cut",
+   "set": "found and fixed"
+  },
+  {
+   "pair": [
+    "Wing_Panel_R/L",
+    "Boom_Clamp_Front/Rear_upper"
+   ],
+   "volume_cm3": 1.005,
+   "intended": false,
+   "fix": "clamp seat pockets cut into the foam",
+   "set": "found and fixed"
+  },
+  {
+   "pair": [
+    "Wing_Panel_R/L",
+    "Spar_Tube"
+   ],
+   "volume_cm3": 0.237,
+   "intended": false,
+   "fix": "spar socket trimmed to the tube",
+   "set": "found and fixed"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Boom_Rear_Stub"
+   ],
+   "volume_cm3": 4.114,
+   "intended": false,
+   "fix": "6 cm tube-on-tube overlap at the splice: stub trimmed to butt against the front boom end (plug HW-022 spans the joint)",
+   "set": "found and fixed"
+  },
+  {
+   "pair": [
+    "H_Tail",
+    "Fin_fixed"
+   ],
+   "volume_cm3": 6.679,
+   "intended": false,
+   "fix": "H_Tail notched for the fin roots",
+   "set": "found and fixed"
+  },
+  {
+   "pair": [
+    "H_Tail",
+    "SRV_ELEV"
+   ],
+   "volume_cm3": 3.125,
+   "intended": false,
+   "fix": "elevator servo bay pocket",
+   "set": "found and fixed"
+  },
+  {
+   "pair": [
+    "Elevator",
+    "SRV_RUD_L/R, Fin_fixed"
+   ],
+   "volume_cm3": 0.98,
+   "intended": false,
+   "fix": "servo/fin clearance notches in the elevator",
+   "set": "found and fixed"
+  },
+  {
+   "pair": [
+    "Lift_Motor",
+    "Lift_Prop x4"
+   ],
+   "volume_cm3": 18.04,
+   "intended": false,
+   "fix": "prop hub seat cut (motor shaft / bell seat) in the prop",
+   "set": "found and fixed"
+  },
+  {
+   "pair": [
+    "Pusher_Motor",
+    "Pusher_Prop_14in / Spinner"
+   ],
+   "volume_cm3": 7.868,
+   "intended": false,
+   "fix": "prop hub / spinner seat cut",
+   "set": "found and fixed"
+  },
+  {
+   "pair": [
+    "Gear_Clamp_lower",
+    "Landing_Leg x4"
+   ],
+   "volume_cm3": 1.176,
+   "intended": false,
+   "fix": "leg socket relief cut in lower clamp half",
+   "set": "found and fixed"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Landing_Leg x4"
+   ],
+   "volume_cm3": 0.227,
+   "intended": false,
+   "fix": "leg top trimmed at the boom",
+   "set": "found and fixed"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "ESC_L1..4 x4"
+   ],
+   "volume_cm3": 1.304,
+   "intended": false,
+   "fix": "ESC trimmed where it sat 0.6 mm into the boom wall; inner wafer fragments deleted",
+   "set": "found and fixed"
+  },
+  {
+   "pair": [
+    "ESC_L1..4",
+    "CAP_L1..4"
+   ],
+   "volume_cm3": 1.76,
+   "intended": false,
+   "fix": "capacitor seat cut",
+   "set": "found and fixed"
+  },
+  {
+   "pair": [
+    "Spar_Tube R/L (shared component)"
+   ],
+   "volume_cm3": null,
+   "intended": false,
+   "fix": "R/L dedupe bug: both spars shared one component, so the 2x2 cross-bolt holes of the R spar also appeared 8 spar stations away on both spars (8 stray holes, 3.6 mm). Rebuilt the two spars as separate components with holes at +/-41.73 and +/-45.01 cm only",
+   "set": "found and fixed"
+  },
+  {
+   "pair": [
+    "Wing_Bolt x2 (airframe)",
+    "HW-009 M5x30 x2"
+   ],
+   "volume_cm3": 1.523,
+   "intended": false,
+   "fix": "duplicate bolt: hidden airframe Wing_Bolt bodies deleted, detailed HW-009 kept",
+   "set": "found and fixed"
+  },
+  {
+   "pair": [
+    "HW plates/screws/straps/servos vs Fuselage_Pod, Wing_Saddle, Wing_Panel, Boom_Rear_Stub?, ESC, FC1, Canopy etc."
+   ],
+   "volume_cm3": null,
+   "intended": false,
+   "fix": "screws, washers, straps, standoffs, grommets, servos, formers embedded in solid parts: hole / pocket cut into the host part (pair-by-pair, ~200 cuts; hardware itself never cut)",
+   "set": "found and fixed"
+  },
+  {
+   "pair": [
+    "HW-022 splice plug",
+    "JB_J3_R/L"
+   ],
+   "volume_cm3": 1.92,
+   "intended": false,
+   "fix": "plug pocketed for the harness joint boxes",
+   "set": "found and fixed"
+  },
+  {
+   "pair": [
+    "HW-124 vs HW-141 cable ties"
+   ],
+   "volume_cm3": 0.92,
+   "intended": false,
+   "fix": "HW-141 ties notched where they crossed HW-124; HW-124_5/6 notched at the plug",
+   "set": "found and fixed"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Boom_Clamp_Front_upper"
+   ],
+   "volume_cm3": 0.26917,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "airframe"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Boom_Clamp_Front_lower"
+   ],
+   "volume_cm3": 0.26373,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "airframe"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Boom_Clamp_Rear_upper"
+   ],
+   "volume_cm3": 0.26917,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "airframe"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Boom_Clamp_Rear_lower"
+   ],
+   "volume_cm3": 0.26373,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "airframe"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Motor_Mount_upper"
+   ],
+   "volume_cm3": 0.50526,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "airframe"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Motor_Mount_lower"
+   ],
+   "volume_cm3": 0.54298,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "airframe"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Gear_Clamp_upper"
+   ],
+   "volume_cm3": 0.26373,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "airframe"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Gear_Clamp_lower"
+   ],
+   "volume_cm3": 0.25547,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "airframe"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Motor_Mount_upper"
+   ],
+   "volume_cm3": 0.46554,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "airframe"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Motor_Mount_lower"
+   ],
+   "volume_cm3": 0.50419,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "airframe"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Gear_Clamp_upper"
+   ],
+   "volume_cm3": 0.26373,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "airframe"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Gear_Clamp_lower"
+   ],
+   "volume_cm3": 0.25547,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "airframe"
+  },
+  {
+   "pair": [
+    "Boom_Rear_Stub",
+    "Motor_Mount_upper"
+   ],
+   "volume_cm3": 0.03958,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "airframe"
+  },
+  {
+   "pair": [
+    "Boom_Rear_Stub",
+    "Motor_Mount_lower"
+   ],
+   "volume_cm3": 0.03878,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "airframe"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Boom_Clamp_Front_upper"
+   ],
+   "volume_cm3": 0.26917,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "airframe"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Boom_Clamp_Front_lower"
+   ],
+   "volume_cm3": 0.26373,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "airframe"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Boom_Clamp_Rear_upper"
+   ],
+   "volume_cm3": 0.26917,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "airframe"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Boom_Clamp_Rear_lower"
+   ],
+   "volume_cm3": 0.26373,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "airframe"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Motor_Mount_upper"
+   ],
+   "volume_cm3": 0.50526,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "airframe"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Motor_Mount_lower"
+   ],
+   "volume_cm3": 0.54298,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "airframe"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Motor_Mount_upper"
+   ],
+   "volume_cm3": 0.46554,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "airframe"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Motor_Mount_lower"
+   ],
+   "volume_cm3": 0.50419,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "airframe"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Gear_Clamp_upper"
+   ],
+   "volume_cm3": 0.26373,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "airframe"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Gear_Clamp_lower"
+   ],
+   "volume_cm3": 0.25547,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "airframe"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Gear_Clamp_upper"
+   ],
+   "volume_cm3": 0.26373,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "airframe"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Gear_Clamp_lower"
+   ],
+   "volume_cm3": 0.25547,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "airframe"
+  },
+  {
+   "pair": [
+    "Boom_Rear_Stub",
+    "Motor_Mount_upper"
+   ],
+   "volume_cm3": 0.03958,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "airframe"
+  },
+  {
+   "pair": [
+    "Boom_Rear_Stub",
+    "Motor_Mount_lower"
+   ],
+   "volume_cm3": 0.03878,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "airframe"
+  },
+  {
+   "pair": [
+    "Lift_Motor",
+    "DISC_Lift_Prop:1"
+   ],
+   "volume_cm3": 2.0186,
+   "intended": true,
+   "fix": "none: swept prop disc overlaps its own motor/spinner (prop sits on the shaft); no wing, boom, fin, pod or gear body intersected the swept discs",
+   "set": "prop swept disc"
+  },
+  {
+   "pair": [
+    "Pusher_Motor",
+    "DISC_Pusher_Prop_14in:1"
+   ],
+   "volume_cm3": 1.3171,
+   "intended": true,
+   "fix": "none: swept prop disc overlaps its own motor/spinner (prop sits on the shaft); no wing, boom, fin, pod or gear body intersected the swept discs",
+   "set": "prop swept disc"
+  },
+  {
+   "pair": [
+    "Spinner",
+    "DISC_Pusher_Prop_14in:1"
+   ],
+   "volume_cm3": 2.7745,
+   "intended": true,
+   "fix": "none: swept prop disc overlaps its own motor/spinner (prop sits on the shaft); no wing, boom, fin, pod or gear body intersected the swept discs",
+   "set": "prop swept disc"
+  },
+  {
+   "pair": [
+    "Lift_Motor",
+    "DISC_Lift_Prop:2"
+   ],
+   "volume_cm3": 2.0186,
+   "intended": true,
+   "fix": "none: swept prop disc overlaps its own motor/spinner (prop sits on the shaft); no wing, boom, fin, pod or gear body intersected the swept discs",
+   "set": "prop swept disc"
+  },
+  {
+   "pair": [
+    "Lift_Motor",
+    "DISC_Lift_Prop:3"
+   ],
+   "volume_cm3": 2.0186,
+   "intended": true,
+   "fix": "none: swept prop disc overlaps its own motor/spinner (prop sits on the shaft); no wing, boom, fin, pod or gear body intersected the swept discs",
+   "set": "prop swept disc"
+  },
+  {
+   "pair": [
+    "Lift_Motor",
+    "DISC_Lift_Prop:4"
+   ],
+   "volume_cm3": 2.0186,
+   "intended": true,
+   "fix": "none: swept prop disc overlaps its own motor/spinner (prop sits on the shaft); no wing, boom, fin, pod or gear body intersected the swept discs",
+   "set": "prop swept disc"
+  },
+  {
+   "pair": [
+    "HW-004_1 ISO 7380-1 M3x12 A2",
+    "HW-005_1 Ruthex-type M3x5.7 brass heat-set insert"
+   ],
+   "volume_cm3": 0.01186,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-01"
+  },
+  {
+   "pair": [
+    "HW-004_2 ISO 7380-1 M3x12 A2",
+    "HW-005_2 Ruthex-type M3x5.7 brass heat-set insert"
+   ],
+   "volume_cm3": 0.01186,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-01"
+  },
+  {
+   "pair": [
+    "HW-005_1 Ruthex-type M3x5.7 brass heat-set insert",
+    "HW-002_1 Saddle root plate with tab (PETG, 7.5 mm + 25 mm ta"
+   ],
+   "volume_cm3": 0.00934,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-01"
+  },
+  {
+   "pair": [
+    "HW-005_2 Ruthex-type M3x5.7 brass heat-set insert",
+    "HW-002_2 Saddle root plate with tab (PETG, 7.5 mm + 25 mm ta"
+   ],
+   "volume_cm3": 0.00934,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-01"
+  },
+  {
+   "pair": [
+    "HW-006_1 ISO 4762 / DIN 912 M3x20 A2",
+    "HW-008_1 Ruthex-type M3x5.7 brass heat-set insert"
+   ],
+   "volume_cm3": 0.01186,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-01"
+  },
+  {
+   "pair": [
+    "HW-006_1 ISO 4762 / DIN 912 M3x20 A2",
+    "HW-002_1 Saddle root plate with tab (PETG, 7.5 mm + 25 mm ta"
+   ],
+   "volume_cm3": 0.00014,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-01"
+  },
+  {
+   "pair": [
+    "HW-006_2 ISO 4762 / DIN 912 M3x20 A2",
+    "HW-008_2 Ruthex-type M3x5.7 brass heat-set insert"
+   ],
+   "volume_cm3": 0.01186,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-01"
+  },
+  {
+   "pair": [
+    "HW-006_2 ISO 4762 / DIN 912 M3x20 A2",
+    "HW-002_2 Saddle root plate with tab (PETG, 7.5 mm + 25 mm ta"
+   ],
+   "volume_cm3": 0.00014,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-01"
+  },
+  {
+   "pair": [
+    "HW-007_1 ISO 7089 M4 A2 used on M3 screw",
+    "Wing_Panel_R"
+   ],
+   "volume_cm3": 0.0084,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-01"
+  },
+  {
+   "pair": [
+    "HW-007_2 ISO 7089 M4 A2 used on M3 screw",
+    "Wing_Panel_L"
+   ],
+   "volume_cm3": 0.0084,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-01"
+  },
+  {
+   "pair": [
+    "HW-008_1 Ruthex-type M3x5.7 brass heat-set insert",
+    "HW-002_1 Saddle root plate with tab (PETG, 7.5 mm + 25 mm ta"
+   ],
+   "volume_cm3": 0.00022,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-01"
+  },
+  {
+   "pair": [
+    "HW-008_1 Ruthex-type M3x5.7 brass heat-set insert",
+    "HW-003_1 Pad for retention insert (PETG 14 x 14 x 8)"
+   ],
+   "volume_cm3": 0.00844,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-01"
+  },
+  {
+   "pair": [
+    "HW-008_1 Ruthex-type M3x5.7 brass heat-set insert",
+    "Wing_Panel_R"
+   ],
+   "volume_cm3": 0.03996,
+   "intended": true,
+   "fix": "none: heat-set insert pressed into part bore (melt-in interference)",
+   "set": "joint J-01"
+  },
+  {
+   "pair": [
+    "HW-008_2 Ruthex-type M3x5.7 brass heat-set insert",
+    "HW-002_2 Saddle root plate with tab (PETG, 7.5 mm + 25 mm ta"
+   ],
+   "volume_cm3": 0.00022,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-01"
+  },
+  {
+   "pair": [
+    "HW-008_2 Ruthex-type M3x5.7 brass heat-set insert",
+    "HW-003_2 Pad for retention insert (PETG 14 x 14 x 8)"
+   ],
+   "volume_cm3": 0.00844,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-01"
+  },
+  {
+   "pair": [
+    "HW-008_2 Ruthex-type M3x5.7 brass heat-set insert",
+    "Wing_Panel_L"
+   ],
+   "volume_cm3": 0.03996,
+   "intended": true,
+   "fix": "none: heat-set insert pressed into part bore (melt-in interference)",
+   "set": "joint J-01"
+  },
+  {
+   "pair": [
+    "HW-001_1 Panel root plate (PETG, aerofoil outline, 3 mm)",
+    "HW-002_1 Saddle root plate with tab (PETG, 7.5 mm + 25 mm ta"
+   ],
+   "volume_cm3": 0.00063,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-01"
+  },
+  {
+   "pair": [
+    "HW-001_2 Panel root plate (PETG, aerofoil outline, 3 mm)",
+    "HW-002_2 Saddle root plate with tab (PETG, 7.5 mm + 25 mm ta"
+   ],
+   "volume_cm3": 0.00063,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-01"
+  },
+  {
+   "pair": [
+    "HW-009_1 ISO 7380-1 M5x30 A2",
+    "HW-011_1 ISO 4032 M5 A2"
+   ],
+   "volume_cm3": 0.02717,
+   "intended": true,
+   "fix": "none: screw thread inside nut / nyloc",
+   "set": "joint J-02"
+  },
+  {
+   "pair": [
+    "HW-009_2 ISO 7380-1 M5x30 A2",
+    "HW-011_2 ISO 4032 M5 A2"
+   ],
+   "volume_cm3": 0.02717,
+   "intended": true,
+   "fix": "none: screw thread inside nut / nyloc",
+   "set": "joint J-02"
+  },
+  {
+   "pair": [
+    "HW-013_1 ISO 7380-1 M3x40 A2",
+    "HW-015_1 Ruthex-type M3x5.7 brass heat-set insert"
+   ],
+   "volume_cm3": 0.00651,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-04"
+  },
+  {
+   "pair": [
+    "HW-013_2 ISO 7380-1 M3x40 A2",
+    "HW-015_2 Ruthex-type M3x5.7 brass heat-set insert"
+   ],
+   "volume_cm3": 0.00651,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-04"
+  },
+  {
+   "pair": [
+    "HW-013_3 ISO 7380-1 M3x40 A2",
+    "HW-015_3 Ruthex-type M3x5.7 brass heat-set insert"
+   ],
+   "volume_cm3": 0.00651,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-04"
+  },
+  {
+   "pair": [
+    "HW-013_4 ISO 7380-1 M3x40 A2",
+    "HW-015_4 Ruthex-type M3x5.7 brass heat-set insert"
+   ],
+   "volume_cm3": 0.00651,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-04"
+  },
+  {
+   "pair": [
+    "HW-014_1 ISO 7089 M4 A2 used on M3 screw",
+    "Wing_Panel_R"
+   ],
+   "volume_cm3": 0.00168,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-04"
+  },
+  {
+   "pair": [
+    "HW-014_2 ISO 7089 M4 A2 used on M3 screw",
+    "Wing_Panel_R"
+   ],
+   "volume_cm3": 0.00168,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-04"
+  },
+  {
+   "pair": [
+    "HW-014_3 ISO 7089 M4 A2 used on M3 screw",
+    "Wing_Panel_L"
+   ],
+   "volume_cm3": 0.00168,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-04"
+  },
+  {
+   "pair": [
+    "HW-014_4 ISO 7089 M4 A2 used on M3 screw",
+    "Wing_Panel_L"
+   ],
+   "volume_cm3": 0.00168,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-04"
+  },
+  {
+   "pair": [
+    "HW-015_1 Ruthex-type M3x5.7 brass heat-set insert",
+    "Wing_Panel_R"
+   ],
+   "volume_cm3": 0.00014,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-04"
+  },
+  {
+   "pair": [
+    "HW-015_1 Ruthex-type M3x5.7 brass heat-set insert",
+    "Boom_Clamp_Front_upper"
+   ],
+   "volume_cm3": 0.00875,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-04"
+  },
+  {
+   "pair": [
+    "HW-015_2 Ruthex-type M3x5.7 brass heat-set insert",
+    "Wing_Panel_R"
+   ],
+   "volume_cm3": 0.00014,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-04"
+  },
+  {
+   "pair": [
+    "HW-015_2 Ruthex-type M3x5.7 brass heat-set insert",
+    "Boom_Clamp_Front_upper"
+   ],
+   "volume_cm3": 0.00875,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-04"
+  },
+  {
+   "pair": [
+    "HW-015_3 Ruthex-type M3x5.7 brass heat-set insert",
+    "Wing_Panel_L"
+   ],
+   "volume_cm3": 0.00014,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-04"
+  },
+  {
+   "pair": [
+    "HW-015_3 Ruthex-type M3x5.7 brass heat-set insert",
+    "Boom_Clamp_Front_upper"
+   ],
+   "volume_cm3": 0.00875,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-04"
+  },
+  {
+   "pair": [
+    "HW-015_4 Ruthex-type M3x5.7 brass heat-set insert",
+    "Wing_Panel_L"
+   ],
+   "volume_cm3": 0.00014,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-04"
+  },
+  {
+   "pair": [
+    "HW-015_4 Ruthex-type M3x5.7 brass heat-set insert",
+    "Boom_Clamp_Front_upper"
+   ],
+   "volume_cm3": 0.00875,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-04"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Boom_Clamp_Front_upper"
+   ],
+   "volume_cm3": 0.26917,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-04"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Boom_Clamp_Front_upper"
+   ],
+   "volume_cm3": 0.26917,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-04"
+  },
+  {
+   "pair": [
+    "HW-016_1 ISO 4762 / DIN 912 M3x30 A2",
+    "HW-018_1 Ruthex-type M3x5.7 brass heat-set insert"
+   ],
+   "volume_cm3": 0.01186,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-05"
+  },
+  {
+   "pair": [
+    "HW-016_1 ISO 4762 / DIN 912 M3x30 A2",
+    "Boom_Clamp_Rear_upper"
+   ],
+   "volume_cm3": 0.04172,
+   "intended": true,
+   "fix": "none: tail-saddle / clamp bore 25.0 on 25.4 tube preload",
+   "set": "joint J-05"
+  },
+  {
+   "pair": [
+    "HW-016_2 ISO 4762 / DIN 912 M3x30 A2",
+    "HW-018_2 Ruthex-type M3x5.7 brass heat-set insert"
+   ],
+   "volume_cm3": 0.01186,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-05"
+  },
+  {
+   "pair": [
+    "HW-016_2 ISO 4762 / DIN 912 M3x30 A2",
+    "Boom_Clamp_Rear_upper"
+   ],
+   "volume_cm3": 0.04172,
+   "intended": true,
+   "fix": "none: tail-saddle / clamp bore 25.0 on 25.4 tube preload",
+   "set": "joint J-05"
+  },
+  {
+   "pair": [
+    "HW-016_3 ISO 4762 / DIN 912 M3x30 A2",
+    "HW-018_3 Ruthex-type M3x5.7 brass heat-set insert"
+   ],
+   "volume_cm3": 0.01186,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-05"
+  },
+  {
+   "pair": [
+    "HW-016_3 ISO 4762 / DIN 912 M3x30 A2",
+    "Boom_Clamp_Rear_upper"
+   ],
+   "volume_cm3": 0.04172,
+   "intended": true,
+   "fix": "none: tail-saddle / clamp bore 25.0 on 25.4 tube preload",
+   "set": "joint J-05"
+  },
+  {
+   "pair": [
+    "HW-016_4 ISO 4762 / DIN 912 M3x30 A2",
+    "HW-018_4 Ruthex-type M3x5.7 brass heat-set insert"
+   ],
+   "volume_cm3": 0.01186,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-05"
+  },
+  {
+   "pair": [
+    "HW-016_4 ISO 4762 / DIN 912 M3x30 A2",
+    "Boom_Clamp_Rear_upper"
+   ],
+   "volume_cm3": 0.04172,
+   "intended": true,
+   "fix": "none: tail-saddle / clamp bore 25.0 on 25.4 tube preload",
+   "set": "joint J-05"
+  },
+  {
+   "pair": [
+    "HW-017_1 ISO 7089 M4 A2 used on M3 screw",
+    "Wing_Panel_R"
+   ],
+   "volume_cm3": 0.00979,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-05"
+  },
+  {
+   "pair": [
+    "HW-017_2 ISO 7089 M4 A2 used on M3 screw",
+    "Wing_Panel_R"
+   ],
+   "volume_cm3": 0.00979,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-05"
+  },
+  {
+   "pair": [
+    "HW-017_3 ISO 7089 M4 A2 used on M3 screw",
+    "Wing_Panel_L"
+   ],
+   "volume_cm3": 0.00979,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-05"
+  },
+  {
+   "pair": [
+    "HW-017_4 ISO 7089 M4 A2 used on M3 screw",
+    "Wing_Panel_L"
+   ],
+   "volume_cm3": 0.00979,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-05"
+  },
+  {
+   "pair": [
+    "HW-018_1 Ruthex-type M3x5.7 brass heat-set insert",
+    "Wing_Panel_R"
+   ],
+   "volume_cm3": 0.00034,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-05"
+  },
+  {
+   "pair": [
+    "HW-018_1 Ruthex-type M3x5.7 brass heat-set insert",
+    "Boom_Clamp_Rear_upper"
+   ],
+   "volume_cm3": 0.00875,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-05"
+  },
+  {
+   "pair": [
+    "HW-018_2 Ruthex-type M3x5.7 brass heat-set insert",
+    "Wing_Panel_R"
+   ],
+   "volume_cm3": 0.00034,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-05"
+  },
+  {
+   "pair": [
+    "HW-018_2 Ruthex-type M3x5.7 brass heat-set insert",
+    "Boom_Clamp_Rear_upper"
+   ],
+   "volume_cm3": 0.00875,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-05"
+  },
+  {
+   "pair": [
+    "HW-018_3 Ruthex-type M3x5.7 brass heat-set insert",
+    "Wing_Panel_L"
+   ],
+   "volume_cm3": 0.00034,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-05"
+  },
+  {
+   "pair": [
+    "HW-018_3 Ruthex-type M3x5.7 brass heat-set insert",
+    "Boom_Clamp_Rear_upper"
+   ],
+   "volume_cm3": 0.00875,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-05"
+  },
+  {
+   "pair": [
+    "HW-018_4 Ruthex-type M3x5.7 brass heat-set insert",
+    "Wing_Panel_L"
+   ],
+   "volume_cm3": 0.00034,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-05"
+  },
+  {
+   "pair": [
+    "HW-018_4 Ruthex-type M3x5.7 brass heat-set insert",
+    "Boom_Clamp_Rear_upper"
+   ],
+   "volume_cm3": 0.00875,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-05"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Boom_Clamp_Rear_upper"
+   ],
+   "volume_cm3": 0.26917,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-05"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Boom_Clamp_Rear_upper"
+   ],
+   "volume_cm3": 0.26917,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-05"
+  },
+  {
+   "pair": [
+    "HW-019_1 ISO 4762 / DIN 912 M3x20 A2",
+    "HW-020_1 ISO 7089 M3 A2"
+   ],
+   "volume_cm3": 0.00786,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-06"
+  },
+  {
+   "pair": [
+    "HW-019_1 ISO 4762 / DIN 912 M3x20 A2",
+    "HW-021_1 Ruthex-type M3x5.7 brass heat-set insert"
+   ],
+   "volume_cm3": 0.01186,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-06"
+  },
+  {
+   "pair": [
+    "HW-019_1 ISO 4762 / DIN 912 M3x20 A2",
+    "Boom_Clamp_Front_upper"
+   ],
+   "volume_cm3": 0.00148,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-06"
+  },
+  {
+   "pair": [
+    "HW-019_2 ISO 4762 / DIN 912 M3x20 A2",
+    "HW-020_2 ISO 7089 M3 A2"
+   ],
+   "volume_cm3": 0.00786,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-06"
+  },
+  {
+   "pair": [
+    "HW-019_2 ISO 4762 / DIN 912 M3x20 A2",
+    "HW-021_2 Ruthex-type M3x5.7 brass heat-set insert"
+   ],
+   "volume_cm3": 0.01186,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-06"
+  },
+  {
+   "pair": [
+    "HW-019_2 ISO 4762 / DIN 912 M3x20 A2",
+    "Boom_Clamp_Front_upper"
+   ],
+   "volume_cm3": 0.00148,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-06"
+  },
+  {
+   "pair": [
+    "HW-019_3 ISO 4762 / DIN 912 M3x20 A2",
+    "HW-020_3 ISO 7089 M3 A2"
+   ],
+   "volume_cm3": 0.00786,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-06"
+  },
+  {
+   "pair": [
+    "HW-019_3 ISO 4762 / DIN 912 M3x20 A2",
+    "HW-021_3 Ruthex-type M3x5.7 brass heat-set insert"
+   ],
+   "volume_cm3": 0.01186,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-06"
+  },
+  {
+   "pair": [
+    "HW-019_3 ISO 4762 / DIN 912 M3x20 A2",
+    "Boom_Clamp_Front_upper"
+   ],
+   "volume_cm3": 0.00148,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-06"
+  },
+  {
+   "pair": [
+    "HW-019_4 ISO 4762 / DIN 912 M3x20 A2",
+    "HW-020_4 ISO 7089 M3 A2"
+   ],
+   "volume_cm3": 0.00786,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-06"
+  },
+  {
+   "pair": [
+    "HW-019_4 ISO 4762 / DIN 912 M3x20 A2",
+    "HW-021_4 Ruthex-type M3x5.7 brass heat-set insert"
+   ],
+   "volume_cm3": 0.01186,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-06"
+  },
+  {
+   "pair": [
+    "HW-019_4 ISO 4762 / DIN 912 M3x20 A2",
+    "Boom_Clamp_Front_upper"
+   ],
+   "volume_cm3": 0.00148,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-06"
+  },
+  {
+   "pair": [
+    "HW-019_5 ISO 4762 / DIN 912 M3x20 A2",
+    "HW-020_5 ISO 7089 M3 A2"
+   ],
+   "volume_cm3": 0.00786,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-06"
+  },
+  {
+   "pair": [
+    "HW-019_5 ISO 4762 / DIN 912 M3x20 A2",
+    "HW-021_5 Ruthex-type M3x5.7 brass heat-set insert"
+   ],
+   "volume_cm3": 0.01186,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-06"
+  },
+  {
+   "pair": [
+    "HW-019_5 ISO 4762 / DIN 912 M3x20 A2",
+    "Boom_Clamp_Front_upper"
+   ],
+   "volume_cm3": 0.00148,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-06"
+  },
+  {
+   "pair": [
+    "HW-019_6 ISO 4762 / DIN 912 M3x20 A2",
+    "HW-020_6 ISO 7089 M3 A2"
+   ],
+   "volume_cm3": 0.00786,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-06"
+  },
+  {
+   "pair": [
+    "HW-019_6 ISO 4762 / DIN 912 M3x20 A2",
+    "HW-021_6 Ruthex-type M3x5.7 brass heat-set insert"
+   ],
+   "volume_cm3": 0.01186,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-06"
+  },
+  {
+   "pair": [
+    "HW-019_6 ISO 4762 / DIN 912 M3x20 A2",
+    "Boom_Clamp_Front_upper"
+   ],
+   "volume_cm3": 0.00148,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-06"
+  },
+  {
+   "pair": [
+    "HW-019_7 ISO 4762 / DIN 912 M3x20 A2",
+    "HW-020_7 ISO 7089 M3 A2"
+   ],
+   "volume_cm3": 0.00786,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-06"
+  },
+  {
+   "pair": [
+    "HW-019_7 ISO 4762 / DIN 912 M3x20 A2",
+    "HW-021_7 Ruthex-type M3x5.7 brass heat-set insert"
+   ],
+   "volume_cm3": 0.01186,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-06"
+  },
+  {
+   "pair": [
+    "HW-019_7 ISO 4762 / DIN 912 M3x20 A2",
+    "Boom_Clamp_Front_upper"
+   ],
+   "volume_cm3": 0.00148,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-06"
+  },
+  {
+   "pair": [
+    "HW-019_8 ISO 4762 / DIN 912 M3x20 A2",
+    "HW-020_8 ISO 7089 M3 A2"
+   ],
+   "volume_cm3": 0.00786,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-06"
+  },
+  {
+   "pair": [
+    "HW-019_8 ISO 4762 / DIN 912 M3x20 A2",
+    "HW-021_8 Ruthex-type M3x5.7 brass heat-set insert"
+   ],
+   "volume_cm3": 0.01186,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-06"
+  },
+  {
+   "pair": [
+    "HW-019_8 ISO 4762 / DIN 912 M3x20 A2",
+    "Boom_Clamp_Front_upper"
+   ],
+   "volume_cm3": 0.00148,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-06"
+  },
+  {
+   "pair": [
+    "HW-019_9 ISO 4762 / DIN 912 M3x20 A2",
+    "HW-020_9 ISO 7089 M3 A2"
+   ],
+   "volume_cm3": 0.00786,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-06"
+  },
+  {
+   "pair": [
+    "HW-019_9 ISO 4762 / DIN 912 M3x20 A2",
+    "HW-021_9 Ruthex-type M3x5.7 brass heat-set insert"
+   ],
+   "volume_cm3": 0.01186,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-06"
+  },
+  {
+   "pair": [
+    "HW-019_9 ISO 4762 / DIN 912 M3x20 A2",
+    "Boom_Clamp_Rear_upper"
+   ],
+   "volume_cm3": 0.00148,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-06"
+  },
+  {
+   "pair": [
+    "HW-019_10 ISO 4762 / DIN 912 M3x20 A2",
+    "HW-020_10 ISO 7089 M3 A2"
+   ],
+   "volume_cm3": 0.00786,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-06"
+  },
+  {
+   "pair": [
+    "HW-019_10 ISO 4762 / DIN 912 M3x20 A2",
+    "HW-021_10 Ruthex-type M3x5.7 brass heat-set insert"
+   ],
+   "volume_cm3": 0.01186,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-06"
+  },
+  {
+   "pair": [
+    "HW-019_10 ISO 4762 / DIN 912 M3x20 A2",
+    "Boom_Clamp_Rear_upper"
+   ],
+   "volume_cm3": 0.00148,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-06"
+  },
+  {
+   "pair": [
+    "HW-019_11 ISO 4762 / DIN 912 M3x20 A2",
+    "HW-020_11 ISO 7089 M3 A2"
+   ],
+   "volume_cm3": 0.00786,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-06"
+  },
+  {
+   "pair": [
+    "HW-019_11 ISO 4762 / DIN 912 M3x20 A2",
+    "HW-021_11 Ruthex-type M3x5.7 brass heat-set insert"
+   ],
+   "volume_cm3": 0.01186,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-06"
+  },
+  {
+   "pair": [
+    "HW-019_11 ISO 4762 / DIN 912 M3x20 A2",
+    "Boom_Clamp_Rear_upper"
+   ],
+   "volume_cm3": 0.00148,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-06"
+  },
+  {
+   "pair": [
+    "HW-019_12 ISO 4762 / DIN 912 M3x20 A2",
+    "HW-020_12 ISO 7089 M3 A2"
+   ],
+   "volume_cm3": 0.00786,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-06"
+  },
+  {
+   "pair": [
+    "HW-019_12 ISO 4762 / DIN 912 M3x20 A2",
+    "HW-021_12 Ruthex-type M3x5.7 brass heat-set insert"
+   ],
+   "volume_cm3": 0.01186,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-06"
+  },
+  {
+   "pair": [
+    "HW-019_12 ISO 4762 / DIN 912 M3x20 A2",
+    "Boom_Clamp_Rear_upper"
+   ],
+   "volume_cm3": 0.00148,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-06"
+  },
+  {
+   "pair": [
+    "HW-019_13 ISO 4762 / DIN 912 M3x20 A2",
+    "HW-020_13 ISO 7089 M3 A2"
+   ],
+   "volume_cm3": 0.00786,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-06"
+  },
+  {
+   "pair": [
+    "HW-019_13 ISO 4762 / DIN 912 M3x20 A2",
+    "HW-021_13 Ruthex-type M3x5.7 brass heat-set insert"
+   ],
+   "volume_cm3": 0.01186,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-06"
+  },
+  {
+   "pair": [
+    "HW-019_13 ISO 4762 / DIN 912 M3x20 A2",
+    "Boom_Clamp_Rear_upper"
+   ],
+   "volume_cm3": 0.00148,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-06"
+  },
+  {
+   "pair": [
+    "HW-019_14 ISO 4762 / DIN 912 M3x20 A2",
+    "HW-020_14 ISO 7089 M3 A2"
+   ],
+   "volume_cm3": 0.00786,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-06"
+  },
+  {
+   "pair": [
+    "HW-019_14 ISO 4762 / DIN 912 M3x20 A2",
+    "HW-021_14 Ruthex-type M3x5.7 brass heat-set insert"
+   ],
+   "volume_cm3": 0.01186,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-06"
+  },
+  {
+   "pair": [
+    "HW-019_14 ISO 4762 / DIN 912 M3x20 A2",
+    "Boom_Clamp_Rear_upper"
+   ],
+   "volume_cm3": 0.00148,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-06"
+  },
+  {
+   "pair": [
+    "HW-019_15 ISO 4762 / DIN 912 M3x20 A2",
+    "HW-020_15 ISO 7089 M3 A2"
+   ],
+   "volume_cm3": 0.00786,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-06"
+  },
+  {
+   "pair": [
+    "HW-019_15 ISO 4762 / DIN 912 M3x20 A2",
+    "HW-021_15 Ruthex-type M3x5.7 brass heat-set insert"
+   ],
+   "volume_cm3": 0.01186,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-06"
+  },
+  {
+   "pair": [
+    "HW-019_15 ISO 4762 / DIN 912 M3x20 A2",
+    "Boom_Clamp_Rear_upper"
+   ],
+   "volume_cm3": 0.00148,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-06"
+  },
+  {
+   "pair": [
+    "HW-019_16 ISO 4762 / DIN 912 M3x20 A2",
+    "HW-020_16 ISO 7089 M3 A2"
+   ],
+   "volume_cm3": 0.00786,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-06"
+  },
+  {
+   "pair": [
+    "HW-019_16 ISO 4762 / DIN 912 M3x20 A2",
+    "HW-021_16 Ruthex-type M3x5.7 brass heat-set insert"
+   ],
+   "volume_cm3": 0.01186,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-06"
+  },
+  {
+   "pair": [
+    "HW-019_16 ISO 4762 / DIN 912 M3x20 A2",
+    "Boom_Clamp_Rear_upper"
+   ],
+   "volume_cm3": 0.00148,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-06"
+  },
+  {
+   "pair": [
+    "HW-021_1 Ruthex-type M3x5.7 brass heat-set insert",
+    "Boom_Clamp_Front_upper"
+   ],
+   "volume_cm3": 0.00934,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-06"
+  },
+  {
+   "pair": [
+    "HW-021_2 Ruthex-type M3x5.7 brass heat-set insert",
+    "Boom_Clamp_Front_upper"
+   ],
+   "volume_cm3": 0.00934,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-06"
+  },
+  {
+   "pair": [
+    "HW-021_3 Ruthex-type M3x5.7 brass heat-set insert",
+    "Boom_Clamp_Front_upper"
+   ],
+   "volume_cm3": 0.00934,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-06"
+  },
+  {
+   "pair": [
+    "HW-021_4 Ruthex-type M3x5.7 brass heat-set insert",
+    "Boom_Clamp_Front_upper"
+   ],
+   "volume_cm3": 0.00934,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-06"
+  },
+  {
+   "pair": [
+    "HW-021_5 Ruthex-type M3x5.7 brass heat-set insert",
+    "Boom_Clamp_Front_upper"
+   ],
+   "volume_cm3": 0.00934,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-06"
+  },
+  {
+   "pair": [
+    "HW-021_6 Ruthex-type M3x5.7 brass heat-set insert",
+    "Boom_Clamp_Front_upper"
+   ],
+   "volume_cm3": 0.00934,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-06"
+  },
+  {
+   "pair": [
+    "HW-021_7 Ruthex-type M3x5.7 brass heat-set insert",
+    "Boom_Clamp_Front_upper"
+   ],
+   "volume_cm3": 0.00934,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-06"
+  },
+  {
+   "pair": [
+    "HW-021_8 Ruthex-type M3x5.7 brass heat-set insert",
+    "Boom_Clamp_Front_upper"
+   ],
+   "volume_cm3": 0.00934,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-06"
+  },
+  {
+   "pair": [
+    "HW-021_9 Ruthex-type M3x5.7 brass heat-set insert",
+    "Boom_Clamp_Rear_upper"
+   ],
+   "volume_cm3": 0.00934,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-06"
+  },
+  {
+   "pair": [
+    "HW-021_10 Ruthex-type M3x5.7 brass heat-set insert",
+    "Boom_Clamp_Rear_upper"
+   ],
+   "volume_cm3": 0.00934,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-06"
+  },
+  {
+   "pair": [
+    "HW-021_11 Ruthex-type M3x5.7 brass heat-set insert",
+    "Boom_Clamp_Rear_upper"
+   ],
+   "volume_cm3": 0.00934,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-06"
+  },
+  {
+   "pair": [
+    "HW-021_12 Ruthex-type M3x5.7 brass heat-set insert",
+    "Boom_Clamp_Rear_upper"
+   ],
+   "volume_cm3": 0.00934,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-06"
+  },
+  {
+   "pair": [
+    "HW-021_13 Ruthex-type M3x5.7 brass heat-set insert",
+    "Boom_Clamp_Rear_upper"
+   ],
+   "volume_cm3": 0.00934,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-06"
+  },
+  {
+   "pair": [
+    "HW-021_14 Ruthex-type M3x5.7 brass heat-set insert",
+    "Boom_Clamp_Rear_upper"
+   ],
+   "volume_cm3": 0.00934,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-06"
+  },
+  {
+   "pair": [
+    "HW-021_15 Ruthex-type M3x5.7 brass heat-set insert",
+    "Boom_Clamp_Rear_upper"
+   ],
+   "volume_cm3": 0.00934,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-06"
+  },
+  {
+   "pair": [
+    "HW-021_16 Ruthex-type M3x5.7 brass heat-set insert",
+    "Boom_Clamp_Rear_upper"
+   ],
+   "volume_cm3": 0.00934,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-06"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Boom_Clamp_Front_upper"
+   ],
+   "volume_cm3": 0.26917,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-06"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Boom_Clamp_Front_lower"
+   ],
+   "volume_cm3": 0.26373,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-06"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Boom_Clamp_Rear_upper"
+   ],
+   "volume_cm3": 0.26917,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-06"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Boom_Clamp_Rear_lower"
+   ],
+   "volume_cm3": 0.26373,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-06"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Boom_Clamp_Front_upper"
+   ],
+   "volume_cm3": 0.26917,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-06"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Boom_Clamp_Front_lower"
+   ],
+   "volume_cm3": 0.26373,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-06"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Boom_Clamp_Rear_upper"
+   ],
+   "volume_cm3": 0.26917,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-06"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Boom_Clamp_Rear_lower"
+   ],
+   "volume_cm3": 0.26373,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-06"
+  },
+  {
+   "pair": [
+    "HW-023_1 ISO 4762 / DIN 912 M3x30 A2",
+    "HW-025_1 DIN 985 M3 A2"
+   ],
+   "volume_cm3": 0.00499,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-07"
+  },
+  {
+   "pair": [
+    "HW-023_1 ISO 4762 / DIN 912 M3x30 A2",
+    "HW-025_1 nylon"
+   ],
+   "volume_cm3": 0.00295,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-07"
+  },
+  {
+   "pair": [
+    "HW-023_2 ISO 4762 / DIN 912 M3x30 A2",
+    "HW-025_2 DIN 985 M3 A2"
+   ],
+   "volume_cm3": 0.00499,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-07"
+  },
+  {
+   "pair": [
+    "HW-023_2 ISO 4762 / DIN 912 M3x30 A2",
+    "HW-025_2 nylon"
+   ],
+   "volume_cm3": 0.00295,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-07"
+  },
+  {
+   "pair": [
+    "HW-023_3 ISO 4762 / DIN 912 M3x30 A2",
+    "HW-025_3 DIN 985 M3 A2"
+   ],
+   "volume_cm3": 0.00499,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-07"
+  },
+  {
+   "pair": [
+    "HW-023_3 ISO 4762 / DIN 912 M3x30 A2",
+    "HW-025_3 nylon"
+   ],
+   "volume_cm3": 0.00295,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-07"
+  },
+  {
+   "pair": [
+    "HW-023_4 ISO 4762 / DIN 912 M3x30 A2",
+    "HW-025_4 DIN 985 M3 A2"
+   ],
+   "volume_cm3": 0.00499,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-07"
+  },
+  {
+   "pair": [
+    "HW-023_4 ISO 4762 / DIN 912 M3x30 A2",
+    "HW-025_4 nylon"
+   ],
+   "volume_cm3": 0.00295,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-07"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Motor_Mount_upper"
+   ],
+   "volume_cm3": 0.46554,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-07"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Motor_Mount_lower"
+   ],
+   "volume_cm3": 0.50419,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-07"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Gear_Clamp_upper"
+   ],
+   "volume_cm3": 0.26373,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-07"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Gear_Clamp_lower"
+   ],
+   "volume_cm3": 0.25547,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-07"
+  },
+  {
+   "pair": [
+    "Boom_Rear_Stub",
+    "Motor_Mount_upper"
+   ],
+   "volume_cm3": 0.03958,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-07"
+  },
+  {
+   "pair": [
+    "Boom_Rear_Stub",
+    "Motor_Mount_lower"
+   ],
+   "volume_cm3": 0.03878,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-07"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Motor_Mount_upper"
+   ],
+   "volume_cm3": 0.46554,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-07"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Motor_Mount_lower"
+   ],
+   "volume_cm3": 0.50419,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-07"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Gear_Clamp_upper"
+   ],
+   "volume_cm3": 0.26373,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-07"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Gear_Clamp_lower"
+   ],
+   "volume_cm3": 0.25547,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-07"
+  },
+  {
+   "pair": [
+    "Boom_Rear_Stub",
+    "Motor_Mount_upper"
+   ],
+   "volume_cm3": 0.03958,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-07"
+  },
+  {
+   "pair": [
+    "Boom_Rear_Stub",
+    "Motor_Mount_lower"
+   ],
+   "volume_cm3": 0.03878,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-07"
+  },
+  {
+   "pair": [
+    "HW-026_1 ISO 4762 / DIN 912 M3x20 A2",
+    "HW-027_1 ISO 7089 M3 A2"
+   ],
+   "volume_cm3": 0.00786,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-08"
+  },
+  {
+   "pair": [
+    "HW-026_1 ISO 4762 / DIN 912 M3x20 A2",
+    "HW-028_1 Ruthex-type M3x5.7 brass heat-set insert"
+   ],
+   "volume_cm3": 0.01186,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-08"
+  },
+  {
+   "pair": [
+    "HW-026_1 ISO 4762 / DIN 912 M3x20 A2",
+    "Motor_Mount_upper"
+   ],
+   "volume_cm3": 0.01345,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-08"
+  },
+  {
+   "pair": [
+    "HW-026_2 ISO 4762 / DIN 912 M3x20 A2",
+    "HW-027_2 ISO 7089 M3 A2"
+   ],
+   "volume_cm3": 0.00786,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-08"
+  },
+  {
+   "pair": [
+    "HW-026_2 ISO 4762 / DIN 912 M3x20 A2",
+    "HW-028_2 Ruthex-type M3x5.7 brass heat-set insert"
+   ],
+   "volume_cm3": 0.01186,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-08"
+  },
+  {
+   "pair": [
+    "HW-026_2 ISO 4762 / DIN 912 M3x20 A2",
+    "Motor_Mount_upper"
+   ],
+   "volume_cm3": 0.01345,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-08"
+  },
+  {
+   "pair": [
+    "HW-026_3 ISO 4762 / DIN 912 M3x20 A2",
+    "HW-027_3 ISO 7089 M3 A2"
+   ],
+   "volume_cm3": 0.00786,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-08"
+  },
+  {
+   "pair": [
+    "HW-026_3 ISO 4762 / DIN 912 M3x20 A2",
+    "HW-028_3 Ruthex-type M3x5.7 brass heat-set insert"
+   ],
+   "volume_cm3": 0.01186,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-08"
+  },
+  {
+   "pair": [
+    "HW-026_3 ISO 4762 / DIN 912 M3x20 A2",
+    "Motor_Mount_upper"
+   ],
+   "volume_cm3": 0.01345,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-08"
+  },
+  {
+   "pair": [
+    "HW-026_4 ISO 4762 / DIN 912 M3x20 A2",
+    "HW-027_4 ISO 7089 M3 A2"
+   ],
+   "volume_cm3": 0.00786,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-08"
+  },
+  {
+   "pair": [
+    "HW-026_4 ISO 4762 / DIN 912 M3x20 A2",
+    "HW-028_4 Ruthex-type M3x5.7 brass heat-set insert"
+   ],
+   "volume_cm3": 0.01186,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-08"
+  },
+  {
+   "pair": [
+    "HW-026_4 ISO 4762 / DIN 912 M3x20 A2",
+    "Motor_Mount_upper"
+   ],
+   "volume_cm3": 0.01345,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-08"
+  },
+  {
+   "pair": [
+    "HW-026_5 ISO 4762 / DIN 912 M3x20 A2",
+    "HW-027_5 ISO 7089 M3 A2"
+   ],
+   "volume_cm3": 0.00786,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-08"
+  },
+  {
+   "pair": [
+    "HW-026_5 ISO 4762 / DIN 912 M3x20 A2",
+    "HW-028_5 Ruthex-type M3x5.7 brass heat-set insert"
+   ],
+   "volume_cm3": 0.01186,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-08"
+  },
+  {
+   "pair": [
+    "HW-026_5 ISO 4762 / DIN 912 M3x20 A2",
+    "Motor_Mount_upper"
+   ],
+   "volume_cm3": 0.01345,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-08"
+  },
+  {
+   "pair": [
+    "HW-026_6 ISO 4762 / DIN 912 M3x20 A2",
+    "HW-027_6 ISO 7089 M3 A2"
+   ],
+   "volume_cm3": 0.00786,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-08"
+  },
+  {
+   "pair": [
+    "HW-026_6 ISO 4762 / DIN 912 M3x20 A2",
+    "HW-028_6 Ruthex-type M3x5.7 brass heat-set insert"
+   ],
+   "volume_cm3": 0.01186,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-08"
+  },
+  {
+   "pair": [
+    "HW-026_6 ISO 4762 / DIN 912 M3x20 A2",
+    "Motor_Mount_upper"
+   ],
+   "volume_cm3": 0.01345,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-08"
+  },
+  {
+   "pair": [
+    "HW-026_7 ISO 4762 / DIN 912 M3x20 A2",
+    "HW-027_7 ISO 7089 M3 A2"
+   ],
+   "volume_cm3": 0.00786,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-08"
+  },
+  {
+   "pair": [
+    "HW-026_7 ISO 4762 / DIN 912 M3x20 A2",
+    "HW-028_7 Ruthex-type M3x5.7 brass heat-set insert"
+   ],
+   "volume_cm3": 0.01186,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-08"
+  },
+  {
+   "pair": [
+    "HW-026_7 ISO 4762 / DIN 912 M3x20 A2",
+    "Motor_Mount_upper"
+   ],
+   "volume_cm3": 0.01345,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-08"
+  },
+  {
+   "pair": [
+    "HW-026_8 ISO 4762 / DIN 912 M3x20 A2",
+    "HW-027_8 ISO 7089 M3 A2"
+   ],
+   "volume_cm3": 0.00786,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-08"
+  },
+  {
+   "pair": [
+    "HW-026_8 ISO 4762 / DIN 912 M3x20 A2",
+    "HW-028_8 Ruthex-type M3x5.7 brass heat-set insert"
+   ],
+   "volume_cm3": 0.01186,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-08"
+  },
+  {
+   "pair": [
+    "HW-026_8 ISO 4762 / DIN 912 M3x20 A2",
+    "Motor_Mount_upper"
+   ],
+   "volume_cm3": 0.01345,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-08"
+  },
+  {
+   "pair": [
+    "HW-026_9 ISO 4762 / DIN 912 M3x20 A2",
+    "HW-027_9 ISO 7089 M3 A2"
+   ],
+   "volume_cm3": 0.00786,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-08"
+  },
+  {
+   "pair": [
+    "HW-026_9 ISO 4762 / DIN 912 M3x20 A2",
+    "HW-028_9 Ruthex-type M3x5.7 brass heat-set insert"
+   ],
+   "volume_cm3": 0.01186,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-08"
+  },
+  {
+   "pair": [
+    "HW-026_9 ISO 4762 / DIN 912 M3x20 A2",
+    "Motor_Mount_upper"
+   ],
+   "volume_cm3": 0.01345,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-08"
+  },
+  {
+   "pair": [
+    "HW-026_10 ISO 4762 / DIN 912 M3x20 A2",
+    "HW-027_10 ISO 7089 M3 A2"
+   ],
+   "volume_cm3": 0.00786,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-08"
+  },
+  {
+   "pair": [
+    "HW-026_10 ISO 4762 / DIN 912 M3x20 A2",
+    "HW-028_10 Ruthex-type M3x5.7 brass heat-set insert"
+   ],
+   "volume_cm3": 0.01186,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-08"
+  },
+  {
+   "pair": [
+    "HW-026_10 ISO 4762 / DIN 912 M3x20 A2",
+    "Motor_Mount_upper"
+   ],
+   "volume_cm3": 0.01345,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-08"
+  },
+  {
+   "pair": [
+    "HW-026_11 ISO 4762 / DIN 912 M3x20 A2",
+    "HW-027_11 ISO 7089 M3 A2"
+   ],
+   "volume_cm3": 0.00786,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-08"
+  },
+  {
+   "pair": [
+    "HW-026_11 ISO 4762 / DIN 912 M3x20 A2",
+    "HW-028_11 Ruthex-type M3x5.7 brass heat-set insert"
+   ],
+   "volume_cm3": 0.01186,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-08"
+  },
+  {
+   "pair": [
+    "HW-026_11 ISO 4762 / DIN 912 M3x20 A2",
+    "Motor_Mount_upper"
+   ],
+   "volume_cm3": 0.01345,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-08"
+  },
+  {
+   "pair": [
+    "HW-026_12 ISO 4762 / DIN 912 M3x20 A2",
+    "HW-027_12 ISO 7089 M3 A2"
+   ],
+   "volume_cm3": 0.00786,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-08"
+  },
+  {
+   "pair": [
+    "HW-026_12 ISO 4762 / DIN 912 M3x20 A2",
+    "HW-028_12 Ruthex-type M3x5.7 brass heat-set insert"
+   ],
+   "volume_cm3": 0.01186,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-08"
+  },
+  {
+   "pair": [
+    "HW-026_12 ISO 4762 / DIN 912 M3x20 A2",
+    "Motor_Mount_upper"
+   ],
+   "volume_cm3": 0.01345,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-08"
+  },
+  {
+   "pair": [
+    "HW-026_13 ISO 4762 / DIN 912 M3x20 A2",
+    "HW-027_13 ISO 7089 M3 A2"
+   ],
+   "volume_cm3": 0.00786,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-08"
+  },
+  {
+   "pair": [
+    "HW-026_13 ISO 4762 / DIN 912 M3x20 A2",
+    "HW-028_13 Ruthex-type M3x5.7 brass heat-set insert"
+   ],
+   "volume_cm3": 0.01186,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-08"
+  },
+  {
+   "pair": [
+    "HW-026_13 ISO 4762 / DIN 912 M3x20 A2",
+    "Motor_Mount_upper"
+   ],
+   "volume_cm3": 0.01345,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-08"
+  },
+  {
+   "pair": [
+    "HW-026_14 ISO 4762 / DIN 912 M3x20 A2",
+    "HW-027_14 ISO 7089 M3 A2"
+   ],
+   "volume_cm3": 0.00786,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-08"
+  },
+  {
+   "pair": [
+    "HW-026_14 ISO 4762 / DIN 912 M3x20 A2",
+    "HW-028_14 Ruthex-type M3x5.7 brass heat-set insert"
+   ],
+   "volume_cm3": 0.01186,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-08"
+  },
+  {
+   "pair": [
+    "HW-026_14 ISO 4762 / DIN 912 M3x20 A2",
+    "Motor_Mount_upper"
+   ],
+   "volume_cm3": 0.01345,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-08"
+  },
+  {
+   "pair": [
+    "HW-026_15 ISO 4762 / DIN 912 M3x20 A2",
+    "HW-027_15 ISO 7089 M3 A2"
+   ],
+   "volume_cm3": 0.00786,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-08"
+  },
+  {
+   "pair": [
+    "HW-026_15 ISO 4762 / DIN 912 M3x20 A2",
+    "HW-028_15 Ruthex-type M3x5.7 brass heat-set insert"
+   ],
+   "volume_cm3": 0.01186,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-08"
+  },
+  {
+   "pair": [
+    "HW-026_15 ISO 4762 / DIN 912 M3x20 A2",
+    "Motor_Mount_upper"
+   ],
+   "volume_cm3": 0.01345,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-08"
+  },
+  {
+   "pair": [
+    "HW-026_16 ISO 4762 / DIN 912 M3x20 A2",
+    "HW-027_16 ISO 7089 M3 A2"
+   ],
+   "volume_cm3": 0.00786,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-08"
+  },
+  {
+   "pair": [
+    "HW-026_16 ISO 4762 / DIN 912 M3x20 A2",
+    "HW-028_16 Ruthex-type M3x5.7 brass heat-set insert"
+   ],
+   "volume_cm3": 0.01186,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-08"
+  },
+  {
+   "pair": [
+    "HW-026_16 ISO 4762 / DIN 912 M3x20 A2",
+    "Motor_Mount_upper"
+   ],
+   "volume_cm3": 0.01345,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-08"
+  },
+  {
+   "pair": [
+    "HW-028_1 Ruthex-type M3x5.7 brass heat-set insert",
+    "Motor_Mount_upper"
+   ],
+   "volume_cm3": 0.00934,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-08"
+  },
+  {
+   "pair": [
+    "HW-028_2 Ruthex-type M3x5.7 brass heat-set insert",
+    "Motor_Mount_upper"
+   ],
+   "volume_cm3": 0.00934,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-08"
+  },
+  {
+   "pair": [
+    "HW-028_3 Ruthex-type M3x5.7 brass heat-set insert",
+    "Motor_Mount_upper"
+   ],
+   "volume_cm3": 0.00934,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-08"
+  },
+  {
+   "pair": [
+    "HW-028_4 Ruthex-type M3x5.7 brass heat-set insert",
+    "Motor_Mount_upper"
+   ],
+   "volume_cm3": 0.00934,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-08"
+  },
+  {
+   "pair": [
+    "HW-028_5 Ruthex-type M3x5.7 brass heat-set insert",
+    "Motor_Mount_upper"
+   ],
+   "volume_cm3": 0.00934,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-08"
+  },
+  {
+   "pair": [
+    "HW-028_6 Ruthex-type M3x5.7 brass heat-set insert",
+    "Motor_Mount_upper"
+   ],
+   "volume_cm3": 0.00934,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-08"
+  },
+  {
+   "pair": [
+    "HW-028_7 Ruthex-type M3x5.7 brass heat-set insert",
+    "Motor_Mount_upper"
+   ],
+   "volume_cm3": 0.00934,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-08"
+  },
+  {
+   "pair": [
+    "HW-028_8 Ruthex-type M3x5.7 brass heat-set insert",
+    "Motor_Mount_upper"
+   ],
+   "volume_cm3": 0.00934,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-08"
+  },
+  {
+   "pair": [
+    "HW-028_9 Ruthex-type M3x5.7 brass heat-set insert",
+    "Motor_Mount_upper"
+   ],
+   "volume_cm3": 0.00934,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-08"
+  },
+  {
+   "pair": [
+    "HW-028_10 Ruthex-type M3x5.7 brass heat-set insert",
+    "Motor_Mount_upper"
+   ],
+   "volume_cm3": 0.00934,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-08"
+  },
+  {
+   "pair": [
+    "HW-028_11 Ruthex-type M3x5.7 brass heat-set insert",
+    "Motor_Mount_upper"
+   ],
+   "volume_cm3": 0.00934,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-08"
+  },
+  {
+   "pair": [
+    "HW-028_12 Ruthex-type M3x5.7 brass heat-set insert",
+    "Motor_Mount_upper"
+   ],
+   "volume_cm3": 0.00934,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-08"
+  },
+  {
+   "pair": [
+    "HW-028_13 Ruthex-type M3x5.7 brass heat-set insert",
+    "Motor_Mount_upper"
+   ],
+   "volume_cm3": 0.00934,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-08"
+  },
+  {
+   "pair": [
+    "HW-028_14 Ruthex-type M3x5.7 brass heat-set insert",
+    "Motor_Mount_upper"
+   ],
+   "volume_cm3": 0.00934,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-08"
+  },
+  {
+   "pair": [
+    "HW-028_15 Ruthex-type M3x5.7 brass heat-set insert",
+    "Motor_Mount_upper"
+   ],
+   "volume_cm3": 0.00934,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-08"
+  },
+  {
+   "pair": [
+    "HW-028_16 Ruthex-type M3x5.7 brass heat-set insert",
+    "Motor_Mount_upper"
+   ],
+   "volume_cm3": 0.00934,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-08"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Boom_Clamp_Front_upper"
+   ],
+   "volume_cm3": 0.26917,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-08"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Boom_Clamp_Front_lower"
+   ],
+   "volume_cm3": 0.26373,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-08"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Boom_Clamp_Rear_upper"
+   ],
+   "volume_cm3": 0.26917,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-08"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Boom_Clamp_Rear_lower"
+   ],
+   "volume_cm3": 0.26373,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-08"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Motor_Mount_upper"
+   ],
+   "volume_cm3": 0.50526,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-08"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Motor_Mount_lower"
+   ],
+   "volume_cm3": 0.54298,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-08"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Gear_Clamp_upper"
+   ],
+   "volume_cm3": 0.26373,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-08"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Gear_Clamp_lower"
+   ],
+   "volume_cm3": 0.25547,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-08"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Motor_Mount_upper"
+   ],
+   "volume_cm3": 0.46554,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-08"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Motor_Mount_lower"
+   ],
+   "volume_cm3": 0.50419,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-08"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Gear_Clamp_upper"
+   ],
+   "volume_cm3": 0.26373,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-08"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Gear_Clamp_lower"
+   ],
+   "volume_cm3": 0.25547,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-08"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Boom_Clamp_Front_upper"
+   ],
+   "volume_cm3": 0.26917,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-08"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Boom_Clamp_Front_lower"
+   ],
+   "volume_cm3": 0.26373,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-08"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Boom_Clamp_Rear_upper"
+   ],
+   "volume_cm3": 0.26917,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-08"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Boom_Clamp_Rear_lower"
+   ],
+   "volume_cm3": 0.26373,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-08"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Motor_Mount_upper"
+   ],
+   "volume_cm3": 0.50526,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-08"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Motor_Mount_lower"
+   ],
+   "volume_cm3": 0.54298,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-08"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Motor_Mount_upper"
+   ],
+   "volume_cm3": 0.46554,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-08"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Motor_Mount_lower"
+   ],
+   "volume_cm3": 0.50419,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-08"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Gear_Clamp_upper"
+   ],
+   "volume_cm3": 0.26373,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-08"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Gear_Clamp_lower"
+   ],
+   "volume_cm3": 0.25547,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-08"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Gear_Clamp_upper"
+   ],
+   "volume_cm3": 0.26373,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-08"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Gear_Clamp_lower"
+   ],
+   "volume_cm3": 0.25547,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-08"
+  },
+  {
+   "pair": [
+    "HW-029_1 ISO 4762 / DIN 912 M3x12 A2",
+    "Boom_Front"
+   ],
+   "volume_cm3": 0.00375,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-09"
+  },
+  {
+   "pair": [
+    "HW-029_2 ISO 4762 / DIN 912 M3x12 A2",
+    "Boom_Front"
+   ],
+   "volume_cm3": 0.00375,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-09"
+  },
+  {
+   "pair": [
+    "HW-029_3 ISO 4762 / DIN 912 M3x12 A2",
+    "Boom_Front"
+   ],
+   "volume_cm3": 0.00375,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-09"
+  },
+  {
+   "pair": [
+    "HW-029_4 ISO 4762 / DIN 912 M3x12 A2",
+    "Boom_Front"
+   ],
+   "volume_cm3": 0.00375,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-09"
+  },
+  {
+   "pair": [
+    "HW-029_5 ISO 4762 / DIN 912 M3x12 A2",
+    "Boom_Front"
+   ],
+   "volume_cm3": 0.00375,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-09"
+  },
+  {
+   "pair": [
+    "HW-029_6 ISO 4762 / DIN 912 M3x12 A2",
+    "Boom_Front"
+   ],
+   "volume_cm3": 0.00375,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-09"
+  },
+  {
+   "pair": [
+    "HW-029_7 ISO 4762 / DIN 912 M3x12 A2",
+    "Boom_Front"
+   ],
+   "volume_cm3": 0.00375,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-09"
+  },
+  {
+   "pair": [
+    "HW-029_8 ISO 4762 / DIN 912 M3x12 A2",
+    "Boom_Front"
+   ],
+   "volume_cm3": 0.00375,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-09"
+  },
+  {
+   "pair": [
+    "HW-029_9 ISO 4762 / DIN 912 M3x12 A2",
+    "Boom_Front"
+   ],
+   "volume_cm3": 0.00375,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-09"
+  },
+  {
+   "pair": [
+    "HW-029_10 ISO 4762 / DIN 912 M3x12 A2",
+    "Boom_Front"
+   ],
+   "volume_cm3": 0.00375,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-09"
+  },
+  {
+   "pair": [
+    "HW-029_11 ISO 4762 / DIN 912 M3x12 A2",
+    "Boom_Front"
+   ],
+   "volume_cm3": 0.00375,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-09"
+  },
+  {
+   "pair": [
+    "HW-029_12 ISO 4762 / DIN 912 M3x12 A2",
+    "Boom_Front"
+   ],
+   "volume_cm3": 0.00375,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-09"
+  },
+  {
+   "pair": [
+    "HW-029_13 ISO 4762 / DIN 912 M3x12 A2",
+    "Boom_Front"
+   ],
+   "volume_cm3": 0.00375,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-09"
+  },
+  {
+   "pair": [
+    "HW-029_14 ISO 4762 / DIN 912 M3x12 A2",
+    "Boom_Front"
+   ],
+   "volume_cm3": 0.00375,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-09"
+  },
+  {
+   "pair": [
+    "HW-029_15 ISO 4762 / DIN 912 M3x12 A2",
+    "Boom_Front"
+   ],
+   "volume_cm3": 0.00375,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-09"
+  },
+  {
+   "pair": [
+    "HW-029_16 ISO 4762 / DIN 912 M3x12 A2",
+    "Boom_Front"
+   ],
+   "volume_cm3": 0.00375,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-09"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Boom_Clamp_Front_upper"
+   ],
+   "volume_cm3": 0.26917,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-09"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Boom_Clamp_Rear_upper"
+   ],
+   "volume_cm3": 0.26917,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-09"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Motor_Mount_upper"
+   ],
+   "volume_cm3": 0.50526,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-09"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Gear_Clamp_upper"
+   ],
+   "volume_cm3": 0.26373,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-09"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Motor_Mount_upper"
+   ],
+   "volume_cm3": 0.46554,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-09"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Gear_Clamp_upper"
+   ],
+   "volume_cm3": 0.26373,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-09"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Boom_Clamp_Front_upper"
+   ],
+   "volume_cm3": 0.26917,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-09"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Boom_Clamp_Rear_upper"
+   ],
+   "volume_cm3": 0.26917,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-09"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Motor_Mount_upper"
+   ],
+   "volume_cm3": 0.50526,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-09"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Motor_Mount_upper"
+   ],
+   "volume_cm3": 0.46554,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-09"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Gear_Clamp_upper"
+   ],
+   "volume_cm3": 0.26373,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-09"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Gear_Clamp_upper"
+   ],
+   "volume_cm3": 0.26373,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-09"
+  },
+  {
+   "pair": [
+    "HW-031_1 SunnySky bolt-on prop adapter (supplied)",
+    "HW-033_1 Prop adapter screw M3x12 (supplied, thread/length e"
+   ],
+   "volume_cm3": 0.00065,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-10"
+  },
+  {
+   "pair": [
+    "HW-031_1 SunnySky bolt-on prop adapter (supplied)",
+    "HW-033_2 Prop adapter screw M3x12 (supplied, thread/length e"
+   ],
+   "volume_cm3": 0.00065,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-10"
+  },
+  {
+   "pair": [
+    "HW-031_1 SunnySky bolt-on prop adapter (supplied)",
+    "HW-033_3 Prop adapter screw M3x12 (supplied, thread/length e"
+   ],
+   "volume_cm3": 0.00065,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-10"
+  },
+  {
+   "pair": [
+    "HW-031_1 SunnySky bolt-on prop adapter (supplied)",
+    "HW-033_4 Prop adapter screw M3x12 (supplied, thread/length e"
+   ],
+   "volume_cm3": 0.00065,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-10"
+  },
+  {
+   "pair": [
+    "HW-031_1 SunnySky bolt-on prop adapter (supplied)",
+    "HW-138_1 Prop adapter hub set screw M3x4 (est) on the shaft "
+   ],
+   "volume_cm3": 0.0067,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-10"
+  },
+  {
+   "pair": [
+    "HW-031_2 SunnySky bolt-on prop adapter (supplied)",
+    "HW-033_5 Prop adapter screw M3x12 (supplied, thread/length e"
+   ],
+   "volume_cm3": 0.00065,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-10"
+  },
+  {
+   "pair": [
+    "HW-031_2 SunnySky bolt-on prop adapter (supplied)",
+    "HW-033_6 Prop adapter screw M3x12 (supplied, thread/length e"
+   ],
+   "volume_cm3": 0.00065,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-10"
+  },
+  {
+   "pair": [
+    "HW-031_2 SunnySky bolt-on prop adapter (supplied)",
+    "HW-033_7 Prop adapter screw M3x12 (supplied, thread/length e"
+   ],
+   "volume_cm3": 0.00065,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-10"
+  },
+  {
+   "pair": [
+    "HW-031_2 SunnySky bolt-on prop adapter (supplied)",
+    "HW-033_8 Prop adapter screw M3x12 (supplied, thread/length e"
+   ],
+   "volume_cm3": 0.00065,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-10"
+  },
+  {
+   "pair": [
+    "HW-031_2 SunnySky bolt-on prop adapter (supplied)",
+    "HW-138_2 Prop adapter hub set screw M3x4 (est) on the shaft "
+   ],
+   "volume_cm3": 0.0067,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-10"
+  },
+  {
+   "pair": [
+    "HW-031_3 SunnySky bolt-on prop adapter (supplied)",
+    "HW-033_9 Prop adapter screw M3x12 (supplied, thread/length e"
+   ],
+   "volume_cm3": 0.00065,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-10"
+  },
+  {
+   "pair": [
+    "HW-031_3 SunnySky bolt-on prop adapter (supplied)",
+    "HW-033_10 Prop adapter screw M3x12 (supplied, thread/length "
+   ],
+   "volume_cm3": 0.00065,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-10"
+  },
+  {
+   "pair": [
+    "HW-031_3 SunnySky bolt-on prop adapter (supplied)",
+    "HW-033_11 Prop adapter screw M3x12 (supplied, thread/length "
+   ],
+   "volume_cm3": 0.00065,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-10"
+  },
+  {
+   "pair": [
+    "HW-031_3 SunnySky bolt-on prop adapter (supplied)",
+    "HW-033_12 Prop adapter screw M3x12 (supplied, thread/length "
+   ],
+   "volume_cm3": 0.00065,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-10"
+  },
+  {
+   "pair": [
+    "HW-031_3 SunnySky bolt-on prop adapter (supplied)",
+    "HW-138_3 Prop adapter hub set screw M3x4 (est) on the shaft "
+   ],
+   "volume_cm3": 0.0067,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-10"
+  },
+  {
+   "pair": [
+    "HW-031_4 SunnySky bolt-on prop adapter (supplied)",
+    "HW-033_13 Prop adapter screw M3x12 (supplied, thread/length "
+   ],
+   "volume_cm3": 0.00065,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-10"
+  },
+  {
+   "pair": [
+    "HW-031_4 SunnySky bolt-on prop adapter (supplied)",
+    "HW-033_14 Prop adapter screw M3x12 (supplied, thread/length "
+   ],
+   "volume_cm3": 0.00065,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-10"
+  },
+  {
+   "pair": [
+    "HW-031_4 SunnySky bolt-on prop adapter (supplied)",
+    "HW-033_15 Prop adapter screw M3x12 (supplied, thread/length "
+   ],
+   "volume_cm3": 0.00065,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-10"
+  },
+  {
+   "pair": [
+    "HW-031_4 SunnySky bolt-on prop adapter (supplied)",
+    "HW-033_16 Prop adapter screw M3x12 (supplied, thread/length "
+   ],
+   "volume_cm3": 0.00065,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-10"
+  },
+  {
+   "pair": [
+    "HW-031_4 SunnySky bolt-on prop adapter (supplied)",
+    "HW-138_4 Prop adapter hub set screw M3x4 (est) on the shaft "
+   ],
+   "volume_cm3": 0.0067,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-10"
+  },
+  {
+   "pair": [
+    "HW-033_1 Prop adapter screw M3x12 (supplied, thread/length e",
+    "HW-032_1 SunnySky holding plate (supplied)"
+   ],
+   "volume_cm3": 0.01414,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-10"
+  },
+  {
+   "pair": [
+    "HW-033_2 Prop adapter screw M3x12 (supplied, thread/length e",
+    "HW-032_1 SunnySky holding plate (supplied)"
+   ],
+   "volume_cm3": 0.01414,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-10"
+  },
+  {
+   "pair": [
+    "HW-033_3 Prop adapter screw M3x12 (supplied, thread/length e",
+    "HW-032_1 SunnySky holding plate (supplied)"
+   ],
+   "volume_cm3": 0.01414,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-10"
+  },
+  {
+   "pair": [
+    "HW-033_4 Prop adapter screw M3x12 (supplied, thread/length e",
+    "HW-032_1 SunnySky holding plate (supplied)"
+   ],
+   "volume_cm3": 0.01414,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-10"
+  },
+  {
+   "pair": [
+    "HW-033_5 Prop adapter screw M3x12 (supplied, thread/length e",
+    "HW-032_2 SunnySky holding plate (supplied)"
+   ],
+   "volume_cm3": 0.01414,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-10"
+  },
+  {
+   "pair": [
+    "HW-033_6 Prop adapter screw M3x12 (supplied, thread/length e",
+    "HW-032_2 SunnySky holding plate (supplied)"
+   ],
+   "volume_cm3": 0.01414,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-10"
+  },
+  {
+   "pair": [
+    "HW-033_7 Prop adapter screw M3x12 (supplied, thread/length e",
+    "HW-032_2 SunnySky holding plate (supplied)"
+   ],
+   "volume_cm3": 0.01414,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-10"
+  },
+  {
+   "pair": [
+    "HW-033_8 Prop adapter screw M3x12 (supplied, thread/length e",
+    "HW-032_2 SunnySky holding plate (supplied)"
+   ],
+   "volume_cm3": 0.01414,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-10"
+  },
+  {
+   "pair": [
+    "HW-033_9 Prop adapter screw M3x12 (supplied, thread/length e",
+    "HW-032_3 SunnySky holding plate (supplied)"
+   ],
+   "volume_cm3": 0.01414,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-10"
+  },
+  {
+   "pair": [
+    "HW-033_10 Prop adapter screw M3x12 (supplied, thread/length ",
+    "HW-032_3 SunnySky holding plate (supplied)"
+   ],
+   "volume_cm3": 0.01414,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-10"
+  },
+  {
+   "pair": [
+    "HW-033_11 Prop adapter screw M3x12 (supplied, thread/length ",
+    "HW-032_3 SunnySky holding plate (supplied)"
+   ],
+   "volume_cm3": 0.01414,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-10"
+  },
+  {
+   "pair": [
+    "HW-033_12 Prop adapter screw M3x12 (supplied, thread/length ",
+    "HW-032_3 SunnySky holding plate (supplied)"
+   ],
+   "volume_cm3": 0.01414,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-10"
+  },
+  {
+   "pair": [
+    "HW-033_13 Prop adapter screw M3x12 (supplied, thread/length ",
+    "HW-032_4 SunnySky holding plate (supplied)"
+   ],
+   "volume_cm3": 0.01414,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-10"
+  },
+  {
+   "pair": [
+    "HW-033_14 Prop adapter screw M3x12 (supplied, thread/length ",
+    "HW-032_4 SunnySky holding plate (supplied)"
+   ],
+   "volume_cm3": 0.01414,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-10"
+  },
+  {
+   "pair": [
+    "HW-033_15 Prop adapter screw M3x12 (supplied, thread/length ",
+    "HW-032_4 SunnySky holding plate (supplied)"
+   ],
+   "volume_cm3": 0.01414,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-10"
+  },
+  {
+   "pair": [
+    "HW-033_16 Prop adapter screw M3x12 (supplied, thread/length ",
+    "HW-032_4 SunnySky holding plate (supplied)"
+   ],
+   "volume_cm3": 0.01414,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-10"
+  },
+  {
+   "pair": [
+    "HW-036_1 ISO 7380-1 M3x10 A2",
+    "HW-035_1 Pod aft bulkhead ring (PETG, 58 OD x 6.5)"
+   ],
+   "volume_cm3": 0.00494,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-11"
+  },
+  {
+   "pair": [
+    "HW-036_2 ISO 7380-1 M3x10 A2",
+    "HW-035_1 Pod aft bulkhead ring (PETG, 58 OD x 6.5)"
+   ],
+   "volume_cm3": 0.00494,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-11"
+  },
+  {
+   "pair": [
+    "HW-036_3 ISO 7380-1 M3x10 A2",
+    "HW-035_1 Pod aft bulkhead ring (PETG, 58 OD x 6.5)"
+   ],
+   "volume_cm3": 0.00494,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-11"
+  },
+  {
+   "pair": [
+    "HW-036_4 ISO 7380-1 M3x10 A2",
+    "HW-035_1 Pod aft bulkhead ring (PETG, 58 OD x 6.5)"
+   ],
+   "volume_cm3": 0.00494,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-11"
+  },
+  {
+   "pair": [
+    "HW-037_1 ISO 7089 M3 A2",
+    "HW-035_1 Pod aft bulkhead ring (PETG, 58 OD x 6.5)"
+   ],
+   "volume_cm3": 0.00444,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-11"
+  },
+  {
+   "pair": [
+    "HW-037_1 ISO 7089 M3 A2",
+    "Fuselage_Pod"
+   ],
+   "volume_cm3": 0.01078,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-11"
+  },
+  {
+   "pair": [
+    "HW-037_2 ISO 7089 M3 A2",
+    "HW-035_1 Pod aft bulkhead ring (PETG, 58 OD x 6.5)"
+   ],
+   "volume_cm3": 0.00444,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-11"
+  },
+  {
+   "pair": [
+    "HW-037_2 ISO 7089 M3 A2",
+    "Fuselage_Pod"
+   ],
+   "volume_cm3": 0.01078,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-11"
+  },
+  {
+   "pair": [
+    "HW-037_3 ISO 7089 M3 A2",
+    "HW-035_1 Pod aft bulkhead ring (PETG, 58 OD x 6.5)"
+   ],
+   "volume_cm3": 0.00444,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-11"
+  },
+  {
+   "pair": [
+    "HW-037_3 ISO 7089 M3 A2",
+    "Fuselage_Pod"
+   ],
+   "volume_cm3": 0.01078,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-11"
+  },
+  {
+   "pair": [
+    "HW-037_4 ISO 7089 M3 A2",
+    "HW-035_1 Pod aft bulkhead ring (PETG, 58 OD x 6.5)"
+   ],
+   "volume_cm3": 0.00444,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-11"
+  },
+  {
+   "pair": [
+    "HW-037_4 ISO 7089 M3 A2",
+    "Fuselage_Pod"
+   ],
+   "volume_cm3": 0.01078,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-11"
+  },
+  {
+   "pair": [
+    "HW-038_1 ISO 7380-1 M3x12 A2",
+    "HW-040_1 Ruthex-type M3x5.7 brass heat-set insert"
+   ],
+   "volume_cm3": 0.01065,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-11"
+  },
+  {
+   "pair": [
+    "HW-038_2 ISO 7380-1 M3x12 A2",
+    "HW-040_2 Ruthex-type M3x5.7 brass heat-set insert"
+   ],
+   "volume_cm3": 0.01065,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-11"
+  },
+  {
+   "pair": [
+    "HW-038_3 ISO 7380-1 M3x12 A2",
+    "HW-040_3 Ruthex-type M3x5.7 brass heat-set insert"
+   ],
+   "volume_cm3": 0.01065,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-11"
+  },
+  {
+   "pair": [
+    "HW-038_4 ISO 7380-1 M3x12 A2",
+    "HW-040_4 Ruthex-type M3x5.7 brass heat-set insert"
+   ],
+   "volume_cm3": 0.01065,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-11"
+  },
+  {
+   "pair": [
+    "HW-039_1 ISO 7089 M3 A2",
+    "HW-034_1 Pusher firewall (PA6-CF, 58 dia x 6.1)"
+   ],
+   "volume_cm3": 0.00135,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-11"
+  },
+  {
+   "pair": [
+    "HW-039_2 ISO 7089 M3 A2",
+    "HW-034_1 Pusher firewall (PA6-CF, 58 dia x 6.1)"
+   ],
+   "volume_cm3": 0.00135,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-11"
+  },
+  {
+   "pair": [
+    "HW-039_3 ISO 7089 M3 A2",
+    "HW-034_1 Pusher firewall (PA6-CF, 58 dia x 6.1)"
+   ],
+   "volume_cm3": 0.00135,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-11"
+  },
+  {
+   "pair": [
+    "HW-039_4 ISO 7089 M3 A2",
+    "HW-034_1 Pusher firewall (PA6-CF, 58 dia x 6.1)"
+   ],
+   "volume_cm3": 0.00135,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-11"
+  },
+  {
+   "pair": [
+    "HW-040_1 Ruthex-type M3x5.7 brass heat-set insert",
+    "HW-035_1 Pod aft bulkhead ring (PETG, 58 OD x 6.5)"
+   ],
+   "volume_cm3": 0.00934,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-11"
+  },
+  {
+   "pair": [
+    "HW-040_1 Ruthex-type M3x5.7 brass heat-set insert",
+    "Fuselage_Pod"
+   ],
+   "volume_cm3": 0.04045,
+   "intended": true,
+   "fix": "none: heat-set insert pressed into part bore (melt-in interference)",
+   "set": "joint J-11"
+  },
+  {
+   "pair": [
+    "HW-040_2 Ruthex-type M3x5.7 brass heat-set insert",
+    "HW-035_1 Pod aft bulkhead ring (PETG, 58 OD x 6.5)"
+   ],
+   "volume_cm3": 0.00934,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-11"
+  },
+  {
+   "pair": [
+    "HW-040_2 Ruthex-type M3x5.7 brass heat-set insert",
+    "Fuselage_Pod"
+   ],
+   "volume_cm3": 0.04045,
+   "intended": true,
+   "fix": "none: heat-set insert pressed into part bore (melt-in interference)",
+   "set": "joint J-11"
+  },
+  {
+   "pair": [
+    "HW-040_3 Ruthex-type M3x5.7 brass heat-set insert",
+    "HW-035_1 Pod aft bulkhead ring (PETG, 58 OD x 6.5)"
+   ],
+   "volume_cm3": 0.00934,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-11"
+  },
+  {
+   "pair": [
+    "HW-040_3 Ruthex-type M3x5.7 brass heat-set insert",
+    "Fuselage_Pod"
+   ],
+   "volume_cm3": 0.04045,
+   "intended": true,
+   "fix": "none: heat-set insert pressed into part bore (melt-in interference)",
+   "set": "joint J-11"
+  },
+  {
+   "pair": [
+    "HW-040_4 Ruthex-type M3x5.7 brass heat-set insert",
+    "HW-035_1 Pod aft bulkhead ring (PETG, 58 OD x 6.5)"
+   ],
+   "volume_cm3": 0.00934,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-11"
+  },
+  {
+   "pair": [
+    "HW-040_4 Ruthex-type M3x5.7 brass heat-set insert",
+    "Fuselage_Pod"
+   ],
+   "volume_cm3": 0.04045,
+   "intended": true,
+   "fix": "none: heat-set insert pressed into part bore (melt-in interference)",
+   "set": "joint J-11"
+  },
+  {
+   "pair": [
+    "HW-041_1 SunnySky bolt-on prop adapter (supplied), pusher",
+    "HW-043_1 Prop adapter screw M3x12 (supplied, est)"
+   ],
+   "volume_cm3": 0.00065,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-12"
+  },
+  {
+   "pair": [
+    "HW-041_1 SunnySky bolt-on prop adapter (supplied), pusher",
+    "HW-043_2 Prop adapter screw M3x12 (supplied, est)"
+   ],
+   "volume_cm3": 0.00065,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-12"
+  },
+  {
+   "pair": [
+    "HW-041_1 SunnySky bolt-on prop adapter (supplied), pusher",
+    "HW-043_3 Prop adapter screw M3x12 (supplied, est)"
+   ],
+   "volume_cm3": 0.00065,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-12"
+  },
+  {
+   "pair": [
+    "HW-041_1 SunnySky bolt-on prop adapter (supplied), pusher",
+    "HW-043_4 Prop adapter screw M3x12 (supplied, est)"
+   ],
+   "volume_cm3": 0.00065,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-12"
+  },
+  {
+   "pair": [
+    "HW-041_1 SunnySky bolt-on prop adapter (supplied), pusher",
+    "HW-139_1 Pusher adapter hub set screw M3x4 (est)"
+   ],
+   "volume_cm3": 0.00668,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-12"
+  },
+  {
+   "pair": [
+    "HW-043_1 Prop adapter screw M3x12 (supplied, est)",
+    "HW-042_1 SunnySky holding plate (supplied), pusher"
+   ],
+   "volume_cm3": 0.01414,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-12"
+  },
+  {
+   "pair": [
+    "HW-043_2 Prop adapter screw M3x12 (supplied, est)",
+    "HW-044_2 ISO 7380-1 M3x10 A2"
+   ],
+   "volume_cm3": 0.00452,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-12"
+  },
+  {
+   "pair": [
+    "HW-043_2 Prop adapter screw M3x12 (supplied, est)",
+    "HW-045_2 ISO 7089 M3 A2"
+   ],
+   "volume_cm3": 0.00293,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-12"
+  },
+  {
+   "pair": [
+    "HW-043_2 Prop adapter screw M3x12 (supplied, est)",
+    "HW-042_1 SunnySky holding plate (supplied), pusher"
+   ],
+   "volume_cm3": 0.01414,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-12"
+  },
+  {
+   "pair": [
+    "HW-043_3 Prop adapter screw M3x12 (supplied, est)",
+    "HW-044_3 ISO 7380-1 M3x10 A2"
+   ],
+   "volume_cm3": 0.00452,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-12"
+  },
+  {
+   "pair": [
+    "HW-043_3 Prop adapter screw M3x12 (supplied, est)",
+    "HW-045_3 ISO 7089 M3 A2"
+   ],
+   "volume_cm3": 0.00293,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-12"
+  },
+  {
+   "pair": [
+    "HW-043_3 Prop adapter screw M3x12 (supplied, est)",
+    "HW-042_1 SunnySky holding plate (supplied), pusher"
+   ],
+   "volume_cm3": 0.01414,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-12"
+  },
+  {
+   "pair": [
+    "HW-043_4 Prop adapter screw M3x12 (supplied, est)",
+    "HW-042_1 SunnySky holding plate (supplied), pusher"
+   ],
+   "volume_cm3": 0.01414,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-12"
+  },
+  {
+   "pair": [
+    "HW-044_1 ISO 7380-1 M3x10 A2",
+    "HW-042_1 SunnySky holding plate (supplied), pusher"
+   ],
+   "volume_cm3": 0.01414,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-12"
+  },
+  {
+   "pair": [
+    "HW-044_2 ISO 7380-1 M3x10 A2",
+    "HW-042_1 SunnySky holding plate (supplied), pusher"
+   ],
+   "volume_cm3": 0.01414,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-12"
+  },
+  {
+   "pair": [
+    "HW-044_3 ISO 7380-1 M3x10 A2",
+    "HW-042_1 SunnySky holding plate (supplied), pusher"
+   ],
+   "volume_cm3": 0.01414,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-12"
+  },
+  {
+   "pair": [
+    "HW-045_1 ISO 7089 M3 A2",
+    "Spinner"
+   ],
+   "volume_cm3": 0.01522,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-12"
+  },
+  {
+   "pair": [
+    "HW-045_2 ISO 7089 M3 A2",
+    "Spinner"
+   ],
+   "volume_cm3": 0.01229,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-12"
+  },
+  {
+   "pair": [
+    "HW-045_3 ISO 7089 M3 A2",
+    "Spinner"
+   ],
+   "volume_cm3": 0.01229,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-12"
+  },
+  {
+   "pair": [
+    "HW-046_1 ISO 4762 / DIN 912 M3x20 A2",
+    "HW-048_1 Ruthex-type M3x5.7 brass heat-set insert"
+   ],
+   "volume_cm3": 0.01186,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-13"
+  },
+  {
+   "pair": [
+    "HW-046_2 ISO 4762 / DIN 912 M3x20 A2",
+    "HW-048_2 Ruthex-type M3x5.7 brass heat-set insert"
+   ],
+   "volume_cm3": 0.01186,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-13"
+  },
+  {
+   "pair": [
+    "HW-046_3 ISO 4762 / DIN 912 M3x20 A2",
+    "HW-048_3 Ruthex-type M3x5.7 brass heat-set insert"
+   ],
+   "volume_cm3": 0.01186,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-13"
+  },
+  {
+   "pair": [
+    "HW-046_4 ISO 4762 / DIN 912 M3x20 A2",
+    "HW-048_4 Ruthex-type M3x5.7 brass heat-set insert"
+   ],
+   "volume_cm3": 0.01186,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-13"
+  },
+  {
+   "pair": [
+    "HW-046_5 ISO 4762 / DIN 912 M3x20 A2",
+    "HW-048_5 Ruthex-type M3x5.7 brass heat-set insert"
+   ],
+   "volume_cm3": 0.01186,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-13"
+  },
+  {
+   "pair": [
+    "HW-046_6 ISO 4762 / DIN 912 M3x20 A2",
+    "HW-048_6 Ruthex-type M3x5.7 brass heat-set insert"
+   ],
+   "volume_cm3": 0.01186,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-13"
+  },
+  {
+   "pair": [
+    "HW-046_7 ISO 4762 / DIN 912 M3x20 A2",
+    "HW-048_7 Ruthex-type M3x5.7 brass heat-set insert"
+   ],
+   "volume_cm3": 0.01186,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-13"
+  },
+  {
+   "pair": [
+    "HW-046_8 ISO 4762 / DIN 912 M3x20 A2",
+    "HW-048_8 Ruthex-type M3x5.7 brass heat-set insert"
+   ],
+   "volume_cm3": 0.01186,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-13"
+  },
+  {
+   "pair": [
+    "HW-048_1 Ruthex-type M3x5.7 brass heat-set insert",
+    "Gear_Clamp_lower"
+   ],
+   "volume_cm3": 0.00934,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-13"
+  },
+  {
+   "pair": [
+    "HW-048_2 Ruthex-type M3x5.7 brass heat-set insert",
+    "Gear_Clamp_lower"
+   ],
+   "volume_cm3": 0.00934,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-13"
+  },
+  {
+   "pair": [
+    "HW-048_3 Ruthex-type M3x5.7 brass heat-set insert",
+    "Gear_Clamp_lower"
+   ],
+   "volume_cm3": 0.00934,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-13"
+  },
+  {
+   "pair": [
+    "HW-048_4 Ruthex-type M3x5.7 brass heat-set insert",
+    "Gear_Clamp_lower"
+   ],
+   "volume_cm3": 0.00934,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-13"
+  },
+  {
+   "pair": [
+    "HW-048_5 Ruthex-type M3x5.7 brass heat-set insert",
+    "Gear_Clamp_lower"
+   ],
+   "volume_cm3": 0.00934,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-13"
+  },
+  {
+   "pair": [
+    "HW-048_6 Ruthex-type M3x5.7 brass heat-set insert",
+    "Gear_Clamp_lower"
+   ],
+   "volume_cm3": 0.00934,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-13"
+  },
+  {
+   "pair": [
+    "HW-048_7 Ruthex-type M3x5.7 brass heat-set insert",
+    "Gear_Clamp_lower"
+   ],
+   "volume_cm3": 0.00934,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-13"
+  },
+  {
+   "pair": [
+    "HW-048_8 Ruthex-type M3x5.7 brass heat-set insert",
+    "Gear_Clamp_lower"
+   ],
+   "volume_cm3": 0.00934,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-13"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Boom_Clamp_Front_upper"
+   ],
+   "volume_cm3": 0.26917,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-13"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Boom_Clamp_Front_lower"
+   ],
+   "volume_cm3": 0.26373,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-13"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Boom_Clamp_Rear_upper"
+   ],
+   "volume_cm3": 0.26917,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-13"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Boom_Clamp_Rear_lower"
+   ],
+   "volume_cm3": 0.26373,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-13"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Gear_Clamp_upper"
+   ],
+   "volume_cm3": 0.26373,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-13"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Gear_Clamp_lower"
+   ],
+   "volume_cm3": 0.25547,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-13"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Gear_Clamp_upper"
+   ],
+   "volume_cm3": 0.26373,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-13"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Gear_Clamp_lower"
+   ],
+   "volume_cm3": 0.25547,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-13"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Boom_Clamp_Front_upper"
+   ],
+   "volume_cm3": 0.26917,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-13"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Boom_Clamp_Front_lower"
+   ],
+   "volume_cm3": 0.26373,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-13"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Boom_Clamp_Rear_upper"
+   ],
+   "volume_cm3": 0.26917,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-13"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Boom_Clamp_Rear_lower"
+   ],
+   "volume_cm3": 0.26373,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-13"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Gear_Clamp_upper"
+   ],
+   "volume_cm3": 0.26373,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-13"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Gear_Clamp_lower"
+   ],
+   "volume_cm3": 0.25547,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-13"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Gear_Clamp_upper"
+   ],
+   "volume_cm3": 0.26373,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-13"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Gear_Clamp_lower"
+   ],
+   "volume_cm3": 0.25547,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-13"
+  },
+  {
+   "pair": [
+    "HW-060_1 ISO 7380-1 M3x12 A2",
+    "HW-062_1 Ruthex-type M3x5.7 brass heat-set insert"
+   ],
+   "volume_cm3": 0.00857,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-16"
+  },
+  {
+   "pair": [
+    "HW-060_2 ISO 7380-1 M3x12 A2",
+    "HW-062_2 Ruthex-type M3x5.7 brass heat-set insert"
+   ],
+   "volume_cm3": 0.00857,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-16"
+  },
+  {
+   "pair": [
+    "HW-060_3 ISO 7380-1 M3x12 A2",
+    "HW-062_3 Ruthex-type M3x5.7 brass heat-set insert"
+   ],
+   "volume_cm3": 0.00857,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-16"
+  },
+  {
+   "pair": [
+    "HW-060_4 ISO 7380-1 M3x12 A2",
+    "HW-062_4 Ruthex-type M3x5.7 brass heat-set insert"
+   ],
+   "volume_cm3": 0.00857,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-16"
+  },
+  {
+   "pair": [
+    "HW-062_1 Ruthex-type M3x5.7 brass heat-set insert",
+    "HW-058_1 Tail saddle (PETG): stub clamshell, inboard cheek, "
+   ],
+   "volume_cm3": 0.00934,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-16"
+  },
+  {
+   "pair": [
+    "HW-062_3 Ruthex-type M3x5.7 brass heat-set insert",
+    "HW-058_1 Tail saddle (PETG): stub clamshell, inboard cheek, "
+   ],
+   "volume_cm3": 0.00934,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-16"
+  },
+  {
+   "pair": [
+    "HW-058_1 Tail saddle (PETG): stub clamshell, inboard cheek, ",
+    "Boom_Rear_Stub"
+   ],
+   "volume_cm3": 0.62054,
+   "intended": true,
+   "fix": "none: tail-saddle / clamp bore 25.0 on 25.4 tube preload",
+   "set": "joint J-16"
+  },
+  {
+   "pair": [
+    "HW-058_2 Tail saddle (PETG): stub clamshell, inboard cheek, ",
+    "Boom_Rear_Stub"
+   ],
+   "volume_cm3": 0.62054,
+   "intended": true,
+   "fix": "none: tail-saddle / clamp bore 25.0 on 25.4 tube preload",
+   "set": "joint J-16"
+  },
+  {
+   "pair": [
+    "HW-058_3 Tail saddle (PETG): stub clamshell, inboard cheek, ",
+    "Boom_Rear_Stub"
+   ],
+   "volume_cm3": 1.02919,
+   "intended": true,
+   "fix": "none: tail-saddle / clamp bore 25.0 on 25.4 tube preload",
+   "set": "joint J-16"
+  },
+  {
+   "pair": [
+    "HW-058_4 Tail saddle (PETG): stub clamshell, inboard cheek, ",
+    "Boom_Rear_Stub"
+   ],
+   "volume_cm3": 1.02919,
+   "intended": true,
+   "fix": "none: tail-saddle / clamp bore 25.0 on 25.4 tube preload",
+   "set": "joint J-16"
+  },
+  {
+   "pair": [
+    "HW-058_1 Tail saddle (PETG): stub clamshell, inboard cheek, ",
+    "Boom_Rear_Stub"
+   ],
+   "volume_cm3": 0.63335,
+   "intended": true,
+   "fix": "none: tail-saddle / clamp bore 25.0 on 25.4 tube preload",
+   "set": "joint J-16"
+  },
+  {
+   "pair": [
+    "HW-058_2 Tail saddle (PETG): stub clamshell, inboard cheek, ",
+    "Boom_Rear_Stub"
+   ],
+   "volume_cm3": 0.63335,
+   "intended": true,
+   "fix": "none: tail-saddle / clamp bore 25.0 on 25.4 tube preload",
+   "set": "joint J-16"
+  },
+  {
+   "pair": [
+    "HW-058_3 Tail saddle (PETG): stub clamshell, inboard cheek, ",
+    "Boom_Rear_Stub"
+   ],
+   "volume_cm3": 1.00838,
+   "intended": true,
+   "fix": "none: tail-saddle / clamp bore 25.0 on 25.4 tube preload",
+   "set": "joint J-16"
+  },
+  {
+   "pair": [
+    "HW-058_4 Tail saddle (PETG): stub clamshell, inboard cheek, ",
+    "Boom_Rear_Stub"
+   ],
+   "volume_cm3": 1.00838,
+   "intended": true,
+   "fix": "none: tail-saddle / clamp bore 25.0 on 25.4 tube preload",
+   "set": "joint J-16"
+  },
+  {
+   "pair": [
+    "HW-064_1 ISO 7380-1 M3x12 A2",
+    "HW-066_1 DIN 985 M3 A2"
+   ],
+   "volume_cm3": 0.00499,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-17"
+  },
+  {
+   "pair": [
+    "HW-064_1 ISO 7380-1 M3x12 A2",
+    "HW-066_1 nylon"
+   ],
+   "volume_cm3": 0.00333,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-17"
+  },
+  {
+   "pair": [
+    "HW-064_2 ISO 7380-1 M3x12 A2",
+    "HW-066_2 DIN 985 M3 A2"
+   ],
+   "volume_cm3": 0.00499,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-17"
+  },
+  {
+   "pair": [
+    "HW-064_2 ISO 7380-1 M3x12 A2",
+    "HW-066_2 nylon"
+   ],
+   "volume_cm3": 0.00333,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-17"
+  },
+  {
+   "pair": [
+    "HW-064_3 ISO 7380-1 M3x12 A2",
+    "HW-066_3 DIN 985 M3 A2"
+   ],
+   "volume_cm3": 0.00499,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-17"
+  },
+  {
+   "pair": [
+    "HW-064_3 ISO 7380-1 M3x12 A2",
+    "HW-066_3 nylon"
+   ],
+   "volume_cm3": 0.00333,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-17"
+  },
+  {
+   "pair": [
+    "HW-064_4 ISO 7380-1 M3x12 A2",
+    "HW-066_4 DIN 985 M3 A2"
+   ],
+   "volume_cm3": 0.00499,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-17"
+  },
+  {
+   "pair": [
+    "HW-064_4 ISO 7380-1 M3x12 A2",
+    "HW-066_4 nylon"
+   ],
+   "volume_cm3": 0.00333,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-17"
+  },
+  {
+   "pair": [
+    "HW-064_5 ISO 7380-1 M3x12 A2",
+    "HW-066_5 DIN 985 M3 A2"
+   ],
+   "volume_cm3": 0.00499,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-17"
+  },
+  {
+   "pair": [
+    "HW-064_5 ISO 7380-1 M3x12 A2",
+    "HW-066_5 nylon"
+   ],
+   "volume_cm3": 0.00333,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-17"
+  },
+  {
+   "pair": [
+    "HW-064_6 ISO 7380-1 M3x12 A2",
+    "HW-066_6 DIN 985 M3 A2"
+   ],
+   "volume_cm3": 0.00499,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-17"
+  },
+  {
+   "pair": [
+    "HW-064_6 ISO 7380-1 M3x12 A2",
+    "HW-066_6 nylon"
+   ],
+   "volume_cm3": 0.00333,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-17"
+  },
+  {
+   "pair": [
+    "HW-064_7 ISO 7380-1 M3x12 A2",
+    "HW-066_7 DIN 985 M3 A2"
+   ],
+   "volume_cm3": 0.00499,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-17"
+  },
+  {
+   "pair": [
+    "HW-064_7 ISO 7380-1 M3x12 A2",
+    "HW-066_7 nylon"
+   ],
+   "volume_cm3": 0.00333,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-17"
+  },
+  {
+   "pair": [
+    "HW-064_8 ISO 7380-1 M3x12 A2",
+    "HW-066_8 DIN 985 M3 A2"
+   ],
+   "volume_cm3": 0.00499,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-17"
+  },
+  {
+   "pair": [
+    "HW-064_8 ISO 7380-1 M3x12 A2",
+    "HW-066_8 nylon"
+   ],
+   "volume_cm3": 0.00333,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-17"
+  },
+  {
+   "pair": [
+    "HW-065_1 ISO 7089 M3 A2",
+    "Wing_Panel_R"
+   ],
+   "volume_cm3": 0.00016,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-17"
+  },
+  {
+   "pair": [
+    "HW-065_2 ISO 7089 M3 A2",
+    "Wing_Panel_R"
+   ],
+   "volume_cm3": 0.00016,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-17"
+  },
+  {
+   "pair": [
+    "HW-065_3 ISO 7089 M3 A2",
+    "Wing_Panel_R"
+   ],
+   "volume_cm3": 0.00016,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-17"
+  },
+  {
+   "pair": [
+    "HW-065_4 ISO 7089 M3 A2",
+    "Wing_Panel_R"
+   ],
+   "volume_cm3": 0.00016,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-17"
+  },
+  {
+   "pair": [
+    "HW-065_5 ISO 7089 M3 A2",
+    "Wing_Panel_L"
+   ],
+   "volume_cm3": 0.00016,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-17"
+  },
+  {
+   "pair": [
+    "HW-065_6 ISO 7089 M3 A2",
+    "Wing_Panel_L"
+   ],
+   "volume_cm3": 0.00016,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-17"
+  },
+  {
+   "pair": [
+    "HW-065_7 ISO 7089 M3 A2",
+    "Wing_Panel_L"
+   ],
+   "volume_cm3": 0.00016,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-17"
+  },
+  {
+   "pair": [
+    "HW-065_8 ISO 7089 M3 A2",
+    "Wing_Panel_L"
+   ],
+   "volume_cm3": 0.00016,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-17"
+  },
+  {
+   "pair": [
+    "HW-066_1 nylon",
+    "Wing_Panel_R"
+   ],
+   "volume_cm3": 0.0132,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-17"
+  },
+  {
+   "pair": [
+    "HW-066_2 nylon",
+    "Wing_Panel_R"
+   ],
+   "volume_cm3": 0.0132,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-17"
+  },
+  {
+   "pair": [
+    "HW-066_3 nylon",
+    "Wing_Panel_R"
+   ],
+   "volume_cm3": 0.0132,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-17"
+  },
+  {
+   "pair": [
+    "HW-066_4 nylon",
+    "Wing_Panel_R"
+   ],
+   "volume_cm3": 0.0132,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-17"
+  },
+  {
+   "pair": [
+    "HW-066_5 nylon",
+    "Wing_Panel_L"
+   ],
+   "volume_cm3": 0.0132,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-17"
+  },
+  {
+   "pair": [
+    "HW-066_6 nylon",
+    "Wing_Panel_L"
+   ],
+   "volume_cm3": 0.0132,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-17"
+  },
+  {
+   "pair": [
+    "HW-066_7 nylon",
+    "Wing_Panel_L"
+   ],
+   "volume_cm3": 0.0132,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-17"
+  },
+  {
+   "pair": [
+    "HW-066_8 nylon",
+    "Wing_Panel_L"
+   ],
+   "volume_cm3": 0.0132,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-17"
+  },
+  {
+   "pair": [
+    "HW-134_1 Cable tie 100 x 2.5 mm (kit item 11): servo lead st",
+    "HW-063_1 Aileron servo frame (PETG): tray 62 x 26 x 3, windo"
+   ],
+   "volume_cm3": 0.0015,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-17"
+  },
+  {
+   "pair": [
+    "HW-134_1 Cable tie 100 x 2.5 mm (kit item 11): servo lead st",
+    "Spar_Tube"
+   ],
+   "volume_cm3": 0.01319,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-17"
+  },
+  {
+   "pair": [
+    "HW-134_2 Cable tie 100 x 2.5 mm (kit item 11): servo lead st",
+    "HW-063_2 Aileron servo frame (PETG): tray 62 x 26 x 3, windo"
+   ],
+   "volume_cm3": 0.0015,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-17"
+  },
+  {
+   "pair": [
+    "HW-134_2 Cable tie 100 x 2.5 mm (kit item 11): servo lead st",
+    "Spar_Tube"
+   ],
+   "volume_cm3": 0.01319,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-17"
+  },
+  {
+   "pair": [
+    "HW-129_1 EMAX ES3005HV digital metal-gear servo (aileron) (2",
+    "Wing_Panel_R"
+   ],
+   "volume_cm3": 0.00647,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-17"
+  },
+  {
+   "pair": [
+    "HW-129_2 EMAX ES3005HV digital metal-gear servo (aileron) (2",
+    "Wing_Panel_L"
+   ],
+   "volume_cm3": 0.00647,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-17"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Boom_Clamp_Front_upper"
+   ],
+   "volume_cm3": 0.26917,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-17"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Boom_Clamp_Front_upper"
+   ],
+   "volume_cm3": 0.26917,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-17"
+  },
+  {
+   "pair": [
+    "HW-069_1 ISO 7380-1 M3x12 A2",
+    "HW-071_1 DIN 985 M3 A2"
+   ],
+   "volume_cm3": 0.00499,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-18"
+  },
+  {
+   "pair": [
+    "HW-069_1 ISO 7380-1 M3x12 A2",
+    "HW-071_1 nylon"
+   ],
+   "volume_cm3": 0.00333,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-18"
+  },
+  {
+   "pair": [
+    "HW-069_2 ISO 7380-1 M3x12 A2",
+    "HW-071_2 DIN 985 M3 A2"
+   ],
+   "volume_cm3": 0.00499,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-18"
+  },
+  {
+   "pair": [
+    "HW-069_2 ISO 7380-1 M3x12 A2",
+    "HW-071_2 nylon"
+   ],
+   "volume_cm3": 0.00333,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-18"
+  },
+  {
+   "pair": [
+    "HW-069_3 ISO 7380-1 M3x12 A2",
+    "HW-071_3 DIN 985 M3 A2"
+   ],
+   "volume_cm3": 0.00499,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-18"
+  },
+  {
+   "pair": [
+    "HW-069_3 ISO 7380-1 M3x12 A2",
+    "HW-071_3 nylon"
+   ],
+   "volume_cm3": 0.00333,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-18"
+  },
+  {
+   "pair": [
+    "HW-069_4 ISO 7380-1 M3x12 A2",
+    "HW-071_4 DIN 985 M3 A2"
+   ],
+   "volume_cm3": 0.00499,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-18"
+  },
+  {
+   "pair": [
+    "HW-069_4 ISO 7380-1 M3x12 A2",
+    "HW-071_4 nylon"
+   ],
+   "volume_cm3": 0.00333,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-18"
+  },
+  {
+   "pair": [
+    "HW-135_1 Cable tie 100 x 2.5 mm (kit item 11): servo lead st",
+    "HW-132_1 Elevator servo bay (PETG tub + tray, part of the st"
+   ],
+   "volume_cm3": 0.0015,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-18"
+  },
+  {
+   "pair": [
+    "HW-074_1 ISO 7380-1 M3x12 A2",
+    "HW-076_1 DIN 985 M3 A2"
+   ],
+   "volume_cm3": 0.00499,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-19"
+  },
+  {
+   "pair": [
+    "HW-074_1 ISO 7380-1 M3x12 A2",
+    "HW-076_1 nylon"
+   ],
+   "volume_cm3": 0.00333,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-19"
+  },
+  {
+   "pair": [
+    "HW-074_2 ISO 7380-1 M3x12 A2",
+    "HW-076_2 DIN 985 M3 A2"
+   ],
+   "volume_cm3": 0.00499,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-19"
+  },
+  {
+   "pair": [
+    "HW-074_2 ISO 7380-1 M3x12 A2",
+    "HW-076_2 nylon"
+   ],
+   "volume_cm3": 0.00333,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-19"
+  },
+  {
+   "pair": [
+    "HW-074_3 ISO 7380-1 M3x12 A2",
+    "HW-076_3 DIN 985 M3 A2"
+   ],
+   "volume_cm3": 0.00499,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-19"
+  },
+  {
+   "pair": [
+    "HW-074_3 ISO 7380-1 M3x12 A2",
+    "HW-076_3 nylon"
+   ],
+   "volume_cm3": 0.00333,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-19"
+  },
+  {
+   "pair": [
+    "HW-074_4 ISO 7380-1 M3x12 A2",
+    "HW-076_4 DIN 985 M3 A2"
+   ],
+   "volume_cm3": 0.00499,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-19"
+  },
+  {
+   "pair": [
+    "HW-074_4 ISO 7380-1 M3x12 A2",
+    "HW-076_4 nylon"
+   ],
+   "volume_cm3": 0.00333,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-19"
+  },
+  {
+   "pair": [
+    "HW-074_5 ISO 7380-1 M3x12 A2",
+    "HW-076_5 DIN 985 M3 A2"
+   ],
+   "volume_cm3": 0.00499,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-19"
+  },
+  {
+   "pair": [
+    "HW-074_5 ISO 7380-1 M3x12 A2",
+    "HW-076_5 nylon"
+   ],
+   "volume_cm3": 0.00333,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-19"
+  },
+  {
+   "pair": [
+    "HW-074_6 ISO 7380-1 M3x12 A2",
+    "HW-076_6 DIN 985 M3 A2"
+   ],
+   "volume_cm3": 0.00499,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-19"
+  },
+  {
+   "pair": [
+    "HW-074_6 ISO 7380-1 M3x12 A2",
+    "HW-076_6 nylon"
+   ],
+   "volume_cm3": 0.00333,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-19"
+  },
+  {
+   "pair": [
+    "HW-074_7 ISO 7380-1 M3x12 A2",
+    "HW-076_7 DIN 985 M3 A2"
+   ],
+   "volume_cm3": 0.00499,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-19"
+  },
+  {
+   "pair": [
+    "HW-074_7 ISO 7380-1 M3x12 A2",
+    "HW-076_7 nylon"
+   ],
+   "volume_cm3": 0.00333,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-19"
+  },
+  {
+   "pair": [
+    "HW-074_8 ISO 7380-1 M3x12 A2",
+    "HW-076_8 DIN 985 M3 A2"
+   ],
+   "volume_cm3": 0.00499,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-19"
+  },
+  {
+   "pair": [
+    "HW-074_8 ISO 7380-1 M3x12 A2",
+    "HW-076_8 nylon"
+   ],
+   "volume_cm3": 0.00333,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-19"
+  },
+  {
+   "pair": [
+    "HW-136_1 Cable tie 100 x 2.5 mm (kit item 11): servo lead st",
+    "HW-133_1 Rudder servo bay (PETG tub + tray, part of the rudd"
+   ],
+   "volume_cm3": 0.0015,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-19"
+  },
+  {
+   "pair": [
+    "HW-136_2 Cable tie 100 x 2.5 mm (kit item 11): servo lead st",
+    "HW-133_2 Rudder servo bay (PETG tub + tray, part of the rudd"
+   ],
+   "volume_cm3": 0.0015,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-19"
+  },
+  {
+   "pair": [
+    "HW-081_1 ISO 7380-1 M2x20 A2",
+    "HW-082_1 ISO 4032 M2 A2"
+   ],
+   "volume_cm3": 0.00148,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-20"
+  },
+  {
+   "pair": [
+    "HW-081_2 ISO 7380-1 M2x20 A2",
+    "HW-082_2 ISO 4032 M2 A2"
+   ],
+   "volume_cm3": 0.00148,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-20"
+  },
+  {
+   "pair": [
+    "HW-081_3 ISO 7380-1 M2x20 A2",
+    "HW-082_3 ISO 4032 M2 A2"
+   ],
+   "volume_cm3": 0.00148,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-20"
+  },
+  {
+   "pair": [
+    "HW-081_4 ISO 7380-1 M2x20 A2",
+    "HW-082_4 ISO 4032 M2 A2"
+   ],
+   "volume_cm3": 0.00148,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-20"
+  },
+  {
+   "pair": [
+    "HW-082_1 ISO 4032 M2 A2",
+    "Aileron_R"
+   ],
+   "volume_cm3": 0.0,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-20"
+  },
+  {
+   "pair": [
+    "HW-082_3 ISO 4032 M2 A2",
+    "Aileron_L"
+   ],
+   "volume_cm3": 0.0,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-20"
+  },
+  {
+   "pair": [
+    "HW-083_1 Du-Bro 230 Mini Nylon Kwik-Link 2-56 (aileron)",
+    "HW-084_1 Du-Bro 230 rod 12 in 2-56, 0.072 in dia, cut to len"
+   ],
+   "volume_cm3": 0.01015,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-20"
+  },
+  {
+   "pair": [
+    "HW-083_2 Du-Bro 230 Mini Nylon Kwik-Link 2-56 (aileron)",
+    "HW-084_2 Du-Bro 230 rod 12 in 2-56, 0.072 in dia, cut to len"
+   ],
+   "volume_cm3": 0.01015,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-20"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Boom_Clamp_Rear_upper"
+   ],
+   "volume_cm3": 0.26917,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-20"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Boom_Clamp_Rear_upper"
+   ],
+   "volume_cm3": 0.26917,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-20"
+  },
+  {
+   "pair": [
+    "HW-088_1 ISO 7380-1 M2x8 A2",
+    "HW-089_1 ISO 4032 M2 A2"
+   ],
+   "volume_cm3": 0.00148,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-21"
+  },
+  {
+   "pair": [
+    "HW-088_1 ISO 7380-1 M2x8 A2",
+    "Elevator"
+   ],
+   "volume_cm3": 0.01016,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-21"
+  },
+  {
+   "pair": [
+    "HW-088_2 ISO 7380-1 M2x8 A2",
+    "HW-089_2 ISO 4032 M2 A2"
+   ],
+   "volume_cm3": 0.00148,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-21"
+  },
+  {
+   "pair": [
+    "HW-088_2 ISO 7380-1 M2x8 A2",
+    "Elevator"
+   ],
+   "volume_cm3": 0.00343,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-21"
+  },
+  {
+   "pair": [
+    "HW-090_1 Du-Bro 230 Mini Nylon Kwik-Link 2-56 (elevator)",
+    "HW-091_1 Du-Bro 230 rod 12 in 2-56, 0.072 in dia, cut to len"
+   ],
+   "volume_cm3": 0.01015,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-21"
+  },
+  {
+   "pair": [
+    "HW-095_1 ISO 7380-1 M2x12 A2",
+    "HW-096_1 ISO 4032 M2 A2"
+   ],
+   "volume_cm3": 0.00148,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-22"
+  },
+  {
+   "pair": [
+    "HW-095_2 ISO 7380-1 M2x12 A2",
+    "HW-096_2 ISO 4032 M2 A2"
+   ],
+   "volume_cm3": 0.00148,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-22"
+  },
+  {
+   "pair": [
+    "HW-095_2 ISO 7380-1 M2x12 A2",
+    "Rudder"
+   ],
+   "volume_cm3": 0.0144,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-22"
+  },
+  {
+   "pair": [
+    "HW-095_3 ISO 7380-1 M2x12 A2",
+    "HW-096_3 ISO 4032 M2 A2"
+   ],
+   "volume_cm3": 0.00148,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-22"
+  },
+  {
+   "pair": [
+    "HW-095_4 ISO 7380-1 M2x12 A2",
+    "HW-096_4 ISO 4032 M2 A2"
+   ],
+   "volume_cm3": 0.00148,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-22"
+  },
+  {
+   "pair": [
+    "HW-095_4 ISO 7380-1 M2x12 A2",
+    "Rudder"
+   ],
+   "volume_cm3": 0.0144,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-22"
+  },
+  {
+   "pair": [
+    "HW-097_1 Du-Bro 230 Mini Nylon Kwik-Link 2-56 (rudder)",
+    "HW-098_1 Du-Bro 230 rod 12 in 2-56, 0.072 in dia, cut to len"
+   ],
+   "volume_cm3": 0.01015,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-22"
+  },
+  {
+   "pair": [
+    "HW-097_2 Du-Bro 230 Mini Nylon Kwik-Link 2-56 (rudder)",
+    "HW-098_2 Du-Bro 230 rod 12 in 2-56, 0.072 in dia, cut to len"
+   ],
+   "volume_cm3": 0.01015,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-22"
+  },
+  {
+   "pair": [
+    "HW-100_1 Hinge tape 25.4 mm (1 in) strip: ailerons, elevator",
+    "Wing_Panel_R"
+   ],
+   "volume_cm3": 0.00523,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-23"
+  },
+  {
+   "pair": [
+    "HW-100_1 Hinge tape 25.4 mm (1 in) strip: ailerons, elevator",
+    "Aileron_R"
+   ],
+   "volume_cm3": 0.00423,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-23"
+  },
+  {
+   "pair": [
+    "HW-100_2 Hinge tape 25.4 mm (1 in) strip: ailerons, elevator",
+    "Wing_Panel_L"
+   ],
+   "volume_cm3": 0.00523,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-23"
+  },
+  {
+   "pair": [
+    "HW-100_2 Hinge tape 25.4 mm (1 in) strip: ailerons, elevator",
+    "Aileron_L"
+   ],
+   "volume_cm3": 0.00423,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-23"
+  },
+  {
+   "pair": [
+    "HW-100_3 Hinge tape 25.4 mm (1 in) strip: ailerons, elevator",
+    "Fin_fixed"
+   ],
+   "volume_cm3": 0.00302,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-23"
+  },
+  {
+   "pair": [
+    "HW-100_3 Hinge tape 25.4 mm (1 in) strip: ailerons, elevator",
+    "Fin_fixed"
+   ],
+   "volume_cm3": 0.00302,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-23"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Boom_Clamp_Rear_upper"
+   ],
+   "volume_cm3": 0.26917,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-23"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Motor_Mount_upper"
+   ],
+   "volume_cm3": 0.46554,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-23"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Gear_Clamp_upper"
+   ],
+   "volume_cm3": 0.26373,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-23"
+  },
+  {
+   "pair": [
+    "Boom_Rear_Stub",
+    "Motor_Mount_upper"
+   ],
+   "volume_cm3": 0.03958,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-23"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Boom_Clamp_Rear_upper"
+   ],
+   "volume_cm3": 0.26917,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-23"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Motor_Mount_upper"
+   ],
+   "volume_cm3": 0.46554,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-23"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Gear_Clamp_upper"
+   ],
+   "volume_cm3": 0.26373,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-23"
+  },
+  {
+   "pair": [
+    "Boom_Rear_Stub",
+    "Motor_Mount_upper"
+   ],
+   "volume_cm3": 0.03958,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-23"
+  },
+  {
+   "pair": [
+    "HW-101_1 ISO 7380-1 M3x10 A2",
+    "HW-103_1 Ruthex-type M3x5.7 brass heat-set insert"
+   ],
+   "volume_cm3": 0.01186,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-24"
+  },
+  {
+   "pair": [
+    "HW-101_2 ISO 7380-1 M3x10 A2",
+    "HW-103_2 Ruthex-type M3x5.7 brass heat-set insert"
+   ],
+   "volume_cm3": 0.01186,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-24"
+  },
+  {
+   "pair": [
+    "HW-101_3 ISO 7380-1 M3x10 A2",
+    "HW-103_3 Ruthex-type M3x5.7 brass heat-set insert"
+   ],
+   "volume_cm3": 0.01186,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-24"
+  },
+  {
+   "pair": [
+    "HW-101_4 ISO 7380-1 M3x10 A2",
+    "HW-103_4 Ruthex-type M3x5.7 brass heat-set insert"
+   ],
+   "volume_cm3": 0.01186,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-24"
+  },
+  {
+   "pair": [
+    "HW-103_1 Ruthex-type M3x5.7 brass heat-set insert",
+    "Fuselage_Pod"
+   ],
+   "volume_cm3": 0.04543,
+   "intended": true,
+   "fix": "none: heat-set insert pressed into part bore (melt-in interference)",
+   "set": "joint J-24"
+  },
+  {
+   "pair": [
+    "HW-103_2 Ruthex-type M3x5.7 brass heat-set insert",
+    "Fuselage_Pod"
+   ],
+   "volume_cm3": 0.04542,
+   "intended": true,
+   "fix": "none: heat-set insert pressed into part bore (melt-in interference)",
+   "set": "joint J-24"
+  },
+  {
+   "pair": [
+    "HW-103_3 Ruthex-type M3x5.7 brass heat-set insert",
+    "Fuselage_Pod"
+   ],
+   "volume_cm3": 0.04513,
+   "intended": true,
+   "fix": "none: heat-set insert pressed into part bore (melt-in interference)",
+   "set": "joint J-24"
+  },
+  {
+   "pair": [
+    "HW-103_4 Ruthex-type M3x5.7 brass heat-set insert",
+    "Fuselage_Pod"
+   ],
+   "volume_cm3": 0.04513,
+   "intended": true,
+   "fix": "none: heat-set insert pressed into part bore (melt-in interference)",
+   "set": "joint J-24"
+  },
+  {
+   "pair": [
+    "HW-106_1 ISO 7380-1 M3x10 A2",
+    "HW-107_1 Ruthex-type M3x5.7 brass heat-set insert"
+   ],
+   "volume_cm3": 0.01182,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-25"
+  },
+  {
+   "pair": [
+    "HW-106_2 ISO 7380-1 M3x10 A2",
+    "HW-107_2 Ruthex-type M3x5.7 brass heat-set insert"
+   ],
+   "volume_cm3": 0.01182,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-25"
+  },
+  {
+   "pair": [
+    "HW-106_3 ISO 7380-1 M3x10 A2",
+    "HW-107_3 Ruthex-type M3x5.7 brass heat-set insert"
+   ],
+   "volume_cm3": 0.01182,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-25"
+  },
+  {
+   "pair": [
+    "HW-106_4 ISO 7380-1 M3x10 A2",
+    "HW-107_4 Ruthex-type M3x5.7 brass heat-set insert"
+   ],
+   "volume_cm3": 0.01182,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-25"
+  },
+  {
+   "pair": [
+    "HW-107_1 Ruthex-type M3x5.7 brass heat-set insert",
+    "HW-105_1 Battery tray (PETG 171 x 60 x 3, end blocks 8 mm)"
+   ],
+   "volume_cm3": 0.00934,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-25"
+  },
+  {
+   "pair": [
+    "HW-107_1 Ruthex-type M3x5.7 brass heat-set insert",
+    "Fuselage_Pod"
+   ],
+   "volume_cm3": 0.03928,
+   "intended": true,
+   "fix": "none: heat-set insert pressed into part bore (melt-in interference)",
+   "set": "joint J-25"
+  },
+  {
+   "pair": [
+    "HW-107_2 Ruthex-type M3x5.7 brass heat-set insert",
+    "HW-105_1 Battery tray (PETG 171 x 60 x 3, end blocks 8 mm)"
+   ],
+   "volume_cm3": 0.00934,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-25"
+  },
+  {
+   "pair": [
+    "HW-107_2 Ruthex-type M3x5.7 brass heat-set insert",
+    "Fuselage_Pod"
+   ],
+   "volume_cm3": 0.03928,
+   "intended": true,
+   "fix": "none: heat-set insert pressed into part bore (melt-in interference)",
+   "set": "joint J-25"
+  },
+  {
+   "pair": [
+    "HW-107_3 Ruthex-type M3x5.7 brass heat-set insert",
+    "HW-105_1 Battery tray (PETG 171 x 60 x 3, end blocks 8 mm)"
+   ],
+   "volume_cm3": 0.00934,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-25"
+  },
+  {
+   "pair": [
+    "HW-107_4 Ruthex-type M3x5.7 brass heat-set insert",
+    "HW-105_1 Battery tray (PETG 171 x 60 x 3, end blocks 8 mm)"
+   ],
+   "volume_cm3": 0.00934,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-25"
+  },
+  {
+   "pair": [
+    "HW-110_1 ISO 7380-1 M3x10 A2",
+    "HW-111_1 Ruthex-type M3x5.7 brass heat-set insert"
+   ],
+   "volume_cm3": 0.01182,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-26"
+  },
+  {
+   "pair": [
+    "HW-110_2 ISO 7380-1 M3x10 A2",
+    "HW-111_2 Ruthex-type M3x5.7 brass heat-set insert"
+   ],
+   "volume_cm3": 0.01182,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-26"
+  },
+  {
+   "pair": [
+    "HW-110_3 ISO 7380-1 M3x10 A2",
+    "HW-111_3 Ruthex-type M3x5.7 brass heat-set insert"
+   ],
+   "volume_cm3": 0.01182,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-26"
+  },
+  {
+   "pair": [
+    "HW-110_4 ISO 7380-1 M3x10 A2",
+    "HW-111_4 Ruthex-type M3x5.7 brass heat-set insert"
+   ],
+   "volume_cm3": 0.01182,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-26"
+  },
+  {
+   "pair": [
+    "HW-111_1 Ruthex-type M3x5.7 brass heat-set insert",
+    "HW-109_1 Avionics deck (PETG 195 x 90 x 2, end blocks 8 mm)"
+   ],
+   "volume_cm3": 0.00934,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-26"
+  },
+  {
+   "pair": [
+    "HW-111_1 Ruthex-type M3x5.7 brass heat-set insert",
+    "Fuselage_Pod"
+   ],
+   "volume_cm3": 0.03928,
+   "intended": true,
+   "fix": "none: heat-set insert pressed into part bore (melt-in interference)",
+   "set": "joint J-26"
+  },
+  {
+   "pair": [
+    "HW-111_2 Ruthex-type M3x5.7 brass heat-set insert",
+    "HW-109_1 Avionics deck (PETG 195 x 90 x 2, end blocks 8 mm)"
+   ],
+   "volume_cm3": 0.00934,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-26"
+  },
+  {
+   "pair": [
+    "HW-111_2 Ruthex-type M3x5.7 brass heat-set insert",
+    "Fuselage_Pod"
+   ],
+   "volume_cm3": 0.03928,
+   "intended": true,
+   "fix": "none: heat-set insert pressed into part bore (melt-in interference)",
+   "set": "joint J-26"
+  },
+  {
+   "pair": [
+    "HW-111_3 Ruthex-type M3x5.7 brass heat-set insert",
+    "HW-109_1 Avionics deck (PETG 195 x 90 x 2, end blocks 8 mm)"
+   ],
+   "volume_cm3": 0.00934,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-26"
+  },
+  {
+   "pair": [
+    "HW-111_3 Ruthex-type M3x5.7 brass heat-set insert",
+    "Fuselage_Pod"
+   ],
+   "volume_cm3": 0.03928,
+   "intended": true,
+   "fix": "none: heat-set insert pressed into part bore (melt-in interference)",
+   "set": "joint J-26"
+  },
+  {
+   "pair": [
+    "HW-111_4 Ruthex-type M3x5.7 brass heat-set insert",
+    "HW-109_1 Avionics deck (PETG 195 x 90 x 2, end blocks 8 mm)"
+   ],
+   "volume_cm3": 0.00934,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-26"
+  },
+  {
+   "pair": [
+    "HW-111_4 Ruthex-type M3x5.7 brass heat-set insert",
+    "Fuselage_Pod"
+   ],
+   "volume_cm3": 0.03928,
+   "intended": true,
+   "fix": "none: heat-set insert pressed into part bore (melt-in interference)",
+   "set": "joint J-26"
+  },
+  {
+   "pair": [
+    "HW-112_1 ISO 4762 / DIN 912 M3x30 A2",
+    "HW-116_1 DIN 985 M3 A2"
+   ],
+   "volume_cm3": 0.00499,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-26"
+  },
+  {
+   "pair": [
+    "HW-112_1 ISO 4762 / DIN 912 M3x30 A2",
+    "HW-116_1 nylon"
+   ],
+   "volume_cm3": 0.00333,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-26"
+  },
+  {
+   "pair": [
+    "HW-112_2 ISO 4762 / DIN 912 M3x30 A2",
+    "HW-116_2 DIN 985 M3 A2"
+   ],
+   "volume_cm3": 0.00499,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-26"
+  },
+  {
+   "pair": [
+    "HW-112_2 ISO 4762 / DIN 912 M3x30 A2",
+    "HW-116_2 nylon"
+   ],
+   "volume_cm3": 0.00333,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-26"
+  },
+  {
+   "pair": [
+    "HW-112_3 ISO 4762 / DIN 912 M3x30 A2",
+    "HW-116_3 DIN 985 M3 A2"
+   ],
+   "volume_cm3": 0.00499,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-26"
+  },
+  {
+   "pair": [
+    "HW-112_3 ISO 4762 / DIN 912 M3x30 A2",
+    "HW-116_3 nylon"
+   ],
+   "volume_cm3": 0.00333,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-26"
+  },
+  {
+   "pair": [
+    "HW-112_4 ISO 4762 / DIN 912 M3x30 A2",
+    "HW-116_4 DIN 985 M3 A2"
+   ],
+   "volume_cm3": 0.00499,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-26"
+  },
+  {
+   "pair": [
+    "HW-112_4 ISO 4762 / DIN 912 M3x30 A2",
+    "HW-116_4 nylon"
+   ],
+   "volume_cm3": 0.00333,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-26"
+  },
+  {
+   "pair": [
+    "HW-114_1 Rubber grommet 3.2 ID x 6 OD x 2 (supplied with FC?",
+    "FC1"
+   ],
+   "volume_cm3": 0.00981,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-26"
+  },
+  {
+   "pair": [
+    "HW-114_2 Rubber grommet 3.2 ID x 6 OD x 2 (supplied with FC?",
+    "FC1"
+   ],
+   "volume_cm3": 0.00981,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-26"
+  },
+  {
+   "pair": [
+    "HW-114_3 Rubber grommet 3.2 ID x 6 OD x 2 (supplied with FC?",
+    "FC1"
+   ],
+   "volume_cm3": 0.00981,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-26"
+  },
+  {
+   "pair": [
+    "HW-114_4 Rubber grommet 3.2 ID x 6 OD x 2 (supplied with FC?",
+    "FC1"
+   ],
+   "volume_cm3": 0.00981,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-26"
+  },
+  {
+   "pair": [
+    "HW-115_1 ISO 7089 M3 A2",
+    "Fuselage_Pod"
+   ],
+   "volume_cm3": 0.01522,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-26"
+  },
+  {
+   "pair": [
+    "HW-115_2 ISO 7089 M3 A2",
+    "Fuselage_Pod"
+   ],
+   "volume_cm3": 0.01522,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-26"
+  },
+  {
+   "pair": [
+    "HW-115_3 ISO 7089 M3 A2",
+    "Fuselage_Pod"
+   ],
+   "volume_cm3": 0.01522,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-26"
+  },
+  {
+   "pair": [
+    "HW-115_4 ISO 7089 M3 A2",
+    "Fuselage_Pod"
+   ],
+   "volume_cm3": 0.01522,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-26"
+  },
+  {
+   "pair": [
+    "HW-116_1 nylon",
+    "Fuselage_Pod"
+   ],
+   "volume_cm3": 0.0132,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-26"
+  },
+  {
+   "pair": [
+    "HW-116_2 nylon",
+    "Fuselage_Pod"
+   ],
+   "volume_cm3": 0.0132,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-26"
+  },
+  {
+   "pair": [
+    "HW-116_3 nylon",
+    "Fuselage_Pod"
+   ],
+   "volume_cm3": 0.0132,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-26"
+  },
+  {
+   "pair": [
+    "HW-116_4 nylon",
+    "Fuselage_Pod"
+   ],
+   "volume_cm3": 0.0132,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-26"
+  },
+  {
+   "pair": [
+    "HW-118_1 ISO 7380-1 M3x10 A2",
+    "HW-120_1 Ruthex-type M3x5.7 brass heat-set insert"
+   ],
+   "volume_cm3": 0.01186,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-27"
+  },
+  {
+   "pair": [
+    "HW-119_1 ISO 7089 M3 A2",
+    "Canopy"
+   ],
+   "volume_cm3": 0.01522,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-27"
+  },
+  {
+   "pair": [
+    "HW-120_1 Ruthex-type M3x5.7 brass heat-set insert",
+    "HW-117_1 GPS mast (PETG, 10 dia x 14, M3 insert in base, 2 M"
+   ],
+   "volume_cm3": 0.00934,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-27"
+  },
+  {
+   "pair": [
+    "HW-121_1 ISO 7380-1 M2x6 A2",
+    "HW-142_1 ISO 7089 M2 A2: GPS module screws"
+   ],
+   "volume_cm3": 0.00175,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-27"
+  },
+  {
+   "pair": [
+    "HW-121_1 ISO 7380-1 M2x6 A2",
+    "GPS1"
+   ],
+   "volume_cm3": 0.01425,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-27"
+  },
+  {
+   "pair": [
+    "HW-121_2 ISO 7380-1 M2x6 A2",
+    "HW-142_2 ISO 7089 M2 A2: GPS module screws"
+   ],
+   "volume_cm3": 0.00175,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-27"
+  },
+  {
+   "pair": [
+    "HW-121_2 ISO 7380-1 M2x6 A2",
+    "GPS1"
+   ],
+   "volume_cm3": 0.01425,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-27"
+  },
+  {
+   "pair": [
+    "HW-142_1 ISO 7089 M2 A2: GPS module screws",
+    "GPS1"
+   ],
+   "volume_cm3": 0.00444,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-27"
+  },
+  {
+   "pair": [
+    "HW-142_2 ISO 7089 M2 A2: GPS module screws",
+    "GPS1"
+   ],
+   "volume_cm3": 0.00444,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-27"
+  },
+  {
+   "pair": [
+    "HW-117_1 GPS mast (PETG, 10 dia x 14, M3 insert in base, 2 M",
+    "GPS1"
+   ],
+   "volume_cm3": 0.00079,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-27"
+  },
+  {
+   "pair": [
+    "HW-122_1 Cable tie 150 x 3.6 mm (kit item 11, 6 in)",
+    "RX1"
+   ],
+   "volume_cm3": 0.00384,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-28"
+  },
+  {
+   "pair": [
+    "HW-122_2 Cable tie 150 x 3.6 mm (kit item 11, 6 in)",
+    "Fuselage_Pod"
+   ],
+   "volume_cm3": 0.016,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-28"
+  },
+  {
+   "pair": [
+    "HW-122_2 Cable tie 150 x 3.6 mm (kit item 11, 6 in)",
+    "Canopy"
+   ],
+   "volume_cm3": 0.00065,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-28"
+  },
+  {
+   "pair": [
+    "HW-123_9 Cable tie 200 x 3.6 mm (kit item 11, 8 in)",
+    "ESC_P"
+   ],
+   "volume_cm3": 0.01408,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-29"
+  },
+  {
+   "pair": [
+    "HW-123_10 Cable tie 200 x 3.6 mm (kit item 11, 8 in)",
+    "ESC_P"
+   ],
+   "volume_cm3": 0.01408,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-29"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Boom_Clamp_Front_upper"
+   ],
+   "volume_cm3": 0.26917,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-29"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Boom_Clamp_Front_lower"
+   ],
+   "volume_cm3": 0.26373,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-29"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Boom_Clamp_Rear_upper"
+   ],
+   "volume_cm3": 0.26917,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-29"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Boom_Clamp_Rear_lower"
+   ],
+   "volume_cm3": 0.26373,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-29"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Boom_Clamp_Front_upper"
+   ],
+   "volume_cm3": 0.26917,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-29"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Boom_Clamp_Front_lower"
+   ],
+   "volume_cm3": 0.26373,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-29"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Boom_Clamp_Rear_upper"
+   ],
+   "volume_cm3": 0.26917,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-29"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Boom_Clamp_Rear_lower"
+   ],
+   "volume_cm3": 0.26373,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-29"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Boom_Clamp_Rear_upper"
+   ],
+   "volume_cm3": 0.26917,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-30"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Boom_Clamp_Rear_lower"
+   ],
+   "volume_cm3": 0.26373,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-30"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Motor_Mount_upper"
+   ],
+   "volume_cm3": 0.46554,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-30"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Motor_Mount_lower"
+   ],
+   "volume_cm3": 0.50419,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-30"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Gear_Clamp_upper"
+   ],
+   "volume_cm3": 0.26373,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-30"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Gear_Clamp_lower"
+   ],
+   "volume_cm3": 0.25547,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-30"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Boom_Clamp_Rear_upper"
+   ],
+   "volume_cm3": 0.26917,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-30"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Boom_Clamp_Rear_lower"
+   ],
+   "volume_cm3": 0.26373,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-30"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Motor_Mount_upper"
+   ],
+   "volume_cm3": 0.46554,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-30"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Motor_Mount_lower"
+   ],
+   "volume_cm3": 0.50419,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-30"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Gear_Clamp_upper"
+   ],
+   "volume_cm3": 0.26373,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-30"
+  },
+  {
+   "pair": [
+    "Boom_Front",
+    "Gear_Clamp_lower"
+   ],
+   "volume_cm3": 0.25547,
+   "intended": true,
+   "fix": "none: clamp / mount bore 25.0 mm on 25.4 mm tube = designed 0.2 mm radial preload (split clamp)",
+   "set": "joint J-30"
+  },
+  {
+   "pair": [
+    "HW-126_1 ISO 7380-1 M3x12 A2",
+    "HW-128_1 Ruthex-type M3x5.7 brass heat-set insert"
+   ],
+   "volume_cm3": 0.01186,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-31"
+  },
+  {
+   "pair": [
+    "HW-126_2 ISO 7380-1 M3x12 A2",
+    "HW-128_2 Ruthex-type M3x5.7 brass heat-set insert"
+   ],
+   "volume_cm3": 0.01186,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint J-31"
+  },
+  {
+   "pair": [
+    "HW-128_1 Ruthex-type M3x5.7 brass heat-set insert",
+    "HW-125_1 Pitot clamp post + cap (PETG, 22 x 14 x 16, bore 6."
+   ],
+   "volume_cm3": 0.02543,
+   "intended": true,
+   "fix": "none: threaded insert / screw thread engagement or heat-set melt-in",
+   "set": "joint J-31"
+  },
+  {
+   "pair": [
+    "HW-128_1 Ruthex-type M3x5.7 brass heat-set insert",
+    "Pitot_Tube"
+   ],
+   "volume_cm3": 0.02266,
+   "intended": true,
+   "fix": "none: heat-set insert pressed into part bore (melt-in interference)",
+   "set": "joint J-31"
+  },
+  {
+   "pair": [
+    "HW-128_2 Ruthex-type M3x5.7 brass heat-set insert",
+    "HW-125_1 Pitot clamp post + cap (PETG, 22 x 14 x 16, bore 6."
+   ],
+   "volume_cm3": 0.02543,
+   "intended": true,
+   "fix": "none: threaded insert / screw thread engagement or heat-set melt-in",
+   "set": "joint J-31"
+  },
+  {
+   "pair": [
+    "HW-128_2 Ruthex-type M3x5.7 brass heat-set insert",
+    "Pitot_Tube"
+   ],
+   "volume_cm3": 0.02266,
+   "intended": true,
+   "fix": "none: heat-set insert pressed into part bore (melt-in interference)",
+   "set": "joint J-31"
+  },
+  {
+   "pair": [
+    "HW-050_1 ISO 7380-1 M3x40 A2",
+    "HW-052_1 DIN 985 M3 A2"
+   ],
+   "volume_cm3": 0.00499,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint WG Le"
+  },
+  {
+   "pair": [
+    "HW-050_1 ISO 7380-1 M3x40 A2",
+    "HW-052_1 nylon"
+   ],
+   "volume_cm3": 0.00333,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint WG Le"
+  },
+  {
+   "pair": [
+    "HW-050_5 ISO 7380-1 M3x40 A2",
+    "HW-052_5 DIN 985 M3 A2"
+   ],
+   "volume_cm3": 0.00499,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint WG Le"
+  },
+  {
+   "pair": [
+    "HW-050_5 ISO 7380-1 M3x40 A2",
+    "HW-052_5 nylon"
+   ],
+   "volume_cm3": 0.00333,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint WG Le"
+  },
+  {
+   "pair": [
+    "HW-053_1 tyre",
+    "HW-053_1 hub"
+   ],
+   "volume_cm3": 0.80638,
+   "intended": true,
+   "fix": "none: rubber tyre stretched on hub (press fit)",
+   "set": "joint WG Le"
+  },
+  {
+   "pair": [
+    "HW-054_1 Du-Bro DUB248 axle 5/32 in x 2 in",
+    "HW-055_1 Du-Bro DUB140 wheel collar 5/32 in (inner and outer"
+   ],
+   "volume_cm3": 3e-05,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint WG Le"
+  },
+  {
+   "pair": [
+    "HW-054_1 Du-Bro DUB248 axle 5/32 in x 2 in",
+    "HW-055_2 Du-Bro DUB140 wheel collar 5/32 in (inner and outer"
+   ],
+   "volume_cm3": 3e-05,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint WG Le"
+  },
+  {
+   "pair": [
+    "HW-054_1 Du-Bro DUB248 axle 5/32 in x 2 in",
+    "HW-057_1 Nylon-insert axle nut (supplied with DUB248, size e"
+   ],
+   "volume_cm3": 0.01054,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint WG Le"
+  },
+  {
+   "pair": [
+    "HW-054_1 Du-Bro DUB248 axle 5/32 in x 2 in",
+    "HW-057_1 nylon"
+   ],
+   "volume_cm3": 0.00702,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint WG Le"
+  },
+  {
+   "pair": [
+    "HW-054_1 Du-Bro DUB248 axle 5/32 in x 2 in",
+    "HW-137_1 Collar set screw 6-32 x 1/8 in (supplied with DUB14"
+   ],
+   "volume_cm3": 0.00547,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint WG Le"
+  },
+  {
+   "pair": [
+    "HW-054_1 Du-Bro DUB248 axle 5/32 in x 2 in",
+    "HW-137_2 Collar set screw 6-32 x 1/8 in (supplied with DUB14"
+   ],
+   "volume_cm3": 0.00547,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint WG Le"
+  },
+  {
+   "pair": [
+    "HW-055_1 Du-Bro DUB140 wheel collar 5/32 in (inner and outer",
+    "HW-137_1 Collar set screw 6-32 x 1/8 in (supplied with DUB14"
+   ],
+   "volume_cm3": 0.00913,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint WG Le"
+  },
+  {
+   "pair": [
+    "HW-055_2 Du-Bro DUB140 wheel collar 5/32 in (inner and outer",
+    "HW-137_2 Collar set screw 6-32 x 1/8 in (supplied with DUB14"
+   ],
+   "volume_cm3": 0.00913,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint WG Le"
+  },
+  {
+   "pair": [
+    "HW-050_2 ISO 7380-1 M3x40 A2",
+    "HW-052_2 DIN 985 M3 A2"
+   ],
+   "volume_cm3": 0.00499,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint WG Le"
+  },
+  {
+   "pair": [
+    "HW-050_2 ISO 7380-1 M3x40 A2",
+    "HW-052_2 nylon"
+   ],
+   "volume_cm3": 0.00333,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint WG Le"
+  },
+  {
+   "pair": [
+    "HW-050_6 ISO 7380-1 M3x40 A2",
+    "HW-052_6 DIN 985 M3 A2"
+   ],
+   "volume_cm3": 0.00499,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint WG Le"
+  },
+  {
+   "pair": [
+    "HW-050_6 ISO 7380-1 M3x40 A2",
+    "HW-052_6 nylon"
+   ],
+   "volume_cm3": 0.00333,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint WG Le"
+  },
+  {
+   "pair": [
+    "HW-053_2 tyre",
+    "HW-053_2 hub"
+   ],
+   "volume_cm3": 0.80638,
+   "intended": true,
+   "fix": "none: rubber tyre stretched on hub (press fit)",
+   "set": "joint WG Le"
+  },
+  {
+   "pair": [
+    "HW-054_2 Du-Bro DUB248 axle 5/32 in x 2 in",
+    "HW-055_3 Du-Bro DUB140 wheel collar 5/32 in (inner and outer"
+   ],
+   "volume_cm3": 3e-05,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint WG Le"
+  },
+  {
+   "pair": [
+    "HW-054_2 Du-Bro DUB248 axle 5/32 in x 2 in",
+    "HW-055_4 Du-Bro DUB140 wheel collar 5/32 in (inner and outer"
+   ],
+   "volume_cm3": 3e-05,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint WG Le"
+  },
+  {
+   "pair": [
+    "HW-054_2 Du-Bro DUB248 axle 5/32 in x 2 in",
+    "HW-057_2 Nylon-insert axle nut (supplied with DUB248, size e"
+   ],
+   "volume_cm3": 0.01054,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint WG Le"
+  },
+  {
+   "pair": [
+    "HW-054_2 Du-Bro DUB248 axle 5/32 in x 2 in",
+    "HW-057_2 nylon"
+   ],
+   "volume_cm3": 0.00702,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint WG Le"
+  },
+  {
+   "pair": [
+    "HW-054_2 Du-Bro DUB248 axle 5/32 in x 2 in",
+    "HW-137_3 Collar set screw 6-32 x 1/8 in (supplied with DUB14"
+   ],
+   "volume_cm3": 0.00547,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint WG Le"
+  },
+  {
+   "pair": [
+    "HW-054_2 Du-Bro DUB248 axle 5/32 in x 2 in",
+    "HW-137_4 Collar set screw 6-32 x 1/8 in (supplied with DUB14"
+   ],
+   "volume_cm3": 0.00547,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint WG Le"
+  },
+  {
+   "pair": [
+    "HW-055_3 Du-Bro DUB140 wheel collar 5/32 in (inner and outer",
+    "HW-137_3 Collar set screw 6-32 x 1/8 in (supplied with DUB14"
+   ],
+   "volume_cm3": 0.00913,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint WG Le"
+  },
+  {
+   "pair": [
+    "HW-055_4 Du-Bro DUB140 wheel collar 5/32 in (inner and outer",
+    "HW-137_4 Collar set screw 6-32 x 1/8 in (supplied with DUB14"
+   ],
+   "volume_cm3": 0.00913,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint WG Le"
+  },
+  {
+   "pair": [
+    "HW-050_3 ISO 7380-1 M3x40 A2",
+    "HW-052_3 DIN 985 M3 A2"
+   ],
+   "volume_cm3": 0.00499,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint WG Le"
+  },
+  {
+   "pair": [
+    "HW-050_3 ISO 7380-1 M3x40 A2",
+    "HW-052_3 nylon"
+   ],
+   "volume_cm3": 0.00333,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint WG Le"
+  },
+  {
+   "pair": [
+    "HW-050_7 ISO 7380-1 M3x40 A2",
+    "HW-052_7 DIN 985 M3 A2"
+   ],
+   "volume_cm3": 0.00499,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint WG Le"
+  },
+  {
+   "pair": [
+    "HW-050_7 ISO 7380-1 M3x40 A2",
+    "HW-052_7 nylon"
+   ],
+   "volume_cm3": 0.00333,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint WG Le"
+  },
+  {
+   "pair": [
+    "HW-053_3 tyre",
+    "HW-053_3 hub"
+   ],
+   "volume_cm3": 0.80638,
+   "intended": true,
+   "fix": "none: rubber tyre stretched on hub (press fit)",
+   "set": "joint WG Le"
+  },
+  {
+   "pair": [
+    "HW-054_3 Du-Bro DUB248 axle 5/32 in x 2 in",
+    "HW-055_5 Du-Bro DUB140 wheel collar 5/32 in (inner and outer"
+   ],
+   "volume_cm3": 3e-05,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint WG Le"
+  },
+  {
+   "pair": [
+    "HW-054_3 Du-Bro DUB248 axle 5/32 in x 2 in",
+    "HW-055_6 Du-Bro DUB140 wheel collar 5/32 in (inner and outer"
+   ],
+   "volume_cm3": 3e-05,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint WG Le"
+  },
+  {
+   "pair": [
+    "HW-054_3 Du-Bro DUB248 axle 5/32 in x 2 in",
+    "HW-057_3 Nylon-insert axle nut (supplied with DUB248, size e"
+   ],
+   "volume_cm3": 0.01054,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint WG Le"
+  },
+  {
+   "pair": [
+    "HW-054_3 Du-Bro DUB248 axle 5/32 in x 2 in",
+    "HW-057_3 nylon"
+   ],
+   "volume_cm3": 0.00702,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint WG Le"
+  },
+  {
+   "pair": [
+    "HW-054_3 Du-Bro DUB248 axle 5/32 in x 2 in",
+    "HW-137_5 Collar set screw 6-32 x 1/8 in (supplied with DUB14"
+   ],
+   "volume_cm3": 0.00547,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint WG Le"
+  },
+  {
+   "pair": [
+    "HW-054_3 Du-Bro DUB248 axle 5/32 in x 2 in",
+    "HW-137_6 Collar set screw 6-32 x 1/8 in (supplied with DUB14"
+   ],
+   "volume_cm3": 0.00547,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint WG Le"
+  },
+  {
+   "pair": [
+    "HW-055_5 Du-Bro DUB140 wheel collar 5/32 in (inner and outer",
+    "HW-137_5 Collar set screw 6-32 x 1/8 in (supplied with DUB14"
+   ],
+   "volume_cm3": 0.00913,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint WG Le"
+  },
+  {
+   "pair": [
+    "HW-055_6 Du-Bro DUB140 wheel collar 5/32 in (inner and outer",
+    "HW-137_6 Collar set screw 6-32 x 1/8 in (supplied with DUB14"
+   ],
+   "volume_cm3": 0.00913,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint WG Le"
+  },
+  {
+   "pair": [
+    "HW-050_4 ISO 7380-1 M3x40 A2",
+    "HW-052_4 DIN 985 M3 A2"
+   ],
+   "volume_cm3": 0.00499,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint WG Le"
+  },
+  {
+   "pair": [
+    "HW-050_4 ISO 7380-1 M3x40 A2",
+    "HW-052_4 nylon"
+   ],
+   "volume_cm3": 0.00333,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint WG Le"
+  },
+  {
+   "pair": [
+    "HW-050_8 ISO 7380-1 M3x40 A2",
+    "HW-052_8 DIN 985 M3 A2"
+   ],
+   "volume_cm3": 0.00499,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint WG Le"
+  },
+  {
+   "pair": [
+    "HW-050_8 ISO 7380-1 M3x40 A2",
+    "HW-052_8 nylon"
+   ],
+   "volume_cm3": 0.00333,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint WG Le"
+  },
+  {
+   "pair": [
+    "HW-053_4 tyre",
+    "HW-053_4 hub"
+   ],
+   "volume_cm3": 0.80638,
+   "intended": true,
+   "fix": "none: rubber tyre stretched on hub (press fit)",
+   "set": "joint WG Le"
+  },
+  {
+   "pair": [
+    "HW-054_4 Du-Bro DUB248 axle 5/32 in x 2 in",
+    "HW-055_7 Du-Bro DUB140 wheel collar 5/32 in (inner and outer"
+   ],
+   "volume_cm3": 3e-05,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint WG Le"
+  },
+  {
+   "pair": [
+    "HW-054_4 Du-Bro DUB248 axle 5/32 in x 2 in",
+    "HW-055_8 Du-Bro DUB140 wheel collar 5/32 in (inner and outer"
+   ],
+   "volume_cm3": 3e-05,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint WG Le"
+  },
+  {
+   "pair": [
+    "HW-054_4 Du-Bro DUB248 axle 5/32 in x 2 in",
+    "HW-057_4 Nylon-insert axle nut (supplied with DUB248, size e"
+   ],
+   "volume_cm3": 0.01054,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint WG Le"
+  },
+  {
+   "pair": [
+    "HW-054_4 Du-Bro DUB248 axle 5/32 in x 2 in",
+    "HW-057_4 nylon"
+   ],
+   "volume_cm3": 0.00702,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint WG Le"
+  },
+  {
+   "pair": [
+    "HW-054_4 Du-Bro DUB248 axle 5/32 in x 2 in",
+    "HW-137_7 Collar set screw 6-32 x 1/8 in (supplied with DUB14"
+   ],
+   "volume_cm3": 0.00547,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint WG Le"
+  },
+  {
+   "pair": [
+    "HW-054_4 Du-Bro DUB248 axle 5/32 in x 2 in",
+    "HW-137_8 Collar set screw 6-32 x 1/8 in (supplied with DUB14"
+   ],
+   "volume_cm3": 0.00547,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint WG Le"
+  },
+  {
+   "pair": [
+    "HW-055_7 Du-Bro DUB140 wheel collar 5/32 in (inner and outer",
+    "HW-137_7 Collar set screw 6-32 x 1/8 in (supplied with DUB14"
+   ],
+   "volume_cm3": 0.00913,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint WG Le"
+  },
+  {
+   "pair": [
+    "HW-055_8 Du-Bro DUB140 wheel collar 5/32 in (inner and outer",
+    "HW-137_8 Collar set screw 6-32 x 1/8 in (supplied with DUB14"
+   ],
+   "volume_cm3": 0.00913,
+   "intended": true,
+   "fix": "none: contact sliver < 0.02 cm3 (hole-to-shank tolerance / tessellation)",
+   "set": "joint WG Le"
+  }
+ ]
+}

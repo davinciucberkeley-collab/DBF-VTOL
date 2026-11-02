@@ -1,0 +1,1421 @@
+{
+ "generated": "2026-11-01",
+ "process": {
+  "printer": "ASSUMED Prusa MK4S class (not named anywhere in the repo, —): 250 x 210 x 220 mm bed, 0.4 mm nozzle, 0.05..0.30 layer; measured data from the same class",
+  "printer_source": "https://www.prusa3d.com/product/original-prusa-mk4s-3d-printer-5/ (2026-11-01)",
+  "nozzle_mm": 0.4,
+  "layer_mm": 0.2,
+  "filament": {
+   "PETG": "ELEGOO PETG 1.75 (budget-airframe.md sec. 5, P-05) for clamps, plates, pod parts",
+   "PA6_CF20": "Polymaker PA6-CF20 (P-01) for motor mounts, firewall, splice plug; hardened nozzle, dried 100 C 10 h",
+   "PETG_HDT_C": 68
+  },
+  "xy_hole_shrink_mm": {
+   "min": 0.1,
+   "max": 0.25,
+   "sources": [
+    "https://rsmith.home.xs4all.nl/3d-printing/dimensional-accuracy-of-3d-prints.html (-0.10..-0.20, PETG, MK4S)",
+    "https://cnckitchen.com/blog/are-our-heat-set-insert-datasheets-wrong (-0.25, PLA)"
+   ],
+   "est": "plus-minus 0.05 added as EST"
+  },
+  "xy_external_scale": {
+   "value": 0.997,
+   "note": "-0.3 % on 110 mm (S1); small parts about 0",
+   "source": "https://rsmith.home.xs4all.nl/3d-printing/dimensional-accuracy-of-3d-prints.html"
+  },
+  "z_scale": {
+   "PETG": "+0.2 %, within caliper resolution (S1)",
+   "PA6_CF20": "TDS test block 10 mm printed 9.73 (-2.7 %, axis mapping unclear): verify on coupon C-08",
+   "source": "https://fiberon.polymaker.com/wp-content/uploads/TDS_FIBERON-PA6-CF20_V1.1_EN.pdf"
+  },
+  "position_tol_mm": {
+   "value": 0.15,
+   "est": true,
+   "note": "feature position error within 50 mm, EST"
+  },
+  "tube_tolerance": {
+   "OD_in": 0.008,
+   "wall_in": 0.0049,
+   "source": "https://alcobrametals.com/?p=68918 (drawn 6061-T6; 5/8-1 in OD +-0.008, wall +-0.0049, checked 2026-11-01); onlinemetals.com lists no tolerance",
+   "boom_ID_range_mm": [
+    23.17,
+    24.074
+   ],
+   "spar_ID_range_mm": [
+    22.001,
+    22.906
+   ],
+   "joiner_OD_range_mm": [
+    22.022,
+    22.428
+   ],
+   "tube_OD_range_mm": [
+    25.197,
+    25.603
+   ]
+  },
+  "max_part_mm": "238.7 (root plate), 260 (canopy, needs diagonal or split)",
+  "creep": {
+   "model": "D(t) = D0 + D1 t^m, 23 C: D0 6.73e-4 1/MPa (E 1486 MPa), D1 1.24e-7, m 0.582; t in seconds ASSUMED; relaxation estimate 1/(1+D1 t^m/D0)",
+   "source": "https://opus.cloud1.lib.uts.edu.au/bitstream/10453/166023/2/Binder1.pdf",
+   "est": true,
+   "loss_percent": {
+    "1 day": 12,
+    "1 week": 30,
+    "30 days": 50
+   },
+   "time_shift_a": {
+    "45C": 1.83,
+    "55C": 4.59,
+    "60C": 53.4
+   }
+  }
+ },
+ "rules": [
+  {
+   "feature": "clearance_M2",
+   "nominal_mm": 2,
+   "cad_mm": 2.6,
+   "tol_mm": "printed 2.30..2.55",
+   "note": "ISO 273 medium 2.4 + 0.2. Horizontal holes: teardrop top.",
+   "source": "ISO 273 medium row via amesweb.info/Screws/Metric-Clearance-Hole-Chart.aspx (checked 2026-11-01) + 0.2 print compensation; S1 rsmith.home.xs4all.nl/3d-printing/dimensional-accuracy-of-3d-prints.html (hole -0.10..-0.20 mm, PETG, MK4S); S2 cnckitchen.com/blog/are-our-heat-set-insert-datasheets-wrong (printed holes about 0.25 mm small); checked 2026-11-01",
+   "est": true
+  },
+  {
+   "feature": "clearance_M2.5",
+   "nominal_mm": 2.5,
+   "cad_mm": 3.1,
+   "tol_mm": "printed 2.80..3.05",
+   "note": "medium 2.9 + 0.2",
+   "source": "ISO 273 medium row via amesweb.info/Screws/Metric-Clearance-Hole-Chart.aspx (checked 2026-11-01) + 0.2 print compensation; S1 rsmith.home.xs4all.nl/3d-printing/dimensional-accuracy-of-3d-prints.html (hole -0.10..-0.20 mm, PETG, MK4S); S2 cnckitchen.com/blog/are-our-heat-set-insert-datasheets-wrong (printed holes about 0.25 mm small); checked 2026-11-01",
+   "est": true
+  },
+  {
+   "feature": "clearance_M3",
+   "nominal_mm": 3,
+   "cad_mm": 3.6,
+   "tol_mm": "printed 3.30..3.55",
+   "note": "medium 3.4 + 0.2; use for single bolts",
+   "source": "ISO 273 medium row via amesweb.info/Screws/Metric-Clearance-Hole-Chart.aspx (checked 2026-11-01) + 0.2 print compensation; S1 rsmith.home.xs4all.nl/3d-printing/dimensional-accuracy-of-3d-prints.html (hole -0.10..-0.20 mm, PETG, MK4S); S2 cnckitchen.com/blog/are-our-heat-set-insert-datasheets-wrong (printed holes about 0.25 mm small); checked 2026-11-01",
+   "est": true
+  },
+  {
+   "feature": "clearance_M3_pattern",
+   "nominal_mm": 3,
+   "cad_mm": 3.8,
+   "tol_mm": "printed 3.50..3.75",
+   "note": "4-hole patterns (motor mount, firewall, FC deck): radial slack 0.25..0.37 covers position error EST",
+   "source": "ISO 273 medium row via amesweb.info/Screws/Metric-Clearance-Hole-Chart.aspx (checked 2026-11-01) + 0.2 print compensation; S1 rsmith.home.xs4all.nl/3d-printing/dimensional-accuracy-of-3d-prints.html (hole -0.10..-0.20 mm, PETG, MK4S); S2 cnckitchen.com/blog/are-our-heat-set-insert-datasheets-wrong (printed holes about 0.25 mm small); checked 2026-11-01",
+   "est": true
+  },
+  {
+   "feature": "clearance_M4",
+   "nominal_mm": 4,
+   "cad_mm": 4.7,
+   "tol_mm": "printed 4.40..4.65",
+   "note": "medium 4.5 + 0.2",
+   "source": "ISO 273 medium row via amesweb.info/Screws/Metric-Clearance-Hole-Chart.aspx (checked 2026-11-01) + 0.2 print compensation; S1 rsmith.home.xs4all.nl/3d-printing/dimensional-accuracy-of-3d-prints.html (hole -0.10..-0.20 mm, PETG, MK4S); S2 cnckitchen.com/blog/are-our-heat-set-insert-datasheets-wrong (printed holes about 0.25 mm small); checked 2026-11-01",
+   "est": true
+  },
+  {
+   "feature": "clearance_M5",
+   "nominal_mm": 5,
+   "cad_mm": 5.7,
+   "tol_mm": "printed 5.40..5.65",
+   "note": "medium 5.5 + 0.2",
+   "source": "ISO 273 medium row via amesweb.info/Screws/Metric-Clearance-Hole-Chart.aspx (checked 2026-11-01) + 0.2 print compensation; S1 rsmith.home.xs4all.nl/3d-printing/dimensional-accuracy-of-3d-prints.html (hole -0.10..-0.20 mm, PETG, MK4S); S2 cnckitchen.com/blog/are-our-heat-set-insert-datasheets-wrong (printed holes about 0.25 mm small); checked 2026-11-01",
+   "est": true
+  },
+  {
+   "feature": "insert_bore_M3",
+   "nominal_mm": 4.6,
+   "cad_mm": 4.2,
+   "tol_mm": "printed 3.90..4.15",
+   "note": "Ruthex M3x5.7 (OD 4.6); S2 as-printed best 4.2; hardware.json says 4.0 (too tight when printed). PA6-CF: start 4.0, confirm on coupon C-02. Add 0.4 x 45 deg lead-in; hole axis vertical; boss wall >= 1.6 (boss OD 7.4)",
+   "source": "S2; 3djake.ch/en-CH/ruthex/threaded-insert-m3-100-pieces (W min 1.6, length 5.7, 4.6) checked 2026-11-01",
+   "est": true
+  },
+  {
+   "feature": "insert_depth_M3",
+   "nominal_mm": 5.7,
+   "cad_mm": 7.5,
+   "tol_mm": "min 7.3",
+   "note": "insert 5.7 + 1.6 cavity (hardware.json hole_depth_min 7.3)",
+   "source": "inventory/hardware/hardware.json HW-005",
+   "est": true
+  },
+  {
+   "feature": "insert_bore_M2",
+   "nominal_mm": "—",
+   "cad_mm": "—",
+   "tol_mm": "—",
+   "note": "Ruthex M2 data not published on the pages read; M2 joints use nuts, not inserts",
+   "source": "—",
+   "est": false
+  },
+  {
+   "feature": "nut_trap_M2_s",
+   "nominal_mm": 4,
+   "cad_mm": 4.4,
+   "tol_mm": "printed 4.10..4.35",
+   "note": "across flats + 0.4; ISO 4032 s 4.0",
+   "source": "ISO 4032 table royasutton.github.io/omdl-snapshot (checked 2026-11-01)",
+   "est": true
+  },
+  {
+   "feature": "nut_trap_M2_depth",
+   "nominal_mm": 1.6,
+   "cad_mm": 2,
+   "tol_mm": "+0.4",
+   "note": "m 1.6 + 0.4 (hardware.json pocket 1.6 deep has no margin)",
+   "source": "ISO 4032 table; HW-066",
+   "est": true
+  },
+  {
+   "feature": "nut_trap_M2.5_s",
+   "nominal_mm": 5,
+   "cad_mm": 5.4,
+   "tol_mm": "printed 5.10..5.35",
+   "note": "+0.4",
+   "source": "ISO 4032 table",
+   "est": true
+  },
+  {
+   "feature": "nut_trap_M3_s",
+   "nominal_mm": 5.5,
+   "cad_mm": 5.9,
+   "tol_mm": "printed 5.60..5.85",
+   "note": "+0.4",
+   "source": "ISO 4032 table",
+   "est": true
+  },
+  {
+   "feature": "nut_trap_M3_depth",
+   "nominal_mm": 2.4,
+   "cad_mm": 2.8,
+   "tol_mm": "+0.4",
+   "note": "nyloc DIN 985 M3 is 4.0 tall (hardware.json): use 4.4",
+   "source": "ISO 4032 table; HW-025",
+   "est": true
+  },
+  {
+   "feature": "nut_trap_M4_s",
+   "nominal_mm": 7,
+   "cad_mm": 7.4,
+   "tol_mm": "printed 7.10..7.35",
+   "note": "+0.4",
+   "source": "ISO 4032 table",
+   "est": true
+  },
+  {
+   "feature": "nut_trap_M4_depth",
+   "nominal_mm": 3.2,
+   "cad_mm": 3.6,
+   "tol_mm": "+0.4",
+   "note": "",
+   "source": "ISO 4032 table",
+   "est": true
+  },
+  {
+   "feature": "nut_trap_M5_s",
+   "nominal_mm": 8,
+   "cad_mm": 8.4,
+   "tol_mm": "printed 8.10..8.35",
+   "note": "+0.4; hardware.json HW-012 pocket 8 AF would print 7.70..7.95 and block the nut",
+   "source": "ISO 4032 table; HW-012",
+   "est": true
+  },
+  {
+   "feature": "nut_trap_M5_depth",
+   "nominal_mm": 4.7,
+   "cad_mm": 5.1,
+   "tol_mm": "+0.4",
+   "note": "plate 7.7 thick leaves 2.6 floor",
+   "source": "ISO 4032 table; HW-012",
+   "est": true
+  },
+  {
+   "feature": "counterbore_M3_head",
+   "nominal_mm": 5.5,
+   "cad_mm": 6.3,
+   "tol_mm": "printed 6.00..6.25",
+   "note": "socket 5.5 / button 5.7 head, no washer",
+   "source": "ISO 4762 head per hardware.json HW-023; S1 rsmith.home.xs4all.nl/3d-printing/dimensional-accuracy-of-3d-prints.html (hole -0.10..-0.20 mm, PETG, MK4S); S2 cnckitchen.com/blog/are-our-heat-set-insert-datasheets-wrong (printed holes about 0.25 mm small); checked 2026-11-01",
+   "est": true
+  },
+  {
+   "feature": "counterbore_M3_washer",
+   "nominal_mm": 7,
+   "cad_mm": 7.6,
+   "tol_mm": "printed 7.30..7.55",
+   "note": "ISO 7089 washer OD 7 (hardware.json HW-024); motor-mount pocket 6.0 does not take it",
+   "source": "HW-024",
+   "est": true
+  },
+  {
+   "feature": "tube_bore_25.4_clamp_default",
+   "nominal_mm": 25.4,
+   "cad_mm": 25,
+   "tol_mm": "free gap 0.25..0.90 at 25.197..25.603 tube",
+   "note": "split clamp, closed halves, unmeasured tube; needs up to 0.9 mm closure",
+   "source": "alcobrametals.com/?p=68918 (OD +-0.008 in for 5/8-1 in, wall +-0.0049 in, checked 2026-11-01); S1 rsmith.home.xs4all.nl/3d-printing/dimensional-accuracy-of-3d-prints.html (hole -0.10..-0.20 mm, PETG, MK4S); S2 cnckitchen.com/blog/are-our-heat-set-insert-datasheets-wrong (printed holes about 0.25 mm small); checked 2026-11-01",
+   "est": true
+  },
+  {
+   "feature": "tube_bore_25.4_clamp_measured",
+   "nominal_mm": "d_meas",
+   "cad_mm": "d_meas - 0.22",
+   "tol_mm": "free gap 0.24..0.55",
+   "note": "preferred: caliper the tube at 3 places, average, model bore = d_meas - 0.22 (PETG); PA6-CF mounts d_meas - 0.08",
+   "source": "derived from the two sources above",
+   "est": true
+  },
+  {
+   "feature": "tube_bore_22.225_saddle_plate",
+   "nominal_mm": 22.225,
+   "cad_mm": 22.85,
+   "tol_mm": "printed 22.55..22.80",
+   "note": "joiner OD 22.022..22.428; passes 22.455 as built (-0.27 interference)",
+   "source": "alcobrametals.com/?p=68918; S1 rsmith.home.xs4all.nl/3d-printing/dimensional-accuracy-of-3d-prints.html (hole -0.10..-0.20 mm, PETG, MK4S); S2 cnckitchen.com/blog/are-our-heat-set-insert-datasheets-wrong (printed holes about 0.25 mm small); checked 2026-11-01",
+   "est": true
+  },
+  {
+   "feature": "tube_bore_25.4_leg_socket_epoxy",
+   "nominal_mm": 25.4,
+   "cad_mm": 26,
+   "tol_mm": "printed 25.70..25.95",
+   "note": "axle-block leg socket, bonded; teardrop (horizontal)",
+   "source": "as above",
+   "est": true
+  },
+  {
+   "feature": "tube_bore_25.4_foam_socket",
+   "nominal_mm": 25.4,
+   "cad_mm": 26,
+   "tol_mm": "EST",
+   "note": "foam process (—), epoxy bond line",
+   "source": "R2 WingPanel (CAD 25.4, zero clearance)",
+   "est": true
+  },
+  {
+   "feature": "plug_OD_boom_ID",
+   "nominal_mm": 23.622,
+   "cad_mm": 23,
+   "tol_mm": "plug printed 22.83..23.03 vs ID 23.17..24.07",
+   "note": "size to measured ID minus 0.25 and bond; 23.2 as drawn reaches -0.13",
+   "source": "alcobrametals.com/?p=68918; S1 rsmith.home.xs4all.nl/3d-printing/dimensional-accuracy-of-3d-prints.html (hole -0.10..-0.20 mm, PETG, MK4S); S2 cnckitchen.com/blog/are-our-heat-set-insert-datasheets-wrong (printed holes about 0.25 mm small); checked 2026-11-01",
+   "est": true
+  },
+  {
+   "feature": "axle_bore_5_32",
+   "nominal_mm": 3.97,
+   "cad_mm": 4.2,
+   "tol_mm": "printed 3.90..4.15, then ream 4.10 (4.05..4.15)",
+   "note": "DUB248 5/32 in; vertical hole",
+   "source": "gator-rc.com/products/dubro-super-lite-wheels (axle size 5/32, checked 2026-11-01); S1 rsmith.home.xs4all.nl/3d-printing/dimensional-accuracy-of-3d-prints.html (hole -0.10..-0.20 mm, PETG, MK4S); S2 cnckitchen.com/blog/are-our-heat-set-insert-datasheets-wrong (printed holes about 0.25 mm small); checked 2026-11-01",
+   "est": true
+  },
+  {
+   "feature": "pin_bore_LE_head_pin",
+   "nominal_mm": 5.7,
+   "cad_mm": 6.2,
+   "tol_mm": "printed 5.90..6.15",
+   "note": "M3 button head pocket",
+   "source": "HW-004; S1 rsmith.home.xs4all.nl/3d-printing/dimensional-accuracy-of-3d-prints.html (hole -0.10..-0.20 mm, PETG, MK4S); S2 cnckitchen.com/blog/are-our-heat-set-insert-datasheets-wrong (printed holes about 0.25 mm small); checked 2026-11-01",
+   "est": true
+  },
+  {
+   "feature": "slot_TE_tab",
+   "nominal_mm": 3,
+   "cad_mm": 3.6,
+   "tol_mm": "printed 3.30..3.55 vs tab 2.90..3.10",
+   "note": "sliding clearance 0.20..0.25 on separate parts (S3 makerspace.uflib.ufl.edu ... MK4 tolerances)",
+   "source": "S3, S1 rsmith.home.xs4all.nl/3d-printing/dimensional-accuracy-of-3d-prints.html (hole -0.10..-0.20 mm, PETG, MK4S); S2 cnckitchen.com/blog/are-our-heat-set-insert-datasheets-wrong (printed holes about 0.25 mm small); checked 2026-11-01",
+   "est": true
+  },
+  {
+   "feature": "servo_pocket_ES3005HV",
+   "nominal_mm": "38.6 x 18.8",
+   "cad_mm": "39.4 x 19.6",
+   "tol_mm": "printed clearance 0.5..0.75",
+   "note": "body per components.json; ears unknown",
+   "source": "inventory/electrical/components.json; HW-063",
+   "est": true
+  },
+  {
+   "feature": "hinge_gap_aileron",
+   "nominal_mm": 4.77,
+   "cad_mm": 4.8,
+   "tol_mm": "+-0.87 RSS, +-1.5 worst",
+   "note": "2 % chord",
+   "source": "S-08",
+   "est": true
+  },
+  {
+   "feature": "hinge_gap_elevator",
+   "nominal_mm": 1.51,
+   "cad_mm": 3.5,
+   "tol_mm": "+-0.87 RSS, +-1.5 worst",
+   "note": "CAD 2 % chord gives 1.51; make 3.5 (4.6 % chord)",
+   "source": "S-09",
+   "est": true
+  },
+  {
+   "feature": "elephant_foot_chamfer",
+   "nominal_mm": 0,
+   "cad_mm": 0.4,
+   "tol_mm": "-",
+   "note": "0.4 x 45 deg on the first-layer edge of every mating part (Prusa: about 0.2 mm squish)",
+   "source": "help.prusa3d.com/article/elephant-foot-compensation_114487",
+   "est": true
+  }
+ ],
+ "fits": [
+  {
+   "id": "F-01",
+   "parts": [
+    "Boom_Clamp_Front",
+    "Boom_Clamp_Rear",
+    "Boom_Front"
+   ],
+   "feature": "boom tube 25.4 in split-clamp bore (halves closed)",
+   "nominal": "25.4 +-0.203",
+   "cad": 25,
+   "min_clear": -0.9,
+   "max_clear": -0.25,
+   "verdict": "pass",
+   "source": "R2 SaddleTB; https://alcobrametals.com/?p=68918; https://rsmith.home.xs4all.nl/3d-printing/dimensional-accuracy-of-3d-prints.html",
+   "note": "interference by design = free gap 0.25..0.90 mm to close; measured-tube rule gives 0.24..0.55"
+  },
+  {
+   "id": "F-02",
+   "parts": [
+    "Motor_Mount",
+    "Boom_Front"
+   ],
+   "feature": "boom tube in PA6-CF motor-mount clamshell bore",
+   "nominal": "25.4 +-0.203",
+   "cad": "d_meas-0.08",
+   "min_clear": -0.9,
+   "max_clear": -0.25,
+   "verdict": "marginal",
+   "source": "R3 HW (J-08); S7",
+   "note": "PA6-CF E 8637 MPa cannot close 0.9 mm: bore must follow the measured tube, target free gap 0.25"
+  },
+  {
+   "id": "F-03",
+   "parts": [
+    "Gear_Clamp",
+    "Landing_Leg"
+   ],
+   "feature": "leg tube in gear clamp socket (vertical bore, split + cross bolt)",
+   "nominal": "25.4 +-0.203",
+   "cad": 25,
+   "min_clear": -0.9,
+   "max_clear": -0.25,
+   "verdict": "pass",
+   "source": "R3 J-13/J-14",
+   "note": "same rule as F-01; print socket axis vertical"
+  },
+  {
+   "id": "F-04",
+   "parts": [
+    "Wing_Joiner",
+    "Spar_Tube"
+   ],
+   "feature": "0.875 joiner sliding in 1.000x0.058 spar ID (panel removal)",
+   "nominal": "0.229 diametral",
+   "cad": "22.225 / 22.454",
+   "min_clear": -0.43,
+   "max_clear": 0.88,
+   "verdict": "fail",
+   "source": "R1 joinOD, sparID; https://alcobrametals.com/?p=68918",
+   "note": "ID = OD - 2 wall: worst-case interference 0.43; ISO 286 IT13 at 22 mm is 0.33 (S13)"
+  },
+  {
+   "id": "F-05a",
+   "parts": [
+    "Wing_Saddle (root plate)",
+    "Wing_Joiner"
+   ],
+   "feature": "joiner through saddle root-plate hole, CAD as built",
+   "nominal": "22.225 +0.23",
+   "cad": "22.455",
+   "min_clear": -0.27,
+   "max_clear": 0.38,
+   "verdict": "fail",
+   "source": "R2 WingSaddle",
+   "note": ""
+  },
+  {
+   "id": "F-05b",
+   "parts": [
+    "Wing_Saddle (root plate)",
+    "Wing_Joiner"
+   ],
+   "feature": "same, compensated",
+   "nominal": "22.225",
+   "cad": "22.85",
+   "min_clear": 0.12,
+   "max_clear": 0.78,
+   "verdict": "pass",
+   "source": "S1, S2",
+   "note": ""
+  },
+  {
+   "id": "F-06",
+   "parts": [
+    "Wing_Panel",
+    "Spar_Tube"
+   ],
+   "feature": "spar tube in foam socket (bonded)",
+   "nominal": "25.4",
+   "cad": "25.4 now -> 26.0",
+   "min_clear": null,
+   "max_clear": null,
+   "verdict": "marginal",
+   "source": "R2 WingPanel",
+   "note": "CAD bore has zero clearance to a tube up to 25.603; foam process is not specified (—); EST 26.0 for epoxy bond line"
+  },
+  {
+   "id": "F-07",
+   "parts": [
+    "Splice plug (PA6-CF)",
+    "Boom_Front",
+    "Boom_Rear_Stub"
+   ],
+   "feature": "plug in boom ID 23.17..24.07 (CAD plug 23.2 now)",
+   "nominal": "23.622 nominal ID",
+   "cad": "23.2 -> 23.0",
+   "min_clear": -0.13,
+   "max_clear": 1.04,
+   "verdict": "marginal",
+   "source": "R3 HW-022; https://alcobrametals.com/?p=68918",
+   "note": "as drawn 23.2: -0.13..+0.97; at 23.0: 0.07..1.24, bond with epoxy, size to measured ID"
+  },
+  {
+   "id": "F-08",
+   "parts": [
+    "printed plate",
+    "M2 screw"
+   ],
+   "feature": "clearance hole M2",
+   "nominal": "2",
+   "cad": "2.6",
+   "min_clear": 0.3,
+   "max_clear": 0.55,
+   "verdict": "pass",
+   "source": "ISO 273 medium 2.4 (S9) + 0.2",
+   "note": ""
+  },
+  {
+   "id": "F-09",
+   "parts": [
+    "printed part",
+    "M2.5 screw"
+   ],
+   "feature": "clearance hole M2.5",
+   "nominal": "2.5",
+   "cad": "3.1",
+   "min_clear": 0.3,
+   "max_clear": 0.55,
+   "verdict": "pass",
+   "source": "ISO 273 medium 2.9 (S9) + 0.2",
+   "note": ""
+  },
+  {
+   "id": "F-10",
+   "parts": [
+    "clamp tops, tabs, plates",
+    "M3 screw"
+   ],
+   "feature": "clearance hole M3",
+   "nominal": "3",
+   "cad": "3.6",
+   "min_clear": 0.3,
+   "max_clear": 0.55,
+   "verdict": "pass",
+   "source": "ISO 273 medium 3.4 (S9) + 0.2",
+   "note": ""
+  },
+  {
+   "id": "F-11",
+   "parts": [
+    "Motor_Mount, firewall, FC deck",
+    "M3 (4-hole pattern) screw"
+   ],
+   "feature": "clearance hole M3 (4-hole pattern)",
+   "nominal": "3",
+   "cad": "3.8",
+   "min_clear": 0.5,
+   "max_clear": 0.75,
+   "verdict": "pass",
+   "source": "medium + 0.4: radial slack 0.22..0.37 vs position error EST +-0.15 +-0.10 motor",
+   "note": "medium + 0.4: radial slack 0.25..0.37 vs position error EST +-0.15 print, +-0.10 motor"
+  },
+  {
+   "id": "F-12",
+   "parts": [
+    "axle-block/washer parts",
+    "M4 screw"
+   ],
+   "feature": "clearance hole M4",
+   "nominal": "4",
+   "cad": "4.7",
+   "min_clear": 0.4,
+   "max_clear": 0.65,
+   "verdict": "pass",
+   "source": "ISO 273 medium 4.5 + 0.2",
+   "note": ""
+  },
+  {
+   "id": "F-13",
+   "parts": [
+    "Wing_Saddle, pod plate",
+    "M5 screw"
+   ],
+   "feature": "clearance hole M5",
+   "nominal": "5",
+   "cad": "5.7",
+   "min_clear": 0.4,
+   "max_clear": 0.65,
+   "verdict": "pass",
+   "source": "ISO 273 medium 5.5 + 0.2",
+   "note": ""
+  },
+  {
+   "id": "F-14",
+   "parts": [
+    "any printed boss",
+    "Ruthex M3x5.7 insert"
+   ],
+   "feature": "heat-set insert bore (HW-005 etc. say 4.0)",
+   "nominal": "OD 4.6",
+   "cad": "4.0 -> 4.2",
+   "min_clear": -0.7,
+   "max_clear": -0.45,
+   "verdict": "pass",
+   "source": "S2, S11",
+   "note": "printed 3.90..4.15 vs 4.6 knurl: 0.45..0.70 interference as intended; 4.0 gives 3.70..3.95 (too tight)"
+  },
+  {
+   "id": "F-15",
+   "parts": [
+    "printed trap",
+    "M3 nut ISO 4032"
+   ],
+   "feature": "M3 nut trap across flats",
+   "nominal": "5.5",
+   "cad": 5.9,
+   "min_clear": 0.1,
+   "max_clear": 0.55,
+   "verdict": "pass",
+   "source": "S10",
+   "note": "min AF 5.3 is EST"
+  },
+  {
+   "id": "F-16a",
+   "parts": [
+    "Pod hard-point plate",
+    "M5 nut"
+   ],
+   "feature": "M5 nut pocket as drawn (HW-012)",
+   "nominal": "8.0",
+   "cad": "8.0",
+   "min_clear": -0.3,
+   "max_clear": 0.15,
+   "verdict": "fail",
+   "source": "R3 HW-012; S10",
+   "note": "7.70..7.95 vs 8.0: nut does not enter"
+  },
+  {
+   "id": "F-16b",
+   "parts": [
+    "Pod hard-point plate",
+    "M5 nut"
+   ],
+   "feature": "M5 nut pocket compensated, depth 5.1",
+   "nominal": "8.0",
+   "cad": "8.4",
+   "min_clear": 0.1,
+   "max_clear": 0.55,
+   "verdict": "pass",
+   "source": "S10",
+   "note": ""
+  },
+  {
+   "id": "F-17",
+   "parts": [
+    "Aileron/elevator servo tray",
+    "M2 nut"
+   ],
+   "feature": "M2 nut trap AF 4.0, depth 1.6 as drawn",
+   "nominal": "4.0, m 1.6",
+   "cad": "4.4 x 2.0 deep",
+   "min_clear": 0.1,
+   "max_clear": 0.55,
+   "verdict": "fail",
+   "source": "R3 HW-066 (depth 1.6 = nut m, zero margin); S10",
+   "note": "AF passes at 4.4; depth must be 2.0"
+  },
+  {
+   "id": "F-18a",
+   "parts": [
+    "Motor_Mount",
+    "M3 socket head 5.5 + washer OD 7"
+   ],
+   "feature": "head pocket as drawn (HW: 6.0 dia, head + 0.5 washer)",
+   "nominal": "5.5 / 7.0",
+   "cad": "6.0",
+   "min_clear": -1.3,
+   "max_clear": 0.45,
+   "verdict": "fail",
+   "source": "R4 sec. 4; R3 HW-024",
+   "note": "head fits (0.20..0.45), ISO 7089 washer OD 7 does not"
+  },
+  {
+   "id": "F-18b",
+   "parts": [
+    "Motor_Mount",
+    "M3 socket head + washer"
+   ],
+   "feature": "pocket for head + ISO 7089 washer",
+   "nominal": "7.0",
+   "cad": "7.6",
+   "min_clear": 0.3,
+   "max_clear": 0.55,
+   "verdict": "pass",
+   "source": "R3 HW-024",
+   "note": ""
+  },
+  {
+   "id": "F-19",
+   "parts": [
+    "Panel root plate",
+    "M3 button head (LE pin)"
+   ],
+   "feature": "LE head-pin pocket",
+   "nominal": "5.7",
+   "cad": "6.2",
+   "min_clear": 0.2,
+   "max_clear": 0.45,
+   "verdict": "pass",
+   "source": "R3 HW-001/004",
+   "note": ""
+  },
+  {
+   "id": "F-20a",
+   "parts": [
+    "Saddle plate tab",
+    "Panel root plate slot"
+   ],
+   "feature": "TE tab 3.0 in slot 3.4 as drawn",
+   "nominal": "3.0 / 3.4",
+   "cad": "3.4",
+   "min_clear": 0,
+   "max_clear": 0.46,
+   "verdict": "marginal",
+   "source": "R3 HW-001/002",
+   "note": "zero clearance at the corner of the range"
+  },
+  {
+   "id": "F-20b",
+   "parts": [
+    "Saddle plate tab",
+    "Panel root plate slot"
+   ],
+   "feature": "same, slot 3.6",
+   "nominal": "3.0 / 3.6",
+   "cad": "3.6",
+   "min_clear": 0.2,
+   "max_clear": 0.66,
+   "verdict": "pass",
+   "source": "S3 (sliding 0.20..0.25 on separate parts)",
+   "note": ""
+  },
+  {
+   "id": "F-21a",
+   "parts": [
+    "Servo tray",
+    "ES3005HV body 38.6 x 18.8"
+   ],
+   "feature": "servo cut-out as drawn 39 x 19 (width)",
+   "nominal": "18.8",
+   "cad": "19.0",
+   "min_clear": -0.1,
+   "max_clear": 0.15,
+   "verdict": "fail",
+   "source": "R3 HW-063; R8",
+   "note": "width: -0.10 interference; length 0.10..0.35"
+  },
+  {
+   "id": "F-21b",
+   "parts": [
+    "Servo tray",
+    "ES3005HV"
+   ],
+   "feature": "servo cut-out 39.4 x 19.6",
+   "nominal": "38.6 x 18.8",
+   "cad": "39.4 x 19.6",
+   "min_clear": 0.5,
+   "max_clear": 0.75,
+   "verdict": "pass",
+   "source": "R8",
+   "note": "servo body tolerance (-) assumed 0"
+  },
+  {
+   "id": "F-22",
+   "parts": [
+    "Servo tray",
+    "ES3005HV ears"
+   ],
+   "feature": "ear holes: pitch 48 x 10 is EST",
+   "nominal": "—",
+   "cad": "slots 2.6 x 4.0 until measured",
+   "min_clear": null,
+   "max_clear": null,
+   "verdict": "open",
+   "source": "R4 sec. 5",
+   "note": "ear hole size and pitch unknown (—)"
+  },
+  {
+   "id": "F-23a",
+   "parts": [
+    "Axle block",
+    "DUB248 axle 5/32"
+   ],
+   "feature": "axle bore as drawn (4.2), vertical hole",
+   "nominal": "3.97",
+   "cad": "4.2",
+   "min_clear": -0.07,
+   "max_clear": 0.18,
+   "verdict": "marginal",
+   "source": "R3 HW-049; S12",
+   "note": "3.90..4.15 vs 3.97: may bind"
+  },
+  {
+   "id": "F-23b",
+   "parts": [
+    "Axle block",
+    "DUB248 axle"
+   ],
+   "feature": "bore printed 4.2 then reamed with a 4.1 mm drill",
+   "nominal": "3.97",
+   "cad": "4.2 + ream 4.10",
+   "min_clear": 0.08,
+   "max_clear": 0.18,
+   "verdict": "pass",
+   "source": "EST ream +-0.05",
+   "note": "toe error <= 0.18/16 mm = 0.64 deg"
+  },
+  {
+   "id": "F-24",
+   "parts": [
+    "Du-Bro 300SL hub",
+    "DUB248 axle"
+   ],
+   "feature": "wheel hub bore on axle",
+   "nominal": "3.97",
+   "cad": "—",
+   "min_clear": null,
+   "max_clear": null,
+   "verdict": "open",
+   "source": "S12 (axle size 5/32 only; bore not published)",
+   "note": "measure on receipt; spins on the axle, no bearing"
+  },
+  {
+   "id": "F-25",
+   "parts": [
+    "Axle block",
+    "Landing_Leg"
+   ],
+   "feature": "leg tube in block socket 25.6 as drawn -> 26.0 (horizontal bore, teardrop)",
+   "nominal": "25.4 +-0.203",
+   "cad": "25.6 -> 26.0",
+   "min_clear": -0.3,
+   "max_clear": 0.35,
+   "verdict": "marginal",
+   "source": "R3 HW-049",
+   "note": "as drawn -0.30..+0.35; at 26.0: 0.1..0.75 for epoxy"
+  },
+  {
+   "id": "F-26",
+   "parts": [
+    "Wheel 300SL",
+    "Landing_Leg tube"
+   ],
+   "feature": "wheel inner face (z 8.8 from leg axis) vs tube radius 12.7 over 18.1 mm of tube above the axle",
+   "nominal": "—",
+   "cad": "offset axle 5 mm outboard",
+   "min_clear": -3.9,
+   "max_clear": null,
+   "verdict": "fail",
+   "source": "R3 J-15 note; calc: wheel r 38.1 - 10 axle offset",
+   "note": "geometric interference; with +5 mm offset clearance 1.1"
+  },
+  {
+   "id": "F-27",
+   "parts": [
+    "DUB248",
+    "block",
+    "wheel",
+    "collar"
+   ],
+   "feature": "axle stack 50.4 on 50.8 axle",
+   "nominal": "nominal margin 0.4",
+   "cad": "move nyloc inboard",
+   "min_clear": -0.75,
+   "max_clear": 0.4,
+   "verdict": "marginal",
+   "source": "R3 J-15; S12",
+   "note": "worst case overruns by 0.75; collar set screw still bites if flush (EST)"
+  },
+  {
+   "id": "F-28",
+   "parts": [
+    "Tail saddle clamshell",
+    "boom stub"
+   ],
+   "feature": "saddle bore 25.5 -> 25.0 (HW-058 bore_d)",
+   "nominal": "25.4 +-0.203",
+   "cad": "25.5 -> 25.0",
+   "min_clear": -0.4,
+   "max_clear": 0.25,
+   "verdict": "marginal",
+   "source": "R3 HW-058",
+   "note": "25.5 leaves 0.25 slack at the small tube; use F-01 rule"
+  },
+  {
+   "id": "F-29",
+   "parts": [
+    "Pitot clamp post",
+    "6 mm pitot"
+   ],
+   "feature": "bore 6.1 split at z=-1.0",
+   "nominal": "6.0 (OD tolerance —)",
+   "cad": "6.1 -> 5.8",
+   "min_clear": -0.2,
+   "max_clear": 0.05,
+   "verdict": "open",
+   "source": "R3 HW-125",
+   "note": "as drawn -0.20 interference; clamp rule gives 0.25..0.5 free gap"
+  },
+  {
+   "id": "F-30",
+   "parts": [
+    "Battery tray",
+    "6S pack 155 x 48 x 50 (EST)"
+   ],
+   "feature": "battery pocket (tray -23..148 mm = 171, pack x 61 +-77.5)",
+   "nominal": "EST",
+   "cad": "inside length = pack + 10",
+   "min_clear": null,
+   "max_clear": null,
+   "verdict": "open",
+   "source": "R3 HW-105; R8 BAT1 (dims EST)",
+   "note": "6.5 mm each end today; pack puffs; real pack dims (—)"
+  },
+  {
+   "id": "F-31",
+   "parts": [
+    "Canopy",
+    "pod hatch rim"
+   ],
+   "feature": "canopy lip gap",
+   "nominal": "—",
+   "cad": "1.0 mm gap under tape",
+   "min_clear": null,
+   "max_clear": null,
+   "verdict": "open",
+   "source": "R3 HW-103",
+   "note": "foam rim and 260 mm blister both EST +-0.8"
+  },
+  {
+   "id": "F-32",
+   "parts": [
+    "Wing_Panel",
+    "Aileron"
+   ],
+   "feature": "aileron hinge gap (tape)",
+   "nominal": "4.77",
+   "cad": "4.8",
+   "min_clear": 3.27,
+   "max_clear": 6.27,
+   "verdict": "pass",
+   "source": "S-08",
+   "note": ""
+  },
+  {
+   "id": "F-33",
+   "parts": [
+    "H_Tail",
+    "Elevator"
+   ],
+   "feature": "elevator hinge gap (tape)",
+   "nominal": "1.51",
+   "cad": "3.5",
+   "min_clear": 2,
+   "max_clear": 5,
+   "verdict": "fail as drawn (1.51 mm); pass at 3.5",
+   "source": "S-09",
+   "note": "1.51 +-1.5 can reach 0.01; 3.5 gives 2.0 worst case"
+  }
+ ],
+ "stackups": [
+  {
+   "id": "S-01",
+   "name": "Wing incidence error, panel to saddle to pod (deg)",
+   "unit": "deg",
+   "contributors": [
+    {
+     "name": "TE tab slot play (printed slot 3.30-3.55 vs tab 2.90-3.10: max play 0.65, +-0.325 mm at 95.5 mm lever)",
+     "tol": 0.195
+    },
+    {
+     "name": "Panel root plate in foam pocket (0.6 mm EST over 238.7 mm)",
+     "tol": 0.072
+    },
+    {
+     "name": "Saddle plate in saddle foam pocket (0.6 mm EST over 238.7 mm)",
+     "tol": 0.072
+    },
+    {
+     "name": "Root plate bow/warp (0.5 mm EST end to end, +-0.25)",
+     "tol": 0.06
+    },
+    {
+     "name": "Saddle seat on pod formers (+-0.5 mm EST over 150 mm; formers are -)",
+     "tol": 0.191
+    }
+   ],
+   "worst": 0.59,
+   "rss": 0.297,
+   "limit": 0.5,
+   "limit_kind": "maximum",
+   "verdict": "marginal: worst 0.59 > 0.5, RSS 0.30 passes",
+   "formula": "angle = atan(offset / lever); worst = sum, RSS = sqrt(sum of squares)"
+  },
+  {
+   "id": "S-02",
+   "name": "Boom clamp pair to boom tilt, i.e. lift-motor axis tilt (deg)",
+   "unit": "deg",
+   "contributors": [
+    {
+     "name": "Front clamp: bore centre vs clamp body (EST +-0.15 mm) -> tilt",
+     "tol": 0.072
+    },
+    {
+     "name": "Rear clamp: bore centre vs clamp body (EST +-0.15 mm)",
+     "tol": 0.072
+    },
+    {
+     "name": "Front clamp seat gap to foam (bond line, EST +-0.5 mm)",
+     "tol": 0.24
+    },
+    {
+     "name": "Rear clamp seat gap to foam (EST +-0.5)",
+     "tol": 0.24
+    },
+    {
+     "name": "Foam lower surface at front station (EST +-0.5)",
+     "tol": 0.24
+    },
+    {
+     "name": "Foam lower surface at rear station (EST +-0.5)",
+     "tol": 0.24
+    },
+    {
+     "name": "Tube offset in front clamp (half of 0.52 mm closing gap)",
+     "tol": 0.125
+    },
+    {
+     "name": "Tube offset in rear clamp (half of 0.52 mm closing gap)",
+     "tol": 0.125
+    }
+   ],
+   "worst": 1.354,
+   "rss": 0.522,
+   "limit": 1,
+   "limit_kind": "maximum",
+   "verdict": "marginal: worst 1.35 > 1.0, RSS 0.52 passes (assumes measured-tube clamp rule)",
+   "formula": "angle = atan(offset / lever); worst = sum, RSS = sqrt(sum of squares)"
+  },
+  {
+   "id": "S-03",
+   "name": "Rear lift prop tip to wing trailing edge (mm), nominal 50.0",
+   "unit": "mm",
+   "contributors": [
+    {
+     "name": "Boom axial position in clamps (EST)",
+     "tol": 2
+    },
+    {
+     "name": "Motor mount axial position on boom (EST)",
+     "tol": 1
+    },
+    {
+     "name": "Prop radius (17 in prop, EST +-0.8)",
+     "tol": 0.8
+    },
+    {
+     "name": "Wing TE x position (foam, EST)",
+     "tol": 1
+    },
+    {
+     "name": "Boom tilt moves prop 59 mm above boom by 0.8 mm",
+     "tol": 0.8
+    }
+   ],
+   "worst": 5.6,
+   "rss": 2.698,
+   "limit": 20,
+   "limit_kind": "minimum",
+   "verdict": "pass: min gap 44.4 worst, 47.3 RSS vs 20",
+   "formula": "worst = sum, RSS = sqrt(sum of squares)"
+  },
+  {
+   "id": "S-04",
+   "name": "Rear lift prop tip to pusher disc (mm), nominal 60.6",
+   "unit": "mm",
+   "contributors": [
+    {
+     "name": "Boom z position (clamp seat on wing, EST)",
+     "tol": 1.5
+    },
+    {
+     "name": "Pusher motor y/z position on firewall (EST)",
+     "tol": 1
+    },
+    {
+     "name": "Lift prop radius (EST)",
+     "tol": 0.8
+    },
+    {
+     "name": "Pusher prop radius (EST)",
+     "tol": 0.5
+    },
+    {
+     "name": "Boom roll tilt (EST)",
+     "tol": 1
+    }
+   ],
+   "worst": 4.8,
+   "rss": 2.267,
+   "limit": 20,
+   "limit_kind": "minimum",
+   "verdict": "pass: min 55.8 worst, 58.3 RSS vs 20",
+   "formula": "worst = sum, RSS = sqrt(sum of squares)"
+  },
+  {
+   "id": "S-05",
+   "name": "Lift motor mount: face perpendicularity to thrust line (deg)",
+   "unit": "deg",
+   "contributors": [
+    {
+     "name": "Motor face flatness (EST +-0.15 mm over 46 mm)",
+     "tol": 0.187
+    },
+    {
+     "name": "Mount tilt in clamp (+-0.26 mm closing gap over 70 mm bore)",
+     "tol": 0.213
+    },
+    {
+     "name": "Boom straightness (EST +-0.5 mm over 0.44 m)",
+     "tol": 0.065
+    },
+    {
+     "name": "Insert/screw seat under washer (EST +-0.1 mm over 19 mm)",
+     "tol": 0.302
+    }
+   ],
+   "worst": 0.766,
+   "rss": 0.419,
+   "limit": 1,
+   "limit_kind": "maximum",
+   "verdict": "pass",
+   "formula": "angle = atan(offset / lever); worst = sum, RSS = sqrt(sum of squares)"
+  },
+  {
+   "id": "S-06",
+   "name": "Pusher thrust-line tilt (deg)",
+   "unit": "deg",
+   "contributors": [
+    {
+     "name": "Firewall PA6-CF flatness (EST +-0.15 mm over 58 mm)",
+     "tol": 0.148
+    },
+    {
+     "name": "Bulkhead ring flatness (EST +-0.15 mm over 58 mm)",
+     "tol": 0.148
+    },
+    {
+     "name": "Bulkhead seat on foam tail cone (EST +-0.5 mm over 58 mm)",
+     "tol": 0.494
+    },
+    {
+     "name": "Tail cone axis vs pod axis (foam, EST)",
+     "tol": 0.3
+    }
+   ],
+   "worst": 1.09,
+   "rss": 0.615,
+   "limit": 1,
+   "limit_kind": "maximum",
+   "verdict": "marginal: worst 1.09 > 1.0, RSS 0.62 passes",
+   "formula": "angle = atan(offset / lever); worst = sum, RSS = sqrt(sum of squares)"
+  },
+  {
+   "id": "S-07",
+   "name": "Pusher prop tip ground clearance on wheels (mm), nominal 84.0",
+   "unit": "mm",
+   "contributors": [
+    {
+     "name": "Leg cut length and squareness (EST)",
+     "tol": 0.7
+    },
+    {
+     "name": "Leg seat depth in axle block (EST)",
+     "tol": 0.5
+    },
+    {
+     "name": "Axle hole position in block (EST)",
+     "tol": 0.3
+    },
+    {
+     "name": "Wheel radius (EST +-0.5)",
+     "tol": 0.5
+    },
+    {
+     "name": "Tyre compression under load (EST, one-sided)",
+     "tol": 1.5
+    },
+    {
+     "name": "Gear clamp vertical position (EST)",
+     "tol": 0.3
+    }
+   ],
+   "worst": 3.8,
+   "rss": 1.849,
+   "limit": 50,
+   "limit_kind": "minimum",
+   "verdict": "pass: min 80.2 worst",
+   "formula": "worst = sum, RSS = sqrt(sum of squares)"
+  },
+  {
+   "id": "S-08",
+   "name": "Aileron hinge gap (mm), nominal 4.77",
+   "unit": "mm",
+   "contributors": [
+    {
+     "name": "Hot-wire kerf variation (EST)",
+     "tol": 0.5
+    },
+    {
+     "name": "Panel cut line (EST)",
+     "tol": 0.5
+    },
+    {
+     "name": "Aileron LE cut line (EST)",
+     "tol": 0.5
+    }
+   ],
+   "worst": 1.5,
+   "rss": 0.866,
+   "limit": 2,
+   "limit_kind": "minimum",
+   "verdict": "pass: gap 3.27..6.27",
+   "formula": "worst = sum, RSS = sqrt(sum of squares)"
+  },
+  {
+   "id": "S-09",
+   "name": "Elevator hinge gap (mm), nominal 1.51 (CAD 2 % chord)",
+   "unit": "mm",
+   "contributors": [
+    {
+     "name": "Hot-wire kerf variation (EST)",
+     "tol": 0.5
+    },
+    {
+     "name": "Stabiliser cut line (EST)",
+     "tol": 0.5
+    },
+    {
+     "name": "Elevator LE cut line (EST)",
+     "tol": 0.5
+    }
+   ],
+   "worst": 1.5,
+   "rss": 0.866,
+   "limit": 2,
+   "limit_kind": "minimum",
+   "verdict": "fail as drawn: 1.51 - 1.5 = 0.01 < 2.0; gap 3.5 passes (2.0 worst)",
+   "formula": "worst = sum, RSS = sqrt(sum of squares)"
+  },
+  {
+   "id": "S-10",
+   "name": "Wheel track half-width error (mm), nominal 454.0 per side",
+   "unit": "mm",
+   "contributors": [
+    {
+     "name": "Boom z position (EST)",
+     "tol": 1.5
+    },
+    {
+     "name": "Axle block position on leg (EST)",
+     "tol": 0.5
+    },
+    {
+     "name": "Block foot 16 mm +-0.15 (half)",
+     "tol": 0.08
+    },
+    {
+     "name": "Washer 0.8 +-0.1",
+     "tol": 0.1
+    },
+    {
+     "name": "Wheel width 23.0 +-0.5 (EST), half",
+     "tol": 0.25
+    }
+   ],
+   "worst": 2.43,
+   "rss": 1.606,
+   "limit": 10,
+   "limit_kind": "maximum",
+   "verdict": "pass",
+   "formula": "worst = sum, RSS = sqrt(sum of squares)"
+  },
+  {
+   "id": "S-11",
+   "name": "Wheel axle stack on DUB248 (mm), nominal 50.4 of 50.8",
+   "unit": "mm",
+   "contributors": [
+    {
+     "name": "nyloc (size EST)",
+     "tol": 0.3
+    },
+    {
+     "name": "block foot 16",
+     "tol": 0.15
+    },
+    {
+     "name": "M4 washer 0.8",
+     "tol": 0.1
+    },
+    {
+     "name": "wheel 23.0 (EST)",
+     "tol": 0.5
+    },
+    {
+     "name": "collar DUB140 5.6 (EST)",
+     "tol": 0.1
+    }
+   ],
+   "worst": 1.15,
+   "rss": 0.62,
+   "limit": 0.4,
+   "limit_kind": "allowed overrun margin = 50.8-50.4",
+   "verdict": "marginal: worst case 51.55 overruns the axle by 0.75; RSS 51.02 by 0.22; collar set screw (2.8 from its face) still bites if the axle ends flush",
+   "formula": "stack = nominal + sum(tol); RSS = nominal + sqrt(sum tol^2)"
+  }
+ ],
+ "coupons": [
+  {
+   "id": "C-01",
+   "name": "Hole ladder",
+   "dims_mm": "60 x 40 x 6, 2 coupons (vertical axis; horizontal axis with teardrop)",
+   "content": "holes cad 2.4, 2.6, 2.8 | 3.2, 3.4, 3.6, 3.8, 4.0 | 4.3, 4.5, 4.7 | 5.3, 5.5, 5.7",
+   "measure": "go/no-go with drill shanks and M2..M5 screws; record printed minus cad; update hole offset 0.10..0.25",
+   "material": "PETG and PA6-CF",
+   "time_min_est": 15
+  },
+  {
+   "id": "C-02",
+   "name": "Insert coupon",
+   "dims_mm": "50 x 20 x 10, boss OD 7.4",
+   "content": "6 holes cad 3.9, 4.0, 4.1, 4.2, 4.3, 4.4, depth 7.5, 0.4 chamfer",
+   "measure": "install Ruthex M3x5.7 at 220 C PETG / 280 C PA6-CF (EST), then pull with M3x12 and a hanging scale to 300 N (EST accept >= 300 N)",
+   "material": "PETG and PA6-CF",
+   "time_min_est": 10
+  },
+  {
+   "id": "C-03",
+   "name": "Nut trap coupon",
+   "dims_mm": "60 x 30 x 8",
+   "content": "M2 s 4.2/4.3/4.4/4.5 depth 2.0 | M3 5.7/5.8/5.9/6.0 | M4 7.2/7.3/7.4/7.5 | M5 8.2/8.3/8.4/8.5 depth 5.1",
+   "measure": "smallest AF where the nut seats by hand without a tool",
+   "material": "PETG",
+   "time_min_est": 12
+  },
+  {
+   "id": "C-04",
+   "name": "Clamp slice",
+   "dims_mm": "34 axial x 40 x 30, 3 pieces (halves each)",
+   "content": "split clamp bore cad 24.8, 25.0, 25.2 for the real boom tube offcut, M3 insert + pinch bolt",
+   "measure": "free gap with tube seated (feeler), torque 0.25 N m closes it, hold by hand-twist; choose the bore giving gap 0.25 +-0.1",
+   "material": "PETG; repeat for PA6-CF mount",
+   "time_min_est": 20
+  },
+  {
+   "id": "C-05",
+   "name": "Ring gauge set",
+   "dims_mm": "10 mm wide rings",
+   "content": "ID 22.6, 22.7, 22.8, 22.9, 23.0 (joiner); OD 22.8, 22.9, 23.0, 23.1, 23.2 (plug)",
+   "measure": "slide on the real joiner; slide plug rings into both ends of the real boom; record fit",
+   "material": "PETG / PA6-CF",
+   "time_min_est": 10
+  },
+  {
+   "id": "C-06",
+   "name": "Axle ladder",
+   "dims_mm": "16 x 24 x 18 blocks, 4 of them",
+   "content": "axle holes cad 4.0, 4.1, 4.2, 4.3 vertical; ream test with 4.1 mm drill",
+   "measure": "DUB248 axle slides without rocking; wheel spin",
+   "material": "PETG and PA6-CF",
+   "time_min_est": 20
+  },
+  {
+   "id": "C-07",
+   "name": "Slot and tab",
+   "dims_mm": "40 x 25 x 8",
+   "content": "tabs 3.0 x 14; slots 3.3, 3.4, 3.5, 3.6, 3.7",
+   "measure": "insertion by hand, rock by feeler",
+   "material": "PETG",
+   "time_min_est": 8
+  },
+  {
+   "id": "C-08",
+   "name": "Scale and foot square",
+   "dims_mm": "100 x 100 x 36 with 40 mm bore, steps Z 10/20/36",
+   "content": "XY, Z and bore measurement; elephant foot at the base edge",
+   "measure": "calipers: set XY scale (S1 suggests 1.003), check PA6-CF Z; record foot flare, adjust chamfer 0.4",
+   "material": "PETG, then PA6-CF",
+   "time_min_est": 45
+  }
+ ],
+ "notes": "Estimates are est:true or labelled EST. Negative min_clear/max_clear = interference. Aluminium (6061-T6) tubes, not carbon, are the tubes in the BOM (cad/params.mjs, inventory M-06..M-10).",
+ "source_keys": {
+  "S1": "https://rsmith.home.xs4all.nl/3d-printing/dimensional-accuracy-of-3d-prints.html",
+  "S2": "https://cnckitchen.com/blog/are-our-heat-set-insert-datasheets-wrong",
+  "S3": "https://makerspace.uflib.ufl.edu/services/3dprocess/recommended-software-for-3d-printing/designing-for-3d-printing-tolerances-on-the-mk4-and-xl/",
+  "S4": "https://help.prusa3d.com/article/elephant-foot-compensation_114487",
+  "S5": "https://www.prusa3d.com/product/original-prusa-mk4s-3d-printer-5/",
+  "S6": "https://alcobrametals.com/?p=68918",
+  "S7": "https://fiberon.polymaker.com/wp-content/uploads/TDS_FIBERON-PA6-CF20_V1.1_EN.pdf",
+  "S8": "https://opus.cloud1.lib.uts.edu.au/bitstream/10453/166023/2/Binder1.pdf",
+  "S9": "https://amesweb.info/Screws/Metric-Clearance-Hole-Chart.aspx",
+  "S10": "https://royasutton.github.io/omdl-snapshot/docs/html/omdl-v1.0/group__database__component__fastener__iso__4032.html",
+  "S11": "https://www.3djake.ch/en-CH/ruthex/threaded-insert-m3-100-pieces",
+  "S12": "https://www.gator-rc.com/products/dubro-super-lite-wheels",
+  "S13": "https://en.wikipedia.org/wiki/IT_Grade",
+  "R1": "cad/params.txt",
+  "R2": "cad/BuildVtol.cs",
+  "R3": "inventory/hardware/hardware.json",
+  "R4": "docs/research/hardware-schedule.md",
+  "R5": "docs/research/budget-airframe.md",
+  "R6": "docs/research/electrical-architecture.md sec. 11",
+  "R7": "cad/params.mjs",
+  "R8": "inventory/electrical/components.json",
+  "date_checked": "2026-11-01"
+ }
+}

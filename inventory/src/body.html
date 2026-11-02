@@ -93,6 +93,29 @@
   </details>
   <details class="cadparts"><summary>Parts list ({{CAD_PARTS}} parts)</summary><ul id="v3dParts">{{PART_LIST}}</ul></details>
   <p class="src">cad/mesh/*.STL and cad/mesh/meta.json via review/mesh.mjs ({{CAD_PARTS}} parts, {{CAD_COMPS}} placed components, {{CAD_TRIS}} triangles; placements from cad/params.txt); statuses from inventory/inventory.json column CAD part; electronics inventory/electrical/components.json (placements EST); wires inventory/electrical/wiring.json (routes EST); wheels docs/research/electrical-architecture.md §11, inventory/electrical/proposed_lines.json</p>
+
+  <h3 class="fvhead" id="fusion3d">Fusion model, down to every fastener</h3>
+  <p class="v3dnote">The same aircraft rebuilt in Autodesk Fusion, with all {{FV_PIECES}} pieces of hardware from the hardware schedule: every screw, washer, nut and insert, the servos with their arms, horns, pushrods and clevises, the hinge tape, and the wheel blocks with axles and collars. Holes in the printed parts are cut at the toleranced sizes (see Print fits and tolerances, §7). Turn on <b>Hardware focus</b> to see the fasteners inside the foam, then click a group for its joint card.</p>
+  <div class="v3dgrid">
+  <div class="viewer cadview fview" id="fv" data-card="fvCard">
+    <canvas id="fvCanvas" aria-label="Rotatable Autodesk Fusion model of the aircraft with every fastener; drag to orbit, scroll to zoom, click a fastener group for its joint card"></canvas>
+    <span class="lbl">Autodesk Fusion · {{FV_DATE}}</span>
+    <div class="tip" hidden></div>
+    <div class="fvstart"><p>{{FV_TRIS}} triangles in {{FV_FILES}} meshes. It takes a few seconds to build.</p><button type="button" id="fvLoad">Load the Fusion model</button></div>
+    <div class="fallback" hidden><p>The 3D viewer needs an internet connection to load its graphics library (three.js).</p></div>
+    <p class="loadmsg">Building the Fusion model…</p>
+    <div class="ctl" role="group" aria-label="Fusion model controls" hidden>
+      <div class="grp" role="group" aria-label="Groups"><span class="glabel">Show</span><button type="button" data-fgroup="airframe" aria-pressed="true">Airframe</button><button type="button" data-fgroup="printed" aria-pressed="true">Printed</button><button type="button" data-fgroup="propulsion" aria-pressed="true">Propulsion</button><button type="button" data-fgroup="gear" aria-pressed="true">Gear and wheels</button><button type="button" data-fgroup="electronics" aria-pressed="true">Electronics</button><button type="button" data-fgroup="hardware" aria-pressed="true">Hardware</button><button type="button" data-fgroup="mechanisms" aria-pressed="true">Servos and linkages</button></div>
+      <div class="grp" role="group" aria-label="Hardware focus and reset"><button type="button" data-fact="focus" aria-pressed="false">Hardware focus</button><button type="button" data-fact="reset">Reset</button></div>
+      <div class="grp" role="group" aria-label="Camera view"><span class="glabel">View</span><button type="button" data-fview="iso">Iso</button><button type="button" data-fview="top">Top</button><button type="button" data-fview="side">Side</button><button type="button" data-fview="front">Front</button></div>
+    </div>
+  </div>
+  <aside class="pcard" id="fvCard" aria-live="polite" aria-label="Selected joint card"></aside>
+  </div>
+  <details class="more"><summary>Fusion model notes and limits</summary>
+  <p class="v3dnote">Built by script from cad/params.txt and cad/BuildVtol.cs (fusion/build_vtol_fusion.py), then the hardware, servos, linkages, hinges and wheel gear from inventory/hardware/hardware.json and mechanisms.json (fusion/build_detail_fusion.py), with holes from inventory/hardware/tolerances.json. All 613 pieces are present (fusion/hardware_rev2_compact.json); the interference check left 0 unintended overlaps and 678 intended ones, such as a screw in its insert (fusion/interference_report.json). Saved in Fusion as project DBF-VTOL, document "VTOL C0 full". Threads are not modelled; insert knurls are approximated; Z-bends are drawn as straight segments; strap loops are rounded rectangles <span class="est">EST</span>. Several joints are proposals from the hardware schedule, not parts of the SOLIDWORKS model: the panel tab screw and LE pin, the boom splice plug, the removable tail screws and the wheel axle blocks. The X4110S bolt pattern, the ES3005HV ear holes, the kit screw lengths and the DUB248 thread are unknown (—), so those features are placeholders until measured. The STEP and Fusion archive are in inventory/fusion/.</p>
+  </details>
+  <p class="src">inventory/fusion/manifest.json and stl/*.stl (exported from Fusion {{FV_DATE}}) via inventory/build_fusion.mjs ({{FV_FILES}} meshes, {{FV_TRIS}} triangles; groups {{FV_GROUPS}}); joints and items inventory/hardware/hardware.json ({{FV_JOINTS}} joints, {{FV_PIECES}} pieces)</p>
 </section>
 
 <!-- ============================ 3 ELECTRICAL ============================ -->
@@ -263,6 +286,15 @@
   <h4 class="kh">Cost and reserve</h4>
   {{GEAR_COST}}
   <p class="src">inventory/inventory.json rows G-01 to G-04 and summary.proposed (goods, withTax, reserveAfter, reserveAfterWithNwa), summary.nwaSwap.retailPropWithTax; proposed lines are not in committed spend and shipping for them is not quoted</p></details>
+  <h3 class="fvhead" id="tolerances">Print fits and tolerances</h3>
+  <p class="verdict"><b>{{TOL_FAIL}} fits fail and {{TOL_MARG}} are marginal as drawn; print the coupons first and size bores to the measured tubes.</b> The Fusion model is cut with the CAD sizes below (hole compensation included). Printer assumed: {{TOL_PRINTER}}.</p>
+  <h4 class="kh">Fits</h4>
+  <div class="tbl"><table><thead><tr><th>ID</th><th>Fit</th><th>Nominal</th><th class="n">CAD (mm)</th><th class="n">Clearance (mm)</th><th>Verdict</th></tr></thead><tbody>{{TOL_FITS}}</tbody></table></div>
+  <h4 class="kh">Stack-ups</h4>
+  <div class="tbl"><table><thead><tr><th>ID</th><th>Stack-up</th><th class="n">Worst case</th><th class="n">RSS</th><th class="n">Limit</th><th>Verdict</th></tr></thead><tbody>{{TOL_STACKS}}</tbody></table></div>
+  <h4 class="kh">Calibration coupons to print first</h4>
+  <ul class="tight">{{TOL_COUPONS}}</ul>
+  <p class="src">inventory/hardware/tolerances.json and docs/research/tolerance-analysis.md (process assumptions, every source and formula; worst = sum, RSS = root of the sum of squares); hole sizes applied in fusion/build_detail_fusion.py</p>
 </section>
 
 <!-- ============================ 8 NAUTICAL WINGS PROPS ============================ -->

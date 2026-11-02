@@ -1,0 +1,379 @@
+{
+ "generated": "2026-11-01",
+ "frame": "X fwd, Y up, Z right, metres",
+ "surfaces": [
+  {
+   "surface": "aileron_R",
+   "servo": "SRV_AIL_R",
+   "servo_item": "HW-129",
+   "arm_item": "HW-067",
+   "arm_screw_item": "HW-068",
+   "horn_item": "HW-079",
+   "backing_item": "HW-080",
+   "horn_screw_item": "HW-081",
+   "nut_item": "HW-082",
+   "clevis_item": "HW-083",
+   "pushrod_item": "HW-084",
+   "keeper_item": "HW-085",
+   "pushrod_instance": 0,
+   "arm_r_mm": 20,
+   "arm_trim_mm": 25,
+   "horn_h_mm": 14,
+   "ratio_horn_over_arm": 0.7,
+   "servo_travel_deg": [
+    -45,
+    45
+   ],
+   "throw_deg": {
+    "servo_-45": -26.1,
+    "servo_+45": 26.1
+   },
+   "throw_note": "Delta positive = trailing edge down; planar solver (geo.py/mech.py, scratchpad), arm at exact CAD neutral -106.5 deg, symmetric about neutral to within 0.0 deg; the real arm sits on a 15.65 deg spline tooth, remainder by sub-trim",
+   "rod_len_pin_to_hole_mm": 59.89,
+   "rod_cut_mm": 53.9,
+   "p1_m": [
+    -0.13528,
+    -0.01418,
+    0.82337
+   ],
+   "p2_m": [
+    -0.195,
+    -0.01875,
+    0.82337
+   ],
+   "clevis": "Du-Bro mini nylon Kwik-Link 2-56 (DUB228), pin at p2",
+   "horn_screw": "2 x M2x20, foam 14.52 mm, protrusion 0.38 mm",
+   "hinge": {
+    "item": "HW-100",
+    "instance": 0,
+    "gap_mm": 4.77,
+    "len_mm": 612.0,
+    "side": "upper"
+   }
+  },
+  {
+   "surface": "aileron_L",
+   "servo": "SRV_AIL_L",
+   "servo_item": "HW-129",
+   "arm_item": "HW-067",
+   "arm_screw_item": "HW-068",
+   "horn_item": "HW-079",
+   "backing_item": "HW-080",
+   "horn_screw_item": "HW-081",
+   "nut_item": "HW-082",
+   "clevis_item": "HW-083",
+   "pushrod_item": "HW-084",
+   "keeper_item": "HW-085",
+   "pushrod_instance": 1,
+   "arm_r_mm": 20,
+   "arm_trim_mm": 25,
+   "horn_h_mm": 14,
+   "ratio_horn_over_arm": 0.7,
+   "servo_travel_deg": [
+    -45,
+    45
+   ],
+   "throw_deg": {
+    "servo_-45": -26.1,
+    "servo_+45": 26.1
+   },
+   "throw_note": "Delta positive = trailing edge down; planar solver (geo.py/mech.py, scratchpad), arm at exact CAD neutral -106.5 deg, symmetric about neutral to within 0.0 deg; the real arm sits on a 15.65 deg spline tooth, remainder by sub-trim",
+   "rod_len_pin_to_hole_mm": 59.89,
+   "rod_cut_mm": 53.9,
+   "p1_m": [
+    -0.13528,
+    -0.01418,
+    -0.82337
+   ],
+   "p2_m": [
+    -0.195,
+    -0.01875,
+    -0.82337
+   ],
+   "clevis": "Du-Bro mini nylon Kwik-Link 2-56 (DUB228), pin at p2",
+   "horn_screw": "2 x M2x20, foam 14.52 mm, protrusion 0.38 mm",
+   "hinge": {
+    "item": "HW-100",
+    "instance": 1,
+    "gap_mm": 4.77,
+    "len_mm": 612.0,
+    "side": "upper"
+   }
+  },
+  {
+   "surface": "elevator",
+   "servo": "SRV_ELEV",
+   "servo_item": "HW-130",
+   "arm_item": "HW-072",
+   "arm_screw_item": "HW-073",
+   "horn_item": "HW-086",
+   "backing_item": "HW-087",
+   "horn_screw_item": "HW-088",
+   "nut_item": "HW-089",
+   "clevis_item": "HW-090",
+   "pushrod_item": "HW-091",
+   "keeper_item": "HW-092",
+   "pushrod_instance": 0,
+   "arm_r_mm": 14,
+   "arm_trim_mm": 18,
+   "horn_h_mm": 18,
+   "ratio_horn_over_arm": 1.286,
+   "servo_travel_deg": [
+    -45,
+    45
+   ],
+   "throw_deg": {
+    "servo_-45": -24.2,
+    "servo_+45": 24.2
+   },
+   "throw_note": "Delta positive = trailing edge down; planar solver (geo.py/mech.py, scratchpad), arm at exact CAD neutral -117.8 deg, symmetric about neutral to within 0.0 deg; the real arm sits on a 15.65 deg spline tooth, remainder by sub-trim",
+   "rod_len_pin_to_hole_mm": 33.09,
+   "rod_cut_mm": 27.1,
+   "p1_m": [
+    -0.80612,
+    -0.04839,
+    0.36964
+   ],
+   "p2_m": [
+    -0.8354,
+    -0.03297,
+    0.36964
+   ],
+   "clevis": "Du-Bro mini nylon Kwik-Link 2-56 (DUB228), pin at p2",
+   "horn_screw": "2 x M2x8, foam 2.13 mm, protrusion 0.77 mm",
+   "hinge": {
+    "item": "HW-100",
+    "instance": 2,
+    "gap_mm": 3.5,
+    "len_mm": 855.4,
+    "side": "upper"
+   }
+  },
+  {
+   "surface": "rudder_R",
+   "servo": "SRV_RUD_R",
+   "servo_item": "HW-131",
+   "arm_item": "HW-077",
+   "arm_screw_item": "HW-078",
+   "horn_item": "HW-093",
+   "backing_item": "HW-094",
+   "horn_screw_item": "HW-095",
+   "nut_item": "HW-096",
+   "clevis_item": "HW-097",
+   "pushrod_item": "HW-098",
+   "keeper_item": "HW-099",
+   "pushrod_instance": 0,
+   "arm_r_mm": 14,
+   "arm_trim_mm": 18,
+   "horn_h_mm": 14,
+   "ratio_horn_over_arm": 1.0,
+   "servo_travel_deg": [
+    -45,
+    45
+   ],
+   "throw_deg": {
+    "servo_-45": -22.9,
+    "servo_+45": 22.9
+   },
+   "throw_note": "Delta positive = trailing edge down; planar solver (geo.py/mech.py, scratchpad), arm at exact CAD neutral -126.8 deg, symmetric about neutral to within 0.0 deg; the real arm sits on a 15.65 deg spline tooth, remainder by sub-trim",
+   "rod_len_pin_to_hole_mm": 32.01,
+   "rod_cut_mm": 26.0,
+   "p1_m": [
+    -0.86798,
+    -0.01064,
+    0.39638
+   ],
+   "p2_m": [
+    -0.8925,
+    -0.01064,
+    0.41695
+   ],
+   "clevis": "Du-Bro mini nylon Kwik-Link 2-56 (DUB228), pin at p2",
+   "horn_screw": "2 x M2x12, foam 5.50 mm, protrusion 1.40 mm",
+   "hinge": {
+    "item": "HW-100",
+    "instance": 3,
+    "gap_mm": 4.0,
+    "len_mm": 188.0,
+    "side": "outboard"
+   }
+  },
+  {
+   "surface": "rudder_L",
+   "servo": "SRV_RUD_L",
+   "servo_item": "HW-131",
+   "arm_item": "HW-077",
+   "arm_screw_item": "HW-078",
+   "horn_item": "HW-093",
+   "backing_item": "HW-094",
+   "horn_screw_item": "HW-095",
+   "nut_item": "HW-096",
+   "clevis_item": "HW-097",
+   "pushrod_item": "HW-098",
+   "keeper_item": "HW-099",
+   "pushrod_instance": 1,
+   "arm_r_mm": 14,
+   "arm_trim_mm": 18,
+   "horn_h_mm": 14,
+   "ratio_horn_over_arm": 1.0,
+   "servo_travel_deg": [
+    -45,
+    45
+   ],
+   "throw_deg": {
+    "servo_-45": -22.9,
+    "servo_+45": 22.9
+   },
+   "throw_note": "Delta positive = trailing edge down; planar solver (geo.py/mech.py, scratchpad), arm at exact CAD neutral -126.8 deg, symmetric about neutral to within 0.0 deg; the real arm sits on a 15.65 deg spline tooth, remainder by sub-trim",
+   "rod_len_pin_to_hole_mm": 32.01,
+   "rod_cut_mm": 26.0,
+   "p1_m": [
+    -0.86798,
+    -0.01064,
+    -0.39638
+   ],
+   "p2_m": [
+    -0.8925,
+    -0.01064,
+    -0.41695
+   ],
+   "clevis": "Du-Bro mini nylon Kwik-Link 2-56 (DUB228), pin at p2",
+   "horn_screw": "2 x M2x12, foam 5.50 mm, protrusion 1.40 mm",
+   "hinge": {
+    "item": "HW-100",
+    "instance": 4,
+    "gap_mm": 4.0,
+    "len_mm": 188.0,
+    "side": "outboard"
+   }
+  }
+ ],
+ "gear": {
+  "fork_design": "Single-sided offset axle block (HW-049): socket bore 26.0 x 25 deep, OD 32.0; foot 24 x 8 x 16, offset 3.3 mm outboard; axle bore 4.2 (ream 4.10) 10 mm below the tube end; M3 cross bolt 12 mm above the tube end. Replaces the CAD dome foot.",
+  "block_frame": "origin at tube end centre, +y up, local z outboard",
+  "wheel": {
+   "item": "HW-053",
+   "part": "Du-Bro 300SL super lite 3.00 in",
+   "od_mm": 76.2,
+   "w_mm": 23.0,
+   "bore": "- (not published)",
+   "hub_w": "- (not published)",
+   "source": "https://www.gator-rc.com/products/dubro-super-lite-wheels (3.00 in = 76.2 mm, width 0.9063 in = 23.0 mm, 16.8 g, 5/32 in axle; hub width and bore not listed) 2026-11-01"
+  },
+  "axle": {
+   "item": "HW-054",
+   "part": "Du-Bro DUB248 5/32 x 2 in",
+   "d_mm": 3.97,
+   "L_mm": 50.8,
+   "inboard_end_u_mm": -2.7,
+   "outboard_end_u_mm": 48.1,
+   "thread": "- (not published)"
+  },
+  "collars": {
+   "item": "HW-055",
+   "part": "Du-Bro DUB140",
+   "count": 8,
+   "per_wheel": 2,
+   "inner_u_mm": [
+    11.3,
+    16.9
+   ],
+   "outer_u_mm": [
+    41.5,
+    47.1
+   ]
+  },
+  "washers": {
+   "item": "HW-056",
+   "count": 8,
+   "per_wheel": 2,
+   "u_mm": [
+    [
+     16.9,
+     17.7
+    ],
+    [
+     40.7,
+     41.5
+    ]
+   ]
+  },
+  "nyloc": {
+   "item": "HW-057",
+   "u_mm": [
+    -1.7,
+    3.3
+   ]
+  },
+  "set_screws": {
+   "item": "HW-137",
+   "spec": "6-32 x 1/8 in, 1/16 in hex, 1 per collar"
+  },
+  "stack_u_mm": {
+   "nyloc": [
+    -1.7,
+    3.3
+   ],
+   "foot": [
+    3.3,
+    11.3
+   ],
+   "inner_collar": [
+    11.3,
+    16.9
+   ],
+   "washer_in": [
+    16.9,
+    17.7
+   ],
+   "wheel": [
+    17.7,
+    40.7
+   ],
+   "washer_out": [
+    40.7,
+    41.5
+   ],
+   "outer_collar": [
+    41.5,
+    47.1
+   ],
+   "axle_free_end_beyond_collar": 1.0,
+   "total_used_mm": 50.8
+  },
+  "wheel_centre_outboard_of_leg_axis_mm": 29.2,
+  "clearances_mm": {
+   "wheel_inner_face_to_block_OD": 1.7,
+   "wheel_inner_face_to_tube_surface": 5.0,
+   "wheel_inner_face_to_boom_clamp": "- (clamp lies above the wheel top; not checked)"
+  },
+  "track_mm": {
+   "before": 908.0,
+   "after": 925.8,
+   "source": "leg z 0.4337 (hardware.orig.json HW-053 was 0.454 per side) + 29.2"
+  },
+  "wheelbase_mm": 695.5,
+  "ground_clearance": {
+   "wheel_bottom_below_tube_end_mm": 48.1,
+   "before": "pusher prop tip 84.0 mm nominal (tolerances.json S-07)",
+   "after": "unchanged 84.0 mm nominal: axle y -0.2537 and wheel OD 76.2 are unchanged; lift props - (not computed)"
+  },
+  "risks": [
+   "gear clamp roll moment: wheel load now acts 29.2 mm outboard of the leg axis (was 20.3): moment arm 1.4x, not analysed",
+   "axle bending: single-sided 50.8 mm axle with the wheel at 29.2 mm, not analysed",
+   "wheel bore and hub width unknown, measure on receipt"
+  ]
+ },
+ "placement_changes": {
+  "SRV_ELEV": "moved/lowered to clear the elevator and H_Tail insert bosses (S=(-0.7996,-0.036) in the rod plane)",
+  "SRV_RUD": "moved to clear the elevator trailing edge; shaft along +/-Y",
+  "aileron_horn": "x -0.195 (was -0.200 in J-20, -0.186 in first model) so M2x20 fits"
+ },
+ "hinges": {
+  "HW-100": {
+   "aileron_gap_mm": 4.77,
+   "TE_down_closure_limit_deg": 14.7,
+   "note": "chamfer the lower edges to allow more TE-down"
+  }
+ }
+}
