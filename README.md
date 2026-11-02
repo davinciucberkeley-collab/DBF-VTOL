@@ -19,7 +19,7 @@ Design phase. The baseline (C0, v0.3.1) is sized, modelled in SOLIDWORKS, checke
 
 ## What to open
 
-There are four interactive outputs. The first three are about the real aircraft; the fourth is a demonstration only.
+There are five interactive outputs. The first three are about the real aircraft, the fourth is a demonstration only, and the fifth compares literature concepts against the C0 envelope.
 
 **Open online, no download:** [Inventory & Electrical Overview](https://claude.ai/artifact/C6JEuXWN4B4Aoay5zHU3Pg) (public, view only). Links to the other pages are under [Published versions](#published-versions-claude-artifacts).
 
@@ -80,6 +80,16 @@ A browser flight game built with three.js, where you fly a lift + cruise eVTOL: 
 > **It is not an engineering tool.** It flies a notional full-scale **8-lift** eVTOL (2,200 kg, 13 m span, per `sim/src/config.js`), not the C0 4-lift baseline, and its numbers are not tied to `analysis/`. Nothing in the design review depends on it.
 
 Source and run instructions: [`sim/`](sim/README.md) (needs a local web server, e.g. `python -m http.server` inside `sim/`).
+
+### 5. Concept models (James Guymon: concept exploration)
+
+**[`Concept-Models.html`](Concept-Models.html)** shows eleven VTOL concepts from the literature as interactive 3D models built on the C0 envelope, so they compare like for like. They cover wingtip props, a boundary-layer-ingesting pusher, parked and faired lift rotors, a tiltrotor, a blended wing, a tiltwing, a tailsitter, a box wing, fan-in-wing and a cross-flow fan. A0 is C0 itself, placed from `cad/params.txt` and `analysis/results.json`.
+
+You can orbit any model and scrub or play the hover-to-cruise transition: rotors tilt, the wing pivots and lift rotors park. Toggles show the battery and the 3 m span limit. Each model reports its span, overall width, motor count, tilt mechanisms and largest part, plus one quoted literature claim with its source (checked 2026-10-21).
+
+> **These are illustrative models, not CAD.** Only A0 follows the CAD placements. The other concepts reuse C0's parts and estimate their own proportions (EST), and none of them is sized.
+
+Download and double-click the file. It needs web fonts and the three.js library from a CDN. Sources are in `concepts/` (`concepts.json`, `models.js`, `build.mjs`).
 
 ### Published versions (Claude artifacts)
 
@@ -145,6 +155,8 @@ CFD was not run (Flow Simulation would not load on this licence). `analysis/veri
 | `inventory/fusion/` | Fusion exports: STEP, .f3d, per-part STL meshes with `manifest.json`, renders |
 | `inventory/hardware/` | Hardware schedule (`hardware.json`), mechanisms, print tolerances, new purchase lines |
 | `sim/` | Browser flight game (three.js), copied from the published Sim artifact; not used by the engineering |
+| `Concept-Models.html` | Literature concepts as 3D models on the C0 envelope (standalone; rebuilt by `concepts/build.mjs`) |
+| `concepts/` | Concept text and sources (`concepts.json`), the 3D model builders (`models.js`) and the page build script |
 | `PRODUCT.md`, `DESIGN.md` | Who the review is for, and its visual design system |
 
 ## Regenerate everything
@@ -158,6 +170,7 @@ node review/build.mjs           # review page   -> VTOL-Review.html, review/vtol
 node inventory/build_inventory.mjs   # inventory     -> inventory/inventory.csv, inventory.json
 python3 inventory/build_sheet.py     # sheet seed    -> inventory/DBF-Inventory.xlsx, DBF-Inventory-sheet.csv
 node inventory/build_overview.mjs    # overview page -> Inventory-Overview.html
+node concepts/build.mjs              # concept models -> Concept-Models.html (reads cad/params.txt)
 ```
 
 The CAD and simulations need SOLIDWORKS 2025 with Simulation on Windows:
