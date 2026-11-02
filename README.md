@@ -200,9 +200,9 @@ These come from review §1, and each technical section ends with "What the team 
 4. **Nautical Wings sponsorship.** Send the message in inventory overview §8 to confirm the sponsorship rules in writing, with the spec sheet. Until then the retail props stay on hold.
 5. **Electrical bench checks.** Cap lift throttle so each motor stays at or below 26 A on the thrust stand, and measure the servo-rail stall current (inventory overview §3–4).
 6. **Landing gear.** Decide on the wheeled gear proposal (inventory overview §7). The Fusion model now has printed axle blocks for it.
-9. **Measure before printing.** The tube diameters, the X4110S bolt pattern and thread depth, the ES3005HV ear holes, the 300SL hub bore and the DUB248 thread are unknown; the joiner fit fails as drawn (docs/research/tolerance-analysis.md).
-10. **Battery access.** The battery cannot be lifted out of the pod in the CAD (no hatch over it, the saddle covers its rear 17 mm); the pod needs a hatch or a top-loading change (fusion/motion_clearance.md).
 7. **Cart totals.** Price shipping at checkout. If the reserve drops under $100: borrow a hot-wire cutter, then drop the spare motor, then the airspeed sensor.
 8. **Flight build-up.** Follow review §13 (SITL → bench → tethered → free hover → partial → full transition → mission).
+9. **Measure before printing.** The tube diameters, the X4110S bolt pattern and thread depth, the ES3005HV ear holes, the 300SL hub bore and the DUB248 thread are unknown; the joiner fit fails as drawn (docs/research/tolerance-analysis.md).
+10. **Battery access.** The battery cannot be lifted out of the pod in the CAD (no hatch over it, the saddle covers its rear 17 mm); the pod needs a hatch or a top-loading change (fusion/motion_clearance.md).
 
 v0.3.1 incorporates a six-reviewer project audit (79 confirmed findings; review §12).
