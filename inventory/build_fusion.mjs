@@ -34,13 +34,33 @@ export function packFusion(){
     }
     const big = q.length / 3 > 65535, v = new Uint16Array(q), ix = big ? new Uint32Array(idx) : new Uint16Array(idx);
     tris += tri.length / 9; bytes += v.byteLength + ix.byteLength;
-    return { n: e.name, g: e.group, c: e.color, j: e.joint || null, k: e.count, v: b64(v), i: b64(ix), w: big ? 4 : 2 };
+    return { n: e.name, g: e.group, c: e.color, j: e.joint || null, k: e.count, m: e.moving || null, r: e.rides || null, v: b64(v), i: b64(ix), w: big ? 4 : 2 };
   });
   // hardware cards: one per joint, with its item list
   const joints = {};
   for (const j of hw.joints) joints[j.id] = { name: j.name, tool: j.tool, removable: j.removable, order: j.assembly_order, notes: j.notes, source: j.source, items: [] };
   let pieces = 0;
   for (const it of hw.items){ pieces += it.qty_total; joints[it.joint] && joints[it.joint].items.push([it.id, it.kind, it.spec, it.qty_total, it.covered_by, !!it.est]); }
+  // joints and motion (inventory/fusion/kinematics/kinematics.json): model-frame (m) vectors are used as they are; Fusion-frame (cm) pivots are kept for the card
+  const kin = JSON.parse(readFileSync(url('./fusion/kinematics/kinematics.json'), 'utf8'));
+  const r4 = v => Array.isArray(v) ? v.map(r4) : (typeof v === 'number' ? Math.round(v * 1e6) / 1e6 : v);
+  const STEPS = [], tbl = o => { const k = Object.keys(o).map(Number).sort((a, b) => a - b); if (!STEPS.length) STEPS.push(...k); return k.map(x => o[String(x)]); };
+  const cm2m = v => v && [v[1] / 100, v[2] / 100, v[0] / 100];
+  const KG = {};
+  for (const g of kin.groups){
+    const o = { id: g.id, name: g.name, kind: g.kind, parent: g.parent, contains: g.contains || g.note || null, positive: g.positive || null, note: g.note || null,
+      pivot: r4(g.pivot_m || cm2m(g.pivot_cm)), pivotCm: g.pivot_cm, axis: g.axis_m, axisCm: g.axis_cm };
+    if (g.limits_deg) o.limDeg = g.limits_deg; if (g.limits_mm) o.limMm = g.limits_mm; if (g.limit_source) o.limSrc = g.limit_source; if (g.limits_source) o.limSrc = g.limits_source;
+    if (g.kind === 'surface'){ o.driver = g.driver.group; o.ratio = g.driver.secant_ratio_surface_per_servo; o.tbl = tbl(g.servo_to_surface_deg); o.plus = g.servo_plus_gives; o.hinge = g.hinge_line_m; }
+    if (g.kind === 'servo_arm'){ o.hole = g.arm_hole_m; o.armR = g.arm_r_mm; o.neutralDeg = g.neutral_arm_angle_deg_about_axis; }
+    if (g.kind === 'pushrod'){ o.p1 = g.p1_neutral_m; o.p2 = g.p2_neutral_m; o.len = g.rod_len_pin_to_hole_mm; o.cut = g.rod_cut_mm; o.rod = g.pose_table.map(t => t.rod_angle_deg); o.p1t = g.pose_table.map(t => r4(t.p1_m)); if (g.pose_table.length !== 19 || g.pose_table[0].servo_deg !== -45) throw new Error('pose table steps'); }
+    if (g.kind === 'slider') o.carries = g.carries ? g.carries.groups : [];
+    KG[g.id] = o;
+  }
+  if (STEPS.join() !== '-45,-40,-35,-30,-25,-20,-15,-10,-5,0,5,10,15,20,25,30,35,40,45') throw new Error('servo table steps');
+  const K = { g: KG, order: kin.groups.map(g => g.id), method: kin.four_bar_method, src: 'inventory/fusion/kinematics/kinematics.json (' + kin.generated + ')' };
+  const nMov = Object.keys(KG).length, nSlide = Object.values(KG).filter(g => g.kind === 'slider').length;
+  for (const p of parts){ if (p.m && !KG[p.m]) throw new Error('unknown moving id ' + p.m); if (p.r && !KG[p.r]) throw new Error('unknown rides id ' + p.r); }
   const groups = {}; for (const p of parts) groups[p.g] = (groups[p.g] || 0) + 1;
-  return { lo, sc, parts, joints, tris, pieces, files: parts.length, groups, bytes, generated: man.generated };
+  return { lo, sc, parts, joints, K, nMov, nSlide, tris, pieces, files: parts.length, groups, bytes, generated: man.generated };
 }

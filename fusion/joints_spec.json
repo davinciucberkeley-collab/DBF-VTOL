@@ -1,0 +1,555 @@
+{
+ "joints": [
+  {
+   "name": "Rev Aileron_R hinge",
+   "type": "revolute",
+   "one": "surf:Aileron_R",
+   "two": "panel:R",
+   "axis": "X",
+   "pt": [
+    89.2,
+    -17.424,
+    1.341
+   ],
+   "lo": -26.15,
+   "hi": 26.15,
+   "unit": "deg",
+   "kin": "ail_R"
+  },
+  {
+   "name": "Rev Arm_Aileron_R servo shaft",
+   "type": "revolute",
+   "one": "arm:Aileron_R",
+   "two": "hw:J-17:R",
+   "axis": "X",
+   "pt": [
+    82.095,
+    -12.96,
+    0.5
+   ],
+   "lo": -45,
+   "hi": 45,
+   "unit": "deg",
+   "kin": "arm_ail_R",
+   "link": {
+    "to": "Rev Aileron_R hinge",
+    "ratio_other_per_this": 0.58019
+   }
+  },
+  {
+   "name": "Rev Pushrod_Aileron_R arm hole",
+   "type": "revolute",
+   "one": "rod:Aileron_R",
+   "two": "arm:Aileron_R",
+   "axis": "X",
+   "pt": [
+    82.337,
+    -13.528,
+    -1.418
+   ],
+   "lo": null,
+   "hi": null,
+   "unit": "deg",
+   "kin": "rod_ail_R",
+   "rod_p2_cm": [
+    82.337,
+    -19.5,
+    -1.875
+   ],
+   "rod_len_mm": 59.8946
+  },
+  {
+   "name": "Rev Aileron_L hinge",
+   "type": "revolute",
+   "one": "surf:Aileron_L",
+   "two": "panel:L",
+   "axis": "X",
+   "pt": [
+    -89.2,
+    -17.424,
+    1.341
+   ],
+   "lo": -26.15,
+   "hi": 26.15,
+   "unit": "deg",
+   "kin": "ail_L"
+  },
+  {
+   "name": "Rev Arm_Aileron_L servo shaft",
+   "type": "revolute",
+   "one": "arm:Aileron_L",
+   "two": "hw:J-17:L",
+   "axis": "X",
+   "pt": [
+    -82.095,
+    -12.96,
+    0.5
+   ],
+   "lo": -45,
+   "hi": 45,
+   "unit": "deg",
+   "kin": "arm_ail_L",
+   "link": {
+    "to": "Rev Aileron_L hinge",
+    "ratio_other_per_this": 0.58019
+   }
+  },
+  {
+   "name": "Rev Pushrod_Aileron_L arm hole",
+   "type": "revolute",
+   "one": "rod:Aileron_L",
+   "two": "arm:Aileron_L",
+   "axis": "X",
+   "pt": [
+    -82.337,
+    -13.528,
+    -1.418
+   ],
+   "lo": null,
+   "hi": null,
+   "unit": "deg",
+   "kin": "rod_ail_L",
+   "rod_p2_cm": [
+    -82.337,
+    -19.5,
+    -1.875
+   ],
+   "rod_len_mm": 59.8946
+  },
+  {
+   "name": "Rev Elevator hinge",
+   "type": "revolute",
+   "one": "surf:Elevator",
+   "two": "htail",
+   "axis": "X",
+   "pt": [
+    36.964,
+    -82.364,
+    -1.186
+   ],
+   "lo": -24.25,
+   "hi": 24.25,
+   "unit": "deg",
+   "kin": "elev"
+  },
+  {
+   "name": "Rev Arm_Elevator servo shaft",
+   "type": "revolute",
+   "one": "arm:Elevator",
+   "two": "hw:J-18:R",
+   "axis": "X",
+   "pt": [
+    37.205,
+    -79.96,
+    -3.6
+   ],
+   "lo": -45,
+   "hi": 45,
+   "unit": "deg",
+   "kin": "arm_elev",
+   "link": {
+    "to": "Rev Elevator hinge",
+    "ratio_other_per_this": 0.53889
+   }
+  },
+  {
+   "name": "Rev Pushrod_Elevator arm hole",
+   "type": "revolute",
+   "one": "rod:Elevator",
+   "two": "arm:Elevator",
+   "axis": "X",
+   "pt": [
+    36.964,
+    -80.612,
+    -4.839
+   ],
+   "lo": null,
+   "hi": null,
+   "unit": "deg",
+   "kin": "rod_elev",
+   "rod_p2_cm": [
+    36.964,
+    -83.54,
+    -3.297
+   ],
+   "rod_len_mm": 33.0922
+  },
+  {
+   "name": "Rev Rudder_R hinge",
+   "type": "revolute",
+   "one": "surf:Rudder_R",
+   "two": "fin:R",
+   "axis": "Z",
+   "pt": [
+    43.765,
+    -87.773,
+    7.665
+   ],
+   "lo": -22.93,
+   "hi": 22.93,
+   "unit": "deg",
+   "kin": "rud_R"
+  },
+  {
+   "name": "Rev Arm_Rudder_R servo shaft",
+   "type": "revolute",
+   "one": "arm:Rudder_R",
+   "two": "hw:J-19:R",
+   "axis": "Z",
+   "pt": [
+    40.76,
+    -85.96,
+    -1.305
+   ],
+   "lo": -45,
+   "hi": 45,
+   "unit": "deg",
+   "kin": "arm_rud_R",
+   "link": {
+    "to": "Rev Rudder_R hinge",
+    "ratio_other_per_this": 0.5096
+   }
+  },
+  {
+   "name": "Rev Pushrod_Rudder_R arm hole",
+   "type": "revolute",
+   "one": "rod:Rudder_R",
+   "two": "arm:Rudder_R",
+   "axis": "Z",
+   "pt": [
+    39.638,
+    -86.798,
+    -1.064
+   ],
+   "lo": null,
+   "hi": null,
+   "unit": "deg",
+   "kin": "rod_rud_R",
+   "rod_p2_cm": [
+    41.695,
+    -89.25,
+    -1.064
+   ],
+   "rod_len_mm": 32.0056
+  },
+  {
+   "name": "Rev Rudder_L hinge",
+   "type": "revolute",
+   "one": "surf:Rudder_L",
+   "two": "fin:L",
+   "axis": "Z",
+   "pt": [
+    -43.765,
+    -87.773,
+    7.665
+   ],
+   "lo": -22.93,
+   "hi": 22.93,
+   "unit": "deg",
+   "kin": "rud_L"
+  },
+  {
+   "name": "Rev Arm_Rudder_L servo shaft",
+   "type": "revolute",
+   "one": "arm:Rudder_L",
+   "two": "hw:J-19:L",
+   "axis": "Z",
+   "pt": [
+    -40.76,
+    -85.96,
+    -1.305
+   ],
+   "lo": -45,
+   "hi": 45,
+   "unit": "deg",
+   "kin": "arm_rud_L",
+   "link": {
+    "to": "Rev Rudder_L hinge",
+    "ratio_other_per_this": 0.50901
+   }
+  },
+  {
+   "name": "Rev Pushrod_Rudder_L arm hole",
+   "type": "revolute",
+   "one": "rod:Rudder_L",
+   "two": "arm:Rudder_L",
+   "axis": "Z",
+   "pt": [
+    -39.638,
+    -86.798,
+    -1.064
+   ],
+   "lo": null,
+   "hi": null,
+   "unit": "deg",
+   "kin": "rod_rud_L",
+   "rod_p2_cm": [
+    -41.695,
+    -89.25,
+    -1.064
+   ],
+   "rod_len_mm": 32.0056
+  },
+  {
+   "name": "Rev Lift_Prop_L1 motor axis",
+   "type": "revolute",
+   "one": "prop:L1",
+   "two": "mount:L1",
+   "axis": "Z",
+   "pt": [
+    43.4,
+    37.1,
+    3.0
+   ],
+   "lo": null,
+   "hi": null,
+   "unit": "deg",
+   "kin": "prop_L1"
+  },
+  {
+   "name": "Rev Lift_Prop_L2 motor axis",
+   "type": "revolute",
+   "one": "prop:L2",
+   "two": "mount:L2",
+   "axis": "Z",
+   "pt": [
+    -43.4,
+    -50.5,
+    3.0
+   ],
+   "lo": null,
+   "hi": null,
+   "unit": "deg",
+   "kin": "prop_L2"
+  },
+  {
+   "name": "Rev Lift_Prop_L3 motor axis",
+   "type": "revolute",
+   "one": "prop:L3",
+   "two": "mount:L3",
+   "axis": "Z",
+   "pt": [
+    -43.4,
+    37.1,
+    3.0
+   ],
+   "lo": null,
+   "hi": null,
+   "unit": "deg",
+   "kin": "prop_L3"
+  },
+  {
+   "name": "Rev Lift_Prop_L4 motor axis",
+   "type": "revolute",
+   "one": "prop:L4",
+   "two": "mount:L4",
+   "axis": "Z",
+   "pt": [
+    43.4,
+    -50.5,
+    3.0
+   ],
+   "lo": null,
+   "hi": null,
+   "unit": "deg",
+   "kin": "prop_L4"
+  },
+  {
+   "name": "Rev Pusher_Prop motor axis",
+   "type": "revolute",
+   "one": "prop:P",
+   "two": "pod",
+   "axis": "Y",
+   "pt": [
+    0.0,
+    -42.3,
+    -3.0
+   ],
+   "lo": null,
+   "hi": null,
+   "unit": "deg",
+   "kin": "prop_P"
+  },
+  {
+   "name": "Rev Wheel_FR axle",
+   "type": "revolute",
+   "one": "wheel:FR",
+   "two": "leg:FR",
+   "axis": "X",
+   "pt": [
+    46.29,
+    28.092,
+    -25.37
+   ],
+   "lo": null,
+   "hi": null,
+   "unit": "deg",
+   "kin": "wheel_FR"
+  },
+  {
+   "name": "Rev Wheel_FL axle",
+   "type": "revolute",
+   "one": "wheel:FL",
+   "two": "leg:FL",
+   "axis": "X",
+   "pt": [
+    -46.29,
+    28.092,
+    -25.37
+   ],
+   "lo": null,
+   "hi": null,
+   "unit": "deg",
+   "kin": "wheel_FL"
+  },
+  {
+   "name": "Rev Wheel_RR axle",
+   "type": "revolute",
+   "one": "wheel:RR",
+   "two": "leg:RR",
+   "axis": "X",
+   "pt": [
+    46.29,
+    -41.458,
+    -25.37
+   ],
+   "lo": null,
+   "hi": null,
+   "unit": "deg",
+   "kin": "wheel_RR"
+  },
+  {
+   "name": "Rev Wheel_RL axle",
+   "type": "revolute",
+   "one": "wheel:RL",
+   "two": "leg:RL",
+   "axis": "X",
+   "pt": [
+    -46.29,
+    -41.458,
+    -25.37
+   ],
+   "lo": null,
+   "hi": null,
+   "unit": "deg",
+   "kin": "wheel_RL"
+  },
+  {
+   "name": "Slide Wing_Panel_R on joiner",
+   "type": "slider",
+   "one": "panel:R",
+   "two": "saddle",
+   "axis": "X",
+   "pt": [
+    8.0,
+    -7.16,
+    0.45
+   ],
+   "lo": 0,
+   "hi": 30,
+   "unit": "cm",
+   "kin": "slide_panel_R"
+  },
+  {
+   "name": "Slide Wing_Panel_L on joiner",
+   "type": "slider",
+   "one": "panel:L",
+   "two": "saddle",
+   "axis": "X",
+   "pt": [
+    -8.0,
+    -7.16,
+    0.45
+   ],
+   "lo": -30,
+   "hi": 0,
+   "unit": "cm",
+   "kin": "slide_panel_L"
+  },
+  {
+   "name": "Slide H_Tail lift-off",
+   "type": "slider",
+   "one": "htail",
+   "two": "stub:R",
+   "axis": "Z",
+   "pt": [
+    0.0,
+    -79.7,
+    -1.4
+   ],
+   "lo": 0,
+   "hi": 15,
+   "unit": "cm",
+   "kin": "slide_htail"
+  },
+  {
+   "name": "Slide Canopy lift-off",
+   "type": "slider",
+   "one": "canopy",
+   "two": "pod",
+   "axis": "Z",
+   "pt": [
+    0.0,
+    20.5,
+    4.6
+   ],
+   "lo": 0,
+   "hi": 10,
+   "unit": "cm",
+   "kin": "slide_canopy"
+  },
+  {
+   "name": "Slide Battery tray",
+   "type": "slider",
+   "one": "battery",
+   "two": "pod",
+   "axis": "Y",
+   "pt": [
+    0.0,
+    6.1,
+    -5.0
+   ],
+   "lo": -3,
+   "hi": 3,
+   "unit": "cm",
+   "kin": "slide_battery"
+  }
+ ],
+ "kin_of_key": {
+  "surf:Aileron_R": "ail_R",
+  "arm:Aileron_R": "arm_ail_R",
+  "rod:Aileron_R": "rod_ail_R",
+  "surf:Aileron_L": "ail_L",
+  "arm:Aileron_L": "arm_ail_L",
+  "rod:Aileron_L": "rod_ail_L",
+  "surf:Elevator": "elev",
+  "arm:Elevator": "arm_elev",
+  "rod:Elevator": "rod_elev",
+  "surf:Rudder_R": "rud_R",
+  "arm:Rudder_R": "arm_rud_R",
+  "rod:Rudder_R": "rod_rud_R",
+  "surf:Rudder_L": "rud_L",
+  "arm:Rudder_L": "arm_rud_L",
+  "rod:Rudder_L": "rod_rud_L",
+  "prop:L1": "prop_L1",
+  "prop:L2": "prop_L2",
+  "prop:L3": "prop_L3",
+  "prop:L4": "prop_L4",
+  "prop:P": "prop_P",
+  "wheel:FR": "wheel_FR",
+  "wheel:FL": "wheel_FL",
+  "wheel:RR": "wheel_RR",
+  "wheel:RL": "wheel_RL",
+  "panel:R": "slide_panel_R",
+  "panel:L": "slide_panel_L",
+  "htail": "slide_htail",
+  "canopy": "slide_canopy",
+  "battery": "slide_battery"
+ },
+ "rides": {
+  "WR": "slide_panel_R",
+  "WL": "slide_panel_L",
+  "TAIL": "slide_htail",
+  "CAN": "slide_canopy"
+ }
+}

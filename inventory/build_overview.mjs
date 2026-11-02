@@ -250,7 +250,7 @@ const T = {
   P12_NOTE: esc(byId['P-12'].Notes), M19: esc(byId['M-19'].Item), M19_NOTE: esc(byId['M-19'].Notes),
   TEN: usd(byId['P-02']['Ext USD']), AMA: usd(amaFee.v), FAA: usd(faaFee.v),
   ...ET,
-  FV_PIECES: FUS.pieces, FV_TRIS: FUS.tris.toLocaleString('en-US'), FV_FILES: FUS.files, FV_DATE: FUS.generated, FV_JOINTS: Object.keys(FUS.joints).length,
+  FV_PIECES: FUS.pieces, FV_TRIS: FUS.tris.toLocaleString('en-US'), FV_FILES: FUS.files, FV_DATE: FUS.generated, FV_JOINTS: Object.keys(FUS.joints).length, FV_NMOV: FUS.nMov, FV_NSLIDE: FUS.nSlide, FV_NREV: FUS.nMov - FUS.nSlide,
   FV_GROUPS: Object.entries(FUS.groups).map(([g, n]) => g + ' ' + n).join(', '),
   TOL_FITS: tolFits, TOL_STACKS: tolStacks, TOL_COUPONS: tolCoupons, TOL_PRINTER: esc(TOL.process.printer.split(' (')[0].replace(/^ASSUMED /, '') + ' (the repo names no printer), ' + TOL.process.layer_mm + ' mm layers, PETG and PA6-CF'),
   TOL_FAIL: TOL.fits.filter(f => tolSc(String(f.verdict)) === 'bad').length, TOL_MARG: TOL.fits.filter(f => tolSc(String(f.verdict)) === 'warn').length,

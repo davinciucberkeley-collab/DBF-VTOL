@@ -1,0 +1,4007 @@
+{
+ "generated": "2026-11-02",
+ "task": "Fusion joints and motion (task 31)",
+ "frames": {
+  "model": "X fwd, Y up, Z right, metres",
+  "fusion": "X right, Y fwd, Z up, cm; model (x,y,z) m -> Fusion (z,x,y)*100",
+  "stl": "STL files are Fusion world cm, Z-up, binary, exactly like stl/ in manifest.json (paths here are relative to inventory/fusion/)"
+ },
+ "conventions": {
+  "servo_deg": "rotation of the servo arm about +axis (right-hand), 0 = CAD neutral arm angle; arm limits +-45 deg",
+  "surface_deg": "rotation of the surface about +axis (right-hand): ailerons/elevator positive = trailing edge down; rudders positive = trailing edge toward +Z model (right)",
+  "ail_L/ail_R": "same sign relation: servo +deg -> TE down on both sides (the servo shaft axis in hardware.json is mirrored but the planar geometry is identical)",
+  "rod_angle_deg": "rotation of the pushrod line about +axis relative to neutral"
+ },
+ "sources": [
+  "inventory/hardware/mechanisms.json (arm_r_mm, p1_m, p2_m, throw_deg, rod_len_pin_to_hole_mm)",
+  "inventory/hardware/hardware.json (servo shaft pos HW-067/072/077, hinge_line HW-100, wheel pos HW-053)"
+ ],
+ "four_bar_method": "servo arm hole P1 rotates about the shaft S by the servo angle; the horn hole P2 rotates about the hinge H by the surface angle; |P1-P2| = rod length (neutral value); solved by bisection with continuation from neutral (fusion/make_kinematics.py)",
+ "groups": [
+  {
+   "id": "ail_R",
+   "name": "Aileron_R",
+   "kind": "surface",
+   "parent": "slide_panel_R",
+   "stl": [
+    "kinematics/Aileron_R.stl"
+   ],
+   "contains": "surface body + control horn + backing plate + 2 horn screws + 2 nuts",
+   "pivot_m": [
+    -0.17424,
+    0.01341,
+    0.892
+   ],
+   "pivot_cm": [
+    89.2,
+    -17.424,
+    1.341
+   ],
+   "axis_m": [
+    0,
+    0,
+    1
+   ],
+   "axis_cm": [
+    1,
+    0,
+    0
+   ],
+   "hinge_line_m": [
+    [
+     -0.17424,
+     0.01341,
+     0.586
+    ],
+    [
+     -0.17424,
+     0.01341,
+     1.198
+    ]
+   ],
+   "hinge_line_cm": [
+    [
+     58.6,
+     -17.424,
+     1.341
+    ],
+    [
+     119.8,
+     -17.424,
+     1.341
+    ]
+   ],
+   "limits_deg": [
+    -26.15,
+    26.15
+   ],
+   "limits_source": "mechanisms.json throw_deg at servo +-45 deg: +-26.1 (solver here: 26.11 / -26.15)",
+   "positive": "rotation about +axis (right-hand): trailing edge down",
+   "driver": {
+    "group": "arm_ail_R",
+    "relation": "four_bar",
+    "secant_ratio_surface_per_servo": 0.58019,
+    "note": "surface_deg = f(servo_deg), table below; the linear motion link in Fusion uses the secant ratio (error up to ~0.8 deg mid-range)"
+   },
+   "servo_plus_gives": "TE down",
+   "servo_to_surface_deg": {
+    "-45": -26.146,
+    "-40": -23.632,
+    "-35": -20.941,
+    "-30": -18.12,
+    "-25": -15.205,
+    "-20": -12.222,
+    "-15": -9.194,
+    "-10": -6.138,
+    "-5": -3.069,
+    "0": 0.0,
+    "5": 3.059,
+    "10": 6.097,
+    "15": 9.106,
+    "20": 12.078,
+    "25": 15.004,
+    "30": 17.877,
+    "35": 20.69,
+    "40": 23.436,
+    "45": 26.108
+   },
+   "neutral_lookup_rod_len_mm": 59.895,
+   "max_rod_len_err_mm": 0.0
+  },
+  {
+   "id": "arm_ail_R",
+   "name": "Arm_Aileron_R",
+   "kind": "servo_arm",
+   "parent": "slide_panel_R",
+   "stl": [
+    "kinematics/Arm_Aileron_R.stl"
+   ],
+   "contains": "servo output arm (23T) + arm screw",
+   "pivot_m": [
+    -0.1296,
+    0.005,
+    0.82095
+   ],
+   "pivot_cm": [
+    82.095,
+    -12.96,
+    0.5
+   ],
+   "axis_m": [
+    0,
+    0,
+    1
+   ],
+   "axis_cm": [
+    1,
+    0,
+    0
+   ],
+   "arm_hole_m": [
+    -0.13528,
+    -0.01418,
+    0.82337
+   ],
+   "arm_hole_cm": [
+    82.337,
+    -13.528,
+    -1.418
+   ],
+   "arm_r_mm": 20,
+   "neutral_arm_angle_deg_about_axis": -106.5,
+   "neutral_arm_angle_basis": "angle of (hole - shaft) in the plane normal to axis_m, u = model X, v = axis x u",
+   "limits_deg": [
+    -45,
+    45
+   ],
+   "positive": "rotation about +axis (right-hand) = servo angle in this file; TE down on Aileron_R",
+   "physical_axis_in_hardware_json_m": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "note": "for the surfaces whose servo shaft axis in hardware.json is -Z (aileron_L, elevator) the command sign is the opposite of the angle here; geometry is identical"
+  },
+  {
+   "id": "rod_ail_R",
+   "name": "Pushrod_Aileron_R",
+   "kind": "pushrod",
+   "parent": "arm_ail_R",
+   "stl": [
+    "kinematics/Pushrod_Aileron_R.stl"
+   ],
+   "contains": "rod with Z-bend + Kwik-Link clevis + keeper bead",
+   "pivot_m": [
+    -0.13528,
+    -0.01418,
+    0.82337
+   ],
+   "pivot_cm": [
+    82.337,
+    -13.528,
+    -1.418
+   ],
+   "axis_m": [
+    0,
+    0,
+    1
+   ],
+   "axis_cm": [
+    1,
+    0,
+    0
+   ],
+   "p1_neutral_m": [
+    -0.13528,
+    -0.01418,
+    0.82337
+   ],
+   "p2_neutral_m": [
+    -0.195,
+    -0.01875,
+    0.82337
+   ],
+   "p1_neutral_cm": [
+    82.337,
+    -13.528,
+    -1.418
+   ],
+   "p2_neutral_cm": [
+    82.337,
+    -19.5,
+    -1.875
+   ],
+   "rod_len_pin_to_hole_mm": 59.89,
+   "rod_cut_mm": 53.9,
+   "driver": {
+    "group": "arm_ail_R",
+    "relation": "rod pose per servo step: p1 = arm hole, p2 = horn hole (rows below)"
+   },
+   "transform_rule": "M = T(p1_step) * Rot(axis_cm, rod_angle_deg) * T(-p1_neutral)  applied to the neutral STL",
+   "pose_table": [
+    {
+     "servo_deg": -45,
+     "rod_angle_deg": -2.687,
+     "p1_m": [
+      -0.147179,
+      -0.004546,
+      0.82337
+     ],
+     "p2_m": [
+      -0.207047,
+      -0.006311,
+      0.82337
+     ],
+     "p1_cm": [
+      82.337,
+      -14.7179,
+      -0.4546
+     ],
+     "p2_cm": [
+      82.337,
+      -20.7047,
+      -0.6311
+     ],
+     "rod_len_err_mm": -0.0
+    },
+    {
+     "servo_deg": -40,
+     "rod_angle_deg": -2.759,
+     "p1_m": [
+      -0.14628,
+      -0.006042,
+      0.82337
+     ],
+     "p2_m": [
+      -0.206151,
+      -0.007731,
+      0.82337
+     ],
+     "p1_cm": [
+      82.337,
+      -14.628,
+      -0.6042
+     ],
+     "p2_cm": [
+      82.337,
+      -20.6151,
+      -0.7731
+     ],
+     "rod_len_err_mm": 0.0
+    },
+    {
+     "servo_deg": -35,
+     "rod_angle_deg": -2.699,
+     "p1_m": [
+      -0.145254,
+      -0.007453,
+      0.82337
+     ],
+     "p2_m": [
+      -0.205123,
+      -0.009206,
+      0.82337
+     ],
+     "p1_cm": [
+      82.337,
+      -14.5254,
+      -0.7453
+     ],
+     "p2_cm": [
+      82.337,
+      -20.5123,
+      -0.9206
+     ],
+     "rod_len_err_mm": -0.0
+    },
+    {
+     "servo_deg": -30,
+     "rod_angle_deg": -2.531,
+     "p1_m": [
+      -0.144109,
+      -0.00877,
+      0.82337
+     ],
+     "p2_m": [
+      -0.203973,
+      -0.010698,
+      0.82337
+     ],
+     "p1_cm": [
+      82.337,
+      -14.4109,
+      -0.877
+     ],
+     "p2_cm": [
+      82.337,
+      -20.3973,
+      -1.0698
+     ],
+     "rod_len_err_mm": 0.0
+    },
+    {
+     "servo_deg": -25,
+     "rod_angle_deg": -2.274,
+     "p1_m": [
+      -0.142854,
+      -0.009983,
+      0.82337
+     ],
+     "p2_m": [
+      -0.202708,
+      -0.012179,
+      0.82337
+     ],
+     "p1_cm": [
+      82.337,
+      -14.2854,
+      -0.9983
+     ],
+     "p2_cm": [
+      82.337,
+      -20.2708,
+      -1.2179
+     ],
+     "rod_len_err_mm": 0.0
+    },
+    {
+     "servo_deg": -20,
+     "rod_angle_deg": -1.94,
+     "p1_m": [
+      -0.141497,
+      -0.011081,
+      0.82337
+     ],
+     "p2_m": [
+      -0.201338,
+      -0.013626,
+      0.82337
+     ],
+     "p1_cm": [
+      82.337,
+      -14.1497,
+      -1.1081
+     ],
+     "p2_cm": [
+      82.337,
+      -20.1338,
+      -1.3626
+     ],
+     "rod_len_err_mm": 0.0
+    },
+    {
+     "servo_deg": -15,
+     "rod_angle_deg": -1.54,
+     "p1_m": [
+      -0.140051,
+      -0.012056,
+      0.82337
+     ],
+     "p2_m": [
+      -0.199872,
+      -0.01502,
+      0.82337
+     ],
+     "p1_cm": [
+      82.337,
+      -14.0051,
+      -1.2056
+     ],
+     "p2_cm": [
+      82.337,
+      -19.9872,
+      -1.502
+     ],
+     "rod_len_err_mm": -0.0
+    },
+    {
+     "servo_deg": -10,
+     "rod_angle_deg": -1.08,
+     "p1_m": [
+      -0.138524,
+      -0.012902,
+      0.82337
+     ],
+     "p2_m": [
+      -0.19832,
+      -0.016346,
+      0.82337
+     ],
+     "p1_cm": [
+      82.337,
+      -13.8524,
+      -1.2902
+     ],
+     "p2_cm": [
+      82.337,
+      -19.832,
+      -1.6346
+     ],
+     "rod_len_err_mm": -0.0
+    },
+    {
+     "servo_deg": -5,
+     "rod_angle_deg": -0.566,
+     "p1_m": [
+      -0.13693,
+      -0.013612,
+      0.82337
+     ],
+     "p2_m": [
+      -0.196692,
+      -0.017592,
+      0.82337
+     ],
+     "p1_cm": [
+      82.337,
+      -13.693,
+      -1.3612
+     ],
+     "p2_cm": [
+      82.337,
+      -19.6692,
+      -1.7592
+     ],
+     "rod_len_err_mm": 0.0
+    },
+    {
+     "servo_deg": 0,
+     "rod_angle_deg": 0.0,
+     "p1_m": [
+      -0.13528,
+      -0.01418,
+      0.82337
+     ],
+     "p2_m": [
+      -0.195,
+      -0.01875,
+      0.82337
+     ],
+     "p1_cm": [
+      82.337,
+      -13.528,
+      -1.418
+     ],
+     "p2_cm": [
+      82.337,
+      -19.5,
+      -1.875
+     ],
+     "rod_len_err_mm": 0.0
+    },
+    {
+     "servo_deg": 5,
+     "rod_angle_deg": 0.614,
+     "p1_m": [
+      -0.133587,
+      -0.014602,
+      0.82337
+     ],
+     "p2_m": [
+      -0.193254,
+      -0.019812,
+      0.82337
+     ],
+     "p1_cm": [
+      82.337,
+      -13.3587,
+      -1.4602
+     ],
+     "p2_cm": [
+      82.337,
+      -19.3254,
+      -1.9812
+     ],
+     "rod_len_err_mm": 0.0
+    },
+    {
+     "servo_deg": 10,
+     "rod_angle_deg": 1.275,
+     "p1_m": [
+      -0.131863,
+      -0.014875,
+      0.82337
+     ],
+     "p2_m": [
+      -0.191467,
+      -0.020773,
+      0.82337
+     ],
+     "p1_cm": [
+      82.337,
+      -13.1863,
+      -1.4875
+     ],
+     "p2_cm": [
+      82.337,
+      -19.1467,
+      -2.0773
+     ],
+     "rod_len_err_mm": 0.0
+    },
+    {
+     "servo_deg": 15,
+     "rod_angle_deg": 1.983,
+     "p1_m": [
+      -0.130122,
+      -0.014997,
+      0.82337
+     ],
+     "p2_m": [
+      -0.189648,
+      -0.02163,
+      0.82337
+     ],
+     "p1_cm": [
+      82.337,
+      -13.0122,
+      -1.4997
+     ],
+     "p2_cm": [
+      82.337,
+      -18.9648,
+      -2.163
+     ],
+     "rod_len_err_mm": 0.0
+    },
+    {
+     "servo_deg": 20,
+     "rod_angle_deg": 2.737,
+     "p1_m": [
+      -0.128378,
+      -0.014966,
+      0.82337
+     ],
+     "p2_m": [
+      -0.187811,
+      -0.022382,
+      0.82337
+     ],
+     "p1_cm": [
+      82.337,
+      -12.8378,
+      -1.4966
+     ],
+     "p2_cm": [
+      82.337,
+      -18.7811,
+      -2.2382
+     ],
+     "rod_len_err_mm": 0.0
+    },
+    {
+     "servo_deg": 25,
+     "rod_angle_deg": 3.536,
+     "p1_m": [
+      -0.126642,
+      -0.014783,
+      0.82337
+     ],
+     "p2_m": [
+      -0.185966,
+      -0.023028,
+      0.82337
+     ],
+     "p1_cm": [
+      82.337,
+      -12.6642,
+      -1.4783
+     ],
+     "p2_cm": [
+      82.337,
+      -18.5966,
+      -2.3028
+     ],
+     "rod_len_err_mm": -0.0
+    },
+    {
+     "servo_deg": 30,
+     "rod_angle_deg": 4.382,
+     "p1_m": [
+      -0.124929,
+      -0.01445,
+      0.82337
+     ],
+     "p2_m": [
+      -0.184125,
+      -0.02357,
+      0.82337
+     ],
+     "p1_cm": [
+      82.337,
+      -12.4929,
+      -1.445
+     ],
+     "p2_cm": [
+      82.337,
+      -18.4125,
+      -2.357
+     ],
+     "rod_len_err_mm": -0.0
+    },
+    {
+     "servo_deg": 35,
+     "rod_angle_deg": 5.275,
+     "p1_m": [
+      -0.123252,
+      -0.013969,
+      0.82337
+     ],
+     "p2_m": [
+      -0.182298,
+      -0.024011,
+      0.82337
+     ],
+     "p1_cm": [
+      82.337,
+      -12.3252,
+      -1.3969
+     ],
+     "p2_cm": [
+      82.337,
+      -18.2298,
+      -2.4011
+     ],
+     "rod_len_err_mm": 0.0
+    },
+    {
+     "servo_deg": 40,
+     "rod_angle_deg": 6.217,
+     "p1_m": [
+      -0.121622,
+      -0.013344,
+      0.82337
+     ],
+     "p2_m": [
+      -0.180496,
+      -0.024354,
+      0.82337
+     ],
+     "p1_cm": [
+      82.337,
+      -12.1622,
+      -1.3344
+     ],
+     "p2_cm": [
+      82.337,
+      -18.0496,
+      -2.4354
+     ],
+     "rod_len_err_mm": 0.0
+    },
+    {
+     "servo_deg": 45,
+     "rod_angle_deg": 7.207,
+     "p1_m": [
+      -0.120054,
+      -0.012579,
+      0.82337
+     ],
+     "p2_m": [
+      -0.178729,
+      -0.024604,
+      0.82337
+     ],
+     "p1_cm": [
+      82.337,
+      -12.0054,
+      -1.2579
+     ],
+     "p2_cm": [
+      82.337,
+      -17.8729,
+      -2.4604
+     ],
+     "rod_len_err_mm": 0.0
+    }
+   ]
+  },
+  {
+   "id": "ail_L",
+   "name": "Aileron_L",
+   "kind": "surface",
+   "parent": "slide_panel_L",
+   "stl": [
+    "kinematics/Aileron_L.stl"
+   ],
+   "contains": "surface body + control horn + backing plate + 2 horn screws + 2 nuts",
+   "pivot_m": [
+    -0.17424,
+    0.01341,
+    -0.892
+   ],
+   "pivot_cm": [
+    -89.2,
+    -17.424,
+    1.341
+   ],
+   "axis_m": [
+    0,
+    0,
+    1
+   ],
+   "axis_cm": [
+    1,
+    0,
+    0
+   ],
+   "hinge_line_m": [
+    [
+     -0.17424,
+     0.01341,
+     -0.586
+    ],
+    [
+     -0.17424,
+     0.01341,
+     -1.198
+    ]
+   ],
+   "hinge_line_cm": [
+    [
+     -58.6,
+     -17.424,
+     1.341
+    ],
+    [
+     -119.8,
+     -17.424,
+     1.341
+    ]
+   ],
+   "limits_deg": [
+    -26.15,
+    26.15
+   ],
+   "limits_source": "mechanisms.json throw_deg at servo +-45 deg: +-26.1 (solver here: 26.11 / -26.15)",
+   "positive": "rotation about +axis (right-hand): trailing edge down",
+   "driver": {
+    "group": "arm_ail_L",
+    "relation": "four_bar",
+    "secant_ratio_surface_per_servo": 0.58019,
+    "note": "surface_deg = f(servo_deg), table below; the linear motion link in Fusion uses the secant ratio (error up to ~0.8 deg mid-range)"
+   },
+   "servo_plus_gives": "TE down",
+   "servo_to_surface_deg": {
+    "-45": -26.146,
+    "-40": -23.632,
+    "-35": -20.941,
+    "-30": -18.12,
+    "-25": -15.205,
+    "-20": -12.222,
+    "-15": -9.194,
+    "-10": -6.138,
+    "-5": -3.069,
+    "0": 0.0,
+    "5": 3.059,
+    "10": 6.097,
+    "15": 9.106,
+    "20": 12.078,
+    "25": 15.004,
+    "30": 17.877,
+    "35": 20.69,
+    "40": 23.436,
+    "45": 26.108
+   },
+   "neutral_lookup_rod_len_mm": 59.895,
+   "max_rod_len_err_mm": 0.0
+  },
+  {
+   "id": "arm_ail_L",
+   "name": "Arm_Aileron_L",
+   "kind": "servo_arm",
+   "parent": "slide_panel_L",
+   "stl": [
+    "kinematics/Arm_Aileron_L.stl"
+   ],
+   "contains": "servo output arm (23T) + arm screw",
+   "pivot_m": [
+    -0.1296,
+    0.005,
+    -0.82095
+   ],
+   "pivot_cm": [
+    -82.095,
+    -12.96,
+    0.5
+   ],
+   "axis_m": [
+    0,
+    0,
+    1
+   ],
+   "axis_cm": [
+    1,
+    0,
+    0
+   ],
+   "arm_hole_m": [
+    -0.13528,
+    -0.01418,
+    -0.82337
+   ],
+   "arm_hole_cm": [
+    -82.337,
+    -13.528,
+    -1.418
+   ],
+   "arm_r_mm": 20,
+   "neutral_arm_angle_deg_about_axis": -106.5,
+   "neutral_arm_angle_basis": "angle of (hole - shaft) in the plane normal to axis_m, u = model X, v = axis x u",
+   "limits_deg": [
+    -45,
+    45
+   ],
+   "positive": "rotation about +axis (right-hand) = servo angle in this file; TE down on Aileron_L",
+   "physical_axis_in_hardware_json_m": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "note": "for the surfaces whose servo shaft axis in hardware.json is -Z (aileron_L, elevator) the command sign is the opposite of the angle here; geometry is identical"
+  },
+  {
+   "id": "rod_ail_L",
+   "name": "Pushrod_Aileron_L",
+   "kind": "pushrod",
+   "parent": "arm_ail_L",
+   "stl": [
+    "kinematics/Pushrod_Aileron_L.stl"
+   ],
+   "contains": "rod with Z-bend + Kwik-Link clevis + keeper bead",
+   "pivot_m": [
+    -0.13528,
+    -0.01418,
+    -0.82337
+   ],
+   "pivot_cm": [
+    -82.337,
+    -13.528,
+    -1.418
+   ],
+   "axis_m": [
+    0,
+    0,
+    1
+   ],
+   "axis_cm": [
+    1,
+    0,
+    0
+   ],
+   "p1_neutral_m": [
+    -0.13528,
+    -0.01418,
+    -0.82337
+   ],
+   "p2_neutral_m": [
+    -0.195,
+    -0.01875,
+    -0.82337
+   ],
+   "p1_neutral_cm": [
+    -82.337,
+    -13.528,
+    -1.418
+   ],
+   "p2_neutral_cm": [
+    -82.337,
+    -19.5,
+    -1.875
+   ],
+   "rod_len_pin_to_hole_mm": 59.89,
+   "rod_cut_mm": 53.9,
+   "driver": {
+    "group": "arm_ail_L",
+    "relation": "rod pose per servo step: p1 = arm hole, p2 = horn hole (rows below)"
+   },
+   "transform_rule": "M = T(p1_step) * Rot(axis_cm, rod_angle_deg) * T(-p1_neutral)  applied to the neutral STL",
+   "pose_table": [
+    {
+     "servo_deg": -45,
+     "rod_angle_deg": -2.687,
+     "p1_m": [
+      -0.147179,
+      -0.004546,
+      -0.82337
+     ],
+     "p2_m": [
+      -0.207047,
+      -0.006311,
+      -0.82337
+     ],
+     "p1_cm": [
+      -82.337,
+      -14.7179,
+      -0.4546
+     ],
+     "p2_cm": [
+      -82.337,
+      -20.7047,
+      -0.6311
+     ],
+     "rod_len_err_mm": -0.0
+    },
+    {
+     "servo_deg": -40,
+     "rod_angle_deg": -2.759,
+     "p1_m": [
+      -0.14628,
+      -0.006042,
+      -0.82337
+     ],
+     "p2_m": [
+      -0.206151,
+      -0.007731,
+      -0.82337
+     ],
+     "p1_cm": [
+      -82.337,
+      -14.628,
+      -0.6042
+     ],
+     "p2_cm": [
+      -82.337,
+      -20.6151,
+      -0.7731
+     ],
+     "rod_len_err_mm": 0.0
+    },
+    {
+     "servo_deg": -35,
+     "rod_angle_deg": -2.699,
+     "p1_m": [
+      -0.145254,
+      -0.007453,
+      -0.82337
+     ],
+     "p2_m": [
+      -0.205123,
+      -0.009206,
+      -0.82337
+     ],
+     "p1_cm": [
+      -82.337,
+      -14.5254,
+      -0.7453
+     ],
+     "p2_cm": [
+      -82.337,
+      -20.5123,
+      -0.9206
+     ],
+     "rod_len_err_mm": -0.0
+    },
+    {
+     "servo_deg": -30,
+     "rod_angle_deg": -2.531,
+     "p1_m": [
+      -0.144109,
+      -0.00877,
+      -0.82337
+     ],
+     "p2_m": [
+      -0.203973,
+      -0.010698,
+      -0.82337
+     ],
+     "p1_cm": [
+      -82.337,
+      -14.4109,
+      -0.877
+     ],
+     "p2_cm": [
+      -82.337,
+      -20.3973,
+      -1.0698
+     ],
+     "rod_len_err_mm": 0.0
+    },
+    {
+     "servo_deg": -25,
+     "rod_angle_deg": -2.274,
+     "p1_m": [
+      -0.142854,
+      -0.009983,
+      -0.82337
+     ],
+     "p2_m": [
+      -0.202708,
+      -0.012179,
+      -0.82337
+     ],
+     "p1_cm": [
+      -82.337,
+      -14.2854,
+      -0.9983
+     ],
+     "p2_cm": [
+      -82.337,
+      -20.2708,
+      -1.2179
+     ],
+     "rod_len_err_mm": 0.0
+    },
+    {
+     "servo_deg": -20,
+     "rod_angle_deg": -1.94,
+     "p1_m": [
+      -0.141497,
+      -0.011081,
+      -0.82337
+     ],
+     "p2_m": [
+      -0.201338,
+      -0.013626,
+      -0.82337
+     ],
+     "p1_cm": [
+      -82.337,
+      -14.1497,
+      -1.1081
+     ],
+     "p2_cm": [
+      -82.337,
+      -20.1338,
+      -1.3626
+     ],
+     "rod_len_err_mm": 0.0
+    },
+    {
+     "servo_deg": -15,
+     "rod_angle_deg": -1.54,
+     "p1_m": [
+      -0.140051,
+      -0.012056,
+      -0.82337
+     ],
+     "p2_m": [
+      -0.199872,
+      -0.01502,
+      -0.82337
+     ],
+     "p1_cm": [
+      -82.337,
+      -14.0051,
+      -1.2056
+     ],
+     "p2_cm": [
+      -82.337,
+      -19.9872,
+      -1.502
+     ],
+     "rod_len_err_mm": -0.0
+    },
+    {
+     "servo_deg": -10,
+     "rod_angle_deg": -1.08,
+     "p1_m": [
+      -0.138524,
+      -0.012902,
+      -0.82337
+     ],
+     "p2_m": [
+      -0.19832,
+      -0.016346,
+      -0.82337
+     ],
+     "p1_cm": [
+      -82.337,
+      -13.8524,
+      -1.2902
+     ],
+     "p2_cm": [
+      -82.337,
+      -19.832,
+      -1.6346
+     ],
+     "rod_len_err_mm": -0.0
+    },
+    {
+     "servo_deg": -5,
+     "rod_angle_deg": -0.566,
+     "p1_m": [
+      -0.13693,
+      -0.013612,
+      -0.82337
+     ],
+     "p2_m": [
+      -0.196692,
+      -0.017592,
+      -0.82337
+     ],
+     "p1_cm": [
+      -82.337,
+      -13.693,
+      -1.3612
+     ],
+     "p2_cm": [
+      -82.337,
+      -19.6692,
+      -1.7592
+     ],
+     "rod_len_err_mm": 0.0
+    },
+    {
+     "servo_deg": 0,
+     "rod_angle_deg": 0.0,
+     "p1_m": [
+      -0.13528,
+      -0.01418,
+      -0.82337
+     ],
+     "p2_m": [
+      -0.195,
+      -0.01875,
+      -0.82337
+     ],
+     "p1_cm": [
+      -82.337,
+      -13.528,
+      -1.418
+     ],
+     "p2_cm": [
+      -82.337,
+      -19.5,
+      -1.875
+     ],
+     "rod_len_err_mm": 0.0
+    },
+    {
+     "servo_deg": 5,
+     "rod_angle_deg": 0.614,
+     "p1_m": [
+      -0.133587,
+      -0.014602,
+      -0.82337
+     ],
+     "p2_m": [
+      -0.193254,
+      -0.019812,
+      -0.82337
+     ],
+     "p1_cm": [
+      -82.337,
+      -13.3587,
+      -1.4602
+     ],
+     "p2_cm": [
+      -82.337,
+      -19.3254,
+      -1.9812
+     ],
+     "rod_len_err_mm": 0.0
+    },
+    {
+     "servo_deg": 10,
+     "rod_angle_deg": 1.275,
+     "p1_m": [
+      -0.131863,
+      -0.014875,
+      -0.82337
+     ],
+     "p2_m": [
+      -0.191467,
+      -0.020773,
+      -0.82337
+     ],
+     "p1_cm": [
+      -82.337,
+      -13.1863,
+      -1.4875
+     ],
+     "p2_cm": [
+      -82.337,
+      -19.1467,
+      -2.0773
+     ],
+     "rod_len_err_mm": 0.0
+    },
+    {
+     "servo_deg": 15,
+     "rod_angle_deg": 1.983,
+     "p1_m": [
+      -0.130122,
+      -0.014997,
+      -0.82337
+     ],
+     "p2_m": [
+      -0.189648,
+      -0.02163,
+      -0.82337
+     ],
+     "p1_cm": [
+      -82.337,
+      -13.0122,
+      -1.4997
+     ],
+     "p2_cm": [
+      -82.337,
+      -18.9648,
+      -2.163
+     ],
+     "rod_len_err_mm": 0.0
+    },
+    {
+     "servo_deg": 20,
+     "rod_angle_deg": 2.737,
+     "p1_m": [
+      -0.128378,
+      -0.014966,
+      -0.82337
+     ],
+     "p2_m": [
+      -0.187811,
+      -0.022382,
+      -0.82337
+     ],
+     "p1_cm": [
+      -82.337,
+      -12.8378,
+      -1.4966
+     ],
+     "p2_cm": [
+      -82.337,
+      -18.7811,
+      -2.2382
+     ],
+     "rod_len_err_mm": 0.0
+    },
+    {
+     "servo_deg": 25,
+     "rod_angle_deg": 3.536,
+     "p1_m": [
+      -0.126642,
+      -0.014783,
+      -0.82337
+     ],
+     "p2_m": [
+      -0.185966,
+      -0.023028,
+      -0.82337
+     ],
+     "p1_cm": [
+      -82.337,
+      -12.6642,
+      -1.4783
+     ],
+     "p2_cm": [
+      -82.337,
+      -18.5966,
+      -2.3028
+     ],
+     "rod_len_err_mm": -0.0
+    },
+    {
+     "servo_deg": 30,
+     "rod_angle_deg": 4.382,
+     "p1_m": [
+      -0.124929,
+      -0.01445,
+      -0.82337
+     ],
+     "p2_m": [
+      -0.184125,
+      -0.02357,
+      -0.82337
+     ],
+     "p1_cm": [
+      -82.337,
+      -12.4929,
+      -1.445
+     ],
+     "p2_cm": [
+      -82.337,
+      -18.4125,
+      -2.357
+     ],
+     "rod_len_err_mm": -0.0
+    },
+    {
+     "servo_deg": 35,
+     "rod_angle_deg": 5.275,
+     "p1_m": [
+      -0.123252,
+      -0.013969,
+      -0.82337
+     ],
+     "p2_m": [
+      -0.182298,
+      -0.024011,
+      -0.82337
+     ],
+     "p1_cm": [
+      -82.337,
+      -12.3252,
+      -1.3969
+     ],
+     "p2_cm": [
+      -82.337,
+      -18.2298,
+      -2.4011
+     ],
+     "rod_len_err_mm": 0.0
+    },
+    {
+     "servo_deg": 40,
+     "rod_angle_deg": 6.217,
+     "p1_m": [
+      -0.121622,
+      -0.013344,
+      -0.82337
+     ],
+     "p2_m": [
+      -0.180496,
+      -0.024354,
+      -0.82337
+     ],
+     "p1_cm": [
+      -82.337,
+      -12.1622,
+      -1.3344
+     ],
+     "p2_cm": [
+      -82.337,
+      -18.0496,
+      -2.4354
+     ],
+     "rod_len_err_mm": 0.0
+    },
+    {
+     "servo_deg": 45,
+     "rod_angle_deg": 7.207,
+     "p1_m": [
+      -0.120054,
+      -0.012579,
+      -0.82337
+     ],
+     "p2_m": [
+      -0.178729,
+      -0.024604,
+      -0.82337
+     ],
+     "p1_cm": [
+      -82.337,
+      -12.0054,
+      -1.2579
+     ],
+     "p2_cm": [
+      -82.337,
+      -17.8729,
+      -2.4604
+     ],
+     "rod_len_err_mm": 0.0
+    }
+   ]
+  },
+  {
+   "id": "elev",
+   "name": "Elevator",
+   "kind": "surface",
+   "parent": "slide_htail",
+   "stl": [
+    "kinematics/Elevator.stl"
+   ],
+   "contains": "surface body + control horn + backing plate + 2 horn screws + 2 nuts",
+   "pivot_m": [
+    -0.82364,
+    -0.01186,
+    0.36964
+   ],
+   "pivot_cm": [
+    36.964,
+    -82.364,
+    -1.186
+   ],
+   "axis_m": [
+    0,
+    0,
+    1
+   ],
+   "axis_cm": [
+    1,
+    0,
+    0
+   ],
+   "hinge_line_m": [
+    [
+     -0.82364,
+     -0.01186,
+     -0.4277
+    ],
+    [
+     -0.82364,
+     -0.01186,
+     0.4277
+    ]
+   ],
+   "hinge_line_cm": [
+    [
+     -42.77,
+     -82.364,
+     -1.186
+    ],
+    [
+     42.77,
+     -82.364,
+     -1.186
+    ]
+   ],
+   "limits_deg": [
+    -24.25,
+    24.25
+   ],
+   "limits_source": "mechanisms.json throw_deg at servo +-45 deg: +-24.2 (solver here: 24.25 / -24.21)",
+   "positive": "rotation about +axis (right-hand): trailing edge down",
+   "driver": {
+    "group": "arm_elev",
+    "relation": "four_bar",
+    "secant_ratio_surface_per_servo": 0.53889,
+    "note": "surface_deg = f(servo_deg), table below; the linear motion link in Fusion uses the secant ratio (error up to ~0.8 deg mid-range)"
+   },
+   "servo_plus_gives": "TE down",
+   "servo_to_surface_deg": {
+    "-45": -24.207,
+    "-40": -21.913,
+    "-35": -19.464,
+    "-30": -16.89,
+    "-25": -14.214,
+    "-20": -11.459,
+    "-15": -8.642,
+    "-10": -5.783,
+    "-5": -2.897,
+    "0": 0.0,
+    "5": 2.894,
+    "10": 5.77,
+    "15": 8.614,
+    "20": 11.413,
+    "25": 14.154,
+    "30": 16.821,
+    "35": 19.402,
+    "40": 21.883,
+    "45": 24.25
+   },
+   "neutral_lookup_rod_len_mm": 33.092,
+   "max_rod_len_err_mm": 0.0
+  },
+  {
+   "id": "arm_elev",
+   "name": "Arm_Elevator",
+   "kind": "servo_arm",
+   "parent": "slide_panel_R",
+   "stl": [
+    "kinematics/Arm_Elevator.stl"
+   ],
+   "contains": "servo output arm (23T) + arm screw",
+   "pivot_m": [
+    -0.7996,
+    -0.036,
+    0.37205
+   ],
+   "pivot_cm": [
+    37.205,
+    -79.96,
+    -3.6
+   ],
+   "axis_m": [
+    0,
+    0,
+    1
+   ],
+   "axis_cm": [
+    1,
+    0,
+    0
+   ],
+   "arm_hole_m": [
+    -0.80612,
+    -0.04839,
+    0.36964
+   ],
+   "arm_hole_cm": [
+    36.964,
+    -80.612,
+    -4.839
+   ],
+   "arm_r_mm": 14,
+   "neutral_arm_angle_deg_about_axis": -117.75,
+   "neutral_arm_angle_basis": "angle of (hole - shaft) in the plane normal to axis_m, u = model X, v = axis x u",
+   "limits_deg": [
+    -45,
+    45
+   ],
+   "positive": "rotation about +axis (right-hand) = servo angle in this file; TE down on Elevator",
+   "physical_axis_in_hardware_json_m": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "note": "for the surfaces whose servo shaft axis in hardware.json is -Z (aileron_L, elevator) the command sign is the opposite of the angle here; geometry is identical"
+  },
+  {
+   "id": "rod_elev",
+   "name": "Pushrod_Elevator",
+   "kind": "pushrod",
+   "parent": "arm_elev",
+   "stl": [
+    "kinematics/Pushrod_Elevator.stl"
+   ],
+   "contains": "rod with Z-bend + Kwik-Link clevis + keeper bead",
+   "pivot_m": [
+    -0.80612,
+    -0.04839,
+    0.36964
+   ],
+   "pivot_cm": [
+    36.964,
+    -80.612,
+    -4.839
+   ],
+   "axis_m": [
+    0,
+    0,
+    1
+   ],
+   "axis_cm": [
+    1,
+    0,
+    0
+   ],
+   "p1_neutral_m": [
+    -0.80612,
+    -0.04839,
+    0.36964
+   ],
+   "p2_neutral_m": [
+    -0.8354,
+    -0.03297,
+    0.36964
+   ],
+   "p1_neutral_cm": [
+    36.964,
+    -80.612,
+    -4.839
+   ],
+   "p2_neutral_cm": [
+    36.964,
+    -83.54,
+    -3.297
+   ],
+   "rod_len_pin_to_hole_mm": 33.09,
+   "rod_cut_mm": 27.1,
+   "driver": {
+    "group": "arm_elev",
+    "relation": "rod pose per servo step: p1 = arm hole, p2 = horn hole (rows below)"
+   },
+   "transform_rule": "M = T(p1_step) * Rot(axis_cm, rod_angle_deg) * T(-p1_neutral)  applied to the neutral STL",
+   "pose_table": [
+    {
+     "servo_deg": -45,
+     "rod_angle_deg": 3.014,
+     "p1_m": [
+      -0.812971,
+      -0.040151,
+      0.36964
+     ],
+     "p2_m": [
+      -0.843022,
+      -0.026292,
+      0.36964
+     ],
+     "p1_cm": [
+      36.964,
+      -81.2971,
+      -4.0151
+     ],
+     "p2_cm": [
+      36.964,
+      -84.3022,
+      -2.6292
+     ],
+     "rod_len_err_mm": -0.0
+    },
+    {
+     "servo_deg": -40,
+     "rod_angle_deg": 2.278,
+     "p1_m": [
+      -0.812559,
+      -0.0413,
+      0.36964
+     ],
+     "p2_m": [
+      -0.842428,
+      -0.027056,
+      0.36964
+     ],
+     "p1_cm": [
+      36.964,
+      -81.2559,
+      -4.13
+     ],
+     "p2_cm": [
+      36.964,
+      -84.2428,
+      -2.7056
+     ],
+     "rod_len_err_mm": 0.0
+    },
+    {
+     "servo_deg": -35,
+     "rod_angle_deg": 1.661,
+     "p1_m": [
+      -0.812047,
+      -0.04241,
+      0.36964
+     ],
+     "p2_m": [
+      -0.841762,
+      -0.027845,
+      0.36964
+     ],
+     "p1_cm": [
+      36.964,
+      -81.2047,
+      -4.241
+     ],
+     "p2_cm": [
+      36.964,
+      -84.1762,
+      -2.7845
+     ],
+     "rod_len_err_mm": -0.0
+    },
+    {
+     "servo_deg": -30,
+     "rod_angle_deg": 1.154,
+     "p1_m": [
+      -0.811441,
+      -0.04347,
+      0.36964
+     ],
+     "p2_m": [
+      -0.841026,
+      -0.028643,
+      0.36964
+     ],
+     "p1_cm": [
+      36.964,
+      -81.1441,
+      -4.347
+     ],
+     "p2_cm": [
+      36.964,
+      -84.1026,
+      -2.8643
+     ],
+     "rod_len_err_mm": 0.0
+    },
+    {
+     "servo_deg": -25,
+     "rod_angle_deg": 0.746,
+     "p1_m": [
+      -0.810745,
+      -0.044474,
+      0.36964
+     ],
+     "p2_m": [
+      -0.840224,
+      -0.029436,
+      0.36964
+     ],
+     "p1_cm": [
+      36.964,
+      -81.0745,
+      -4.4474
+     ],
+     "p2_cm": [
+      36.964,
+      -84.0224,
+      -2.9436
+     ],
+     "rod_len_err_mm": -0.0
+    },
+    {
+     "servo_deg": -20,
+     "rod_angle_deg": 0.43,
+     "p1_m": [
+      -0.809964,
+      -0.045413,
+      0.36964
+     ],
+     "p2_m": [
+      -0.839359,
+      -0.030213,
+      0.36964
+     ],
+     "p1_cm": [
+      36.964,
+      -80.9964,
+      -4.5413
+     ],
+     "p2_cm": [
+      36.964,
+      -83.9359,
+      -3.0213
+     ],
+     "rod_len_err_mm": 0.0
+    },
+    {
+     "servo_deg": -15,
+     "rod_angle_deg": 0.201,
+     "p1_m": [
+      -0.809105,
+      -0.04628,
+      0.36964
+     ],
+     "p2_m": [
+      -0.838439,
+      -0.030963,
+      0.36964
+     ],
+     "p1_cm": [
+      36.964,
+      -80.9105,
+      -4.628
+     ],
+     "p2_cm": [
+      36.964,
+      -83.8439,
+      -3.0963
+     ],
+     "rod_len_err_mm": 0.0
+    },
+    {
+     "servo_deg": -10,
+     "rod_angle_deg": 0.055,
+     "p1_m": [
+      -0.808172,
+      -0.04707,
+      0.36964
+     ],
+     "p2_m": [
+      -0.837467,
+      -0.031678,
+      0.36964
+     ],
+     "p1_cm": [
+      36.964,
+      -80.8172,
+      -4.707
+     ],
+     "p2_cm": [
+      36.964,
+      -83.7467,
+      -3.1678
+     ],
+     "rod_len_err_mm": 0.0
+    },
+    {
+     "servo_deg": -5,
+     "rod_angle_deg": -0.012,
+     "p1_m": [
+      -0.807175,
+      -0.047775,
+      0.36964
+     ],
+     "p2_m": [
+      -0.836452,
+      -0.032349,
+      0.36964
+     ],
+     "p1_cm": [
+      36.964,
+      -80.7175,
+      -4.7775
+     ],
+     "p2_cm": [
+      36.964,
+      -83.6452,
+      -3.2349
+     ],
+     "rod_len_err_mm": 0.0
+    },
+    {
+     "servo_deg": 0,
+     "rod_angle_deg": 0.0,
+     "p1_m": [
+      -0.80612,
+      -0.04839,
+      0.36964
+     ],
+     "p2_m": [
+      -0.8354,
+      -0.03297,
+      0.36964
+     ],
+     "p1_cm": [
+      36.964,
+      -80.612,
+      -4.839
+     ],
+     "p2_cm": [
+      36.964,
+      -83.54,
+      -3.297
+     ],
+     "rod_len_err_mm": 0.0
+    },
+    {
+     "servo_deg": 5,
+     "rod_angle_deg": 0.089,
+     "p1_m": [
+      -0.805015,
+      -0.048911,
+      0.36964
+     ],
+     "p2_m": [
+      -0.834319,
+      -0.033537,
+      0.36964
+     ],
+     "p1_cm": [
+      36.964,
+      -80.5015,
+      -4.8911
+     ],
+     "p2_cm": [
+      36.964,
+      -83.4319,
+      -3.3537
+     ],
+     "rod_len_err_mm": 0.0
+    },
+    {
+     "servo_deg": 10,
+     "rod_angle_deg": 0.257,
+     "p1_m": [
+      -0.803869,
+      -0.049334,
+      0.36964
+     ],
+     "p2_m": [
+      -0.833218,
+      -0.034045,
+      0.36964
+     ],
+     "p1_cm": [
+      36.964,
+      -80.3869,
+      -4.9334
+     ],
+     "p2_cm": [
+      36.964,
+      -83.3218,
+      -3.4045
+     ],
+     "rod_len_err_mm": -0.0
+    },
+    {
+     "servo_deg": 15,
+     "rod_angle_deg": 0.504,
+     "p1_m": [
+      -0.802691,
+      -0.049655,
+      0.36964
+     ],
+     "p2_m": [
+      -0.832105,
+      -0.034493,
+      0.36964
+     ],
+     "p1_cm": [
+      36.964,
+      -80.2691,
+      -4.9655
+     ],
+     "p2_cm": [
+      36.964,
+      -83.2105,
+      -3.4493
+     ],
+     "rod_len_err_mm": 0.0
+    },
+    {
+     "servo_deg": 20,
+     "rod_angle_deg": 0.832,
+     "p1_m": [
+      -0.801489,
+      -0.049873,
+      0.36964
+     ],
+     "p2_m": [
+      -0.83099,
+      -0.03488,
+      0.36964
+     ],
+     "p1_cm": [
+      36.964,
+      -80.1489,
+      -4.9873
+     ],
+     "p2_cm": [
+      36.964,
+      -83.099,
+      -3.488
+     ],
+     "rod_len_err_mm": -0.0
+    },
+    {
+     "servo_deg": 25,
+     "rod_angle_deg": 1.246,
+     "p1_m": [
+      -0.800273,
+      -0.049985,
+      0.36964
+     ],
+     "p2_m": [
+      -0.829881,
+      -0.035205,
+      0.36964
+     ],
+     "p1_cm": [
+      36.964,
+      -80.0273,
+      -4.9985
+     ],
+     "p2_cm": [
+      36.964,
+      -82.9881,
+      -3.5205
+     ],
+     "rod_len_err_mm": 0.0
+    },
+    {
+     "servo_deg": 30,
+     "rod_angle_deg": 1.747,
+     "p1_m": [
+      -0.799051,
+      -0.04999,
+      0.36964
+     ],
+     "p2_m": [
+      -0.828788,
+      -0.03547,
+      0.36964
+     ],
+     "p1_cm": [
+      36.964,
+      -79.9051,
+      -4.999
+     ],
+     "p2_cm": [
+      36.964,
+      -82.8788,
+      -3.547
+     ],
+     "rod_len_err_mm": -0.0
+    },
+    {
+     "servo_deg": 35,
+     "rod_angle_deg": 2.341,
+     "p1_m": [
+      -0.797834,
+      -0.049889,
+      0.36964
+     ],
+     "p2_m": [
+      -0.82772,
+      -0.035678,
+      0.36964
+     ],
+     "p1_cm": [
+      36.964,
+      -79.7834,
+      -4.9889
+     ],
+     "p2_cm": [
+      36.964,
+      -82.772,
+      -3.5678
+     ],
+     "rod_len_err_mm": 0.0
+    },
+    {
+     "servo_deg": 40,
+     "rod_angle_deg": 3.031,
+     "p1_m": [
+      -0.79663,
+      -0.049682,
+      0.36964
+     ],
+     "p2_m": [
+      -0.826685,
+      -0.035832,
+      0.36964
+     ],
+     "p1_cm": [
+      36.964,
+      -79.663,
+      -4.9682
+     ],
+     "p2_cm": [
+      36.964,
+      -82.6685,
+      -3.5832
+     ],
+     "rod_len_err_mm": 0.0
+    },
+    {
+     "servo_deg": 45,
+     "rod_angle_deg": 3.822,
+     "p1_m": [
+      -0.795449,
+      -0.049371,
+      0.36964
+     ],
+     "p2_m": [
+      -0.825692,
+      -0.035937,
+      0.36964
+     ],
+     "p1_cm": [
+      36.964,
+      -79.5449,
+      -4.9371
+     ],
+     "p2_cm": [
+      36.964,
+      -82.5692,
+      -3.5937
+     ],
+     "rod_len_err_mm": -0.0
+    }
+   ]
+  },
+  {
+   "id": "rud_R",
+   "name": "Rudder_R",
+   "kind": "surface",
+   "parent": "slide_panel_R",
+   "stl": [
+    "kinematics/Rudder_R.stl"
+   ],
+   "contains": "surface body + control horn + backing plate + 2 horn screws + 2 nuts",
+   "pivot_m": [
+    -0.87773,
+    0.07665,
+    0.43765
+   ],
+   "pivot_cm": [
+    43.765,
+    -87.773,
+    7.665
+   ],
+   "axis_m": [
+    0,
+    1,
+    0
+   ],
+   "axis_cm": [
+    0,
+    0,
+    1
+   ],
+   "hinge_line_m": [
+    [
+     -0.87773,
+     -0.0173,
+     0.43765
+    ],
+    [
+     -0.87773,
+     0.1706,
+     0.43765
+    ]
+   ],
+   "hinge_line_cm": [
+    [
+     43.765,
+     -87.773,
+     -1.73
+    ],
+    [
+     43.765,
+     -87.773,
+     17.06
+    ]
+   ],
+   "limits_deg": [
+    -22.93,
+    22.93
+   ],
+   "limits_source": "mechanisms.json throw_deg at servo +-45 deg: +-22.9 (solver here: 22.93 / -22.91)",
+   "positive": "rotation about +axis (right-hand): trailing edge toward +Z model (right)",
+   "driver": {
+    "group": "arm_rud_R",
+    "relation": "four_bar",
+    "secant_ratio_surface_per_servo": 0.5096,
+    "note": "surface_deg = f(servo_deg), table below; the linear motion link in Fusion uses the secant ratio (error up to ~0.8 deg mid-range)"
+   },
+   "servo_plus_gives": "TE toward +Z (right)",
+   "servo_to_surface_deg": {
+    "-45": -22.905,
+    "-40": -20.705,
+    "-35": -18.384,
+    "-30": -15.959,
+    "-25": -13.441,
+    "-20": -10.848,
+    "-15": -8.192,
+    "-10": -5.489,
+    "-5": -2.754,
+    "0": 0.0,
+    "5": 2.757,
+    "10": 5.501,
+    "15": 8.218,
+    "20": 10.891,
+    "25": 13.503,
+    "30": 16.035,
+    "35": 18.466,
+    "40": 20.773,
+    "45": 22.932
+   },
+   "neutral_lookup_rod_len_mm": 32.006,
+   "max_rod_len_err_mm": 0.0
+  },
+  {
+   "id": "arm_rud_R",
+   "name": "Arm_Rudder_R",
+   "kind": "servo_arm",
+   "parent": "slide_panel_R",
+   "stl": [
+    "kinematics/Arm_Rudder_R.stl"
+   ],
+   "contains": "servo output arm (23T) + arm screw",
+   "pivot_m": [
+    -0.8596,
+    -0.01305,
+    0.4076
+   ],
+   "pivot_cm": [
+    40.76,
+    -85.96,
+    -1.305
+   ],
+   "axis_m": [
+    0,
+    1,
+    0
+   ],
+   "axis_cm": [
+    0,
+    0,
+    1
+   ],
+   "arm_hole_m": [
+    -0.86798,
+    -0.01064,
+    0.39638
+   ],
+   "arm_hole_cm": [
+    39.638,
+    -86.798,
+    -1.064
+   ],
+   "arm_r_mm": 14,
+   "neutral_arm_angle_deg_about_axis": -143.24,
+   "neutral_arm_angle_basis": "angle of (hole - shaft) in the plane normal to axis_m, u = model Z, v = axis x u",
+   "limits_deg": [
+    -45,
+    45
+   ],
+   "positive": "rotation about +axis (right-hand) = servo angle in this file; TE toward +Z (right) on Rudder_R",
+   "physical_axis_in_hardware_json_m": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "note": "for the surfaces whose servo shaft axis in hardware.json is -Z (aileron_L, elevator) the command sign is the opposite of the angle here; geometry is identical"
+  },
+  {
+   "id": "rod_rud_R",
+   "name": "Pushrod_Rudder_R",
+   "kind": "pushrod",
+   "parent": "arm_rud_R",
+   "stl": [
+    "kinematics/Pushrod_Rudder_R.stl"
+   ],
+   "contains": "rod with Z-bend + Kwik-Link clevis + keeper bead",
+   "pivot_m": [
+    -0.86798,
+    -0.01064,
+    0.39638
+   ],
+   "pivot_cm": [
+    39.638,
+    -86.798,
+    -1.064
+   ],
+   "axis_m": [
+    0,
+    1,
+    0
+   ],
+   "axis_cm": [
+    0,
+    0,
+    1
+   ],
+   "p1_neutral_m": [
+    -0.86798,
+    -0.01064,
+    0.39638
+   ],
+   "p2_neutral_m": [
+    -0.8925,
+    -0.01064,
+    0.41695
+   ],
+   "p1_neutral_cm": [
+    39.638,
+    -86.798,
+    -1.064
+   ],
+   "p2_neutral_cm": [
+    41.695,
+    -89.25,
+    -1.064
+   ],
+   "rod_len_pin_to_hole_mm": 32.01,
+   "rod_cut_mm": 26.0,
+   "driver": {
+    "group": "arm_rud_R",
+    "relation": "rod pose per servo step: p1 = arm hole, p2 = horn hole (rows below)"
+   },
+   "transform_rule": "M = T(p1_step) * Rot(axis_cm, rod_angle_deg) * T(-p1_neutral)  applied to the neutral STL",
+   "pose_table": [
+    {
+     "servo_deg": -45,
+     "rod_angle_deg": -3.37,
+     "p1_m": [
+      -0.857592,
+      -0.01064,
+      0.393741
+     ],
+     "p2_m": [
+      -0.883279,
+      -0.01064,
+      0.412834
+     ],
+     "p1_cm": [
+      39.3741,
+      -85.7592,
+      -1.064
+     ],
+     "p2_cm": [
+      41.2834,
+      -88.3279,
+      -1.064
+     ],
+     "rod_len_err_mm": -0.0
+    },
+    {
+     "servo_deg": -40,
+     "rod_angle_deg": -2.577,
+     "p1_m": [
+      -0.858807,
+      -0.01064,
+      0.393618
+     ],
+     "p2_m": [
+      -0.884228,
+      -0.01064,
+      0.413065
+     ],
+     "p1_cm": [
+      39.3618,
+      -85.8807,
+      -1.064
+     ],
+     "p2_cm": [
+      41.3065,
+      -88.4228,
+      -1.064
+     ],
+     "rod_len_err_mm": -0.0
+    },
+    {
+     "servo_deg": -35,
+     "rod_angle_deg": -1.9,
+     "p1_m": [
+      -0.860029,
+      -0.01064,
+      0.393603
+     ],
+     "p2_m": [
+      -0.885218,
+      -0.01064,
+      0.413348
+     ],
+     "p1_cm": [
+      39.3603,
+      -86.0029,
+      -1.064
+     ],
+     "p2_cm": [
+      41.3348,
+      -88.5218,
+      -1.064
+     ],
+     "rod_len_err_mm": -0.0
+    },
+    {
+     "servo_deg": -30,
+     "rod_angle_deg": -1.334,
+     "p1_m": [
+      -0.861247,
+      -0.01064,
+      0.393693
+     ],
+     "p2_m": [
+      -0.886239,
+      -0.01064,
+      0.413687
+     ],
+     "p1_cm": [
+      39.3693,
+      -86.1247,
+      -1.064
+     ],
+     "p2_cm": [
+      41.3687,
+      -88.6239,
+      -1.064
+     ],
+     "rod_len_err_mm": 0.0
+    },
+    {
+     "servo_deg": -25,
+     "rod_angle_deg": -0.873,
+     "p1_m": [
+      -0.862453,
+      -0.01064,
+      0.39389
+     ],
+     "p2_m": [
+      -0.887284,
+      -0.01064,
+      0.414084
+     ],
+     "p1_cm": [
+      39.389,
+      -86.2453,
+      -1.064
+     ],
+     "p2_cm": [
+      41.4084,
+      -88.7284,
+      -1.064
+     ],
+     "rod_len_err_mm": 0.0
+    },
+    {
+     "servo_deg": -20,
+     "rod_angle_deg": -0.513,
+     "p1_m": [
+      -0.863637,
+      -0.01064,
+      0.394191
+     ],
+     "p2_m": [
+      -0.88834,
+      -0.01064,
+      0.41454
+     ],
+     "p1_cm": [
+      39.4191,
+      -86.3637,
+      -1.064
+     ],
+     "p2_cm": [
+      41.454,
+      -88.834,
+      -1.064
+     ],
+     "rod_len_err_mm": -0.0
+    },
+    {
+     "servo_deg": -15,
+     "rod_angle_deg": -0.249,
+     "p1_m": [
+      -0.864791,
+      -0.01064,
+      0.394593
+     ],
+     "p2_m": [
+      -0.8894,
+      -0.01064,
+      0.415057
+     ],
+     "p1_cm": [
+      39.4593,
+      -86.4791,
+      -1.064
+     ],
+     "p2_cm": [
+      41.5057,
+      -88.94,
+      -1.064
+     ],
+     "rod_len_err_mm": 0.0
+    },
+    {
+     "servo_deg": -10,
+     "rod_angle_deg": -0.078,
+     "p1_m": [
+      -0.865904,
+      -0.01064,
+      0.395095
+     ],
+     "p2_m": [
+      -0.890452,
+      -0.01064,
+      0.415632
+     ],
+     "p1_cm": [
+      39.5095,
+      -86.5904,
+      -1.064
+     ],
+     "p2_cm": [
+      41.5632,
+      -89.0452,
+      -1.064
+     ],
+     "rod_len_err_mm": 0.0
+    },
+    {
+     "servo_deg": -5,
+     "rod_angle_deg": 0.005,
+     "p1_m": [
+      -0.86697,
+      -0.01064,
+      0.395692
+     ],
+     "p2_m": [
+      -0.891489,
+      -0.01064,
+      0.416264
+     ],
+     "p1_cm": [
+      39.5692,
+      -86.697,
+      -1.064
+     ],
+     "p2_cm": [
+      41.6264,
+      -89.1489,
+      -1.064
+     ],
+     "rod_len_err_mm": -0.0
+    },
+    {
+     "servo_deg": 0,
+     "rod_angle_deg": 0.0,
+     "p1_m": [
+      -0.86798,
+      -0.01064,
+      0.39638
+     ],
+     "p2_m": [
+      -0.8925,
+      -0.01064,
+      0.41695
+     ],
+     "p1_cm": [
+      39.638,
+      -86.798,
+      -1.064
+     ],
+     "p2_cm": [
+      41.695,
+      -89.25,
+      -1.064
+     ],
+     "rod_len_err_mm": 0.0
+    },
+    {
+     "servo_deg": 5,
+     "rod_angle_deg": -0.09,
+     "p1_m": [
+      -0.868926,
+      -0.01064,
+      0.397153
+     ],
+     "p2_m": [
+      -0.893478,
+      -0.01064,
+      0.417684
+     ],
+     "p1_cm": [
+      39.7153,
+      -86.8926,
+      -1.064
+     ],
+     "p2_cm": [
+      41.7684,
+      -89.3478,
+      -1.064
+     ],
+     "rod_len_err_mm": 0.0
+    },
+    {
+     "servo_deg": 10,
+     "rod_angle_deg": -0.267,
+     "p1_m": [
+      -0.869801,
+      -0.01064,
+      0.398006
+     ],
+     "p2_m": [
+      -0.894416,
+      -0.01064,
+      0.418461
+     ],
+     "p1_cm": [
+      39.8006,
+      -86.9801,
+      -1.064
+     ],
+     "p2_cm": [
+      41.8461,
+      -89.4416,
+      -1.064
+     ],
+     "rod_len_err_mm": 0.0
+    },
+    {
+     "servo_deg": 15,
+     "rod_angle_deg": -0.529,
+     "p1_m": [
+      -0.870598,
+      -0.01064,
+      0.398931
+     ],
+     "p2_m": [
+      -0.895307,
+      -0.01064,
+      0.419274
+     ],
+     "p1_cm": [
+      39.8931,
+      -87.0598,
+      -1.064
+     ],
+     "p2_cm": [
+      41.9274,
+      -89.5307,
+      -1.064
+     ],
+     "rod_len_err_mm": -0.0
+    },
+    {
+     "servo_deg": 20,
+     "rod_angle_deg": -0.88,
+     "p1_m": [
+      -0.871312,
+      -0.01064,
+      0.399923
+     ],
+     "p2_m": [
+      -0.896145,
+      -0.01064,
+      0.420114
+     ],
+     "p1_cm": [
+      39.9923,
+      -87.1312,
+      -1.064
+     ],
+     "p2_cm": [
+      42.0114,
+      -89.6145,
+      -1.064
+     ],
+     "rod_len_err_mm": 0.0
+    },
+    {
+     "servo_deg": 25,
+     "rod_angle_deg": -1.323,
+     "p1_m": [
+      -0.871937,
+      -0.01064,
+      0.400973
+     ],
+     "p2_m": [
+      -0.896925,
+      -0.01064,
+      0.420971
+     ],
+     "p1_cm": [
+      40.0973,
+      -87.1937,
+      -1.064
+     ],
+     "p2_cm": [
+      42.0971,
+      -89.6925,
+      -1.064
+     ],
+     "rod_len_err_mm": 0.0
+    },
+    {
+     "servo_deg": 30,
+     "rod_angle_deg": -1.863,
+     "p1_m": [
+      -0.872467,
+      -0.01064,
+      0.402073
+     ],
+     "p2_m": [
+      -0.897643,
+      -0.01064,
+      0.421835
+     ],
+     "p1_cm": [
+      40.2073,
+      -87.2467,
+      -1.064
+     ],
+     "p2_cm": [
+      42.1835,
+      -89.7643,
+      -1.064
+     ],
+     "rod_len_err_mm": 0.0
+    },
+    {
+     "servo_deg": 35,
+     "rod_angle_deg": -2.506,
+     "p1_m": [
+      -0.8729,
+      -0.01064,
+      0.403216
+     ],
+     "p2_m": [
+      -0.898296,
+      -0.01064,
+      0.422694
+     ],
+     "p1_cm": [
+      40.3216,
+      -87.29,
+      -1.064
+     ],
+     "p2_cm": [
+      42.2694,
+      -89.8296,
+      -1.064
+     ],
+     "rod_len_err_mm": 0.0
+    },
+    {
+     "servo_deg": 40,
+     "rod_angle_deg": -3.26,
+     "p1_m": [
+      -0.873232,
+      -0.01064,
+      0.404392
+     ],
+     "p2_m": [
+      -0.898881,
+      -0.01064,
+      0.423534
+     ],
+     "p1_cm": [
+      40.4392,
+      -87.3232,
+      -1.064
+     ],
+     "p2_cm": [
+      42.3534,
+      -89.8881,
+      -1.064
+     ],
+     "rod_len_err_mm": -0.0
+    },
+    {
+     "servo_deg": 45,
+     "rod_angle_deg": -4.133,
+     "p1_m": [
+      -0.873459,
+      -0.01064,
+      0.405592
+     ],
+     "p2_m": [
+      -0.899398,
+      -0.01064,
+      0.424341
+     ],
+     "p1_cm": [
+      40.5592,
+      -87.3459,
+      -1.064
+     ],
+     "p2_cm": [
+      42.4341,
+      -89.9398,
+      -1.064
+     ],
+     "rod_len_err_mm": 0.0
+    }
+   ]
+  },
+  {
+   "id": "rud_L",
+   "name": "Rudder_L",
+   "kind": "surface",
+   "parent": "slide_panel_L",
+   "stl": [
+    "kinematics/Rudder_L.stl"
+   ],
+   "contains": "surface body + control horn + backing plate + 2 horn screws + 2 nuts",
+   "pivot_m": [
+    -0.87773,
+    0.07665,
+    -0.43765
+   ],
+   "pivot_cm": [
+    -43.765,
+    -87.773,
+    7.665
+   ],
+   "axis_m": [
+    0,
+    1,
+    0
+   ],
+   "axis_cm": [
+    0,
+    0,
+    1
+   ],
+   "hinge_line_m": [
+    [
+     -0.87773,
+     -0.0173,
+     -0.43765
+    ],
+    [
+     -0.87773,
+     0.1706,
+     -0.43765
+    ]
+   ],
+   "hinge_line_cm": [
+    [
+     -43.765,
+     -87.773,
+     -1.73
+    ],
+    [
+     -43.765,
+     -87.773,
+     17.06
+    ]
+   ],
+   "limits_deg": [
+    -22.93,
+    22.93
+   ],
+   "limits_source": "mechanisms.json throw_deg at servo +-45 deg: +-22.9 (solver here: 22.91 / -22.93)",
+   "positive": "rotation about +axis (right-hand): trailing edge toward +Z model (right)",
+   "driver": {
+    "group": "arm_rud_L",
+    "relation": "four_bar",
+    "secant_ratio_surface_per_servo": 0.50901,
+    "note": "surface_deg = f(servo_deg), table below; the linear motion link in Fusion uses the secant ratio (error up to ~0.8 deg mid-range)"
+   },
+   "servo_plus_gives": "TE toward +Z (right)",
+   "servo_to_surface_deg": {
+    "-45": -22.932,
+    "-40": -20.773,
+    "-35": -18.466,
+    "-30": -16.035,
+    "-25": -13.503,
+    "-20": -10.891,
+    "-15": -8.218,
+    "-10": -5.501,
+    "-5": -2.757,
+    "0": 0.0,
+    "5": 2.754,
+    "10": 5.489,
+    "15": 8.192,
+    "20": 10.848,
+    "25": 13.441,
+    "30": 15.959,
+    "35": 18.384,
+    "40": 20.705,
+    "45": 22.905
+   },
+   "neutral_lookup_rod_len_mm": 32.006,
+   "max_rod_len_err_mm": 0.0
+  },
+  {
+   "id": "arm_rud_L",
+   "name": "Arm_Rudder_L",
+   "kind": "servo_arm",
+   "parent": "slide_panel_L",
+   "stl": [
+    "kinematics/Arm_Rudder_L.stl"
+   ],
+   "contains": "servo output arm (23T) + arm screw",
+   "pivot_m": [
+    -0.8596,
+    -0.01305,
+    -0.4076
+   ],
+   "pivot_cm": [
+    -40.76,
+    -85.96,
+    -1.305
+   ],
+   "axis_m": [
+    0,
+    1,
+    0
+   ],
+   "axis_cm": [
+    0,
+    0,
+    1
+   ],
+   "arm_hole_m": [
+    -0.86798,
+    -0.01064,
+    -0.39638
+   ],
+   "arm_hole_cm": [
+    -39.638,
+    -86.798,
+    -1.064
+   ],
+   "arm_r_mm": 14,
+   "neutral_arm_angle_deg_about_axis": -36.76,
+   "neutral_arm_angle_basis": "angle of (hole - shaft) in the plane normal to axis_m, u = model Z, v = axis x u",
+   "limits_deg": [
+    -45,
+    45
+   ],
+   "positive": "rotation about +axis (right-hand) = servo angle in this file; TE toward +Z (right) on Rudder_L",
+   "physical_axis_in_hardware_json_m": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "note": "for the surfaces whose servo shaft axis in hardware.json is -Z (aileron_L, elevator) the command sign is the opposite of the angle here; geometry is identical"
+  },
+  {
+   "id": "rod_rud_L",
+   "name": "Pushrod_Rudder_L",
+   "kind": "pushrod",
+   "parent": "arm_rud_L",
+   "stl": [
+    "kinematics/Pushrod_Rudder_L.stl"
+   ],
+   "contains": "rod with Z-bend + Kwik-Link clevis + keeper bead",
+   "pivot_m": [
+    -0.86798,
+    -0.01064,
+    -0.39638
+   ],
+   "pivot_cm": [
+    -39.638,
+    -86.798,
+    -1.064
+   ],
+   "axis_m": [
+    0,
+    1,
+    0
+   ],
+   "axis_cm": [
+    0,
+    0,
+    1
+   ],
+   "p1_neutral_m": [
+    -0.86798,
+    -0.01064,
+    -0.39638
+   ],
+   "p2_neutral_m": [
+    -0.8925,
+    -0.01064,
+    -0.41695
+   ],
+   "p1_neutral_cm": [
+    -39.638,
+    -86.798,
+    -1.064
+   ],
+   "p2_neutral_cm": [
+    -41.695,
+    -89.25,
+    -1.064
+   ],
+   "rod_len_pin_to_hole_mm": 32.01,
+   "rod_cut_mm": 26.0,
+   "driver": {
+    "group": "arm_rud_L",
+    "relation": "rod pose per servo step: p1 = arm hole, p2 = horn hole (rows below)"
+   },
+   "transform_rule": "M = T(p1_step) * Rot(axis_cm, rod_angle_deg) * T(-p1_neutral)  applied to the neutral STL",
+   "pose_table": [
+    {
+     "servo_deg": -45,
+     "rod_angle_deg": 4.133,
+     "p1_m": [
+      -0.873459,
+      -0.01064,
+      -0.405592
+     ],
+     "p2_m": [
+      -0.899398,
+      -0.01064,
+      -0.424341
+     ],
+     "p1_cm": [
+      -40.5592,
+      -87.3459,
+      -1.064
+     ],
+     "p2_cm": [
+      -42.4341,
+      -89.9398,
+      -1.064
+     ],
+     "rod_len_err_mm": 0.0
+    },
+    {
+     "servo_deg": -40,
+     "rod_angle_deg": 3.26,
+     "p1_m": [
+      -0.873232,
+      -0.01064,
+      -0.404392
+     ],
+     "p2_m": [
+      -0.898881,
+      -0.01064,
+      -0.423534
+     ],
+     "p1_cm": [
+      -40.4392,
+      -87.3232,
+      -1.064
+     ],
+     "p2_cm": [
+      -42.3534,
+      -89.8881,
+      -1.064
+     ],
+     "rod_len_err_mm": -0.0
+    },
+    {
+     "servo_deg": -35,
+     "rod_angle_deg": 2.506,
+     "p1_m": [
+      -0.8729,
+      -0.01064,
+      -0.403216
+     ],
+     "p2_m": [
+      -0.898296,
+      -0.01064,
+      -0.422694
+     ],
+     "p1_cm": [
+      -40.3216,
+      -87.29,
+      -1.064
+     ],
+     "p2_cm": [
+      -42.2694,
+      -89.8296,
+      -1.064
+     ],
+     "rod_len_err_mm": 0.0
+    },
+    {
+     "servo_deg": -30,
+     "rod_angle_deg": 1.863,
+     "p1_m": [
+      -0.872467,
+      -0.01064,
+      -0.402073
+     ],
+     "p2_m": [
+      -0.897643,
+      -0.01064,
+      -0.421835
+     ],
+     "p1_cm": [
+      -40.2073,
+      -87.2467,
+      -1.064
+     ],
+     "p2_cm": [
+      -42.1835,
+      -89.7643,
+      -1.064
+     ],
+     "rod_len_err_mm": 0.0
+    },
+    {
+     "servo_deg": -25,
+     "rod_angle_deg": 1.323,
+     "p1_m": [
+      -0.871937,
+      -0.01064,
+      -0.400973
+     ],
+     "p2_m": [
+      -0.896925,
+      -0.01064,
+      -0.420971
+     ],
+     "p1_cm": [
+      -40.0973,
+      -87.1937,
+      -1.064
+     ],
+     "p2_cm": [
+      -42.0971,
+      -89.6925,
+      -1.064
+     ],
+     "rod_len_err_mm": 0.0
+    },
+    {
+     "servo_deg": -20,
+     "rod_angle_deg": 0.88,
+     "p1_m": [
+      -0.871312,
+      -0.01064,
+      -0.399923
+     ],
+     "p2_m": [
+      -0.896145,
+      -0.01064,
+      -0.420114
+     ],
+     "p1_cm": [
+      -39.9923,
+      -87.1312,
+      -1.064
+     ],
+     "p2_cm": [
+      -42.0114,
+      -89.6145,
+      -1.064
+     ],
+     "rod_len_err_mm": 0.0
+    },
+    {
+     "servo_deg": -15,
+     "rod_angle_deg": 0.529,
+     "p1_m": [
+      -0.870598,
+      -0.01064,
+      -0.398931
+     ],
+     "p2_m": [
+      -0.895307,
+      -0.01064,
+      -0.419274
+     ],
+     "p1_cm": [
+      -39.8931,
+      -87.0598,
+      -1.064
+     ],
+     "p2_cm": [
+      -41.9274,
+      -89.5307,
+      -1.064
+     ],
+     "rod_len_err_mm": -0.0
+    },
+    {
+     "servo_deg": -10,
+     "rod_angle_deg": 0.267,
+     "p1_m": [
+      -0.869801,
+      -0.01064,
+      -0.398006
+     ],
+     "p2_m": [
+      -0.894416,
+      -0.01064,
+      -0.418461
+     ],
+     "p1_cm": [
+      -39.8006,
+      -86.9801,
+      -1.064
+     ],
+     "p2_cm": [
+      -41.8461,
+      -89.4416,
+      -1.064
+     ],
+     "rod_len_err_mm": 0.0
+    },
+    {
+     "servo_deg": -5,
+     "rod_angle_deg": 0.09,
+     "p1_m": [
+      -0.868926,
+      -0.01064,
+      -0.397153
+     ],
+     "p2_m": [
+      -0.893478,
+      -0.01064,
+      -0.417684
+     ],
+     "p1_cm": [
+      -39.7153,
+      -86.8926,
+      -1.064
+     ],
+     "p2_cm": [
+      -41.7684,
+      -89.3478,
+      -1.064
+     ],
+     "rod_len_err_mm": 0.0
+    },
+    {
+     "servo_deg": 0,
+     "rod_angle_deg": 0.0,
+     "p1_m": [
+      -0.86798,
+      -0.01064,
+      -0.39638
+     ],
+     "p2_m": [
+      -0.8925,
+      -0.01064,
+      -0.41695
+     ],
+     "p1_cm": [
+      -39.638,
+      -86.798,
+      -1.064
+     ],
+     "p2_cm": [
+      -41.695,
+      -89.25,
+      -1.064
+     ],
+     "rod_len_err_mm": 0.0
+    },
+    {
+     "servo_deg": 5,
+     "rod_angle_deg": -0.005,
+     "p1_m": [
+      -0.86697,
+      -0.01064,
+      -0.395692
+     ],
+     "p2_m": [
+      -0.891489,
+      -0.01064,
+      -0.416264
+     ],
+     "p1_cm": [
+      -39.5692,
+      -86.697,
+      -1.064
+     ],
+     "p2_cm": [
+      -41.6264,
+      -89.1489,
+      -1.064
+     ],
+     "rod_len_err_mm": -0.0
+    },
+    {
+     "servo_deg": 10,
+     "rod_angle_deg": 0.078,
+     "p1_m": [
+      -0.865904,
+      -0.01064,
+      -0.395095
+     ],
+     "p2_m": [
+      -0.890452,
+      -0.01064,
+      -0.415632
+     ],
+     "p1_cm": [
+      -39.5095,
+      -86.5904,
+      -1.064
+     ],
+     "p2_cm": [
+      -41.5632,
+      -89.0452,
+      -1.064
+     ],
+     "rod_len_err_mm": 0.0
+    },
+    {
+     "servo_deg": 15,
+     "rod_angle_deg": 0.249,
+     "p1_m": [
+      -0.864791,
+      -0.01064,
+      -0.394593
+     ],
+     "p2_m": [
+      -0.8894,
+      -0.01064,
+      -0.415057
+     ],
+     "p1_cm": [
+      -39.4593,
+      -86.4791,
+      -1.064
+     ],
+     "p2_cm": [
+      -41.5057,
+      -88.94,
+      -1.064
+     ],
+     "rod_len_err_mm": 0.0
+    },
+    {
+     "servo_deg": 20,
+     "rod_angle_deg": 0.513,
+     "p1_m": [
+      -0.863637,
+      -0.01064,
+      -0.394191
+     ],
+     "p2_m": [
+      -0.88834,
+      -0.01064,
+      -0.41454
+     ],
+     "p1_cm": [
+      -39.4191,
+      -86.3637,
+      -1.064
+     ],
+     "p2_cm": [
+      -41.454,
+      -88.834,
+      -1.064
+     ],
+     "rod_len_err_mm": -0.0
+    },
+    {
+     "servo_deg": 25,
+     "rod_angle_deg": 0.873,
+     "p1_m": [
+      -0.862453,
+      -0.01064,
+      -0.39389
+     ],
+     "p2_m": [
+      -0.887284,
+      -0.01064,
+      -0.414084
+     ],
+     "p1_cm": [
+      -39.389,
+      -86.2453,
+      -1.064
+     ],
+     "p2_cm": [
+      -41.4084,
+      -88.7284,
+      -1.064
+     ],
+     "rod_len_err_mm": 0.0
+    },
+    {
+     "servo_deg": 30,
+     "rod_angle_deg": 1.334,
+     "p1_m": [
+      -0.861247,
+      -0.01064,
+      -0.393693
+     ],
+     "p2_m": [
+      -0.886239,
+      -0.01064,
+      -0.413687
+     ],
+     "p1_cm": [
+      -39.3693,
+      -86.1247,
+      -1.064
+     ],
+     "p2_cm": [
+      -41.3687,
+      -88.6239,
+      -1.064
+     ],
+     "rod_len_err_mm": 0.0
+    },
+    {
+     "servo_deg": 35,
+     "rod_angle_deg": 1.9,
+     "p1_m": [
+      -0.860029,
+      -0.01064,
+      -0.393603
+     ],
+     "p2_m": [
+      -0.885218,
+      -0.01064,
+      -0.413348
+     ],
+     "p1_cm": [
+      -39.3603,
+      -86.0029,
+      -1.064
+     ],
+     "p2_cm": [
+      -41.3348,
+      -88.5218,
+      -1.064
+     ],
+     "rod_len_err_mm": -0.0
+    },
+    {
+     "servo_deg": 40,
+     "rod_angle_deg": 2.577,
+     "p1_m": [
+      -0.858807,
+      -0.01064,
+      -0.393618
+     ],
+     "p2_m": [
+      -0.884228,
+      -0.01064,
+      -0.413065
+     ],
+     "p1_cm": [
+      -39.3618,
+      -85.8807,
+      -1.064
+     ],
+     "p2_cm": [
+      -41.3065,
+      -88.4228,
+      -1.064
+     ],
+     "rod_len_err_mm": -0.0
+    },
+    {
+     "servo_deg": 45,
+     "rod_angle_deg": 3.37,
+     "p1_m": [
+      -0.857592,
+      -0.01064,
+      -0.393741
+     ],
+     "p2_m": [
+      -0.883279,
+      -0.01064,
+      -0.412834
+     ],
+     "p1_cm": [
+      -39.3741,
+      -85.7592,
+      -1.064
+     ],
+     "p2_cm": [
+      -41.2834,
+      -88.3279,
+      -1.064
+     ],
+     "rod_len_err_mm": -0.0
+    }
+   ]
+  },
+  {
+   "id": "prop_L1",
+   "name": "Lift_Prop_L1",
+   "kind": "prop",
+   "parent": "slide_panel_R",
+   "stl": [
+    "kinematics/Lift_Prop_L1.stl"
+   ],
+   "contains": "lift prop + motor can (bell; one body in the model) + prop adapter, holding plate, 4 screws (J-10)",
+   "pivot_cm": [
+    43.4,
+    37.1,
+    3.0
+   ],
+   "pivot_m": [
+    0.371,
+    0.03,
+    0.434
+   ],
+   "axis_cm": [
+    0,
+    0,
+    1
+   ],
+   "axis_m": [
+    0,
+    1,
+    0
+   ],
+   "limits_deg": null,
+   "positive": "rotation about +Z (up), counter-clockwise seen from above; the real rotation direction of each motor is - (not in the data)"
+  },
+  {
+   "id": "prop_L2",
+   "name": "Lift_Prop_L2",
+   "kind": "prop",
+   "parent": "slide_panel_L",
+   "stl": [
+    "kinematics/Lift_Prop_L2.stl"
+   ],
+   "contains": "lift prop + motor can (bell; one body in the model) + prop adapter, holding plate, 4 screws (J-10)",
+   "pivot_cm": [
+    -43.4,
+    -50.5,
+    3.0
+   ],
+   "pivot_m": [
+    -0.505,
+    0.03,
+    -0.434
+   ],
+   "axis_cm": [
+    0,
+    0,
+    1
+   ],
+   "axis_m": [
+    0,
+    1,
+    0
+   ],
+   "limits_deg": null,
+   "positive": "rotation about +Z (up), counter-clockwise seen from above; the real rotation direction of each motor is - (not in the data)"
+  },
+  {
+   "id": "prop_L3",
+   "name": "Lift_Prop_L3",
+   "kind": "prop",
+   "parent": "slide_panel_L",
+   "stl": [
+    "kinematics/Lift_Prop_L3.stl"
+   ],
+   "contains": "lift prop + motor can (bell; one body in the model) + prop adapter, holding plate, 4 screws (J-10)",
+   "pivot_cm": [
+    -43.4,
+    37.1,
+    3.0
+   ],
+   "pivot_m": [
+    0.371,
+    0.03,
+    -0.434
+   ],
+   "axis_cm": [
+    0,
+    0,
+    1
+   ],
+   "axis_m": [
+    0,
+    1,
+    0
+   ],
+   "limits_deg": null,
+   "positive": "rotation about +Z (up), counter-clockwise seen from above; the real rotation direction of each motor is - (not in the data)"
+  },
+  {
+   "id": "prop_L4",
+   "name": "Lift_Prop_L4",
+   "kind": "prop",
+   "parent": "slide_panel_R",
+   "stl": [
+    "kinematics/Lift_Prop_L4.stl"
+   ],
+   "contains": "lift prop + motor can (bell; one body in the model) + prop adapter, holding plate, 4 screws (J-10)",
+   "pivot_cm": [
+    43.4,
+    -50.5,
+    3.0
+   ],
+   "pivot_m": [
+    -0.505,
+    0.03,
+    0.434
+   ],
+   "axis_cm": [
+    0,
+    0,
+    1
+   ],
+   "axis_m": [
+    0,
+    1,
+    0
+   ],
+   "limits_deg": null,
+   "positive": "rotation about +Z (up), counter-clockwise seen from above; the real rotation direction of each motor is - (not in the data)"
+  },
+  {
+   "id": "prop_P",
+   "name": "Pusher_Prop_Set",
+   "kind": "prop",
+   "parent": null,
+   "stl": [
+    "kinematics/Pusher_Prop_Set.stl"
+   ],
+   "contains": "pusher prop 14x8.5 + spinner + motor can + prop adapter hardware (J-12)",
+   "pivot_cm": [
+    0.0,
+    -42.3,
+    -3.0
+   ],
+   "pivot_m": [
+    -0.423,
+    -0.03,
+    0.0
+   ],
+   "axis_cm": [
+    0,
+    1,
+    0
+   ],
+   "axis_m": [
+    1,
+    0,
+    0
+   ],
+   "limits_deg": null,
+   "positive": "rotation about +Y (forward, Fusion) = +X model, right-hand; real direction - (not in the data)"
+  },
+  {
+   "id": "wheel_FR",
+   "name": "Wheel_FR",
+   "kind": "wheel",
+   "parent": "slide_panel_R",
+   "stl": [
+    "kinematics/Wheel_FR.stl"
+   ],
+   "contains": "Du-Bro 300SL wheel: tyre + hub (HW-053)",
+   "pivot_m": [
+    0.28092,
+    -0.2537,
+    0.4629
+   ],
+   "pivot_cm": [
+    46.29,
+    28.092,
+    -25.37
+   ],
+   "axis_m": [
+    0,
+    0,
+    1
+   ],
+   "axis_cm": [
+    1,
+    0,
+    0
+   ],
+   "limits_deg": null,
+   "positive": "rotation about +X (right) = +Z model, right-hand; rolling forward = positive rotation about -X... sign: positive about +X rolls the top toward the rear? see note",
+   "note": "positive about +X: the wheel top moves toward -Y (aft) i.e. the aircraft rolls rearward; use negative for forward roll. Wheel OD 76.2 mm: forward distance = angle(rad) * 38.1 mm"
+  },
+  {
+   "id": "wheel_FL",
+   "name": "Wheel_FL",
+   "kind": "wheel",
+   "parent": "slide_panel_L",
+   "stl": [
+    "kinematics/Wheel_FL.stl"
+   ],
+   "contains": "Du-Bro 300SL wheel: tyre + hub (HW-053)",
+   "pivot_m": [
+    0.28092,
+    -0.2537,
+    -0.4629
+   ],
+   "pivot_cm": [
+    -46.29,
+    28.092,
+    -25.37
+   ],
+   "axis_m": [
+    0,
+    0,
+    1
+   ],
+   "axis_cm": [
+    1,
+    0,
+    0
+   ],
+   "limits_deg": null,
+   "positive": "rotation about +X (right) = +Z model, right-hand; rolling forward = positive rotation about -X... sign: positive about +X rolls the top toward the rear? see note",
+   "note": "positive about +X: the wheel top moves toward -Y (aft) i.e. the aircraft rolls rearward; use negative for forward roll. Wheel OD 76.2 mm: forward distance = angle(rad) * 38.1 mm"
+  },
+  {
+   "id": "wheel_RR",
+   "name": "Wheel_RR",
+   "kind": "wheel",
+   "parent": "slide_panel_R",
+   "stl": [
+    "kinematics/Wheel_RR.stl"
+   ],
+   "contains": "Du-Bro 300SL wheel: tyre + hub (HW-053)",
+   "pivot_m": [
+    -0.41458,
+    -0.2537,
+    0.4629
+   ],
+   "pivot_cm": [
+    46.29,
+    -41.458,
+    -25.37
+   ],
+   "axis_m": [
+    0,
+    0,
+    1
+   ],
+   "axis_cm": [
+    1,
+    0,
+    0
+   ],
+   "limits_deg": null,
+   "positive": "rotation about +X (right) = +Z model, right-hand; rolling forward = positive rotation about -X... sign: positive about +X rolls the top toward the rear? see note",
+   "note": "positive about +X: the wheel top moves toward -Y (aft) i.e. the aircraft rolls rearward; use negative for forward roll. Wheel OD 76.2 mm: forward distance = angle(rad) * 38.1 mm"
+  },
+  {
+   "id": "wheel_RL",
+   "name": "Wheel_RL",
+   "kind": "wheel",
+   "parent": "slide_panel_L",
+   "stl": [
+    "kinematics/Wheel_RL.stl"
+   ],
+   "contains": "Du-Bro 300SL wheel: tyre + hub (HW-053)",
+   "pivot_m": [
+    -0.41458,
+    -0.2537,
+    -0.4629
+   ],
+   "pivot_cm": [
+    -46.29,
+    -41.458,
+    -25.37
+   ],
+   "axis_m": [
+    0,
+    0,
+    1
+   ],
+   "axis_cm": [
+    1,
+    0,
+    0
+   ],
+   "limits_deg": null,
+   "positive": "rotation about +X (right) = +Z model, right-hand; rolling forward = positive rotation about -X... sign: positive about +X rolls the top toward the rear? see note",
+   "note": "positive about +X: the wheel top moves toward -Y (aft) i.e. the aircraft rolls rearward; use negative for forward roll. Wheel OD 76.2 mm: forward distance = angle(rad) * 38.1 mm"
+  },
+  {
+   "id": "slide_panel_R",
+   "name": "Wing_Panel_R slide on the joiner",
+   "kind": "slider",
+   "parent": null,
+   "stl": [
+    "stl/Wing_Panel_R.stl"
+   ],
+   "carries": {
+    "stl": [
+     "kinematics/Aileron_R.stl",
+     "kinematics/Arm_Aileron_R.stl",
+     "kinematics/Arm_Elevator.stl",
+     "kinematics/Arm_Rudder_R.stl",
+     "kinematics/Elevator.stl",
+     "kinematics/Lift_Prop_L1.stl",
+     "kinematics/Lift_Prop_L4.stl",
+     "kinematics/Rudder_R.stl",
+     "kinematics/Wheel_FR.stl",
+     "kinematics/Wheel_RR.stl",
+     "stl/Boom_Clamp_Front_2.stl",
+     "stl/Boom_Clamp_Rear_2.stl",
+     "stl/Boom_Front_2.stl",
+     "stl/Boom_Rear_Stub_2.stl",
+     "stl/CAP_L1.stl",
+     "stl/CAP_L4.stl",
+     "stl/ESC_L1.stl",
+     "stl/ESC_L4.stl",
+     "stl/Fin_2.stl",
+     "stl/Gear_Clamp_3.stl",
+     "stl/Gear_Clamp_4.stl",
+     "stl/H_Tail.stl",
+     "stl/Hinge_Aileron_R.stl",
+     "stl/Hinge_Elevator.stl",
+     "stl/Hinge_Rudder_R.stl",
+     "stl/J-01_Wing_panel_root_R.stl",
+     "stl/J-04_Front_boom_clamp_R.stl",
+     "stl/J-05_Rear_boom_clamp_R.stl",
+     "stl/J-06_Boom_clamp_lower_R.stl",
+     "stl/J-07_Boom_front_rear_R.stl",
+     "stl/J-08_Motor_mount_clamshell_R.stl",
+     "stl/J-09_Lift_motor_motor_R.stl",
+     "stl/J-13_Gear_clamp_cap_R.stl",
+     "stl/J-16_Tail_fin_and_R.stl",
+     "stl/J-17_Aileron_servo_servo_R.stl",
+     "stl/J-18_Elevator_servo_right_R.stl",
+     "stl/J-19_Rudder_servos_saddle_R.stl",
+     "stl/J-29_ESC_mounting_lift_R.stl",
+     "stl/J-30_Harness_joint_boxes_R.stl",
+     "stl/JB_J1_R.stl",
+     "stl/JB_J2_R.stl",
+     "stl/JB_J3_R.stl",
+     "stl/Landing_Leg_3.stl",
+     "stl/Landing_Leg_4.stl",
+     "stl/Motor_Mount_3.stl",
+     "stl/Motor_Mount_4.stl",
+     "stl/Spar_Tube_1.stl",
+     "stl/Wheel_Leg_FR.stl",
+     "stl/Wheel_Leg_RR.stl"
+    ],
+    "groups": [
+     "ail_R",
+     "arm_ail_R",
+     "arm_elev",
+     "arm_rud_R",
+     "elev",
+     "prop_L1",
+     "prop_L4",
+     "rud_R",
+     "slide_htail",
+     "wheel_FR",
+     "wheel_RR"
+    ]
+   },
+   "pivot_cm": [
+    8.0,
+    -7.16,
+    0.45
+   ],
+   "axis_cm": [
+    1,
+    0,
+    0
+   ],
+   "axis_m": [
+    0,
+    0,
+    1
+   ],
+   "limits_mm": [
+    0,
+    300
+   ],
+   "positive": "panel moves outboard (+X)",
+   "limit_source": "joiner insertion 300 mm (Wing_Joiner 8..38 cm from the centre line in the CAD); the brief said ~120 mm, 300 mm fully clears the joiner",
+   "note": "carries the whole right wing group: spar tube, booms, clamps, mounts, motors, props, gear, ESCs, aileron, rudder, elevator servo and tail stub, H-tail seat"
+  },
+  {
+   "id": "slide_panel_L",
+   "name": "Wing_Panel_L slide on the joiner",
+   "kind": "slider",
+   "parent": null,
+   "stl": [
+    "stl/Wing_Panel_L.stl"
+   ],
+   "carries": {
+    "stl": [
+     "kinematics/Aileron_L.stl",
+     "kinematics/Arm_Aileron_L.stl",
+     "kinematics/Arm_Rudder_L.stl",
+     "kinematics/Lift_Prop_L2.stl",
+     "kinematics/Lift_Prop_L3.stl",
+     "kinematics/Rudder_L.stl",
+     "kinematics/Wheel_FL.stl",
+     "kinematics/Wheel_RL.stl",
+     "stl/ASPD1.stl",
+     "stl/Boom_Clamp_Front_1.stl",
+     "stl/Boom_Clamp_Rear_1.stl",
+     "stl/Boom_Front_1.stl",
+     "stl/Boom_Rear_Stub_1.stl",
+     "stl/CAP_L2.stl",
+     "stl/CAP_L3.stl",
+     "stl/ESC_L2.stl",
+     "stl/ESC_L3.stl",
+     "stl/Fin_1.stl",
+     "stl/Gear_Clamp_1.stl",
+     "stl/Gear_Clamp_2.stl",
+     "stl/Hinge_Aileron_L.stl",
+     "stl/Hinge_Rudder_L.stl",
+     "stl/J-01_Wing_panel_root_L.stl",
+     "stl/J-04_Front_boom_clamp_L.stl",
+     "stl/J-05_Rear_boom_clamp_L.stl",
+     "stl/J-06_Boom_clamp_lower_L.stl",
+     "stl/J-07_Boom_front_rear_L.stl",
+     "stl/J-08_Motor_mount_clamshell_L.stl",
+     "stl/J-09_Lift_motor_motor_L.stl",
+     "stl/J-13_Gear_clamp_cap_L.stl",
+     "stl/J-16_Tail_fin_and_L.stl",
+     "stl/J-17_Aileron_servo_servo_L.stl",
+     "stl/J-19_Rudder_servos_saddle_L.stl",
+     "stl/J-28_RX_Remote_ID_L.stl",
+     "stl/J-29_ESC_mounting_lift_L.stl",
+     "stl/J-30_Harness_joint_boxes_L.stl",
+     "stl/J-31_Pitot_clamp_on_L.stl",
+     "stl/JB_J1_L.stl",
+     "stl/JB_J2_L.stl",
+     "stl/JB_J3_L.stl",
+     "stl/Landing_Leg_1.stl",
+     "stl/Landing_Leg_2.stl",
+     "stl/Motor_Mount_1.stl",
+     "stl/Motor_Mount_2.stl",
+     "stl/Pitot_Tube.stl",
+     "stl/Spar_Tube_2.stl",
+     "stl/Wheel_Leg_FL.stl",
+     "stl/Wheel_Leg_RL.stl"
+    ],
+    "groups": [
+     "ail_L",
+     "arm_ail_L",
+     "arm_rud_L",
+     "prop_L2",
+     "prop_L3",
+     "rud_L",
+     "wheel_FL",
+     "wheel_RL"
+    ]
+   },
+   "pivot_cm": [
+    -8.0,
+    -7.16,
+    0.45
+   ],
+   "axis_cm": [
+    -1,
+    0,
+    0
+   ],
+   "axis_m": [
+    0,
+    0,
+    -1
+   ],
+   "limits_mm": [
+    0,
+    300
+   ],
+   "positive": "panel moves outboard (-X)",
+   "limit_source": "as slide_panel_R",
+   "note": "carries the left wing group (incl. pitot, airspeed module)"
+  },
+  {
+   "id": "slide_htail",
+   "name": "H_Tail lift-off the boom stubs",
+   "kind": "slider",
+   "parent": "slide_panel_R",
+   "stl": [
+    "stl/H_Tail.stl"
+   ],
+   "carries": {
+    "stl": [
+     "kinematics/Elevator.stl",
+     "stl/Hinge_Elevator.stl"
+    ],
+    "groups": [
+     "elev"
+    ]
+   },
+   "pivot_cm": [
+    0.0,
+    -79.7,
+    -1.4
+   ],
+   "axis_cm": [
+    0,
+    0,
+    1
+   ],
+   "axis_m": [
+    0,
+    1,
+    0
+   ],
+   "limits_mm": [
+    0,
+    150
+   ],
+   "positive": "up (+Z)",
+   "limit_source": "estimate - the seat height / screw length from J-16 is not turned into a travel in the data (-)",
+   "note": "jointed to the right stub only so that the joint graph stays a tree (the H-tail spans both stubs)"
+  },
+  {
+   "id": "slide_canopy",
+   "name": "Canopy lift-off",
+   "kind": "slider",
+   "parent": null,
+   "stl": [
+    "stl/Canopy.stl"
+   ],
+   "carries": {
+    "stl": [
+     "stl/GPS1.stl",
+     "stl/J-24_27_Canopy_screws_GPS_mast.stl"
+    ],
+    "groups": []
+   },
+   "pivot_cm": [
+    0.0,
+    20.5,
+    4.6
+   ],
+   "axis_cm": [
+    0,
+    0,
+    1
+   ],
+   "axis_m": [
+    0,
+    1,
+    0
+   ],
+   "limits_mm": [
+    0,
+    100
+   ],
+   "positive": "up (+Z)",
+   "limit_source": "estimate (-)",
+   "note": "carries canopy screws, GPS mast and GPS"
+  },
+  {
+   "id": "slide_battery",
+   "name": "Battery along its tray",
+   "kind": "slider",
+   "parent": null,
+   "stl": [
+    "stl/Battery_6S_LiPo.stl"
+   ],
+   "carries": {
+    "stl": [],
+    "groups": []
+   },
+   "pivot_cm": [
+    0.0,
+    6.1,
+    -5.0
+   ],
+   "axis_cm": [
+    0,
+    1,
+    0
+   ],
+   "axis_m": [
+    1,
+    0,
+    0
+   ],
+   "limits_mm": [
+    -30,
+    30
+   ],
+   "positive": "forward (+Y)",
+   "limit_source": "estimate - tray length is not in the data (-)",
+   "note": "CG trim travel; the battery is removed upward after the canopy"
+  }
+ ]
+}
