@@ -25,8 +25,8 @@
      2.245
     ]
    ],
-   "size": 111284,
-   "triangles": 2224,
+   "size": 245584,
+   "triangles": 4910,
    "moving": "slide_panel_R"
   },
   {
@@ -51,8 +51,8 @@
      2.242
     ]
    ],
-   "size": 127584,
-   "triangles": 2550,
+   "size": 262484,
+   "triangles": 5248,
    "moving": "slide_panel_L"
   },
   {
@@ -328,18 +328,18 @@
    "count": 7,
    "bbox_cm": [
     [
-     -42.77,
+     -42.614,
      -84.608,
      -3.697
     ],
     [
-     42.77,
+     42.614,
      -82.539,
      -0.897
     ]
    ],
-   "size": 110584,
-   "triangles": 2210,
+   "size": 146684,
+   "triangles": 2932,
    "moving": "elev",
    "rides": "slide_htail"
   },
@@ -1611,8 +1611,8 @@
      -0.805
     ]
    ],
-   "size": 125684,
-   "triangles": 2512,
+   "size": 433284,
+   "triangles": 8664,
    "joint": "J-16",
    "rides": "slide_panel_R"
   },
@@ -1638,8 +1638,8 @@
      -0.805
     ]
    ],
-   "size": 120684,
-   "triangles": 2412,
+   "size": 411284,
+   "triangles": 8224,
    "joint": "J-16",
    "rides": "slide_panel_L"
   },
@@ -2021,8 +2021,8 @@
      17.065
     ]
    ],
-   "size": 108984,
-   "triangles": 2178,
+   "size": 175984,
+   "triangles": 3518,
    "moving": "rud_R",
    "rides": "slide_panel_R"
   },
@@ -2048,8 +2048,8 @@
      17.065
     ]
    ],
-   "size": 108984,
-   "triangles": 2178,
+   "size": 176184,
+   "triangles": 3522,
    "moving": "rud_L",
    "rides": "slide_panel_L"
   },

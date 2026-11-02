@@ -165,7 +165,7 @@ def p_breakdown(i, n):          # tail lifts off first (it rides on the R panel 
     tail = seg(f, 36, 56) - seg(f, 130, 148)
     pan = seg(f, 56, 92) - seg(f, 100, 130)
     slide('slide_canopy', 9.99 * can)
-    slide('slide_battery', 2.99 * bat)
+    slide('slide_battery', 0.69 * bat)
     slide('slide_htail', 14.99 * tail)
     slide('slide_panel_R', 29.99 * pan)
     slide('slide_panel_L', -29.99 * pan)

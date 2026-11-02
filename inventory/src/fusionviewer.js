@@ -139,11 +139,12 @@ function FusionViewer(wrap, F, INVP){
   const anyAnim = () => A.demo || A.spin || A.wheels || P.bd !== A.bdTo;
   const ease = u => u < 0.5 ? 2*u*u : 1 - Math.pow(-2*u + 2, 2) / 2, clamp01 = u => Math.max(0, Math.min(1, u));
   const DEMO_S = 4;   // seconds per axis; roll, then pitch, then yaw, looping
-  // breakdown: canopy up, battery slides, H-tail up, wing panels slide off the joiner; slider ranges from kinematics.json (limits_mm; some are estimates)
-  const BD = [['slide_canopy', 0, 0.3], ['slide_battery', 0.15, 0.4], ['slide_htail', 0.3, 0.55], ['slide_panel_R', 0.5, 1], ['slide_panel_L', 0.5, 1]];
+  // breakdown order from fusion/motion_clearance.md: canopy up, then the H-tail up, and only then the wing panels slide off the joiner
+  // (the battery only shifts within its tray, -4..+7 mm); slider ranges from kinematics.json (limits_mm; some are estimates)
+  const BD = [['slide_canopy', 0, 0.25], ['slide_battery', 0.1, 0.3], ['slide_htail', 0.3, 0.55], ['slide_panel_R', 0.6, 1], ['slide_panel_L', 0.6, 1]];
   function setBreakdown(t){
     P.bd = t;
-    for (const [id, a, b] of BD) P.slide[id] = KG[id].limMm[1] * ease(clamp01((t - a) / (b - a)));   // 0 = assembled, up to the limit (battery +30 mm forward)
+    for (const [id, a, b] of BD) P.slide[id] = KG[id].limMm[1] * ease(clamp01((t - a) / (b - a)));   // 0 = assembled, up to the limit (battery to its +7 mm limit)
     syncUI(); poseAll();
   }
   function step(dt){

@@ -215,14 +215,14 @@ groups.append({'id': 'slide_canopy', 'name': 'Canopy lift-off', 'kind': 'slider'
                'pivot_cm': [0.0, 20.5, 4.6], 'axis_cm': [0, 0, 1], 'axis_m': [0, 1, 0], 'limits_mm': [0, 100],
                'positive': 'up (+Z)', 'limit_source': 'estimate (-)', 'note': 'carries canopy screws, GPS mast and GPS'})
 groups.append({'id': 'slide_battery', 'name': 'Battery along its tray', 'kind': 'slider', 'parent': None, 'stl': ['stl/Battery_6S_LiPo.stl'], 'carries': [],
-               'pivot_cm': [0.0, 6.1, -5.0], 'axis_cm': [0, 1, 0], 'axis_m': [1, 0, 0], 'limits_mm': [-30, 30],
-               'positive': 'forward (+Y)', 'limit_source': 'estimate - tray length is not in the data (-)', 'note': 'CG trim travel; the battery is removed upward after the canopy'})
+               'pivot_cm': [0.0, 6.1, -5.0], 'axis_cm': [0, 1, 0], 'axis_m': [1, 0, 0], 'limits_mm': [-4, 7],
+               'positive': 'forward (+Y)', 'limit_source': 'Fusion motion-clearance sweep 2026-11-02 (fusion/motion_clearance.md): pod pocket extended -5/+8 mm, formers limit free travel to -4/+7 mm', 'note': 'CG trim travel only 11 mm; battery cannot be lifted out in this CAD (see motion_clearance.md)'})
 joints += [
     {'name': 'Slide Wing_Panel_R on joiner', 'type': 'slider', 'one': 'panel:R', 'two': 'saddle', 'axis': 'X', 'pt': joiner_pt, 'lo': 0, 'hi': 30, 'unit': 'cm', 'kin': 'slide_panel_R'},
     {'name': 'Slide Wing_Panel_L on joiner', 'type': 'slider', 'one': 'panel:L', 'two': 'saddle', 'axis': 'X', 'pt': [-8.0, -7.16, 0.45], 'lo': -30, 'hi': 0, 'unit': 'cm', 'kin': 'slide_panel_L'},
     {'name': 'Slide H_Tail lift-off', 'type': 'slider', 'one': 'htail', 'two': 'stub:R', 'axis': 'Z', 'pt': [0.0, -79.7, -1.4], 'lo': 0, 'hi': 15, 'unit': 'cm', 'kin': 'slide_htail'},
     {'name': 'Slide Canopy lift-off', 'type': 'slider', 'one': 'canopy', 'two': 'pod', 'axis': 'Z', 'pt': [0.0, 20.5, 4.6], 'lo': 0, 'hi': 10, 'unit': 'cm', 'kin': 'slide_canopy'},
-    {'name': 'Slide Battery tray', 'type': 'slider', 'one': 'battery', 'two': 'pod', 'axis': 'Y', 'pt': [0.0, 6.1, -5.0], 'lo': -3, 'hi': 3, 'unit': 'cm', 'kin': 'slide_battery'},
+    {'name': 'Slide Battery tray', 'type': 'slider', 'one': 'battery', 'two': 'pod', 'axis': 'Y', 'pt': [0.0, 6.1, -5.0], 'lo': -0.4, 'hi': 0.7, 'unit': 'cm', 'kin': 'slide_battery'},
 ]
 for g in groups:
     if g['kind'] == 'wheel':
