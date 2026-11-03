@@ -1,0 +1,1131 @@
+{
+ "id": "a3",
+ "doc": "VTOL A3 faired parked rotors",
+ "axis_note": "STL coordinates are Fusion world cm, Z-up (world-transformed, written from the B-rep mesh calculator; no further transform needed). Model X fwd = Fusion +Y, model Y up = Fusion +Z, model Z right = Fusion +X. i.e. model (x,y,z) m -> Fusion (z,x,y)*100 cm.",
+ "units": "cm",
+ "hide": [
+  "Motor_Mount_1",
+  "Motor_Mount_2",
+  "Motor_Mount_3",
+  "Motor_Mount_4",
+  "Lift_Prop_L1",
+  "Lift_Prop_L2",
+  "Lift_Prop_L3",
+  "Lift_Prop_L4"
+ ],
+ "entries": [
+  {
+   "file": "stl/Motor_Mount_1.stl",
+   "name": "Motor_Mount_1",
+   "group": "printed",
+   "color": [
+    0.118,
+    0.125,
+    0.157
+   ],
+   "count": 2,
+   "bbox_cm": [
+    [
+     -45.67,
+     33.592,
+     -4.5
+    ],
+    [
+     -41.07,
+     40.592,
+     -0.9
+    ]
+   ],
+   "size": 120684,
+   "triangles": 2412,
+   "rides": "slide_panel_L",
+   "changed": "insert bores"
+  },
+  {
+   "file": "stl/Motor_Mount_2.stl",
+   "name": "Motor_Mount_2",
+   "group": "printed",
+   "color": [
+    0.118,
+    0.125,
+    0.157
+   ],
+   "count": 2,
+   "bbox_cm": [
+    [
+     -45.67,
+     -53.958,
+     -4.5
+    ],
+    [
+     -41.07,
+     -46.958,
+     -0.9
+    ]
+   ],
+   "size": 120684,
+   "triangles": 2412,
+   "rides": "slide_panel_L",
+   "changed": "insert bores"
+  },
+  {
+   "file": "stl/Motor_Mount_3.stl",
+   "name": "Motor_Mount_3",
+   "group": "printed",
+   "color": [
+    0.118,
+    0.125,
+    0.157
+   ],
+   "count": 2,
+   "bbox_cm": [
+    [
+     41.07,
+     33.592,
+     -4.5
+    ],
+    [
+     45.67,
+     40.592,
+     -0.9
+    ]
+   ],
+   "size": 120684,
+   "triangles": 2412,
+   "rides": "slide_panel_R",
+   "changed": "insert bores"
+  },
+  {
+   "file": "stl/Motor_Mount_4.stl",
+   "name": "Motor_Mount_4",
+   "group": "printed",
+   "color": [
+    0.118,
+    0.125,
+    0.157
+   ],
+   "count": 2,
+   "bbox_cm": [
+    [
+     41.07,
+     -53.958,
+     -4.5
+    ],
+    [
+     45.67,
+     -46.958,
+     -0.9
+    ]
+   ],
+   "size": 120684,
+   "triangles": 2412,
+   "rides": "slide_panel_R",
+   "changed": "insert bores"
+  },
+  {
+   "file": "kinematics/Lift_Prop_L1.stl",
+   "name": "Lift_Prop_L1",
+   "group": "propulsion",
+   "color": [
+    0.059,
+    0.059,
+    0.067
+   ],
+   "count": 5,
+   "bbox_cm": [
+    [
+     40.974,
+     15.502,
+     -0.9
+    ],
+    [
+     45.766,
+     58.682,
+     4.1
+    ]
+   ],
+   "size": 195184,
+   "triangles": 3902,
+   "moving": "prop_L1",
+   "rides": "slide_panel_R",
+   "changed": "HW-033 M3x12 removed"
+  },
+  {
+   "file": "kinematics/Lift_Cap_L1.stl",
+   "name": "Lift_Cap_L1",
+   "group": "printed",
+   "color": [
+    0.96,
+    0.5,
+    0.12
+   ],
+   "count": 1,
+   "bbox_cm": [
+    [
+     40.72,
+     33.646,
+     1.85
+    ],
+    [
+     46.02,
+     40.538,
+     4.28
+    ]
+   ],
+   "size": 132684,
+   "triangles": 2652,
+   "moving": "cap_L1",
+   "rides": "slide_panel_R"
+  },
+  {
+   "file": "kinematics/Magnet_Rot_L1.stl",
+   "name": "Magnet_Rot_L1",
+   "group": "hardware",
+   "color": [
+    0.62,
+    0.64,
+    0.68
+   ],
+   "count": 2,
+   "bbox_cm": [
+    [
+     43.056,
+     33.675,
+     1.9
+    ],
+    [
+     43.688,
+     40.509,
+     2.217
+    ]
+   ],
+   "size": 8084,
+   "triangles": 160,
+   "moving": "cap_L1",
+   "rides": "slide_panel_R"
+  },
+  {
+   "file": "kinematics/HW-A3-03_Cap_screws_L1.stl",
+   "name": "HW-A3-03_Cap_screws_L1",
+   "group": "hardware",
+   "color": [
+    0.75,
+    0.75,
+    0.77
+   ],
+   "count": 4,
+   "bbox_cm": [
+    [
+     42.519,
+     36.248,
+     2.5
+    ],
+    [
+     44.221,
+     37.936,
+     4.265
+    ]
+   ],
+   "size": 24884,
+   "triangles": 496,
+   "joint": "J-A3-02",
+   "moving": "cap_L1",
+   "rides": "slide_panel_R"
+  },
+  {
+   "file": "kinematics/Lift_Prop_L3.stl",
+   "name": "Lift_Prop_L3",
+   "group": "propulsion",
+   "color": [
+    0.059,
+    0.059,
+    0.067
+   ],
+   "count": 5,
+   "bbox_cm": [
+    [
+     -45.766,
+     15.502,
+     -0.9
+    ],
+    [
+     -40.974,
+     58.682,
+     4.1
+    ]
+   ],
+   "size": 195184,
+   "triangles": 3902,
+   "moving": "prop_L3",
+   "rides": "slide_panel_L",
+   "changed": "HW-033 M3x12 removed"
+  },
+  {
+   "file": "kinematics/Lift_Cap_L3.stl",
+   "name": "Lift_Cap_L3",
+   "group": "printed",
+   "color": [
+    0.96,
+    0.5,
+    0.12
+   ],
+   "count": 1,
+   "bbox_cm": [
+    [
+     -46.02,
+     33.646,
+     1.85
+    ],
+    [
+     -40.72,
+     40.538,
+     4.28
+    ]
+   ],
+   "size": 132684,
+   "triangles": 2652,
+   "moving": "cap_L3",
+   "rides": "slide_panel_L"
+  },
+  {
+   "file": "kinematics/Magnet_Rot_L3.stl",
+   "name": "Magnet_Rot_L3",
+   "group": "hardware",
+   "color": [
+    0.62,
+    0.64,
+    0.68
+   ],
+   "count": 2,
+   "bbox_cm": [
+    [
+     -43.684,
+     33.675,
+     1.9
+    ],
+    [
+     -43.053,
+     40.509,
+     2.217
+    ]
+   ],
+   "size": 8084,
+   "triangles": 160,
+   "moving": "cap_L3",
+   "rides": "slide_panel_L"
+  },
+  {
+   "file": "kinematics/HW-A3-03_Cap_screws_L3.stl",
+   "name": "HW-A3-03_Cap_screws_L3",
+   "group": "hardware",
+   "color": [
+    0.75,
+    0.75,
+    0.77
+   ],
+   "count": 4,
+   "bbox_cm": [
+    [
+     -44.221,
+     36.248,
+     2.5
+    ],
+    [
+     -42.519,
+     37.936,
+     4.265
+    ]
+   ],
+   "size": 24884,
+   "triangles": 496,
+   "joint": "J-A3-02",
+   "moving": "cap_L3",
+   "rides": "slide_panel_L"
+  },
+  {
+   "file": "kinematics/Lift_Prop_L4.stl",
+   "name": "Lift_Prop_L4",
+   "group": "propulsion",
+   "color": [
+    0.059,
+    0.059,
+    0.067
+   ],
+   "count": 5,
+   "bbox_cm": [
+    [
+     40.974,
+     -72.048,
+     -0.9
+    ],
+    [
+     45.766,
+     -28.868,
+     4.1
+    ]
+   ],
+   "size": 195184,
+   "triangles": 3902,
+   "moving": "prop_L4",
+   "rides": "slide_panel_R",
+   "changed": "HW-033 M3x12 removed"
+  },
+  {
+   "file": "kinematics/Lift_Cap_L4.stl",
+   "name": "Lift_Cap_L4",
+   "group": "printed",
+   "color": [
+    0.96,
+    0.5,
+    0.12
+   ],
+   "count": 1,
+   "bbox_cm": [
+    [
+     40.72,
+     -53.904,
+     1.85
+    ],
+    [
+     46.02,
+     -47.012,
+     4.28
+    ]
+   ],
+   "size": 132684,
+   "triangles": 2652,
+   "moving": "cap_L4",
+   "rides": "slide_panel_R"
+  },
+  {
+   "file": "kinematics/Magnet_Rot_L4.stl",
+   "name": "Magnet_Rot_L4",
+   "group": "hardware",
+   "color": [
+    0.62,
+    0.64,
+    0.68
+   ],
+   "count": 2,
+   "bbox_cm": [
+    [
+     43.056,
+     -53.875,
+     1.9
+    ],
+    [
+     43.688,
+     -47.041,
+     2.217
+    ]
+   ],
+   "size": 8084,
+   "triangles": 160,
+   "moving": "cap_L4",
+   "rides": "slide_panel_R"
+  },
+  {
+   "file": "kinematics/HW-A3-03_Cap_screws_L4.stl",
+   "name": "HW-A3-03_Cap_screws_L4",
+   "group": "hardware",
+   "color": [
+    0.75,
+    0.75,
+    0.77
+   ],
+   "count": 4,
+   "bbox_cm": [
+    [
+     42.519,
+     -51.302,
+     2.5
+    ],
+    [
+     44.221,
+     -49.614,
+     4.265
+    ]
+   ],
+   "size": 24884,
+   "triangles": 496,
+   "joint": "J-A3-02",
+   "moving": "cap_L4",
+   "rides": "slide_panel_R"
+  },
+  {
+   "file": "kinematics/Lift_Prop_L2.stl",
+   "name": "Lift_Prop_L2",
+   "group": "propulsion",
+   "color": [
+    0.059,
+    0.059,
+    0.067
+   ],
+   "count": 5,
+   "bbox_cm": [
+    [
+     -45.766,
+     -72.048,
+     -0.9
+    ],
+    [
+     -40.974,
+     -28.868,
+     4.1
+    ]
+   ],
+   "size": 195184,
+   "triangles": 3902,
+   "moving": "prop_L2",
+   "rides": "slide_panel_L",
+   "changed": "HW-033 M3x12 removed"
+  },
+  {
+   "file": "kinematics/Lift_Cap_L2.stl",
+   "name": "Lift_Cap_L2",
+   "group": "printed",
+   "color": [
+    0.96,
+    0.5,
+    0.12
+   ],
+   "count": 1,
+   "bbox_cm": [
+    [
+     -46.02,
+     -53.904,
+     1.85
+    ],
+    [
+     -40.72,
+     -47.012,
+     4.28
+    ]
+   ],
+   "size": 132684,
+   "triangles": 2652,
+   "moving": "cap_L2",
+   "rides": "slide_panel_L"
+  },
+  {
+   "file": "kinematics/Magnet_Rot_L2.stl",
+   "name": "Magnet_Rot_L2",
+   "group": "hardware",
+   "color": [
+    0.62,
+    0.64,
+    0.68
+   ],
+   "count": 2,
+   "bbox_cm": [
+    [
+     -43.684,
+     -53.875,
+     1.9
+    ],
+    [
+     -43.053,
+     -47.041,
+     2.217
+    ]
+   ],
+   "size": 8084,
+   "triangles": 160,
+   "moving": "cap_L2",
+   "rides": "slide_panel_L"
+  },
+  {
+   "file": "kinematics/HW-A3-03_Cap_screws_L2.stl",
+   "name": "HW-A3-03_Cap_screws_L2",
+   "group": "hardware",
+   "color": [
+    0.75,
+    0.75,
+    0.77
+   ],
+   "count": 4,
+   "bbox_cm": [
+    [
+     -44.221,
+     -51.302,
+     2.5
+    ],
+    [
+     -42.519,
+     -49.614,
+     4.265
+    ]
+   ],
+   "size": 24884,
+   "triangles": 496,
+   "joint": "J-A3-02",
+   "moving": "cap_L2",
+   "rides": "slide_panel_L"
+  },
+  {
+   "file": "stl/Lift_Nacelle_L4.stl",
+   "name": "Lift_Nacelle_L4",
+   "group": "printed",
+   "color": [
+    0.96,
+    0.5,
+    0.12
+   ],
+   "count": 2,
+   "bbox_cm": [
+    [
+     40.509,
+     -61.758,
+     -4.55
+    ],
+    [
+     46.231,
+     -43.818,
+     1.7
+    ]
+   ],
+   "size": 189384,
+   "triangles": 3786,
+   "rides": "slide_panel_R"
+  },
+  {
+   "file": "stl/Magnet_Fix_L4.stl",
+   "name": "Magnet_Fix_L4",
+   "group": "hardware",
+   "color": [
+    0.62,
+    0.64,
+    0.68
+   ],
+   "count": 1,
+   "bbox_cm": [
+    [
+     43.056,
+     -47.675,
+     1.33
+    ],
+    [
+     43.688,
+     -47.041,
+     1.648
+    ]
+   ],
+   "size": 4084,
+   "triangles": 80,
+   "rides": "slide_panel_R"
+  },
+  {
+   "file": "stl/Reed_L4.stl",
+   "name": "Reed_L4",
+   "group": "electronics",
+   "color": [
+    0.85,
+    0.9,
+    0.95
+   ],
+   "count": 1,
+   "bbox_cm": [
+    [
+     41.348,
+     -53.657,
+     1.386
+    ],
+    [
+     45.392,
+     -53.459,
+     1.614
+    ]
+   ],
+   "size": 3084,
+   "triangles": 60,
+   "rides": "slide_panel_R"
+  },
+  {
+   "file": "stl/Reed_Wire_L4.stl",
+   "name": "Reed_Wire_L4",
+   "group": "electronics",
+   "color": [
+    0.85,
+    0.1,
+    0.1
+   ],
+   "count": 2,
+   "bbox_cm": [
+    [
+     41.3,
+     -65.458,
+     -3.85
+    ],
+    [
+     45.44,
+     -53.558,
+     1.55
+    ]
+   ],
+   "size": 8684,
+   "triangles": 172,
+   "rides": "slide_panel_R"
+  },
+  {
+   "file": "stl/Lift_Nacelle_L2.stl",
+   "name": "Lift_Nacelle_L2",
+   "group": "printed",
+   "color": [
+    0.96,
+    0.5,
+    0.12
+   ],
+   "count": 2,
+   "bbox_cm": [
+    [
+     -46.231,
+     -61.758,
+     -4.55
+    ],
+    [
+     -40.509,
+     -43.818,
+     1.7
+    ]
+   ],
+   "size": 189984,
+   "triangles": 3798,
+   "rides": "slide_panel_L"
+  },
+  {
+   "file": "stl/Magnet_Fix_L2.stl",
+   "name": "Magnet_Fix_L2",
+   "group": "hardware",
+   "color": [
+    0.62,
+    0.64,
+    0.68
+   ],
+   "count": 1,
+   "bbox_cm": [
+    [
+     -43.684,
+     -47.675,
+     1.33
+    ],
+    [
+     -43.053,
+     -47.041,
+     1.648
+    ]
+   ],
+   "size": 4084,
+   "triangles": 80,
+   "rides": "slide_panel_L"
+  },
+  {
+   "file": "stl/Reed_L2.stl",
+   "name": "Reed_L2",
+   "group": "electronics",
+   "color": [
+    0.85,
+    0.9,
+    0.95
+   ],
+   "count": 1,
+   "bbox_cm": [
+    [
+     -45.392,
+     -53.657,
+     1.386
+    ],
+    [
+     -41.348,
+     -53.459,
+     1.614
+    ]
+   ],
+   "size": 3084,
+   "triangles": 60,
+   "rides": "slide_panel_L"
+  },
+  {
+   "file": "stl/Reed_Wire_L2.stl",
+   "name": "Reed_Wire_L2",
+   "group": "electronics",
+   "color": [
+    0.85,
+    0.1,
+    0.1
+   ],
+   "count": 2,
+   "bbox_cm": [
+    [
+     -45.433,
+     -65.458,
+     -3.85
+    ],
+    [
+     -41.3,
+     -53.558,
+     1.55
+    ]
+   ],
+   "size": 8984,
+   "triangles": 178,
+   "rides": "slide_panel_L"
+  },
+  {
+   "file": "stl/Reed_Ladder_R.stl",
+   "name": "Reed_Ladder_R",
+   "group": "electronics",
+   "color": [
+    0.82,
+    0.7,
+    0.5
+   ],
+   "count": 5,
+   "bbox_cm": [
+    [
+     0.2,
+     24.5,
+     -2.09
+    ],
+    [
+     4.2,
+     25.5,
+     -1.676
+    ]
+   ],
+   "size": 11884,
+   "triangles": 236
+  },
+  {
+   "file": "stl/Lift_Nacelle_L1.stl",
+   "name": "Lift_Nacelle_L1",
+   "group": "printed",
+   "color": [
+    0.96,
+    0.5,
+    0.12
+   ],
+   "count": 2,
+   "bbox_cm": [
+    [
+     40.509,
+     30.442,
+     -4.55
+    ],
+    [
+     46.231,
+     43.732,
+     1.7
+    ]
+   ],
+   "size": 198184,
+   "triangles": 3962,
+   "rides": "slide_panel_R"
+  },
+  {
+   "file": "stl/Magnet_Fix_L1.stl",
+   "name": "Magnet_Fix_L1",
+   "group": "hardware",
+   "color": [
+    0.62,
+    0.64,
+    0.68
+   ],
+   "count": 1,
+   "bbox_cm": [
+    [
+     43.056,
+     39.875,
+     1.33
+    ],
+    [
+     43.688,
+     40.509,
+     1.648
+    ]
+   ],
+   "size": 4084,
+   "triangles": 80,
+   "rides": "slide_panel_R"
+  },
+  {
+   "file": "stl/Reed_L1.stl",
+   "name": "Reed_L1",
+   "group": "electronics",
+   "color": [
+    0.85,
+    0.9,
+    0.95
+   ],
+   "count": 1,
+   "bbox_cm": [
+    [
+     41.348,
+     33.893,
+     1.386
+    ],
+    [
+     45.392,
+     34.091,
+     1.614
+    ]
+   ],
+   "size": 3084,
+   "triangles": 60,
+   "rides": "slide_panel_R"
+  },
+  {
+   "file": "stl/Reed_Wire_L1.stl",
+   "name": "Reed_Wire_L1",
+   "group": "electronics",
+   "color": [
+    0.85,
+    0.1,
+    0.1
+   ],
+   "count": 2,
+   "bbox_cm": [
+    [
+     41.3,
+     29.992,
+     -3.85
+    ],
+    [
+     45.44,
+     33.992,
+     1.55
+    ]
+   ],
+   "size": 9284,
+   "triangles": 184,
+   "rides": "slide_panel_R"
+  },
+  {
+   "file": "stl/Lift_Nacelle_L3.stl",
+   "name": "Lift_Nacelle_L3",
+   "group": "printed",
+   "color": [
+    0.96,
+    0.5,
+    0.12
+   ],
+   "count": 2,
+   "bbox_cm": [
+    [
+     -46.231,
+     30.442,
+     -4.55
+    ],
+    [
+     -40.509,
+     43.732,
+     1.7
+    ]
+   ],
+   "size": 198184,
+   "triangles": 3962,
+   "rides": "slide_panel_L"
+  },
+  {
+   "file": "stl/Magnet_Fix_L3.stl",
+   "name": "Magnet_Fix_L3",
+   "group": "hardware",
+   "color": [
+    0.62,
+    0.64,
+    0.68
+   ],
+   "count": 1,
+   "bbox_cm": [
+    [
+     -43.684,
+     39.875,
+     1.33
+    ],
+    [
+     -43.053,
+     40.509,
+     1.648
+    ]
+   ],
+   "size": 4084,
+   "triangles": 80,
+   "rides": "slide_panel_L"
+  },
+  {
+   "file": "stl/Reed_L3.stl",
+   "name": "Reed_L3",
+   "group": "electronics",
+   "color": [
+    0.85,
+    0.9,
+    0.95
+   ],
+   "count": 1,
+   "bbox_cm": [
+    [
+     -45.392,
+     33.893,
+     1.386
+    ],
+    [
+     -41.348,
+     34.091,
+     1.614
+    ]
+   ],
+   "size": 3084,
+   "triangles": 60,
+   "rides": "slide_panel_L"
+  },
+  {
+   "file": "stl/Reed_Wire_L3.stl",
+   "name": "Reed_Wire_L3",
+   "group": "electronics",
+   "color": [
+    0.85,
+    0.1,
+    0.1
+   ],
+   "count": 2,
+   "bbox_cm": [
+    [
+     -45.433,
+     29.992,
+     -3.85
+    ],
+    [
+     -41.3,
+     33.992,
+     1.55
+    ]
+   ],
+   "size": 9584,
+   "triangles": 190,
+   "rides": "slide_panel_L"
+  },
+  {
+   "file": "stl/J-A3-01_Lift_Nacelle_Motor_Mount_R.stl",
+   "name": "J-A3-01_Lift_Nacelle_Motor_Mount_R",
+   "group": "hardware",
+   "color": [
+    0.75,
+    0.75,
+    0.77
+   ],
+   "count": 24,
+   "bbox_cm": [
+    [
+     40.441,
+     -60.243,
+     -2.535
+    ],
+    [
+     46.299,
+     43.177,
+     -1.215
+    ]
+   ],
+   "size": 168084,
+   "triangles": 3360,
+   "joint": "J-A3-01",
+   "rides": "slide_panel_R"
+  },
+  {
+   "file": "stl/J-A3-01_Lift_Nacelle_Motor_Mount_L.stl",
+   "name": "J-A3-01_Lift_Nacelle_Motor_Mount_L",
+   "group": "hardware",
+   "color": [
+    0.75,
+    0.75,
+    0.77
+   ],
+   "count": 24,
+   "bbox_cm": [
+    [
+     -46.299,
+     -60.243,
+     -2.535
+    ],
+    [
+     -40.441,
+     43.177,
+     -1.215
+    ]
+   ],
+   "size": 168084,
+   "triangles": 3360,
+   "joint": "J-A3-01",
+   "rides": "slide_panel_L"
+  }
+ ],
+ "moving": [
+  {
+   "id": "cap_L1",
+   "kind": "revolute",
+   "parent": "slide_panel_R",
+   "pivot_m": [
+    0.37092,
+    0.03,
+    0.4337
+   ],
+   "axis_m": [
+    0,
+    1,
+    0
+   ],
+   "limits": null,
+   "note": "same physical axis as prop_L1: cap, 2 rotating magnets and 4 M3x16 screws turn with the prop"
+  },
+  {
+   "id": "cap_L3",
+   "kind": "revolute",
+   "parent": "slide_panel_L",
+   "pivot_m": [
+    0.37092,
+    0.03,
+    -0.4337
+   ],
+   "axis_m": [
+    0,
+    1,
+    0
+   ],
+   "limits": null,
+   "note": "same physical axis as prop_L3: cap, 2 rotating magnets and 4 M3x16 screws turn with the prop"
+  },
+  {
+   "id": "cap_L4",
+   "kind": "revolute",
+   "parent": "slide_panel_R",
+   "pivot_m": [
+    -0.50458,
+    0.03,
+    0.4337
+   ],
+   "axis_m": [
+    0,
+    1,
+    0
+   ],
+   "limits": null,
+   "note": "same physical axis as prop_L4: cap, 2 rotating magnets and 4 M3x16 screws turn with the prop"
+  },
+  {
+   "id": "cap_L2",
+   "kind": "revolute",
+   "parent": "slide_panel_L",
+   "pivot_m": [
+    -0.50458,
+    0.03,
+    -0.4337
+   ],
+   "axis_m": [
+    0,
+    1,
+    0
+   ],
+   "limits": null,
+   "note": "same physical axis as prop_L2: cap, 2 rotating magnets and 4 M3x16 screws turn with the prop"
+  }
+ ]
+}

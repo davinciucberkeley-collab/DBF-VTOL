@@ -535,3 +535,95 @@ figure.bpfig figcaption{padding-bottom:2px}
 .pcard table.hwlist td.num{text-align:right;font-variant-numeric:tabular-nums}
 .pcard table.hwlist .est{margin-left:4px}
 .tbl td.mono{white-space:nowrap}
+
+/* ---------- §10 alternative designs ---------- */
+.altpoint{margin:6px 0 0;font-size:.9375rem;color:var(--fg-2);max-width:78ch}
+.alttabs{display:flex;gap:0;overflow-x:auto;border-bottom:1px solid var(--line-2);margin:18px 0 0;scrollbar-width:none}
+.alttabs::-webkit-scrollbar{display:none}
+.alttabs button{flex:0 0 auto;min-height:48px;padding:0 16px;border:0;border-bottom:3px solid transparent;margin-bottom:-1px;background:transparent;color:var(--fg-2);font:500 .9375rem var(--f-body);cursor:pointer;white-space:nowrap;display:inline-flex;align-items:center;gap:8px}
+.alttabs button .mono{font:600 .8125rem var(--f-mono);color:var(--fg-3)}
+.alttabs button:hover{color:var(--fg)}
+.alttabs button[aria-selected="true"]{color:var(--fg);font-weight:600;border-bottom-color:var(--accent)}
+.alttabs button[aria-selected="true"] .mono{color:var(--accent)}
+.altpanel{padding-top:6px;min-width:0}
+.altpanel:focus-visible{outline-offset:-2px}
+.altpanel>h4{font:600 1.125rem/1.2 var(--f-display);margin:2rem 0 .5rem;padding-top:.9rem;border-top:1px solid var(--line)}
+.altpanel>h4:first-child{margin-top:.8rem;border-top:0;padding-top:0;font-size:1.375rem}
+.altpanel p{max-width:78ch}
+.altbl{font-size:1.0625rem;border-left:3px solid var(--accent);padding-left:14px;margin:10px 0 14px}
+.altkpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(168px,1fr));margin:18px 0 4px;border-top:2px solid var(--ink);border-left:1px solid var(--line-2)}
+.altk{background:var(--surface);padding:10px 14px 12px;min-width:0;border-right:1px solid var(--line-2);border-bottom:1px solid var(--line-2)}
+.pcard:empty{display:none}
+.altk .l{font:600 .75rem/1 var(--f-body);letter-spacing:.04em;text-transform:uppercase;color:var(--fg-3);margin-bottom:8px}
+.altk .v{font:600 1.5rem/1.1 var(--f-display);color:var(--fg);font-variant-numeric:tabular-nums}
+.altk .v small{font:500 .875rem var(--f-body);color:var(--fg-3)}
+.altk .v.ok{color:var(--ok)} .altk .v.warn{color:var(--warn)} .altk .v.bad{color:var(--bad)}
+.altk .s{font-size:.8125rem;line-height:1.4;color:var(--fg-2);margin-top:6px}
+/* comparison table */
+.alttbl-cmp table{min-width:780px}
+.alttbl-cmp td.n{white-space:normal;min-width:150px}.alttbl-cmp td.n .nw{white-space:nowrap}
+.alttbl-cmp tbody th[scope="row"]{position:sticky;left:0;background:var(--bg);font:600 .875rem/1.35 var(--f-body);color:var(--fg);white-space:normal;min-width:130px;max-width:150px;z-index:1;border-bottom:1px solid var(--line)}
+.alttbl-cmp tbody th small{font-weight:400;color:var(--fg-3)}
+.alttbl-cmp thead th:first-child{left:0;z-index:3}
+.alttbl-cmp thead th.n{white-space:normal;min-width:130px}
+.alttbl-cmp td.n small{display:inline-block;line-height:1.35}
+.alttbl-cmp .c0col{background:var(--surface-2);color:var(--fg-2)}
+.alttbl-cmp td.verdictcell{white-space:normal;min-width:190px;max-width:240px;font-size:.8125rem;line-height:1.45;color:var(--fg-2)}
+.alttbl-cmp tbody tr:hover td.c0col{background:var(--surface-3)}
+.dl{font-variant-numeric:tabular-nums;color:var(--fg-3)} .dl.ok{color:var(--ok)} .dl.bad{color:var(--bad)}
+svg .b-bad{fill:var(--bad)} svg .d-ok{fill:var(--ok)} svg .d-bad{fill:var(--bad)}
+/* variant status chips and inventory table */
+.chip.st-new{color:var(--accent);border-color:var(--accent);background:var(--accent-soft)}
+.chip.st-changed{color:var(--warn);border-color:var(--warn)}
+.chip.st-removed{color:var(--bad);border-color:var(--bad);background:var(--bad-soft)}
+.chip.st-same{color:var(--fg-3);border-color:var(--line-3)}
+.altfilt{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:10px 0 4px}
+.altfilt button{min-height:44px;padding:0 14px;border:1px solid var(--line-2);background:var(--surface);color:var(--fg-2);border-radius:var(--r-s);font:500 .875rem var(--f-body);cursor:pointer}
+.altfilt button:hover{border-color:var(--fg);color:var(--fg)}
+.altfilt button[aria-pressed="true"]{background:var(--ink);color:var(--ink-fg);border-color:var(--ink)}
+.altfilt .count{margin-left:auto;font:.8125rem var(--f-mono);color:var(--fg-3)}
+.alttbl.changes tbody tr[data-st="same"]{display:none}
+.alttbl tbody tr[data-st="new"] td:first-child{box-shadow:inset 3px 0 0 var(--accent)}
+.alttbl tbody tr[data-st="changed"] td:first-child{box-shadow:inset 3px 0 0 var(--warn)}
+.alttbl tbody tr[data-st="removed"] td:not(:first-child){text-decoration:line-through;color:var(--fg-3)}
+.alttbl tbody tr.hit td{background:var(--accent-soft)}
+.alttbl td:nth-child(2){min-width:210px}
+.alttbl td.note{min-width:250px;font-size:.8125rem;color:var(--fg-2);line-height:1.45}
+@media (max-width:640px){.hide-s{display:none}.alttbl td.note{min-width:200px}}
+/* hardware delta */
+.hwgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:4px 28px}
+.hwgrid h5{margin:.6rem 0 .2rem;font:600 .9375rem var(--f-display);display:flex;gap:8px;align-items:center}
+ul.hwdelta{font-size:.875rem;columns:1;margin:.3rem 0}
+ul.hwdelta li{break-inside:avoid}
+/* 3D */
+.altviewer .altlegend{flex:1 1 100%;margin:0;font-size:.8125rem;color:var(--fg-2)}
+.altlegend .sw{display:inline-block;width:11px;height:11px;margin:0 4px 0 12px;vertical-align:-1px;border:1px solid var(--line-3)}
+.altlegend .sw:first-child{margin-left:0}
+.sw-acc{background:var(--accent)} .sw-c0{background:var(--surface-3);opacity:.7} .sw-rm{background:var(--bad);opacity:.6}
+.altviewer .ctl .glabel{align-self:center}
+.altparts{display:flex;flex-wrap:wrap;gap:6px;list-style:none;margin:10px 0 0;padding:0}
+.altparts button{min-height:44px;padding:0 12px;border:1px solid var(--line-2);background:var(--surface);color:var(--fg-2);border-radius:var(--r-s);font:500 .8125rem var(--f-body);cursor:pointer}
+.altparts button:hover{border-color:var(--fg);color:var(--fg)}
+.altparts button[aria-pressed="true"]{border-color:var(--accent);color:var(--accent);background:var(--accent-soft)}
+.altnomodel{border:1px dashed var(--line-3);background:var(--surface-2);padding:22px 20px;margin:8px 0;color:var(--fg-2)}
+.altnomodel b{display:block;font:600 1.0625rem var(--f-display);color:var(--fg);margin-bottom:6px}
+.altnomodel p{margin:0;font-size:.875rem;max-width:68ch}
+.altline{display:grid;grid-template-columns:auto minmax(0,1fr);gap:2px 10px;padding:8px 0;border-top:1px solid var(--line);width:100%;font-size:.8125rem}
+.altline .q{grid-column:2;color:var(--fg-2)}
+.altline .linkbtn{grid-column:2;justify-self:start}
+.pcard h4{margin:0;font-size:1.125rem}
+/* design note */
+.altnote .md{max-width:80ch;font-size:.9375rem}
+.altnote .md h4.mdh,.altnote .md h5.mdh,.altnote .md h6.mdh{margin:1.6rem 0 .4rem;font-family:var(--f-display);font-weight:600}
+.altnote .md h4.mdh{font-size:1.1875rem;border-top:1px solid var(--line);padding-top:.8rem}
+.altnote .md h5.mdh{font-size:1.0625rem} .altnote .md h6.mdh{font-size:.9375rem}
+.altnote .md ul,.altnote .md ol{padding-left:1.3em;margin:.4rem 0}
+.altnote .md li{margin:.2rem 0}
+.altnote .md pre.mdcode{background:var(--surface-2);border:1px solid var(--line);padding:10px 12px;overflow:auto;font:.8125rem/1.5 var(--f-mono);max-width:100%}
+.altnote .md pre code{background:none;padding:0}
+.altnote .md .tbl{max-height:none}
+.altnote .md blockquote{margin:.6rem 0;padding-left:12px;border-left:3px solid var(--line-2);color:var(--fg-2)}
+@media print{.altpanel[hidden]{display:block!important}.alttabs{display:none}.alttbl.changes tbody tr[data-st="same"]{display:none}}
+@media (max-width:560px){.altk .v{font-size:1.3125rem}.altfilt .count{margin-left:0;flex:1 1 100%}}
+.altpanel code,.altnote .md{overflow-wrap:anywhere}
+.altnote .md td code,.altnote .md th{overflow-wrap:normal}

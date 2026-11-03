@@ -4,7 +4,8 @@
 import { readFileSync, writeFileSync } from 'fs';
 import { packMesh } from '../review/mesh.mjs';
 import { buildElectrical } from './build_electrical.mjs';
-import { packFusion } from './build_fusion.mjs';
+import { packFusionAll } from './build_fusion.mjs';
+import { buildVariants } from './build_variants.mjs';
 const r = p => readFileSync(new URL(p, import.meta.url), 'utf8');
 const INV = JSON.parse(r('./inventory.json')), S = INV.summary, ROWS = INV.rows;
 const NWA_MD = r('../docs/research/nautical-wings-props.md'), BEN_MD = r('../docs/research/budget-energy-test.md');
@@ -182,7 +183,10 @@ const locRows = KIT_IDS.map(k => `<tr><td><span class="mono-id">${k}</span></td>
 
 // ---------- 3D model data ----------
 const MESH = packMesh();
-const FUS = packFusion();
+const { F: FUS, V: VMESH } = packFusionAll();   // C0 pack + the variants' own meshes, on one quantisation grid
+const missionMin = (BASIS.match(/≥\s*(\d+)\s*min cruise/) || [])[1]; if (!missionMin) throw new Error('R10 cruise minutes not found');
+const ALT = buildVariants({ esc, usd, round2, S, ROWS, reserveTarget, missionMin, c0Pieces: FUS.pieces, VMESH });   // §10 Alternative designs
+if (!ALT) throw new Error('no variants found under concepts/variants');
 const TOL = JSON.parse(readFileSync(new URL('./hardware/tolerances.json', import.meta.url), 'utf8'));
 const tolSc = v => /^fail/.test(v) && !/pass at/.test(v) ? 'bad' : /fail|marginal/.test(v) ? 'warn' : /^open/.test(v) ? 'open' : 'ok';
 const tolChip = v => { const w = String(v).split(':')[0]; return `<span class="chip ${tolSc(String(v))}" title="${esc(String(v))}">${esc(w.length > 34 ? w.slice(0, 32) + '…' : w)}</span>`; };
@@ -249,7 +253,7 @@ const T = {
   N_PROP: proposed.length, NWA_MSG: esc(NWA_MSG), RECEIVED: received, LOC_BLANK: ROWS.filter(x => !x.Location || x.Location === '—').length,
   P12_NOTE: esc(byId['P-12'].Notes), M19: esc(byId['M-19'].Item), M19_NOTE: esc(byId['M-19'].Notes),
   TEN: usd(byId['P-02']['Ext USD']), AMA: usd(amaFee.v), FAA: usd(faaFee.v),
-  ...ET,
+  ...ET, ...ALT.T,
   FV_PIECES: FUS.pieces, FV_TRIS: FUS.tris.toLocaleString('en-US'), FV_FILES: FUS.files, FV_DATE: FUS.generated, FV_JOINTS: Object.keys(FUS.joints).length, FV_NMOV: FUS.nMov, FV_NSLIDE: FUS.nSlide, FV_NREV: FUS.nMov - FUS.nSlide,
   FV_GROUPS: Object.entries(FUS.groups).map(([g, n]) => g + ' ' + n).join(', '),
   TOL_FITS: tolFits, TOL_STACKS: tolStacks, TOL_COUPONS: tolCoupons, TOL_PRINTER: esc(TOL.process.printer.split(' (')[0].replace(/^ASSUMED /, '') + ' (the repo names no printer), ' + TOL.process.layer_mm + ' mm layers, PETG and PA6-CF'),
@@ -274,6 +278,8 @@ ${r('./src/style.css')}
 ${bodyHtml}
 <script>const MESH = ${json(MESH)}; const INVP = ${json(INVP)}; const KITS = ${json(KITS)}; const EL = ${json(ELB.EL)};</script>
 <script type="application/json" id="fusionData">${json(FUS)}</script>
+${ALT.blocks}
+<script>const ALTV = ${json(ALT.META)};</script>
 <script>
 ${r('./src/viewer3d.js')}
 </script>
@@ -281,15 +287,19 @@ ${r('./src/viewer3d.js')}
 ${r('./src/fusionviewer.js')}
 </script>
 <script>
+${r('./src/variantviewer.js')}
+</script>
+<script>
 ${r('./src/app.js')}
 </script>
 `;
-writeFileSync(new URL('./inventory-overview.html', import.meta.url), html);
-console.log('wrote inventory/inventory-overview.html', html.length, 'bytes');
+const OUT = process.env.OVERVIEW_TEST_OUT;   // tests write elsewhere so the repo files stay clean
+if (!OUT) writeFileSync(new URL('./inventory-overview.html', import.meta.url), html);
+if (!OUT) console.log('wrote inventory/inventory-overview.html', html.length, 'bytes');
 const cut = html.indexOf('</style>') + '</style>'.length;
 const local = '<!doctype html>\n<html lang="en"><head><meta charset="utf-8">\n'
   + '<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n'
   + html.slice(0, cut).replace('<style>', '<style>\n[hidden]{display:none!important}')
   + '\n</head><body>\n' + html.slice(cut) + '</body></html>\n';
-writeFileSync(new URL('../Inventory-Overview.html', import.meta.url), local);
-console.log('wrote Inventory-Overview.html (repo root)', local.length, 'bytes');
+writeFileSync(OUT || new URL('../Inventory-Overview.html', import.meta.url), local);
+console.log('wrote', OUT || 'Inventory-Overview.html (repo root)', local.length, 'bytes (' + (local.length / 1048576).toFixed(2) + ' MB); 3D variants: ' + (ALT.built.join(', ') || 'none yet') + ' of ' + ALT.ids.join(', '));

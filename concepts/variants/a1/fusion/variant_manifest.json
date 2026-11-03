@@ -1,0 +1,1059 @@
+{
+ "id": "a1",
+ "doc": "VTOL A1 wingtip props",
+ "axis_note": "STL coordinates are Fusion world cm, Z-up (world-transformed, written from the B-rep mesh calculator; no further transform needed). Model X fwd = Fusion +Y, model Y up = Fusion +Z, model Z right = Fusion +X. i.e. model (x,y,z) m -> Fusion (z,x,y)*100 cm.",
+ "units": "cm",
+ "hide": [
+  "Wing_Panel_R",
+  "Wing_Panel_L",
+  "Fuselage_Pod",
+  "Battery_6S_LiPo",
+  "XT90S_1",
+  "Pitot_Tube",
+  "J-31 Pitot clamp on left wing lower skin [L]",
+  "J-25 Pod formers battery tray straps",
+  "J-11 Pusher motor - firewall - pod aft bulkhead",
+  "Pusher_Prop_Set",
+  "ESC_P",
+  "CAP_P",
+  "J-29 ESC mounting lift ESCs on boom outboard faces [C]"
+ ],
+ "entries": [
+  {
+   "file": "stl/Wing_Panel_R.stl",
+   "name": "Wing_Panel_R",
+   "group": "airframe",
+   "color": [
+    0.925,
+    0.933,
+    0.957
+   ],
+   "count": 1,
+   "bbox_cm": [
+    [
+     8.0,
+     -23.868,
+     -1.361
+    ],
+    [
+     120.0,
+     -0.016,
+     2.247
+    ]
+   ],
+   "size": 293384,
+   "triangles": 5866,
+   "rides": "slide_panel_R",
+   "changed": "tip bore d25.6 + upper-skin wire groove + J1 wire channel"
+  },
+  {
+   "file": "stl/Wing_Panel_L.stl",
+   "name": "Wing_Panel_L",
+   "group": "airframe",
+   "color": [
+    0.925,
+    0.933,
+    0.957
+   ],
+   "count": 1,
+   "bbox_cm": [
+    [
+     -120.0,
+     -23.868,
+     -1.361
+    ],
+    [
+     -8.0,
+     0.003,
+     2.247
+    ]
+   ],
+   "size": 310284,
+   "triangles": 6204,
+   "rides": "slide_panel_L",
+   "changed": "tip bore d25.6 + upper-skin wire groove + J1 wire channel"
+  },
+  {
+   "file": "stl/Fuselage_Pod.stl",
+   "name": "Fuselage_Pod",
+   "group": "airframe",
+   "color": [
+    0.945,
+    0.957,
+    0.969
+   ],
+   "count": 1,
+   "bbox_cm": [
+    [
+     -7.984,
+     -40.0,
+     -11.001
+    ],
+    [
+     7.992,
+     45.0,
+     5.001
+    ]
+   ],
+   "size": 563384,
+   "triangles": 11266,
+   "changed": "bottom battery hatch 170 x 60, wire channels, tray and aft-cap seats"
+  },
+  {
+   "file": "stl/Battery_6S_LiPo.stl",
+   "name": "Battery_6S_LiPo",
+   "group": "electronics",
+   "color": [
+    0.2,
+    0.443,
+    0.843
+   ],
+   "count": 1,
+   "bbox_cm": [
+    [
+     -2.4,
+     -19.07,
+     -7.5
+    ],
+    [
+     2.4,
+     -3.57,
+     -2.5
+    ]
+   ],
+   "size": 15884,
+   "triangles": 316,
+   "changed": "moved 0.1742 m aft"
+  },
+  {
+   "file": "stl/Pitot_Tube.stl",
+   "name": "Pitot_Tube",
+   "group": "airframe",
+   "color": [
+    0.718,
+    0.733,
+    0.773
+   ],
+   "count": 1,
+   "bbox_cm": [
+    [
+     -90.3,
+     -5.0,
+     -2.3
+    ],
+    [
+     -89.7,
+     20.0,
+     -1.7
+    ]
+   ],
+   "size": 6684,
+   "triangles": 132,
+   "rides": "slide_panel_L",
+   "changed": "moved to z -0.90"
+  },
+  {
+   "file": "stl/J-25_Pod_formers_battery_tray_straps.stl",
+   "name": "J-25 Pod formers battery tray straps",
+   "group": "hardware",
+   "color": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "count": 16,
+   "bbox_cm": [
+    [
+     -7.0,
+     -2.865,
+     -9.95
+    ],
+    [
+     7.0,
+     34.7,
+     3.929
+    ]
+   ],
+   "size": 201284,
+   "triangles": 4024,
+   "joint": "J-25",
+   "changed": "former HW-104_1 and tray HW-105_1 notched for the tip wires"
+  },
+  {
+   "file": "stl/J-31_Pitot_clamp_on_left_wing_lower_skin__L_.stl",
+   "name": "J-31 Pitot clamp on left wing lower skin [L]",
+   "group": "hardware",
+   "color": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "count": 7,
+   "bbox_cm": [
+    [
+     -90.8,
+     -4.6,
+     -2.75
+    ],
+    [
+     -89.2,
+     -2.4,
+     -1.35
+    ]
+   ],
+   "size": 86484,
+   "triangles": 1728,
+   "joint": "J-31",
+   "rides": "slide_panel_L",
+   "changed": "moved to z -0.90"
+  },
+  {
+   "file": "stl/XT90S_1.stl",
+   "name": "XT90S_1",
+   "group": "electronics",
+   "color": [
+    0.447,
+    0.498,
+    0.549
+   ],
+   "count": 1,
+   "bbox_cm": [
+    [
+     -1.0,
+     -1.92,
+     -6.0
+    ],
+    [
+     1.0,
+     0.08,
+     -4.0
+    ]
+   ],
+   "size": 36284,
+   "triangles": 724,
+   "changed": "moved 0.1742 m aft"
+  },
+  {
+   "file": "stl/Pod_Aft_Cap.stl",
+   "name": "Pod_Aft_Cap",
+   "group": "printed",
+   "color": [
+    0.118,
+    0.125,
+    0.157
+   ],
+   "count": 1,
+   "bbox_cm": [
+    [
+     -2.9,
+     -40.0,
+     -5.9
+    ],
+    [
+     2.9,
+     -39.35,
+     -0.1
+    ]
+   ],
+   "size": 11884,
+   "triangles": 236
+  },
+  {
+   "file": "stl/Battery_Tray_Ext.stl",
+   "name": "Battery_Tray_Ext",
+   "group": "printed",
+   "color": [
+    0.118,
+    0.125,
+    0.157
+   ],
+   "count": 2,
+   "bbox_cm": [
+    [
+     -3.5,
+     -20.5,
+     -7.8
+    ],
+    [
+     3.5,
+     -3.5,
+     -6.7
+    ]
+   ],
+   "size": 2884,
+   "triangles": 56
+  },
+  {
+   "file": "stl/Tip_Tube_Ext_R.stl",
+   "name": "Tip_Tube_Ext_R",
+   "group": "airframe",
+   "color": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "count": 1,
+   "bbox_cm": [
+    [
+     88.0,
+     -8.43,
+     -0.822
+    ],
+    [
+     122.2,
+     -5.89,
+     1.718
+    ]
+   ],
+   "size": 7884,
+   "triangles": 156,
+   "rides": "slide_panel_R"
+  },
+  {
+   "file": "stl/Tip_Splice_Sleeve_R.stl",
+   "name": "Tip_Splice_Sleeve_R",
+   "group": "airframe",
+   "color": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "count": 1,
+   "bbox_cm": [
+    [
+     84.3,
+     -8.267,
+     -0.663
+    ],
+    [
+     91.7,
+     -6.053,
+     1.559
+    ]
+   ],
+   "size": 14684,
+   "triangles": 292,
+   "rides": "slide_panel_R"
+  },
+  {
+   "file": "stl/Tip_Tube_Ext_L.stl",
+   "name": "Tip_Tube_Ext_L",
+   "group": "airframe",
+   "color": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "count": 1,
+   "bbox_cm": [
+    [
+     -122.2,
+     -8.43,
+     -0.822
+    ],
+    [
+     -88.0,
+     -5.89,
+     1.718
+    ]
+   ],
+   "size": 7884,
+   "triangles": 156,
+   "rides": "slide_panel_L"
+  },
+  {
+   "file": "stl/Tip_Splice_Sleeve_L.stl",
+   "name": "Tip_Splice_Sleeve_L",
+   "group": "airframe",
+   "color": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "count": 1,
+   "bbox_cm": [
+    [
+     -91.7,
+     -8.267,
+     -0.663
+    ],
+    [
+     -84.3,
+     -6.053,
+     1.559
+    ]
+   ],
+   "size": 14684,
+   "triangles": 292,
+   "rides": "slide_panel_L"
+  },
+  {
+   "file": "stl/Nacelle_Mount_R.stl",
+   "name": "Nacelle_Mount_R",
+   "group": "printed",
+   "color": [
+    0.118,
+    0.125,
+    0.157
+   ],
+   "count": 1,
+   "bbox_cm": [
+    [
+     119.95,
+     -9.5,
+     -1.65
+    ],
+    [
+     125.622,
+     3.9,
+     4.022
+    ]
+   ],
+   "size": 92584,
+   "triangles": 1850,
+   "rides": "slide_panel_R"
+  },
+  {
+   "file": "stl/Nacelle_Shell_R.stl",
+   "name": "Nacelle_Shell_R",
+   "group": "printed",
+   "color": [
+    0.925,
+    0.933,
+    0.957
+   ],
+   "count": 1,
+   "bbox_cm": [
+    [
+     120.0,
+     -22.0,
+     -1.7
+    ],
+    [
+     125.7,
+     4.05,
+     4.1
+    ]
+   ],
+   "size": 126484,
+   "triangles": 2528,
+   "rides": "slide_panel_R"
+  },
+  {
+   "file": "stl/Nacelle_Mount_L.stl",
+   "name": "Nacelle_Mount_L",
+   "group": "printed",
+   "color": [
+    0.118,
+    0.125,
+    0.157
+   ],
+   "count": 1,
+   "bbox_cm": [
+    [
+     -125.622,
+     -9.5,
+     -1.65
+    ],
+    [
+     -119.95,
+     3.9,
+     4.022
+    ]
+   ],
+   "size": 92584,
+   "triangles": 1850,
+   "rides": "slide_panel_L"
+  },
+  {
+   "file": "stl/Nacelle_Shell_L.stl",
+   "name": "Nacelle_Shell_L",
+   "group": "printed",
+   "color": [
+    0.925,
+    0.933,
+    0.957
+   ],
+   "count": 1,
+   "bbox_cm": [
+    [
+     -125.7,
+     -22.0,
+     -1.7
+    ],
+    [
+     -120.0,
+     4.05,
+     4.1
+    ]
+   ],
+   "size": 125984,
+   "triangles": 2518,
+   "rides": "slide_panel_L"
+  },
+  {
+   "file": "kinematics/Tip_Prop_Set_R.stl",
+   "name": "Tip_Prop_Set_R",
+   "group": "propulsion",
+   "color": [
+    0.549,
+    0.569,
+    0.62
+   ],
+   "count": 16,
+   "bbox_cm": [
+    [
+     120.401,
+     3.9,
+     -16.58
+    ],
+    [
+     125.199,
+     11.9,
+     18.98
+    ]
+   ],
+   "size": 506784,
+   "triangles": 10134,
+   "moving": "prop_TR",
+   "rides": "slide_panel_R"
+  },
+  {
+   "file": "kinematics/Tip_Prop_Set_L.stl",
+   "name": "Tip_Prop_Set_L",
+   "group": "propulsion",
+   "color": [
+    0.549,
+    0.569,
+    0.62
+   ],
+   "count": 16,
+   "bbox_cm": [
+    [
+     -125.199,
+     3.5,
+     -16.58
+    ],
+    [
+     -120.401,
+     11.5,
+     18.98
+    ]
+   ],
+   "size": 506784,
+   "triangles": 10134,
+   "moving": "prop_TL",
+   "rides": "slide_panel_L"
+  },
+  {
+   "file": "stl/ESC_T_R.stl",
+   "name": "ESC_T_R",
+   "group": "electronics",
+   "color": [
+    0.098,
+    0.349,
+    0.2
+   ],
+   "count": 1,
+   "bbox_cm": [
+    [
+     123.1,
+     -3.75,
+     -0.05
+    ],
+    [
+     123.9,
+     0.75,
+     2.45
+    ]
+   ],
+   "size": 684,
+   "triangles": 12,
+   "rides": "slide_panel_R"
+  },
+  {
+   "file": "stl/CAP_T_R.stl",
+   "name": "CAP_T_R",
+   "group": "electronics",
+   "color": [
+    0.098,
+    0.098,
+    0.447
+   ],
+   "count": 1,
+   "bbox_cm": [
+    [
+     123.009,
+     -6.25,
+     0.702
+    ],
+    [
+     124.0,
+     -4.25,
+     1.698
+    ]
+   ],
+   "size": 3284,
+   "triangles": 64,
+   "rides": "slide_panel_R"
+  },
+  {
+   "file": "stl/ESC_T_L.stl",
+   "name": "ESC_T_L",
+   "group": "electronics",
+   "color": [
+    0.098,
+    0.349,
+    0.2
+   ],
+   "count": 1,
+   "bbox_cm": [
+    [
+     -123.9,
+     -3.75,
+     -0.05
+    ],
+    [
+     -123.1,
+     0.75,
+     2.45
+    ]
+   ],
+   "size": 684,
+   "triangles": 12,
+   "rides": "slide_panel_L"
+  },
+  {
+   "file": "stl/CAP_T_L.stl",
+   "name": "CAP_T_L",
+   "group": "electronics",
+   "color": [
+    0.098,
+    0.098,
+    0.447
+   ],
+   "count": 1,
+   "bbox_cm": [
+    [
+     -123.991,
+     -6.25,
+     0.702
+    ],
+    [
+     -123.0,
+     -4.25,
+     1.698
+    ]
+   ],
+   "size": 3284,
+   "triangles": 64,
+   "rides": "slide_panel_L"
+  },
+  {
+   "file": "stl/J-A1-3_Tip_motor_-_nacelle_mount_4_x_M3x10___washers__ESC_and_cap_cable_ties__R_.stl",
+   "name": "J-A1-3 Tip motor - nacelle mount 4 x M3x10 + washers, ESC and cap cable ties [R]",
+   "group": "hardware",
+   "color": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "count": 11,
+   "bbox_cm": [
+    [
+     121.5,
+     -5.245,
+     -0.4
+    ],
+    [
+     124.1,
+     4.24,
+     2.8
+    ]
+   ],
+   "size": 58484,
+   "triangles": 1168,
+   "joint": "J-A1-3",
+   "rides": "slide_panel_R"
+  },
+  {
+   "file": "stl/J-A1-2_Tip_tube_-_nacelle_mount_barrel_2_x_M3x5_7_inserts___2_x_M3x6_grub__R_.stl",
+   "name": "J-A1-2 Tip tube - nacelle mount barrel 2 x M3x5.7 inserts + 2 x M3x6 grub [R]",
+   "group": "hardware",
+   "color": [
+    0.8,
+    0.62,
+    0.247
+   ],
+   "count": 4,
+   "bbox_cm": [
+    [
+     121.023,
+     -7.389,
+     0.219
+    ],
+    [
+     121.48,
+     -5.26,
+     2.348
+    ]
+   ],
+   "size": 24884,
+   "triangles": 496,
+   "joint": "J-A1-2",
+   "rides": "slide_panel_R"
+  },
+  {
+   "file": "stl/J-A1-5_Nacelle_shell_-_mount_ring_2_x_M3x8___washers_into_inserts__R_.stl",
+   "name": "J-A1-5 Nacelle shell - mount ring 2 x M3x8 + washers into inserts [R]",
+   "group": "hardware",
+   "color": [
+    0.8,
+    0.62,
+    0.247
+   ],
+   "count": 6,
+   "bbox_cm": [
+    [
+     122.45,
+     3.254,
+     0.85
+    ],
+    [
+     125.903,
+     3.946,
+     4.303
+    ]
+   ],
+   "size": 40684,
+   "triangles": 812,
+   "joint": "J-A1-5",
+   "rides": "slide_panel_R"
+  },
+  {
+   "file": "stl/J-A1-3_Tip_motor_-_nacelle_mount_4_x_M3x10___washers__ESC_and_cap_cable_ties__L_.stl",
+   "name": "J-A1-3 Tip motor - nacelle mount 4 x M3x10 + washers, ESC and cap cable ties [L]",
+   "group": "hardware",
+   "color": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "count": 11,
+   "bbox_cm": [
+    [
+     -124.1,
+     -5.245,
+     -0.4
+    ],
+    [
+     -121.5,
+     4.24,
+     2.8
+    ]
+   ],
+   "size": 58484,
+   "triangles": 1168,
+   "joint": "J-A1-3",
+   "rides": "slide_panel_L"
+  },
+  {
+   "file": "stl/J-A1-2_Tip_tube_-_nacelle_mount_barrel_2_x_M3x5_7_inserts___2_x_M3x6_grub__L_.stl",
+   "name": "J-A1-2 Tip tube - nacelle mount barrel 2 x M3x5.7 inserts + 2 x M3x6 grub [L]",
+   "group": "hardware",
+   "color": [
+    0.8,
+    0.62,
+    0.247
+   ],
+   "count": 4,
+   "bbox_cm": [
+    [
+     -121.477,
+     -7.389,
+     0.219
+    ],
+    [
+     -121.02,
+     -5.26,
+     2.348
+    ]
+   ],
+   "size": 24884,
+   "triangles": 496,
+   "joint": "J-A1-2",
+   "rides": "slide_panel_L"
+  },
+  {
+   "file": "stl/J-A1-5_Nacelle_shell_-_mount_ring_2_x_M3x8___washers_into_inserts__L_.stl",
+   "name": "J-A1-5 Nacelle shell - mount ring 2 x M3x8 + washers into inserts [L]",
+   "group": "hardware",
+   "color": [
+    0.8,
+    0.62,
+    0.247
+   ],
+   "count": 6,
+   "bbox_cm": [
+    [
+     -125.903,
+     3.254,
+     0.85
+    ],
+    [
+     -122.45,
+     3.946,
+     4.303
+    ]
+   ],
+   "size": 40684,
+   "triangles": 812,
+   "joint": "J-A1-5",
+   "rides": "slide_panel_L"
+  },
+  {
+   "file": "stl/Tip_Connectors_R.stl",
+   "name": "Tip_Connectors_R",
+   "group": "electronics",
+   "color": [
+    0.949,
+    0.8,
+    0.098
+   ],
+   "count": 4,
+   "bbox_cm": [
+    [
+     9.55,
+     -11.25,
+     -0.78
+    ],
+    [
+     11.95,
+     -9.9,
+     0.78
+    ]
+   ],
+   "size": 2484,
+   "triangles": 48,
+   "rides": "slide_panel_R"
+  },
+  {
+   "file": "stl/J-A1-6_XT60H_mated-pair_retention_cable_tie__R_.stl",
+   "name": "J-A1-6 XT60H mated-pair retention cable tie [R]",
+   "group": "hardware",
+   "color": [
+    0.898,
+    0.898,
+    0.878
+   ],
+   "count": 1,
+   "bbox_cm": [
+    [
+     10.625,
+     -11.36,
+     -0.89
+    ],
+    [
+     10.875,
+     -10.34,
+     0.89
+    ]
+   ],
+   "size": 1684,
+   "triangles": 32,
+   "joint": "J-A1-6",
+   "rides": "slide_panel_R"
+  },
+  {
+   "file": "stl/Tip_Connectors_L.stl",
+   "name": "Tip_Connectors_L",
+   "group": "electronics",
+   "color": [
+    0.949,
+    0.8,
+    0.098
+   ],
+   "count": 4,
+   "bbox_cm": [
+    [
+     -11.95,
+     -11.25,
+     -0.78
+    ],
+    [
+     -9.55,
+     -9.9,
+     0.78
+    ]
+   ],
+   "size": 2484,
+   "triangles": 48,
+   "rides": "slide_panel_L"
+  },
+  {
+   "file": "stl/J-A1-6_XT60H_mated-pair_retention_cable_tie__L_.stl",
+   "name": "J-A1-6 XT60H mated-pair retention cable tie [L]",
+   "group": "hardware",
+   "color": [
+    0.898,
+    0.898,
+    0.878
+   ],
+   "count": 1,
+   "bbox_cm": [
+    [
+     -10.875,
+     -11.36,
+     -0.89
+    ],
+    [
+     -10.625,
+     -10.34,
+     0.89
+    ]
+   ],
+   "size": 1684,
+   "triangles": 32,
+   "joint": "J-A1-6",
+   "rides": "slide_panel_L"
+  },
+  {
+   "file": "stl/W_TIP_R_pod.stl",
+   "name": "W_TIP_R_pod",
+   "group": "electronics",
+   "color": [
+    0.847,
+    0.098,
+    0.098
+   ],
+   "count": 3,
+   "bbox_cm": [
+    [
+     0.241,
+     -11.018,
+     -9.407
+    ],
+    [
+     9.724,
+     20.077,
+     0.541
+    ]
+   ],
+   "size": 9684,
+   "triangles": 192
+  },
+  {
+   "file": "stl/W_TIP_R_wing.stl",
+   "name": "W_TIP_R_wing",
+   "group": "electronics",
+   "color": [
+    0.847,
+    0.098,
+    0.098
+   ],
+   "count": 3,
+   "bbox_cm": [
+    [
+     11.83,
+     -11.173,
+     -0.083
+    ],
+    [
+     123.617,
+     -3.665,
+     2.225
+    ]
+   ],
+   "size": 18284,
+   "triangles": 364,
+   "rides": "slide_panel_R"
+  },
+  {
+   "file": "stl/W_TIP_L_pod.stl",
+   "name": "W_TIP_L_pod",
+   "group": "electronics",
+   "color": [
+    0.847,
+    0.098,
+    0.098
+   ],
+   "count": 3,
+   "bbox_cm": [
+    [
+     -9.69,
+     -11.039,
+     -9.407
+    ],
+    [
+     -0.203,
+     20.069,
+     0.533
+    ]
+   ],
+   "size": 9684,
+   "triangles": 192
+  },
+  {
+   "file": "stl/W_TIP_L_wing.stl",
+   "name": "W_TIP_L_wing",
+   "group": "electronics",
+   "color": [
+    0.847,
+    0.098,
+    0.098
+   ],
+   "count": 3,
+   "bbox_cm": [
+    [
+     -123.594,
+     -11.155,
+     -0.093
+    ],
+    [
+     -11.802,
+     -3.665,
+     2.225
+    ]
+   ],
+   "size": 17884,
+   "triangles": 356,
+   "rides": "slide_panel_L"
+  }
+ ],
+ "moving": [
+  {
+   "id": "prop_TR",
+   "kind": "revolute",
+   "parent": "slide_panel_R",
+   "pivot_m": [
+    0.077,
+    0.012,
+    1.228
+   ],
+   "axis_m": [
+    1.0,
+    0,
+    0
+   ],
+   "limits": null,
+   "note": "right-hand about +X = clockwise seen from behind, APC 14x8.5E, inboard blade up; set contains prop, spinner, motor can and prop-adapter hardware; rides slide_panel_R"
+  },
+  {
+   "id": "prop_TL",
+   "kind": "revolute",
+   "parent": "slide_panel_L",
+   "pivot_m": [
+    0.077,
+    0.012,
+    -1.228
+   ],
+   "axis_m": [
+    -1.0,
+    0,
+    0
+   ],
+   "limits": null,
+   "note": "right-hand about -X = counter-clockwise seen from behind, APC 14x8.5EP, inboard blade up; set contains prop, spinner, motor can and prop-adapter hardware; rides slide_panel_L"
+  }
+ ]
+}

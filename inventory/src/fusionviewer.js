@@ -4,6 +4,34 @@
    Motion: 29 joints from inventory/fusion/kinematics/kinematics.json (F.K): 24 revolute (surface, servo arm, pushrod, prop, wheel), 5 slider.
    Each moving mesh sits in a Group at its pivot (geometry shifted by -pivot) and turns about the axis with a quaternion; a slider offset is added through the parent chain.
    Groups: airframe, propulsion, gear, electronics, hardware (one mesh per joint), proposed (wheels). three.js r128 + OrbitControls. */
+/* shared with VariantViewer (variantviewer.js): base64 -> typed array, and creased (30 deg) shading geometry */
+const fvDec = (s, T) => { const b = atob(s), u = new Uint8Array(b.length); for (let i = 0; i < b.length; i++) u[i] = b.charCodeAt(i); return new T(u.buffer); };
+// flat-ish shading: normals averaged only across faces within 30 deg (same rule as the SOLIDWORKS viewer)
+function fvCreased(pos, idx){
+  const nt = idx.length / 3, fn = new Float32Array(nt * 3), nv = pos.length / 3, cnt = new Uint32Array(nv + 1);
+  for (let t = 0; t < nt; t++){
+    const a = idx[3*t]*3, b = idx[3*t+1]*3, c = idx[3*t+2]*3;
+    const ux = pos[b]-pos[a], uy = pos[b+1]-pos[a+1], uz = pos[b+2]-pos[a+2], vx = pos[c]-pos[a], vy = pos[c+1]-pos[a+1], vz = pos[c+2]-pos[a+2];
+    fn[3*t] = uy*vz-uz*vy; fn[3*t+1] = uz*vx-ux*vz; fn[3*t+2] = ux*vy-uy*vx;
+    for (let k = 0; k < 3; k++) cnt[idx[3*t+k] + 1]++;
+  }
+  for (let v = 0; v < nv; v++) cnt[v + 1] += cnt[v];
+  const adj = new Uint32Array(nt * 3), fillp = cnt.slice(0, nv);
+  for (let t = 0; t < nt; t++) for (let k = 0; k < 3; k++) adj[fillp[idx[3*t+k]]++] = t;
+  const unit = new Float32Array(nt * 3);
+  for (let t = 0; t < nt; t++){ const l = Math.hypot(fn[3*t], fn[3*t+1], fn[3*t+2]) || 1; unit[3*t] = fn[3*t]/l; unit[3*t+1] = fn[3*t+1]/l; unit[3*t+2] = fn[3*t+2]/l; }
+  const P = new Float32Array(nt * 9), N = new Float32Array(nt * 9), cosA = Math.cos(30 * Math.PI / 180);
+  for (let t = 0; t < nt; t++) for (let k = 0; k < 3; k++){
+    const v = idx[3*t+k]; let x = 0, y = 0, z = 0;
+    for (let q = cnt[v]; q < cnt[v + 1]; q++){ const f = adj[q]; if (unit[3*f]*unit[3*t] + unit[3*f+1]*unit[3*t+1] + unit[3*f+2]*unit[3*t+2] > cosA){ x += fn[3*f]; y += fn[3*f+1]; z += fn[3*f+2]; } }
+    const l = Math.hypot(x, y, z) || 1, o = 9*t + 3*k;
+    P[o] = pos[3*v]; P[o+1] = pos[3*v+1]; P[o+2] = pos[3*v+2]; N[o] = x/l; N[o+1] = y/l; N[o+2] = z/l;
+  }
+  const g = new THREE.BufferGeometry();
+  g.setAttribute('position', new THREE.BufferAttribute(P, 3)); g.setAttribute('normal', new THREE.BufferAttribute(N, 3));
+  return g;
+}
+
 function FusionViewer(wrap, F, INVP){
   const $ = s => wrap.querySelector(s), $$ = s => Array.from(wrap.querySelectorAll(s));
   const canvas = $('canvas'), tip = $('.tip'), card = document.getElementById(wrap.dataset.card);
@@ -19,33 +47,6 @@ function FusionViewer(wrap, F, INVP){
   const key = new THREE.DirectionalLight(0xffffff, 0.75); key.position.set(2.5, 4, 3); scene.add(key);
   const fill = new THREE.DirectionalLight(0xffffff, 0.3); fill.position.set(-3, 1.5, -2.5); scene.add(fill);
 
-  const dec = (s, T) => { const b = atob(s), u = new Uint8Array(b.length); for (let i = 0; i < b.length; i++) u[i] = b.charCodeAt(i); return new T(u.buffer); };
-  // flat-ish shading: normals averaged only across faces within 30 deg (same rule as the SOLIDWORKS viewer)
-  function creased(pos, idx){
-    const nt = idx.length / 3, fn = new Float32Array(nt * 3), nv = pos.length / 3, cnt = new Uint32Array(nv + 1);
-    for (let t = 0; t < nt; t++){
-      const a = idx[3*t]*3, b = idx[3*t+1]*3, c = idx[3*t+2]*3;
-      const ux = pos[b]-pos[a], uy = pos[b+1]-pos[a+1], uz = pos[b+2]-pos[a+2], vx = pos[c]-pos[a], vy = pos[c+1]-pos[a+1], vz = pos[c+2]-pos[a+2];
-      fn[3*t] = uy*vz-uz*vy; fn[3*t+1] = uz*vx-ux*vz; fn[3*t+2] = ux*vy-uy*vx;
-      for (let k = 0; k < 3; k++) cnt[idx[3*t+k] + 1]++;
-    }
-    for (let v = 0; v < nv; v++) cnt[v + 1] += cnt[v];
-    const adj = new Uint32Array(nt * 3), fillp = cnt.slice(0, nv);
-    for (let t = 0; t < nt; t++) for (let k = 0; k < 3; k++) adj[fillp[idx[3*t+k]]++] = t;
-    const unit = new Float32Array(nt * 3);
-    for (let t = 0; t < nt; t++){ const l = Math.hypot(fn[3*t], fn[3*t+1], fn[3*t+2]) || 1; unit[3*t] = fn[3*t]/l; unit[3*t+1] = fn[3*t+1]/l; unit[3*t+2] = fn[3*t+2]/l; }
-    const P = new Float32Array(nt * 9), N = new Float32Array(nt * 9), cosA = Math.cos(30 * Math.PI / 180);
-    for (let t = 0; t < nt; t++) for (let k = 0; k < 3; k++){
-      const v = idx[3*t+k]; let x = 0, y = 0, z = 0;
-      for (let q = cnt[v]; q < cnt[v + 1]; q++){ const f = adj[q]; if (unit[3*f]*unit[3*t] + unit[3*f+1]*unit[3*t+1] + unit[3*f+2]*unit[3*t+2] > cosA){ x += fn[3*f]; y += fn[3*f+1]; z += fn[3*f+2]; } }
-      const l = Math.hypot(x, y, z) || 1, o = 9*t + 3*k;
-      P[o] = pos[3*v]; P[o+1] = pos[3*v+1]; P[o+2] = pos[3*v+2]; N[o] = x/l; N[o+1] = y/l; N[o+2] = z/l;
-    }
-    const g = new THREE.BufferGeometry();
-    g.setAttribute('position', new THREE.BufferAttribute(P, 3)); g.setAttribute('normal', new THREE.BufferAttribute(N, 3));
-    return g;
-  }
-
   const SHELL = /^(Wing_Panel|Aileron|Wing_Saddle|Fuselage_Pod|Canopy|H_Tail|Elevator|Fin)/;
   const S = {groups:{airframe:true, printed:true, propulsion:true, gear:true, electronics:true, hardware:true, mechanisms:true}, focus:false, sel:null};
   const model = new THREE.Group(); scene.add(model);
@@ -53,14 +54,14 @@ function FusionViewer(wrap, F, INVP){
   const D2R = Math.PI / 180, STEP = 5, rad = d => d * D2R;
   const pivotOf = g => !g || g.kind === 'slider' ? null : (g.kind === 'pushrod' ? g.p1 : g.pivot);
   const objs = F.parts.map((p, n) => {
-    const q = dec(p.v, Uint16Array), idx = dec(p.i, p.w === 4 ? Uint32Array : Uint16Array), pos = new Float32Array(q.length);
+    const q = fvDec(p.v, Uint16Array), idx = fvDec(p.i, p.w === 4 ? Uint32Array : Uint16Array), pos = new Float32Array(q.length);
     for (let i = 0; i < q.length; i++) pos[i] = F.lo[i % 3] + q[i] * F.sc[i % 3];
     const kg = p.m ? KG[p.m] : null, pv = pivotOf(kg);
     if (pv) for (let i = 0; i < pos.length; i++) pos[i] -= pv[i % 3];   // geometry about its pivot, so the Group at the pivot turns it
     const col = new THREE.Color().setRGB(p.c[0], p.c[1], p.c[2]).convertSRGBToLinear();
     const metal = (p.g === 'hardware' && !/nylon|tie|tape/i.test(p.n)) || /^(Boom|Spar|Wing_Joiner|Wing_Bolt|Pitot)/.test(p.n);
     const mat = new THREE.MeshStandardMaterial({color:col, roughness: metal ? 0.35 : 0.62, metalness: metal ? 0.6 : 0.04, side:THREE.DoubleSide});
-    const mesh = new THREE.Mesh(creased(pos, idx), mat); mesh.userData.n = n;
+    const mesh = new THREE.Mesh(fvCreased(pos, idx), mat); mesh.userData.n = n;
     const grp = new THREE.Group(); grp.add(mesh); model.add(grp);
     return {p, mesh, mat, col, tris: idx.length / 3, grp, kg, pv, start: p.m || p.r || null};
   });

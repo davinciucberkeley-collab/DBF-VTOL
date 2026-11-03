@@ -1,0 +1,2807 @@
+{
+ "base": "VTOL C0 full",
+ "variant": "a3",
+ "frame": "model X fwd, Y up, Z right, m (Fusion: model (x,y,z) m -> Fusion (z,x,y)*100 cm)",
+ "notes": [
+  "All new dimensions in mm unless a key says m. Local sketch frame for rotor parts: origin on the rotor axis (x_m, z_m), local x = model X, local z = model Z, local y = model Y absolute.",
+  "Rotor axes: L1 (0.37092, 0.4337) front right; L3 (0.37092,-0.4337) front left; L4 (-0.50458, 0.4337) rear right; L2 (-0.50458,-0.4337) rear left. Mount components in manifest.json: Motor_Mount_3=L1, _1=L3, _4=L4, _2=L2.",
+  "Reference heights (model y, m): boom axis -0.0300; Motor_Mount -0.0450..-0.0090; motor base -0.0090; bell top 0.0230; prop adapter 0.0230..0.0290; prop hub 0.0290..0.0378; holding plate 0.0378..0.0398 (all from inventory/hardware/hardware.json J-09, J-10).",
+  "Dimensions marked est are placeholders until the real X4110S and JeeFly 1755 are measured (bell skirt gap, bolt pattern, hub OD).",
+  "Parked blade azimuth: blades lie along local X (as in the C0 Lift_Prop STL). Detent pocket angles are measured from +X toward +Z."
+ ],
+ "remove": [
+  {
+   "target": "HW-033 Prop adapter screw M3x12 (supplied), 16 instances (4 on each Lift_Prop_L1..L4)",
+   "reason": "replaced by M3x16 that also clamp the Lift_Cap top plate (HW-A3-03)"
+  }
+ ],
+ "modify": [
+  {
+   "target": "Motor_Mount_3",
+   "change": "add 4 M3 heat-set insert bores in the side faces (2 per side), no change to outer envelope",
+   "params": {
+    "bore_d_mm": 4.2,
+    "bore_depth_mm": 7.5,
+    "lead_in": "0.4 x 45 deg",
+    "rule": "tolerances.json insert_bore_M3 / insert_depth_M3",
+    "positions_m": [
+     [
+      0.39792,
+      -0.0225,
+      0.4567
+     ],
+     [
+      0.39792,
+      -0.0225,
+      0.4107
+     ],
+     [
+      0.34392,
+      -0.0225,
+      0.4567
+     ],
+     [
+      0.34392,
+      -0.0225,
+      0.4107
+     ]
+    ],
+    "axes": "normal to the side face, pointing into the mount (-Z on the +Z face, +Z on the -Z face)",
+    "clearance_check": "min 11 mm from J-08 pinch bolts (x_m+/-0.016, z_m+/-0.01785), min 18.9 mm from boom axis"
+   }
+  },
+  {
+   "target": "Lift_Prop_L1",
+   "change": "rotating group gains Lift_Cap_L1 and Magnet_Rot_L1_A/B as children (same revolute joint, axis +Y through the rotor centre); 4 supplied M3x12 holding-plate screws replaced by M3x16",
+   "params": {
+    "pivot_m": [
+     0.37092,
+     0.03,
+     0.4337
+    ],
+    "axis": [
+     0,
+     1,
+     0
+    ],
+    "added_rotating_mass_g": 11.4
+   }
+  },
+  {
+   "target": "Motor_Mount_1",
+   "change": "add 4 M3 heat-set insert bores in the side faces (2 per side), no change to outer envelope",
+   "params": {
+    "bore_d_mm": 4.2,
+    "bore_depth_mm": 7.5,
+    "lead_in": "0.4 x 45 deg",
+    "rule": "tolerances.json insert_bore_M3 / insert_depth_M3",
+    "positions_m": [
+     [
+      0.39792,
+      -0.0225,
+      -0.4107
+     ],
+     [
+      0.39792,
+      -0.0225,
+      -0.4567
+     ],
+     [
+      0.34392,
+      -0.0225,
+      -0.4107
+     ],
+     [
+      0.34392,
+      -0.0225,
+      -0.4567
+     ]
+    ],
+    "axes": "normal to the side face, pointing into the mount (-Z on the +Z face, +Z on the -Z face)",
+    "clearance_check": "min 11 mm from J-08 pinch bolts (x_m+/-0.016, z_m+/-0.01785), min 18.9 mm from boom axis"
+   }
+  },
+  {
+   "target": "Lift_Prop_L3",
+   "change": "rotating group gains Lift_Cap_L3 and Magnet_Rot_L3_A/B as children (same revolute joint, axis +Y through the rotor centre); 4 supplied M3x12 holding-plate screws replaced by M3x16",
+   "params": {
+    "pivot_m": [
+     0.37092,
+     0.03,
+     -0.4337
+    ],
+    "axis": [
+     0,
+     1,
+     0
+    ],
+    "added_rotating_mass_g": 11.4
+   }
+  },
+  {
+   "target": "Motor_Mount_4",
+   "change": "add 4 M3 heat-set insert bores in the side faces (2 per side), no change to outer envelope",
+   "params": {
+    "bore_d_mm": 4.2,
+    "bore_depth_mm": 7.5,
+    "lead_in": "0.4 x 45 deg",
+    "rule": "tolerances.json insert_bore_M3 / insert_depth_M3",
+    "positions_m": [
+     [
+      -0.47758,
+      -0.0225,
+      0.4567
+     ],
+     [
+      -0.47758,
+      -0.0225,
+      0.4107
+     ],
+     [
+      -0.53158,
+      -0.0225,
+      0.4567
+     ],
+     [
+      -0.53158,
+      -0.0225,
+      0.4107
+     ]
+    ],
+    "axes": "normal to the side face, pointing into the mount (-Z on the +Z face, +Z on the -Z face)",
+    "clearance_check": "min 11 mm from J-08 pinch bolts (x_m+/-0.016, z_m+/-0.01785), min 18.9 mm from boom axis"
+   }
+  },
+  {
+   "target": "Lift_Prop_L4",
+   "change": "rotating group gains Lift_Cap_L4 and Magnet_Rot_L4_A/B as children (same revolute joint, axis +Y through the rotor centre); 4 supplied M3x12 holding-plate screws replaced by M3x16",
+   "params": {
+    "pivot_m": [
+     -0.50458,
+     0.03,
+     0.4337
+    ],
+    "axis": [
+     0,
+     1,
+     0
+    ],
+    "added_rotating_mass_g": 11.4
+   }
+  },
+  {
+   "target": "Motor_Mount_2",
+   "change": "add 4 M3 heat-set insert bores in the side faces (2 per side), no change to outer envelope",
+   "params": {
+    "bore_d_mm": 4.2,
+    "bore_depth_mm": 7.5,
+    "lead_in": "0.4 x 45 deg",
+    "rule": "tolerances.json insert_bore_M3 / insert_depth_M3",
+    "positions_m": [
+     [
+      -0.47758,
+      -0.0225,
+      -0.4107
+     ],
+     [
+      -0.47758,
+      -0.0225,
+      -0.4567
+     ],
+     [
+      -0.53158,
+      -0.0225,
+      -0.4107
+     ],
+     [
+      -0.53158,
+      -0.0225,
+      -0.4567
+     ]
+    ],
+    "axes": "normal to the side face, pointing into the mount (-Z on the +Z face, +Z on the -Z face)",
+    "clearance_check": "min 11 mm from J-08 pinch bolts (x_m+/-0.016, z_m+/-0.01785), min 18.9 mm from boom axis"
+   }
+  },
+  {
+   "target": "Lift_Prop_L2",
+   "change": "rotating group gains Lift_Cap_L2 and Magnet_Rot_L2_A/B as children (same revolute joint, axis +Y through the rotor centre); 4 supplied M3x12 holding-plate screws replaced by M3x16",
+   "params": {
+    "pivot_m": [
+     -0.50458,
+     0.03,
+     -0.4337
+    ],
+    "axis": [
+     0,
+     1,
+     0
+    ],
+    "added_rotating_mass_g": 11.4
+   }
+  },
+  {
+   "target": "inventory/fusion/kinematics/kinematics.json groups prop_L1..prop_L4",
+   "change": "add stl names Lift_Cap_Lx.stl to 'stl' and extend 'contains'",
+   "params": {}
+  },
+  {
+   "target": "ESC_L1..ESC_L4 (firmware only, no CAD change)",
+   "change": "BLHeli_S 'Brake on stop' = ON via ArduPilot pass-through",
+   "params": {}
+  }
+ ],
+ "add": [
+  {
+   "name": "Lift_Nacelle_L1",
+   "kind": "part",
+   "count": 1,
+   "shape": {
+    "summary": "Streamlined fairing around motor mount + motor bell, below the prop disc. Plan section = NACA 0022 (symmetric), chord 260 mm, truncated at x/c 0.06 (nose) and 0.75 (tail); extruded in Y from -0.0455 to +0.0170 (62.5 mm); shelled 0.8 mm; open bottom; 1.2 mm lid with a 51.0 mm hole on the rotor axis; modelled as two clamshell halves split on the plane z = z_m.",
+    "ops": [
+     "1 Sketch on plane y=-0.0455 (local frame origin on rotor axis): closed spline through the upper half-thickness table below, mirrored about local x axis; close nose (x=+66.4) and tail (x=-113.0) with straight lines.",
+     "2 Extrude +Y 62.5 mm (to y=+0.0170).",
+     "3 Fillet top outer edge R4, bottom outer edge R2.",
+     "4 Shell inwards 0.8 mm, remove the bottom face. Lid (top face) thickness 1.2 mm.",
+     "5 Cut lid hole D51.0 centred on the rotor axis (bell D47.5 + 1.75 radial clearance; bell top y=0.023 stands proud of the lid).",
+     "6 Cut boom bore D25.8 along X at y=-0.0300, local z=0, through nose and tail faces.",
+     "7 Add 4 inner standoff bosses (D8 outer, D3.4 hole axis Z) at local x=+27 and x=-27, y=-0.0225, on each half's inner wall, height to reach the mount face at |z|=23 mm (about 4 mm).",
+     "8 Add 2 seam bosses on the inboard half at local x=+58 and x=-95, y=-0.015: D4.2 x 7.5 insert bore (axis Z); matching D3.4 through holes with 6.2 x 1.8 counterbore on the outboard half.",
+     "9 Lid underside boss 4 mm thick (y 0.013..0.017), 18 mm wide arc at r=31 on the +X side: 5 magnet pockets D6.5 x 3.3 deep from the top face at azimuth -30,-15,0,+15,+30 deg, r=31 (pocket floor 0.6 mm above boss underside).",
+     "10 Lid underside boss at azimuth 180 deg, r=31: reed pocket 2.6 x 16 slot, axis tangential (Z), centre y=0.015 (phase 2).",
+     "11 Cooling: exit slot 40 x 30 mm opening in the bottom (rib 3 mm left each side of the boom bore) and a 8 x 5 mm wire slot on the face nearest the ESC (tail for front rotors, nose for rear rotors) at y=-0.038.",
+     "12 Split on z=z_m into two halves (names Lift_Nacelle_L1_In, _Out)."
+    ],
+    "plan_half_thickness_table_mm": {
+     "columns": [
+      "x_local_mm (fwd +)",
+      "half_thickness_mm"
+     ],
+     "rows": [
+      [
+       66.4,
+       18.3
+      ],
+      [
+       61.2,
+       20.5
+      ],
+      [
+       56.0,
+       22.3
+      ],
+      [
+       43.0,
+       25.5
+      ],
+      [
+       30.0,
+       27.3
+      ],
+      [
+       17.0,
+       28.3
+      ],
+      [
+       4.0,
+       28.6
+      ],
+      [
+       -22.0,
+       27.6
+      ],
+      [
+       -48.0,
+       25.2
+      ],
+      [
+       -74.0,
+       21.7
+      ],
+      [
+       -100.0,
+       17.3
+      ],
+      [
+       -113.0,
+       14.9
+      ]
+     ],
+     "formula": "y = 5 t c (0.2969 sqrt(xi) - 0.1260 xi - 0.3516 xi^2 + 0.2843 xi^3 - 0.1036 xi^4), t=0.22, c=260 mm, x_local = 82 - xi*260 mm"
+    },
+    "envelope_m": {
+     "x": [
+      0.25792,
+      0.43732
+     ],
+     "y": [
+      -0.0455,
+      0.017
+     ],
+     "z": [
+      0.4051,
+      0.4623
+     ]
+    },
+    "clearances_checked_mm": {
+     "ESC_L1/L3 tail": "front tail ends x=0.2579 vs ESC inner end 0.2225: 35",
+     "gear clamp front (0.2639..0.2979)": "tail at x=0.2579: 6 (tail ends before the clamp)",
+     "gear clamp rear (-0.4316..-0.3976)": "nose at x=-0.4382: 6.6",
+     "prop blade underside y=0.025 vs lid top 0.017": "8",
+     "bell OD 47.5 vs lid hole 51.0": "1.75 radial",
+     "Motor_Mount 46 wide vs inner wall at x=+/-36": ">=26 half-thickness vs 23 needed"
+    }
+   },
+   "material": "PETG (HDT 68 C: keep >= 3 mm air gap to the bell; PA6-CF if thermal test T-A3-5 fails)",
+   "color": [
+    0.96,
+    0.5,
+    0.12
+   ],
+   "placements": [
+    {
+     "pos": [
+      0.37092,
+      0.0,
+      0.4337
+     ],
+     "axis": [
+      0,
+      1,
+      0
+     ],
+     "up": [
+      1,
+      0,
+      0
+     ]
+    }
+   ],
+   "mass_g": 37.5,
+   "source": "analysis/a3_effect.py (nacelle.json); NACA 4-digit thickness formula, Abbott & von Doenhoff; PETG density 1.27 g/cm3 (EST, not in repo)"
+  },
+  {
+   "name": "Lift_Nacelle_L3",
+   "kind": "part",
+   "count": 1,
+   "shape": {
+    "summary": "Streamlined fairing around motor mount + motor bell, below the prop disc. Plan section = NACA 0022 (symmetric), chord 260 mm, truncated at x/c 0.06 (nose) and 0.75 (tail); extruded in Y from -0.0455 to +0.0170 (62.5 mm); shelled 0.8 mm; open bottom; 1.2 mm lid with a 51.0 mm hole on the rotor axis; modelled as two clamshell halves split on the plane z = z_m.",
+    "ops": [
+     "1 Sketch on plane y=-0.0455 (local frame origin on rotor axis): closed spline through the upper half-thickness table below, mirrored about local x axis; close nose (x=+66.4) and tail (x=-113.0) with straight lines.",
+     "2 Extrude +Y 62.5 mm (to y=+0.0170).",
+     "3 Fillet top outer edge R4, bottom outer edge R2.",
+     "4 Shell inwards 0.8 mm, remove the bottom face. Lid (top face) thickness 1.2 mm.",
+     "5 Cut lid hole D51.0 centred on the rotor axis (bell D47.5 + 1.75 radial clearance; bell top y=0.023 stands proud of the lid).",
+     "6 Cut boom bore D25.8 along X at y=-0.0300, local z=0, through nose and tail faces.",
+     "7 Add 4 inner standoff bosses (D8 outer, D3.4 hole axis Z) at local x=+27 and x=-27, y=-0.0225, on each half's inner wall, height to reach the mount face at |z|=23 mm (about 4 mm).",
+     "8 Add 2 seam bosses on the inboard half at local x=+58 and x=-95, y=-0.015: D4.2 x 7.5 insert bore (axis Z); matching D3.4 through holes with 6.2 x 1.8 counterbore on the outboard half.",
+     "9 Lid underside boss 4 mm thick (y 0.013..0.017), 18 mm wide arc at r=31 on the +X side: 5 magnet pockets D6.5 x 3.3 deep from the top face at azimuth -30,-15,0,+15,+30 deg, r=31 (pocket floor 0.6 mm above boss underside).",
+     "10 Lid underside boss at azimuth 180 deg, r=31: reed pocket 2.6 x 16 slot, axis tangential (Z), centre y=0.015 (phase 2).",
+     "11 Cooling: exit slot 40 x 30 mm opening in the bottom (rib 3 mm left each side of the boom bore) and a 8 x 5 mm wire slot on the face nearest the ESC (tail for front rotors, nose for rear rotors) at y=-0.038.",
+     "12 Split on z=z_m into two halves (names Lift_Nacelle_L3_In, _Out)."
+    ],
+    "plan_half_thickness_table_mm": {
+     "columns": [
+      "x_local_mm (fwd +)",
+      "half_thickness_mm"
+     ],
+     "rows": [
+      [
+       66.4,
+       18.3
+      ],
+      [
+       61.2,
+       20.5
+      ],
+      [
+       56.0,
+       22.3
+      ],
+      [
+       43.0,
+       25.5
+      ],
+      [
+       30.0,
+       27.3
+      ],
+      [
+       17.0,
+       28.3
+      ],
+      [
+       4.0,
+       28.6
+      ],
+      [
+       -22.0,
+       27.6
+      ],
+      [
+       -48.0,
+       25.2
+      ],
+      [
+       -74.0,
+       21.7
+      ],
+      [
+       -100.0,
+       17.3
+      ],
+      [
+       -113.0,
+       14.9
+      ]
+     ],
+     "formula": "y = 5 t c (0.2969 sqrt(xi) - 0.1260 xi - 0.3516 xi^2 + 0.2843 xi^3 - 0.1036 xi^4), t=0.22, c=260 mm, x_local = 82 - xi*260 mm"
+    },
+    "envelope_m": {
+     "x": [
+      0.25792,
+      0.43732
+     ],
+     "y": [
+      -0.0455,
+      0.017
+     ],
+     "z": [
+      -0.4623,
+      -0.4051
+     ]
+    },
+    "clearances_checked_mm": {
+     "ESC_L1/L3 tail": "front tail ends x=0.2579 vs ESC inner end 0.2225: 35",
+     "gear clamp front (0.2639..0.2979)": "tail at x=0.2579: 6 (tail ends before the clamp)",
+     "gear clamp rear (-0.4316..-0.3976)": "nose at x=-0.4382: 6.6",
+     "prop blade underside y=0.025 vs lid top 0.017": "8",
+     "bell OD 47.5 vs lid hole 51.0": "1.75 radial",
+     "Motor_Mount 46 wide vs inner wall at x=+/-36": ">=26 half-thickness vs 23 needed"
+    }
+   },
+   "material": "PETG (HDT 68 C: keep >= 3 mm air gap to the bell; PA6-CF if thermal test T-A3-5 fails)",
+   "color": [
+    0.96,
+    0.5,
+    0.12
+   ],
+   "placements": [
+    {
+     "pos": [
+      0.37092,
+      0.0,
+      -0.4337
+     ],
+     "axis": [
+      0,
+      1,
+      0
+     ],
+     "up": [
+      1,
+      0,
+      0
+     ]
+    }
+   ],
+   "mass_g": 37.5,
+   "source": "analysis/a3_effect.py (nacelle.json); NACA 4-digit thickness formula, Abbott & von Doenhoff; PETG density 1.27 g/cm3 (EST, not in repo)"
+  },
+  {
+   "name": "Lift_Nacelle_L4",
+   "kind": "part",
+   "count": 1,
+   "shape": {
+    "summary": "Streamlined fairing around motor mount + motor bell, below the prop disc. Plan section = NACA 0022 (symmetric), chord 260 mm, truncated at x/c 0.06 (nose) and 0.75 (tail); extruded in Y from -0.0455 to +0.0170 (62.5 mm); shelled 0.8 mm; open bottom; 1.2 mm lid with a 51.0 mm hole on the rotor axis; modelled as two clamshell halves split on the plane z = z_m.",
+    "ops": [
+     "1 Sketch on plane y=-0.0455 (local frame origin on rotor axis): closed spline through the upper half-thickness table below, mirrored about local x axis; close nose (x=+66.4) and tail (x=-113.0) with straight lines.",
+     "2 Extrude +Y 62.5 mm (to y=+0.0170).",
+     "3 Fillet top outer edge R4, bottom outer edge R2.",
+     "4 Shell inwards 0.8 mm, remove the bottom face. Lid (top face) thickness 1.2 mm.",
+     "5 Cut lid hole D51.0 centred on the rotor axis (bell D47.5 + 1.75 radial clearance; bell top y=0.023 stands proud of the lid).",
+     "6 Cut boom bore D25.8 along X at y=-0.0300, local z=0, through nose and tail faces.",
+     "7 Add 4 inner standoff bosses (D8 outer, D3.4 hole axis Z) at local x=+27 and x=-27, y=-0.0225, on each half's inner wall, height to reach the mount face at |z|=23 mm (about 4 mm).",
+     "8 Add 2 seam bosses on the inboard half at local x=+58 and x=-95, y=-0.015: D4.2 x 7.5 insert bore (axis Z); matching D3.4 through holes with 6.2 x 1.8 counterbore on the outboard half.",
+     "9 Lid underside boss 4 mm thick (y 0.013..0.017), 18 mm wide arc at r=31 on the +X side: 5 magnet pockets D6.5 x 3.3 deep from the top face at azimuth -30,-15,0,+15,+30 deg, r=31 (pocket floor 0.6 mm above boss underside).",
+     "10 Lid underside boss at azimuth 180 deg, r=31: reed pocket 2.6 x 16 slot, axis tangential (Z), centre y=0.015 (phase 2).",
+     "11 Cooling: exit slot 40 x 30 mm opening in the bottom (rib 3 mm left each side of the boom bore) and a 8 x 5 mm wire slot on the face nearest the ESC (tail for front rotors, nose for rear rotors) at y=-0.038.",
+     "12 Split on z=z_m into two halves (names Lift_Nacelle_L4_In, _Out)."
+    ],
+    "plan_half_thickness_table_mm": {
+     "columns": [
+      "x_local_mm (fwd +)",
+      "half_thickness_mm"
+     ],
+     "rows": [
+      [
+       66.4,
+       18.3
+      ],
+      [
+       61.2,
+       20.5
+      ],
+      [
+       56.0,
+       22.3
+      ],
+      [
+       43.0,
+       25.5
+      ],
+      [
+       30.0,
+       27.3
+      ],
+      [
+       17.0,
+       28.3
+      ],
+      [
+       4.0,
+       28.6
+      ],
+      [
+       -22.0,
+       27.6
+      ],
+      [
+       -48.0,
+       25.2
+      ],
+      [
+       -74.0,
+       21.7
+      ],
+      [
+       -100.0,
+       17.3
+      ],
+      [
+       -113.0,
+       14.9
+      ]
+     ],
+     "formula": "y = 5 t c (0.2969 sqrt(xi) - 0.1260 xi - 0.3516 xi^2 + 0.2843 xi^3 - 0.1036 xi^4), t=0.22, c=260 mm, x_local = 82 - xi*260 mm"
+    },
+    "envelope_m": {
+     "x": [
+      -0.61758,
+      -0.43818
+     ],
+     "y": [
+      -0.0455,
+      0.017
+     ],
+     "z": [
+      0.4051,
+      0.4623
+     ]
+    },
+    "clearances_checked_mm": {
+     "ESC_L1/L3 tail": "front tail ends x=0.2579 vs ESC inner end 0.2225: 35",
+     "gear clamp front (0.2639..0.2979)": "tail at x=0.2579: 6 (tail ends before the clamp)",
+     "gear clamp rear (-0.4316..-0.3976)": "nose at x=-0.4382: 6.6",
+     "prop blade underside y=0.025 vs lid top 0.017": "8",
+     "bell OD 47.5 vs lid hole 51.0": "1.75 radial",
+     "Motor_Mount 46 wide vs inner wall at x=+/-36": ">=26 half-thickness vs 23 needed"
+    }
+   },
+   "material": "PETG (HDT 68 C: keep >= 3 mm air gap to the bell; PA6-CF if thermal test T-A3-5 fails)",
+   "color": [
+    0.96,
+    0.5,
+    0.12
+   ],
+   "placements": [
+    {
+     "pos": [
+      -0.50458,
+      0.0,
+      0.4337
+     ],
+     "axis": [
+      0,
+      1,
+      0
+     ],
+     "up": [
+      1,
+      0,
+      0
+     ]
+    }
+   ],
+   "mass_g": 37.5,
+   "source": "analysis/a3_effect.py (nacelle.json); NACA 4-digit thickness formula, Abbott & von Doenhoff; PETG density 1.27 g/cm3 (EST, not in repo)"
+  },
+  {
+   "name": "Lift_Nacelle_L2",
+   "kind": "part",
+   "count": 1,
+   "shape": {
+    "summary": "Streamlined fairing around motor mount + motor bell, below the prop disc. Plan section = NACA 0022 (symmetric), chord 260 mm, truncated at x/c 0.06 (nose) and 0.75 (tail); extruded in Y from -0.0455 to +0.0170 (62.5 mm); shelled 0.8 mm; open bottom; 1.2 mm lid with a 51.0 mm hole on the rotor axis; modelled as two clamshell halves split on the plane z = z_m.",
+    "ops": [
+     "1 Sketch on plane y=-0.0455 (local frame origin on rotor axis): closed spline through the upper half-thickness table below, mirrored about local x axis; close nose (x=+66.4) and tail (x=-113.0) with straight lines.",
+     "2 Extrude +Y 62.5 mm (to y=+0.0170).",
+     "3 Fillet top outer edge R4, bottom outer edge R2.",
+     "4 Shell inwards 0.8 mm, remove the bottom face. Lid (top face) thickness 1.2 mm.",
+     "5 Cut lid hole D51.0 centred on the rotor axis (bell D47.5 + 1.75 radial clearance; bell top y=0.023 stands proud of the lid).",
+     "6 Cut boom bore D25.8 along X at y=-0.0300, local z=0, through nose and tail faces.",
+     "7 Add 4 inner standoff bosses (D8 outer, D3.4 hole axis Z) at local x=+27 and x=-27, y=-0.0225, on each half's inner wall, height to reach the mount face at |z|=23 mm (about 4 mm).",
+     "8 Add 2 seam bosses on the inboard half at local x=+58 and x=-95, y=-0.015: D4.2 x 7.5 insert bore (axis Z); matching D3.4 through holes with 6.2 x 1.8 counterbore on the outboard half.",
+     "9 Lid underside boss 4 mm thick (y 0.013..0.017), 18 mm wide arc at r=31 on the +X side: 5 magnet pockets D6.5 x 3.3 deep from the top face at azimuth -30,-15,0,+15,+30 deg, r=31 (pocket floor 0.6 mm above boss underside).",
+     "10 Lid underside boss at azimuth 180 deg, r=31: reed pocket 2.6 x 16 slot, axis tangential (Z), centre y=0.015 (phase 2).",
+     "11 Cooling: exit slot 40 x 30 mm opening in the bottom (rib 3 mm left each side of the boom bore) and a 8 x 5 mm wire slot on the face nearest the ESC (tail for front rotors, nose for rear rotors) at y=-0.038.",
+     "12 Split on z=z_m into two halves (names Lift_Nacelle_L2_In, _Out)."
+    ],
+    "plan_half_thickness_table_mm": {
+     "columns": [
+      "x_local_mm (fwd +)",
+      "half_thickness_mm"
+     ],
+     "rows": [
+      [
+       66.4,
+       18.3
+      ],
+      [
+       61.2,
+       20.5
+      ],
+      [
+       56.0,
+       22.3
+      ],
+      [
+       43.0,
+       25.5
+      ],
+      [
+       30.0,
+       27.3
+      ],
+      [
+       17.0,
+       28.3
+      ],
+      [
+       4.0,
+       28.6
+      ],
+      [
+       -22.0,
+       27.6
+      ],
+      [
+       -48.0,
+       25.2
+      ],
+      [
+       -74.0,
+       21.7
+      ],
+      [
+       -100.0,
+       17.3
+      ],
+      [
+       -113.0,
+       14.9
+      ]
+     ],
+     "formula": "y = 5 t c (0.2969 sqrt(xi) - 0.1260 xi - 0.3516 xi^2 + 0.2843 xi^3 - 0.1036 xi^4), t=0.22, c=260 mm, x_local = 82 - xi*260 mm"
+    },
+    "envelope_m": {
+     "x": [
+      -0.61758,
+      -0.43818
+     ],
+     "y": [
+      -0.0455,
+      0.017
+     ],
+     "z": [
+      -0.4623,
+      -0.4051
+     ]
+    },
+    "clearances_checked_mm": {
+     "ESC_L1/L3 tail": "front tail ends x=0.2579 vs ESC inner end 0.2225: 35",
+     "gear clamp front (0.2639..0.2979)": "tail at x=0.2579: 6 (tail ends before the clamp)",
+     "gear clamp rear (-0.4316..-0.3976)": "nose at x=-0.4382: 6.6",
+     "prop blade underside y=0.025 vs lid top 0.017": "8",
+     "bell OD 47.5 vs lid hole 51.0": "1.75 radial",
+     "Motor_Mount 46 wide vs inner wall at x=+/-36": ">=26 half-thickness vs 23 needed"
+    }
+   },
+   "material": "PETG (HDT 68 C: keep >= 3 mm air gap to the bell; PA6-CF if thermal test T-A3-5 fails)",
+   "color": [
+    0.96,
+    0.5,
+    0.12
+   ],
+   "placements": [
+    {
+     "pos": [
+      -0.50458,
+      0.0,
+      -0.4337
+     ],
+     "axis": [
+      0,
+      1,
+      0
+     ],
+     "up": [
+      1,
+      0,
+      0
+     ]
+    }
+   ],
+   "mass_g": 37.5,
+   "source": "analysis/a3_effect.py (nacelle.json); NACA 4-digit thickness formula, Abbott & von Doenhoff; PETG density 1.27 g/cm3 (EST, not in repo)"
+  },
+  {
+   "name": "Lift_Cap_L1",
+   "kind": "part",
+   "count": 1,
+   "shape": {
+    "summary": "Rotating hub fairing (spinner-style cover over bell top, adapter, prop hub and holding plate) with two magnet ears. Solid of revolution about the rotor axis; blade slots at azimuth 0 and 180 deg.",
+    "ops": [
+     "1 Revolve outer profile (r mm, y mm absolute): (26.5,18.5) -> (26.5,24.0) -> (14.0,39.8) -> (14.0,42.8) -> (0,42.8); inner offset 1.2 mm: skirt inner radius 25.3 (clears bell R23.75 by 1.55), inner shoulder parallel, plate underside y=39.8.",
+     "2 Fillet outer shoulder and top edge R5/R2.",
+     "3 Top plate y 39.8..42.8: 4 holes D3.4 on a D16 circle at 45,135,225,315 deg (same est pattern as HW-033, 'est pattern 4 on dia 16'), counterbore D6.2 x 1.8 from the top face.",
+     "4 Blade slots through the shoulder at azimuth 0 and 180 deg: 24 mm wide (Z), y 0.0215..0.0365 (blade 8 mm + 3.5 mm each side), from r=14 outwards.",
+     "5 Cooling inlets: 4 slots 4 x 10 mm through the shoulder at azimuth 45,135,225,315 deg, centred y=0.030.",
+     "6 Two ears at azimuth 0 and 180 deg: 16 mm wide tangential, radial r=26.5..34.5, y 18.5..22.7; in each ear a pocket D6.5 x 3.3 deep from the lower face at r=31 (magnet recessed 0.5 mm; face-to-face gap to the lid magnet 2.5 mm).",
+     "7 Wall 1.2 mm everywhere except the plate (3.0) and ears (4.2)."
+    ],
+    "dims_mm": {
+     "skirt_outer_r": 26.5,
+     "skirt_inner_r": 25.3,
+     "overall_height": 24.3,
+     "bottom_y_m": 0.0185,
+     "top_y_m": 0.0428,
+     "axial_gap_to_lid": 1.5
+    }
+   },
+   "material": "PETG",
+   "color": [
+    0.96,
+    0.5,
+    0.12
+   ],
+   "placements": [
+    {
+     "pos": [
+      0.37092,
+      0.0,
+      0.4337
+     ],
+     "axis": [
+      0,
+      1,
+      0
+     ],
+     "up": [
+      1,
+      0,
+      0
+     ]
+    }
+   ],
+   "mass_g": 9.4,
+   "source": "analysis/a3_effect.py (nacelle.json mass_cap_g); hub and holding-plate heights hardware.json HW-031/032"
+  },
+  {
+   "name": "Lift_Cap_L3",
+   "kind": "part",
+   "count": 1,
+   "shape": {
+    "summary": "Rotating hub fairing (spinner-style cover over bell top, adapter, prop hub and holding plate) with two magnet ears. Solid of revolution about the rotor axis; blade slots at azimuth 0 and 180 deg.",
+    "ops": [
+     "1 Revolve outer profile (r mm, y mm absolute): (26.5,18.5) -> (26.5,24.0) -> (14.0,39.8) -> (14.0,42.8) -> (0,42.8); inner offset 1.2 mm: skirt inner radius 25.3 (clears bell R23.75 by 1.55), inner shoulder parallel, plate underside y=39.8.",
+     "2 Fillet outer shoulder and top edge R5/R2.",
+     "3 Top plate y 39.8..42.8: 4 holes D3.4 on a D16 circle at 45,135,225,315 deg (same est pattern as HW-033, 'est pattern 4 on dia 16'), counterbore D6.2 x 1.8 from the top face.",
+     "4 Blade slots through the shoulder at azimuth 0 and 180 deg: 24 mm wide (Z), y 0.0215..0.0365 (blade 8 mm + 3.5 mm each side), from r=14 outwards.",
+     "5 Cooling inlets: 4 slots 4 x 10 mm through the shoulder at azimuth 45,135,225,315 deg, centred y=0.030.",
+     "6 Two ears at azimuth 0 and 180 deg: 16 mm wide tangential, radial r=26.5..34.5, y 18.5..22.7; in each ear a pocket D6.5 x 3.3 deep from the lower face at r=31 (magnet recessed 0.5 mm; face-to-face gap to the lid magnet 2.5 mm).",
+     "7 Wall 1.2 mm everywhere except the plate (3.0) and ears (4.2)."
+    ],
+    "dims_mm": {
+     "skirt_outer_r": 26.5,
+     "skirt_inner_r": 25.3,
+     "overall_height": 24.3,
+     "bottom_y_m": 0.0185,
+     "top_y_m": 0.0428,
+     "axial_gap_to_lid": 1.5
+    }
+   },
+   "material": "PETG",
+   "color": [
+    0.96,
+    0.5,
+    0.12
+   ],
+   "placements": [
+    {
+     "pos": [
+      0.37092,
+      0.0,
+      -0.4337
+     ],
+     "axis": [
+      0,
+      1,
+      0
+     ],
+     "up": [
+      1,
+      0,
+      0
+     ]
+    }
+   ],
+   "mass_g": 9.4,
+   "source": "analysis/a3_effect.py (nacelle.json mass_cap_g); hub and holding-plate heights hardware.json HW-031/032"
+  },
+  {
+   "name": "Lift_Cap_L4",
+   "kind": "part",
+   "count": 1,
+   "shape": {
+    "summary": "Rotating hub fairing (spinner-style cover over bell top, adapter, prop hub and holding plate) with two magnet ears. Solid of revolution about the rotor axis; blade slots at azimuth 0 and 180 deg.",
+    "ops": [
+     "1 Revolve outer profile (r mm, y mm absolute): (26.5,18.5) -> (26.5,24.0) -> (14.0,39.8) -> (14.0,42.8) -> (0,42.8); inner offset 1.2 mm: skirt inner radius 25.3 (clears bell R23.75 by 1.55), inner shoulder parallel, plate underside y=39.8.",
+     "2 Fillet outer shoulder and top edge R5/R2.",
+     "3 Top plate y 39.8..42.8: 4 holes D3.4 on a D16 circle at 45,135,225,315 deg (same est pattern as HW-033, 'est pattern 4 on dia 16'), counterbore D6.2 x 1.8 from the top face.",
+     "4 Blade slots through the shoulder at azimuth 0 and 180 deg: 24 mm wide (Z), y 0.0215..0.0365 (blade 8 mm + 3.5 mm each side), from r=14 outwards.",
+     "5 Cooling inlets: 4 slots 4 x 10 mm through the shoulder at azimuth 45,135,225,315 deg, centred y=0.030.",
+     "6 Two ears at azimuth 0 and 180 deg: 16 mm wide tangential, radial r=26.5..34.5, y 18.5..22.7; in each ear a pocket D6.5 x 3.3 deep from the lower face at r=31 (magnet recessed 0.5 mm; face-to-face gap to the lid magnet 2.5 mm).",
+     "7 Wall 1.2 mm everywhere except the plate (3.0) and ears (4.2)."
+    ],
+    "dims_mm": {
+     "skirt_outer_r": 26.5,
+     "skirt_inner_r": 25.3,
+     "overall_height": 24.3,
+     "bottom_y_m": 0.0185,
+     "top_y_m": 0.0428,
+     "axial_gap_to_lid": 1.5
+    }
+   },
+   "material": "PETG",
+   "color": [
+    0.96,
+    0.5,
+    0.12
+   ],
+   "placements": [
+    {
+     "pos": [
+      -0.50458,
+      0.0,
+      0.4337
+     ],
+     "axis": [
+      0,
+      1,
+      0
+     ],
+     "up": [
+      1,
+      0,
+      0
+     ]
+    }
+   ],
+   "mass_g": 9.4,
+   "source": "analysis/a3_effect.py (nacelle.json mass_cap_g); hub and holding-plate heights hardware.json HW-031/032"
+  },
+  {
+   "name": "Lift_Cap_L2",
+   "kind": "part",
+   "count": 1,
+   "shape": {
+    "summary": "Rotating hub fairing (spinner-style cover over bell top, adapter, prop hub and holding plate) with two magnet ears. Solid of revolution about the rotor axis; blade slots at azimuth 0 and 180 deg.",
+    "ops": [
+     "1 Revolve outer profile (r mm, y mm absolute): (26.5,18.5) -> (26.5,24.0) -> (14.0,39.8) -> (14.0,42.8) -> (0,42.8); inner offset 1.2 mm: skirt inner radius 25.3 (clears bell R23.75 by 1.55), inner shoulder parallel, plate underside y=39.8.",
+     "2 Fillet outer shoulder and top edge R5/R2.",
+     "3 Top plate y 39.8..42.8: 4 holes D3.4 on a D16 circle at 45,135,225,315 deg (same est pattern as HW-033, 'est pattern 4 on dia 16'), counterbore D6.2 x 1.8 from the top face.",
+     "4 Blade slots through the shoulder at azimuth 0 and 180 deg: 24 mm wide (Z), y 0.0215..0.0365 (blade 8 mm + 3.5 mm each side), from r=14 outwards.",
+     "5 Cooling inlets: 4 slots 4 x 10 mm through the shoulder at azimuth 45,135,225,315 deg, centred y=0.030.",
+     "6 Two ears at azimuth 0 and 180 deg: 16 mm wide tangential, radial r=26.5..34.5, y 18.5..22.7; in each ear a pocket D6.5 x 3.3 deep from the lower face at r=31 (magnet recessed 0.5 mm; face-to-face gap to the lid magnet 2.5 mm).",
+     "7 Wall 1.2 mm everywhere except the plate (3.0) and ears (4.2)."
+    ],
+    "dims_mm": {
+     "skirt_outer_r": 26.5,
+     "skirt_inner_r": 25.3,
+     "overall_height": 24.3,
+     "bottom_y_m": 0.0185,
+     "top_y_m": 0.0428,
+     "axial_gap_to_lid": 1.5
+    }
+   },
+   "material": "PETG",
+   "color": [
+    0.96,
+    0.5,
+    0.12
+   ],
+   "placements": [
+    {
+     "pos": [
+      -0.50458,
+      0.0,
+      -0.4337
+     ],
+     "axis": [
+      0,
+      1,
+      0
+     ],
+     "up": [
+      1,
+      0,
+      0
+     ]
+    }
+   ],
+   "mass_g": 9.4,
+   "source": "analysis/a3_effect.py (nacelle.json mass_cap_g); hub and holding-plate heights hardware.json HW-031/032"
+  },
+  {
+   "name": "Magnet_Rot_L1_A",
+   "kind": "purchased",
+   "count": 1,
+   "shape": {
+    "summary": "K&J D42SH disc magnet D6.35 x 3.17 mm N42SH, axially magnetised, pole facing down = S (same on A and B)",
+    "ops": [
+     "cylinder D6.35 x 3.17 along Y"
+    ]
+   },
+   "material": "N42SH NdFeB",
+   "color": [
+    0.62,
+    0.64,
+    0.68
+   ],
+   "placements": [
+    {
+     "pos": [
+      0.40192,
+      0.019,
+      0.4337
+     ],
+     "axis": [
+      0,
+      1,
+      0
+     ],
+     "up": [
+      1,
+      0,
+      0
+     ]
+    }
+   ],
+   "mass_g": 0.75,
+   "source": "https://www.kjmagnetics.com/proddetail.asp?prod=D42SH (2026-11-02): 6.35 x 3.17 mm, 150 C, 0.75 g, pull 2.3 lb to steel"
+  },
+  {
+   "name": "Magnet_Rot_L1_B",
+   "kind": "purchased",
+   "count": 1,
+   "shape": {
+    "summary": "K&J D42SH disc magnet D6.35 x 3.17 mm N42SH, axially magnetised, pole facing down = S (same on A and B)",
+    "ops": [
+     "cylinder D6.35 x 3.17 along Y"
+    ]
+   },
+   "material": "N42SH NdFeB",
+   "color": [
+    0.62,
+    0.64,
+    0.68
+   ],
+   "placements": [
+    {
+     "pos": [
+      0.33992,
+      0.019,
+      0.4337
+     ],
+     "axis": [
+      0,
+      1,
+      0
+     ],
+     "up": [
+      1,
+      0,
+      0
+     ]
+    }
+   ],
+   "mass_g": 0.75,
+   "source": "https://www.kjmagnetics.com/proddetail.asp?prod=D42SH (2026-11-02): 6.35 x 3.17 mm, 150 C, 0.75 g, pull 2.3 lb to steel"
+  },
+  {
+   "name": "Magnet_Fix_L1",
+   "kind": "purchased",
+   "count": 1,
+   "shape": {
+    "summary": "K&J D42SH D6.35 x 3.17 mm, pole facing up = N, in the lid pocket at azimuth 0 deg (default; pockets at -30..+30 deg every 15 deg)",
+    "ops": [
+     "cylinder D6.35 x 3.17 along Y"
+    ]
+   },
+   "material": "N42SH NdFeB",
+   "color": [
+    0.62,
+    0.64,
+    0.68
+   ],
+   "placements": [
+    {
+     "pos": [
+      0.40192,
+      0.0133,
+      0.4337
+     ],
+     "axis": [
+      0,
+      1,
+      0
+     ],
+     "up": [
+      1,
+      0,
+      0
+     ]
+    }
+   ],
+   "mass_g": 0.75,
+   "source": "same as above"
+  },
+  {
+   "name": "Reed_L1",
+   "kind": "purchased",
+   "count": 1,
+   "phase": 2,
+   "shape": {
+    "summary": "SparkFun COM-08642 glass reed switch, body D2.28 x 15.24 mm, leads 1.59 in overall; axis tangential (Z) at azimuth 180 deg, r=31",
+    "ops": [
+     "cylinder D2.28 x 15.24 along Z"
+    ]
+   },
+   "material": "glass / Fe-Ni",
+   "color": [
+    0.85,
+    0.9,
+    0.95
+   ],
+   "placements": [
+    {
+     "pos": [
+      0.33992,
+      0.015,
+      0.42608
+     ],
+     "axis": [
+      0,
+      0,
+      1
+     ],
+     "up": [
+      0,
+      1,
+      0
+     ]
+    }
+   ],
+   "mass_g": 0.3,
+   "source": "https://www.sparkfun.com/reed-switch.html (2026-11-02)"
+  },
+  {
+   "name": "Magnet_Rot_L3_A",
+   "kind": "purchased",
+   "count": 1,
+   "shape": {
+    "summary": "K&J D42SH disc magnet D6.35 x 3.17 mm N42SH, axially magnetised, pole facing down = S (same on A and B)",
+    "ops": [
+     "cylinder D6.35 x 3.17 along Y"
+    ]
+   },
+   "material": "N42SH NdFeB",
+   "color": [
+    0.62,
+    0.64,
+    0.68
+   ],
+   "placements": [
+    {
+     "pos": [
+      0.40192,
+      0.019,
+      -0.4337
+     ],
+     "axis": [
+      0,
+      1,
+      0
+     ],
+     "up": [
+      1,
+      0,
+      0
+     ]
+    }
+   ],
+   "mass_g": 0.75,
+   "source": "https://www.kjmagnetics.com/proddetail.asp?prod=D42SH (2026-11-02): 6.35 x 3.17 mm, 150 C, 0.75 g, pull 2.3 lb to steel"
+  },
+  {
+   "name": "Magnet_Rot_L3_B",
+   "kind": "purchased",
+   "count": 1,
+   "shape": {
+    "summary": "K&J D42SH disc magnet D6.35 x 3.17 mm N42SH, axially magnetised, pole facing down = S (same on A and B)",
+    "ops": [
+     "cylinder D6.35 x 3.17 along Y"
+    ]
+   },
+   "material": "N42SH NdFeB",
+   "color": [
+    0.62,
+    0.64,
+    0.68
+   ],
+   "placements": [
+    {
+     "pos": [
+      0.33992,
+      0.019,
+      -0.4337
+     ],
+     "axis": [
+      0,
+      1,
+      0
+     ],
+     "up": [
+      1,
+      0,
+      0
+     ]
+    }
+   ],
+   "mass_g": 0.75,
+   "source": "https://www.kjmagnetics.com/proddetail.asp?prod=D42SH (2026-11-02): 6.35 x 3.17 mm, 150 C, 0.75 g, pull 2.3 lb to steel"
+  },
+  {
+   "name": "Magnet_Fix_L3",
+   "kind": "purchased",
+   "count": 1,
+   "shape": {
+    "summary": "K&J D42SH D6.35 x 3.17 mm, pole facing up = N, in the lid pocket at azimuth 0 deg (default; pockets at -30..+30 deg every 15 deg)",
+    "ops": [
+     "cylinder D6.35 x 3.17 along Y"
+    ]
+   },
+   "material": "N42SH NdFeB",
+   "color": [
+    0.62,
+    0.64,
+    0.68
+   ],
+   "placements": [
+    {
+     "pos": [
+      0.40192,
+      0.0133,
+      -0.4337
+     ],
+     "axis": [
+      0,
+      1,
+      0
+     ],
+     "up": [
+      1,
+      0,
+      0
+     ]
+    }
+   ],
+   "mass_g": 0.75,
+   "source": "same as above"
+  },
+  {
+   "name": "Reed_L3",
+   "kind": "purchased",
+   "count": 1,
+   "phase": 2,
+   "shape": {
+    "summary": "SparkFun COM-08642 glass reed switch, body D2.28 x 15.24 mm, leads 1.59 in overall; axis tangential (Z) at azimuth 180 deg, r=31",
+    "ops": [
+     "cylinder D2.28 x 15.24 along Z"
+    ]
+   },
+   "material": "glass / Fe-Ni",
+   "color": [
+    0.85,
+    0.9,
+    0.95
+   ],
+   "placements": [
+    {
+     "pos": [
+      0.33992,
+      0.015,
+      -0.44132
+     ],
+     "axis": [
+      0,
+      0,
+      1
+     ],
+     "up": [
+      0,
+      1,
+      0
+     ]
+    }
+   ],
+   "mass_g": 0.3,
+   "source": "https://www.sparkfun.com/reed-switch.html (2026-11-02)"
+  },
+  {
+   "name": "Magnet_Rot_L4_A",
+   "kind": "purchased",
+   "count": 1,
+   "shape": {
+    "summary": "K&J D42SH disc magnet D6.35 x 3.17 mm N42SH, axially magnetised, pole facing down = S (same on A and B)",
+    "ops": [
+     "cylinder D6.35 x 3.17 along Y"
+    ]
+   },
+   "material": "N42SH NdFeB",
+   "color": [
+    0.62,
+    0.64,
+    0.68
+   ],
+   "placements": [
+    {
+     "pos": [
+      -0.47358,
+      0.019,
+      0.4337
+     ],
+     "axis": [
+      0,
+      1,
+      0
+     ],
+     "up": [
+      1,
+      0,
+      0
+     ]
+    }
+   ],
+   "mass_g": 0.75,
+   "source": "https://www.kjmagnetics.com/proddetail.asp?prod=D42SH (2026-11-02): 6.35 x 3.17 mm, 150 C, 0.75 g, pull 2.3 lb to steel"
+  },
+  {
+   "name": "Magnet_Rot_L4_B",
+   "kind": "purchased",
+   "count": 1,
+   "shape": {
+    "summary": "K&J D42SH disc magnet D6.35 x 3.17 mm N42SH, axially magnetised, pole facing down = S (same on A and B)",
+    "ops": [
+     "cylinder D6.35 x 3.17 along Y"
+    ]
+   },
+   "material": "N42SH NdFeB",
+   "color": [
+    0.62,
+    0.64,
+    0.68
+   ],
+   "placements": [
+    {
+     "pos": [
+      -0.53558,
+      0.019,
+      0.4337
+     ],
+     "axis": [
+      0,
+      1,
+      0
+     ],
+     "up": [
+      1,
+      0,
+      0
+     ]
+    }
+   ],
+   "mass_g": 0.75,
+   "source": "https://www.kjmagnetics.com/proddetail.asp?prod=D42SH (2026-11-02): 6.35 x 3.17 mm, 150 C, 0.75 g, pull 2.3 lb to steel"
+  },
+  {
+   "name": "Magnet_Fix_L4",
+   "kind": "purchased",
+   "count": 1,
+   "shape": {
+    "summary": "K&J D42SH D6.35 x 3.17 mm, pole facing up = N, in the lid pocket at azimuth 0 deg (default; pockets at -30..+30 deg every 15 deg)",
+    "ops": [
+     "cylinder D6.35 x 3.17 along Y"
+    ]
+   },
+   "material": "N42SH NdFeB",
+   "color": [
+    0.62,
+    0.64,
+    0.68
+   ],
+   "placements": [
+    {
+     "pos": [
+      -0.47358,
+      0.0133,
+      0.4337
+     ],
+     "axis": [
+      0,
+      1,
+      0
+     ],
+     "up": [
+      1,
+      0,
+      0
+     ]
+    }
+   ],
+   "mass_g": 0.75,
+   "source": "same as above"
+  },
+  {
+   "name": "Reed_L4",
+   "kind": "purchased",
+   "count": 1,
+   "phase": 2,
+   "shape": {
+    "summary": "SparkFun COM-08642 glass reed switch, body D2.28 x 15.24 mm, leads 1.59 in overall; axis tangential (Z) at azimuth 180 deg, r=31",
+    "ops": [
+     "cylinder D2.28 x 15.24 along Z"
+    ]
+   },
+   "material": "glass / Fe-Ni",
+   "color": [
+    0.85,
+    0.9,
+    0.95
+   ],
+   "placements": [
+    {
+     "pos": [
+      -0.53558,
+      0.015,
+      0.42608
+     ],
+     "axis": [
+      0,
+      0,
+      1
+     ],
+     "up": [
+      0,
+      1,
+      0
+     ]
+    }
+   ],
+   "mass_g": 0.3,
+   "source": "https://www.sparkfun.com/reed-switch.html (2026-11-02)"
+  },
+  {
+   "name": "Magnet_Rot_L2_A",
+   "kind": "purchased",
+   "count": 1,
+   "shape": {
+    "summary": "K&J D42SH disc magnet D6.35 x 3.17 mm N42SH, axially magnetised, pole facing down = S (same on A and B)",
+    "ops": [
+     "cylinder D6.35 x 3.17 along Y"
+    ]
+   },
+   "material": "N42SH NdFeB",
+   "color": [
+    0.62,
+    0.64,
+    0.68
+   ],
+   "placements": [
+    {
+     "pos": [
+      -0.47358,
+      0.019,
+      -0.4337
+     ],
+     "axis": [
+      0,
+      1,
+      0
+     ],
+     "up": [
+      1,
+      0,
+      0
+     ]
+    }
+   ],
+   "mass_g": 0.75,
+   "source": "https://www.kjmagnetics.com/proddetail.asp?prod=D42SH (2026-11-02): 6.35 x 3.17 mm, 150 C, 0.75 g, pull 2.3 lb to steel"
+  },
+  {
+   "name": "Magnet_Rot_L2_B",
+   "kind": "purchased",
+   "count": 1,
+   "shape": {
+    "summary": "K&J D42SH disc magnet D6.35 x 3.17 mm N42SH, axially magnetised, pole facing down = S (same on A and B)",
+    "ops": [
+     "cylinder D6.35 x 3.17 along Y"
+    ]
+   },
+   "material": "N42SH NdFeB",
+   "color": [
+    0.62,
+    0.64,
+    0.68
+   ],
+   "placements": [
+    {
+     "pos": [
+      -0.53558,
+      0.019,
+      -0.4337
+     ],
+     "axis": [
+      0,
+      1,
+      0
+     ],
+     "up": [
+      1,
+      0,
+      0
+     ]
+    }
+   ],
+   "mass_g": 0.75,
+   "source": "https://www.kjmagnetics.com/proddetail.asp?prod=D42SH (2026-11-02): 6.35 x 3.17 mm, 150 C, 0.75 g, pull 2.3 lb to steel"
+  },
+  {
+   "name": "Magnet_Fix_L2",
+   "kind": "purchased",
+   "count": 1,
+   "shape": {
+    "summary": "K&J D42SH D6.35 x 3.17 mm, pole facing up = N, in the lid pocket at azimuth 0 deg (default; pockets at -30..+30 deg every 15 deg)",
+    "ops": [
+     "cylinder D6.35 x 3.17 along Y"
+    ]
+   },
+   "material": "N42SH NdFeB",
+   "color": [
+    0.62,
+    0.64,
+    0.68
+   ],
+   "placements": [
+    {
+     "pos": [
+      -0.47358,
+      0.0133,
+      -0.4337
+     ],
+     "axis": [
+      0,
+      1,
+      0
+     ],
+     "up": [
+      1,
+      0,
+      0
+     ]
+    }
+   ],
+   "mass_g": 0.75,
+   "source": "same as above"
+  },
+  {
+   "name": "Reed_L2",
+   "kind": "purchased",
+   "count": 1,
+   "phase": 2,
+   "shape": {
+    "summary": "SparkFun COM-08642 glass reed switch, body D2.28 x 15.24 mm, leads 1.59 in overall; axis tangential (Z) at azimuth 180 deg, r=31",
+    "ops": [
+     "cylinder D2.28 x 15.24 along Z"
+    ]
+   },
+   "material": "glass / Fe-Ni",
+   "color": [
+    0.85,
+    0.9,
+    0.95
+   ],
+   "placements": [
+    {
+     "pos": [
+      -0.53558,
+      0.015,
+      -0.44132
+     ],
+     "axis": [
+      0,
+      0,
+      1
+     ],
+     "up": [
+      0,
+      1,
+      0
+     ]
+    }
+   ],
+   "mass_g": 0.3,
+   "source": "https://www.sparkfun.com/reed-switch.html (2026-11-02)"
+  },
+  {
+   "name": "Ladder_R_L1",
+   "kind": "purchased",
+   "count": 1,
+   "phase": 2,
+   "shape": {
+    "summary": "axial 1/4 W resistor 2.2k ohm (D2.5 x 6.3 body) on a 20 x 10 mm perfboard strip next to FC1, in parallel with that rotor's reed leads",
+    "ops": [
+     "cylinder D2.5 x 6.3"
+    ]
+   },
+   "material": "carbon film",
+   "color": [
+    0.82,
+    0.7,
+    0.5
+   ],
+   "placements": [
+    {
+     "pos": [
+      0.25,
+      -0.018,
+      0.01
+     ],
+     "axis": [
+      1,
+      0,
+      0
+     ],
+     "up": [
+      0,
+      1,
+      0
+     ]
+    }
+   ],
+   "mass_g": 0.25,
+   "source": "design choice (analysis/a3_park.lua RK table); position EST"
+  },
+  {
+   "name": "Ladder_R_L2",
+   "kind": "purchased",
+   "count": 1,
+   "phase": 2,
+   "shape": {
+    "summary": "axial 1/4 W resistor 4.7k ohm (D2.5 x 6.3 body) on a 20 x 10 mm perfboard strip next to FC1, in parallel with that rotor's reed leads",
+    "ops": [
+     "cylinder D2.5 x 6.3"
+    ]
+   },
+   "material": "carbon film",
+   "color": [
+    0.82,
+    0.7,
+    0.5
+   ],
+   "placements": [
+    {
+     "pos": [
+      0.25,
+      -0.018,
+      0.018
+     ],
+     "axis": [
+      1,
+      0,
+      0
+     ],
+     "up": [
+      0,
+      1,
+      0
+     ]
+    }
+   ],
+   "mass_g": 0.25,
+   "source": "design choice (analysis/a3_park.lua RK table); position EST"
+  },
+  {
+   "name": "Ladder_R_L3",
+   "kind": "purchased",
+   "count": 1,
+   "phase": 2,
+   "shape": {
+    "summary": "axial 1/4 W resistor 10k ohm (D2.5 x 6.3 body) on a 20 x 10 mm perfboard strip next to FC1, in parallel with that rotor's reed leads",
+    "ops": [
+     "cylinder D2.5 x 6.3"
+    ]
+   },
+   "material": "carbon film",
+   "color": [
+    0.82,
+    0.7,
+    0.5
+   ],
+   "placements": [
+    {
+     "pos": [
+      0.25,
+      -0.018,
+      0.026
+     ],
+     "axis": [
+      1,
+      0,
+      0
+     ],
+     "up": [
+      0,
+      1,
+      0
+     ]
+    }
+   ],
+   "mass_g": 0.25,
+   "source": "design choice (analysis/a3_park.lua RK table); position EST"
+  },
+  {
+   "name": "Ladder_R_L4",
+   "kind": "purchased",
+   "count": 1,
+   "phase": 2,
+   "shape": {
+    "summary": "axial 1/4 W resistor 22k ohm (D2.5 x 6.3 body) on a 20 x 10 mm perfboard strip next to FC1, in parallel with that rotor's reed leads",
+    "ops": [
+     "cylinder D2.5 x 6.3"
+    ]
+   },
+   "material": "carbon film",
+   "color": [
+    0.82,
+    0.7,
+    0.5
+   ],
+   "placements": [
+    {
+     "pos": [
+      0.25,
+      -0.018,
+      0.034
+     ],
+     "axis": [
+      1,
+      0,
+      0
+     ],
+     "up": [
+      0,
+      1,
+      0
+     ]
+    }
+   ],
+   "mass_g": 0.25,
+   "source": "design choice (analysis/a3_park.lua RK table); position EST"
+  }
+ ],
+ "hardware": [
+  {
+   "id": "HW-A3-01",
+   "joint": "J-A3-01",
+   "kind": "screw",
+   "spec": "ISO 7380-1 M3x10 A2 (nacelle: 4 to mount + 2 seam per rotor)",
+   "standard": "ISO 7380-1",
+   "geom": {
+    "d": 3,
+    "L": 10,
+    "head": "button",
+    "head_d": 5.7,
+    "head_h": 1.65,
+    "s": 2.0
+   },
+   "material": "A2 stainless (304)",
+   "color": [
+    0.75,
+    0.75,
+    0.77
+   ],
+   "instances": [
+    {
+     "pos": [
+      0.39792,
+      -0.0225,
+      0.46134
+     ],
+     "axis": [
+      0,
+      0,
+      -1
+     ],
+     "parent": "Lift_Nacelle_L1",
+     "note": "head bearing on the outer wall, wall 0.8 + standoff boss to mount face z_m+0.023, engages insert in Motor_Mount (5 mm)"
+    },
+    {
+     "pos": [
+      0.39792,
+      -0.0225,
+      0.40606
+     ],
+     "axis": [
+      0,
+      0,
+      1
+     ],
+     "parent": "Lift_Nacelle_L1",
+     "note": "head bearing on the outer wall, wall 0.8 + standoff boss to mount face z_m-0.023, engages insert in Motor_Mount (5 mm)"
+    },
+    {
+     "pos": [
+      0.34392,
+      -0.0225,
+      0.46097
+     ],
+     "axis": [
+      0,
+      0,
+      -1
+     ],
+     "parent": "Lift_Nacelle_L1",
+     "note": "head bearing on the outer wall, wall 0.8 + standoff boss to mount face z_m+0.023, engages insert in Motor_Mount (5 mm)"
+    },
+    {
+     "pos": [
+      0.34392,
+      -0.0225,
+      0.40643
+     ],
+     "axis": [
+      0,
+      0,
+      1
+     ],
+     "parent": "Lift_Nacelle_L1",
+     "note": "head bearing on the outer wall, wall 0.8 + standoff boss to mount face z_m-0.023, engages insert in Motor_Mount (5 mm)"
+    },
+    {
+     "pos": [
+      0.39792,
+      -0.0225,
+      -0.40606
+     ],
+     "axis": [
+      0,
+      0,
+      -1
+     ],
+     "parent": "Lift_Nacelle_L3",
+     "note": "head bearing on the outer wall, wall 0.8 + standoff boss to mount face z_m+0.023, engages insert in Motor_Mount (5 mm)"
+    },
+    {
+     "pos": [
+      0.39792,
+      -0.0225,
+      -0.46134
+     ],
+     "axis": [
+      0,
+      0,
+      1
+     ],
+     "parent": "Lift_Nacelle_L3",
+     "note": "head bearing on the outer wall, wall 0.8 + standoff boss to mount face z_m-0.023, engages insert in Motor_Mount (5 mm)"
+    },
+    {
+     "pos": [
+      0.34392,
+      -0.0225,
+      -0.40643
+     ],
+     "axis": [
+      0,
+      0,
+      -1
+     ],
+     "parent": "Lift_Nacelle_L3",
+     "note": "head bearing on the outer wall, wall 0.8 + standoff boss to mount face z_m+0.023, engages insert in Motor_Mount (5 mm)"
+    },
+    {
+     "pos": [
+      0.34392,
+      -0.0225,
+      -0.46097
+     ],
+     "axis": [
+      0,
+      0,
+      1
+     ],
+     "parent": "Lift_Nacelle_L3",
+     "note": "head bearing on the outer wall, wall 0.8 + standoff boss to mount face z_m-0.023, engages insert in Motor_Mount (5 mm)"
+    },
+    {
+     "pos": [
+      -0.47758,
+      -0.0225,
+      0.46134
+     ],
+     "axis": [
+      0,
+      0,
+      -1
+     ],
+     "parent": "Lift_Nacelle_L4",
+     "note": "head bearing on the outer wall, wall 0.8 + standoff boss to mount face z_m+0.023, engages insert in Motor_Mount (5 mm)"
+    },
+    {
+     "pos": [
+      -0.47758,
+      -0.0225,
+      0.40606
+     ],
+     "axis": [
+      0,
+      0,
+      1
+     ],
+     "parent": "Lift_Nacelle_L4",
+     "note": "head bearing on the outer wall, wall 0.8 + standoff boss to mount face z_m-0.023, engages insert in Motor_Mount (5 mm)"
+    },
+    {
+     "pos": [
+      -0.53158,
+      -0.0225,
+      0.46097
+     ],
+     "axis": [
+      0,
+      0,
+      -1
+     ],
+     "parent": "Lift_Nacelle_L4",
+     "note": "head bearing on the outer wall, wall 0.8 + standoff boss to mount face z_m+0.023, engages insert in Motor_Mount (5 mm)"
+    },
+    {
+     "pos": [
+      -0.53158,
+      -0.0225,
+      0.40643
+     ],
+     "axis": [
+      0,
+      0,
+      1
+     ],
+     "parent": "Lift_Nacelle_L4",
+     "note": "head bearing on the outer wall, wall 0.8 + standoff boss to mount face z_m-0.023, engages insert in Motor_Mount (5 mm)"
+    },
+    {
+     "pos": [
+      -0.47758,
+      -0.0225,
+      -0.40606
+     ],
+     "axis": [
+      0,
+      0,
+      -1
+     ],
+     "parent": "Lift_Nacelle_L2",
+     "note": "head bearing on the outer wall, wall 0.8 + standoff boss to mount face z_m+0.023, engages insert in Motor_Mount (5 mm)"
+    },
+    {
+     "pos": [
+      -0.47758,
+      -0.0225,
+      -0.46134
+     ],
+     "axis": [
+      0,
+      0,
+      1
+     ],
+     "parent": "Lift_Nacelle_L2",
+     "note": "head bearing on the outer wall, wall 0.8 + standoff boss to mount face z_m-0.023, engages insert in Motor_Mount (5 mm)"
+    },
+    {
+     "pos": [
+      -0.53158,
+      -0.0225,
+      -0.40643
+     ],
+     "axis": [
+      0,
+      0,
+      -1
+     ],
+     "parent": "Lift_Nacelle_L2",
+     "note": "head bearing on the outer wall, wall 0.8 + standoff boss to mount face z_m+0.023, engages insert in Motor_Mount (5 mm)"
+    },
+    {
+     "pos": [
+      -0.53158,
+      -0.0225,
+      -0.46097
+     ],
+     "axis": [
+      0,
+      0,
+      1
+     ],
+     "parent": "Lift_Nacelle_L2",
+     "note": "head bearing on the outer wall, wall 0.8 + standoff boss to mount face z_m-0.023, engages insert in Motor_Mount (5 mm)"
+    },
+    {
+     "pos": [
+      0.42892,
+      -0.015,
+      0.45458
+     ],
+     "axis": [
+      0,
+      0,
+      -1
+     ],
+     "parent": "Lift_Nacelle_L1",
+     "note": "seam screw from the outboard (+Z) half into the insert in the inboard half; for z_m<0 mirror: pos z = z_m - (half-0.0008), axis +Z"
+    },
+    {
+     "pos": [
+      0.27592,
+      -0.015,
+      0.45112
+     ],
+     "axis": [
+      0,
+      0,
+      -1
+     ],
+     "parent": "Lift_Nacelle_L1",
+     "note": "seam screw from the outboard (+Z) half into the insert in the inboard half; for z_m<0 mirror: pos z = z_m - (half-0.0008), axis +Z"
+    },
+    {
+     "pos": [
+      0.42892,
+      -0.015,
+      -0.45458
+     ],
+     "axis": [
+      0,
+      0,
+      1
+     ],
+     "parent": "Lift_Nacelle_L3",
+     "note": "seam screw, mirrored side"
+    },
+    {
+     "pos": [
+      0.27592,
+      -0.015,
+      -0.45112
+     ],
+     "axis": [
+      0,
+      0,
+      1
+     ],
+     "parent": "Lift_Nacelle_L3",
+     "note": "seam screw, mirrored side"
+    },
+    {
+     "pos": [
+      -0.44658,
+      -0.015,
+      0.45458
+     ],
+     "axis": [
+      0,
+      0,
+      -1
+     ],
+     "parent": "Lift_Nacelle_L4",
+     "note": "seam screw from the outboard (+Z) half into the insert in the inboard half; for z_m<0 mirror: pos z = z_m - (half-0.0008), axis +Z"
+    },
+    {
+     "pos": [
+      -0.59958,
+      -0.015,
+      0.45112
+     ],
+     "axis": [
+      0,
+      0,
+      -1
+     ],
+     "parent": "Lift_Nacelle_L4",
+     "note": "seam screw from the outboard (+Z) half into the insert in the inboard half; for z_m<0 mirror: pos z = z_m - (half-0.0008), axis +Z"
+    },
+    {
+     "pos": [
+      -0.44658,
+      -0.015,
+      -0.45458
+     ],
+     "axis": [
+      0,
+      0,
+      1
+     ],
+     "parent": "Lift_Nacelle_L2",
+     "note": "seam screw, mirrored side"
+    },
+    {
+     "pos": [
+      -0.59958,
+      -0.015,
+      -0.45112
+     ],
+     "axis": [
+      0,
+      0,
+      1
+     ],
+     "parent": "Lift_Nacelle_L2",
+     "note": "seam screw, mirrored side"
+    }
+   ],
+   "qty_total": 24,
+   "covered_by": "new line P-A3-03",
+   "est": false,
+   "source": "https://www.zoro.com/ M3 button 18-8 listing family (price est); geometry as HW-036"
+  },
+  {
+   "id": "HW-A3-02",
+   "joint": "J-A3-01",
+   "kind": "insert",
+   "spec": "Ruthex-type M3x5.7 brass heat-set insert (16 in Motor_Mount sides, 8 in nacelle seam bosses)",
+   "standard": "n/a (Ruthex RX-M3x5.7)",
+   "geom": {
+    "od": 4.6,
+    "L": 5.7,
+    "hole_d": 4.0,
+    "hole_depth_min": 7.3,
+    "cad_mm": {
+     "bore_d": 4.2,
+     "bore_depth": 7.5,
+     "lead_in": "0.4 x 45 deg"
+    }
+   },
+   "material": "brass",
+   "color": [
+    0.75,
+    0.75,
+    0.77
+   ],
+   "instances": [
+    {
+     "pos": [
+      0.39792,
+      -0.0225,
+      0.4567
+     ],
+     "axis": [
+      0,
+      0,
+      -1
+     ],
+     "parent": "Motor_Mount_3",
+     "note": "insert body 5.7 mm into the mount side face"
+    },
+    {
+     "pos": [
+      0.39792,
+      -0.0225,
+      0.4107
+     ],
+     "axis": [
+      0,
+      0,
+      1
+     ],
+     "parent": "Motor_Mount_3",
+     "note": "insert body 5.7 mm into the mount side face"
+    },
+    {
+     "pos": [
+      0.34392,
+      -0.0225,
+      0.4567
+     ],
+     "axis": [
+      0,
+      0,
+      -1
+     ],
+     "parent": "Motor_Mount_3",
+     "note": "insert body 5.7 mm into the mount side face"
+    },
+    {
+     "pos": [
+      0.34392,
+      -0.0225,
+      0.4107
+     ],
+     "axis": [
+      0,
+      0,
+      1
+     ],
+     "parent": "Motor_Mount_3",
+     "note": "insert body 5.7 mm into the mount side face"
+    },
+    {
+     "pos": [
+      0.39792,
+      -0.0225,
+      -0.4107
+     ],
+     "axis": [
+      0,
+      0,
+      -1
+     ],
+     "parent": "Motor_Mount_1",
+     "note": "insert body 5.7 mm into the mount side face"
+    },
+    {
+     "pos": [
+      0.39792,
+      -0.0225,
+      -0.4567
+     ],
+     "axis": [
+      0,
+      0,
+      1
+     ],
+     "parent": "Motor_Mount_1",
+     "note": "insert body 5.7 mm into the mount side face"
+    },
+    {
+     "pos": [
+      0.34392,
+      -0.0225,
+      -0.4107
+     ],
+     "axis": [
+      0,
+      0,
+      -1
+     ],
+     "parent": "Motor_Mount_1",
+     "note": "insert body 5.7 mm into the mount side face"
+    },
+    {
+     "pos": [
+      0.34392,
+      -0.0225,
+      -0.4567
+     ],
+     "axis": [
+      0,
+      0,
+      1
+     ],
+     "parent": "Motor_Mount_1",
+     "note": "insert body 5.7 mm into the mount side face"
+    },
+    {
+     "pos": [
+      -0.47758,
+      -0.0225,
+      0.4567
+     ],
+     "axis": [
+      0,
+      0,
+      -1
+     ],
+     "parent": "Motor_Mount_4",
+     "note": "insert body 5.7 mm into the mount side face"
+    },
+    {
+     "pos": [
+      -0.47758,
+      -0.0225,
+      0.4107
+     ],
+     "axis": [
+      0,
+      0,
+      1
+     ],
+     "parent": "Motor_Mount_4",
+     "note": "insert body 5.7 mm into the mount side face"
+    },
+    {
+     "pos": [
+      -0.53158,
+      -0.0225,
+      0.4567
+     ],
+     "axis": [
+      0,
+      0,
+      -1
+     ],
+     "parent": "Motor_Mount_4",
+     "note": "insert body 5.7 mm into the mount side face"
+    },
+    {
+     "pos": [
+      -0.53158,
+      -0.0225,
+      0.4107
+     ],
+     "axis": [
+      0,
+      0,
+      1
+     ],
+     "parent": "Motor_Mount_4",
+     "note": "insert body 5.7 mm into the mount side face"
+    },
+    {
+     "pos": [
+      -0.47758,
+      -0.0225,
+      -0.4107
+     ],
+     "axis": [
+      0,
+      0,
+      -1
+     ],
+     "parent": "Motor_Mount_2",
+     "note": "insert body 5.7 mm into the mount side face"
+    },
+    {
+     "pos": [
+      -0.47758,
+      -0.0225,
+      -0.4567
+     ],
+     "axis": [
+      0,
+      0,
+      1
+     ],
+     "parent": "Motor_Mount_2",
+     "note": "insert body 5.7 mm into the mount side face"
+    },
+    {
+     "pos": [
+      -0.53158,
+      -0.0225,
+      -0.4107
+     ],
+     "axis": [
+      0,
+      0,
+      -1
+     ],
+     "parent": "Motor_Mount_2",
+     "note": "insert body 5.7 mm into the mount side face"
+    },
+    {
+     "pos": [
+      -0.53158,
+      -0.0225,
+      -0.4567
+     ],
+     "axis": [
+      0,
+      0,
+      1
+     ],
+     "parent": "Motor_Mount_2",
+     "note": "insert body 5.7 mm into the mount side face"
+    },
+    {
+     "pos": [
+      0.42892,
+      -0.015,
+      0.4337
+     ],
+     "axis": [
+      0,
+      0,
+      -1
+     ],
+     "parent": "Lift_Nacelle_L1",
+     "note": "insert in the inboard-half seam boss at the split plane z=z_m"
+    },
+    {
+     "pos": [
+      0.27592,
+      -0.015,
+      0.4337
+     ],
+     "axis": [
+      0,
+      0,
+      -1
+     ],
+     "parent": "Lift_Nacelle_L1",
+     "note": "insert in the inboard-half seam boss at the split plane z=z_m"
+    },
+    {
+     "pos": [
+      0.42892,
+      -0.015,
+      -0.4337
+     ],
+     "axis": [
+      0,
+      0,
+      1
+     ],
+     "parent": "Lift_Nacelle_L3",
+     "note": "insert in the inboard-half seam boss at the split plane z=z_m"
+    },
+    {
+     "pos": [
+      0.27592,
+      -0.015,
+      -0.4337
+     ],
+     "axis": [
+      0,
+      0,
+      1
+     ],
+     "parent": "Lift_Nacelle_L3",
+     "note": "insert in the inboard-half seam boss at the split plane z=z_m"
+    },
+    {
+     "pos": [
+      -0.44658,
+      -0.015,
+      0.4337
+     ],
+     "axis": [
+      0,
+      0,
+      -1
+     ],
+     "parent": "Lift_Nacelle_L4",
+     "note": "insert in the inboard-half seam boss at the split plane z=z_m"
+    },
+    {
+     "pos": [
+      -0.59958,
+      -0.015,
+      0.4337
+     ],
+     "axis": [
+      0,
+      0,
+      -1
+     ],
+     "parent": "Lift_Nacelle_L4",
+     "note": "insert in the inboard-half seam boss at the split plane z=z_m"
+    },
+    {
+     "pos": [
+      -0.44658,
+      -0.015,
+      -0.4337
+     ],
+     "axis": [
+      0,
+      0,
+      1
+     ],
+     "parent": "Lift_Nacelle_L2",
+     "note": "insert in the inboard-half seam boss at the split plane z=z_m"
+    },
+    {
+     "pos": [
+      -0.59958,
+      -0.015,
+      -0.4337
+     ],
+     "axis": [
+      0,
+      0,
+      1
+     ],
+     "parent": "Lift_Nacelle_L2",
+     "note": "insert in the inboard-half seam boss at the split plane z=z_m"
+    }
+   ],
+   "qty_total": 24,
+   "covered_by": "new line P-A3-04",
+   "est": false,
+   "source": "geometry copied from HW-028 (hardware.json)"
+  },
+  {
+   "id": "HW-A3-03",
+   "joint": "J-A3-02",
+   "kind": "screw",
+   "spec": "ISO 7380-1 M3x16 A2 (replaces supplied M3x12 holding-plate screw)",
+   "standard": "ISO 7380-1",
+   "geom": {
+    "d": 3,
+    "L": 16,
+    "head": "button",
+    "head_d": 5.7,
+    "head_h": 1.65,
+    "s": 2.0
+   },
+   "material": "A2 stainless (304)",
+   "color": [
+    0.75,
+    0.75,
+    0.77
+   ],
+   "instances": [
+    {
+     "pos": [
+      0.37658,
+      0.041,
+      0.43936
+     ],
+     "axis": [
+      0,
+      -1,
+      0
+     ],
+     "parent": "Lift_Cap_L1",
+     "note": "replaces HW-033 at the same xz (est pattern 4 on dia 16); head bearing on the counterbore floor y=0.0410, tip y=0.0250"
+    },
+    {
+     "pos": [
+      0.36526,
+      0.041,
+      0.43936
+     ],
+     "axis": [
+      0,
+      -1,
+      0
+     ],
+     "parent": "Lift_Cap_L1",
+     "note": "replaces HW-033 at the same xz (est pattern 4 on dia 16); head bearing on the counterbore floor y=0.0410, tip y=0.0250"
+    },
+    {
+     "pos": [
+      0.36526,
+      0.041,
+      0.42804
+     ],
+     "axis": [
+      0,
+      -1,
+      0
+     ],
+     "parent": "Lift_Cap_L1",
+     "note": "replaces HW-033 at the same xz (est pattern 4 on dia 16); head bearing on the counterbore floor y=0.0410, tip y=0.0250"
+    },
+    {
+     "pos": [
+      0.37658,
+      0.041,
+      0.42804
+     ],
+     "axis": [
+      0,
+      -1,
+      0
+     ],
+     "parent": "Lift_Cap_L1",
+     "note": "replaces HW-033 at the same xz (est pattern 4 on dia 16); head bearing on the counterbore floor y=0.0410, tip y=0.0250"
+    },
+    {
+     "pos": [
+      0.37658,
+      0.041,
+      -0.42804
+     ],
+     "axis": [
+      0,
+      -1,
+      0
+     ],
+     "parent": "Lift_Cap_L3",
+     "note": "replaces HW-033 at the same xz (est pattern 4 on dia 16); head bearing on the counterbore floor y=0.0410, tip y=0.0250"
+    },
+    {
+     "pos": [
+      0.36526,
+      0.041,
+      -0.42804
+     ],
+     "axis": [
+      0,
+      -1,
+      0
+     ],
+     "parent": "Lift_Cap_L3",
+     "note": "replaces HW-033 at the same xz (est pattern 4 on dia 16); head bearing on the counterbore floor y=0.0410, tip y=0.0250"
+    },
+    {
+     "pos": [
+      0.36526,
+      0.041,
+      -0.43936
+     ],
+     "axis": [
+      0,
+      -1,
+      0
+     ],
+     "parent": "Lift_Cap_L3",
+     "note": "replaces HW-033 at the same xz (est pattern 4 on dia 16); head bearing on the counterbore floor y=0.0410, tip y=0.0250"
+    },
+    {
+     "pos": [
+      0.37658,
+      0.041,
+      -0.43936
+     ],
+     "axis": [
+      0,
+      -1,
+      0
+     ],
+     "parent": "Lift_Cap_L3",
+     "note": "replaces HW-033 at the same xz (est pattern 4 on dia 16); head bearing on the counterbore floor y=0.0410, tip y=0.0250"
+    },
+    {
+     "pos": [
+      -0.49892,
+      0.041,
+      0.43936
+     ],
+     "axis": [
+      0,
+      -1,
+      0
+     ],
+     "parent": "Lift_Cap_L4",
+     "note": "replaces HW-033 at the same xz (est pattern 4 on dia 16); head bearing on the counterbore floor y=0.0410, tip y=0.0250"
+    },
+    {
+     "pos": [
+      -0.51024,
+      0.041,
+      0.43936
+     ],
+     "axis": [
+      0,
+      -1,
+      0
+     ],
+     "parent": "Lift_Cap_L4",
+     "note": "replaces HW-033 at the same xz (est pattern 4 on dia 16); head bearing on the counterbore floor y=0.0410, tip y=0.0250"
+    },
+    {
+     "pos": [
+      -0.51024,
+      0.041,
+      0.42804
+     ],
+     "axis": [
+      0,
+      -1,
+      0
+     ],
+     "parent": "Lift_Cap_L4",
+     "note": "replaces HW-033 at the same xz (est pattern 4 on dia 16); head bearing on the counterbore floor y=0.0410, tip y=0.0250"
+    },
+    {
+     "pos": [
+      -0.49892,
+      0.041,
+      0.42804
+     ],
+     "axis": [
+      0,
+      -1,
+      0
+     ],
+     "parent": "Lift_Cap_L4",
+     "note": "replaces HW-033 at the same xz (est pattern 4 on dia 16); head bearing on the counterbore floor y=0.0410, tip y=0.0250"
+    },
+    {
+     "pos": [
+      -0.49892,
+      0.041,
+      -0.42804
+     ],
+     "axis": [
+      0,
+      -1,
+      0
+     ],
+     "parent": "Lift_Cap_L2",
+     "note": "replaces HW-033 at the same xz (est pattern 4 on dia 16); head bearing on the counterbore floor y=0.0410, tip y=0.0250"
+    },
+    {
+     "pos": [
+      -0.51024,
+      0.041,
+      -0.42804
+     ],
+     "axis": [
+      0,
+      -1,
+      0
+     ],
+     "parent": "Lift_Cap_L2",
+     "note": "replaces HW-033 at the same xz (est pattern 4 on dia 16); head bearing on the counterbore floor y=0.0410, tip y=0.0250"
+    },
+    {
+     "pos": [
+      -0.51024,
+      0.041,
+      -0.43936
+     ],
+     "axis": [
+      0,
+      -1,
+      0
+     ],
+     "parent": "Lift_Cap_L2",
+     "note": "replaces HW-033 at the same xz (est pattern 4 on dia 16); head bearing on the counterbore floor y=0.0410, tip y=0.0250"
+    },
+    {
+     "pos": [
+      -0.49892,
+      0.041,
+      -0.43936
+     ],
+     "axis": [
+      0,
+      -1,
+      0
+     ],
+     "parent": "Lift_Cap_L2",
+     "note": "replaces HW-033 at the same xz (est pattern 4 on dia 16); head bearing on the counterbore floor y=0.0410, tip y=0.0250"
+    }
+   ],
+   "qty_total": 16,
+   "covered_by": "new line P-A3-02",
+   "est": false,
+   "source": "https://www.zoro.com/zoro-select-m3-050-socket-head-cap-screw-button-plain-18-8-stainless-steel-16-mm-length-50-pk-m510300300016/i/G1723099/ (2026-11-02)"
+  }
+ ],
+ "moving": [
+  {
+   "id": "cap_L1",
+   "kind": "revolute",
+   "parent": "slide_panel_R",
+   "pivot": [
+    0.37092,
+    0.03,
+    0.4337
+   ],
+   "axis": [
+    0,
+    1,
+    0
+   ],
+   "limits_deg": null,
+   "note": "rides on the existing prop_L1 group (same axis); the 2 rotating magnets and the cap turn with the prop; nacelle, fixed magnet and reed do not"
+  },
+  {
+   "id": "cap_L3",
+   "kind": "revolute",
+   "parent": "slide_panel_L",
+   "pivot": [
+    0.37092,
+    0.03,
+    -0.4337
+   ],
+   "axis": [
+    0,
+    1,
+    0
+   ],
+   "limits_deg": null,
+   "note": "rides on the existing prop_L3 group (same axis); the 2 rotating magnets and the cap turn with the prop; nacelle, fixed magnet and reed do not"
+  },
+  {
+   "id": "cap_L4",
+   "kind": "revolute",
+   "parent": "slide_panel_R",
+   "pivot": [
+    -0.50458,
+    0.03,
+    0.4337
+   ],
+   "axis": [
+    0,
+    1,
+    0
+   ],
+   "limits_deg": null,
+   "note": "rides on the existing prop_L4 group (same axis); the 2 rotating magnets and the cap turn with the prop; nacelle, fixed magnet and reed do not"
+  },
+  {
+   "id": "cap_L2",
+   "kind": "revolute",
+   "parent": "slide_panel_L",
+   "pivot": [
+    -0.50458,
+    0.03,
+    -0.4337
+   ],
+   "axis": [
+    0,
+    1,
+    0
+   ],
+   "limits_deg": null,
+   "note": "rides on the existing prop_L2 group (same axis); the 2 rotating magnets and the cap turn with the prop; nacelle, fixed magnet and reed do not"
+  }
+ ],
+ "joints": [
+  {
+   "id": "J-A3-01",
+   "name": "Lift_Nacelle <-> Motor_Mount (4 x M3x10 into inserts) + halves joined by 2 seam screws",
+   "parts": [
+    "Lift_Nacelle_L1..L4",
+    "Motor_Mount_1..4"
+   ],
+   "removable": true,
+   "tool": "2.5 mm hex key",
+   "assembly_order": 11,
+   "notes": "Assemble after the motor and prop are fitted and tested; halves close around the mount and boom from the sides, no removal of boom or mount. Nacelle can be left on when the aircraft is broken down for transport (nacelle is wing-side of the boom splice only for rear rotors: check the rear nacelle does not cover the J-07 splice screws, tolerances.json)."
+  },
+  {
+   "id": "J-A3-02",
+   "name": "Lift_Cap <-> prop holding plate (4 x M3x16 through the cap top plate into the adapter)",
+   "parts": [
+    "Lift_Cap_L1..L4",
+    "Lift_Prop_L1..L4"
+   ],
+   "removable": true,
+   "tool": "2.0 mm hex key (est)",
+   "assembly_order": 12,
+   "notes": "Cap is lowered over the hub with the blade slots on the blades; balance each prop+cap on a nail balancer before first spin (cap adds 9.4 g at r<=34 mm)."
+  }
+ ],
+ "fusion_hints": [
+  "Copy 'VTOL C0 full', remove 16 HW-033 screws, add the parts above in assembly_order 11-12, extend the existing prop_Lx revolute groups.",
+  "Interference check expected: Lift_Cap skirt vs bell (1.55 mm), Lift_Nacelle lid vs prop hub (8 mm), tail vs ESC (35 mm); the rear nacelle nose is 6.6 mm from the rear gear clamp.",
+  "Parked-state render: blades along X; magnets A/B at x_m+/-0.031 over the fixed magnet and reed."
+ ]
+}

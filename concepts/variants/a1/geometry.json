@@ -1,0 +1,2517 @@
+{
+ "base": "VTOL C0 full",
+ "frame": "model X fwd, Y up, Z right, m",
+ "variant": "a1 Wingtip cruise propellers",
+ "date": "2026-11-02",
+ "conventions": "R parts at +Z; mirror to L at -Z (z -> -z, axis z flips). Nacelle axis A = line along X through (y 0.012, z = +/-1.228). Fusion cm Z-up: model (x,y,z) m -> Fusion (z,x,y) x 100.",
+ "remove": [
+  {
+   "name": "Pusher_Prop_Set",
+   "why": "merged pusher motor + 14x8.5EP + spinner + J-10/J-12 adapter hardware (16 pieces); comp= lines Pusher_Motor, Pusher_Prop_14in, Spinner in cad/params.txt",
+   "joint_removed": "prop_P"
+  },
+  {
+   "name": "J-11 Pusher motor - firewall - pod aft bulkhead",
+   "why": "22 pieces; firewall HW-034, motor screws HW-036/037, firewall screws HW-038/039, inserts HW-040. The bulkhead HW-035 stays, modified (see modify)."
+  },
+  {
+   "name": "ESC_P",
+   "why": "pusher ESC in the pod boat-tail"
+  },
+  {
+   "name": "CAP_P",
+   "why": "pusher ESC capacitor"
+  },
+  {
+   "name": "J-29 ESC mounting ... [C]",
+   "why": "the two cable ties that held ESC_P to the pod former"
+  },
+  {
+   "name": "W08 / W15 / W25",
+   "why": "pusher ESC power feed, phase leads and DShot lead (inventory/electrical/wiring.json); delete if modelled as wire bodies"
+  }
+ ],
+ "modify": [
+  {
+   "target": "Battery_6S_LiPo",
+   "change": "move aft to hold the CG at -0.0668 m",
+   "params": {
+    "from_pos_m": [
+     0.0605,
+     -0.05,
+     0.0
+    ],
+    "to_pos_m": [
+     -0.1137,
+     -0.05,
+     0.0
+    ],
+    "shift_m": -0.1742,
+    "new_extent_x_m": [
+     -0.1912,
+     -0.0362
+    ]
+   },
+   "note": "pack now sits under the wing saddle (saddle y -0.0136..0.0225, pack top y -0.025): 11 mm clearance"
+  },
+  {
+   "target": "J-25 Pod formers battery tray straps / Fuselage_Pod",
+   "change": "extend the tray aft with Battery_Tray_Ext and cut a bottom battery slot hatch 170 x 60 mm in the pod skin at x -0.205..-0.035",
+   "params": {
+    "hatch_mm": [
+     170,
+     60
+    ],
+    "x_range_m": [
+     -0.205,
+     -0.035
+    ]
+   }
+  },
+  {
+   "target": "XT90S_1 and W01/W02",
+   "change": "XT90S pull-to-disconnect moves with the pack front",
+   "params": {
+    "from_pos_m": [
+     0.165,
+     -0.05,
+     0.0
+    ],
+    "to_pos_m": [
+     -0.0092,
+     -0.05,
+     0.0
+    ]
+   }
+  },
+  {
+   "target": "HW-035 Pod aft bulkhead ring",
+   "change": "becomes a solid aft cap (the firewall is gone)",
+   "params": {
+    "id_mm": 0,
+    "od_mm": 58,
+    "t_mm": 6.5,
+    "new_pos_m": [
+     -0.39675,
+     -0.03,
+     0.0
+    ],
+    "x_range_m": [
+     -0.4,
+     -0.3935
+    ]
+   }
+  },
+  {
+   "target": "Wing_Panel_R / Wing_Panel_L",
+   "change": "tip bore for the Al extension, upper-skin wire groove, notch none",
+   "params": {
+    "bore": "dia 25.6 mm along Z through (x -0.0716, y 0.00448) from z +/-0.880 (socket end) to +/-1.200 (tip face)",
+    "groove": "upper-skin groove 7 mm wide x 4 mm deep, polyline (x,z): (-0.12,0.09) -> (-0.04,0.25) -> (-0.04,1.200); mirror for L",
+    "tip_face": "flat at z +/-1.200, unchanged"
+   }
+  },
+  {
+   "target": "Aileron_R / Aileron_L",
+   "change": "none; check only",
+   "params": {
+    "clearance_to_nacelle_mm": 14,
+    "at": "x -0.1766 (hinge), shell radius 15.6 mm at that station, aileron end z 1.198 vs shell surface z 1.2124"
+   }
+  },
+  {
+   "target": "Pitot_Tube and J-31 clamp (left)",
+   "change": "move inboard 0.10 m out of the left prop induction field",
+   "params": {
+    "from_z_m": -1.0,
+    "to_z_m": -0.9,
+    "note": "prop disc inner edge at z -1.050; hose W32/W33 shortens by 0.1 m"
+   }
+  },
+  {
+   "target": "JB_J1_R / JB_J1_L",
+   "change": "box carries a third XT60H pair and a sixth JR pair per side",
+   "params": {
+    "new_pairs": {
+     "XT60H": 1,
+     "JR_3pin": 1
+    }
+   }
+  },
+  {
+   "target": "mass / CG / SM",
+   "change": "results only (no geometry)",
+   "params": {
+    "mass_kg": 6.9104,
+    "cg_x_m": -0.066829043,
+    "static_margin_pct_est": 17.7
+   }
+  }
+ ],
+ "add": [
+  {
+   "name": "Tip_Tube_Ext",
+   "kind": "part",
+   "shape": {
+    "type": "hollow cylinder along model Z",
+    "OD_mm": 25.4,
+    "ID_mm": 23.622,
+    "length_mm": 342.0,
+    "ops": "extrude annulus 342 mm along Z; no other features",
+    "note": "cut from the 358 mm offcut of one P-30 boom tube; z 0.880 -> 1.222 (R), mirror for L; butts against the socket end at z = +/-0.880"
+   },
+   "material": "6061-T6",
+   "color": [
+    0.718,
+    0.737,
+    0.776
+   ],
+   "placements": [
+    {
+     "pos": [
+      -0.0716,
+      0.00448,
+      1.051
+     ],
+     "axis": [
+      0,
+      0,
+      1
+     ],
+     "up": [
+      0,
+      1,
+      0
+     ],
+     "tag": "R"
+    },
+    {
+     "pos": [
+      -0.0716,
+      0.00448,
+      -1.051
+     ],
+     "axis": [
+      0,
+      0,
+      -1
+     ],
+     "up": [
+      0,
+      1,
+      0
+     ],
+     "tag": "L"
+    }
+   ],
+   "mass_g": 63.2,
+   "source": "cad/params.txt boomOD/boomID (0.0254/0.023622) x 342 mm x matRho 2700; calc.py tube list"
+  },
+  {
+   "name": "Tip_Splice_Sleeve",
+   "kind": "part",
+   "shape": {
+    "type": "hollow cylinder along model Z",
+    "OD_mm": 22.225,
+    "ID_mm": 19.279,
+    "length_mm": 74.0,
+    "ops": "extrude annulus 74 mm; centred on the socket end (z = +/-0.880) so 37 mm sits in the socket and 37 mm in the tip tube",
+    "note": "cut from the 154 mm offcut of P-32 (two sleeves + kerf); same section as Wing_Joiner"
+   },
+   "material": "6061-T6",
+   "color": [
+    0.8,
+    0.82,
+    0.86
+   ],
+   "placements": [
+    {
+     "pos": [
+      -0.0716,
+      0.00448,
+      0.88
+     ],
+     "axis": [
+      0,
+      0,
+      1
+     ],
+     "up": [
+      0,
+      1,
+      0
+     ],
+     "tag": "R"
+    },
+    {
+     "pos": [
+      -0.0716,
+      0.00448,
+      -0.88
+     ],
+     "axis": [
+      0,
+      0,
+      -1
+     ],
+     "up": [
+      0,
+      1,
+      0
+     ],
+     "tag": "L"
+    }
+   ],
+   "mass_g": 19.2,
+   "source": "cad/params.txt joinOD/joinID x 74 mm x 2700; calc.py"
+  },
+  {
+   "name": "Nacelle_Mount",
+   "kind": "part",
+   "shape": {
+    "type": "one printed body, three features",
+    "axis_note": "nacelle axis A = line along X through (y 0.012, z +/-1.228); tube axis T = line along Z through (x -0.0716, y 0.00448)",
+    "ring": {
+     "OD_mm": 57.0,
+     "thickness_mm": 6.0,
+     "x_range_m": [
+      0.033,
+      0.039
+     ],
+     "centre_hole_dia_mm": 20.0,
+     "vent_holes": "4 x dia 8 mm on a 38 mm dia circle at 45/135/225/315 deg",
+     "motor_holes": "4 x dia 3.2 mm on a 19 x 19 mm square about A (as HW-036 pattern), through",
+     "shell_pockets": "2 x dia 10 mm x 2.5 mm radial pockets in the rim at the top (+Y) and outboard (+Z for R, -Z for L) positions, x = 0.036; insert bore dia 4.2 x 7.5 in the pocket floor (r 26 -> 20.3 mm)",
+     "note": "replaces C0 firewall HW-034 (58 dia x 6.1 PA6-CF) with the same 19 mm hole square"
+    },
+    "keel": {
+     "plate_mm": {
+      "x": 128.0,
+      "y": 44.0,
+      "z": 4.0
+     },
+     "x_range_m": [
+      -0.095,
+      0.033
+     ],
+     "y_range_m": [
+      -0.01,
+      0.034
+     ],
+     "z_range_R_m": [
+      1.226,
+      1.23
+     ],
+     "lightening": "3 x dia 14 mm at x -0.060, -0.020, +0.010 (y 0.012), 2 mm fillet to the ring and the barrel",
+     "tie_slots": "4.2 x 1.6 mm: ESC loops at x -0.0275 and -0.0025, y -0.0035 and 0.0275; cap loop at x -0.0525, y 0.0015 and 0.0225",
+     "note": "carries motor thrust, torque and weight into the barrel; ESC on its outboard face (z 1.231..1.239), 470 uF capacitor aft of the ESC"
+    },
+    "barrel": {
+     "OD_mm": 38.0,
+     "z_range_R_m": [
+      1.2,
+      1.236
+     ],
+     "bore_dia_mm": 25.6,
+     "bore_depth_mm": 24.0,
+     "bore_from": "inboard face z = 1.200",
+     "end_cap_mm": 12.0,
+     "inserts": "2 x M3x5.7 radial at z 1.2125, at +Y and +X, bores dia 4.2 x 7.5",
+     "wire_hole": "dia 10 mm through the keel at x -0.040, y 0.004 for the power pair and DShot lead",
+     "note": "inboard face is bonded (epoxy) to the foam tip face and the 25.4 mm tube end; the barrel is the only structural tie from nacelle to wing"
+    }
+   },
+   "material": "PA6-CF (Polymaker PA6-CF20, P-01)",
+   "color": [
+    0.118,
+    0.129,
+    0.157
+   ],
+   "placements": [
+    {
+     "pos": [
+      0.0,
+      0.012,
+      1.228
+     ],
+     "axis": [
+      1,
+      0,
+      0
+     ],
+     "up": [
+      0,
+      1,
+      0
+     ],
+     "tag": "R"
+    },
+    {
+     "pos": [
+      0.0,
+      0.012,
+      -1.228
+     ],
+     "axis": [
+      1,
+      0,
+      0
+     ],
+     "up": [
+      0,
+      1,
+      0
+     ],
+     "tag": "L"
+    }
+   ],
+   "mass_g": 45.0,
+   "source": "calc.py: ring 14 cm3 x 0.7 + keel 11.5 cm3 x 0.8 + barrel 30.5 cm3 x 0.6 fill, x 1.2 g/cc (EST); firewall precedent HW-034"
+  },
+  {
+   "name": "Nacelle_Shell",
+   "kind": "part",
+   "shape": {
+    "type": "revolve about A (y 0.012, z +/-1.228), wall 0.5 mm, open both ends",
+    "profile_x_vs_radius_mm": [
+     [
+      0.039,
+      29.0
+     ],
+     [
+      -0.1,
+      29.0
+     ],
+     [
+      -0.16,
+      19.0
+     ],
+     [
+      -0.22,
+      8.0
+     ]
+    ],
+    "profile_note": "cylinder dia 58 from x 0.039 to -0.100, then a cone (spline, tangent-continuous) to dia 16 at x -0.220; open tail dia 15 mm is the cooling exit",
+    "cutouts": [
+     "barrel clearance dia 38.6 mm through the inboard wall centred (x -0.0716, y 0.00448) axis Z",
+     "wire slot 12 x 6 mm at x -0.040, y 0.004 in the inboard wall",
+     "2 x dia 3.4 mm radial holes at x 0.036, top and outboard, each in a dia 9 mm x 2.5 mm internal doubler pad"
+    ],
+    "swet_m2": 0.0384
+   },
+   "material": "PETG 0.5 mm vase print (P-05)",
+   "color": [
+    0.929,
+    0.937,
+    0.957
+   ],
+   "placements": [
+    {
+     "pos": [
+      0.0,
+      0.012,
+      1.228
+     ],
+     "axis": [
+      1,
+      0,
+      0
+     ],
+     "up": [
+      0,
+      1,
+      0
+     ],
+     "tag": "R"
+    },
+    {
+     "pos": [
+      0.0,
+      0.012,
+      -1.228
+     ],
+     "axis": [
+      1,
+      0,
+      0
+     ],
+     "up": [
+      0,
+      1,
+      0
+     ],
+     "tag": "L"
+    }
+   ],
+   "mass_g": 28.0,
+   "source": "calc.py: Swet 0.0384 m2 x 0.5 mm x 1.27 g/cc = 24 g + pads/lip (EST)"
+  },
+  {
+   "name": "Tip_Motor",
+   "kind": "purchased",
+   "shape": {
+    "copy_of": "C0 occurrence Pusher_Motor (fusion/build_vtol_fusion.py motor_profile(X))",
+    "transform": "rotate 180 deg about model Y so the body extends toward +X; rotor dia 47.5 mm, body length 32 mm; shaft dia 4 mm to x 0.0858",
+    "x_range_m": [
+     0.039,
+     0.071
+    ],
+    "axis": "A"
+   },
+   "material": "SunnySky X4110S 400KV (P-38 / P-40)",
+   "color": [
+    0.176,
+    0.188,
+    0.22
+   ],
+   "placements": [
+    {
+     "pos": [
+      0.039,
+      0.012,
+      1.228
+     ],
+     "axis": [
+      1,
+      0,
+      0
+     ],
+     "up": [
+      0,
+      1,
+      0
+     ],
+     "tag": "R"
+    },
+    {
+     "pos": [
+      0.039,
+      0.012,
+      -1.228
+     ],
+     "axis": [
+      1,
+      0,
+      0
+     ],
+     "up": [
+      0,
+      1,
+      0
+     ],
+     "tag": "L"
+    }
+   ],
+   "mass_g": 165.0,
+   "source": "https://sunnyskyusa.com/collections/multirotor-motors/products/sunnysky-x4110s-motors (165 g, 2026-11-02)"
+  },
+  {
+   "name": "Tip_Prop_R",
+   "kind": "purchased",
+   "shape": {
+    "copy_of": "C0 occurrence Pusher_Prop_14in (APC 14x8.5EP envelope, dia 355.6 mm)",
+    "transform": "rotate 180 deg about model Y, translate to x 0.077; mirror the blade pair about the plane containing A and Y (z -> -z in prop-local) to make the standard-rotation (right-hand) APC LP14085E",
+    "disc": "dia 355.6 mm in the Y-Z plane at x 0.077",
+    "rotation": "clockwise seen from behind (from -X): +X right-hand rotation, inboard blade moves UP"
+   },
+   "material": "APC 14x8.5E (standard rotation)",
+   "color": [
+    0.059,
+    0.059,
+    0.067
+   ],
+   "placements": [
+    {
+     "pos": [
+      0.077,
+      0.012,
+      1.228
+     ],
+     "axis": [
+      1,
+      0,
+      0
+     ],
+     "up": [
+      0,
+      1,
+      0
+     ]
+    }
+   ],
+   "mass_g": 37.1,
+   "source": "https://www.apcprop.com/product/14x8-5e/ (1.31 oz, 2026-11-02)"
+  },
+  {
+   "name": "Tip_Prop_L",
+   "kind": "purchased",
+   "shape": {
+    "copy_of": "C0 occurrence Pusher_Prop_14in (APC 14x8.5EP, reverse rotation)",
+    "transform": "rotate 180 deg about model Y, translate to x 0.077 (no mirror: the EP is the left-hand part)",
+    "disc": "dia 355.6 mm in the Y-Z plane at x 0.077",
+    "rotation": "counter-clockwise seen from behind: -X rotation, inboard blade moves UP"
+   },
+   "material": "APC 14x8.5EP (reverse rotation)",
+   "color": [
+    0.059,
+    0.059,
+    0.067
+   ],
+   "placements": [
+    {
+     "pos": [
+      0.077,
+      0.012,
+      -1.228
+     ],
+     "axis": [
+      1,
+      0,
+      0
+     ],
+     "up": [
+      0,
+      1,
+      0
+     ]
+    }
+   ],
+   "mass_g": 37.1,
+   "source": "https://www.apcprop.com/product/14x8-5ep/ (1.31 oz, \"Left Hand Rotation\", 2026-11-02)"
+  },
+  {
+   "name": "Tip_Spinner",
+   "kind": "part",
+   "shape": {
+    "copy_of": "C0 occurrence Spinner (revolve profile (0,0),(0,.021),(-.012,.019),(-.026,.012),(-.038,0) about X)",
+    "transform": "mirror the profile to +X: base r 21 mm at x 0.081, tip at x 0.119",
+    "base_dia_mm": 42.0,
+    "length_mm": 38.0
+   },
+   "material": "PETG / TPU printed (M-19)",
+   "color": [
+    0.949,
+    0.957,
+    0.969
+   ],
+   "placements": [
+    {
+     "pos": [
+      0.081,
+      0.012,
+      1.228
+     ],
+     "axis": [
+      1,
+      0,
+      0
+     ],
+     "up": [
+      0,
+      1,
+      0
+     ],
+     "tag": "R"
+    },
+    {
+     "pos": [
+      0.081,
+      0.012,
+      -1.228
+     ],
+     "axis": [
+      1,
+      0,
+      0
+     ],
+     "up": [
+      0,
+      1,
+      0
+     ],
+     "tag": "L"
+    }
+   ],
+   "mass_g": 8.0,
+   "source": "EST; C0 Spinner row M-19 has no mass"
+  },
+  {
+   "name": "ESC_T",
+   "kind": "purchased",
+   "shape": {
+    "type": "box",
+    "size_mm": {
+     "x": 45,
+     "y": 25,
+     "z": 8
+    },
+    "note": "same envelope as ESC_P (components.json); lies flat on the outboard keel face, long edge along X"
+   },
+   "material": "SoloGood 45A BLHeli_S (P-15)",
+   "color": [
+    0.1,
+    0.35,
+    0.2
+   ],
+   "placements": [
+    {
+     "pos": [
+      -0.015,
+      0.012,
+      1.239
+     ],
+     "axis": [
+      1,
+      0,
+      0
+     ],
+     "up": [
+      0,
+      1,
+      0
+     ],
+     "tag": "R"
+    },
+    {
+     "pos": [
+      -0.015,
+      0.012,
+      -1.239
+     ],
+     "axis": [
+      1,
+      0,
+      0
+     ],
+     "up": [
+      0,
+      1,
+      0
+     ],
+     "tag": "L"
+    }
+   ],
+   "mass_g": 15.0,
+   "source": "inventory/electrical/components.json ESC_P mass_g 15 (EST)"
+  },
+  {
+   "name": "CAP_T",
+   "kind": "purchased",
+   "shape": {
+    "type": "cylinder along X",
+    "dia_mm": 10.0,
+    "length_mm": 20.0,
+    "note": "470 uF 35 V radial can, leads to the ESC input pads"
+   },
+   "material": "Panasonic 470 uF 35 V (G-04)",
+   "color": [
+    0.1,
+    0.1,
+    0.45
+   ],
+   "placements": [
+    {
+     "pos": [
+      -0.0525,
+      0.012,
+      1.2335
+     ],
+     "axis": [
+      1,
+      0,
+      0
+     ],
+     "up": [
+      0,
+      1,
+      0
+     ],
+     "tag": "R"
+    },
+    {
+     "pos": [
+      -0.0525,
+      0.012,
+      -1.2335
+     ],
+     "axis": [
+      1,
+      0,
+      0
+     ],
+     "up": [
+      0,
+      1,
+      0
+     ],
+     "tag": "L"
+    }
+   ],
+   "mass_g": 4.0,
+   "source": "EST; dims not in components.json (CAP_*: \u2014)"
+  },
+  {
+   "name": "Battery_Tray_Ext",
+   "kind": "part",
+   "shape": {
+    "type": "two printed rails, each 170 mm x 14 mm x 8 mm L-section",
+    "x_range_m": [
+     -0.205,
+     -0.035
+    ],
+    "z": [
+     -0.035,
+     0.035
+    ],
+    "note": "extends the C0 battery tray (J-25) aft so the pack slides rearward to x -0.1137; bonded to the aft formers"
+   },
+   "material": "PETG (P-05)",
+   "color": [
+    0.118,
+    0.129,
+    0.157
+   ],
+   "placements": [
+    {
+     "pos": [
+      -0.12,
+      -0.075,
+      0.0
+     ],
+     "axis": [
+      1,
+      0,
+      0
+     ],
+     "up": [
+      0,
+      1,
+      0
+     ]
+    }
+   ],
+   "mass_g": 12.0,
+   "source": "EST"
+  },
+  {
+   "name": "Pod_Aft_Cap",
+   "kind": "part",
+   "shape": {
+    "type": "see modify HW-035 (solid disc dia 58 x 6.5 mm at x -0.4000..-0.3935)"
+   },
+   "material": "PETG",
+   "color": [
+    0.118,
+    0.129,
+    0.157
+   ],
+   "placements": [
+    {
+     "pos": [
+      -0.39675,
+      -0.03,
+      0.0
+     ],
+     "axis": [
+      1,
+      0,
+      0
+     ],
+     "up": [
+      0,
+      1,
+      0
+     ]
+    }
+   ],
+   "mass_g": 0.0,
+   "source": "same part as HW-035, no new mass",
+   "note": "listed so the Fusion agent finds it; geometry in the modify list"
+  },
+  {
+   "name": "W_TIP_PWR_R",
+   "kind": "wire",
+   "gauge": "12 AWG (0.415 m per conductor, BUS1 to J1) then 14 AWG (1.263 m per conductor, J1 to ESC_T); red + black",
+   "route_m": [
+    [
+     0.2,
+     -0.06,
+     0.0
+    ],
+    [
+     0.12,
+     -0.09,
+     0.02
+    ],
+    [
+     -0.02,
+     -0.09,
+     0.04
+    ],
+    [
+     -0.09,
+     -0.05,
+     0.065
+    ],
+    [
+     -0.12,
+     0.0,
+     0.09
+    ],
+    [
+     -0.04,
+     0.0,
+     0.25
+    ],
+    [
+     -0.04,
+     0.004,
+     1.2
+    ],
+    [
+     -0.03,
+     0.012,
+     1.215
+    ]
+   ],
+   "joint_at": "J1 (XT60H pair at z +/-0.095)",
+   "mass_g": 92.3,
+   "length_est_m": 1.678,
+   "source": "calc.py wire block (route length x 1.10 slack; 36 / 24 g/m EST)"
+  },
+  {
+   "name": "W_TIP_SIG_R",
+   "kind": "wire",
+   "gauge": "JR 3-pin lead, DShot (white + black), 1.9 m",
+   "route_m": "same path as W_TIP_PWR, in the same groove",
+   "joint_at": "J1 (JR pair)",
+   "mass_g": 3.0,
+   "source": "EST"
+  },
+  {
+   "name": "W_TIP_PWR_L",
+   "kind": "wire",
+   "gauge": "12 AWG (0.415 m per conductor, BUS1 to J1) then 14 AWG (1.263 m per conductor, J1 to ESC_T); red + black",
+   "route_m": [
+    [
+     0.2,
+     -0.06,
+     0.0
+    ],
+    [
+     0.12,
+     -0.09,
+     -0.02
+    ],
+    [
+     -0.02,
+     -0.09,
+     -0.04
+    ],
+    [
+     -0.09,
+     -0.05,
+     -0.065
+    ],
+    [
+     -0.12,
+     0.0,
+     -0.09
+    ],
+    [
+     -0.04,
+     0.0,
+     -0.25
+    ],
+    [
+     -0.04,
+     0.004,
+     -1.2
+    ],
+    [
+     -0.03,
+     0.012,
+     -1.215
+    ]
+   ],
+   "joint_at": "J1 (XT60H pair at z +/-0.095)",
+   "mass_g": 92.3,
+   "length_est_m": 1.678,
+   "source": "calc.py wire block (route length x 1.10 slack; 36 / 24 g/m EST)"
+  },
+  {
+   "name": "W_TIP_SIG_L",
+   "kind": "wire",
+   "gauge": "JR 3-pin lead, DShot (white + black), 1.9 m",
+   "route_m": "same path as W_TIP_PWR, in the same groove",
+   "joint_at": "J1 (JR pair)",
+   "mass_g": 3.0,
+   "source": "EST"
+  },
+  {
+   "name": "W02_ext",
+   "kind": "wire",
+   "gauge": "10 AWG pair, +0.174 m (battery moved aft)",
+   "route_m": "XT90S moves aft with the pack: trunk W02 gains 0.174 m each conductor",
+   "mass_g": 16.0,
+   "source": "EST 47 g/m"
+  }
+ ],
+ "hardware": [
+  {
+   "kind": "screw",
+   "spec": "ISO 7380-1 M3x10 A2",
+   "thread": "M3",
+   "standard": "ISO 7380-1",
+   "geom": {
+    "d": 3,
+    "L": 10,
+    "head": "button",
+    "head_d": 5.7,
+    "head_h": 1.65,
+    "s": 2.0
+   },
+   "material": "A2 stainless (304)",
+   "color": [
+    0.75,
+    0.75,
+    0.77
+   ],
+   "covered_by": "P-04",
+   "est": true,
+   "source": "https://engineersedge.com/iso_socket_button_head.htm (M3-M5 rows), M2 row not on page: ISO 7380-1 M2 value est; checked 2026-11-01",
+   "rationale": "L = 10 = washer 0.5 + 6.1 firewall + 3.4 engagement. Verify real thread depth.",
+   "joint": "J-A1-3",
+   "c0_template": "HW-036",
+   "instances": [
+    {
+     "pos": [
+      0.0324,
+      0.0025,
+      1.2185
+     ],
+     "axis": [
+      1.0,
+      0.0,
+      0.0
+     ],
+     "parent": "Tip_Motor_R",
+     "note": "head on washer on firewall forward face x=-0.3939; tip x=-0.4034; motor face x=-0.400 -> 3.4 mm [mapped from C0 pusher pattern, x -> -0.361 - x]"
+    },
+    {
+     "pos": [
+      0.0324,
+      0.0025,
+      1.2375
+     ],
+     "axis": [
+      1.0,
+      0.0,
+      0.0
+     ],
+     "parent": "Tip_Motor_R",
+     "note": "head on washer on firewall forward face x=-0.3939; tip x=-0.4034; motor face x=-0.400 -> 3.4 mm [mapped from C0 pusher pattern, x -> -0.361 - x]"
+    },
+    {
+     "pos": [
+      0.0324,
+      0.0215,
+      1.2185
+     ],
+     "axis": [
+      1.0,
+      0.0,
+      0.0
+     ],
+     "parent": "Tip_Motor_R",
+     "note": "head on washer on firewall forward face x=-0.3939; tip x=-0.4034; motor face x=-0.400 -> 3.4 mm [mapped from C0 pusher pattern, x -> -0.361 - x]"
+    },
+    {
+     "pos": [
+      0.0324,
+      0.0215,
+      1.2375
+     ],
+     "axis": [
+      1.0,
+      0.0,
+      0.0
+     ],
+     "parent": "Tip_Motor_R",
+     "note": "head on washer on firewall forward face x=-0.3939; tip x=-0.4034; motor face x=-0.400 -> 3.4 mm [mapped from C0 pusher pattern, x -> -0.361 - x]"
+    },
+    {
+     "pos": [
+      0.0324,
+      0.0025,
+      -1.2375
+     ],
+     "axis": [
+      1.0,
+      0.0,
+      0.0
+     ],
+     "parent": "Tip_Motor_L",
+     "note": "head on washer on firewall forward face x=-0.3939; tip x=-0.4034; motor face x=-0.400 -> 3.4 mm [mapped from C0 pusher pattern, x -> -0.361 - x]"
+    },
+    {
+     "pos": [
+      0.0324,
+      0.0025,
+      -1.2185
+     ],
+     "axis": [
+      1.0,
+      0.0,
+      0.0
+     ],
+     "parent": "Tip_Motor_L",
+     "note": "head on washer on firewall forward face x=-0.3939; tip x=-0.4034; motor face x=-0.400 -> 3.4 mm [mapped from C0 pusher pattern, x -> -0.361 - x]"
+    },
+    {
+     "pos": [
+      0.0324,
+      0.0215,
+      -1.2375
+     ],
+     "axis": [
+      1.0,
+      0.0,
+      0.0
+     ],
+     "parent": "Tip_Motor_L",
+     "note": "head on washer on firewall forward face x=-0.3939; tip x=-0.4034; motor face x=-0.400 -> 3.4 mm [mapped from C0 pusher pattern, x -> -0.361 - x]"
+    },
+    {
+     "pos": [
+      0.0324,
+      0.0215,
+      -1.2185
+     ],
+     "axis": [
+      1.0,
+      0.0,
+      0.0
+     ],
+     "parent": "Tip_Motor_L",
+     "note": "head on washer on firewall forward face x=-0.3939; tip x=-0.4034; motor face x=-0.400 -> 3.4 mm [mapped from C0 pusher pattern, x -> -0.361 - x]"
+    }
+   ],
+   "qty_total": 8,
+   "id": "HW-A1-001"
+  },
+  {
+   "kind": "washer",
+   "spec": "ISO 7089 M3 A2",
+   "thread": "M3",
+   "standard": "ISO 7089",
+   "geom": {
+    "id": 3.2,
+    "od": 7.0,
+    "t": 0.5
+   },
+   "material": "A2 stainless",
+   "color": [
+    0.75,
+    0.75,
+    0.77
+   ],
+   "covered_by": "P-04",
+   "est": false,
+   "source": "https://fasten.it/norms/norm/din_en_iso_7089 (ISO 7089 M2-M5) checked 2026-11-01",
+   "rationale": "Under head on PA6-CF.",
+   "joint": "J-A1-3",
+   "c0_template": "HW-037",
+   "instances": [
+    {
+     "pos": [
+      0.03265,
+      0.0025,
+      1.2185
+     ],
+     "axis": [
+      1.0,
+      0.0,
+      0.0
+     ],
+     "parent": "Tip_Motor_R",
+     "note": " [mapped from C0 pusher pattern, x -> -0.361 - x]"
+    },
+    {
+     "pos": [
+      0.03265,
+      0.0025,
+      1.2375
+     ],
+     "axis": [
+      1.0,
+      0.0,
+      0.0
+     ],
+     "parent": "Tip_Motor_R",
+     "note": " [mapped from C0 pusher pattern, x -> -0.361 - x]"
+    },
+    {
+     "pos": [
+      0.03265,
+      0.0215,
+      1.2185
+     ],
+     "axis": [
+      1.0,
+      0.0,
+      0.0
+     ],
+     "parent": "Tip_Motor_R",
+     "note": " [mapped from C0 pusher pattern, x -> -0.361 - x]"
+    },
+    {
+     "pos": [
+      0.03265,
+      0.0215,
+      1.2375
+     ],
+     "axis": [
+      1.0,
+      0.0,
+      0.0
+     ],
+     "parent": "Tip_Motor_R",
+     "note": " [mapped from C0 pusher pattern, x -> -0.361 - x]"
+    },
+    {
+     "pos": [
+      0.03265,
+      0.0025,
+      -1.2375
+     ],
+     "axis": [
+      1.0,
+      0.0,
+      0.0
+     ],
+     "parent": "Tip_Motor_L",
+     "note": " [mapped from C0 pusher pattern, x -> -0.361 - x]"
+    },
+    {
+     "pos": [
+      0.03265,
+      0.0025,
+      -1.2185
+     ],
+     "axis": [
+      1.0,
+      0.0,
+      0.0
+     ],
+     "parent": "Tip_Motor_L",
+     "note": " [mapped from C0 pusher pattern, x -> -0.361 - x]"
+    },
+    {
+     "pos": [
+      0.03265,
+      0.0215,
+      -1.2375
+     ],
+     "axis": [
+      1.0,
+      0.0,
+      0.0
+     ],
+     "parent": "Tip_Motor_L",
+     "note": " [mapped from C0 pusher pattern, x -> -0.361 - x]"
+    },
+    {
+     "pos": [
+      0.03265,
+      0.0215,
+      -1.2185
+     ],
+     "axis": [
+      1.0,
+      0.0,
+      0.0
+     ],
+     "parent": "Tip_Motor_L",
+     "note": " [mapped from C0 pusher pattern, x -> -0.361 - x]"
+    }
+   ],
+   "qty_total": 8,
+   "id": "HW-A1-002"
+  },
+  {
+   "kind": "other",
+   "spec": "SunnySky bolt-on prop adapter (supplied), pusher",
+   "thread": "\u2014",
+   "standard": "n/a",
+   "geom": {
+    "od": 28.0,
+    "L": 6.0,
+    "bore": 4.0
+   },
+   "material": "aluminium (est)",
+   "color": [
+    0.72,
+    0.74,
+    0.78
+   ],
+   "covered_by": "supplied with part",
+   "est": true,
+   "source": "dims est",
+   "rationale": "Pusher prop interface.",
+   "joint": "J-A1-4",
+   "c0_template": "HW-041",
+   "instances": [
+    {
+     "pos": [
+      0.071,
+      0.012,
+      1.228
+     ],
+     "axis": [
+      1.0,
+      0.0,
+      0.0
+     ],
+     "parent": "Tip_Motor_R",
+     "note": "adapter base on bell face x=-0.432 [mapped from C0 pusher pattern, x -> -0.361 - x]"
+    },
+    {
+     "pos": [
+      0.071,
+      0.012,
+      -1.228
+     ],
+     "axis": [
+      1.0,
+      0.0,
+      0.0
+     ],
+     "parent": "Tip_Motor_L",
+     "note": "adapter base on bell face x=-0.432 [mapped from C0 pusher pattern, x -> -0.361 - x]"
+    }
+   ],
+   "qty_total": 2,
+   "id": "HW-A1-003"
+  },
+  {
+   "kind": "plate",
+   "spec": "SunnySky holding plate (supplied), pusher",
+   "thread": "\u2014",
+   "standard": "n/a",
+   "geom": {
+    "od": 28.0,
+    "t": 2.0
+   },
+   "material": "aluminium (est)",
+   "color": [
+    0.72,
+    0.74,
+    0.78
+   ],
+   "covered_by": "supplied with part",
+   "est": true,
+   "source": "dims est",
+   "rationale": "Clamps pusher prop hub.",
+   "joint": "J-A1-4",
+   "c0_template": "HW-042",
+   "instances": [
+    {
+     "pos": [
+      0.0858,
+      0.012,
+      1.228
+     ],
+     "axis": [
+      1.0,
+      0.0,
+      0.0
+     ],
+     "parent": "Tip_Motor_R",
+     "note": "holding plate aft of prop hub (hub x -0.4292..-0.4468) [mapped from C0 pusher pattern, x -> -0.361 - x]"
+    },
+    {
+     "pos": [
+      0.0858,
+      0.012,
+      -1.228
+     ],
+     "axis": [
+      1.0,
+      0.0,
+      0.0
+     ],
+     "parent": "Tip_Motor_L",
+     "note": "holding plate aft of prop hub (hub x -0.4292..-0.4468) [mapped from C0 pusher pattern, x -> -0.361 - x]"
+    }
+   ],
+   "qty_total": 2,
+   "id": "HW-A1-004"
+  },
+  {
+   "kind": "screw",
+   "spec": "Prop adapter screw M3x12 (supplied, est)",
+   "thread": "M3 (est)",
+   "standard": "n/a",
+   "geom": {
+    "d": 3,
+    "L": 12,
+    "head": "socket",
+    "head_d": 5.5,
+    "head_h": 3.0,
+    "s": 2.5
+   },
+   "material": "steel",
+   "color": [
+    0.75,
+    0.75,
+    0.77
+   ],
+   "covered_by": "supplied with part",
+   "est": true,
+   "source": "est",
+   "rationale": "Four per motor.",
+   "joint": "J-A1-4",
+   "c0_template": "HW-043",
+   "instances": [
+    {
+     "pos": [
+      0.0878,
+      0.01766,
+      1.23366
+     ],
+     "axis": [
+      -1.0,
+      0.0,
+      0.0
+     ],
+     "parent": "Tip_Motor_R",
+     "note": "est pattern [mapped from C0 pusher pattern, x -> -0.361 - x]"
+    },
+    {
+     "pos": [
+      0.0878,
+      0.00634,
+      1.23366
+     ],
+     "axis": [
+      -1.0,
+      0.0,
+      0.0
+     ],
+     "parent": "Tip_Motor_R",
+     "note": "est pattern [mapped from C0 pusher pattern, x -> -0.361 - x]"
+    },
+    {
+     "pos": [
+      0.0878,
+      0.00634,
+      1.22234
+     ],
+     "axis": [
+      -1.0,
+      0.0,
+      0.0
+     ],
+     "parent": "Tip_Motor_R",
+     "note": "est pattern [mapped from C0 pusher pattern, x -> -0.361 - x]"
+    },
+    {
+     "pos": [
+      0.0878,
+      0.01766,
+      1.22234
+     ],
+     "axis": [
+      -1.0,
+      0.0,
+      0.0
+     ],
+     "parent": "Tip_Motor_R",
+     "note": "est pattern [mapped from C0 pusher pattern, x -> -0.361 - x]"
+    },
+    {
+     "pos": [
+      0.0878,
+      0.01766,
+      -1.22234
+     ],
+     "axis": [
+      -1.0,
+      0.0,
+      0.0
+     ],
+     "parent": "Tip_Motor_L",
+     "note": "est pattern [mapped from C0 pusher pattern, x -> -0.361 - x]"
+    },
+    {
+     "pos": [
+      0.0878,
+      0.00634,
+      -1.22234
+     ],
+     "axis": [
+      -1.0,
+      0.0,
+      0.0
+     ],
+     "parent": "Tip_Motor_L",
+     "note": "est pattern [mapped from C0 pusher pattern, x -> -0.361 - x]"
+    },
+    {
+     "pos": [
+      0.0878,
+      0.00634,
+      -1.23366
+     ],
+     "axis": [
+      -1.0,
+      0.0,
+      0.0
+     ],
+     "parent": "Tip_Motor_L",
+     "note": "est pattern [mapped from C0 pusher pattern, x -> -0.361 - x]"
+    },
+    {
+     "pos": [
+      0.0878,
+      0.01766,
+      -1.23366
+     ],
+     "axis": [
+      -1.0,
+      0.0,
+      0.0
+     ],
+     "parent": "Tip_Motor_L",
+     "note": "est pattern [mapped from C0 pusher pattern, x -> -0.361 - x]"
+    }
+   ],
+   "qty_total": 8,
+   "id": "HW-A1-005"
+  },
+  {
+   "kind": "screw",
+   "spec": "Pusher adapter hub set screw M3x4 (est)",
+   "thread": "M3",
+   "standard": "",
+   "geom": {
+    "d": 3,
+    "L": 4,
+    "head": "grub",
+    "head_d": 3.0,
+    "head_h": 0.1,
+    "s": 1.5
+   },
+   "material": "A2 stainless",
+   "color": [
+    0.75,
+    0.75,
+    0.77
+   ],
+   "covered_by": "supplied with part (unknown, -)",
+   "est": true,
+   "source": "est: the SunnySky bolt-on adapter is described only as \"adapter + holding plate + screws\" (readymaderc.com 86945, 2026-11-01); a radial M3x4 set screw on the adapter hub is assumed and must be verified on receipt (delete the line if the adapter already clamps the 4.0 mm shaft)",
+   "rationale": "Shaft lock on the pusher motor.",
+   "joint": "J-A1-4",
+   "c0_template": "HW-139",
+   "instances": [
+    {
+     "pos": [
+      0.074,
+      0.026,
+      1.228
+     ],
+     "axis": [
+      -0.0,
+      -1.0,
+      0.0
+     ],
+     "parent": "Tip_Motor_R",
+     "note": "radial, 3 mm aft of the adapter base, from above [mapped from C0 pusher pattern, x -> -0.361 - x]"
+    },
+    {
+     "pos": [
+      0.074,
+      0.026,
+      -1.228
+     ],
+     "axis": [
+      -0.0,
+      -1.0,
+      0.0
+     ],
+     "parent": "Tip_Motor_L",
+     "note": "radial, 3 mm aft of the adapter base, from above [mapped from C0 pusher pattern, x -> -0.361 - x]"
+    }
+   ],
+   "qty_total": 2,
+   "id": "HW-A1-006"
+  },
+  {
+   "kind": "screw",
+   "spec": "ISO 7380-1 M3x10 A2",
+   "thread": "M3",
+   "standard": "ISO 7380-1",
+   "geom": {
+    "d": 3,
+    "L": 10,
+    "head": "button",
+    "head_d": 5.7,
+    "head_h": 1.65,
+    "s": 2.0
+   },
+   "material": "A2 stainless (304)",
+   "color": [
+    0.75,
+    0.75,
+    0.77
+   ],
+   "covered_by": "P-04",
+   "est": true,
+   "source": "https://engineersedge.com/iso_socket_button_head.htm (M3-M5 rows), M2 row not on page: ISO 7380-1 M2 value est; checked 2026-11-01",
+   "rationale": "Spinner retention; pattern unknown (\u2014), est.",
+   "joint": "J-A1-4",
+   "c0_template": "HW-044",
+   "instances": [
+    {
+     "pos": [
+      0.09,
+      0.023,
+      1.228
+     ],
+     "axis": [
+      -1.0,
+      0.0,
+      0.0
+     ],
+     "parent": "Tip_Motor_R",
+     "note": "spinner back-plate screw, est position [mapped from C0 pusher pattern, x -> -0.361 - x]"
+    },
+    {
+     "pos": [
+      0.09,
+      0.0065,
+      1.23753
+     ],
+     "axis": [
+      -1.0,
+      0.0,
+      0.0
+     ],
+     "parent": "Tip_Motor_R",
+     "note": "spinner back-plate screw, est position [mapped from C0 pusher pattern, x -> -0.361 - x]"
+    },
+    {
+     "pos": [
+      0.09,
+      0.0065,
+      1.21847
+     ],
+     "axis": [
+      -1.0,
+      0.0,
+      0.0
+     ],
+     "parent": "Tip_Motor_R",
+     "note": "spinner back-plate screw, est position [mapped from C0 pusher pattern, x -> -0.361 - x]"
+    },
+    {
+     "pos": [
+      0.09,
+      0.023,
+      -1.228
+     ],
+     "axis": [
+      -1.0,
+      0.0,
+      0.0
+     ],
+     "parent": "Tip_Motor_L",
+     "note": "spinner back-plate screw, est position [mapped from C0 pusher pattern, x -> -0.361 - x]"
+    },
+    {
+     "pos": [
+      0.09,
+      0.0065,
+      -1.21847
+     ],
+     "axis": [
+      -1.0,
+      0.0,
+      0.0
+     ],
+     "parent": "Tip_Motor_L",
+     "note": "spinner back-plate screw, est position [mapped from C0 pusher pattern, x -> -0.361 - x]"
+    },
+    {
+     "pos": [
+      0.09,
+      0.0065,
+      -1.23753
+     ],
+     "axis": [
+      -1.0,
+      0.0,
+      0.0
+     ],
+     "parent": "Tip_Motor_L",
+     "note": "spinner back-plate screw, est position [mapped from C0 pusher pattern, x -> -0.361 - x]"
+    }
+   ],
+   "qty_total": 6,
+   "id": "HW-A1-007"
+  },
+  {
+   "kind": "washer",
+   "spec": "ISO 7089 M3 A2",
+   "thread": "M3",
+   "standard": "ISO 7089",
+   "geom": {
+    "id": 3.2,
+    "od": 7.0,
+    "t": 0.5
+   },
+   "material": "A2 stainless",
+   "color": [
+    0.75,
+    0.75,
+    0.77
+   ],
+   "covered_by": "P-04",
+   "est": false,
+   "source": "https://fasten.it/norms/norm/din_en_iso_7089 (ISO 7089 M2-M5) checked 2026-11-01",
+   "rationale": "Under head on printed spinner back plate.",
+   "joint": "J-A1-4",
+   "c0_template": "HW-045",
+   "instances": [
+    {
+     "pos": [
+      0.08975,
+      0.023,
+      1.228
+     ],
+     "axis": [
+      -1.0,
+      0.0,
+      0.0
+     ],
+     "parent": "Tip_Motor_R",
+     "note": " [mapped from C0 pusher pattern, x -> -0.361 - x]"
+    },
+    {
+     "pos": [
+      0.08975,
+      0.0065,
+      1.23753
+     ],
+     "axis": [
+      -1.0,
+      0.0,
+      0.0
+     ],
+     "parent": "Tip_Motor_R",
+     "note": " [mapped from C0 pusher pattern, x -> -0.361 - x]"
+    },
+    {
+     "pos": [
+      0.08975,
+      0.0065,
+      1.21847
+     ],
+     "axis": [
+      -1.0,
+      0.0,
+      0.0
+     ],
+     "parent": "Tip_Motor_R",
+     "note": " [mapped from C0 pusher pattern, x -> -0.361 - x]"
+    },
+    {
+     "pos": [
+      0.08975,
+      0.023,
+      -1.228
+     ],
+     "axis": [
+      -1.0,
+      0.0,
+      0.0
+     ],
+     "parent": "Tip_Motor_L",
+     "note": " [mapped from C0 pusher pattern, x -> -0.361 - x]"
+    },
+    {
+     "pos": [
+      0.08975,
+      0.0065,
+      -1.21847
+     ],
+     "axis": [
+      -1.0,
+      0.0,
+      0.0
+     ],
+     "parent": "Tip_Motor_L",
+     "note": " [mapped from C0 pusher pattern, x -> -0.361 - x]"
+    },
+    {
+     "pos": [
+      0.08975,
+      0.0065,
+      -1.23753
+     ],
+     "axis": [
+      -1.0,
+      0.0,
+      0.0
+     ],
+     "parent": "Tip_Motor_L",
+     "note": " [mapped from C0 pusher pattern, x -> -0.361 - x]"
+    }
+   ],
+   "qty_total": 6,
+   "id": "HW-A1-008"
+  },
+  {
+   "joint": "J-A1-2",
+   "kind": "insert",
+   "spec": "Ruthex-type M3x5.7 brass heat-set insert (tube retention)",
+   "thread": "M3",
+   "standard": "n/a (Ruthex RX-M3x5.7)",
+   "geom": {
+    "od": 4.6,
+    "L": 5.7,
+    "hole_d": 4.0,
+    "hole_depth_min": 7.3,
+    "cad_mm": {
+     "bore_d": 4.2,
+     "bore_depth": 7.5,
+     "lead_in": "0.4 x 45 deg"
+    }
+   },
+   "material": "brass",
+   "color": [
+    0.8,
+    0.65,
+    0.3
+   ],
+   "instances": [
+    {
+     "pos": [
+      -0.0716,
+      0.02348,
+      1.2125
+     ],
+     "axis": [
+      0,
+      -1,
+      0
+     ],
+     "parent": "Nacelle_Mount_R",
+     "note": "radial, top of the tube barrel, 90 deg from the next; barrel OD 38, wall 6.2"
+    },
+    {
+     "pos": [
+      -0.0716,
+      0.02348,
+      -1.2125
+     ],
+     "axis": [
+      0,
+      -1,
+      0
+     ],
+     "parent": "Nacelle_Mount_L",
+     "note": "radial, top of the tube barrel, 90 deg from the next; barrel OD 38, wall 6.2 (mirror)"
+    },
+    {
+     "pos": [
+      -0.052599999999999994,
+      0.00448,
+      1.2125
+     ],
+     "axis": [
+      -1,
+      0,
+      0
+     ],
+     "parent": "Nacelle_Mount_R",
+     "note": "radial, front of the tube barrel"
+    },
+    {
+     "pos": [
+      -0.052599999999999994,
+      0.00448,
+      -1.2125
+     ],
+     "axis": [
+      -1,
+      0,
+      0
+     ],
+     "parent": "Nacelle_Mount_L",
+     "note": "radial, front of the tube barrel (mirror)"
+    }
+   ],
+   "qty_total": 4,
+   "covered_by": "P-04 (item 6)",
+   "est": false,
+   "source": "inventory/hardware/hardware.json HW-040 (insert spec, tolerances.json insert_bore_M3)",
+   "rationale": "Thread for the grub screws that pin the Al tube end in the barrel.",
+   "id": "HW-A1-009"
+  },
+  {
+   "joint": "J-A1-2",
+   "kind": "screw",
+   "spec": "ISO 4027 M3x6 A2 grub screw, flat point (tube retention)",
+   "thread": "M3",
+   "standard": "ISO 4027",
+   "geom": {
+    "d": 3,
+    "L": 6,
+    "head": "grub",
+    "head_d": 3.0,
+    "head_h": 0.1,
+    "s": 1.5
+   },
+   "material": "A2 stainless",
+   "color": [
+    0.75,
+    0.75,
+    0.77
+   ],
+   "instances": [
+    {
+     "pos": [
+      -0.0716,
+      0.02348,
+      1.2125
+     ],
+     "axis": [
+      0,
+      -1,
+      0
+     ],
+     "parent": "Nacelle_Mount_R",
+     "note": "seat on barrel outer face, drives inward on the Al tube"
+    },
+    {
+     "pos": [
+      -0.0716,
+      0.02348,
+      -1.2125
+     ],
+     "axis": [
+      0,
+      -1,
+      0
+     ],
+     "parent": "Nacelle_Mount_L",
+     "note": "seat on barrel outer face, drives inward on the Al tube (mirror)"
+    },
+    {
+     "pos": [
+      -0.052599999999999994,
+      0.00448,
+      1.2125
+     ],
+     "axis": [
+      -1,
+      0,
+      0
+     ],
+     "parent": "Nacelle_Mount_R",
+     "note": "seat on barrel outer face"
+    },
+    {
+     "pos": [
+      -0.052599999999999994,
+      0.00448,
+      -1.2125
+     ],
+     "axis": [
+      -1,
+      0,
+      0
+     ],
+     "parent": "Nacelle_Mount_L",
+     "note": "seat on barrel outer face (mirror)"
+    }
+   ],
+   "qty_total": 4,
+   "covered_by": "P-04 (item 5; M3 grub screws are in the 1290-pc assortment: count to confirm, \u2014)",
+   "est": true,
+   "source": "est: grub screw not in hardware.json; HW-139 is the C0 precedent (M3x4 grub)",
+   "rationale": "Axial and torque retention of the tube end in the printed barrel (also epoxied).",
+   "id": "HW-A1-010"
+  },
+  {
+   "joint": "J-A1-3",
+   "kind": "strap",
+   "spec": "Cable tie 100 x 2.5 mm (ESC to keel, 2 loops)",
+   "thread": "",
+   "standard": "kit item 11",
+   "geom": {
+    "w": 2.5,
+    "t": 1.0,
+    "L": 100.0
+   },
+   "material": "nylon",
+   "color": [
+    0.9,
+    0.9,
+    0.9
+   ],
+   "instances": [
+    {
+     "pos": [
+      -0.0275,
+      0.012,
+      1.2405
+     ],
+     "axis": [
+      0,
+      1,
+      0
+     ],
+     "parent": "ESC_T_R",
+     "note": "loop around ESC and keel through slots 4.2 x 1.6 at y -0.0035 and 0.0275"
+    },
+    {
+     "pos": [
+      -0.0275,
+      0.012,
+      -1.2405
+     ],
+     "axis": [
+      0,
+      1,
+      0
+     ],
+     "parent": "ESC_T_L",
+     "note": "loop around ESC and keel through slots 4.2 x 1.6 at y -0.0035 and 0.0275 (mirror)"
+    },
+    {
+     "pos": [
+      -0.0025,
+      0.012,
+      1.2405
+     ],
+     "axis": [
+      0,
+      1,
+      0
+     ],
+     "parent": "ESC_T_R",
+     "note": "second loop"
+    },
+    {
+     "pos": [
+      -0.0025,
+      0.012,
+      -1.2405
+     ],
+     "axis": [
+      0,
+      1,
+      0
+     ],
+     "parent": "ESC_T_L",
+     "note": "second loop (mirror)"
+    }
+   ],
+   "qty_total": 4,
+   "covered_by": "P-04 (item 11)",
+   "est": true,
+   "source": "HW-141 precedent (100 x 2.5 tie)",
+   "rationale": "Holds the ESC flat on the keel.",
+   "id": "HW-A1-011"
+  },
+  {
+   "joint": "J-A1-3",
+   "kind": "strap",
+   "spec": "Cable tie 100 x 2.5 mm (capacitor to keel)",
+   "thread": "",
+   "standard": "kit item 11",
+   "geom": {
+    "w": 2.5,
+    "t": 1.0,
+    "L": 100.0
+   },
+   "material": "nylon",
+   "color": [
+    0.9,
+    0.9,
+    0.9
+   ],
+   "instances": [
+    {
+     "pos": [
+      -0.0525,
+      0.012,
+      1.2415
+     ],
+     "axis": [
+      0,
+      1,
+      0
+     ],
+     "parent": "CAP_T_R",
+     "note": "loop through slots at y 0.0015 and 0.0225"
+    },
+    {
+     "pos": [
+      -0.0525,
+      0.012,
+      -1.2415
+     ],
+     "axis": [
+      0,
+      1,
+      0
+     ],
+     "parent": "CAP_T_L",
+     "note": "loop through slots at y 0.0015 and 0.0225 (mirror)"
+    }
+   ],
+   "qty_total": 2,
+   "covered_by": "P-04 (item 11)",
+   "est": true,
+   "source": "HW-141 precedent",
+   "rationale": "Holds the 470 uF capacitor.",
+   "id": "HW-A1-012"
+  },
+  {
+   "joint": "J-A1-5",
+   "kind": "insert",
+   "spec": "Ruthex-type M3x5.7 brass heat-set insert (shell screw)",
+   "thread": "M3",
+   "standard": "n/a (Ruthex RX-M3x5.7)",
+   "geom": {
+    "od": 4.6,
+    "L": 5.7,
+    "hole_d": 4.0,
+    "hole_depth_min": 7.3
+   },
+   "material": "brass",
+   "color": [
+    0.8,
+    0.65,
+    0.3
+   ],
+   "instances": [
+    {
+     "pos": [
+      0.036,
+      0.038,
+      1.228
+     ],
+     "axis": [
+      0,
+      -1,
+      0
+     ],
+     "parent": "Nacelle_Mount_R",
+     "note": "ring rim, top; insert top at r = 26 mm"
+    },
+    {
+     "pos": [
+      0.036,
+      0.038,
+      -1.228
+     ],
+     "axis": [
+      0,
+      -1,
+      0
+     ],
+     "parent": "Nacelle_Mount_L",
+     "note": "ring rim, top; insert top at r = 26 mm (mirror)"
+    },
+    {
+     "pos": [
+      0.036,
+      0.012,
+      1.254
+     ],
+     "axis": [
+      0,
+      0,
+      -1
+     ],
+     "parent": "Nacelle_Mount_R",
+     "note": "ring rim, outboard side; insert top at r = 26 mm"
+    },
+    {
+     "pos": [
+      0.036,
+      0.012,
+      -1.254
+     ],
+     "axis": [
+      0,
+      0,
+      1
+     ],
+     "parent": "Nacelle_Mount_L",
+     "note": "ring rim, outboard side; insert top at r = 26 mm (mirror)"
+    }
+   ],
+   "qty_total": 4,
+   "covered_by": "P-04 (item 6)",
+   "est": false,
+   "source": "HW-040 precedent",
+   "rationale": "Retains the nacelle shell.",
+   "id": "HW-A1-013"
+  },
+  {
+   "joint": "J-A1-5",
+   "kind": "screw",
+   "spec": "ISO 7380-1 M3x8 A2",
+   "thread": "M3",
+   "standard": "ISO 7380-1",
+   "geom": {
+    "d": 3,
+    "L": 8,
+    "head": "button",
+    "head_d": 5.7,
+    "head_h": 1.65,
+    "s": 2.0
+   },
+   "material": "A2 stainless (304)",
+   "color": [
+    0.75,
+    0.75,
+    0.77
+   ],
+   "instances": [
+    {
+     "pos": [
+      0.036,
+      0.041499999999999995,
+      1.228
+     ],
+     "axis": [
+      0,
+      -1,
+      0
+     ],
+     "parent": "Nacelle_Shell_R",
+     "note": "head seat on washer, radial through shell pad (2.5 mm doubler)"
+    },
+    {
+     "pos": [
+      0.036,
+      0.041499999999999995,
+      -1.228
+     ],
+     "axis": [
+      0,
+      -1,
+      0
+     ],
+     "parent": "Nacelle_Shell_L",
+     "note": "head seat on washer, radial through shell pad (2.5 mm doubler) (mirror)"
+    },
+    {
+     "pos": [
+      0.036,
+      0.012,
+      1.2575
+     ],
+     "axis": [
+      0,
+      0,
+      -1
+     ],
+     "parent": "Nacelle_Shell_R",
+     "note": "head seat on washer"
+    },
+    {
+     "pos": [
+      0.036,
+      0.012,
+      -1.2575
+     ],
+     "axis": [
+      0,
+      0,
+      1
+     ],
+     "parent": "Nacelle_Shell_L",
+     "note": "head seat on washer (mirror)"
+    }
+   ],
+   "qty_total": 4,
+   "covered_by": "P-04 (item 5)",
+   "est": false,
+   "source": "HW-036 precedent (ISO 7380-1, P-04)",
+   "rationale": "Retains the nacelle shell: removable for ESC access.",
+   "id": "HW-A1-014"
+  },
+  {
+   "joint": "J-A1-5",
+   "kind": "washer",
+   "spec": "ISO 7089 M3 A2",
+   "thread": "M3",
+   "standard": "ISO 7089",
+   "geom": {
+    "id": 3.2,
+    "od": 7.0,
+    "t": 0.5
+   },
+   "material": "A2 stainless",
+   "color": [
+    0.75,
+    0.75,
+    0.77
+   ],
+   "instances": [
+    {
+     "pos": [
+      0.036,
+      0.04125,
+      1.228
+     ],
+     "axis": [
+      0,
+      -1,
+      0
+     ],
+     "parent": "Nacelle_Shell_R",
+     "note": ""
+    },
+    {
+     "pos": [
+      0.036,
+      0.04125,
+      -1.228
+     ],
+     "axis": [
+      0,
+      -1,
+      0
+     ],
+     "parent": "Nacelle_Shell_L",
+     "note": " (mirror)"
+    },
+    {
+     "pos": [
+      0.036,
+      0.012,
+      1.25725
+     ],
+     "axis": [
+      0,
+      0,
+      -1
+     ],
+     "parent": "Nacelle_Shell_R",
+     "note": ""
+    },
+    {
+     "pos": [
+      0.036,
+      0.012,
+      -1.25725
+     ],
+     "axis": [
+      0,
+      0,
+      1
+     ],
+     "parent": "Nacelle_Shell_L",
+     "note": " (mirror)"
+    }
+   ],
+   "qty_total": 4,
+   "covered_by": "P-04 (item 5)",
+   "est": false,
+   "source": "HW-037 precedent",
+   "rationale": "Under head on 0.5 mm shell.",
+   "id": "HW-A1-015"
+  },
+  {
+   "joint": "J-A1-6",
+   "kind": "strap",
+   "spec": "Cable tie 100 x 2.5 mm (XT60H mated-pair retention, tip feed)",
+   "thread": "",
+   "standard": "kit item 11",
+   "geom": {
+    "w": 2.5,
+    "t": 1.0,
+    "L": 100.0
+   },
+   "material": "nylon",
+   "color": [
+    0.9,
+    0.9,
+    0.9
+   ],
+   "instances": [
+    {
+     "pos": [
+      -0.115,
+      0.0,
+      0.095
+     ],
+     "axis": [
+      0,
+      0,
+      1
+     ],
+     "parent": "JB_J1_R",
+     "note": "at JB_J1 box; one tie per mated pair"
+    },
+    {
+     "pos": [
+      -0.115,
+      0.0,
+      -0.095
+     ],
+     "axis": [
+      0,
+      0,
+      -1
+     ],
+     "parent": "JB_J1_L",
+     "note": "at JB_J1 box; one tie per mated pair (mirror)"
+    }
+   ],
+   "qty_total": 2,
+   "covered_by": "P-04 (item 11)",
+   "est": true,
+   "source": "HW-141 precedent",
+   "rationale": "Pair takes no cable load.",
+   "id": "HW-A1-016"
+  }
+ ],
+ "hardware_removed": [
+  {
+   "id": "HW-034",
+   "spec": "Pusher firewall (PA6-CF, 58 dia x 6.1)",
+   "pieces": 1
+  },
+  {
+   "id": "HW-036",
+   "spec": "ISO 7380-1 M3x10 A2",
+   "pieces": 4
+  },
+  {
+   "id": "HW-037",
+   "spec": "ISO 7089 M3 A2",
+   "pieces": 4
+  },
+  {
+   "id": "HW-038",
+   "spec": "ISO 7380-1 M3x12 A2",
+   "pieces": 4
+  },
+  {
+   "id": "HW-039",
+   "spec": "ISO 7089 M3 A2",
+   "pieces": 4
+  },
+  {
+   "id": "HW-040",
+   "spec": "Ruthex-type M3x5.7 brass heat-set insert",
+   "pieces": 4
+  },
+  {
+   "id": "HW-041",
+   "spec": "SunnySky bolt-on prop adapter (supplied), pusher",
+   "pieces": 1
+  },
+  {
+   "id": "HW-042",
+   "spec": "SunnySky holding plate (supplied), pusher",
+   "pieces": 1
+  },
+  {
+   "id": "HW-043",
+   "spec": "Prop adapter screw M3x12 (supplied, est)",
+   "pieces": 4
+  },
+  {
+   "id": "HW-044",
+   "spec": "ISO 7380-1 M3x10 A2",
+   "pieces": 3
+  },
+  {
+   "id": "HW-045",
+   "spec": "ISO 7089 M3 A2",
+   "pieces": 3
+  },
+  {
+   "id": "HW-139",
+   "spec": "Pusher adapter hub set screw M3x4 (est)",
+   "pieces": 1
+  }
+ ],
+ "moving": [
+  {
+   "name": "prop_TR",
+   "kind": "revolute",
+   "parent": "Nacelle_Mount_R",
+   "pivot": [
+    0.077,
+    0.012,
+    1.228
+   ],
+   "axis": [
+    1,
+    0,
+    0
+   ],
+   "limits": "continuous",
+   "note": "cruise direction +X right-hand = clockwise seen from behind; contains Tip_Prop_R + Tip_Spinner_R + Tip_Motor_R can + adapter hardware"
+  },
+  {
+   "name": "prop_TL",
+   "kind": "revolute",
+   "parent": "Nacelle_Mount_L",
+   "pivot": [
+    0.077,
+    0.012,
+    -1.228
+   ],
+   "axis": [
+    -1,
+    0,
+    0
+   ],
+   "limits": "continuous",
+   "note": "cruise direction -X right-hand = counter-clockwise seen from behind"
+  },
+  {
+   "name": "prop_P",
+   "kind": "remove",
+   "note": "delete the C0 pusher revolute and its kinematics group"
+  },
+  {
+   "name": "slide_panel_R / slide_panel_L",
+   "kind": "slider",
+   "note": "unchanged slide; Tip_Tube_Ext, Tip_Splice_Sleeve, Nacelle_*, Tip_Motor, ESC_T, CAP_T, wires ride the panel group. Extent grows from z 1.200 to 1.257 (shell outer face)."
+  }
+ ],
+ "checks": {
+  "width_over_disks_m": 2.812,
+  "margin_to_3m_m": 0.188,
+  "span_m": 2.4,
+  "prop_disc_to_wing_LE_m": 0.077,
+  "disc_inner_edge_z_m": 1.05,
+  "disc_bottom_above_leg_foot_mm": 77.9,
+  "roll_to_prop_strike_deg": {
+   "no_wheels": 5.6,
+   "wheels_G01": 8.9
+  },
+  "interference_to_run": [
+   "shell vs Aileron end (expect 14 mm)",
+   "prop disc vs Wing LE and pitot (disc inner edge z 1.050 vs pitot at 0.90)",
+   "battery top vs Wing_Saddle underside (expect 11 mm)",
+   "tube end 1.222 vs barrel bore end 1.224",
+   "wire groove vs aileron servo bay (servo at x -0.151..-0.082, groove at x -0.04)"
+  ]
+ }
+}

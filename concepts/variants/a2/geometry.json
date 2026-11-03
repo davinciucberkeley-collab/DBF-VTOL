@@ -1,0 +1,863 @@
+{
+ "variant": "a2",
+ "name": "Boundary-layer-ingesting pusher (stretched boat-tail)",
+ "base": "VTOL C0 full",
+ "frame": "model X fwd, Y up, Z right, m (Fusion = (z,x,y)*100 cm, Z-up)",
+ "units": "m unless a name ends _mm",
+ "date": "2026-11-02",
+ "est_note": "All masses and the placement of the pod slide are EST; see bli_estimate.py / bli_estimate.json and design.md.",
+ "constants": {
+  "DX_pod_slide_m": 0.0167,
+  "tail_stretch_m": 0.1,
+  "pod_nose_x_m": 0.4667,
+  "joint_plane_x_m": -0.26,
+  "pod_end_x_m": -0.4833,
+  "prop_plane_x_m": -0.5213,
+  "spinner_x_m": -0.5253,
+  "axis_y_m": -0.03,
+  "axis_z_m": 0.0,
+  "derivation": "DX = ((m1 x_cg0) - (m0 x_cg0 + dMx)) / M_pod_group, bli_estimate.json aircraft.pod_slide_fwd_m (EST); pod end = nose - 0.95 m; prop plane = pod end - 0.038 m (C0 offset -0.438 vs -0.400); rev 2: joint plane = nose 0.4667 - 0.7267 = -0.2600 m",
+  "joint_plane_rev1_x_m": -0.0333,
+  "tail_module_length_m": 0.2233,
+  "forebody_length_m": 0.7267
+ },
+ "remove": [],
+ "remove_note": "No C0 component is deleted. Fuselage_Pod is rebuilt as a shorter forebody (see modify). C0 wire W15 is replaced by the longer W15x.",
+ "modify": [
+  {
+   "target": "Fuselage_Pod",
+   "change": "REV 2: forebody to the joint plane s=0.7267 m: elliptic nose a=0.220 m to R=0.080 m, cylinder to s=0.500 m, then the first 0.2267 m of the spec tail-cone law r=0.030+0.050(1-u^2(3-2u)), u=s_c/0.450 (end radius 0.0547 m), flat disc at the joint plane with an 8 mm spigot seat (r 50 mm). Saddle, joiner, root plates and J-02 hardware are unmodified C0 bodies (the rev 1 notch cuts are gone).",
+   "params": {
+    "nose_x_m": 0.4667,
+    "length_m": 0.7267,
+    "R_m": 0.08,
+    "profile_s_r_mm": [
+     [
+      0.0,
+      0.0
+     ],
+     [
+      25.0,
+      37.04
+     ],
+     [
+      50.0,
+      50.78
+     ],
+     [
+      75.0,
+      60.17
+     ],
+     [
+      100.0,
+      67.05
+     ],
+     [
+      125.0,
+      72.16
+     ],
+     [
+      150.0,
+      75.84
+     ],
+     [
+      175.0,
+      78.31
+     ],
+     [
+      200.0,
+      79.67
+     ],
+     [
+      225.0,
+      80.0
+     ],
+     [
+      250.0,
+      80.0
+     ],
+     [
+      275.0,
+      80.0
+     ],
+     [
+      300.0,
+      80.0
+     ],
+     [
+      325.0,
+      80.0
+     ],
+     [
+      350.0,
+      80.0
+     ],
+     [
+      375.0,
+      80.0
+     ],
+     [
+      400.0,
+      80.0
+     ],
+     [
+      425.0,
+      80.0
+     ],
+     [
+      450.0,
+      80.0
+     ],
+     [
+      475.0,
+      80.0
+     ],
+     [
+      500.0,
+      80.0
+     ]
+    ],
+    "axis_y_m": -0.03,
+    "c0_function": "fusion/build_vtol_fusion.py fuselage(): s<a: R sqrt(1-((s-a)/a)^2); a<=s<0.50: R",
+    "aft_end": "flat disc at s=0.7267 (joint plane x=-0.26 m), r=0.0547 m; spigot seat r 50 mm x 8 mm",
+    "joint_plane_x_m": -0.26
+   }
+  },
+  {
+   "target": "POD GROUP translate",
+   "change": "Translate every pod-fixed component forward by DX = +0.0167 m along +X (re-register the pod on the wing saddle so the CG returns to 28 % MAC). Wing, saddle, spar, joiner, booms, lift motors/props, gear, H-tail, fins, pitot, airspeed module ASPD1 and joint boxes JB_* do NOT move.",
+   "params": {
+    "dx_m": 0.0167,
+    "components": [
+     "Fuselage_Pod",
+     "Canopy",
+     "Battery_6S_LiPo",
+     "Pusher_Motor",
+     "Pusher_Prop_Set (Pusher_Prop_14in + Spinner)",
+     "XT90S_1",
+     "FC1",
+     "BUS1",
+     "UBEC1",
+     "GPS1",
+     "RX1",
+     "RID1",
+     "ESC_P",
+     "CAP_P"
+    ],
+    "hardware_joints": [
+     "J-11 (all 22 pieces; additionally moved aft by 0.100 m)",
+     "J-24+27",
+     "J-25",
+     "J-26",
+     "J-28 [C]",
+     "J-29 [C]"
+    ],
+    "note": "Wing_Bolt (x=-0.16707) stays; the pod pocket for the saddle moves with the pod. Re-run the interference check: the saddle must still clear the pod interior."
+   }
+  },
+  {
+   "target": "Pusher_Motor",
+   "change": "Place at x = -0.4833 m (pod end; C0 -0.400 + DX - 0.100). Same part, same orientation (shaft aft).",
+   "params": {
+    "pos_m": [
+     -0.4833,
+     -0.03,
+     0.0
+    ],
+    "axis": [
+     -1,
+     0,
+     0
+    ]
+   }
+  },
+  {
+   "target": "Pusher_Prop_Set (Pusher_Prop_14in, Spinner)",
+   "change": "Place prop plane at x = -0.5213 m and spinner at -0.5253 m (C0 -0.438 / -0.442 shifted by DX - 0.100). Same 14 in APC 14x8.5EP envelope; same spinner.",
+   "params": {
+    "prop_pos_m": [
+     -0.5213,
+     -0.03,
+     0.0
+    ],
+    "spinner_pos_m": [
+     -0.5253,
+     -0.03,
+     0.0
+    ],
+    "prop_diameter_m": 0.3556,
+    "joint": "revolute prop_P (unchanged axis X)"
+   }
+  },
+  {
+   "target": "J-11 hardware (HW-034..HW-040 + any other J-11 piece)",
+   "change": "Move aft by 0.100 m on top of the pod translate: firewall x -0.4833..-0.4772, aft bulkhead ring -0.4772..-0.4707. They now sit inside the Tail_Cone aft end (inner dia 58.8 mm at the end; bulkhead OD 58 slips in).",
+   "params": {
+    "dx_total_m": -0.0833
+   }
+  },
+  {
+   "target": "ESC_P and CAP_P",
+   "change": "Translate with the pod group only (ESC stays at C0 relative station x = -0.340 + DX = -0.3233 m). Re-parent to Tail_Cone. J-29 [C] mounting (two 200 mm cable ties HW-123, C0 note: tie to a rear former slot, former not modelled) moves with them; the ties now pass through the tie slots of the two printed ESC ribs of Tail_Cone.",
+   "params": {
+    "esc_pos_m": [
+     -0.3233,
+     -0.03,
+     0.0
+    ],
+    "cap_pos_m": [
+     -0.3233,
+     -0.05,
+     0.0
+    ]
+   }
+  },
+  {
+   "target": "Wire W15 (ESC_P phase leads to MOT_P)",
+   "change": "Replace by W15x: same 3 conductors, 14 AWG silicone (P-07), now routed ESC aft end to motor face.",
+   "params": {
+    "from_m": [
+     -0.3458,
+     -0.03,
+     0.0
+    ],
+    "to_m": [
+     -0.4833,
+     -0.03,
+     0.01
+    ],
+    "length_geom_m": 0.1375,
+    "length_m_est": 0.151,
+    "c0_length_geom_m": 0.039
+   }
+  },
+  {
+   "target": "Wires W08, W25 (pusher ESC power and DShot)",
+   "change": "Split each at the tail joint plane with a connector pair so the Tail_Cone module unplugs: W08 gets 2 XT60H pairs (P-08 spares), W25 gets 1 JR 3-pin pair (P-09). Route inside the cone along the bottom (y = -0.095 at the joint) and re-end at the ESC.",
+   "params": {
+    "connector_pos_m": [
+     -0.0483,
+     -0.095,
+     0.0
+    ],
+    "w08_route_end_m": [
+     -0.3233,
+     -0.035,
+     -0.005
+    ]
+   }
+  }
+ ],
+ "add": [
+  {
+   "name": "Tail_Cone",
+   "kind": "part",
+   "qty": 1,
+   "shape": {
+    "type": "body of revolution (solid revolve like C0 Fuselage_Pod; physical part is a hollow printed shell, wall 0.5 mm EST)",
+    "axis": "model X, y = -0.03",
+    "start_x_m": -0.26,
+    "end_x_m": -0.4833,
+    "length_m": 0.2233,
+    "profile": "spec law r(u)=0.030+0.050(1-u^2(3-2u)), u=s_c/0.450; this part covers s_c=0.2267..0.450 m (r 54.7 -> 30.0 mm). Mean/max half-angle of the whole 0.45 m cone unchanged (6.3 / 9.5 deg).",
+    "profile_s_r_mm": [
+     [
+      226.7,
+      54.72
+     ],
+     [
+      249.0,
+      51.01
+     ],
+     [
+      271.4,
+      47.38
+     ],
+     [
+      293.7,
+      43.91
+     ],
+     [
+      316.0,
+      40.66
+     ],
+     [
+      338.4,
+      37.71
+     ],
+     [
+      360.7,
+      35.13
+     ],
+     [
+      383.0,
+      32.99
+     ],
+     [
+      405.3,
+      31.38
+     ],
+     [
+      427.7,
+      30.36
+     ],
+     [
+      450.0,
+      30.0
+     ]
+    ],
+    "max_half_angle_deg": 9.46,
+    "mean_half_angle_deg": 6.34,
+    "features": [
+     "forward end open, outer r 54.7 mm, carries Tail_Joint_Sleeve (22 mm, bonded); 3 radial 3.6 mm holes at x=-0.2710 m at +Z, -Z and bottom",
+     "3 segments split at s_c=0.340 and 0.395 m (x=-0.3733 and -0.4283 m), each joint backed by a 20 mm x 1.0 mm lap ring",
+     "aft end open, inner dia 58.8 mm at x=-0.4833 m, takes the 58 mm OD aft bulkhead ring and the PA6-CF firewall (J-11)",
+     "two internal ESC half-ribs 2 mm thick at x=-0.3008 and -0.3458 m, slot 26.0 x 9.0 mm, 2 tie slots 3 x 1.5 mm each",
+     "one 15 x 8 mm ESC vent slot on the bottom at x=-0.3233 m (EST, set by M4)"
+    ]
+   },
+   "material": "PETG (P-05), ESC ribs integral; last 40 mm next to the motor is the existing PA6-CF firewall",
+   "color": [
+    0.949,
+    0.957,
+    0.969
+   ],
+   "placements": [
+    {
+     "pos": [
+      -0.26,
+      -0.03,
+      0.0
+     ],
+     "axis": [
+      -1,
+      0,
+      0
+     ],
+     "up": [
+      0,
+      1,
+      0
+     ]
+    }
+   ],
+   "mass_g": 35.3,
+   "source": "area 0.0555 m^2 (s_c 0.2267..0.45) x 0.5 mm x 1270 kg/m^3 = 35.3 g EST; ribs/lap rings not counted (as in rev 1; solid CAD volume of the 2 ribs 14.7 cm^3)"
+  },
+  {
+   "name": "Tail_Joint_Spigot",
+   "kind": "part",
+   "qty": 1,
+   "shape": {
+    "type": "stepped ring (revolve), axis X",
+    "sections": [
+     {
+      "name": "body",
+      "od_mm": 100.0,
+      "id_mm": 74.0,
+      "length_mm": 8.0,
+      "x_from_m": -0.26,
+      "x_to_m": -0.252,
+      "note": "seated in the forebody spigot seat"
+     },
+     {
+      "name": "tongue",
+      "od_mm": 91.8,
+      "id_mm": 74.0,
+      "length_mm": 22.0,
+      "x_from_m": -0.28200000000000003,
+      "x_to_m": -0.26,
+      "note": "projects aft into Tail_Joint_Sleeve; 3 insert bores 4.2 x 7.5 mm radial at x=-0.2710 m, +Z, -Z, bottom"
+     }
+    ]
+   },
+   "material": "PETG (P-05)",
+   "color": [
+    0.12,
+    0.13,
+    0.16
+   ],
+   "placements": [
+    {
+     "pos": [
+      -0.267,
+      -0.03,
+      0.0
+     ],
+     "axis": [
+      1,
+      0,
+      0
+     ],
+     "up": [
+      0,
+      1,
+      0
+     ]
+    }
+   ],
+   "mass_g": 6.0,
+   "source": "EST: 9 g rev 1 part scaled by circumference (r 46 vs 70 mm); tolerances.json insert_bore_M3, slip fit 0.4 mm radial"
+  },
+  {
+   "name": "Tail_Joint_Sleeve",
+   "kind": "part",
+   "qty": 1,
+   "shape": {
+    "type": "ring (revolve), axis X",
+    "od_mm": "108.0 forward / 100.7 aft (frustum, follows the cone inner surface)",
+    "id_mm": 92.6,
+    "length_mm": 22.0,
+    "x_from_m": -0.28200000000000003,
+    "x_to_m": -0.26,
+    "note": "bonded inside the forward end of Tail_Cone; 3 radial clearance holes 3.6 mm at +Z, -Z, bottom, x = -0.0443 m, aligned with the cone holes"
+   },
+   "material": "PETG (P-05)",
+   "color": [
+    0.12,
+    0.13,
+    0.16
+   ],
+   "placements": [
+    {
+     "pos": [
+      -0.271,
+      -0.03,
+      0.0
+     ],
+     "axis": [
+      1,
+      0,
+      0
+     ],
+     "up": [
+      0,
+      1,
+      0
+     ]
+    }
+   ],
+   "mass_g": 6.0,
+   "source": "EST: 9 g rev 1 part scaled by circumference"
+  },
+  {
+   "name": "W15x phase extension",
+   "kind": "wire",
+   "qty": 1,
+   "shape": {
+    "type": "3 x 14 AWG silicone, 0.10 m extra each, spliced at the ESC end, heat shrink 3 pieces"
+   },
+   "material": "copper/silicone",
+   "color": [
+    0.1,
+    0.1,
+    0.1
+   ],
+   "placements": [
+    {
+     "pos": [
+      -0.4145,
+      -0.03,
+      0.0
+     ],
+     "axis": [
+      -1,
+      0,
+      0
+     ]
+    }
+   ],
+   "mass_g": 8.0,
+   "source": "inventory/electrical/wiring.json W15 (length 0.039 m); EST mass"
+  },
+  {
+   "name": "Tail connectors",
+   "kind": "wire",
+   "qty": 1,
+   "shape": {
+    "type": "2 x XT60H pair (W08) + 1 x JR 3-pin pair (W25) at the tail joint; rev 2: inside the spigot bore (r<37 mm) at x=-0.277 m, y=-0.060 m"
+   },
+   "material": "nylon/brass",
+   "color": [
+    0.9,
+    0.7,
+    0.1
+   ],
+   "placements": [
+    {
+     "pos": [
+      -0.277,
+      -0.06,
+      0.0
+     ],
+     "axis": [
+      1,
+      0,
+      0
+     ]
+    }
+   ],
+   "mass_g": 10.0,
+   "source": "inventory/electrical/wiring.json connectors CN_J1_R_PWR (XT60H pair x2 convention); EST mass"
+  }
+ ],
+ "hardware": [
+  {
+   "id": "HW-A2-01",
+   "joint": "J-A2-01",
+   "kind": "screw",
+   "spec": "ISO 7380-1 M3x16 A2 button head",
+   "thread": "M3",
+   "standard": "ISO 7380-1",
+   "geom": {
+    "d": 3,
+    "L": 16,
+    "head": "button",
+    "head_d": 5.7,
+    "head_h": 1.65,
+    "s": 2.0
+   },
+   "material": "A2 stainless",
+   "color": [
+    0.72,
+    0.74,
+    0.78
+   ],
+   "instances": [
+    {
+     "pos": [
+      -0.271,
+      -0.0834,
+      0.0
+     ],
+     "axis": [
+      0,
+      1,
+      0
+     ],
+     "parent": "Tail_Cone",
+     "note": "bottom; head on washer at r 0.0534 m, tip at r 0.0374 m, engages the insert in the spigot tongue (rev 2: M3x16, not M3x20)"
+    },
+    {
+     "pos": [
+      -0.271,
+      -0.03,
+      0.0534
+     ],
+     "axis": [
+      0,
+      0,
+      -1
+     ],
+     "parent": "Tail_Cone",
+     "note": "+Z side"
+    },
+    {
+     "pos": [
+      -0.271,
+      -0.03,
+      -0.0534
+     ],
+     "axis": [
+      0,
+      0,
+      1
+     ],
+     "parent": "Tail_Cone",
+     "note": "-Z side"
+    }
+   ],
+   "qty_total": 3,
+   "covered_by": "P-04 hardware kit stock (M3 kit B0FGV5FCBN, budget-airframe.md line 320)"
+  },
+  {
+   "id": "HW-A2-02",
+   "joint": "J-A2-01",
+   "kind": "washer",
+   "spec": "ISO 7089 M3 A2",
+   "thread": "M3",
+   "standard": "ISO 7089",
+   "geom": {
+    "id": 3.2,
+    "od": 7.0,
+    "t": 0.5
+   },
+   "material": "A2 stainless",
+   "color": [
+    0.72,
+    0.74,
+    0.78
+   ],
+   "instances": [
+    {
+     "pos": [
+      -0.271,
+      -0.0829,
+      0.0
+     ],
+     "axis": [
+      0,
+      1,
+      0
+     ],
+     "parent": "Tail_Cone",
+     "note": "bottom"
+    },
+    {
+     "pos": [
+      -0.271,
+      -0.03,
+      0.0529
+     ],
+     "axis": [
+      0,
+      0,
+      -1
+     ],
+     "parent": "Tail_Cone",
+     "note": "+Z"
+    },
+    {
+     "pos": [
+      -0.271,
+      -0.03,
+      -0.0529
+     ],
+     "axis": [
+      0,
+      0,
+      1
+     ],
+     "parent": "Tail_Cone",
+     "note": "-Z"
+    }
+   ],
+   "qty_total": 3,
+   "covered_by": "P-04 hardware kit stock"
+  },
+  {
+   "id": "HW-A2-03",
+   "joint": "J-A2-01",
+   "kind": "insert",
+   "spec": "Ruthex-type M3x5.7 brass heat-set insert",
+   "thread": "M3",
+   "standard": "heat-set insert",
+   "geom": {
+    "od": 4.6,
+    "L": 5.7,
+    "hole_d": 4.0,
+    "hole_depth_min": 7.3,
+    "cad_mm": {
+     "bore_d": 4.2,
+     "bore_depth": 7.5,
+     "lead_in": "0.4 x 45 deg",
+     "source": "tolerances.json rules insert_bore_M3 / insert_depth_M3"
+    }
+   },
+   "material": "brass",
+   "color": [
+    0.85,
+    0.65,
+    0.2
+   ],
+   "instances": [
+    {
+     "pos": [
+      -0.271,
+      -0.0759,
+      0.0
+     ],
+     "axis": [
+      0,
+      1,
+      0
+     ],
+     "parent": "Tail_Joint_Spigot",
+     "note": "insert from the tongue outer face r 0.0459 m inward (rev 2: tongue OD 91.8 mm)"
+    },
+    {
+     "pos": [
+      -0.271,
+      -0.03,
+      0.0459
+     ],
+     "axis": [
+      0,
+      0,
+      -1
+     ],
+     "parent": "Tail_Joint_Spigot",
+     "note": "insert from the tongue outer face r 0.0459 m inward (rev 2: tongue OD 91.8 mm)"
+    },
+    {
+     "pos": [
+      -0.271,
+      -0.03,
+      -0.0459
+     ],
+     "axis": [
+      0,
+      0,
+      1
+     ],
+     "parent": "Tail_Joint_Spigot",
+     "note": "insert from the tongue outer face r 0.0459 m inward (rev 2: tongue OD 91.8 mm)"
+    }
+   ],
+   "qty_total": 3,
+   "covered_by": "P-04 hardware kit stock (M3 inserts 100 pcs, budget-airframe.md line 287)"
+  },
+  {
+   "id": "HW-A2-04",
+   "joint": "J-A2-01",
+   "kind": "plate",
+   "spec": "Tail joint spigot ring (Tail_Joint_Spigot), see add",
+   "thread": "",
+   "standard": "printed part",
+   "geom": {
+    "ref": "Tail_Joint_Spigot"
+   },
+   "material": "PETG",
+   "color": [
+    0.12,
+    0.13,
+    0.16
+   ],
+   "instances": [
+    {
+     "pos": [
+      -0.0406,
+      -0.03,
+      0.0
+     ],
+     "axis": [
+      1,
+      0,
+      0
+     ],
+     "parent": "Fuselage_Pod",
+     "note": "body inside forebody shell"
+    }
+   ],
+   "qty_total": 1,
+   "covered_by": "printed part (M-A2-02)"
+  },
+  {
+   "id": "HW-A2-05",
+   "joint": "J-A2-01",
+   "kind": "plate",
+   "spec": "Tail joint sleeve ring (Tail_Joint_Sleeve), see add",
+   "thread": "",
+   "standard": "printed part",
+   "geom": {
+    "ref": "Tail_Joint_Sleeve"
+   },
+   "material": "PETG",
+   "color": [
+    0.12,
+    0.13,
+    0.16
+   ],
+   "instances": [
+    {
+     "pos": [
+      -0.0443,
+      -0.03,
+      0.0
+     ],
+     "axis": [
+      1,
+      0,
+      0
+     ],
+     "parent": "Tail_Cone",
+     "note": "bonded inside cone forward end"
+    }
+   ],
+   "qty_total": 1,
+   "covered_by": "printed part (M-A2-03)"
+  }
+ ],
+ "joints": [
+  {
+   "id": "J-A2-01",
+   "name": "Tail cone module <-> pod forebody (spigot + sleeve, 3 radial M3x16), joint plane x=-0.26 m",
+   "parts": [
+    "Fuselage_Pod",
+    "Tail_Joint_Spigot",
+    "Tail_Joint_Sleeve",
+    "Tail_Cone"
+   ],
+   "removable": true,
+   "tool": "2.0 mm hex key",
+   "assembly_order": 25,
+   "notes": "Rev 2. Unplug W08 (2 XT60H) and W25 (JR) first. Screws are reachable from the bottom and both sides below the wing root (y = -0.03 is 16 mm below the saddle lower surface). Slip fit 0.4 mm radial (sleeve ID 130.8 vs tongue OD 130.0), EST. Screws now at x=-0.2710 m, r~53 mm; the joint is 21 mm aft of the wing saddle, so no wing cut-out is needed."
+  }
+ ],
+ "moving": [
+  {
+   "name": "slide_tail_cone",
+   "kind": "slider",
+   "pivot": [
+    -0.26,
+    -0.03,
+    0.0
+   ],
+   "axis": [
+    -1,
+    0,
+    0
+   ],
+   "limits_m": [
+    0.0,
+    0.3
+   ],
+   "moves": [
+    "Tail_Cone",
+    "Tail_Joint_Sleeve",
+    "Pusher_Motor",
+    "Pusher_Prop_Set",
+    "ESC_P",
+    "CAP_P",
+    "firewall HW-034",
+    "aft bulkhead HW-035",
+    "J-11 pieces"
+   ],
+   "note": "Breakdown/A-B swap: after the 3 screws and the connectors, the cone module slides aft 22 mm off the spigot and is lifted away."
+  },
+  {
+   "name": "prop_P",
+   "kind": "revolute",
+   "pivot": [
+    -0.5213,
+    -0.03,
+    0.0
+   ],
+   "axis": [
+    1,
+    0,
+    0
+   ],
+   "limits_deg": [
+    -360,
+    360
+   ],
+   "note": "unchanged C0 joint, new position"
+  }
+ ],
+ "checks": {
+  "prop_tip_to_H_tail_LE_m": 0.249,
+  "pusher_disc_to_lift_disc_lateral_m": 0.04,
+  "pusher_disc_to_boom_axis_m": 0.2559,
+  "tail_strike_deg_no_wheels": 18.6,
+  "tail_strike_deg_with_wheels": 38.3,
+  "boom_end_limit_deg_C0": 23,
+  "interference_to_run": [
+   "Tail_Cone vs Fin/H_Tail (none; nearest H_Tail LE x=-0.770)",
+   "Tail_Cone vs Pusher_Prop_14in (prop plane -0.5213 m)",
+   "Fuselage_Pod vs Wing_Saddle: same overlap as C0 (solid pod; saddle and J-01/J-02 unmodified)"
+  ]
+ },
+ "rev": 2,
+ "rev2_note": "Rev 2 (2026-11-03): joint plane moved from x=-0.0333 m (inside the wing chord x -0.239..0) to x=-0.2600 m, 21 mm aft of the saddle / J-01 root plates / J-02 hard-points (aft extent x=-0.239 m measured in Fusion). Fuselage_Pod forebody = C0 nose + cylinder to s=0.5 m + the first 0.2267 m of the spec cone (same law). Tail module = last 0.2233 m of the spec cone (3 segments, splits at 0.34 / 0.395 m of the spec cone), spigot/sleeve/hardware re-sized to the smaller radius (r=54.7 mm at the plane). Pusher at x=-0.5213 unchanged."
+}

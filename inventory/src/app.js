@@ -43,6 +43,7 @@ function show(id, sub, focus){
   try{ localStorage.setItem('invSec', target.id); }catch(e){}
   if(target.id === 'model3d') initModel();
   const dest = sub ? document.getElementById(sub) : null;
+  if(dest && dest.classList.contains('altpanel')) altSelect(dest.id.slice(4));
   openAround(dest);
   if(dest) dest.scrollIntoView(); else window.scrollTo(0, 0);
   if(focus){ const f = dest || target.querySelector('h2'); if(f){ if(!f.hasAttribute('tabindex')) f.setAttribute('tabindex', '-1'); f.focus({preventScroll:true}); } }
@@ -122,13 +123,14 @@ function startModel(){
   if(pending){ CV.selectPart(pending); pending = null; }
 }
 // Fusion model (every fastener): built only when asked, since it is about 0.4 M triangles
+let FDATA = null; const fusionData = () => FDATA || (FDATA = JSON.parse(document.getElementById('fusionData').textContent));   // parsed once, shared by the Fusion and variant viewers
 let FV = null;
 $('#fvLoad').addEventListener('click', () => {
   if(FV) return; FV = 'loading';
   const view = $('#fv'); view.querySelector('.fvstart').hidden = true; view.classList.add('loading');
   (window.THREE && THREE.OrbitControls ? Promise.resolve() : loadScript(THREE_SRC[0]).then(() => loadScript(THREE_SRC[1])))
     .catch(() => {}).then(() => setTimeout(() => {   // let the loading message paint first
-      const F = JSON.parse(document.getElementById('fusionData').textContent);
+      const F = fusionData();
       FV = FusionViewer(view, F, INVP) || null; view.classList.remove('loading');
       if(!FV){ view.querySelector('.fallback').hidden = false; view.querySelector('.fvstart').hidden = false; $('#fvCanvas').hidden = true; return; }
       view.querySelector('.ctl').hidden = false; window.__fusion3d = FV; touchGate(view);
@@ -147,6 +149,44 @@ function touchGate(view){
   document.addEventListener('pointerdown', e => { if(view.classList.contains('armed') && !view.contains(e.target)) arm(false); });
   if(window.IntersectionObserver) new IntersectionObserver(es => es.forEach(en => { if(!en.isIntersecting) arm(false); })).observe(view);
 }
+
+// ---------- §10 Alternative designs: tabs, inventory filter, lazy 3D ----------
+const altTabs = $$('.alttabs [role="tab"]'), AV = {};
+function altSelect(id, focus){
+  altTabs.forEach(t => { const on = t.dataset.alt === id; t.setAttribute('aria-selected', on); t.tabIndex = on ? 0 : -1; if(on && focus) t.focus(); const p = document.getElementById('alt-' + t.dataset.alt); if(p) p.hidden = !on; });
+  const v = AV[id]; if(v && v.refresh) v.refresh();
+}
+altTabs.forEach((t, i) => {
+  t.addEventListener('click', () => altSelect(t.dataset.alt));
+  t.addEventListener('keydown', e => { const k = {ArrowRight:1, ArrowDown:1, ArrowLeft:-1, ArrowUp:-1}[e.key]; let j = null;
+    if(k) j = (i + k + altTabs.length) % altTabs.length; else if(e.key === 'Home') j = 0; else if(e.key === 'End') j = altTabs.length - 1;
+    if(j !== null){ e.preventDefault(); altSelect(altTabs[j].dataset.alt, true); } });
+});
+function altTotals(panel){
+  const t = panel.querySelector('table.alttbl'), ch = t.classList.contains('changes'); let n = 0, sum = 0;
+  Array.from(t.tBodies[0].rows).forEach(r => { if(ch && r.dataset.st === 'same') return; n++; if(r.dataset.type === 'Buy') sum += parseFloat(r.dataset.ext) || 0; });
+  panel.querySelector('.altfilt .count').textContent = n + ' of ' + t.tBodies[0].rows.length + ' lines';
+  t.querySelector('tfoot .shown').textContent = fmt2(Math.round(sum * 100) / 100);
+}
+$$('.altpanel').forEach(p => { if(p.querySelector('table.alttbl')) altTotals(p); });
+document.addEventListener('click', e => {
+  const b = e.target.closest('.altfilt button[data-altfilt]'); if(b){ const p = b.closest('.altpanel'); p.querySelector('table.alttbl').classList.toggle('changes', b.dataset.altfilt === 'changes');
+    b.parentElement.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b)); altTotals(p); return; }
+  const f = e.target.closest('button[data-altfind]'); if(f){ const p = f.closest('.altpanel'), t = p.querySelector('table.alttbl'), r = t.tBodies[0].querySelector('tr[data-id="' + f.dataset.altfind + '"]');
+    if(r){ if(r.dataset.st === 'same' && t.classList.contains('changes')) p.querySelector('.altfilt button[data-altfilt="all"]').click();
+      t.querySelectorAll('tr.hit').forEach(x => x.classList.remove('hit')); r.classList.add('hit'); r.scrollIntoView({block:'center'}); } }
+});
+$$('button.altload').forEach(btn => btn.addEventListener('click', () => {
+  const id = btn.dataset.var; if(AV[id]) return; AV[id] = 'loading';
+  const view = document.getElementById('av-' + id); view.querySelector('.fvstart').hidden = true; view.classList.add('loading');
+  (window.THREE && THREE.OrbitControls ? Promise.resolve() : loadScript(THREE_SRC[0]).then(() => loadScript(THREE_SRC[1])))
+    .catch(() => {}).then(() => setTimeout(() => {
+      const VP = JSON.parse(document.getElementById('variantData-' + id).textContent);
+      const V = VariantViewer(view, fusionData(), VP, ALTV[id]); view.classList.remove('loading');
+      if(!V){ AV[id] = null; view.querySelector('.fallback').hidden = false; view.querySelector('.fvstart').hidden = false; view.querySelector('canvas').hidden = true; return; }
+      AV[id] = V; view.querySelector('.ctl').hidden = false; (window.__alt3d = window.__alt3d || {})[id] = V; touchGate(view);
+    }, 30));
+}));
 
 // ---------- inventory table: show or hide the secondary columns ----------
 $('#invCols').addEventListener('click', e => { const on = tbl.classList.toggle('lesscols') === false; e.currentTarget.setAttribute('aria-pressed', on); e.currentTarget.textContent = on ? 'Show fewer columns' : 'Show all columns'; });

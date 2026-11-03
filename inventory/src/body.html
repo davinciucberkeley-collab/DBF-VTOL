@@ -27,6 +27,8 @@
   <p class="verdict lede"><b>{{COMMITTED}} committed of the {{CAP}} cap; {{RESERVE}} crash reserve against a {{TARGET}} target: the plan fits, with a thin margin.</b> As of {{DATE}}: {{LINES}} lines ({{N_BUY}} to buy, {{N_MAKE}} to make, {{N_NWA}} NWA prop lines, {{N_PROP}} proposed and not committed); {{RECEIVED}} received. Open decisions are below; the electrical conflict is in <a href="#el-conflicts">§3</a>.</p>
   <p class="src">inventory/inventory.json (summary, rows; snapshot {{DATE}}) ← docs/purchasing/C0_BOM.csv; docs/DESIGN-BASIS.md R6, R7 (reserve target)</p>
 
+  <p class="altpoint"><b>Alternatives:</b> {{ALT_N}} variants of C0 ({{ALT_ONELINE}}) are costed, sized and modelled in <a href="#alternatives">§10</a>.</p>
+
   {{KPIS}}
   <p class="src">inventory/inventory.json summary.cap, committed, reserve, proposed, counts; rows by Type and Status. Items received = lines with Qty on hand above 0. NWA props = sum of Qty needed on the Type NWA lines (N-01, N-02). Proposed spend = summary.proposed (rows G-01 to G-04, not in committed spend). Electrical conflict: docs/research/electrical-architecture.md §4 and inventory/electrical/components.json FC1 (current sensor rating).</p>
 
@@ -409,6 +411,27 @@
   <details class="more"><summary>Bin table, K1 to K7</summary>
   <div class="tbl"><table><thead><tr><th>Bin</th><th>Kit</th><th class="n">Lines</th><th>Note</th></tr></thead><tbody>{{LOC_ROWS}}</tbody></table></div>
   <p class="src">Kit names and line counts from inventory/inventory.json; the bin scheme and notes are a proposal, not a decision; docs/research/budget-energy-test.md §3 for the K6 storage items</p></details>
+</section>
+
+<!-- ============================ 10 ALTERNATIVE DESIGNS ============================ -->
+<section class="sec" id="alternatives" data-title="Alternative designs" data-n="10">
+  <div class="sechead"><h2><span class="secno">10</span> Alternative designs</h2></div>
+  <p class="verdict lede">{{ALT_LEDE}}</p>
+  <p class="src">concepts/variants/a1, a2, a3 (design.md verdicts, metrics.json, inventory.json); concepts/concepts.json group A (James Guymon's concept page, Concept-Models.html, commit c8b7a12)</p>
+  {{ALT_WHY}}
+  <p class="src">concepts/concepts.json (groups, checked 2026-10-21; concepts a1 to a3: what, claim, source); concepts/variants/*/design.md; analysis/results.json (C0 sizing)</p>
+
+  <h3 id="alt-compare">C0 against the three variants</h3>
+  <p>Every cell is read from the variant's metrics.json or inventory.json. Small grey figures under a value are the change from C0 (green = better, red = worse) or the range the file gives. {{ALT_MESHNOTE}}</p>
+  {{ALT_COMPARE}}
+  <p class="src">concepts/variants/a1..a3/metrics.json (mass_kg, static_margin_pct, span_m, width_m, motors, hover_power_W, cruise_power_W, endurance_min, cost_usd, reserve_usd, parts_new, parts_removed, risk) and inventory.json (summary.committed, reserve, counts, hardware_delta; rows by status); C0 money from inventory/inventory.json summary; R7 and R10 from docs/DESIGN-BASIS.md; verdicts from design.md</p>
+  {{ALT_CHARTS}}
+  <p class="src">Reserve: inventory.json summary.reserve of each variant against the R7 target. Endurance: metrics.json endurance_min (value and range; estimates) against the R10 cruise time.</p>
+  <details class="more"><summary>How to read these numbers</summary>{{ALT_NOTES}}</details>
+
+  <h3 id="alt-variants">The variants, one at a time</h3>
+  <p>Pick a tab. Each shows the bottom line, the key numbers, the 3D model with the changes highlighted, the inventory lines that differ from C0 (switch to all lines if you want the full list), the budget, the hardware delta and the full design note.</p>
+  {{ALT_TABS}}
 </section>
 
 </main>

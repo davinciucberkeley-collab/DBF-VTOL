@@ -1,0 +1,23 @@
+{
+ "0.01": {
+  "single_within5deg": 0.3625,
+  "single_within25deg": 0.3625,
+  "nudge_mean": 1.125,
+  "nudge_fail_after12": 0.0,
+  "nudge_p90": 2.0
+ },
+ "0.02": {
+  "single_within5deg": 0.3875,
+  "single_within25deg": 0.3875,
+  "nudge_mean": 0.865,
+  "nudge_fail_after12": 0.0,
+  "nudge_p90": 2.0
+ },
+ "0.04": {
+  "single_within5deg": 0.56,
+  "single_within25deg": 0.56,
+  "nudge_mean": 0.685,
+  "nudge_fail_after12": 0.0,
+  "nudge_p90": 2.0
+ }
+}

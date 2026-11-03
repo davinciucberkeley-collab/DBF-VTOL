@@ -1,0 +1,124 @@
+{
+ "variant": "a2",
+ "base": "C0",
+ "est": true,
+ "date": "2026-11-02",
+ "mass_kg": {
+  "value": 6.241,
+  "c0": 6.182,
+  "est": true,
+  "formula": "m_C0 6.18217 + 0.0353 printed module cone (0.0555 m^2 x 0.5 mm x 1270) + 0.0293 XPS cone extension on the forebody (0.1011 m^2 x 0.29 kg/m^2, areal mass from the 35.5 g / 0.1224 m^2 C0 cone) + 0.012 rings - 0.0355 C0 foam cone + 0.018 wiring/connectors = +0.059 kg (rev 1: +0.100)",
+  "source": "analysis/results.json concepts.C0.sized; concepts/variants/a2/bli_estimate.json; geometry.json",
+  "rev1_value": 6.282
+ },
+ "cg_x_m": {
+  "value": -0.0668,
+  "c0": -0.0668,
+  "est": true,
+  "formula": "x_cg = (m0 x0 + dM_x)/m1 gives -0.0735 m before the fix (30.8 % MAC); pod group (2.497 kg) slides +0.0167 m forward to return to -0.0668 m (28 % MAC); rev 2: dM_x -35.9 g m (EST) needs a 13.8 mm slide; built with 16.7 mm (rev 1 value) = CG about 1.2 mm forward of -0.0668 m, inside the M5 3 mm tolerance",
+  "source": "analysis/results.json concepts.C0.cg (items, target); bli_estimate.json aircraft"
+ },
+ "static_margin_pct": {
+  "value": 19.1,
+  "c0": 19.6,
+  "range": [
+   18.8,
+   19.3
+  ],
+  "est": true,
+  "formula": "SM = NP - CG = (47.63 - dNP) - 28.0; dNP = -0.27 % MAC (+0.0011 m^3 tail volume, Munk 2(k2-k1)V/(S c CLa) with k2-k1 0.9 EST) - 0.1..0.4 % MAC (prop normal force at 0.081 m more lever, N_alpha = 0.3..1.0 T/rad EST)",
+  "source": "analysis/aero.json neutral_point_pct_mac 47.632; bli_estimate.py"
+ },
+ "span_m": {
+  "value": 2.4,
+  "c0": 2.4,
+  "est": false,
+  "source": "analysis/results.json base.span"
+ },
+ "width_m": {
+  "value": 2.4,
+  "c0": 2.4,
+  "est": false,
+  "formula": "overall width = max(span 2.40 m, across the lift discs 2 x (0.4337 + 0.2159) = 1.299 m) = 2.40 m; pod length 0.95 m (C0 0.85) is under the 1.2 m longest piece",
+  "source": "cad/params.txt (span, comp= Boom_Front z, liftProp 0.4318)"
+ },
+ "motors": {
+  "value": 5,
+  "c0": 5,
+  "note": "4 lift X4110S + 1 pusher X4110S 400KV, unchanged",
+  "source": "inventory/inventory.json P-38, P-39"
+ },
+ "hover_power_W": {
+  "value": 843.9,
+  "c0": 831.98,
+  "est": true,
+  "formula": "P_hover x (m1/m0)^1.5, actuator-disc scaling (P ~ T^1.5)",
+  "source": "analysis/results.json concepts.C0.sized; concepts/variants/a2/bli_estimate.json",
+  "rev1_value": 852.2
+ },
+ "cruise_power_W": {
+  "value": 366.35,
+  "c0": 365.24,
+  "range": [
+   362,
+   380
+  ],
+  "est": true,
+  "formula": "P = D V / (eta_p eta_ME), eta_p 0.6, eta_ME 0.85; dD = +0.034 N induced (W^2) + 0..0.031 N pod (Squire-Young vs Raymer, midpoint) = +0.049 N; BLI credit -0.26 W; inflow-distortion penalty 0..+12 W NOT included (upper range); rev 2: induced dD +0.020 N (W^2), pod +0.015 N, BLI credit -0.26 W",
+  "source": "analysis/results.json concepts.C0.sized; concepts/variants/a2/bli_estimate.json",
+  "rev1_value": 366.9
+ },
+ "endurance_min": {
+  "value": 11.82,
+  "c0": 11.94,
+  "est": true,
+  "formula": "t = (E_pack x 0.8 x 0.95 x 3600 - P_hover x 160 s)/P_cruise/60, E_pack 144.3 Wh",
+  "source": "analysis/model.js line 78; analysis/results.json concepts.C0.sized; concepts/variants/a2/bli_estimate.json",
+  "meaning": "cruise minutes available after 2 min hover + 40 s transition and 20 % reserve",
+  "rev1_value": 11.74
+ },
+ "cost_usd": {
+  "value": 1897.92,
+  "c0": 1897.92,
+  "delta": 0.0,
+  "source": "concepts/variants/a2/inventory.json summary; no new purchases"
+ },
+ "reserve_usd": {
+  "value": 102.08,
+  "c0": 102.08,
+  "source": "inventory/inventory.json summary.reserve",
+  "with_wheels_G01_G03": 60.74
+ },
+ "parts_new": {
+  "value": 23,
+  "detail": "3 CAD parts (Tail_Cone, Tail_Joint_Spigot, Tail_Joint_Sleeve) + 20 hardware/wire pieces (hardware_delta)",
+  "source": "inventory.json summary.hardware_delta"
+ },
+ "parts_removed": {
+  "value": 0,
+  "detail": "Fuselage_Pod is modified (forebody only); W15 replaced by W15x",
+  "source": "geometry.json"
+ },
+ "risk": "medium",
+ "trl_note": "TRL 3-4: all subsystems are C0 parts; the new element is a printed tail cone and a pod re-registration. The BLI effect itself is predicted at +0.07 percentage points over C0 (PSC 1.22 % vs 1.15 % of ideal disc power, EST) and is not measurable with the team's instruments (watt meter). Medium risk comes from tail-strike margin (18.5 deg without wheels), cone stiffness (f_n target >= 40 Hz, unmeasured) and the CG/pod re-registration, not from the aerodynamics.",
+ "bli": {
+  "pod_drag_over_total_phi_c0": 0.0597,
+  "phi_a2": 0.063,
+  "psc_14in_c0_pct": 1.15,
+  "psc_14in_a2_pct": 1.22,
+  "psc_scaling": "PSC ~ 0.19 x phi (EST, actuator disc, 14 in prop)",
+  "ideal_power_saved_W": 2.5,
+  "electrical_W_saved_est": 4.5,
+  "source": "bli_estimate.json"
+ },
+ "tail_strike_deg": {
+  "no_wheels": 18.5,
+  "with_wheels": 38.1,
+  "c0_no_wheels": 56.7,
+  "c0_with_wheels": 74.4,
+  "c0_doc": "inventory electrical-architecture.md lines 97-101 (56.9 / 74.4)",
+  "boom_end_limit_deg": 23
+ },
+ "rev": 2,
+ "rev_note": "Rev 2 (2026-11-03): joint plane moved aft of the wing (x=-0.26 m). Mass-related values below re-estimated (EST); aero values (pod drag, BLI, NP) are unchanged because the outer profile is unchanged."
+}

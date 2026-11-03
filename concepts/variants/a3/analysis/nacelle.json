@@ -1,0 +1,59 @@
+{
+ "area_m2": 0.008714104992730714,
+ "perimeter_m": 0.4297303333916653,
+ "mass_nacelle_g": 37.45491354984528,
+ "mass_cap_g": 9.44178134332426,
+ "frontal_tH_m2": 0.0035754235561067087,
+ "table": [
+  {
+   "xi": 0.06,
+   "x_local_mm": 66.4,
+   "half_thickness_mm": 18.3
+  },
+  {
+   "xi": 0.1,
+   "x_local_mm": 56.0,
+   "half_thickness_mm": 22.3
+  },
+  {
+   "xi": 0.15,
+   "x_local_mm": 43.0,
+   "half_thickness_mm": 25.5
+  },
+  {
+   "xi": 0.2,
+   "x_local_mm": 30.0,
+   "half_thickness_mm": 27.3
+  },
+  {
+   "xi": 0.3,
+   "x_local_mm": 4.0,
+   "half_thickness_mm": 28.6
+  },
+  {
+   "xi": 0.4,
+   "x_local_mm": -22.0,
+   "half_thickness_mm": 27.6
+  },
+  {
+   "xi": 0.5,
+   "x_local_mm": -48.0,
+   "half_thickness_mm": 25.2
+  },
+  {
+   "xi": 0.6,
+   "x_local_mm": -74.0,
+   "half_thickness_mm": 21.7
+  },
+  {
+   "xi": 0.7,
+   "x_local_mm": -100.0,
+   "half_thickness_mm": 17.3
+  },
+  {
+   "xi": 0.75,
+   "x_local_mm": -113.0,
+   "half_thickness_mm": 14.9
+  }
+ ]
+}

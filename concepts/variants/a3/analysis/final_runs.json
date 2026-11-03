@@ -1,0 +1,114 @@
+{
+ "C0": {
+  "m": 6.182,
+  "P_hover": 832.0,
+  "P_cruise": 365.2,
+  "D": 9.314,
+  "LD": 6.509,
+  "t_cruise_min": 11.94,
+  "stall_speed": 12.0,
+  "TW": 2.025
+ },
+ "brake_off_windmill (CD_disc 0.10 EST)": {
+  "m": 6.182,
+  "P_hover": 832.0,
+  "P_cruise": 797.4,
+  "D": 20.333,
+  "LD": 2.982,
+  "t_cruise_min": 5.47,
+  "stall_speed": 12.0,
+  "TW": 2.025
+ },
+ "aligned_only_unfaired (+0.02 kg)": {
+  "m": 6.202,
+  "P_hover": 836.0,
+  "P_cruise": 344.7,
+  "D": 8.791,
+  "LD": 6.919,
+  "t_cruise_min": 12.62,
+  "stall_speed": 12.02,
+  "TW": 2.019
+ },
+ "faired_random (1.55e-3), phase1": {
+  "m": 6.41,
+  "P_hover": 885.0,
+  "P_cruise": 297.2,
+  "D": 7.578,
+  "LD": 8.295,
+  "t_cruise_min": 14.2,
+  "stall_speed": 12.22,
+  "TW": 1.953
+ },
+ "a3_low (0.7e-3) phase2": {
+  "m": 6.432,
+  "P_hover": 889.5,
+  "P_cruise": 264.8,
+  "D": 6.753,
+  "LD": 9.34,
+  "t_cruise_min": 15.89,
+  "stall_speed": 12.24,
+  "TW": 1.947
+ },
+ "a3_central (1.1e-3) phase2": {
+  "m": 6.432,
+  "P_hover": 889.5,
+  "P_cruise": 280.2,
+  "D": 7.145,
+  "LD": 8.828,
+  "t_cruise_min": 15.02,
+  "stall_speed": 12.24,
+  "TW": 1.947
+ },
+ "a3_high (1.7e-3) phase2": {
+  "m": 6.432,
+  "P_hover": 889.5,
+  "P_cruise": 303.3,
+  "D": 7.733,
+  "LD": 8.157,
+  "t_cruise_min": 13.88,
+  "stall_speed": 12.24,
+  "TW": 1.947
+ },
+ "a3_mean_with_one_rotor_crosswise (1.325e-3) phase2": {
+  "m": 6.432,
+  "P_hover": 889.5,
+  "P_cruise": 288.8,
+  "D": 7.365,
+  "LD": 8.564,
+  "t_cruise_min": 14.57,
+  "stall_speed": 12.24,
+  "TW": 1.947
+ },
+ "a3_mass_only_no_drag_gain (3.4e-3) phase2": {
+  "m": 6.432,
+  "P_hover": 889.5,
+  "P_cruise": 368.6,
+  "D": 9.399,
+  "LD": 6.711,
+  "t_cruise_min": 11.42,
+  "stall_speed": 12.24,
+  "TW": 1.947
+ },
+ "a3_central phase1": {
+  "m": 6.41,
+  "P_hover": 885.0,
+  "P_cruise": 279.9,
+  "D": 7.137,
+  "LD": 8.807,
+  "t_cruise_min": 15.08,
+  "stall_speed": 12.22,
+  "TW": 1.953
+ },
+ "breakeven_CdA_per_rotor": 0.002975720115841897,
+ "q_Pa": 245.00000000000003,
+ "C0_rotor_share_of_cruise_drag": 0.3577570253650053,
+ "dm_phase1_kg": 0.22778677957267818,
+ "dm_phase2_kg": 0.24978677957267817,
+ "per_rotor_added_g": 56.94669489316954,
+ "cg_shift_mm": -3.4008330873636083e-05,
+ "one_rotor_crosswise": {
+  "dD_N": 0.22050000000000003,
+  "yaw_Nm": 0.09563085,
+  "roll_couple_Nm": 0.17199
+ }
+}

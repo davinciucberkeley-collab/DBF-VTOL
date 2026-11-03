@@ -1,0 +1,811 @@
+{
+ "id": "a2",
+ "doc": "VTOL A2 BLI pusher",
+ "axis_note": "STL coordinates are Fusion world cm, Z-up (world-transformed, written from the B-rep mesh calculator; no further transform needed). Model X fwd = Fusion +Y, model Y up = Fusion +Z, model Z right = Fusion +X. i.e. model (x,y,z) m -> Fusion (z,x,y)*100 cm.",
+ "units": "cm",
+ "hide": [
+  "Fuselage_Pod",
+  "Canopy",
+  "Battery_6S_LiPo",
+  "J-11 Pusher motor - firewall - pod aft bulkhead",
+  "Pusher_Prop_Set",
+  "J-24+27 Canopy screws and GPS mast",
+  "J-25 Pod formers battery tray straps",
+  "J-26 FC stack on avionics deck deck on formers",
+  "J-28 RX Remote ID UBEC BUS1 XT90S airspeed module c [C]",
+  "J-29 ESC mounting lift ESCs on boom outboard faces [C]",
+  "XT90S_1",
+  "FC1",
+  "BUS1",
+  "UBEC1",
+  "GPS1",
+  "RX1",
+  "ESC_P",
+  "CAP_P",
+  "RID1"
+ ],
+ "entries": [
+  {
+   "file": "stl/Fuselage_Pod.stl",
+   "name": "Fuselage_Pod",
+   "group": "airframe",
+   "color": [
+    0.945,
+    0.957,
+    0.969
+   ],
+   "count": 1,
+   "bbox_cm": [
+    [
+     -7.982,
+     -26.0,
+     -10.991
+    ],
+    [
+     8.0,
+     46.67,
+     4.991
+    ]
+   ],
+   "size": 117684,
+   "triangles": 2352,
+   "changed": "rev 2: rebuilt as the forebody to the joint plane x=-0.26 m (C0 nose + cylinder + first 0.2267 m of the spec cone), 8 mm spigot seat, slid 16.7 mm fwd"
+  },
+  {
+   "file": "kinematics/Canopy.stl",
+   "name": "Canopy",
+   "group": "airframe",
+   "color": [
+    0.094,
+    0.157,
+    0.259
+   ],
+   "count": 1,
+   "bbox_cm": [
+    [
+     -5.29,
+     11.656,
+     3.001
+    ],
+    [
+     5.29,
+     32.669,
+     6.999
+    ]
+   ],
+   "size": 91584,
+   "triangles": 1830,
+   "moving": "slide_canopy",
+   "changed": "moved +16.7 mm fwd with the pod"
+  },
+  {
+   "file": "kinematics/Battery_6S_LiPo.stl",
+   "name": "Battery_6S_LiPo",
+   "group": "electronics",
+   "color": [
+    0.2,
+    0.443,
+    0.843
+   ],
+   "count": 1,
+   "bbox_cm": [
+    [
+     -2.4,
+     0.02,
+     -7.5
+    ],
+    [
+     2.4,
+     15.52,
+     -2.5
+    ]
+   ],
+   "size": 15884,
+   "triangles": 316,
+   "moving": "slide_battery",
+   "changed": "moved +16.7 mm fwd with the pod"
+  },
+  {
+   "file": "stl/J-11_Pusher_motor_-_firewall_-_pod_aft_bulkhead.stl",
+   "name": "J-11 Pusher motor - firewall - pod aft bulkhead",
+   "group": "hardware",
+   "color": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "count": 22,
+   "bbox_cm": [
+    [
+     -2.9,
+     -48.67,
+     -5.87
+    ],
+    [
+     2.9,
+     -47.07,
+     -0.13
+    ]
+   ],
+   "size": 235884,
+   "triangles": 4716,
+   "joint": "J-11",
+   "rides": "slide_tail_cone",
+   "changed": "moved aft 83.3 mm (pod slide 16.7 mm fwd - 100 mm tail stretch)"
+  },
+  {
+   "file": "kinematics/Pusher_Prop_Set.stl",
+   "name": "Pusher_Prop_Set",
+   "group": "propulsion",
+   "color": [
+    0.059,
+    0.059,
+    0.067
+   ],
+   "count": 16,
+   "bbox_cm": [
+    [
+     -2.399,
+     -56.33,
+     -20.78
+    ],
+    [
+     2.399,
+     -48.33,
+     14.78
+    ]
+   ],
+   "size": 506784,
+   "triangles": 10134,
+   "moving": "prop_P",
+   "rides": "slide_tail_cone",
+   "changed": "moved aft 83.3 mm (pod slide 16.7 mm fwd - 100 mm tail stretch)"
+  },
+  {
+   "file": "stl/J-24_27_Canopy_screws_and_GPS_mast.stl",
+   "name": "J-24+27 Canopy screws and GPS mast",
+   "group": "hardware",
+   "color": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "count": 20,
+   "bbox_cm": [
+    [
+     -4.35,
+     11.324,
+     2.744
+    ],
+    [
+     4.35,
+     32.016,
+     8.7
+    ]
+   ],
+   "size": 207284,
+   "triangles": 4144,
+   "rides": "slide_canopy",
+   "joint": "J-24",
+   "changed": "moved +16.7 mm fwd with the pod"
+  },
+  {
+   "file": "stl/J-25_Pod_formers_battery_tray_straps.stl",
+   "name": "J-25 Pod formers battery tray straps",
+   "group": "hardware",
+   "color": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "count": 16,
+   "bbox_cm": [
+    [
+     -7.0,
+     -1.195,
+     -9.929
+    ],
+    [
+     7.0,
+     36.37,
+     3.929
+    ]
+   ],
+   "size": 189284,
+   "triangles": 3784,
+   "joint": "J-25",
+   "changed": "moved +16.7 mm fwd with the pod"
+  },
+  {
+   "file": "stl/J-26_FC_stack_on_avionics_deck_deck_on_formers.stl",
+   "name": "J-26 FC stack on avionics deck deck on formers",
+   "group": "hardware",
+   "color": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "count": 33,
+   "bbox_cm": [
+    [
+     -4.5,
+     16.305,
+     -2.25
+    ],
+    [
+     4.5,
+     36.535,
+     1.35
+    ]
+   ],
+   "size": 265484,
+   "triangles": 5308,
+   "joint": "J-26",
+   "changed": "moved +16.7 mm fwd with the pod"
+  },
+  {
+   "file": "stl/J-28_RX_Remote_ID_UBEC_BUS1_XT90S_airspeed_module_c__C_.stl",
+   "name": "J-28 RX Remote ID UBEC BUS1 XT90S airspeed module c [C]",
+   "group": "hardware",
+   "color": [
+    0.929,
+    0.929,
+    0.898
+   ],
+   "count": 6,
+   "bbox_cm": [
+    [
+     -3.23,
+     12.399,
+     -6.921
+    ],
+    [
+     4.23,
+     32.941,
+     5.231
+    ]
+   ],
+   "size": 58484,
+   "triangles": 1168,
+   "joint": "J-28",
+   "changed": "moved +16.7 mm fwd with the pod"
+  },
+  {
+   "file": "stl/J-29_ESC_mounting_lift_ESCs_on_boom_outboard_faces__C_.stl",
+   "name": "J-29 ESC mounting lift ESCs on boom outboard faces [C]",
+   "group": "hardware",
+   "color": [
+    0.929,
+    0.929,
+    0.898
+   ],
+   "count": 2,
+   "bbox_cm": [
+    [
+     -1.43,
+     -34.751,
+     -3.571
+    ],
+    [
+     1.43,
+     -29.909,
+     -2.269
+    ]
+   ],
+   "size": 16084,
+   "triangles": 320,
+   "joint": "J-29",
+   "rides": "slide_tail_cone",
+   "changed": "moved +16.7 mm fwd with the pod"
+  },
+  {
+   "file": "stl/XT90S_1.stl",
+   "name": "XT90S_1",
+   "group": "electronics",
+   "color": [
+    0.447,
+    0.498,
+    0.549
+   ],
+   "count": 1,
+   "bbox_cm": [
+    [
+     -1.0,
+     17.17,
+     -6.0
+    ],
+    [
+     1.0,
+     19.17,
+     -4.0
+    ]
+   ],
+   "size": 36284,
+   "triangles": 724,
+   "changed": "moved +16.7 mm fwd with the pod"
+  },
+  {
+   "file": "stl/FC1.stl",
+   "name": "FC1",
+   "group": "electronics",
+   "color": [
+    0.149,
+    0.647,
+    0.349
+   ],
+   "count": 1,
+   "bbox_cm": [
+    [
+     -1.6,
+     20.07,
+     -0.85
+    ],
+    [
+     1.6,
+     25.27,
+     0.85
+    ]
+   ],
+   "size": 4684,
+   "triangles": 92,
+   "changed": "moved +16.7 mm fwd with the pod"
+  },
+  {
+   "file": "stl/BUS1.stl",
+   "name": "BUS1",
+   "group": "electronics",
+   "color": [
+    0.447,
+    0.498,
+    0.549
+   ],
+   "count": 1,
+   "bbox_cm": [
+    [
+     -1.25,
+     19.67,
+     -6.75
+    ],
+    [
+     1.25,
+     23.67,
+     -5.25
+    ]
+   ],
+   "size": 8684,
+   "triangles": 172,
+   "changed": "moved +16.7 mm fwd with the pod"
+  },
+  {
+   "file": "stl/UBEC1.stl",
+   "name": "UBEC1",
+   "group": "electronics",
+   "color": [
+    0.447,
+    0.498,
+    0.549
+   ],
+   "count": 1,
+   "bbox_cm": [
+    [
+     -1.0,
+     25.67,
+     -6.0
+    ],
+    [
+     1.0,
+     29.67,
+     -5.0
+    ]
+   ],
+   "size": 8684,
+   "triangles": 172,
+   "changed": "moved +16.7 mm fwd with the pod"
+  },
+  {
+   "file": "stl/GPS1.stl",
+   "name": "GPS1",
+   "group": "electronics",
+   "color": [
+    0.447,
+    0.498,
+    0.549
+   ],
+   "count": 1,
+   "bbox_cm": [
+    [
+     -1.05,
+     20.62,
+     8.399
+    ],
+    [
+     1.05,
+     22.72,
+     9.201
+    ]
+   ],
+   "size": 684,
+   "triangles": 12,
+   "rides": "slide_canopy",
+   "changed": "moved +16.7 mm fwd with the pod"
+  },
+  {
+   "file": "stl/RX1.stl",
+   "name": "RX1",
+   "group": "electronics",
+   "color": [
+    0.447,
+    0.498,
+    0.549
+   ],
+   "count": 1,
+   "bbox_cm": [
+    [
+     -3.65,
+     30.57,
+     2.8
+    ],
+    [
+     -2.35,
+     32.77,
+     3.2
+    ]
+   ],
+   "size": 684,
+   "triangles": 12,
+   "changed": "moved +16.7 mm fwd with the pod"
+  },
+  {
+   "file": "stl/ESC_P.stl",
+   "name": "ESC_P",
+   "group": "electronics",
+   "color": [
+    0.859,
+    0.376,
+    0.098
+   ],
+   "count": 1,
+   "bbox_cm": [
+    [
+     -1.25,
+     -34.58,
+     -3.4
+    ],
+    [
+     1.25,
+     -30.08,
+     -2.6
+    ]
+   ],
+   "size": 684,
+   "triangles": 12,
+   "rides": "slide_tail_cone",
+   "changed": "moved +16.7 mm fwd with the pod"
+  },
+  {
+   "file": "stl/CAP_P.stl",
+   "name": "CAP_P",
+   "group": "electronics",
+   "color": [
+    0.949,
+    0.8,
+    0.149
+   ],
+   "count": 1,
+   "bbox_cm": [
+    [
+     -0.5,
+     -32.83,
+     -5.5
+    ],
+    [
+     0.5,
+     -31.83,
+     -4.5
+    ]
+   ],
+   "size": 684,
+   "triangles": 12,
+   "rides": "slide_tail_cone",
+   "changed": "moved +16.7 mm fwd with the pod"
+  },
+  {
+   "file": "stl/RID1.stl",
+   "name": "RID1",
+   "group": "electronics",
+   "color": [
+    0.447,
+    0.498,
+    0.549
+   ],
+   "count": 1,
+   "bbox_cm": [
+    [
+     3.22,
+     12.57,
+     4.1
+    ],
+    [
+     4.78,
+     14.77,
+     4.9
+    ]
+   ],
+   "size": 5484,
+   "triangles": 108,
+   "changed": "moved +16.7 mm fwd with the pod"
+  },
+  {
+   "file": "stl/W15x_phase_extension.stl",
+   "name": "W15x phase extension",
+   "group": "electronics",
+   "color": [
+    0.1,
+    0.1,
+    0.1
+   ],
+   "count": 6,
+   "bbox_cm": [
+    [
+     -0.8,
+     -48.33,
+     -3.19
+    ],
+    [
+     0.8,
+     -34.58,
+     -2.81
+    ]
+   ],
+   "size": 7884,
+   "triangles": 156,
+   "rides": "slide_tail_cone",
+   "new": true
+  },
+  {
+   "file": "stl/Tail_Cone.stl",
+   "name": "Tail_Cone",
+   "group": "printed",
+   "color": [
+    0.949,
+    0.957,
+    0.969
+   ],
+   "count": 5,
+   "bbox_cm": [
+    [
+     -5.472,
+     -48.33,
+     -8.462
+    ],
+    [
+     5.472,
+     -26.0,
+     2.462
+    ]
+   ],
+   "size": 365984,
+   "triangles": 7318,
+   "rides": "slide_tail_cone",
+   "new": true
+  },
+  {
+   "file": "stl/Tail_Joint_Spigot.stl",
+   "name": "Tail_Joint_Spigot",
+   "group": "printed",
+   "color": [
+    0.12,
+    0.13,
+    0.16
+   ],
+   "count": 1,
+   "bbox_cm": [
+    [
+     -5.0,
+     -28.2,
+     -8.0
+    ],
+    [
+     5.0,
+     -25.2,
+     2.0
+    ]
+   ],
+   "size": 42384,
+   "triangles": 846,
+   "new": true
+  },
+  {
+   "file": "stl/Tail_Joint_Sleeve.stl",
+   "name": "Tail_Joint_Sleeve",
+   "group": "printed",
+   "color": [
+    0.12,
+    0.13,
+    0.16
+   ],
+   "count": 1,
+   "bbox_cm": [
+    [
+     -5.402,
+     -28.2,
+     -8.402
+    ],
+    [
+     5.402,
+     -26.0,
+     2.402
+    ]
+   ],
+   "size": 33284,
+   "triangles": 664,
+   "rides": "slide_tail_cone",
+   "new": true
+  },
+  {
+   "file": "stl/J-A2-01_Tail_cone_screws_washers.stl",
+   "name": "J-A2-01_Tail_cone_screws_washers",
+   "group": "hardware",
+   "color": [
+    0.72,
+    0.74,
+    0.78
+   ],
+   "count": 6,
+   "bbox_cm": [
+    [
+     -5.504,
+     -27.446,
+     -8.504
+    ],
+    [
+     5.504,
+     -26.754,
+     -2.65
+    ]
+   ],
+   "size": 40884,
+   "triangles": 816,
+   "joint": "J-A2-01",
+   "rides": "slide_tail_cone",
+   "new": true
+  },
+  {
+   "file": "stl/J-A2-01_Tail_joint_inserts.stl",
+   "name": "J-A2-01_Tail_joint_inserts",
+   "group": "hardware",
+   "color": [
+    0.85,
+    0.65,
+    0.2
+   ],
+   "count": 3,
+   "bbox_cm": [
+    [
+     -4.59,
+     -27.329,
+     -7.59
+    ],
+    [
+     4.59,
+     -26.871,
+     -2.77
+    ]
+   ],
+   "size": 19884,
+   "triangles": 396,
+   "joint": "J-A2-01",
+   "new": true
+  },
+  {
+   "file": "stl/Tail_connectors.stl",
+   "name": "Tail connectors",
+   "group": "electronics",
+   "color": [
+    0.9,
+    0.7,
+    0.1
+   ],
+   "count": 3,
+   "bbox_cm": [
+    [
+     -1.7,
+     -29.2,
+     -6.0
+    ],
+    [
+     1.7,
+     -26.2,
+     -3.45
+    ]
+   ],
+   "size": 1884,
+   "triangles": 36,
+   "rides": "slide_tail_cone",
+   "new": true
+  }
+ ],
+ "moving": [
+  {
+   "id": "slide_tail_cone",
+   "kind": "slider",
+   "new": true,
+   "parent": "Fuselage_Pod",
+   "pivot_m": [
+    -0.26,
+    -0.03,
+    0.0
+   ],
+   "axis_m": [
+    -1,
+    0,
+    0
+   ],
+   "limits": [
+    0.0,
+    0.3
+   ],
+   "unit": "m",
+   "note": "cone module (Tail_Cone, sleeve, pusher set, ESC_P, CAP_P, J-11, screws, W15x, connectors) slides aft 22 mm off the spigot, then lifts away"
+  },
+  {
+   "id": "prop_P",
+   "kind": "revolute",
+   "parent": "Tail_Cone",
+   "pivot_m": [
+    -0.5213,
+    -0.03,
+    0.0
+   ],
+   "axis_m": [
+    1,
+    0,
+    0
+   ],
+   "limits": null,
+   "note": "C0 joint, new position (now on the cone module)"
+  },
+  {
+   "id": "slide_canopy",
+   "kind": "slider",
+   "parent": "Fuselage_Pod",
+   "pivot_m": [
+    0.2217,
+    0.046,
+    0.0
+   ],
+   "axis_m": [
+    0,
+    1,
+    0
+   ],
+   "limits": [
+    0,
+    0.1
+   ],
+   "unit": "m",
+   "note": "C0 joint shifted +16.7 mm with the pod"
+  },
+  {
+   "id": "slide_battery",
+   "kind": "slider",
+   "parent": "Fuselage_Pod",
+   "pivot_m": [
+    0.0777,
+    -0.05,
+    0.0
+   ],
+   "axis_m": [
+    1,
+    0,
+    0
+   ],
+   "limits": [
+    -0.004,
+    0.007
+   ],
+   "unit": "m",
+   "note": "C0 joint shifted +16.7 mm with the pod"
+  }
+ ]
+}

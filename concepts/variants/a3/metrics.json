@@ -1,0 +1,101 @@
+{
+ "variant": "a3",
+ "basis": "C0: MTOW 6.18 kg, hover 832 W, cruise 365 W, 11.9 min, committed $1,897.92, reserve $102.08, NP 47.6 % MAC, SM 19.6 %",
+ "mass_kg": {
+  "value": 6.432,
+  "c0": 6.182,
+  "source": "C0 6.1822 kg (results.json concepts.C0.sized.m) + 0.250 kg (4 x 56.9 g + 22 g phase-2 wiring); wing not re-sized",
+  "est": true
+ },
+ "cg_x_m": {
+  "value": -0.06683,
+  "c0": -0.06683,
+  "source": "moment balance: front pair +0.37092 m, rear pair -0.50458 m, equal masses; shift -0.00003 mm (analysis/final_runs.json)",
+  "est": true
+ },
+ "static_margin_pct": {
+  "value": 19.6,
+  "c0": 19.6,
+  "source": "aero.json static_margin_pct_at_28; CG shift 0.00003 mm; nacelle side area is symmetric about the CG (front pair +0.44 m, rear pair -0.44 m) so net weathercock effect ~0 (not modelled)",
+  "est": true
+ },
+ "span_m": {
+  "value": 2.4,
+  "c0": 2.4,
+  "source": "cad/params.txt; nacelles inside the 0.65 m rotor disc half-width"
+ },
+ "width_m": {
+  "value": 2.4,
+  "c0": 2.4,
+  "source": "span governs; nacelles add 0.057 m width at each boom, inside the lift prop discs"
+ },
+ "motors": {
+  "value": 5,
+  "c0": 5,
+  "source": "4 lift + 1 pusher, no change"
+ },
+ "hover_power_W": {
+  "value": 889.5,
+  "low": 889.5,
+  "high": 896.2,
+  "c0": 832,
+  "source": "F3: P scales as m^1.5 (832 x (6.432/6.1822)^1.5 = 883) x 1.0075 nacelle download (EST range 1.005-1.015)",
+  "est": true
+ },
+ "cruise_power_W": {
+  "value": 280.2,
+  "low": 264.8,
+  "high": 303.3,
+  "c0": 365.2,
+  "source": "F6/F7 with CdA_rotor 1.1e-3 (0.7e-3..1.7e-3) per rotor, fixed wing; analysis/a3_effect.py",
+  "est": true
+ },
+ "endurance_min": {
+  "value": 15.02,
+  "low": 13.88,
+  "high": 15.89,
+  "c0": 11.94,
+  "source": "t = (144.3 Wh x 0.8 x 0.95 - P_hover x 160 s)/P_cruise (model.js t_cruise_avail); same fixed 2 x 6500 mAh pack",
+  "est": true
+ },
+ "cost_usd": {
+  "value": 1943.92,
+  "c0": 1897.92,
+  "source": "inventory.json summary: goods 1672.49 x 1.1025 + $100 shipping; excludes extra shipping on new vendors (\u2014, EST $25-40)",
+  "phase1_only": 1921.93
+ },
+ "reserve_usd": {
+  "value": 56.08,
+  "c0": 102.08,
+  "phase1_only": 78.07,
+  "source": "2000 - committed; before extra shipping"
+ },
+ "parts_new": {
+  "value": 96,
+  "breakdown": {
+   "printed_parts": 12,
+   "hardware_pieces_installed": 84,
+   "note": "printed: 4 nacelles x 2 halves + 4 caps"
+  },
+  "source": "inventory.json summary.hardware_delta"
+ },
+ "parts_removed": {
+  "value": 16,
+  "source": "HW-033 supplied M3x12 screws"
+ },
+ "risk": "medium",
+ "trl_note": "Fairing: TRL 3-4 (concept, bottom-up drag EST, nothing printed or tested). Detent + brake: TRL 2-3 (physics model only, capture 36-56 % per attempt from analysis/mc.py; needs the bench test). Reed/Lua nudge loop: TRL 2 (needs scripting in the CoreWing F405 build, not verified; STM32F405RGT6 flash-limited per ArduPilot board page 2026-11-02).",
+ "drag_cases_per_rotor_CdA_m2": {
+  "C0 random unfaired (repo EST)": 0.0034,
+  "aligned unfaired": 0.00286,
+  "random faired": 0.00155,
+  "a3 aligned faired": 0.0011,
+  "windmilling brake off": "0.0146 (CD_disc 0.10 EST)"
+ },
+ "effect_vs_c0": {
+  "cruise_power_pct": -23.3,
+  "hover_power_pct": 6.9,
+  "endurance_pct": 25.8,
+  "breakeven_CdA_per_rotor": 0.002975720115841897
+ }
+}

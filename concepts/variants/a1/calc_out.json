@@ -1,0 +1,264 @@
+{
+ "width_m": 2.8116,
+ "disk_outer_z": 1.4058,
+ "margin_to_3m_m": 0.18840000000000012,
+ "span_m": 2.4,
+ "tip_mass_g_each": 511.8,
+ "tip_total_kg": 1.0236,
+ "nacelle_group_g_each": 324.1,
+ "removed_g": 323.4,
+ "extra_g_battery_move": 28.0,
+ "delta_mass_kg": 0.7282,
+ "mass_C0_kg": 6.1821705,
+ "mass_kg": 6.9104,
+ "C0_cg_check": {
+  "M": 6.182,
+  "xb": 0.0605,
+  "xb_listed": 0.060549826
+ },
+ "mass_cg_list_kg": 6.8982,
+ "battery_x_C0": 0.0605,
+ "battery_x_A1": -0.1137,
+ "battery_shift_aft_m": 0.1742,
+ "cg_x_battery_not_moved_m": -0.0462,
+ "cg_target_m": -0.066829043,
+ "cg_pct_mac": 28.0,
+ "Ixx_C0_kgm2": 1.131,
+ "Ixx_A1_kgm2": 2.346,
+ "Ixx_ratio": 2.07,
+ "hover_W_C0": 831.97545,
+ "hover_W": 1008.8,
+ "hover_ratio": 1.213,
+ "TW_C0": 2.025,
+ "TW": 1.812,
+ "hover_per_motor_g": 1728.0,
+ "C0_polar": {
+  "CL": 0.432,
+  "CDi": 0.00738,
+  "CD": 0.06636,
+  "D_N": 9.314,
+  "repo_D": 9.314
+ },
+ "nacelle": {
+  "Swet_m2": 0.0384,
+  "Re_L": 337333,
+  "FF": 1.734,
+  "CdA_each_m2": 0.000295
+ },
+ "prop_each": {
+  "T_N": 4.86,
+  "J_assumed": 0.6,
+  "rpm_est": 5624,
+  "CT": 0.0282,
+  "CT_Sinnige": 0.12,
+  "CT_ratio": 0.235
+ },
+ "cruise": {
+  "low": {
+   "de_pct": 4.7,
+   "e": 0.8376,
+   "CL": 0.4829,
+   "CDi": 0.00881,
+   "CD": 0.06882,
+   "D_N": 9.658,
+   "LD": 7.017,
+   "P_cruise_W": 378.7,
+   "endurance_min": 10.27
+  },
+  "central": {
+   "de_pct": 7.06,
+   "e": 0.8565,
+   "CL": 0.4829,
+   "CDi": 0.00862,
+   "CD": 0.06863,
+   "D_N": 9.631,
+   "LD": 7.036,
+   "P_cruise_W": 377.7,
+   "endurance_min": 10.3
+  },
+  "high": {
+   "de_pct": 9.41,
+   "e": 0.8753,
+   "CL": 0.4829,
+   "CDi": 0.00843,
+   "CD": 0.06844,
+   "D_N": 9.605,
+   "LD": 7.055,
+   "P_cruise_W": 376.7,
+   "endurance_min": 10.33
+  }
+ },
+ "tipvortex_benefit_N": 0.085,
+ "tipvortex_benefit_pct_of_D0": 0.92,
+ "nacelle_drag_N": 0.144,
+ "mass_induced_penalty_N": 0.259,
+ "cruise_W_C0": 365.2,
+ "eta_ideal_1prop": 0.9192,
+ "eta_ideal_2prop": 0.9562,
+ "eta_ideal_gain_pct": 4.03,
+ "E_usable_Wh": 109.67,
+ "endurance_C0_min": 11.94,
+ "endurance_min": 10.3,
+ "np_shift": {
+  "0.25": {
+   "dNp_N_per_rad": 12.17,
+   "NP_shift_m": -0.0023,
+   "dSM_pct_MAC": -0.98
+  },
+  "0.5": {
+   "dNp_N_per_rad": 24.33,
+   "NP_shift_m": -0.0047,
+   "dSM_pct_MAC": -1.96
+  },
+  "0.75": {
+   "dNp_N_per_rad": 36.5,
+   "NP_shift_m": -0.007,
+   "dSM_pct_MAC": -2.94
+  }
+ },
+ "SM_pct_C0": 19.632,
+ "SM_pct": 17.7,
+ "SM_pct_range": [
+  16.7,
+  18.7
+ ],
+ "yaw": {
+  "a_fin_per_rad": 1.802,
+  "Nbeta_fins_Nm_per_rad": 18.22,
+  "Nbeta_props_Nm_per_rad": -3.5,
+  "loss_pct": 19.2,
+  "rudder_force_N": 5.49,
+  "rudder_moment_Nm": 4.0,
+  "sideslip8_moment_Nm": 2.05,
+  "one_motor_T_balanced_N": 4.93,
+  "one_motor_T_needed_N": 9.63,
+  "yaw_moment_at_cruise_T_Nm": 11.83,
+  "diff_thrust_moment_per_N_diff": 1.228,
+  "DT_moment_pm1N": 2.46
+ },
+ "LDmax_A1": 10.26,
+ "Dmin_A1_N": 6.6,
+ "wire": {
+  "L_geom_m": 1.526,
+  "L_est_m": 1.678,
+  "awg12": {
+   "area_mm2": 3.309,
+   "R_loop_mOhm": 17.0,
+   "V_drop_at_8.4A": 0.143,
+   "P_at_8.4A_W": 1.2,
+   "V_drop_at_20A": 0.341,
+   "pct_of_22.2V_at_20A": 1.54,
+   "P_at_20A_W": 6.8,
+   "cu_g_per_m": 29.65
+  },
+  "awg14": {
+   "area_mm2": 2.081,
+   "R_loop_mOhm": 27.1,
+   "V_drop_at_8.4A": 0.228,
+   "P_at_8.4A_W": 1.91,
+   "V_drop_at_20A": 0.542,
+   "pct_of_22.2V_at_20A": 2.44,
+   "P_at_20A_W": 10.8,
+   "cu_g_per_m": 18.64
+  },
+  "awg16": {
+   "area_mm2": 1.309,
+   "R_loop_mOhm": 43.1,
+   "V_drop_at_8.4A": 0.362,
+   "P_at_8.4A_W": 3.04,
+   "V_drop_at_20A": 0.862,
+   "pct_of_22.2V_at_20A": 3.88,
+   "P_at_20A_W": 17.2,
+   "cu_g_per_m": 11.73
+  },
+  "mixed": {
+   "L12_m": 0.415,
+   "L14_m": 1.263,
+   "R_loop_mOhm": 24.6,
+   "V_drop_8.5A": 0.209,
+   "P_8.5A_W": 1.78,
+   "V_drop_20A": 0.492,
+   "pct_22.2V_20A": 2.22,
+   "P_20A_W": 9.8
+  },
+  "conductor_m_needed_both_tips": 6.71,
+  "conductor_m_in_14AWG_pack_P07": 6.1,
+  "conductor_m_in_14AWG_used_by_C0": 0.134
+ },
+ "I_mm4": {
+  "socket": 7953.7,
+  "joiner_or_sleeve": 5195.5,
+  "tip_ext": 5147.7
+ },
+ "EI_Nm2": {
+  "socket": 548.8,
+  "socket+joiner": 907.3,
+  "tip_ext": 355.2
+ },
+ "tipbeam": {
+  "F_nacelle_ult_N": 14.3,
+  "M_nacelle_Nm": 4.98,
+  "F_outer_lift_ult_N": 24.2,
+  "M_outer_lift_Nm": 3.13,
+  "M_total_Nm": 8.11,
+  "sigma_MPa": 20.0,
+  "RF_vs_275MPa": 13.7
+ },
+ "root_moment_scale": 1.118,
+ "joiner_RF_C0": 1.8508823,
+ "joiner_RF_A1_est": 1.66,
+ "joiner_note": "Aircraft weight is carried at the booms (z=0.43) and fuselage; the tip nacelle weight (outboard of the lift centroid at about z=0.5) adds root moment. See tip_moment_at_root.",
+ "root_moment_change_per_panel_Nm": {
+  "extra_lift_moment": 8.03,
+  "tip_inertia_relief": -25.93,
+  "net": -17.89
+ },
+ "freq_Hz": {
+  "C0_first3_clamped": [
+   11.26,
+   23.87,
+   68.89
+  ],
+  "A1_first3_clamped": [
+   8.95,
+   44.62,
+   122.26
+  ]
+ },
+ "torsion": {
+  "nacelle_cg_ahead_of_tube_m": 0.102,
+  "GJ_ext_Nm2": 267.7,
+  "twist_1g_deg": 0.024
+ },
+ "tip_deflection_1g_nacelle_mm": 2.25,
+ "tip_deflection_1g_nacelle_pct_semispan": 0.187,
+ "prop_gyro": {
+  "Ip_kgm2": 0.000391,
+  "omega_rad_s": 589.0,
+  "Ip_omega_Nms": 0.23,
+  "torque_at_cruise_Nm": 0.164
+ },
+ "ground": {
+  "disc_bottom_above_ground_mm_noWheels": 77.9,
+  "roll_to_strike_deg_noWheels": 5.6,
+  "roll_to_strike_deg_wheels": 8.9,
+  "C0_pusher_clearance_mm": 35.9
+ },
+ "cruise_per_motor": {
+  "shaft_W_est": 96.3,
+  "electrical_W": 188.8,
+  "I_A_at_22.2V": 8.51
+ },
+ "static_est": {
+  "CT0.10/CP0.045": {
+   "T_N": 23.0,
+   "P_shaft_W": 399,
+   "I_A": 21.1
+  },
+  "CT0.11/CP0.06": {
+   "T_N": 25.3,
+   "P_shaft_W": 531,
+   "I_A": 28.2
+  }
+ }
+}

@@ -47,7 +47,7 @@ The review embeds a rotatable model of all 27 SOLIDWORKS parts. `cad/ExportMesh.
 
 ### 3. Inventory & electrical overview (Tristan Hottier: inventory and electrical)
 
-**[`Inventory-Overview.html`](Inventory-Overview.html)** (DBF-INV-001) is the project overview from the purchasing, physical-parts and electrical side. It is built like the design review, from the same sources, and has nine sections. **Open it online:** https://claude.ai/artifact/C6JEuXWN4B4Aoay5zHU3Pg (public, view only, no Claude account needed).
+**[`Inventory-Overview.html`](Inventory-Overview.html)** (DBF-INV-001) is the project overview from the purchasing, physical-parts and electrical side. It is built like the design review, from the same sources, and has ten sections. **Open it online:** https://claude.ai/artifact/C6JEuXWN4B4Aoay5zHU3Pg (public, view only, no Claude account needed).
 
 | § | Section | What it covers |
 |---|---|---|
@@ -60,6 +60,7 @@ The review embeds a rotatable model of all 27 SOLIDWORKS parts. `cad/ExportMesh.
 | 7 | Fabrication & kits | What the team makes, from which stock line, by which process; cut lists; kit bins K1–K7; wheeled landing-gear proposal; print fits, tolerance stack-ups and calibration coupons |
 | 8 | Nautical Wings props | Sponsorship status, a ready-to-send message to NWA, spec sheet, budget effect, acceptance tests |
 | 9 | Receiving & storage | Receiving checklist, LiPo storage, bin locations |
+| 10 | Alternative designs | The three least experimental literature concepts (wingtip cruise propellers, boundary-layer-ingesting pusher, aligned faired stopped rotors) developed into variants of C0: side-by-side metrics and charts, then a tab per variant with its bottom line, key numbers, Fusion 3D model (new parts highlighted, click for the inventory line), inventory lines vs C0 (status chips), budget, hardware delta and the full design note. Built from `concepts/variants/*`; a variant's 3D appears when its `fusion/variant_manifest.json` lands and the page is rebuilt (`node inventory/build_overview.mjs`) |
 
 **Live inventory:** the editable copy is the Google Sheet [DBF Inventory (DBF-INV-001)](https://docs.google.com/spreadsheets/d/1nKiNBmtv2FeFGMaZjcKlNWKAuCMhC6uzteGTA2Iy9WE/edit). Budget totals and kit counts are formulas, so they update as quantities and statuses change. It is private: ask Tristan for access. The page shows a snapshot of it from the date in its header.
 

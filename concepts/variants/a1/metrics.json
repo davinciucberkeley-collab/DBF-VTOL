@@ -1,0 +1,111 @@
+{
+ "variant": "a1",
+ "name": "Wingtip cruise propellers",
+ "date": "2026-11-02",
+ "mass_kg": {
+  "value": 6.9104,
+  "C0": 6.1821705,
+  "est": true,
+  "source": "calc.py: C0 6.182 kg (analysis/results.json sized.m) + 2 tip assemblies 1.024 kg - removed pusher gear 0.323 kg + battery-move wiring and rails 0.028 kg"
+ },
+ "cg_x_m": {
+  "value": -0.066829043,
+  "est": true,
+  "source": "held at the C0 target (analysis/results.json cg.target, 28 pct MAC) by moving the battery from x 0.0605 to -0.1137 m; unmoved CG would be -0.0462 m"
+ },
+ "static_margin_pct": {
+  "value": 17.7,
+  "range": [
+   16.7,
+   18.7
+  ],
+  "C0": 19.6,
+  "est": true,
+  "source": "C0 19.632 pct (analysis/aero.json) minus 2.0 points for prop normal force: dNp = 2 CNa q A_disk (CNa 0.25-0.75 /rad, EST), arm 0.144 m, NP shift = dNp arm / (CLa q S); calc.py np_shift"
+ },
+ "span_m": {
+  "value": 2.4,
+  "source": "cad/params.txt panelLen 1.12 x 2 + 0.16 saddle; unchanged"
+ },
+ "width_m": {
+  "value": 2.812,
+  "source": "2 x (nacelle axis 1.228 + prop radius 0.1778); 3 m limit margin 0.188 m",
+  "est": false
+ },
+ "motors": {
+  "value": 6,
+  "lift": 4,
+  "cruise": 2,
+  "C0": 5,
+  "source": "4 x X4110S lift (P-39) + 2 x X4110S tip (P-38, P-40)"
+ },
+ "hover_power_W": {
+  "value": 1008.8,
+  "C0": 832,
+  "est": true,
+  "source": "sizing F3 as P_hover = 4 x interp(thrust table, m g / 4) x kCtrl 1.1, calibrated to 831.98 W at 6.182 kg (calc.py); ratio 1.213"
+ },
+ "cruise_power_W": {
+  "value": 377.7,
+  "range": [
+   373.8,
+   384.4
+  ],
+  "C0": 365,
+  "est": true,
+  "source": "P = D V / (eta_prop 0.6 x eta_me 0.85) with D = CD q S; CD0 C0 + 2 nacelles CdA 5.90e-04 m2 + CDi at m 6.910 kg, e x (1 + 0.30 x CT/0.12) (Sinnige); calc.py cruise"
+ },
+ "endurance_min": {
+  "value": 10.3,
+  "range": [
+   10.12,
+   10.41
+  ],
+  "C0": 11.9,
+  "est": true,
+  "source": "(144.3 Wh x 0.95 x 0.8 - P_hover x 160 s) / P_cruise (sizing F8-F9); mission needs 10.0 min"
+ },
+ "cost_usd": {
+  "value": 1919.48,
+  "C0": 1897.92,
+  "delta": 21.56,
+  "source": "inventory.json summary (goods 1650.32 + tax 169.16 + shipping 100)"
+ },
+ "reserve_usd": {
+  "value": 80.52,
+  "C0": 102.08,
+  "source": "2000 - committed"
+ },
+ "parts_new": {
+  "value": 14,
+  "source": "CAD occurrences: Tip_Tube_Ext 2, Tip_Splice_Sleeve 2, Nacelle_Mount 2, Nacelle_Shell 2, Battery_Tray_Ext 1, Tip_Prop_R 1 (new hand), harness 2, ESC_T/CAP_T/motor/spinner/prop relocated (not counted)",
+  "hardware_pieces_added": 70
+ },
+ "parts_removed": {
+  "value": 3,
+  "source": "Pusher_Prop_Set, ESC_P, CAP_P as components (+ J-11 22 pieces, J-29 2 ties); hardware pieces removed 36",
+  "hardware_pieces_removed": 36
+ },
+ "risk": "medium",
+ "risk_basis": "structure and drag are low risk; roll inertia x2.07, one-motor-out yaw, prop-ground clearance, thin reserve and a non-Q_ ArduPilot parameter set bring it to medium",
+ "trl_note": "Layout TRL 4-5: a tip propeller is flown on small aircraft and tunnel-tested at CT 0.12 (Sinnige 2019), but at this aircraft CT 0.028 the drag benefit is unmeasured; ArduPilot twin-throttle/RUDD_DT_GAIN is documented for QuadPlane fixed-wing modes (ardupilot.org/plane/docs/yaw-in-plane.html, 2026-11-02); no flight data for this airframe.",
+ "drag_delta": {
+  "tip_vortex_benefit_N": -0.085,
+  "nacelles_N": 0.144,
+  "mass_induced_N": 0.258,
+  "net_N": 0.317,
+  "D_C0_N": 9.314,
+  "D_A1_N": 9.631
+ },
+ "roll_inertia_kgm2": {
+  "C0": 1.131,
+  "A1": 2.346,
+  "ratio": 2.07,
+  "est": true
+ },
+ "hover_TW": {
+  "C0": 2.025,
+  "A1": 1.812
+ },
+ "verdict": "Do not build as the first aircraft; keep as a later experiment on the C0 wing (tip bore and wire groove are cheap to add during panel cutting)."
+}
