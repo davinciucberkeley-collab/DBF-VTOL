@@ -1,6 +1,7 @@
 """Independent check of analysis/results.json. Re-derives each formula from the stored inputs
 without importing analysis/model.js. Run: python analysis/verify.py"""
-import json, math
+import json, math, os, sys
+os.chdir(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))   # paths below are repo-relative
 R = json.load(open('analysis/results.json'))
 G = 9.80665
 bad = []
@@ -88,4 +89,15 @@ if os.path.exists('analysis/aero.json'):
     chk('Neutral point %MAC: VLM vs sizing (10 %)', A['neutral_point_pct_mac'], A['sizing_neutral_point_pct_mac'], 0.10)
     chk('Wing lift slope: VLM vs Helmbold (10 %)', A['wing_CLa_per_rad'], A['helmbold_CLa_per_rad'], 0.10)
     chk('Sizing e (0.80) below inviscid VLM e (1 = pass)', float(A['sizing_e'] <= A['wing_span_efficiency_inviscid']), 1.0)
+# ---- hand-copied inputs vs their source (sizing.mjs BASE <- analysis/aero/aero_results.json): the loop must be closed ----
+AR_ = 'analysis/aero/aero_results.json'
+if os.path.exists(AR_):
+    AE = json.load(open(AR_)); p0 = R['concepts']['C0']['params']
+    print('\n== Sizing inputs vs aero package')
+    chk('CLmax: sizing vs aero CL_max_3D adopted (1 %)', p0['CLmax'], AE['CL_max_3D']['adopted'], 0.01)
+    if 'stall' in AE:
+        chk('R11 stall <= 12 m/s at the adopted CL_max (1 = pass)', float(AE['stall']['V_stall_mps'] <= 12.0 + 1e-9), 1.0)
+    if 'CD0_clean' in p0 and 'CD0_clean_airframe' in AE.get('drag', {}):
+        chk('CD0_clean: sizing >= aero airframe (conservative; 1 = pass)', float(p0['CD0_clean'] >= AE['drag']['CD0_clean_airframe']), 1.0)
 print('\nFAILED CHECKS:', bad if bad else 'none')
+sys.exit(1 if bad else 0)

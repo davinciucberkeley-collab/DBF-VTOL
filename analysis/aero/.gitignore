@@ -1,0 +1,25 @@
+# meshes and solver volume/restart files are large and reproducible (mesh_2d.py, su2_2d.py)
+mesh/
+out/su2/**/*.su2
+out/su2/**/restart*
+out/su2/**/flow*.vtu
+out/su2/**/flow*.dat
+out/su2/test_*/
+out/xfoil_*.log
+out/avl/*.log
+__pycache__/
+out/archive_v031/su2/**/*.su2
+out/archive_v031/su2/**/restart*
+out/archive_v031/su2/**/flow*
+out/archive_v031/su2/test_*/
+
+# raw solver output: large and reproducible; the summary lives in out/su2_2d.json and aero_results.json
+out/archive_v031/su2/
+out/su2/**/history.csv
+out/su2/**/surface_flow.csv
+out/su2/**/*.log
+out/run_*.log
+
+# flow-visualisation raw solver output (flowfield_2d.py): volume CSV ~30 MB per case; the compact fields live in out/flowviz/
+out/su2_flow/
+out/run_flow*.log

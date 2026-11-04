@@ -7,66 +7,25 @@ function get(path){
   let root = D, pth = path;
   if(path.startsWith('V02.')){ root = V02; pth = path.slice(4); }
   else if(path.startsWith('SIM.')) return SIM[path.slice(4)];
+  else if(path.startsWith('AEROD.')){ let o=AEROD; for(const k of path.slice(6).split('.')) o = o?.[k]; return o; }
   else if(path.startsWith('AERO.')) return AERO[path.slice(5)];
   else if(path.startsWith('CADP.')) return CADP[path.slice(5)];
   let o = /^C\d/.test(pth) ? root.concepts : root; for(const k of pth.split('.')) o = o?.[k]; return o; }
 const set = (id, txt) => { const e=document.getElementById(id); if(e) e.textContent = txt; };
 const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
 
-// ---------- theme ----------
-const modes = ['system','light','dark']; let mi = 0;
-try{ const s = localStorage.getItem('vtolTheme'); if(s){ mi = Math.max(0,modes.indexOf(s)); } }catch(e){}
-function applyTheme(){ const m=modes[mi]; if(m==='system') document.documentElement.removeAttribute('data-theme'); else document.documentElement.setAttribute('data-theme',m);
-  $('#themeBtn').textContent = 'Theme: '+m; try{localStorage.setItem('vtolTheme',m);}catch(e){} redrawAll(); }
-$('#themeBtn').addEventListener('click',()=>{ mi=(mi+1)%3; applyTheme(); });
-if(window.matchMedia) matchMedia('(prefers-color-scheme: dark)').addEventListener?.('change',()=>redrawAll());
-
-// ---------- navigation ----------
+// ---------- navigation: contents list (the binder below shows one chapter at a time) ----------
 const secs = $$('section.sec');
+const GROUP_NAMES = {home:'Overview', design:'Design', verify:'Verification', program:'Program', build:'Build and software', doc:'Documentation'};
 function buildNav(){
-  const side = document.createElement('ol'), tabs = $('#tabs');
-  secs.forEach(s=>{
-    const li = document.createElement('li'); li.dataset.id = s.id;
-    li.innerHTML = `<a href="#${s.id}"><span class="n">${s.dataset.n}</span> ${s.dataset.title}</a>`;
-    const subs = s.querySelectorAll('h3[id]');
-    if(subs.length){ const ol=document.createElement('ol'); ol.className='sub';
-      subs.forEach(h=>{ ol.insertAdjacentHTML('beforeend',`<li><a href="#${h.id}" data-sec="${s.id}">${h.textContent}</a></li>`); }); li.appendChild(ol); }
-    side.appendChild(li);
-    tabs.insertAdjacentHTML('beforeend',`<a href="#${s.id}" data-id="${s.id}"><span class="mono">${s.dataset.n}</span> ${s.dataset.title}</a>`);
-    // in-section index + prev/next
-    const i = secs.indexOf(s), prev = secs[i-1], next = secs[i+1];
-    let h = `<div class="secidx"><div class="eyebrow">In this section</div><ol>`;
-    subs.forEach(x=>h+=`<li><a href="#${x.id}" data-sec="${s.id}">${x.textContent}</a></li>`);
-    h += `</ol><div class="pn">`;
-    h += prev ? `<a class="prev" href="#${prev.id}"><span class="eyebrow">← Previous · ${prev.dataset.n}</span> ${prev.dataset.title}</a>` : '<span></span>';
-    h += next ? `<a class="next" href="#${next.id}"><span class="eyebrow">Next · ${next.dataset.n} →</span> ${next.dataset.title}</a>` : '<span></span>';
-    s.insertAdjacentHTML('beforeend', h+'</div></div>');
-  });
-  $('#side').appendChild(side);
+  const box = $('#tocList'); if(!box) return; let cur=null, ol=null;
+  secs.forEach(s=>{ const p=s.dataset.group; if(s.dataset.nonum) return;
+    if(p!==cur){ cur=p; box.insertAdjacentHTML('beforeend', `<li class="part">${GROUP_NAMES[p]||''}<ol></ol></li>`); ol=box.lastElementChild.querySelector('ol'); }
+    ol.insertAdjacentHTML('beforeend', `<li><a href="#${s.id}"><span class="n">${s.dataset.n}</span><span class="t">${s.dataset.title}</span></a></li>`); });
 }
-function show(id, sub, focus){
-  const target = secs.find(s=>s.id===id) || secs[0];
-  secs.forEach(s=>s.classList.toggle('cur', s===target));
-  const mark=(a,on)=>{ a.classList.toggle('cur',on); if(on) a.setAttribute('aria-current','true'); else a.removeAttribute('aria-current'); };
-  $$('#side li[data-id]').forEach(li=>{ const on=li.dataset.id===target.id; li.classList.toggle('cur',on); mark(li.querySelector('a'),on); });
-  $$('#tabs a').forEach(a=>{ const on=a.dataset.id===target.id; mark(a,on); if(on) a.scrollIntoView({block:'nearest',inline:'center'}); });
-  try{ localStorage.setItem('vtolSec', target.id); }catch(e){}
-  redrawSection(target.id);
-  const dest = sub ? document.getElementById(sub) : null;
-  if(dest) dest.scrollIntoView(); else window.scrollTo(0,0);
-  if(focus){ const f = dest || target.querySelector('h2'); if(f){ if(!f.hasAttribute('tabindex')) f.setAttribute('tabindex','-1'); f.focus({preventScroll:true}); } }
-}
-function route(hash, focus){
-  const h = (hash!==undefined ? hash : location.hash).replace(/^#/,'');
-  if(!h){ let s=null; try{ s=localStorage.getItem('vtolSec'); }catch(e){} show(s||'overview'); return; }
-  const el = document.getElementById(h); if(!el) return show('overview');
-  const sec = el.closest('section.sec'); if(!sec) return show(secs.find(s=>s.classList.contains('cur'))?.id||'overview');
-  show(sec.id, el===sec ? null : h, focus);
-}
-window.addEventListener('hashchange', ()=>route(undefined, true));
-document.addEventListener('click', e=>{ const a=e.target.closest('a[href^="#"]'); if(!a) return; const h=a.getAttribute('href');
-  if(a.classList.contains('skip')){ e.preventDefault(); const t=$('section.sec.cur h2')||$('#main'); t.setAttribute('tabindex','-1'); t.focus(); return; }
-  if(!document.getElementById(h.slice(1))) return; e.preventDefault(); try{ history.pushState(null,'',h); }catch(err){} route(h, true); });
+// chapter numbers follow page order; "§N" links are filled from their target chapter
+function xrefs(){ $$('a.xref').forEach(x=>{ const t=document.getElementById(x.getAttribute('href').slice(1)); const s=t&&t.closest('section.sec'); if(s) x.textContent='§'+s.dataset.n; }); }
+const secNo = id => { const s=document.getElementById(id); return s ? s.dataset.n : '—'; };
 
 // ---------- data binding ----------
 function fill(){
@@ -104,8 +63,7 @@ function derived(){
   set('smWith', fmt((g.hn-0.28)*100,1)); set('smNo', fmt(cg.SM_noPayload*100,1));
   const xc = cg.cgNoPayload, Tr = (g.xFront-xc)/L, Tf = (xc-g.xRear)/L; set('hoverSplit', fmt((Tr/Tf-1)*100,0));
   set('cgSplit', fmt(0.15*L/4*100,0));
-  set('c1Over', fmtUSD(D.concepts.C1.bom.total-2000)); set('c2Over', fmtUSD(D.concepts.C2.bom.total-2000));
-  const days = Math.round((Date.UTC(2027,3,30)-Date.UTC(2026,9,13))/864e5); set('kpiDays', days);
+
   if(TH){ ['thermLumped','thermLumped2','thermLumped3'].forEach(i=>set(i, fmt(TH.T90,0))); set('thermTau', fmt(TH.tau,0)); set('thermTau2', fmt(TH.tau,0));
     set('thermHA', fmt(TH.hA,3)); set('thermMC', fmt(TH.mc,0)); set('thermT3', fmt(TH.T3,0)); set('thermT3b', fmt(TH.T3,0)); set('thermLumped4', fmt(TH.T90,0)); set('thermBand', fmt(TH.lo,0)+'–'+fmt(TH.hi,0)); }
   // stopped-rotor drag: model baseline and R10 failure level per unit
@@ -113,17 +71,19 @@ function derived(){
   set('rotorBase', fmt(baseD,2)); set('rotorFail', fmt(baseD + q*dCdA,1));
   set('cgAft', fmt((g.hn-0.08)*100,1)); set('engage', fmt(C0.struct.engage,2)); set('engageD', fmt(C0.struct.engageD,0));
   set('iTrans', fmt(s0.I_trans,0)); set('iHovL', fmt(s0.I_hover_loaded,0));
-  set('handRF', fmt(C0.struct.SIG_DESIGN/C0.struct.sigJ,2)); set('reserve2', fmtUSD(C0.bom.crash));
+  set('handRF', fmt(C0.struct.SIG_DESIGN/C0.struct.sigJ,2));
   set('longest', fmt(Math.max(B.span/2-0.08, ...C0.geo.segs),2)); set('longest2', fmt(Math.max(B.span/2-0.08, ...C0.geo.segs),2)); set('carMin', fmt(Math.max(B.span/2-0.08, ...C0.geo.segs)+0.03,2));
-  set('marginPct', fmt((s0.t_cruise_avail_min/10-1)*100,0));
+  set('r13kgf', fmt(1.6*s0.m/4,2)); $$('.r13kgf').forEach(e=>e.textContent=fmt(1.6*s0.m/4,2));  // R13: 4 motors x T >= 1.6 x MTOW
 }
 
 // ---------- drawings ----------
 function drawings(){
-  const box=$('#drawings'); if(!box) return;
-  const t=['General arrangement','Parts list','Wing panel and wing saddle','Printed parts','Tube cut list and landing leg'];
+  const box=$('#drawingsBox'); if(!box) return;
+  const t=['General arrangement','Exploded assembly','Parts list','Wing panel, saddle and bolt pillar','Motor mount and splice','Clamps','Tube cut list, leg and fairing','Fastener schedule','Printed hardpoints and trays'].filter((_,i)=>IMG['drw'+(i+1)]);
   t.forEach((title,i)=>{ const k='drw'+(i+1); if(!IMG[k]) return;
-    box.insertAdjacentHTML('beforeend', `<figure class="chart sheet"><button type="button" class="sheetbtn" data-k="${k}" data-t="Sheet ${i+1}: ${title}"><img class="cadimg" src="${IMG[k]}" alt="Drawing DBF-DRW-001 sheet ${i+1}, ${title}" loading="lazy"></button><figcaption>Sheet ${i+1} of 5. ${title}</figcaption></figure>`); });
+    box.insertAdjacentHTML('beforeend', `<figure class="chart sheet"><button type="button" class="sheetbtn" data-k="${k}" data-t="Sheet ${i+1}: ${title}"><img class="cadimg" src="${IMG[k]}" alt="Drawing DBF-DRW-001 sheet ${i+1}, ${title}" loading="lazy"></button><figcaption>Sheet ${i+1} of ${t.length}. ${title}</figcaption></figure>`); });
+  const ga=$('#gaFig'); if(ga && IMG.iso) ga.insertAdjacentHTML('afterbegin', `<img class="cadimg render" src="${IMG.iso}" alt="Isometric render of the C0 aircraft: a straight wing on a slim pod, two booms carrying four lift rotors and a twin-fin tail, a pusher prop behind the pod and four faired landing legs">`);
+  if(ga && IMG.drw1) ga.insertAdjacentHTML('beforeend', `<p class="cta"><button type="button" class="sheetbtn btnlink quiet" data-k="drw1" data-t="Sheet 1: General arrangement">Open the general-arrangement drawing</button></p>`);
   const lb=$('#lightbox');
   $$('.sheetbtn').forEach(b=>b.addEventListener('click',()=>{ const im=document.createElement('img'); im.src=IMG[b.dataset.k]; im.alt='Drawing DBF-DRW-001, '+b.dataset.t; $('#lbBody').replaceChildren(im); $('#lbTitle').textContent='DBF-DRW-001 · '+b.dataset.t;
     if(lb.showModal) lb.showModal(); else lb.setAttribute('open',''); }));
@@ -132,7 +92,8 @@ function drawings(){
 }
 // report numbering: subsections n.k and figures n.k, from the section number
 function numberHeadings(){
-  $$('section.sec').forEach(s=>{ const n=s.dataset.n; let k=0;
+  let i=0; $$('section.sec').forEach(s=>{ const no=s.querySelector('.secno'); if(s.dataset.nonum){ s.dataset.n=''; if(no) no.remove(); return; } s.dataset.n=String(++i); if(no) no.textContent=s.dataset.n; });
+  $$('section.sec').forEach(s=>{ const n=s.dataset.n; let k=0; if(!n) return;
     s.querySelectorAll('h3[id]').forEach(h=>{ k++; if(!h.querySelector('.subno')) h.insertAdjacentHTML('afterbegin',`<span class="subno">${n}.${k}</span> `); }); });
 }
 function numberFigures(){
@@ -147,7 +108,6 @@ function img(id, list){
     box.insertAdjacentHTML('beforeend', `<figure class="chart" style="margin:0"><figcaption>${cap}</figcaption><img class="cadimg" src="${IMG[key]}" alt="${cap}" loading="lazy"></figure>`); });
 }
 function tables(){
-  img('#cadImages', [['cad_iso','Isometric'],['cad_top','Top'],['cad_side','Side'],['cad_front','Front']]);
   img('#simImages', [['fea_boom','Boom arm, von Mises at full thrust'],['fea_spar','Spar + joiner, von Mises at 4.5 g'],['therm_motor','Lift motor, steady-state temperature']]);
   // v0.2 -> v0.3 change table
   const ctb = $('#changeTable tbody'), b2 = V02.concepts.C0.bom, b3 = C0.bom; let t2=0,t3=0;
@@ -227,7 +187,7 @@ function tables(){
   [['Boom static (1.5 mm mesh)','von Mises max, MPa', SIM.boom_vm_max_fine, SIM.boom_hand_sigma, 'RF '+fmt(275/SIM.boom_vm_max_fine,1)+' on yield'],
    ['Boom static (3 mm mesh)','von Mises max, MPa', SIM.boom_vm_max, SIM.boom_hand_sigma, 'mesh change '+fmt((SIM.boom_vm_max_fine/SIM.boom_vm_max-1)*100,0)+' %'],
    ['Boom static','tip deflection, mm', SIM.boom_disp_max, SIM.boom_hand_defl, '—'],
-   ['Boom modal','first mode, Hz', SIM.boom_f1, SIM.boom_hand_fn, 'tap test §6 M2'],
+   ['Boom modal','first mode, Hz', SIM.boom_f1, SIM.boom_hand_fn, 'tap test §'+secNo('structures')+' M2'],
    ['Spar + joiner static, 2 mm mesh (idealised OD)','von Mises max, MPa', SIM.spar_vm_max_fine, SIM.spar_hand_sigJ, 'hand calc governs: RF '+fmt(C0.struct.SIG_DESIGN/C0.struct.sigJ,2)],
    ['Spar + joiner static, 3 mm mesh','von Mises max, MPa', SIM.spar_vm_max, SIM.spar_hand_sigJ, 'mesh change '+fmt((SIM.spar_vm_max_fine/SIM.spar_vm_max-1)*100,0)+' %'],
    ['Lift motor thermal','steady temperature, °C', SIM.motor_T_steady, SIM.motor_T_steady_hand, TH?('90 s ≈ '+fmt(TH.T90,0)+' °C; 3 back-to-back ≈ '+fmt(TH.T3,0)+' °C'):'—']]
@@ -311,64 +271,69 @@ function renderChain(){
   ].join(ar);
 }
 function drawTornado(){
-  const svg=$('#tornado'); if(!svg || !svg.closest('section').classList.contains('cur')) return; clear(svg);
+  const svg=$('#tornado'); if(!svg) return; clear(svg);
   const base = VTOLModel.size(P).m, keys=['Vc','Vs','CLmax','span','tCruise','tHover','reserve','CD0_clean','CdA_rotor','eSpec','mPayload','kCtrl'];
   const res = keys.map(k=>{ const lo=VTOLModel.size({...P,[k]:P[k]*0.8}).m-base, hi=VTOLModel.size({...P,[k]:P[k]*1.2}).m-base; return {k, lo, hi, span:Math.abs(hi-lo)}; }).sort((a,b)=>b.span-a.span);
-  const W=640, x0=190, x1=620, mid=(x0+x1)/2, maxA=Math.max(...res.map(r=>Math.max(Math.abs(r.lo),Math.abs(r.hi))))||1;
-  const sx = v=>mid + v/maxA*(x1-mid), rowH=20, top=26;
-  svg.setAttribute('viewBox',`0 0 ${W} ${top+res.length*rowH+30}`);
+  const narrow=svg.closest('.svgwrap').clientWidth<560, W=narrow?Math.max(260,svg.closest('.svgwrap').clientWidth):640;
+  const x0=narrow?8:190, x1=W-(narrow?8:20), mid=(x0+x1)/2, maxA=Math.max(...res.map(r=>Math.max(Math.abs(r.lo),Math.abs(r.hi))))||1;
+  const sx = v=>mid + v/maxA*(x1-mid), rowH=narrow?34:20, top=26;
+  svg.setAttribute('viewBox',`0 0 ${W} ${top+res.length*rowH+40}`); svg.classList.toggle('fitw', narrow);
   el('text',{x:mid,y:14,'text-anchor':'middle'},svg,`Δ MTOW, kg (base ${fmt(base,2)} kg)`);
-  [-maxA,-maxA/2,0,maxA/2,maxA].forEach(t=>{ el('line',{x1:sx(t),x2:sx(t),y1:top-4,y2:top+res.length*rowH,class:t?'grid':'axis'},svg); el('text',{x:sx(t),y:top+res.length*rowH+14,'text-anchor':'middle'},svg,(t>0?'+':'')+fmt(t,2)); });
+  [-maxA,-maxA/2,0,maxA/2,maxA].forEach((t,k)=>{ el('line',{x1:sx(t),x2:sx(t),y1:top-4,y2:top+res.length*rowH,class:t?'grid':'axis'},svg); el('text',{x:sx(t),y:top+res.length*rowH+14,'text-anchor':k===0?'start':k===4?'end':'middle'},svg,(t>0?'+':'')+fmt(t,2)); });
   const lab = Object.fromEntries(SL.map(s=>[s.k,s.l]));
-  res.forEach((r,i)=>{ const y=top+i*rowH;
-    el('text',{x:x0-8,y:y+13,'text-anchor':'end'},svg,lab[r.k]);
-    el('rect',{x:Math.min(sx(r.lo),mid),y:y+3,width:Math.abs(sx(r.lo)-mid),height:13,fill:css('--c1'),'fill-opacity':0.35,stroke:css('--c1'),'stroke-width':1,rx:2},svg);
-    el('rect',{x:Math.min(sx(r.hi),mid),y:y+3,width:Math.abs(sx(r.hi)-mid),height:13,fill:css('--c1'),rx:2},svg); });
+  res.forEach((r,i)=>{ const y=top+i*rowH, by=narrow?y+15:y+3;
+    if(narrow) el('text',{x:x0,y:y+11},svg,lab[r.k]); else el('text',{x:x0-8,y:y+13,'text-anchor':'end'},svg,lab[r.k]);
+    el('rect',{x:Math.min(sx(r.lo),mid),y:by,width:Math.abs(sx(r.lo)-mid),height:13,fill:css('--c1'),'fill-opacity':0.35,stroke:css('--c1'),'stroke-width':1,rx:2},svg);
+    el('rect',{x:Math.min(sx(r.hi),mid),y:by,width:Math.abs(sx(r.hi)-mid),height:13,fill:css('--c1'),rx:2},svg); });
   el('rect',{x:x0,y:top+res.length*rowH+20,width:10,height:10,fill:css('--c1'),'fill-opacity':0.35,stroke:css('--c1')},svg); el('text',{x:x0+14,y:top+res.length*rowH+29},svg,'input −20 %');
   el('rect',{x:x0+100,y:top+res.length*rowH+20,width:10,height:10,fill:css('--c1')},svg); el('text',{x:x0+114,y:top+res.length*rowH+29},svg,'input +20 %');
   describe(svg, `Tornado chart: change in MTOW from a base of ${fmt(base,2)} kg when each input moves ±20 %, largest first. `+res.map(r=>`${lab[r.k]}: ${sgn(r.lo)} kg at −20 %, ${sgn(r.hi)} kg at +20 %`).join('; ')+'.');
 }
 function drawPack(){
+  // two single-axis panels on shared pack columns: cruise minutes (the R10 question) on top, MTOW below
   const svg=$('#packChart'); if(!svg) return; clear(svg);
-  const data=D.sweepC0, W=640,H=290,l=56,r=56,t=30,b=70;
-  const xs = i=> l + (i+0.5)*(W-l-r)/data.length;
-  const ms=data.map(d=>d.m), mMin=Math.floor((Math.min(...ms)-0.1)*2)/2, mMax=Math.ceil((Math.max(...ms)+0.1)*2)/2, cMax=Math.ceil(Math.max(...data.map(d=>d.cruise_min))/10)*10+10;
-  const ym = v=> t+(H-t-b)*(1-(v-mMin)/(mMax-mMin)), yc = v=> t+(H-t-b)*(1-v/cMax);
+  const data=D.sweepC0, W=640, l=56, r=20, t=26, ph=120, gap=46, lab=44, H=t+ph+gap+ph+lab;
+  svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+  const xs = i=> l + (i+0.5)*(W-l-r)/data.length, bw=(W-l-r)/data.length*0.5;
+  const cMax=Math.ceil(Math.max(...data.map(d=>d.cruise_min))/5)*5+5;
+  const yc = v=> t+ph*(1-v/cMax);
+  el('text',{x:l,y:t-10,class:'phead'},svg,'Cruise available, min');
+  for(let v=0; v<=cMax; v+=5){ el('line',{x1:l,x2:W-r,y1:yc(v),y2:yc(v),class:'grid'},svg); el('text',{x:l-6,y:yc(v)+4,'text-anchor':'end'},svg,v); }
+  el('line',{x1:l,x2:W-r,y1:yc(10),y2:yc(10),stroke:css('--bad'),'stroke-dasharray':'5 4'},svg); el('line',{x1:W-r-250,x2:W-r-226,y1:t-14,y2:t-14,stroke:css('--bad'),'stroke-dasharray':'5 4'},svg); el('text',{x:W-r-220,y:t-10},svg,'R10 minimum, 10 min');
+  const mg=D.cruiseMarginMin; el('line',{x1:l,x2:W-r,y1:yc(mg),y2:yc(mg),stroke:css('--ok'),'stroke-dasharray':'2 3'},svg); el('line',{x1:W-r-104,x2:W-r-80,y1:t-14,y2:t-14,stroke:css('--ok'),'stroke-dasharray':'2 3'},svg); el('text',{x:W-r-74,y:t-10},svg,`margin ${fmt(mg,1)} min`);
+  data.forEach((d,i)=>{ el('rect',{x:xs(i)-bw/2,y:yc(d.cruise_min),width:bw,height:yc(0)-yc(d.cruise_min),fill:css(i===0?'--accent':'--c2'),rx:2},svg);
+    el('text',{x:xs(i),y:yc(d.cruise_min)-5,'text-anchor':'middle'},svg,fmt(d.cruise_min,1)); });
+  const y0=t+ph+gap, ms=data.map(d=>d.m), mMin=Math.floor((Math.min(...ms)-0.1)*2)/2, mMax=Math.ceil((Math.max(...ms)+0.1)*2)/2;
+  const ym = v=> y0+ph*(1-(v-mMin)/(mMax-mMin));
+  el('text',{x:l,y:y0-10,class:'phead'},svg,'Take-off mass, kg');
   for(let v=mMin; v<=mMax+1e-9; v+=0.5){ el('line',{x1:l,x2:W-r,y1:ym(v),y2:ym(v),class:'grid'},svg); el('text',{x:l-6,y:ym(v)+4,'text-anchor':'end'},svg,fmt(v,1)); }
-  for(let v=0; v<=cMax; v+=10) el('text',{x:W-r+6,y:yc(v)+4},svg,v);
-  el('text',{x:14,y:t+80,transform:`rotate(-90 14 ${t+80})`,'text-anchor':'middle'},svg,'MTOW, kg');
-  el('text',{x:W-12,y:t+80,transform:`rotate(90 ${W-12} ${t+80})`,'text-anchor':'middle'},svg,'cruise available, min');
-  el('line',{x1:l,x2:W-r,y1:yc(10),y2:yc(10),stroke:css('--bad'),'stroke-dasharray':'5 4'},svg); el('text',{x:W-r-4,y:yc(10)+13,'text-anchor':'end',fill:css('--bad')},svg,'R10: 10 min');
-  el('rect',{x:l+6,y:t-14,width:10,height:10,fill:css('--c2'),opacity:0.55},svg); el('text',{x:l+20,y:t-5},svg,'cruise min (right axis)');
-  el('circle',{cx:l+170,cy:t-9,r:4,fill:css('--c3')},svg); el('text',{x:l+178,y:t-5},svg,'MTOW kg (left axis)');
-  const bw=(W-l-r)/data.length*0.5;
-  data.forEach((d,i)=>{ el('rect',{x:xs(i)-bw/2,y:yc(d.cruise_min),width:bw,height:yc(0)-yc(d.cruise_min),fill:css(i===0?'--accent':'--c2'),opacity:i===0?1:0.55,rx:2},svg);
-    el('text',{x:xs(i),y:H-b+14,'text-anchor':'end',transform:`rotate(-30 ${xs(i)} ${H-b+14})`},svg,d.pack.replace(' flight pack','').replace('WREKD ','').replace('Tattu ','Tattu '));
-  });
   let pth=''; data.forEach((d,i)=>pth+=(i?'L':'M')+xs(i)+' '+ym(d.m)); el('path',{d:pth,fill:'none',stroke:css('--c3'),'stroke-width':2},svg);
-  data.forEach((d,i)=>{ el('circle',{cx:xs(i),cy:ym(d.m),r:3.5,fill:css('--c3')},svg); el('text',{x:xs(i),y:ym(d.m)-8,'text-anchor':'middle'},svg,fmt(d.m,2)); });
+  data.forEach((d,i)=>{ el('circle',{cx:xs(i),cy:ym(d.m),r:4,fill:css(i===0?'--accent':'--c3'),stroke:css('--surface'),'stroke-width':2},svg); el('text',{x:xs(i),y:ym(d.m)-9,'text-anchor':'middle'},svg,fmt(d.m,2)); });
   if(mMax>=8){ el('line',{x1:l,x2:W-r,y1:ym(8),y2:ym(8),stroke:css('--warn'),'stroke-dasharray':'2 3'},svg); el('text',{x:W-r-4,y:ym(8)-4,'text-anchor':'end',fill:css('--warn')},svg,'R2: 8 kg target floor'); }
-  const mg=D.cruiseMarginMin; el('line',{x1:l,x2:W-r,y1:yc(mg),y2:yc(mg),stroke:css('--ok'),'stroke-dasharray':'2 3'},svg); el('text',{x:l+4,y:yc(mg)-4,fill:css('--ok')},svg,`design margin ${fmt(mg,1)} min`);
-  describe(svg, 'Battery packs on C0, MTOW and cruise minutes available (R10 needs 10 min; design margin '+fmt(D.cruiseMarginMin,1)+' min). '+data.map(d=>`${d.pack}: ${fmt(d.m,2)} kg, ${fmt(d.cruise_min,1)} min`).join('; ')+'.');
+  data.forEach((d,i)=>{ const nm=d.pack.replace(' flight pack','').replace('WREKD ','').replace(/\s*\(2-pack\)/,' ×2').replace(/\b6S\s+/,''); const k=nm.search(/\d{4,5}/); const l1=(k>0?nm.slice(0,k):nm).trim(), l2=k>0?nm.slice(k).trim():'';
+    el('text',{x:xs(i),y:y0+ph+18,'text-anchor':'middle'},svg,l1); if(l2) el('text',{x:xs(i),y:y0+ph+32,'text-anchor':'middle'},svg,l2); });
+  describe(svg, 'Battery packs on C0, cruise minutes available (R10 needs 10 min; design margin '+fmt(D.cruiseMarginMin,1)+' min) and take-off mass. '+data.map(d=>`${d.pack}: ${fmt(d.cruise_min,1)} min, ${fmt(d.m,2)} kg`).join('; ')+'. The chosen pack is highlighted.');
 }
 function drawCap(){
   const svg=$('#capChart'); if(!svg) return; clear(svg);
-  const b=C0.bom, W=640, l=20, r=20, y0=40, h=46, total=2000, x=v=>l+(W-l-r)*v/total;
+  // phones: drawn at the container width so the reserve and the cap line stay on screen
+  const narrow=svg.closest('.svgwrap').clientWidth<560, W=narrow?Math.max(260,svg.closest('.svgwrap').clientWidth):640;
+  const b=C0.bom, l=narrow?4:20, r=narrow?4:20, y0=40, h=46, total=2000, x=v=>l+(W-l-r)*v/total; svg.classList.toggle('fitw', narrow);
   const cols=['--c1','--c2','--c3','--c4','--c5','--c6','--c1','--c2'];
   const parts = CATS.map((cn,i)=>({n:cn, v:cat(b,cn), col:cols[i], op:i>=6?0.55:0.9}));
   parts.push({n:'Tax', v:b.tax, col:'--fg-3', op:0.7}, {n:'Shipping (est.)', v:b.shipping, col:'--line-2', op:0.9});
   let acc=0;
   parts.forEach(p=>{ el('rect',{x:x(acc),y:y0,width:Math.max(0.5,x(acc+p.v)-x(acc)),height:h,fill:css(p.col),opacity:p.op},svg);
-    if(x(acc+p.v)-x(acc)>34) el('text',{x:(x(acc)+x(acc+p.v))/2,y:y0+h+14,'text-anchor':'middle',fill:css('--fg-2'),'font-size':'11'},svg,fmtUSD(p.v)); acc+=p.v; });
+    if(x(acc+p.v)-x(acc)>34) el('text',{x:(x(acc)+x(acc+p.v))/2,y:y0+h+14,'text-anchor':'middle',fill:css('--fg-2')},svg,fmtUSD(p.v)); acc+=p.v; });
   el('rect',{x:x(acc),y:y0,width:Math.max(0,x(total)-x(acc)),height:h,fill:'none',stroke:css('--ok'),'stroke-dasharray':'5 4'},svg);
-  if(total>acc) el('text',{x:(x(acc)+x(total))/2,y:y0+h/2+4,'text-anchor':'middle',fill:css('--ok'),'font-weight':'700'},svg,'reserve '+fmtUSD(total-acc));
+  if(total>acc){ const inside=x(total)-x(acc)>100; el('text',inside?{x:(x(acc)+x(total))/2,y:y0+h/2+4,'text-anchor':'middle',fill:css('--ok'),'font-weight':'700'}:{x:x(total),y:y0+h+30,'text-anchor':'end',fill:css('--ok'),'font-weight':'700'},svg,'reserve '+fmtUSD(total-acc)); }
   el('line',{x1:x(total),x2:x(total),y1:y0-14,y2:y0+h+10,stroke:css('--bad'),'stroke-width':2},svg);
   el('text',{x:x(total),y:y0-18,'text-anchor':'end',fill:css('--bad')},svg,'$2,000 cap');
   el('text',{x:l,y:y0-18},svg,'committed '+fmtUSD(acc));
-  let lx=l, ly=y0+h+40;
+  let lx=l, ly=y0+h+(narrow?56:40);
   parts.forEach(p=>{ const w=16+p.n.length*6.2+16; if(lx+w>W-r){ lx=l; ly+=18; }
     el('rect',{x:lx,y:ly-9,width:10,height:10,fill:css(p.col),opacity:p.op},svg); el('text',{x:lx+14,y:ly},svg,p.n); lx+=w; });
-  svg.setAttribute('viewBox', '0 0 640 '+(ly+14));
+  svg.setAttribute('viewBox', `0 0 ${W} ${ly+14}`);
   describe(svg, `C0 committed spend ${fmtUSD(acc)} against the $2,000 cap, leaving ${fmtUSD(total-acc)} reserve. `+parts.map(p=>`${p.n} ${fmtUSD(p.v)}`).join('; ')+'.');
 }
 
@@ -379,9 +344,9 @@ function drawDuty(){
   const x=s=>l+(W-l-r)*s/T, y=p=>t+(H-t-b)*(1-p/pmax);
   for(let p=0;p<=pmax;p+=250){ el('line',{x1:l,x2:W-r,y1:y(p),y2:y(p),class:'grid'},svg); el('text',{x:l-6,y:y(p)+4,'text-anchor':'end'},svg,p+' W'); }
   let s=0, d=`M${x(0)} ${y(0)}`; ph.forEach(([n,dt,p])=>{ d+=`L${x(s)} ${y(p)}L${x(s+dt)} ${y(p)}`; s+=dt; }); d+=`L${x(T)} ${y(0)}Z`;
-  el('path',{d,fill:css('--accent'),opacity:0.18,stroke:css('--accent'),'stroke-width':2},svg);
+  el('path',{d,fill:css('--c1'),opacity:0.18,stroke:css('--c1'),'stroke-width':2},svg);
   s=0; ph.forEach(([n,dt,p])=>{ el('text',{x:x(s+dt/2),y:y(p)-6,'text-anchor':'middle'},svg,n==='cruise'?`cruise ${fmt(p,0)} W × 10 min`:n==='hover'?`${fmt(p,0)} W`:''); s+=dt; });
-  [0,120,240,360,480,600,760].forEach(v=>el('text',{x:x(v),y:H-b+16,'text-anchor':'middle'},svg,Math.round(v/60)+' min'));
+  [0,120,240,360,480,600,760].forEach((v,k,arr)=>el('text',{x:x(v),y:H-b+16,'text-anchor':k===arr.length-1?'end':k===0?'start':'middle'},svg,Math.round(v/60)+' min'));
   el('text',{x:W-r,y:H-6,'text-anchor':'end'},svg,`mission ${fmt(s0.E_Wh,0)} Wh of ${fmt(s0.Epack_Wh,0)} Wh pack`);
   describe(svg, `Electrical power through one mission: hover ${fmt(Ph,0)} W for 60 s, transition at ${fmt(Ph,0)} W for 20 s, cruise ${fmt(Pc,0)} W for 10 min, transition 20 s, hover 60 s. Mission energy ${fmt(s0.E_Wh,0)} Wh of a ${fmt(s0.Epack_Wh,0)} Wh pack.`);
 }
@@ -407,8 +372,8 @@ function drawState(){
   const R=k=>N[k][0]+N[k][2]/2, L=k=>N[k][0]-N[k][2]/2;
   E(R('DIS'),60,L('QH'),60,'arm',(R('DIS')+L('QH'))/2,34);
   E(R('QH'),60,L('TR'),60,'≥ 30 m AGL',(R('QH')+L('TR'))/2,34);
-  E(R('TR'),60,L('FW'),60,'≥ 15 m/s',(R('TR')+L('FW'))/2,34);
-  E(595,77,595,183,'< 12 m/s',588,110,'end');
+  E(R('TR'),60,L('FW'),60,'≥ 16 m/s',(R('TR')+L('FW'))/2,34);
+  E(595,77,595,183,'< 13 m/s',588,110,'end');
   E(625,183,625,77,'recovered',632,134,'start');
   E(555,77,470,183,'Q mode',500,140,'end');
   E(L('BT'),200,R('QL'),200,'speed ≈ 0',(L('BT')+R('QL'))/2,176);
@@ -419,8 +384,8 @@ function drawState(){
   const fy=258; el('rect',{x:20,y:fy,width:660,height:58,rx:2,fill:'none',stroke:css('--line-2'),'stroke-dasharray':'4 3'},svg);
   el('text',{x:32,y:fy+18,'font-weight':'600',fill:css('--fg')},svg,'From any flying mode (failsafes)');
   el('text',{x:32,y:fy+36},svg,'Transition longer than 15 s (Q_TRANS_FAIL) → QRTL · RC link loss → RTL, then QLAND (R20)');
-  el('text',{x:32,y:fy+52},svg,'Low battery → QLAND · Geofence breach at 120 m AGL → RTL · Pilot can select QHOVER at any time');
-  describe(svg, 'QuadPlane flight modes for C0. Disarmed to QHOVER or QLOITER on arm. QHOVER to Transition at 30 m AGL or higher. Transition to fixed-wing cruise at 15 m/s or more. Fixed-wing cruise to Q_ASSIST below 12 m/s, and back to cruise once recovered. Cruise to Back-transition on selecting a Q mode. Back-transition to QLAND at about zero airspeed. QLAND to Disarmed when landed. Failsafes from any flying mode: transition longer than 15 s (Q_TRANS_FAIL) goes to QRTL; RC link loss goes to RTL then QLAND; low battery goes to QLAND; geofence breach at 120 m AGL goes to RTL; the pilot can select QHOVER at any time.');
+  el('text',{x:32,y:fy+52},svg,'Low battery → RTL, critical → QLAND · Geofence breach at 110 m AGL → RTL · Pilot can select QHOVER at any time');
+  describe(svg, 'QuadPlane flight modes for C0. Disarmed to QHOVER or QLOITER on arm. QHOVER to Transition at 30 m AGL or higher. Transition to fixed-wing cruise at 16 m/s or more. Fixed-wing cruise to Q_ASSIST below 13 m/s, and back to cruise once recovered. Cruise to Back-transition on selecting a Q mode. Back-transition to QLAND at about zero airspeed. QLAND to Disarmed when landed. Failsafes from any flying mode: transition longer than 15 s (Q_TRANS_FAIL) goes to QRTL; RC link loss in fixed-wing modes goes to RTL then a vertical landing, and in hover modes to QLAND; low battery goes to RTL, critical battery to QLAND; geofence breach at 110 m AGL goes to RTL; the pilot can select QHOVER at any time.');
 }
 function drawGantt(){
   const svg=$('#gantt'); if(!svg) return; clear(svg);
@@ -433,7 +398,7 @@ function drawGantt(){
     ['Thrust stand T1–T5',D_(2026,11,16),D_(2026,12,4),'c2'],
     ['CAD + design freeze',D_(2026,11,2),D_(2026,12,4),'c1'],
     ['Order B: airframe, propulsion, avionics',D_(2026,12,7),D_(2026,12,14),'c3'],
-    ['ArduPilot SITL rehearsal (§13)',D_(2027,1,11),D_(2027,2,19),'c5'],
+    ['ArduPilot SITL rehearsal (§'+secNo('controls')+')',D_(2027,1,11),D_(2027,2,19),'c5'],
     ['Airframe build',D_(2027,1,4),D_(2027,2,19),'c1'],
     ['Proof load, drop test, CG',D_(2027,2,19),D_(2027,2,26),'c2'],
     ['Avionics integration + bench',D_(2027,2,22),D_(2027,3,12),'c5'],
@@ -455,37 +420,32 @@ function drawGantt(){
 }
 
 // ---------- viewer ----------
-let V=null, vKey='C0';
-function viewerGeom(k){ const c=D.concepts[k], g=c.geo, s=c.sized, x=c.cg.items.find(i=>i.name.startsWith('Battery')).x;
-  return {span:D.base.span, chord:s.chord, fusL:0.85, fusW:0.16, fusH:0.16, fusX:0.45-0.425, battX:x, booms:g.booms, liftD:g.D, xRear:g.xRear,
-    tailLE:g.xRear-g.D/2-0.05, hC:g.hC, vH:g.vH, vC:g.vC, pushX:0.45-0.85-0.038, pushD:14*0.0254}; }
-function initViewer(){ if(V) return; V = Viewer($('#viewer')); V.build(viewerGeom(vKey)); touchGate($('#viewer').closest('.viewer'));
-  $$('.viewer [data-view]').forEach(b=>b.addEventListener('click',()=>V.view(b.dataset.view)));
-  $('#vDiscs').addEventListener('click',e=>e.currentTarget.setAttribute('aria-pressed',V.toggleDiscs()));
-  $('#vExplode').addEventListener('click',e=>e.currentTarget.setAttribute('aria-pressed',V.toggleExplode()));
-  $$('#vConcept button').forEach(b=>b.addEventListener('click',()=>{ vKey=b.dataset.c; $$('#vConcept button').forEach(x=>x.setAttribute('aria-pressed',x===b)); V.build(viewerGeom(vKey)); })); }
-
 // ---------- SOLIDWORKS model viewer ----------
 let CV=null;
 const THREE_SRC=['https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js','https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js'];
-const loadScript = src => new Promise((ok,fail)=>{ const s=document.createElement('script'); s.src=src; s.onload=ok; s.onerror=fail; document.head.appendChild(s); });
+const THREE_SRI=['sha384-CI3ELBVUz9XQO+97x6nwMDPosPR5XvsxW2ua7N1Xeygeh1IxtgqtCkGfQY9WWdHu','sha384-wagZhIFgY4hD+7awjQjR4e2E294y6J2HSnd8eTNc15ZubTeQeVRZwhQJ+W6hnBsf'];
+const loadScript = src => new Promise((ok,fail)=>{ const s=document.createElement('script'); s.src=src; const k=THREE_SRC.indexOf(src); if(k>=0){ s.integrity=THREE_SRI[k]; s.crossOrigin='anonymous'; } s.onload=ok; s.onerror=fail; document.head.appendChild(s); });
 function initCad(){ if(CV!==null) { CV && CV.refresh && CV.refresh(); return; }
-  CV='loading'; $('#cadTris').textContent=MESH.tris.toLocaleString('en-US'); $('#cadComps').textContent=MESH.comps.length;
+  CV='loading';
   const view=$('#cadView'); view.classList.add('loading');
   (window.THREE && THREE.OrbitControls ? Promise.resolve() : loadScript(THREE_SRC[0]).then(()=>loadScript(THREE_SRC[1])))
     .catch(()=>{}).then(()=>{ view.classList.remove('loading'); startCad(); }); }
 function startCad(){
   const view=$('#cadView'), parts=$('.cadparts');
-  CV = CadViewer(view, MESH) || false;
+  if(!MESH) MESH = JSON.parse(document.getElementById('meshData').textContent);
+  try{ CV = CadViewer(view, MESH) || false; }catch(e){ CV = false; const fb=view.querySelector('.fallback'); if(fb){ fb.hidden=false; fb.querySelector('p').textContent='The 3D model could not start: this browser or device did not provide WebGL. The drawings in §'+secNo('model3d')+'.1 show the same model.'; } view.querySelector('canvas').hidden=true; }
   view.classList.toggle('offline', !CV); parts.hidden = !CV;
   if(!CV){ const r=$('#cadRetry'); if(!r.dataset.bound){ r.dataset.bound=1; r.addEventListener('click',()=>{ CV=null; view.querySelector('.fallback').hidden=true; $('#cadCanvas').hidden=false; initCad(); }); } return; }
   touchGate($('#cadView'));
-  const counts={}; MESH.comps.forEach(c=>counts[c[0]]=(counts[c[0]]||0)+1);
-  const list=$('#cadParts'); Object.keys(MESH.parts).sort().forEach(n=>{ const li=document.createElement('li'), b=document.createElement('button');
-    b.type='button'; b.textContent=n.replace(/_/g,' ')+(counts[n]>1?' ×'+counts[n]:''); b.title=MESH.parts[n].d;
+  const base=n=>n.split('~')[0], counts={}; MESH.comps.forEach(c=>{ const k=base(c[0]); counts[k]=(counts[k]||0)+1; });
+  const FAST=/^[FNWI]\d\d_/, names=[...new Set(Object.keys(MESH.parts).map(base))].sort();
+  const list=$('#cadParts'), flist=document.createElement('ul'); flist.id='cadFasteners';
+  list.insertAdjacentElement('afterend', flist); list.insertAdjacentHTML('afterend', '<p class="meta grp">Fasteners and inserts</p>');
+  names.forEach(n=>{ const li=document.createElement('li'), b=document.createElement('button'), key=Object.keys(MESH.parts).find(k=>base(k)===n);
+    b.type='button'; b.textContent=n.replace(/^([FNWI]\d\d)_/,'$1 ').replace(/_/g,' ')+(counts[n]>1?' ×'+counts[n]:''); b.title=MESH.parts[key].d;
     const on=()=>CV.highlight(n), off=()=>CV.highlight(null);
     b.addEventListener('focus',on); b.addEventListener('mouseenter',on); b.addEventListener('blur',off); b.addEventListener('mouseleave',off); b.addEventListener('click',on);
-    li.appendChild(b); list.appendChild(li); });
+    li.appendChild(b); (FAST.test(n)?flist:list).appendChild(li); });
   $$('#cadView [data-cview]').forEach(b=>b.addEventListener('click',()=>CV.view(b.dataset.cview)));
   $('#cadXray').addEventListener('click',e=>e.currentTarget.setAttribute('aria-pressed',CV.toggleXray()));
   $('#cadExplode').addEventListener('click',e=>e.currentTarget.setAttribute('aria-pressed',CV.toggleExplode()));
@@ -498,28 +458,249 @@ function touchGate(view){
   g.type='button'; g.className='gate'; g.innerHTML='<span>Tap to rotate the model</span>'; view.appendChild(g);
   const size=()=>{ g.style.height=c.offsetHeight+'px'; }; size(); if(window.ResizeObserver) new ResizeObserver(size).observe(c);
   const arm=on=>{ view.classList.toggle('armed',on); g.hidden=on; };
-  g.addEventListener('click',()=>arm(true));
+  g.addEventListener('click',()=>{ arm(true); c.setAttribute('tabindex','-1'); c.focus({preventScroll:true}); });
   document.addEventListener('pointerdown',e=>{ if(view.classList.contains('armed') && !view.contains(e.target)) arm(false); });
   if(window.IntersectionObserver) new IntersectionObserver(es=>es.forEach(en=>{ if(!en.isIntersecting) arm(false); })).observe(view);
 }
 
-function redrawSection(id){
-  if(id==='model3d'){ initCad(); initViewer(); V.build(viewerGeom(vKey)); }
-  if(id==='mass'){ drawTornado(); drawPack(); }
-  if(id==='budget') drawCap();
-  if(id==='testing') drawDuty();
-  if(id==='cg') drawCG();
-  if(id==='controls') drawState();
-  if(id==='schedule') drawGantt();
+const CHARTS = {tradeChart:()=>drawTrade(), dragChart:()=>drawDrag(), polarChart:()=>drawPolar(), tornado:()=>drawTornado(), packChart:()=>drawPack(), capChart:()=>drawCap(), dutyChart:()=>drawDuty(), cgChart:()=>drawCG(), stateSvg:()=>drawState(), gantt:()=>drawGantt()};
+// charts in a hidden chapter measure zero width, so only the visible chapter's charts are drawn; print draws all
+// a chart in a hidden tab is skipped here and draws when its tab opens
+function redrawIn(sec){ for(const id in CHARTS){ const e=document.getElementById(id); if(e && (!sec || sec.contains(e)) && !e.closest('[hidden]')) CHARTS[id](); } if(CV && CV.refresh && (!sec || sec.contains($('#cadView')))) CV.refresh(); FlowViz.redraw(); if(!sec || sec.contains($('#thermViz'))) ThermViz.redraw(); }
+function redrawAll(){ redrawIn(null); }
+function lazyCad(){ const v=$('#cadView'); if(!v) return;
+  if(!('IntersectionObserver' in window)){ initCad(); return; }
+  const io=new IntersectionObserver(es=>{ if(es.some(x=>x.isIntersecting)){ io.disconnect(); initCad(); } }, {rootMargin:'600px 0px'}); io.observe(v); }
+// summary first: decision facts and long tables sit behind disclosures; requirement status as a grid
+function summarise(){
+  $$('.decision').forEach(d=>{ const q=d.querySelector('b.q'), rec=d.querySelector('.rec'); if(!q||!rec) return;
+    const rest=[...d.children].filter(c=>c!==q && c!==rec); if(!rest.length) return;
+    const det=document.createElement('details'); det.className='more facts'; det.innerHTML=`<summary>Facts and sources<span class="sr-only">: ${q.textContent.slice(0,80)}</span></summary>`;
+    rest.forEach(c=>det.appendChild(c)); d.appendChild(det); });
+  const rq=$('#reqTable');
+  if(rq){ const rows=[...rq.tBodies[0].rows], count={met:0,risk:0,fail:0,open:0};
+    const grid=document.createElement('div'); grid.className='reqgrid';
+    const ord={fail:0,risk:1,open:2,met:3}, stOf=r=>{ const c=r.cells[2].querySelector('.chip'); return c?[...c.classList].find(x=>x in ord):'open'; };
+    rows.slice().sort((p,q)=>ord[stOf(p)]-ord[stOf(q)]).forEach(r=>{ const chip=r.cells[2].querySelector('.chip'); const st=chip?[...chip.classList].find(c=>c in count):'open'; if(st) count[st]++;
+      grid.insertAdjacentHTML('beforeend', `<div class="rq ${st}"><span class="rid">${r.cells[0].textContent}</span><span class="rtx">${r.cells[1].textContent}</span>${chip?chip.outerHTML:''}</div>`); });
+    const sum=document.createElement('p'); sum.className='reqsum';
+    sum.innerHTML=`<b>${count.met}</b> met · <b>${count.risk}</b> at risk · <b>${count.open}</b> open${count.fail?` · <b>${count.fail}</b> failed`:''} of ${rows.length} requirements`;
+    const wrap=rq.closest('.tbl'); wrap.before(sum, grid); }
+  $$('.tbl').forEach(t=>{ if(t.closest('details')||t.closest('.doccontrol')||t.classList.contains('nofold')) return; const tb=t.querySelector('tbody'); const n=tb?tb.rows.length:0; if(n<=10) return;
+    const det=document.createElement('details'); det.className='more tablefold';
+    const h=t.closest('section.sec')&&[...t.closest('section.sec').querySelectorAll('h3')].filter(x=>x.compareDocumentPosition(t)&Node.DOCUMENT_POSITION_FOLLOWING).pop();
+    const what=h?h.textContent.replace(/^\s*\d+\.\d+\s*/,''):'the table';
+    det.innerHTML=`<summary>${t.querySelector('#reqTable')?`Show all ${n} requirements as a table`:`Show all ${n} rows: ${what}`}</summary>`;
+    t.before(det); det.appendChild(t); });
 }
-function redrawAll(){ const cur=secs.find(s=>s.classList.contains('cur')); if(cur) redrawSection(cur.id); }
+
+// ---------- fasteners and fits (cad/hardware.json) ----------
+function hardware(){
+  const f=HW.fasteners||[], n=k=>(HW[k]||[]).reduce((s,x)=>s+(x.qty||0),0);
+  const fit=f.filter(x=>x.length_mm!=null), sup=f.filter(x=>x.length_mm==null), screws=fit.reduce((s,x)=>s+(x.qty||0),0), bySize={}; fit.forEach(x=>{ const m=String(x.thread).split('x')[0]; bySize[m]=(bySize[m]||0)+(x.qty||0); });
+  set('hwSummary', `The aircraft uses ${screws} screws in ${fit.length} types${sup.length?`, plus ${sup.reduce((s,x)=>s+(x.qty||0),0)} prop screws that come with the motors`:''} (${Object.entries(bySize).map(([k,v])=>v+' × '+k).join(', ')}), ${n('inserts')} heat-set inserts, ${n('nuts')} nuts and ${n('washers')} washers, nearly all A2 stainless M3 socket heads into brass inserts. Each has a clearance or insert hole, a torque and a threadlocker rule; threadlocker goes only on metal-to-metal threads, because it attacks printed plastic.`);
+  const tb=$('#hwTable tbody'); if(tb) f.forEach(x=>tb.insertAdjacentHTML('beforeend', `<tr><td>${x.id}</td><td>${String(x.thread).replace(/x[0-9.]+$/,'')} × ${x.length_mm??'—'}</td><td>${x.standard}</td><td class="n">${x.qty??'—'}</td><td class="n">${x.torque_Nm!=null?fmt(x.torque_Nm,2):'—'}</td><td>${(x.joints||[]).join('; ')}</td></tr>`));
+  const ft=$('#fitTable tbody'); if(ft) (HW.fits||[]).forEach(x=>ft.insertAdjacentHTML('beforeend', `<tr><td>${x.id}</td><td>${x.joint}</td><td class="n">${x.min_clearance_mm!=null?fmt(x.min_clearance_mm,3):'—'}</td><td class="n">${x.max_clearance_mm!=null?fmt(x.max_clearance_mm,3):'—'}</td></tr>`));
+}
+
+// ---------- design iterations (analysis/tradestudy.json) ----------
+const TV = TRADE.variants, TCRIT = TRADE.criteria;
+const tClass = v => !v.feasible ? 'out' : v.meetsR1 ? 'r1' : 'nor1';
+const tTotal = v => (TRADE.ranking.all.find(x=>x.id===v.id)||{}).total;
+const tLabel = v => v.id==='C0' ? 'C0 baseline (4-lift twin boom)' : String(v.label||v.id).split(/\s+[\u2014\u2013]\s+|:\s|\s\(/)[0].trim();
+function tradeText(){
+  const ranked = TRADE.ranking.all.map(r=>({...r, v:TV.find(v=>v.id===r.id)}));
+  const r1 = ranked.filter(r=>r.feasible&&r.meetsR1), top = ranked.filter(r=>r.feasible)[0];
+  const out = ranked.filter(r=>!r.feasible).length, c0 = ranked.find(r=>r.id==='C0');
+  const best = r1[0];
+  const el_ = $('#tradeVerdict'); if(!el_) return;
+  el_.innerHTML = `<b>Of ${TV.length} configurations sized and priced the same way, the C0 family is the best that keeps the lift rotors stopped in cruise (R1).</b> `
+    + `The baseline C0 scores ${fmt(c0.total,2)} of 10. ` + r1.filter(r=>r.total>c0.total && r.id.startsWith('C0-')).slice(0,3).map(r=>{
+        const why = /lean/.test(r.id) ? 'saves money by dropping parts the design keeps, such as the airspeed sensor used for transitions'
+          : /^C0-b/.test(r.id) ? 'gains cruise time from a longer wing, but puts each wing half at or near the 1.5 m car limit (R4) and lowers the spar reserve factor'
+          : /^C0-pk/.test(r.id) ? 'carries a bigger pack, which leaves less than the $100 crash reserve (R7)' : 'differs only in detail';
+        return `${tLabel(r.v)} (${fmt(r.total,2)}) ${why}`; }).join('; ').replace(/^./,c=>c.toUpperCase()) + (r1.some(r=>r.total>c0.total) ? '. The baseline keeps the margins those variants spend. ' : '')
+    + (top && !top.meetsR1 ? `A ${tLabel(top.v).toLowerCase()} scores higher (${fmt(top.total,2)}) because it drops the pusher, booms, tail and gear, but it breaks R1, needs about 30° of tilt to hold an 8 m/s gust in hover, and cannot survive a motor failure. ` : '')
+    + (()=>{ const o=ranked.filter(r=>!r.feasible), cap=o.filter(r=>(r.v.flags||[]).some(f=>/^R6/.test(f))).length, FAM={'Lift+cruise 8-lift':'the 8-lift','Lift+cruise coaxial X8':'the coaxial X8','Tiltrotor':'the tilt-rotors','Tilt-wing':'the tilt-wing','Box / joined wing':'the box wing','Tandem wing':'the tandem wing','C0 variant':'C0 with folding props'};
+      const fams=[...new Set(o.filter(r=>!/pack sweep/i.test(r.v.family||'')).map(r=>FAM[r.v.family]||String(r.v.family||'').toLowerCase()))], packs=o.filter(r=>/pack sweep/i.test(r.v.family||'')).length;
+      const list=fams.length>1?fams.slice(0,-1).join(', ')+' and '+fams[fams.length-1]:fams.join('');
+      return `${out} variants are ranked out, ${cap} of them for exceeding the $2,000 cap: ${list}${packs?`, and ${packs} of the larger packs`:''}.`; })();
+  const sens = TRADE.sensitivity, changed = sens.cases.filter(c=>c.winnerFeasibleR1!==sens.baseWinnerFeasibleR1).length, allC0 = sens.cases.every(c=>String(c.winnerFeasibleR1).startsWith('C0'));
+  set('tradeSens', `Sensitivity: each weight moved ±30 % in turn (${sens.cases.length} cases). The top R1-compliant variant ${changed? 'swapped in '+changed+' cases' : 'never changed'}${allC0? ', and it was a C0 variant in every case' : ''}.`);
+  const tb = $('#tradeCriteria tbody'); if(tb) TCRIT.forEach(c=>tb.insertAdjacentHTML('beforeend', `<tr><td>${c.name}</td><td class="n">${fmt(c.weight*100,0)} %</td><td>${c.anchor||'—'}</td></tr>`));
+  const tt = $('#tradeTable tbody'); if(tt) ranked.forEach(r=>{ const m=r.v.metrics||{};
+    const st = !r.feasible ? `<span class="chip fail">ranked out</span> ${(r.v.flags||[]).join('; ')}` : r.meetsR1 ? '<span class="chip met">meets R1</span>' : '<span class="chip risk">breaks R1</span>';
+    tt.insertAdjacentHTML('beforeend', `<tr><td>${tLabel(r.v)}</td><td class="n">${fmt(r.total,2)}</td><td class="n">${m.MTOW_kg!=null?fmt(m.MTOW_kg,2):'—'}</td><td class="n">${m.cruise_avail_min!=null?fmt(m.cruise_avail_min,1):'—'}</td><td class="n">${m.reserve_usd!=null?fmt(m.reserve_usd,0):'—'}</td><td>${st}</td></tr>`); });
+}
+function drawTrade(){
+  const svg=$('#tradeChart'); if(!svg) return; clear(svg);
+  const all = TRADE.ranking.all.map(r=>({...r, v:TV.find(v=>v.id===r.id)}));
+  // three blocks, each ranked: what can be built as specified, what breaks R1, what is ranked out
+  const groups=[['r1','Meets every requirement','Meets every requirement'],['nor1','Feasible, but breaks R1 (rotors stopped in cruise)','Breaks R1'],['out','Ranked out: over the cap or short of a requirement','Ranked out']]
+    .map(([c,n,short])=>({c,n,short,rows:all.filter(r=>tClass(r.v)===c).sort((p,q)=>q.total-p.total)})).filter(g=>g.rows.length);
+  const narrow = svg.closest('.svgwrap').clientWidth < 560;
+  const W=narrow?Math.max(260,svg.closest('.svgwrap').clientWidth):640, l=narrow?8:236, r=narrow?44:46, t=16, rh=narrow?36:22, gh=30, n=all.length, H=t+n*rh+groups.length*gh+28, x=v=>l+(W-l-r)*v/10;
+  svg.setAttribute('viewBox', `0 0 ${W} ${H}`); svg.classList.toggle('fitw', narrow);
+  for(let v=0; v<=10; v+=2){ el('line',{x1:x(v),x2:x(v),y1:t,y2:H-26,class:'grid'},svg); el('text',{x:x(v),y:H-10,'text-anchor':'middle'},svg,v); }
+  let y=t;
+  groups.forEach(g=>{
+    el('rect',{x:8,y:y+gh-18,width:12,height:12,rx:2,class:'tb '+g.c},svg);
+    el('text',{x:26,y:y+gh-8,class:'ghead'},svg,`${narrow?g.short:g.n} · ${g.rows.length}`); y+=gh;
+    g.rows.forEach(row=>{ const gg=el('g',{class:'trow'},svg);
+      el('title',{},gg,`${tLabel(row.v)}: ${fmt(row.total,2)} of 10${row.feasible?'':' — '+(row.v.flags||[]).join('; ')}`);
+      if(narrow){ el('text',{x:l,y:y+13,class:row.id==='C0'?'lab sel':'lab'},gg,(t=>t.length>42?t.slice(0,41).replace(/\s+\S*$/,'')+'…':t)(tLabel(row.v))); el('rect',{x:l,y:y+18,width:Math.max(1,x(row.total)-l),height:12,rx:2,class:'tb '+g.c},gg); el('text',{x:x(row.total)+6,y:y+29},gg,fmt(row.total,2)); }
+      else { el('text',{x:l-10,y:y+rh/2+4,'text-anchor':'end',class:row.id==='C0'?'lab sel':'lab'},gg,tLabel(row.v).slice(0,40));
+      el('rect',{x:l,y:y+4,width:Math.max(1,x(row.total)-l),height:rh-8,rx:2,class:'tb '+g.c},gg);
+      el('text',{x:x(row.total)+6,y:y+rh/2+4},gg,fmt(row.total,2)); }
+      if(row.id==='C0' && !narrow) el('rect',{x:l-6,y:y+4,width:3,height:rh-8,fill:css('--accent')},gg);
+      y+=rh; }); });
+  describe(svg, 'Weighted scores out of 10. '+groups.map(g=>g.n+': '+g.rows.map(r=>`${tLabel(r.v)} ${fmt(r.total,2)}`).join('; ')).join('. ')+'.');
+}
+
+// ---------- aerodynamics (analysis/aero/aero_results.json) ----------
+const AD = AEROD;
+function aeroText(){
+  const mis=AD.mission||{}, dr=AD.drag||{}, np=AD.neutral_point||{}, sm=np.static_margin_pct||{}, st=AD.stall||{};
+  const faired = mis.faired_gear || null, round = mis.round_legs || null;
+  const tDesign = mis.t_cruise_avail_min, tAlt = (faired||round||{}).t_cruise_avail_min;
+  const v=$('#aeroVerdict'); if(v) v.innerHTML =
+    (dr.gear_round_case
+      ? `<b>The aerodynamic package (XFOIL, NeuralFoil, AVL, a component drag build-up and 2-D RANS CFD) found that bare round landing legs would add ${fmt(100*(dr.gear_round_case.CdA_legs_round-dr.gear_round_case.CdA_legs_faired)/AD.geometry.S_ref_m2/(dr.CD0_total||1),0)} % to the zero-lift drag, so the legs now carry printed teardrop fairings.</b> `
+      : `<b>The aerodynamic package (XFOIL, NeuralFoil, AVL, a component drag build-up and 2-D RANS CFD) found the sizing's drag too low: bare round landing legs alone were ${fmt(100*(dr.by_group&&dr.by_group.gear||0)/(dr.CD0_total||1),0)} % of zero-lift drag.</b> `)
+    + (faired ? `With round legs the aircraft has ${fmt(tDesign,1)} min of cruise, short of R10's 10 min; teardrop leg fairings, now part of the design, raise that to ${fmt(faired.t_cruise_avail_min,1)} min. ` : round ? `With the teardrop leg fairings now in the design the build-up gives ${fmt(tDesign,1)} min of cruise, against the ${fmt(s0.t_cruise_avail_min,1)} min the sizing uses as the design value (R10 needs 10); with bare round legs it would be ${fmt(round.t_cruise_avail_min,1)}. ` : '')
+    + (Math.abs(B.CLmax-AD.CL_max_3D.adopted)<5e-4
+      ? `The wing is sized on the trimmed CL_max of the aerodynamic package, ${fmt(AD.CL_max_3D.adopted,3)}, to a design stall of ${fmt(AD.stall.V_stall_mps,2)} m/s, ${AD.stall.V_stall_mps>12+1e-9?'over':fmt(AD.stall.margin_to_R11_pct,1)+' % under'} R11's 12 m/s, which covers a ${fmt(100*(1-Math.pow(AD.stall.V_stall_mps/12,2)),0)} % shortfall in CL_max. `
+      : `The wing is sized on a CL_max of ${fmt(B.CLmax,3)}; the trimmed analysis of the resized wing gives ${fmt(AD.CL_max_3D.adopted,3)}, which puts stall at ${fmt(AD.stall.V_stall_mps,2)} m/s, ${AD.stall.V_stall_mps>12+1e-9?'just over':'within'} R11's 12 m/s. `)
+    + `With the pod included, the neutral point sits at ${fmt(np.AVL_pod_pct_MAC,1)} % MAC: ${fmt(sm.CG_28pct,1)} % static margin at the design CG and ${fmt(sm.CG_no_payload,1)} % with an empty payload bay, so the bay carries ballast when flown empty.`;
+  const k=$('#aeroKpis'); if(k){ const rows=[
+      ['CL_max, section (adopted)', fmt(AD.CL_max_2D.adopted_2D,2), 'XFOIL '+fmt(AD.CL_max_2D.xfoil_stall_Re,2)+', NeuralFoil '+fmt(AD.CL_max_2D.neuralfoil_stall_Re,2)+', wind tunnel 1.30'],
+      ['CL_max, aircraft trimmed', fmt(AD.CL_max_3D.adopted,2), 'critical-section method on the AVL span loading'],
+      ['Stall speed at MTOW', fmt(st.V_stall_mps,2)+' m/s', 'R11 needs ≤ 12 m/s'],
+      ['Zero-lift drag CD0', fmt(dr.CD0_total,4), 'component build-up'],
+      ['Cruise L/D at 20 m/s', fmt(dr.cruise&&dr.cruise.LD,2), 'max '+fmt(dr.cruise&&dr.cruise.LD_max,1)+' at '+fmt(dr.cruise&&dr.cruise.V_at_LDmax_mps,1)+' m/s'],
+      ['Cruise electrical power', fmt(mis.P_cruise_W,0)+' W', 'cross-check; the design value is the sizing\'s '+fmt(s0.P_cruise,0)+' W, the more cautious'],
+      ['Neutral point, with pod', fmt(np.AVL_pod_pct_MAC,1)+' % MAC', 'AVL; '+fmt(np.pod_shift_pct_MAC,1)+' % MAC from the pod'],
+      ['Trim at cruise', 'α '+fmt(AD.trim_cruise.alpha_deg,1)+'°, elevator '+fmt(AD.trim_cruise.elevator_deg,1)+'°', 'AVL'] ];
+    k.innerHTML = rows.map(([l,v,s])=>`<div class="kpi"><div class="l">${l}</div><div class="v">${v}</div><div class="s">${s}</div></div>`).join(''); }
+  const cf=AD.cfd, note=$('#cfdNote');
+  // a CFD value counts only if it is physical for this section (|CL| < 2.5, CD > 0); diverged runs read "—"
+  const phys=(cl,cd)=>cl!=null&&cd!=null&&isFinite(cl)&&isFinite(cd)&&Math.abs(cl)<2.5&&cd>0;
+  if(note){ const ok = cf && cf!=='—' && cf.mesh_study;
+    if(ok){ const m10=cf.mesh_study.alpha_10, m2=cf.mesh_study.alpha_2;
+      const good=(m,L)=>m&&phys(m.CL[L],m.CD[L]), dl=m=>good(m,'L1')&&good(m,'L3')?100*Math.abs(m.CL.L3-m.CL.L1)/Math.abs(m.CL.L3):null;
+      const d10=dl(m10), d2=dl(m2), x10=(AD.comparison_2D||[]).find(r=>r.alpha_deg===10), x2=(AD.comparison_2D||[]).find(r=>r.alpha_deg===2);
+      const conv=Object.values(cf.timings||{}).filter(t=>t.converged).length, tot=Object.keys(cf.timings||{}).length;
+      note.innerHTML = `SU2 incompressible RANS on the NACA 2415 section at Re ${fmt((cf.Re||0)/1e5,2)}×10⁵, the cruise condition, with the Spalart–Allmaras turbulence model on three gmsh meshes (first cell at y⁺ below 1). `
+        + (d10!=null?`From the coarse to the fine mesh, lift at 10° changes ${fmt(d10,1)} %${d2!=null?` and at 2° ${fmt(d2,1)} %`:''}, so the fine mesh is the reference. `:'')
+        + (good(m10,'L3')&&x10?`On it, CL is ${fmt(m10.CL.L3,3)} at 10° against XFOIL's ${fmt(x10.xfoil_CL,3)}${good(m2,'L3')&&x2?`, and ${fmt(m2.CL.L3,3)} at 2° against ${fmt(x2.xfoil_CL,3)}`:''}: within about 10 %, with RANS lower because it treats the boundary layer as turbulent from the leading edge, where the real flow at this Reynolds number stays laminar over much of the chord. `:'')
+        + `The medium mesh and the transition-model runs did not converge reliably with these numerics (${conv} of ${tot} runs settled), so their values are left out (—). The section CL_max used in the design therefore rests on XFOIL, NeuralFoil and wind-tunnel data, with the fine-mesh CFD as a cross-check.`;
+      const mt=$('#meshTable tbody'), ms=m10;
+      if(mt && ms) ['L1','L2','L3'].forEach((L,i)=>{ const g=good(ms,L); mt.insertAdjacentHTML('beforeend', `<tr><td>${['Coarse','Medium','Fine'][i]} (${L})</td><td class="n">${ms.cells&&ms.cells[L]?Math.round(ms.cells[L]/1000)+'k':'—'}</td><td class="n">${g?fmt(ms.CL[L],3):'—'}</td><td class="n">${g?fmt(ms.CD[L],4):'—'}</td></tr>`); });
+      const tb=$('#cfdTable tbody'), f=(v,d)=>v!=null?fmt(v,d):'—';
+      if(tb) (AD.comparison_2D||[]).forEach(r=>{ const sa=phys(r.su2_SA_CL,r.su2_SA_CD)&&r.su2_SA_conv, sst=phys(r.su2_SSTLM_CL,r.su2_SSTLM_CD)&&r.su2_SSTLM_conv;
+        tb.insertAdjacentHTML('beforeend', `<tr><td class="n">${r.alpha_deg}°</td><td class="n">${f(r.xfoil_CL,3)}</td><td class="n">${sa?f(r.su2_SA_CL,3):'—'}</td><td class="n">${sst?f(r.su2_SSTLM_CL,3):'—'}</td><td class="n">${f(r.xfoil_CD,4)}</td><td class="n">${sa?f(r.su2_SA_CD,4):'—'}</td><td class="n">${sst?f(r.su2_SSTLM_CD,4):'—'}</td></tr>`); }); }
+    else { note.textContent='CFD results are not in this build (—).'; ['#meshTable','#cfdTable'].forEach(id=>{ const t=$(id); if(t) (t.closest('details')||t.closest('.tbl')).hidden=true; }); } }
+  const sn=$('#stabNote'); if(sn) sn.textContent = `Pitch: Cm_α ${fmt(AD.stability_derivatives_AVL_trim.Cma,2)} per radian, stable. Directional: Cn_β ${fmt(AD.stability_derivatives_AVL_trim.Cnb,4)}, stable. Dihedral effect: Cl_β ${fmt(AD.stability_derivatives_AVL_trim.Clb,4)}, weakly stable with a flat wing. The horizontal-tail volume is ${fmt(AD.tail_volumes.V_h,2)}, under the 0.50 typical of light aircraft, which is why the pod's shift matters.`;
+  const sd=AD.stability_derivatives_AVL_trim, meaning={CLa:'lift-curve slope, per rad',Cma:'pitch stiffness (negative = stable)',Cmq:'pitch damping',CYb:'side force with sideslip',Clb:'roll with sideslip (negative = stable)',Cnb:'yaw with sideslip (positive = stable)',Clp:'roll damping',Cnr:'yaw damping',Clr:'roll due to yaw rate',Cnp:'yaw due to roll rate'};
+  const stb=$('#aeroStabTable tbody'); if(stb) Object.keys(meaning).forEach(kk=>{ if(sd[kk]!=null) stb.insertAdjacentHTML('beforeend', `<tr><td>${kk.replace(/^C(.)(.*)$/,'C<sub>$1$2</sub>')}</td><td class="n">${fmt(sd[kk],4)}</td><td>${meaning[kk]}</td></tr>`); });
+}
+const DRAG_NAMES = {wing:'Wing',tail:'Tail and fins',pod:'Pod and canopy',booms:'Booms and clamps',rotors:'Stopped lift rotors',gear:'Landing legs and feet',misc:'Leakage, hinges, pitot'};
+function drawDrag(){
+  const svg=$('#dragChart'); if(!svg) return; clear(svg);
+  const g=(AD.drag&&AD.drag.by_group)||{}, tot=AD.drag.CD0_total, rows=Object.keys(DRAG_NAMES).filter(k=>g[k]!=null).map(k=>({k, n:DRAG_NAMES[k], v:g[k]})).sort((p,q)=>q.v-p.v);
+  const narrow = svg.closest('.svgwrap').clientWidth < 560;
+  const W=narrow?Math.max(260,svg.closest('.svgwrap').clientWidth):640, l=narrow?8:170, r=narrow?110:90, t=14, rh=narrow?44:34, H=t+rows.length*rh+26, mx=Math.max(...rows.map(x=>x.v)), x=v=>l+(W-l-r)*v/mx;
+  svg.setAttribute('viewBox', `0 0 ${W} ${H}`); svg.classList.toggle('fitw', narrow);
+  rows.forEach((row,i)=>{ const y=t+i*rh;
+    if(narrow){ el('text',{x:l,y:y+14},svg,row.n); el('rect',{x:l,y:y+20,width:Math.max(1,x(row.v)-l),height:14,rx:2,fill:css(row.k==='gear'||row.k==='rotors'?'--c3':'--c1')},svg); el('text',{x:x(row.v)+6,y:y+32},svg,`${fmt(100*row.v/tot,0)} %`); }
+    else { el('text',{x:l-10,y:y+rh/2+4,'text-anchor':'end'},svg,row.n);
+    el('rect',{x:l,y:y+7,width:Math.max(1,x(row.v)-l),height:rh-14,rx:2,fill:css(row.k==='gear'||row.k==='rotors'?'--c3':'--c1')},svg);
+    el('text',{x:x(row.v)+6,y:y+rh/2+4},svg,`${fmt(100*row.v/tot,0)} % · ${fmt(row.v,4)}`); } });
+  el('text',{x:l,y:H-6},svg,`Total CD0 ${fmt(tot,4)} on the ${fmt(AD.geometry.S_ref_m2,3)} m² wing`);
+  describe(svg, 'Zero-lift drag by group: '+rows.map(x=>`${x.n} ${fmt(100*x.v/tot,0)} percent`).join('; ')+'.');
+}
+function drawPolar(){
+  const svg=$('#polarChart'); if(!svg) return; clear(svg);
+  const sp=AD.section_polars.n2415_cruise_ncrit9, xf=(sp.table||[]).map(r=>[r[0],r[1]]);
+  const nfc=(AD.neuralfoil||[]).find(c=>c.name==='n2415_cruise_ncrit9'); const nf=nfc?nfc.alpha.map((al,i)=>[al,nfc.CL[i]]):[];
+  const physOK=r=>r&&isFinite(r.CL)&&isFinite(r.CD)&&Math.abs(r.CL)<2.5&&r.CD>0;
+  const msF=(AD.cfd&&AD.cfd.mesh_study)||{}, su2=[...((AD.cfd&&AD.cfd.polar_L2_SA)||[]).filter(r=>r.converged&&physOK(r)).map(r=>[r.alpha_deg,r.CL]), ...[['alpha_2',2],['alpha_10',10]].filter(([k])=>msF[k]&&physOK({CL:msF[k].CL.L3,CD:msF[k].CD.L3})).map(([k,al])=>[al,msF[k].CL.L3])];
+  const W=640,H=320,l=52,r=20,t=30,b=40, a0=-6,a1=20, c0=-0.6,c1=1.6;
+  const x=v=>l+(W-l-r)*(v-a0)/(a1-a0), y=v=>t+(H-t-b)*(1-(v-c0)/(c1-c0));
+  for(let v=-0.4; v<=1.6+1e-9; v+=0.4){ el('line',{x1:l,x2:W-r,y1:y(v),y2:y(v),class:'grid'},svg); el('text',{x:l-6,y:y(v)+4,'text-anchor':'end'},svg,fmt(v,1)); }
+  for(let v=-5; v<=20; v+=5){ el('text',{x:x(v),y:H-b+16,'text-anchor':'middle'},svg,v+'°'); }
+  el('text',{x:(l+W-r)/2,y:H-6,'text-anchor':'middle'},svg,'angle of attack');
+  el('text',{x:14,y:t+110,transform:`rotate(-90 14 ${t+110})`,'text-anchor':'middle'},svg,'section CL');
+  const line=(pts,col,dash)=>{ const p=pts.filter(q=>q[0]>=a0&&q[0]<=a1).map((q,i)=>(i?'L':'M')+x(q[0]).toFixed(1)+' '+y(q[1]).toFixed(1)).join(''); if(p) el('path',{d:p,fill:'none',stroke:css(col),'stroke-width':2,'stroke-dasharray':dash||''},svg); };
+  line(xf,'--c1'); line(nf,'--c2','6 4');
+  su2.forEach(q=>el('circle',{cx:x(q[0]),cy:y(q[1]),r:5,fill:css('--c4'),stroke:css('--surface'),'stroke-width':2},svg));
+  el('line',{x1:x(12)-10,x2:x(12)+10,y1:y(1.30),y2:y(1.30),stroke:css('--fg'),'stroke-width':2},svg); el('line',{x1:x(12),x2:x(12),y1:y(1.30)-10,y2:y(1.30)+10,stroke:css('--fg'),'stroke-width':2},svg);
+  el('line',{x1:l,x2:W-r,y1:y(AD.CL_max_3D.adopted),y2:y(AD.CL_max_3D.adopted),stroke:css('--warn'),'stroke-dasharray':'2 3'},svg);
+  el('text',{x:W-r-4,y:y(AD.CL_max_3D.adopted)+14,'text-anchor':'end',fill:css('--warn')},svg,'aircraft CL_max '+fmt(AD.CL_max_3D.adopted,2));
+  const key=[['--c1','XFOIL',''],['--c2','NeuralFoil','6 4']]; let kx=l+4;
+  key.forEach(([c,n,d])=>{ el('line',{x1:kx,x2:kx+22,y1:t-14,y2:t-14,stroke:css(c),'stroke-width':2,'stroke-dasharray':d},svg); el('text',{x:kx+28,y:t-10},svg,n); kx+=n.length*7+48; });
+  if(su2.length){ el('circle',{cx:kx+5,cy:t-14,r:5,fill:css('--c4')},svg); el('text',{x:kx+14,y:t-10},svg,'SU2 RANS'); kx+=90; }
+  el('text',{x:kx,y:t-10},svg,'+ wind tunnel, Re 2×10⁵');
+  describe(svg, `NACA 2415 section lift curve at Re ${Math.round(sp.Re/1000)} thousand. XFOIL CL max ${fmt(sp.CL_max,2)} at ${sp.alpha_CLmax_deg} degrees; NeuralFoil ${fmt(sp.neuralfoil_CL_max,2)}; wind tunnel 1.30 at 12 degrees; aircraft trimmed CL max ${fmt(AD.CL_max_3D.adopted,2)}.${su2.length?' SU2 points: '+su2.map(q=>fmt(q[1],2)+' at '+q[0]+' degrees').join(', ')+'.':''}`);
+}
+
+// ---------- build and test summaries (docs/build, docs/test) ----------
+function buildText(){
+  const v=$('#buildVerdict'); if(v) v.innerHTML = `<b>The build is written down to the screw: ${BUILD.wps.length} work packages, ${BUILD.steps} numbered steps, about ${BUILD.total} person-hours of labour and ${BUILD.machine} hours of printer and oven time.</b> Every step lists its parts, fasteners with torque, tools, a measurable check and a time estimate. The printer is the critical path, so printing starts the week Order B arrives. A drill press, soldering station, torque driver and filament dryer are assumed from a campus makerspace; each has a zero-cost fallback in the manual except the soldering station.`;
+  $$('.printHours').forEach(e=>e.textContent=BUILD.machine||'—');
+  const tb=$('#wpTable tbody'); if(tb) BUILD.wps.forEach(w=>tb.insertAdjacentHTML('beforeend', `<tr><td class="n">${w.wp}</td><td>${w.title}</td><td class="n">${fmt(w.labour,0)}</td><td>${w.machine&&w.machine!=='—'?w.machine+' h':'—'}</td></tr>`));
+}
+const SERIES = {C:'Components and coupons: inserts, tube fit, thrust stand, battery, servos, wiring', S:'Structure: wing proof load, boom stiffness and tap test, drop test, mount pull', E:'Electrical and avionics bench: power-up, ESCs, failsafes, telemetry, vibration', G:'Ground: tethered hover, weight and balance, pusher run, assembly time', F:'Flight: hover build-up, transition, cruise performance, failsafes, full mission', I:'Inspection: documents, compliance, configuration'};
+function testText(){
+  const n={}; TESTS.forEach(t=>{ n[t.Series]=(n[t.Series]||0)+1; });
+  const reqs=new Set(); TESTS.forEach(t=>String(t.Requirements||'').split(/[,;\s]+/).forEach(x=>{ if(/^R\d+$/.test(x)) reqs.add(x); }));
+  const v=$('#testVerdict'); if(v) v.innerHTML = `<b>${TESTS.length} tests take the aircraft from incoming parts to the full mission, and every requirement from R1 to R20 has at least one (${reqs.size} covered).</b> Each test states its prediction from the analysis, a numeric pass mark and its prerequisites. ${n.F||0} flight-test cards carry the weather limits, build-up points and abort criteria. R14 (hover motor-out) and R16 (8 m/s gusts) close by analysis and a limited demonstration only.`;
+  const tb=$('#testSeries tbody'); if(tb) Object.keys(SERIES).forEach(k=>{ if(n[k]) tb.insertAdjacentHTML('beforeend', `<tr><td>${k}</td><td class="n">${n[k]}</td><td>${SERIES[k]}</td></tr>`); });
+}
+
+// ---------- measurements: IDs scoped to their chapter (M5.1), plus one list in the overview ----------
+function measurements(){
+  const list=$('#measureList'); let total=0;
+  $$('section.sec').forEach(s=>{ const n=s.dataset.n;
+    s.querySelectorAll('.measure li').forEach((li,k)=>{ const id=li.querySelector('.id'); if(!id) return; const old=id.textContent.trim(); id.textContent='M'+n+'.'+(k+1); li.dataset.old=old; total++;
+      if(list){ const b=li.querySelector('b'); list.insertAdjacentHTML('beforeend', `<li><span class="mid">${id.textContent}</span> <a href="#${s.id}">${b?b.textContent.replace(/\.$/,''):'—'}</a> <span class="mch">${s.dataset.title}</span></li>`); } }); });
+  // "§5 M3" in running text becomes a single "M5.3"
+  $$('a.xref').forEach(x=>{ const nx=x.nextSibling; if(!nx||nx.nodeType!==3) return; const mm=nx.textContent.match(/^\s+M(\d+)/); if(!mm) return;
+    x.textContent='M'+x.textContent.replace('§','')+'.'+mm[1]; nx.textContent=nx.textContent.replace(/^\s+M\d+/,''); });
+  set('measureSum', `${total} measurements are still open. Each sits in the chapter it affects, with how to make it and what result would change the design; the list below gathers them in one place.`);
+}
+// scroll regions and tables get names, so keyboard and screen-reader users can reach and identify them
+function a11yNames(scope){
+  (scope ? [scope] : $$('section.sec')).forEach(s=>{ s.querySelectorAll('.tbl, .svgwrap').forEach(w=>{
+    const h=[...s.querySelectorAll('h3, .sechead h2')].filter(x=>x.compareDocumentPosition(w)&Node.DOCUMENT_POSITION_FOLLOWING).pop();
+    const cap=w.closest('figure')&&w.closest('figure').querySelector('figcaption');
+    const name=(cap?cap.textContent:(h?h.textContent:s.dataset.title)).trim();
+    if(w.scrollWidth>w.clientWidth+1){ w.setAttribute('role','region'); w.setAttribute('tabindex','0'); w.setAttribute('aria-label', name); }
+    const t=w.querySelector('table'); if(t && !t.querySelector('caption') && !t.getAttribute('aria-label')) t.setAttribute('aria-label', name); }); });
+}
+
+// charts redraw at the container width (the bar charts change layout at phone width)
+let rzT=0; window.addEventListener('resize', ()=>{ clearTimeout(rzT); rzT=setTimeout(()=>redrawIn(curSec), 150); });
+
+// printing: shell.js enters report view (every page, disclosures open, paper palette) and calls onShow(null)
+
+// ---------- shop files: inside the claude.ai viewer, plain download links do nothing ----------
+// so links marked data-dl are fetched and offered through the downloads capability (the viewer confirms each save);
+// in the standalone copy, or a viewer without the capability, they stay ordinary links
+(async()=>{ const dl = window.claude && window.claude.use ? await window.claude.use('downloads') : null; if(!dl) return;
+  document.addEventListener('click', async e=>{ const link=e.target.closest('a[data-dl]'); if(!link) return; e.preventDefault();
+    try{ const res=await fetch(link.getAttribute('href')); if(!res.ok) throw new Error('fetch '+res.status); await dl.save({filename:link.dataset.dl, data:await res.blob()}); }
+    catch(err){ if(err && err.code==='declined') return; link.removeAttribute('data-dl'); } }); })();
+
+let curSec=null;
+
 
 // ---------- boot ----------
-numberHeadings(); buildNav(); fill(); derived(); tables(); drawings(); numberFigures(); sortable();
-$$('[data-cad="parts"]').forEach(e=>e.textContent=Object.keys(MESH.parts).length); $$('[data-cad="comps"]').forEach(e=>e.textContent=MESH.comps.length);
+numberHeadings(); buildNav(); xrefs(); fill(); derived(); tables(); hardware(); tradeText(); aeroText(); buildText(); testText(); drawings(); numberFigures(); sortable(); summarise(); measurements(); a11yNames();
+set('cadTris', MESH_META.tris.toLocaleString('en-US')); set('cadComps', MESH_META.comps); set('escHoverA', fmt(s0.I_hover/4,1));
+$$('[data-cad="parts"]').forEach(e=>e.textContent=MESH_META.files); $$('[data-cad="comps"]').forEach(e=>e.textContent=MESH_META.comps);
 $$('main a[href^="#"]').forEach(a=>{ const t=a.textContent.trim(); if(!/^§\s?\d+$/.test(t)) return; const sec=document.getElementById(a.getAttribute('href').slice(1)); const s=sec&&(sec.closest('section.sec')); if(s) a.setAttribute('aria-label', `${t} ${s.dataset.title}`); });
 resetParams(); buildSliders(); renderChain();
 $$('#chainConcept button').forEach(b=>b.addEventListener('click',()=>{ chainKey=b.dataset.c; $$('#chainConcept button').forEach(x=>x.setAttribute('aria-pressed',x===b)); resetParams(); buildSliders(); renderChain(); drawTornado(); }));
-try{ const s=localStorage.getItem('vtolTheme'); if(s) mi=Math.max(0,modes.indexOf(s)); }catch(e){}
-applyTheme(); route();
+Shell.init({ onShow: sec=>{ curSec=sec; redrawIn(sec); a11yNames(sec||undefined); } }); lazyCad(); FlowViz.lazy();
 })();

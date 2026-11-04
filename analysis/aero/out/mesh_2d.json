@@ -1,0 +1,44 @@
+{
+ "L1": {
+  "level": 1,
+  "cells": 55384,
+  "nodes": 30749,
+  "h1": 0.0001,
+  "ratio": 1.25,
+  "nlayers": 22,
+  "bl_thickness": 0.0538101,
+  "n_side": 120,
+  "wake_h": 0.03,
+  "R_far": 60.0,
+  "wall_s": 2.62028,
+  "file": "naca2415_L1.su2"
+ },
+ "L2": {
+  "level": 2,
+  "cells": 130792,
+  "nodes": 70914,
+  "h1": 5e-05,
+  "ratio": 1.2,
+  "nlayers": 30,
+  "bl_thickness": 0.0590941,
+  "n_side": 170,
+  "wake_h": 0.02,
+  "R_far": 60.0,
+  "wall_s": 6.98253,
+  "file": "naca2415_L2.su2"
+ },
+ "L3": {
+  "level": 3,
+  "cells": 267902,
+  "nodes": 144141,
+  "h1": 2.5e-05,
+  "ratio": 1.16,
+  "nlayers": 40,
+  "bl_thickness": 0.0590189,
+  "n_side": 240,
+  "wake_h": 0.014,
+  "R_far": 60.0,
+  "wall_s": 15.3099,
+  "file": "naca2415_L3.su2"
+ }
+}

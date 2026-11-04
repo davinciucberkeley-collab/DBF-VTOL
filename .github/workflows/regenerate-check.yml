@@ -1,0 +1,53 @@
+# Regenerate the analysis and the review page from the committed sources, run the independent checks,
+# and fail if any committed output no longer matches what the sources produce.
+# SOLIDWORKS (CAD, drawings, FEA) and the aero solvers (XFOIL, AVL, SU2) cannot run on a hosted runner;
+# their committed outputs are inputs here, and analysis/verify.py checks the sizing against them.
+name: Regenerate and verify
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  regenerate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Sizing, BOM, vortex lattice, trade study
+        run: |
+          node analysis/sizing.mjs > /dev/null
+          node analysis/export_bom.mjs
+          node analysis/vlm.mjs > /dev/null
+          node analysis/tradestudy.mjs > /dev/null
+
+      - name: Independent checks (analysis/verify.py)
+        run: python analysis/verify.py
+
+      - name: Build the review page and companion documents
+        run: node review/build.mjs
+
+      - name: Committed outputs match the regenerated ones
+        # line endings normalised: export_bom.mjs writes CRLF, the repository stores LF
+        run: |
+          git -c core.autocrlf=input diff --stat --exit-code -- \
+            analysis/results.json analysis/aero.json analysis/tradestudy.json docs/purchasing \
+            review/vtol-review.html review/build-manual.html review/test-plan.html review/flight-software.html review/templates.html \
+            VTOL-Review.html build-manual.html test-plan.html flight-software.html templates.html \
+            || { echo "::error::A committed output is stale: run the pipeline locally (sizing -> export_bom -> vlm -> verify -> tradestudy -> review build) and commit the results."; exit 1; }
+
+      - name: Flight parameter file against ArduPlane metadata (advisory)
+        # downloads ArduPilot's current parameter list, which changes independently of this repo
+        continue-on-error: true
+        run: python firmware/tools/check_params.py firmware/vtol_c0.param

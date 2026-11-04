@@ -1,0 +1,51 @@
+"Vendor","Category","Item","Qty","Unit USD","Ext USD","Source (research file §)","Note","Ordered (Y/N)","Order date","Actual USD"
+"—","Airframe","Polymaker PA6-CF20 500 g (motor mounts: HDT 173 °C)","1","39.99","39.99","AM §2d","PETG too close to motor heat (sec. 12)","","",""
+"—","Airframe","Hot-wire bow, nichrome + bench supply (wing cores)","1","40.00","40.00","EST allowance","not priced; borrow if a makerspace has one","","",""
+"Amazon","Airframe","Scotch heavy-duty packing tape, 6 rolls (skin)","1","19.98","19.98","BF §2 amazon.com","","","",""
+"Amazon","Airframe","Hardware kit: XT90S, wire, extensions, screws, inserts, horns, pushrods, hinge tape, heat shrink, UBEC, epoxy","1","124.01","124.01","BF §3 amazon.com (itemised in file)","","","",""
+"Amazon","Airframe","ELEGOO PETG 1 kg (clamps, pod frames, gear clamps)","2","12.99","25.98","BF §5","","","",""
+"Amazon","Airframe","BNTECHGO 12 AWG silicone wire, 2nd pack (ESC feeds)","1","14.98","14.98","BF §3a item 3 amazon.com","","","",""
+"Amazon","Airframe","14 AWG silicone wire (pusher / BEC feeds)","1","9.99","9.99","BF §3b amazon.com","","","",""
+"Amazon","Airframe","XT60H connectors 12 pairs (boom harness disconnects)","1","6.99","6.99","BF §3b amazon.com","","","",""
+"Amazon","Airframe","300 mm servo extension leads, 2nd pack","1","6.99","6.99","BF §3a item 4 amazon.com","","","",""
+"Amazon","Airframe","Foam-safe glue 4 oz","1","12.99","12.99","BF §3b amazon.com","","","",""
+"Amazon","Airframe","ShareGoo LiPo battery straps (10)","1","7.99","7.99","BF §3b amazon.com","","","",""
+"Amazon","Energy","Ovonic 6S 6500 100C — 2-pack listing (2 packs)","1","138.99","138.99","BE §1 amazon.com","second pack per R7; EC5 leads: re-terminate to XT90S","","",""
+"Amazon","Energy","HTRC C150 charger (150 W, ~6 A on 6S)","1","56.99","56.99","BE §2 amazon.com/dp/B0H4QLJYHY","","","",""
+"Amazon","Lift propulsion","JeeFly 1755 carbon prop (pair)","2","18.60","37.20","BL props amazon.com/dp/B0FJ21V736","$4.99 delivery, likely CN","","",""
+"Amazon","Lift propulsion","SoloGood 45A ESC (4-pack)","2","39.99","79.98","BL ESCs amazon.com","4 lift + pusher + 3 spare; low stock: fallback LANRC 35A","","",""
+"Amazon","Spares","JeeFly 1755 spare pair (amazon.com)","1","18.60","18.60","BL","","","",""
+"Amazon","Spares","Du-Bro 230 pushrod 5-pack (spares)","1","12.48","12.48","BF §3b amazon.com","","","",""
+"Amazon","Test & safety","Tenergy LiPo bag","1","8.99","8.99","BE §3","","","",""
+"Amazon","Test & safety","Watt meter 150 A / 60 V","1","12.99","12.99","BE §3","","","",""
+"Amazon","Test & safety","IR thermometer","1","8.98","8.98","BE §3","","","",""
+"Amazon","Test & safety","20 kg load cell + HX711 kit (thrust stand)","1","8.98","8.98","BE §4","","","",""
+"Amazon","Test & safety","Arduino Nano clone (thrust stand)","1","8.99","8.99","BE §4","","","",""
+"APC Propellers","Cruise propulsion","APC 14x8.5EP pusher prop","3","6.79","20.37","PB 1c","","","",""
+"EMAX USA","Controls","EMAX ES3005HV servo","5","19.99","99.95","BA §6 shop.emax-usa.com","2 ailerons, elevator, 2 rudders","","",""
+"EMAX USA","Spares","EMAX ES3005HV spare servo","1","19.99","19.99","BA §6","","","",""
+"Harbor Freight","Test & safety","Harbor Freight 0.50 cal ammo can (pack storage)","1","19.99","19.99","BE §3","","","",""
+"Holybro (ships CN)","Avionics","Holybro MS5525DSO + PT40 airspeed","1","59.99","59.99","BA §3 holybro.com","ships CN","","",""
+"Home Depot","Airframe","FOAMULAR NGX F-250 2 in x 4 x 8 ft (wing cores)","1","59.97","59.97","BF §2 homedepot.com","","","",""
+"Home Depot","Airframe","FOAMULAR 150 1 in x 4 x 8 ft (tail, pod)","1","30.97","30.97","BF §2 homedepot.com","","","",""
+"OnlineMetals","Airframe","6061-T6 tube 1.000 x 0.035 in x 72 in (booms)","2","26.20","52.40","BF §1 onlinemetals.com","cut list 0.955 + 0.516 + 0.955 + 0.516 m","","",""
+"OnlineMetals","Airframe","6061-T6 tube 1.000 x 0.058 in x 96 in (spar sockets + gear legs)","1","53.97","53.97","BF §1","2 x 0.8 m sockets + 4 x 0.205 m legs + kerf","","",""
+"OnlineMetals","Airframe","6061-T6 tube 0.875 x 0.058 in x 36 in (joiner)","1","18.45","18.45","BF §1","0.76 m joiner, 0.30 m engagement per side; 0.23 mm clearance","","",""
+"RaceDayQuads","Avionics","HGLRC M100-5883 GPS + compass","1","20.49","20.49","BA §2 racedayquads.com","","","",""
+"RaceDayQuads","Avionics","NewBeeDrone BeeID v1.1 Remote ID (FAA DoC RID000001995)","1","36.99","36.99","BA §4 racedayquads.com","","","",""
+"RadioMaster","Avionics","RadioMaster Pocket Crush ELRS","1","64.99","64.99","BA §5 radiomasterrc.com","","","",""
+"RadioMaster","Avionics","RadioMaster RP3 V2 ELRS receiver","1","19.99","19.99","BA §5","","","",""
+"ReadyMadeRC","Avionics","CoreWing F405 Wing APP V2 (12 out, 90 A sensor)","1","67.26","67.26","BA §2 readymaderc.com","ArduPilot target beta-only (4.7.2-beta); fallback Matek F405-WMO $69.99","","",""
+"SunnySky USA","Cruise propulsion","SunnySky X4110S 400KV (pusher)","1","46.99","46.99","BL A3","same motor as lift: one spare covers both","","",""
+"SunnySky USA","Lift propulsion","SunnySky X4110S 400KV","4","46.99","187.96","BL A3 sunnyskyusa.com","","","",""
+"SunnySky USA","Spares","X4110S spare motor (lift or pusher)","1","46.99","46.99","BL","","","",""
+
+"Goods subtotal",,,,,1630.77
+"Sales/use tax 10.25 % (Berkeley, CDTFA 2026-10-01)",,,,,167.15
+"Shipping allowance (estimate)",,,,,100.00
+"Committed spend",,,,,1897.92
+"Crash reserve left under $2,000",,,,,102.08
+
+"Fee outside the hardware cap: FAA registration",,,,,5.00
+"Fee outside the hardware cap: AMA Full membership (1 pilot; $2.5M liability covers UC $1M rule)",,,,,89.00
+"Prices checked 2026-10-13; re-check before ordering. Generated by analysis/export_bom.mjs from analysis/results.json."

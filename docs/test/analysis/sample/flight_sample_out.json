@@ -1,0 +1,181 @@
+{
+ "modes": [
+  {
+   "mode": "QLOITER",
+   "t0": 0.0,
+   "t1": 70.0,
+   "dur_s": 70.0,
+   "lift_pwm_mean": {
+    "C5": 1518.2463768115942,
+    "C6": 1498.2463768115942,
+    "C7": 1508.2463768115942,
+    "C8": 1508.2463768115942
+   },
+   "lift_norm_mean": 0.5082463768115942,
+   "front_rear_split_pct": 1.9675496877584189,
+   "left_right_split_pct": -1.9675496877584189,
+   "lift_stopped_frac": 0.0,
+   "qtun_ThO_mean": 0.5086956521739131,
+   "bat_volt_min": 23.24,
+   "bat_curr_mean": 39.86217391304348,
+   "bat_curr_max": 42.35,
+   "roll_err_max": 2.99,
+   "pitch_err_max": 1.97
+  },
+  {
+   "mode": "FBWA",
+   "t0": 70.0,
+   "t1": 82.0,
+   "dur_s": 12.0,
+   "lift_pwm_mean": {
+    "C5": 1280.5,
+    "C6": 1280.5,
+    "C7": 1280.5,
+    "C8": 1280.5
+   },
+   "lift_norm_mean": 0.2805,
+   "front_rear_split_pct": 0.0,
+   "left_right_split_pct": 0.0,
+   "lift_stopped_frac": 0.0,
+   "qtun_ThO_mean": 0.4000000000000001,
+   "transition_ms_max": 11000.0,
+   "bat_volt_min": 22.36,
+   "bat_curr_mean": 51.666666666666664,
+   "bat_curr_max": 70.0,
+   "roll_err_max": 2.87,
+   "pitch_err_max": 1.75,
+   "airspeed": {
+    "n": 12,
+    "mean": 9.333333333333334,
+    "min": 2.0,
+    "max": 16.67
+   },
+   "groundspeed": {
+    "n": 12,
+    "mean": 7.333333333333333,
+    "min": 0.0,
+    "max": 14.67
+   },
+   "airspeed_over_gps": 1.272727272727273
+  },
+  {
+   "mode": "CRUISE",
+   "t0": 82.0,
+   "t1": 702.0,
+   "dur_s": 620.0,
+   "lift_pwm_mean": {
+    "C5": 1000.0,
+    "C6": 1000.0,
+    "C7": 1000.0,
+    "C8": 1000.0
+   },
+   "lift_norm_mean": 0.0,
+   "front_rear_split_pct": null,
+   "left_right_split_pct": null,
+   "lift_stopped_frac": 1.0,
+   "bat_volt_min": 22.14,
+   "bat_curr_mean": 14.502048387096774,
+   "bat_curr_max": 15.5,
+   "roll_err_max": 2.99,
+   "pitch_err_max": 1.9900000000000002,
+   "airspeed": {
+    "n": 620,
+    "mean": 19.998645161290323,
+    "min": 19.2,
+    "max": 20.8
+   },
+   "groundspeed": {
+    "n": 620,
+    "mean": 17.997887096774193,
+    "min": 16.93,
+    "max": 19.02
+   },
+   "airspeed_over_gps": 1.1111662748942752
+  },
+  {
+   "mode": "QLOITER",
+   "t0": 702.0,
+   "t1": 762.0,
+   "dur_s": 60.0,
+   "lift_pwm_mean": {
+    "C5": 1519.1666666666667,
+    "C6": 1499.1666666666667,
+    "C7": 1509.1666666666667,
+    "C8": 1509.1666666666667
+   },
+   "lift_norm_mean": 0.5091666666666668,
+   "front_rear_split_pct": 1.9639934533551553,
+   "left_right_split_pct": -1.9639934533551553,
+   "lift_stopped_frac": 0.0,
+   "qtun_ThO_mean": 0.5097166666666667,
+   "bat_volt_min": 20.9,
+   "bat_curr_mean": 39.86683333333333,
+   "bat_curr_max": 42.01,
+   "roll_err_max": 2.98,
+   "pitch_err_max": 2.0
+  },
+  {
+   "mode": "QLAND",
+   "t0": 762.0,
+   "t1": 781.0,
+   "dur_s": 19.0,
+   "lift_pwm_mean": {
+    "C5": 1450.0,
+    "C6": 1430.0,
+    "C7": 1440.0,
+    "C8": 1440.0
+   },
+   "lift_norm_mean": 0.44,
+   "front_rear_split_pct": 2.272727272727273,
+   "left_right_split_pct": -2.272727272727273,
+   "lift_stopped_frac": 0.0,
+   "qtun_ThO_mean": 0.43999999999999995,
+   "bat_volt_min": 20.95,
+   "bat_curr_mean": 34.49473684210526,
+   "bat_curr_max": 35.49,
+   "roll_err_max": 2.98,
+   "pitch_err_max": 1.95
+  }
+ ],
+ "hover": {
+  "total_s": 149.0,
+  "ThO_mean": 0.48613743961352657,
+  "lift_norm_mean": 0.485804347826087,
+  "front_rear_split_pct": 2.272727272727273
+ },
+ "cruise": {
+  "total_s": 632.0,
+  "transition_s": 11.0,
+  "transition_seg": "FBWA",
+  "lift_stopped_frac_min": 1.0,
+  "curr_mean": 14.502048387096774
+ },
+ "vibe": {
+  "x_max": 12.0,
+  "y_max": 10.99,
+  "z_max": 16.99,
+  "clip_final": [
+   0.0,
+   0.0,
+   0.0
+  ],
+  "pass": true
+ },
+ "battery": {
+  "volt_min": 20.9,
+  "curr_max": 70.0,
+  "currtot_mah": 4291.4,
+  "enrgtot_wh": 97.57,
+  "remaining_frac": 0.33978461538461546
+ },
+ "airspeed": {},
+ "attitude": {
+  "err_max": 2.99,
+  "pass_": true
+ },
+ "r10": {
+  "hover_ge_120s": true,
+  "cruise_ge_600s": true,
+  "reserve_ge_20pct": true
+ }
+}

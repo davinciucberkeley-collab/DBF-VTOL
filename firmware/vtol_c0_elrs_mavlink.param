@@ -1,0 +1,21 @@
+#
+# vtol_c0_elrs_mavlink.param  -  overlay: switch the RP3 V2 link from CRSF to ELRS MAVLink mode (load AFTER vtol_c0.param)
+#
+# Gives a $0 Mission Planner link through the Pocket Crush backpack WiFi (UDP 14550). See peripherals.md 2.3-2.4.
+# Requires ELRS >= 3.5.0 on TX and RX and TX "Link Mode" = MAVLink. Reboot after loading.
+# Sources (checked 2026-10-21): [EL] https://www.expresslrs.org/software/mavlink/ ; [PD] apm.pdef.xml.
+# Revert: reload vtol_c0.param (SERIAL6_PROTOCOL 23, RSSI_TYPE 3), Link Mode Normal, reboot.
+#
+SERIAL6_PROTOCOL,2        # MAVLink2 on UART6 instead of RCIN; RC arrives as RC_CHANNELS_OVERRIDE from the RX [EL; ExpressLRS SerialMavlink.cpp]
+SERIAL6_BAUD,460          # 460800, per [EL] (ArduPilot common-tbs-rc.html shows 115; ELRS value used)
+RSSI_TYPE,5               # TelemetryRadioRSSI from the RX RADIO_STATUS [EL; PD]
+MAV6_RAW_SENS,1           # stream rates 1 Hz on the ELRS port [EL]
+MAV6_EXT_STAT,1           # [EL]
+MAV6_RC_CHAN,1            # [EL]
+MAV6_RAW_CTRL,0           # keep 0 [EL]
+MAV6_POSITION,1           # [EL]
+MAV6_EXTRA1,1             # [EL]
+MAV6_EXTRA2,1             # [EL]
+MAV6_EXTRA3,1             # [EL]
+MAV6_PARAMS,0             # keep 0 [EL]
+MAV6_ADSB,0               # keep 0 [EL]

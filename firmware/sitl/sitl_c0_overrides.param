@@ -1,0 +1,27 @@
+#
+# sitl_c0_overrides.param  -  load AFTER vtol_c0.param when running ArduPilot SITL with the C0 physics
+# model (--model JSON:127.0.0.1, physics in firmware/sitl/c0_physics.py).
+#
+# Unlike sitl_overrides.param (generic "quadplane" model), NO output remap is needed: c0_physics.py reads
+# SERVOn_FUNCTION from the parameter files, so the real output map of vtol_c0.param section 2 is flown
+# (ailerons S1-S2, elevator S3, rudders S4+S11, lift motors S5-S8, pusher S9). Only board-only items
+# (DShot, BLHeli passthrough, CoreWing ADC pins and UART map, the MS5525 airspeed driver) are replaced by
+# SITL equivalents. Values marked "SITL default" come from a parameter dump of the ArduPlane 4.7.2 SITL
+# binary (firmware/sitl/README.md, 2026-10-21). Nothing here is for the real aircraft.
+#
+Q_M_PWM_TYPE,0            # normal PWM in SITL (DShot is a hardware output type); PWM 1000-2000 -> model throttle 0-1
+SERVO_BLH_MASK,0          # no BLHeli in SITL
+SERVO_BLH_OTYPE,0         # no BLHeli in SITL
+SERVO_DSHOT_ESC,0         # SITL default
+ARSPD_TYPE,100            # SITL simulated airspeed sensor; the model sends true airspeed in the JSON "airspeed" field
+ARSPD_BUS,1               # SITL default
+BATT_VOLT_PIN,13          # SITL default analog pin
+BATT_CURR_PIN,12          # SITL default analog pin
+BATT_VOLT_MULT,10.1       # SITL default
+BATT_AMP_PERVLT,17        # SITL default
+SIM_BATT_VOLTAGE,25.2     # fallback only: the model sends its own battery voltage/current (JSON "battery")
+SIM_BATT_CAP_AH,6.5       # fallback only, as above
+SERIAL3_PROTOCOL,5        # SITL GPS port (SITL default)
+SERIAL4_PROTOCOL,5        # SITL default
+SERIAL5_PROTOCOL,-1       # SITL default
+SERIAL6_PROTOCOL,-1       # SITL default

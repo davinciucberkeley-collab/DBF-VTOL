@@ -14,10 +14,13 @@ not a narrative essay and not a line-by-line code walkthrough.
 ## Format and layout
 - One self-contained HTML page. Inline CSS and JS; any 3D model and data are
   embedded in the page.
-- Layout: sticky section index on the left at >= 1100 px (current section
-  expands to show its subsections); below that, a sticky horizontally
-  scrolling tab bar. One section shown at a time. Each section ends with an
-  in-section index and previous / next cards.
+- Layout (VTOL revision 2026-10-21, client-facing): one continuous report.
+  Cover with title block and document control, a numbered contents page, and
+  a thin running head naming the current section once the contents scroll
+  away. Sections follow in order as chapters; each leads with its verdict,
+  key figures and charts, and long tables or supporting facts fold behind
+  labelled disclosures. (The original gripper spec used a sticky left index
+  and one section at a time.)
 - Light and dark themes via CSS tokens on `:root`, dark under
   `prefers-color-scheme` plus `[data-theme]` overrides.
 - Palette (VTOL revision 2026-10-13, client-facing): ink on near-white paper, cool-neutral

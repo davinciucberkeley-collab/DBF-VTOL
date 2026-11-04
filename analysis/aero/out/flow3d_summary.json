@@ -1,0 +1,56 @@
+{
+ "generated": "2026-10-25 04:42",
+ "tool": "AeroSandbox 4.2.10 VortexLatticeMethod (PyPI, checked 2026-10-21)",
+ "script": "analysis/aero/flowfield_3d.py",
+ "model": "wing + H-tail + twin fins from asb_model.airplane(); pod ignored by the VLM; no control-surface deflection; inviscid potential flow (no separation)",
+ "condition": {
+  "V_mps": 20,
+  "alpha_deg": 2.86416,
+  "alpha_source": "aero_results.json trim_cruise.alpha_deg (AVL trim at cruise CL)",
+  "CL_vlm": 0.410798,
+  "CDi_vlm": 0.00636672,
+  "Cm_vlm": -0.0771124
+ },
+ "frame": "CAD / review viewer frame: X forward from the wing leading edge, Y up, Z right (starboard), metres",
+ "lattice": {
+  "spanwise_per_side": 24,
+  "chordwise": 8,
+  "vortex_core_radius_m": 0.004
+ },
+ "streamlines_note": "RK4 along the unit velocity direction, step 0.005 m, 400 steps, every 5th point kept; xyz is a flat list [X0,Y0,Z0, X1,Y1,Z1, ...]; s is |V|/Vinf at each kept point",
+ "downwash_at_htail": {
+  "x_cad": -0.841357,
+  "epsilon_deg_mean": -1.67436,
+  "epsilon_deg_by_y": [
+   -1.623,
+   -1.633,
+   -1.651,
+   -1.657,
+   -1.635,
+   -1.59,
+   -1.821,
+   -1.785
+  ],
+  "y_stations_m": [
+   0.05,
+   0.102,
+   0.154,
+   0.206,
+   0.258,
+   0.31,
+   0.362,
+   0.414
+  ],
+  "note": "wing-only lattice: local flow-angle change at the H-tail quarter chord relative to the free stream (negative = downwash)"
+ },
+ "n_streamlines": 120,
+ "panels_per_surface": {
+  "wing": 384,
+  "htail": 384,
+  "fin": 384
+ },
+ "speed_ratio_range": [
+  0.93587,
+  1.077
+ ]
+}

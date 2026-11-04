@@ -1,1013 +1,1264 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-19T04:15:51.488Z",
-  "title": "Design System: Design-Build-Fly Design Review",
+  "generatedAt": "2026-10-25T04:31:16.216Z",
+  "title": "Design System: Design-Build-Fly Review Platform",
   "extensions": {
     "colorMeta": {
-      "international-orange": {
+      "signal-blue": {
         "role": "primary",
-        "displayName": "International Orange",
-        "canonical": "#b8481b",
+        "displayName": "Signal Blue",
+        "canonical": "#5B9DFF",
         "tonalRamp": [
-          "#270000",
-          "#4d0000",
-          "#751b00",
-          "#9f3603",
-          "#c6562c",
-          "#e47e5a",
-          "#ffad8e",
-          "#ffd9be"
+          "#000923",
+          "#002253",
+          "#013d8a",
+          "#1b5dba",
+          "#4081e0",
+          "#6aa5fe",
+          "#a9cbff",
+          "#e5efff"
         ]
       },
-      "international-orange-deep": {
+      "signal-blue-hover": {
         "role": "primary",
-        "displayName": "International Orange Deep",
-        "canonical": "#963a14",
+        "displayName": "Signal Blue Hover",
+        "canonical": "#8AB8FF",
         "tonalRamp": [
-          "#270000",
-          "#4c0000",
-          "#751b00",
-          "#993d17",
-          "#be5e3b",
-          "#e37f5c",
-          "#ffad8d",
-          "#ffd9be"
+          "#000923",
+          "#002155",
+          "#17407d",
+          "#3760a1",
+          "#5783c6",
+          "#79a6ec",
+          "#a9cbff",
+          "#e5efff"
         ]
       },
-      "international-orange-wash": {
+      "signal-blue-wash": {
         "role": "primary",
-        "displayName": "International Orange Wash",
-        "canonical": "#f7ece6",
+        "displayName": "Signal Blue Wash",
+        "canonical": "#15243A",
         "tonalRamp": [
-          "#100906",
-          "#2a221e",
-          "#463e39",
-          "#655b56",
-          "#857b76",
-          "#a69c97",
-          "#cfc5bf",
-          "#f7ece6"
+          "#010a1e",
+          "#16253b",
+          "#32435b",
+          "#51627c",
+          "#71849f",
+          "#93a6c3",
+          "#b7cbe8",
+          "#e5effe"
         ]
       },
-      "international-orange-rule": {
+      "signal-blue-rule": {
         "role": "primary",
-        "displayName": "International Orange Rule",
-        "canonical": "#e4bfae",
+        "displayName": "Signal Blue Rule",
+        "canonical": "#2C4D7D",
         "tonalRamp": [
-          "#1b0400",
-          "#371c0e",
-          "#553829",
-          "#755546",
-          "#967565",
-          "#b99685",
-          "#e3bead",
-          "#ffe5d4"
+          "#000a22",
+          "#03234f",
+          "#214271",
+          "#406294",
+          "#6084b8",
+          "#82a7dd",
+          "#a8cbfe",
+          "#e5efff"
         ]
       },
-      "drafting-ink": {
-        "role": "neutral",
-        "displayName": "Drafting Ink",
-        "canonical": "#16191d",
+      "on-signal": {
+        "role": "primary",
+        "displayName": "On Signal",
+        "canonical": "#0E1116",
         "tonalRamp": [
-          "#090b0f",
-          "#212428",
-          "#3d4045",
-          "#5a5e63",
-          "#7a7e83",
-          "#9b9fa4",
-          "#c3c8cd",
-          "#eaeff5"
+          "#080b10",
+          "#22252b",
+          "#3f4248",
+          "#5e6168",
+          "#7e8389",
+          "#a1a5ac",
+          "#c5c9d1",
+          "#eaeff6"
         ]
       },
-      "ink-graphite": {
+      "night-graphite": {
         "role": "neutral",
-        "displayName": "Ink Graphite",
-        "canonical": "#474e57",
+        "displayName": "Night Graphite",
+        "canonical": "#0E1116",
         "tonalRamp": [
-          "#060c12",
-          "#1e252d",
-          "#3a4049",
-          "#575e68",
-          "#767e88",
-          "#979fa9",
-          "#c0c8d3",
-          "#e7effa"
+          "#080b10",
+          "#22252b",
+          "#3f4248",
+          "#5e6168",
+          "#7e8389",
+          "#a1a5ac",
+          "#c5c9d1",
+          "#eaeff6"
         ]
       },
-      "ink-pencil": {
+      "panel-graphite": {
         "role": "neutral",
-        "displayName": "Ink Pencil",
-        "canonical": "#6c737c",
+        "displayName": "Panel Graphite",
+        "canonical": "#151A21",
         "tonalRamp": [
-          "#070c12",
-          "#1f252c",
-          "#3a4048",
-          "#575e67",
-          "#777e87",
-          "#989fa9",
-          "#c0c8d2",
-          "#e7effa"
+          "#070b12",
+          "#20252d",
+          "#3d424b",
+          "#5c626a",
+          "#7c838c",
+          "#9fa6af",
+          "#c3cad4",
+          "#e8eff9"
         ]
       },
-      "vellum": {
+      "raised-graphite": {
         "role": "neutral",
-        "displayName": "Vellum",
-        "canonical": "#fbfbfa",
+        "displayName": "Raised Graphite",
+        "canonical": "#1C222B",
         "tonalRamp": [
-          "#0b0b0b",
-          "#242423",
-          "#40403f",
-          "#5e5e5d",
-          "#7d7d7c",
-          "#9e9e9d",
-          "#c7c7c6",
-          "#eeeeed"
+          "#070b13",
+          "#1f252f",
+          "#3c424c",
+          "#5b626c",
+          "#7b838e",
+          "#9ea6b1",
+          "#c2cad6",
+          "#e7effc"
         ]
       },
-      "sheet-white": {
+      "pressed-graphite": {
         "role": "neutral",
-        "displayName": "Sheet White",
-        "canonical": "#ffffff",
+        "displayName": "Pressed Graphite",
+        "canonical": "#242B35",
         "tonalRamp": [
-          "#0b0b0b",
-          "#242424",
-          "#404040",
-          "#5d5d5d",
-          "#7d7d7d",
-          "#9e9e9e",
-          "#c7c7c7",
-          "#eeeeee"
-        ]
-      },
-      "sheet-tint": {
-        "role": "neutral",
-        "displayName": "Sheet Tint",
-        "canonical": "#f4f5f6",
-        "tonalRamp": [
-          "#0b0b0c",
-          "#232425",
-          "#3f4041",
-          "#5d5e5e",
-          "#7c7d7e",
-          "#9d9e9f",
-          "#c6c7c8",
-          "#edeeef"
-        ]
-      },
-      "sheet-tint-2": {
-        "role": "neutral",
-        "displayName": "Sheet Tint 2",
-        "canonical": "#eceef0",
-        "tonalRamp": [
-          "#0a0b0d",
-          "#232426",
-          "#3e4041",
-          "#5c5e5f",
-          "#7c7d7f",
-          "#9d9fa0",
-          "#c5c7c9",
-          "#edeff1"
+          "#060b14",
+          "#1f262f",
+          "#3b434d",
+          "#5a626d",
+          "#7b838f",
+          "#9da6b2",
+          "#c1cad7",
+          "#e6effd"
         ]
       },
       "hairline": {
         "role": "neutral",
         "displayName": "Hairline",
-        "canonical": "#e3e5e8",
+        "canonical": "#20262F",
         "tonalRamp": [
-          "#0a0b0d",
-          "#232426",
-          "#3e4042",
-          "#5c5e60",
-          "#7b7d80",
-          "#9d9ea1",
-          "#c5c7ca",
-          "#edeff2"
+          "#070b13",
+          "#1f252e",
+          "#3c424c",
+          "#5b626c",
+          "#7b838e",
+          "#9ea6b1",
+          "#c2cad6",
+          "#e7effc"
         ]
       },
-      "frame-rule": {
+      "divider": {
         "role": "neutral",
-        "displayName": "Frame Rule",
-        "canonical": "#cbcfd4",
+        "displayName": "Divider",
+        "canonical": "#2A313C",
+        "tonalRamp": [
+          "#060b14",
+          "#1f2530",
+          "#3b424e",
+          "#5a626e",
+          "#7b8390",
+          "#9da6b3",
+          "#c1cad8",
+          "#e6effe"
+        ]
+      },
+      "strong-rule": {
+        "role": "neutral",
+        "displayName": "Strong Rule",
+        "canonical": "#3A4250",
+        "tonalRamp": [
+          "#060b16",
+          "#1e2532",
+          "#3a4250",
+          "#596271",
+          "#7a8393",
+          "#9ca6b6",
+          "#c0cadb",
+          "#e6effe"
+        ]
+      },
+      "text-primary": {
+        "role": "neutral",
+        "displayName": "Text Primary",
+        "canonical": "#E6EAF0",
         "tonalRamp": [
           "#090b0f",
-          "#212428",
-          "#3d4044",
-          "#5a5e62",
-          "#7a7e82",
-          "#9b9fa3",
-          "#c4c8cd",
-          "#ebeff4"
+          "#22252a",
+          "#3f4247",
+          "#5e6167",
+          "#7f8388",
+          "#a2a5ab",
+          "#c5c9cf",
+          "#ebeff5"
         ]
       },
-      "construction-line": {
+      "text-secondary": {
         "role": "neutral",
-        "displayName": "Construction Line",
-        "canonical": "#9ea4ac",
+        "displayName": "Text Secondary",
+        "canonical": "#A3ADBA",
         "tonalRamp": [
-          "#080b11",
-          "#20242b",
-          "#3b4047",
-          "#595e65",
-          "#787e85",
-          "#999fa7",
-          "#c2c8d0",
-          "#e9eff8"
+          "#050c14",
+          "#1e2630",
+          "#3a434e",
+          "#59626e",
+          "#7a8390",
+          "#9ca6b3",
+          "#c0cad8",
+          "#e5f0fd"
+        ]
+      },
+      "text-tertiary": {
+        "role": "neutral",
+        "displayName": "Text Tertiary",
+        "canonical": "#828C9A",
+        "tonalRamp": [
+          "#050b15",
+          "#1e2631",
+          "#3a434f",
+          "#59626f",
+          "#798391",
+          "#9ca6b4",
+          "#bfcad9",
+          "#e5effe"
         ]
       },
       "status-met": {
         "role": "tertiary",
         "displayName": "Status Met",
-        "canonical": "#23744a",
+        "canonical": "#5FD3A2",
         "tonalRamp": [
-          "#001500",
-          "#00310c",
-          "#004f28",
-          "#1c6e45",
-          "#428f64",
-          "#64b284",
-          "#8edcac",
-          "#b9ffd4"
+          "#000f07",
+          "#012d1d",
+          "#034f36",
+          "#017350",
+          "#0f9a6c",
+          "#47be8e",
+          "#70e3b1",
+          "#c2ffe1"
         ]
       },
       "status-met-wash": {
         "role": "tertiary",
         "displayName": "Status Met Wash",
-        "canonical": "#e7f2ec",
+        "canonical": "#10301F",
         "tonalRamp": [
-          "#060d09",
-          "#1e2622",
-          "#39423d",
-          "#57605b",
-          "#76807b",
-          "#97a19c",
-          "#c0cac4",
-          "#e7f2ec"
+          "#000f06",
+          "#0c2c1b",
+          "#2a4a38",
+          "#496a56",
+          "#6a8c77",
+          "#8caf99",
+          "#afd3bd",
+          "#d4f9e2"
         ]
       },
       "status-risk": {
         "role": "tertiary",
         "displayName": "Status Risk",
-        "canonical": "#94600a",
+        "canonical": "#F0C46E",
         "tonalRamp": [
-          "#210000",
-          "#431400",
-          "#623200",
-          "#845100",
-          "#a67125",
-          "#c9924a",
-          "#f5bb73",
-          "#ffe4a7"
+          "#120a00",
+          "#322200",
+          "#563d00",
+          "#7d5b04",
+          "#a47b1c",
+          "#c89e47",
+          "#eec26c",
+          "#ffeccb"
         ]
       },
       "status-risk-wash": {
         "role": "tertiary",
         "displayName": "Status Risk Wash",
-        "canonical": "#f6efe1",
+        "canonical": "#33270F",
         "tonalRamp": [
-          "#0f0a03",
-          "#292319",
-          "#453f34",
-          "#635d51",
-          "#837d70",
-          "#a49e91",
-          "#cdc7b9",
-          "#f5eee0"
+          "#120a00",
+          "#2f230b",
+          "#4d4028",
+          "#6d5f46",
+          "#8f8066",
+          "#b2a388",
+          "#d7c7ab",
+          "#fcedd0"
         ]
       },
       "status-fail": {
         "role": "tertiary",
         "displayName": "Status Fail",
-        "canonical": "#ad2a1f",
+        "canonical": "#F59393",
         "tonalRamp": [
-          "#280000",
-          "#4d0000",
-          "#76160f",
-          "#a13126",
-          "#c85244",
-          "#e67b6c",
-          "#ffaa9b",
-          "#ffd7c9"
+          "#1f0002",
+          "#4c010e",
+          "#741f26",
+          "#994144",
+          "#bf6364",
+          "#e68586",
+          "#ffb2b1",
+          "#ffe8e8"
         ]
       },
       "status-fail-wash": {
         "role": "tertiary",
         "displayName": "Status Fail Wash",
-        "canonical": "#f8e9e7",
+        "canonical": "#391B1D",
         "tonalRamp": [
-          "#120908",
-          "#2c2120",
-          "#483d3b",
-          "#675a59",
-          "#877a78",
-          "#a99b99",
-          "#d2c3c2",
-          "#faebe9"
-        ]
-      },
-      "status-open": {
-        "role": "tertiary",
-        "displayName": "Status Open",
-        "canonical": "#57489a",
-        "tonalRamp": [
-          "#0e0030",
-          "#251256",
-          "#402e7e",
-          "#5d4ea1",
-          "#7b6ec4",
-          "#9c90e9",
-          "#c4bbff",
-          "#ebe5ff"
-        ]
-      },
-      "status-open-wash": {
-        "role": "tertiary",
-        "displayName": "Status Open Wash",
-        "canonical": "#efedf6",
-        "tonalRamp": [
-          "#0c0a10",
-          "#242329",
-          "#403e46",
-          "#5e5c64",
-          "#7e7c84",
-          "#9f9da5",
-          "#c8c6ce",
-          "#efedf6"
-        ]
-      },
-      "status-open-frame": {
-        "role": "tertiary",
-        "displayName": "Status Open Frame",
-        "canonical": "#a49ec5",
-        "tonalRamp": [
-          "#0d0520",
-          "#251e3d",
-          "#403a5b",
-          "#5e587b",
-          "#7d779d",
-          "#9f99bf",
-          "#c7c1ea",
-          "#efe8ff"
+          "#1b0305",
+          "#391b1d",
+          "#593839",
+          "#7a5658",
+          "#9d7778",
+          "#c19a9b",
+          "#e7bdbe",
+          "#fee9e9"
         ]
       },
       "status-fail-frame": {
         "role": "tertiary",
         "displayName": "Status Fail Frame",
-        "canonical": "#c57e79",
+        "canonical": "#7A3A3D",
         "tonalRamp": [
-          "#260000",
-          "#460a0d",
-          "#672928",
-          "#894844",
-          "#ac6763",
-          "#d08883",
-          "#fcb1ab",
-          "#ffd8d1"
+          "#1f0003",
+          "#470b13",
+          "#692b2f",
+          "#8d4b4d",
+          "#b26c6d",
+          "#d78e8f",
+          "#feb2b3",
+          "#fee9e8"
         ]
       },
-      "international-orange-dark": {
-        "role": "primary",
-        "displayName": "International Orange (dark)",
-        "canonical": "#ec8a58",
-        "tonalRamp": [
-          "#260000",
-          "#4b0200",
-          "#731e00",
-          "#983e00",
-          "#bd5f2c",
-          "#e2814f",
-          "#ffb086",
-          "#ffdbb8"
-        ]
-      },
-      "international-orange-deep-dark": {
-        "role": "primary",
-        "displayName": "International Orange Deep (dark)",
-        "canonical": "#f4a77f",
-        "tonalRamp": [
-          "#260000",
-          "#490800",
-          "#6a2900",
-          "#8c4821",
-          "#b06842",
-          "#d48a62",
-          "#ffb28a",
-          "#ffdcb6"
-        ]
-      },
-      "international-orange-wash-dark": {
-        "role": "primary",
-        "displayName": "International Orange Wash (dark)",
-        "canonical": "#2b1e17",
-        "tonalRamp": [
-          "#130804",
-          "#2e211a",
-          "#4b3c35",
-          "#695a52",
-          "#8a7971",
-          "#ac9a91",
-          "#d5c3ba",
-          "#fdeae1"
-        ]
-      },
-      "international-orange-rule-dark": {
-        "role": "primary",
-        "displayName": "International Orange Rule (dark)",
-        "canonical": "#6b3d27",
-        "tonalRamp": [
-          "#210000",
-          "#3f1500",
-          "#5f321c",
-          "#80503a",
-          "#a27058",
-          "#c59078",
-          "#f0b9a0",
-          "#ffe0c6"
-        ]
-      },
-      "drafting-ink-dark": {
-        "role": "neutral",
-        "displayName": "Drafting Ink (dark)",
-        "canonical": "#e6e8ea",
-        "tonalRamp": [
-          "#0a0b0d",
-          "#232426",
-          "#3e4041",
-          "#5c5e5f",
-          "#7c7d7f",
-          "#9d9fa0",
-          "#c5c7c9",
-          "#edeff1"
-        ]
-      },
-      "ink-graphite-dark": {
-        "role": "neutral",
-        "displayName": "Ink Graphite (dark)",
-        "canonical": "#b2b8bf",
-        "tonalRamp": [
-          "#080c10",
-          "#20242a",
-          "#3b4046",
-          "#595e64",
-          "#787e84",
-          "#999fa6",
-          "#c2c8cf",
-          "#e9eff7"
-        ]
-      },
-      "ink-pencil-dark": {
-        "role": "neutral",
-        "displayName": "Ink Pencil (dark)",
-        "canonical": "#89909a",
-        "tonalRamp": [
-          "#070b12",
-          "#1f242c",
-          "#3a4049",
-          "#585e67",
-          "#777e88",
-          "#989fa9",
-          "#c0c8d3",
-          "#e7effa"
-        ]
-      },
-      "vellum-dark": {
-        "role": "neutral",
-        "displayName": "Vellum (dark)",
-        "canonical": "#111315",
-        "tonalRamp": [
-          "#090b0d",
-          "#222426",
-          "#3e4042",
-          "#5b5e60",
-          "#7b7e80",
-          "#9c9fa1",
-          "#c5c8ca",
-          "#eceff2"
-        ]
-      },
-      "sheet-white-dark": {
-        "role": "neutral",
-        "displayName": "Sheet White (dark)",
-        "canonical": "#16191c",
-        "tonalRamp": [
-          "#090b0e",
-          "#212428",
-          "#3d4044",
-          "#5a5e62",
-          "#7a7e82",
-          "#9b9fa3",
-          "#c4c8cc",
-          "#ebeff3"
-        ]
-      },
-      "sheet-tint-dark": {
-        "role": "neutral",
-        "displayName": "Sheet Tint (dark)",
-        "canonical": "#1c2024",
-        "tonalRamp": [
-          "#080c0f",
-          "#202529",
-          "#3c4045",
-          "#595e63",
-          "#797e83",
-          "#9a9fa4",
-          "#c3c8cd",
-          "#eaeff5"
-        ]
-      },
-      "sheet-tint-2-dark": {
-        "role": "neutral",
-        "displayName": "Sheet Tint 2 (dark)",
-        "canonical": "#23282d",
-        "tonalRamp": [
-          "#070c10",
-          "#20252a",
-          "#3b4046",
-          "#595e64",
-          "#787e84",
-          "#999fa6",
-          "#c2c8cf",
-          "#e9eff6"
-        ]
-      },
-      "zebra-dark": {
-        "role": "neutral",
-        "displayName": "Zebra Dark",
-        "canonical": "#181b1e",
-        "tonalRamp": [
-          "#090b0e",
-          "#212428",
-          "#3d4044",
-          "#5a5e62",
-          "#7a7e82",
-          "#9b9fa3",
-          "#c4c8cc",
-          "#ebeff3"
-        ]
-      },
-      "hairline-dark": {
-        "role": "neutral",
-        "displayName": "Hairline (dark)",
-        "canonical": "#2a2f35",
-        "tonalRamp": [
-          "#070c11",
-          "#20242a",
-          "#3b4047",
-          "#595e65",
-          "#787e85",
-          "#999fa6",
-          "#c2c8d0",
-          "#e9eff7"
-        ]
-      },
-      "frame-rule-dark": {
-        "role": "neutral",
-        "displayName": "Frame Rule (dark)",
-        "canonical": "#3a4048",
-        "tonalRamp": [
-          "#070b12",
-          "#1f242c",
-          "#3a4048",
-          "#585e67",
-          "#777e87",
-          "#989fa8",
-          "#c1c8d2",
-          "#e8eff9"
-        ]
-      },
-      "construction-line-dark": {
-        "role": "neutral",
-        "displayName": "Construction Line (dark)",
-        "canonical": "#5f6670",
-        "tonalRamp": [
-          "#070b13",
-          "#1f242d",
-          "#3a4049",
-          "#575e68",
-          "#777e88",
-          "#979faa",
-          "#c0c8d3",
-          "#e7effb"
-        ]
-      },
-      "status-met-dark": {
+      "status-open": {
         "role": "tertiary",
-        "displayName": "Status Met (dark)",
-        "canonical": "#6cc595",
+        "displayName": "Status Open",
+        "canonical": "#B9AEFF",
         "tonalRamp": [
-          "#001500",
-          "#00320c",
-          "#005028",
-          "#007045",
-          "#359164",
-          "#5ab384",
-          "#84deac",
-          "#b7ffd7"
+          "#0e002c",
+          "#271357",
+          "#433479",
+          "#61549d",
+          "#8176c2",
+          "#a498e8",
+          "#c7c0fe",
+          "#eeecfe"
         ]
       },
-      "status-met-wash-dark": {
+      "status-open-wash": {
         "role": "tertiary",
-        "displayName": "Status Met Wash (dark)",
-        "canonical": "#15261d",
+        "displayName": "Status Open Wash",
+        "canonical": "#251F45",
         "tonalRamp": [
-          "#020f07",
-          "#17281f",
-          "#33453b",
-          "#506358",
-          "#6f8377",
-          "#90a498",
-          "#b8cdc1",
-          "#dff5e8"
+          "#0c0326",
+          "#241e44",
+          "#403c64",
+          "#5f5b86",
+          "#807caa",
+          "#a29fce",
+          "#c6c3f4",
+          "#edecff"
         ]
       },
-      "status-risk-dark": {
+      "status-open-frame": {
         "role": "tertiary",
-        "displayName": "Status Risk (dark)",
-        "canonical": "#dcae5a",
+        "displayName": "Status Open Frame",
+        "canonical": "#4A4290",
         "tonalRamp": [
-          "#1e0200",
-          "#3f1800",
-          "#5e3600",
-          "#7e5400",
-          "#a07516",
-          "#c39641",
-          "#eebf6c",
-          "#ffe8a4"
-        ]
-      },
-      "status-risk-wash-dark": {
-        "role": "tertiary",
-        "displayName": "Status Risk Wash (dark)",
-        "canonical": "#2a2213",
-        "tonalRamp": [
-          "#110a01",
-          "#2b2314",
-          "#473f2f",
-          "#665c4c",
-          "#867c6a",
-          "#a79d8b",
-          "#d0c6b3",
-          "#f8edda"
-        ]
-      },
-      "status-fail-dark": {
-        "role": "tertiary",
-        "displayName": "Status Fail (dark)",
-        "canonical": "#ef8a7f",
-        "tonalRamp": [
-          "#280000",
-          "#4d0000",
-          "#741917",
-          "#983c35",
-          "#bc5c53",
-          "#e27e73",
-          "#ffaa9f",
-          "#ffd6cc"
-        ]
-      },
-      "status-fail-wash-dark": {
-        "role": "tertiary",
-        "displayName": "Status Fail Wash (dark)",
-        "canonical": "#321917",
-        "tonalRamp": [
-          "#190404",
-          "#351c1a",
-          "#533735",
-          "#735552",
-          "#947471",
-          "#b79592",
-          "#e1beba",
-          "#ffe5e1"
-        ]
-      },
-      "status-open-dark": {
-        "role": "tertiary",
-        "displayName": "Status Open (dark)",
-        "canonical": "#a99be0",
-        "tonalRamp": [
-          "#10002e",
-          "#28154f",
-          "#43336f",
-          "#605290",
-          "#8071b3",
-          "#a193d7",
-          "#c9bbff",
-          "#f0e3ff"
-        ]
-      },
-      "status-open-wash-dark": {
-        "role": "tertiary",
-        "displayName": "Status Open Wash (dark)",
-        "canonical": "#221e33",
-        "tonalRamp": [
-          "#0c071a",
-          "#242036",
-          "#403c53",
-          "#5e5a72",
-          "#7d7993",
-          "#9e9ab6",
-          "#c7c3e0",
-          "#eeeaff"
-        ]
-      },
-      "status-open-frame-dark": {
-        "role": "tertiary",
-        "displayName": "Status Open Frame Dark",
-        "canonical": "#636082",
-        "tonalRamp": [
-          "#0b0620",
-          "#231f3c",
-          "#3e3b5b",
-          "#5c597a",
-          "#7b799c",
-          "#9c9abf",
-          "#c5c2e9",
-          "#eceaff"
-        ]
-      },
-      "status-fail-frame-dark": {
-        "role": "tertiary",
-        "displayName": "Status Fail Frame Dark",
-        "canonical": "#96615e",
-        "tonalRamp": [
-          "#210001",
-          "#401313",
-          "#5f302e",
-          "#814d4b",
-          "#a36d6a",
-          "#c68e8a",
-          "#f2b6b2",
-          "#ffddd9"
-        ]
-      },
-      "series-1-dark": {
-        "role": "tertiary",
-        "displayName": "Series 1 Ink Blue (dark)",
-        "canonical": "#7fa8d1",
-        "tonalRamp": [
-          "#000928",
-          "#002546",
-          "#1c4265",
-          "#3a6186",
-          "#5981a8",
-          "#7aa3cb",
-          "#a2ccf7",
-          "#c8f4ff"
-        ]
-      },
-      "series-2-dark": {
-        "role": "tertiary",
-        "displayName": "Series 2 Teal (dark)",
-        "canonical": "#6cbdb4",
-        "tonalRamp": [
-          "#001410",
-          "#002f2a",
-          "#004d46",
-          "#0c6c65",
-          "#3a8d85",
-          "#5eafa6",
-          "#88d9cf",
-          "#affff7"
-        ]
-      },
-      "series-3-dark": {
-        "role": "tertiary",
-        "displayName": "Series 3 Ochre (dark)",
-        "canonical": "#dcae5a",
-        "tonalRamp": [
-          "#1e0200",
-          "#3f1800",
-          "#5e3600",
-          "#7e5400",
-          "#a07516",
-          "#c39641",
-          "#eebf6c",
-          "#ffe8a4"
-        ]
-      },
-      "series-4-dark": {
-        "role": "tertiary",
-        "displayName": "Series 4 Plum (dark)",
-        "canonical": "#cf86b4",
-        "tonalRamp": [
-          "#210016",
-          "#430332",
-          "#63244f",
-          "#85436e",
-          "#a8628f",
-          "#cc83b1",
-          "#f8acdb",
-          "#ffd6ff"
-        ]
-      },
-      "series-5-dark": {
-        "role": "tertiary",
-        "displayName": "Series 5 Slate (dark)",
-        "canonical": "#9aaabb",
-        "tonalRamp": [
-          "#030c17",
-          "#182532",
-          "#344150",
-          "#515f6f",
-          "#707f8f",
-          "#91a0b1",
-          "#b9c9db",
-          "#e0f1ff"
-        ]
-      },
-      "series-6-dark": {
-        "role": "tertiary",
-        "displayName": "Series 6 Olive (dark)",
-        "canonical": "#a8bf62",
-        "tonalRamp": [
-          "#070f00",
-          "#1d2a00",
-          "#374800",
-          "#546700",
-          "#738828",
-          "#94aa4d",
-          "#bcd37c",
-          "#e5f9b0"
-        ]
-      },
-      "zebra": {
-        "role": "neutral",
-        "displayName": "Zebra",
-        "canonical": "#fafafa",
-        "tonalRamp": [
-          "#0b0b0b",
-          "#242424",
-          "#404040",
-          "#5d5d5d",
-          "#7d7d7d",
-          "#9e9e9e",
-          "#c7c7c7",
-          "#eeeeee"
+          "#0b002e",
+          "#23125d",
+          "#3d3480",
+          "#5b54a4",
+          "#7b76ca",
+          "#9d99f0",
+          "#c2c2ff",
+          "#ecedff"
         ]
       },
       "series-1": {
-        "role": "tertiary",
-        "displayName": "Series 1 Ink Blue",
-        "canonical": "#2f5d8a",
+        "role": "data",
+        "displayName": "Series 1",
+        "canonical": "#6EA8FE",
         "tonalRamp": [
-          "#00072e",
-          "#00244d",
-          "#12426d",
-          "#33618e",
-          "#5281b0",
-          "#73a3d4",
-          "#9bccff",
-          "#c1f4ff"
+          "#000923",
+          "#002253",
+          "#013d8a",
+          "#285faf",
+          "#4a82d5",
+          "#6ca6fb",
+          "#a8cbff",
+          "#e5efff"
         ]
       },
       "series-2": {
-        "role": "tertiary",
-        "displayName": "Series 2 Teal",
-        "canonical": "#2e7f78",
+        "role": "data",
+        "displayName": "Series 2",
+        "canonical": "#5CC8B8",
         "tonalRamp": [
-          "#001411",
-          "#002f2a",
-          "#004c47",
-          "#136c65",
-          "#3d8c85",
-          "#60aea7",
-          "#8ad8d0",
-          "#b1fff7"
+          "#000f0c",
+          "#012c27",
+          "#034d45",
+          "#077165",
+          "#1c9687",
+          "#4dbaaa",
+          "#74dfcf",
+          "#bafff2"
         ]
       },
       "series-3": {
-        "role": "tertiary",
-        "displayName": "Series 3 Ochre",
-        "canonical": "#b7791f",
+        "role": "data",
+        "displayName": "Series 3",
+        "canonical": "#E8B65A",
         "tonalRamp": [
-          "#210000",
-          "#441200",
-          "#672e00",
-          "#894e00",
-          "#ab6e0a",
-          "#cf903c",
-          "#f7ba70",
-          "#ffe4a7"
+          "#120900",
+          "#322201",
+          "#573d01",
+          "#7f5a00",
+          "#a87907",
+          "#cd9c3e",
+          "#f3c065",
+          "#ffeccd"
         ]
       },
       "series-4": {
-        "role": "tertiary",
-        "displayName": "Series 4 Plum",
-        "canonical": "#8e3b6e",
+        "role": "data",
+        "displayName": "Series 4",
+        "canonical": "#D98BC0",
         "tonalRamp": [
-          "#220014",
-          "#460030",
-          "#6b1a4f",
-          "#8e3b6e",
-          "#b15b8e",
-          "#d67cb0",
-          "#fda9d8",
-          "#ffd5fd"
+          "#1b0014",
+          "#450136",
+          "#682355",
+          "#8b4476",
+          "#b06599",
+          "#d587bc",
+          "#fcabe1",
+          "#fee7f5"
         ]
       },
       "series-5": {
-        "role": "tertiary",
-        "displayName": "Series 5 Slate",
-        "canonical": "#5b6b7c",
+        "role": "data",
+        "displayName": "Series 5",
+        "canonical": "#9AA7B8",
         "tonalRamp": [
-          "#020c18",
-          "#172534",
-          "#324151",
-          "#505f70",
-          "#6f7f91",
-          "#8fa0b3",
-          "#b8cadd",
-          "#def1ff"
+          "#040b17",
+          "#1c2633",
+          "#384351",
+          "#566272",
+          "#778494",
+          "#99a6b7",
+          "#bdcadc",
+          "#e5f0fe"
         ]
       },
       "series-6": {
-        "role": "tertiary",
-        "displayName": "Series 6 Olive",
-        "canonical": "#6b7f2a",
+        "role": "data",
+        "displayName": "Series 6",
+        "canonical": "#A9C46A",
         "tonalRamp": [
-          "#070f00",
-          "#1d2a00",
-          "#374800",
-          "#546707",
-          "#738733",
-          "#93a956",
-          "#bcd37e",
-          "#e4f9b1"
+          "#080d00",
+          "#1f2a00",
+          "#394901",
+          "#556b01",
+          "#758e33",
+          "#97b158",
+          "#bad67c",
+          "#dffca0"
+        ]
+      },
+      "stage-top": {
+        "role": "data",
+        "displayName": "Stage Top",
+        "canonical": "#1B212A",
+        "tonalRamp": [
+          "#060b13",
+          "#1f252f",
+          "#3c424c",
+          "#5b626c",
+          "#7b838e",
+          "#9ea6b1",
+          "#c2cad6",
+          "#e7effc"
+        ]
+      },
+      "stage-bottom": {
+        "role": "data",
+        "displayName": "Stage Bottom",
+        "canonical": "#0F1318",
+        "tonalRamp": [
+          "#080b10",
+          "#21252b",
+          "#3e4248",
+          "#5d6268",
+          "#7d838a",
+          "#a0a6ad",
+          "#c4cad1",
+          "#e9eff7"
+        ]
+      },
+      "drawing-paper": {
+        "role": "data",
+        "displayName": "Drawing Paper",
+        "canonical": "#FFFFFF",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#252525",
+          "#424242",
+          "#616161",
+          "#828282",
+          "#a5a5a5",
+          "#c9c9c9",
+          "#eeeeee"
+        ]
+      },
+      "light-canvas": {
+        "role": "neutral",
+        "displayName": "Light Canvas",
+        "canonical": "#F7F8FA",
+        "tonalRamp": [
+          "#0b0b0c",
+          "#242526",
+          "#414243",
+          "#606163",
+          "#818284",
+          "#a4a5a7",
+          "#c8c9cb",
+          "#edeef0"
+        ]
+      },
+      "light-panel": {
+        "role": "neutral",
+        "displayName": "Light Panel",
+        "canonical": "#FFFFFF",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#252525",
+          "#424242",
+          "#616161",
+          "#828282",
+          "#a5a5a5",
+          "#c9c9c9",
+          "#eeeeee"
+        ]
+      },
+      "light-raised": {
+        "role": "neutral",
+        "displayName": "Light Raised",
+        "canonical": "#EEF1F5",
+        "tonalRamp": [
+          "#090b0e",
+          "#232528",
+          "#404245",
+          "#5f6165",
+          "#808286",
+          "#a2a5a9",
+          "#c6c9cd",
+          "#eceff3"
+        ]
+      },
+      "light-pressed": {
+        "role": "neutral",
+        "displayName": "Light Pressed",
+        "canonical": "#E3E7ED",
+        "tonalRamp": [
+          "#090b0f",
+          "#22252a",
+          "#3f4247",
+          "#5e6167",
+          "#7f8388",
+          "#a1a5ab",
+          "#c5c9cf",
+          "#ebeff5"
+        ]
+      },
+      "light-hairline": {
+        "role": "neutral",
+        "displayName": "Light Hairline",
+        "canonical": "#E6E9EE",
+        "tonalRamp": [
+          "#090b0e",
+          "#232529",
+          "#404246",
+          "#5f6166",
+          "#808287",
+          "#a2a5aa",
+          "#c6c9ce",
+          "#eceff4"
+        ]
+      },
+      "light-divider": {
+        "role": "neutral",
+        "displayName": "Light Divider",
+        "canonical": "#DADEE4",
+        "tonalRamp": [
+          "#090b0f",
+          "#22252a",
+          "#3f4247",
+          "#5e6167",
+          "#7f8388",
+          "#a1a5ab",
+          "#c5c9cf",
+          "#ebeff5"
+        ]
+      },
+      "light-strong-rule": {
+        "role": "neutral",
+        "displayName": "Light Strong Rule",
+        "canonical": "#B9C0CA",
+        "tonalRamp": [
+          "#070b12",
+          "#20252d",
+          "#3d424b",
+          "#5c626b",
+          "#7c838c",
+          "#9fa6af",
+          "#c3cad4",
+          "#e8effa"
+        ]
+      },
+      "light-text-primary": {
+        "role": "neutral",
+        "displayName": "Light Text Primary",
+        "canonical": "#0F1419",
+        "tonalRamp": [
+          "#070c10",
+          "#20262b",
+          "#3d4349",
+          "#5c6268",
+          "#7d838a",
+          "#9fa6ad",
+          "#c3cad1",
+          "#e8eff7"
+        ]
+      },
+      "light-text-secondary": {
+        "role": "neutral",
+        "displayName": "Light Text Secondary",
+        "canonical": "#4A5361",
+        "tonalRamp": [
+          "#050b16",
+          "#1e2532",
+          "#3a4350",
+          "#596270",
+          "#798392",
+          "#9ca6b6",
+          "#bfcada",
+          "#e5efff"
+        ]
+      },
+      "light-text-tertiary": {
+        "role": "neutral",
+        "displayName": "Light Text Tertiary",
+        "canonical": "#616B79",
+        "tonalRamp": [
+          "#050b16",
+          "#1d2631",
+          "#394350",
+          "#586270",
+          "#798392",
+          "#9ba6b5",
+          "#bfcada",
+          "#e5effe"
+        ]
+      },
+      "light-signal-blue": {
+        "role": "primary",
+        "displayName": "Light Signal Blue",
+        "canonical": "#2A66CC",
+        "tonalRamp": [
+          "#000825",
+          "#002059",
+          "#003a93",
+          "#195ac4",
+          "#3d7eeb",
+          "#6fa4ff",
+          "#abcbfe",
+          "#e6effe"
+        ]
+      },
+      "light-signal-blue-hover": {
+        "role": "primary",
+        "displayName": "Light Signal Blue Hover",
+        "canonical": "#1F57B8",
+        "tonalRamp": [
+          "#000826",
+          "#001f5a",
+          "#003995",
+          "#235bbd",
+          "#457fe3",
+          "#6fa4ff",
+          "#abcafe",
+          "#e6effe"
+        ]
+      },
+      "light-signal-blue-wash": {
+        "role": "primary",
+        "displayName": "Light Signal Blue Wash",
+        "canonical": "#E7EFFC",
+        "tonalRamp": [
+          "#070b13",
+          "#20252f",
+          "#3c424d",
+          "#5b626d",
+          "#7c838e",
+          "#9ea6b2",
+          "#c2cad6",
+          "#e7effc"
+        ]
+      },
+      "light-signal-blue-rule": {
+        "role": "primary",
+        "displayName": "Light Signal Blue Rule",
+        "canonical": "#A9C3EE",
+        "tonalRamp": [
+          "#000826",
+          "#112445",
+          "#2d4266",
+          "#4b6288",
+          "#6b83ab",
+          "#8da6d0",
+          "#b0caf6",
+          "#e6efff"
+        ]
+      },
+      "light-status-met": {
+        "role": "tertiary",
+        "displayName": "Light Status Met",
+        "canonical": "#11734A",
+        "tonalRamp": [
+          "#000f06",
+          "#012e1a",
+          "#034f31",
+          "#11734a",
+          "#3f966a",
+          "#64ba8c",
+          "#89dfb0",
+          "#c4ffdc"
+        ]
+      },
+      "light-status-met-wash": {
+        "role": "tertiary",
+        "displayName": "Light Status Met Wash",
+        "canonical": "#E3F5EC",
+        "tonalRamp": [
+          "#030e09",
+          "#1b2922",
+          "#37463f",
+          "#56655e",
+          "#77877f",
+          "#99aaa1",
+          "#bdcec5",
+          "#e2f4eb"
+        ]
+      },
+      "light-status-risk": {
+        "role": "tertiary",
+        "displayName": "Light Status Risk",
+        "canonical": "#8A5A0B",
+        "tonalRamp": [
+          "#140800",
+          "#362000",
+          "#5c3a00",
+          "#855602",
+          "#a97732",
+          "#ce9a57",
+          "#f4be7b",
+          "#ffebd4"
+        ]
+      },
+      "light-status-risk-wash": {
+        "role": "tertiary",
+        "displayName": "Light Status Risk Wash",
+        "canonical": "#FBF0D9",
+        "tonalRamp": [
+          "#110a00",
+          "#2c2412",
+          "#4a412e",
+          "#6a604c",
+          "#8b816d",
+          "#aea48e",
+          "#d3c8b2",
+          "#f8edd6"
+        ]
+      },
+      "light-status-fail": {
+        "role": "tertiary",
+        "displayName": "Light Status Fail",
+        "canonical": "#A42828",
+        "tonalRamp": [
+          "#1f0001",
+          "#4d0005",
+          "#80020f",
+          "#aa2e2d",
+          "#d1534d",
+          "#f9786f",
+          "#ffb3ab",
+          "#ffe9e6"
+        ]
+      },
+      "light-status-fail-wash": {
+        "role": "tertiary",
+        "displayName": "Light Status Fail Wash",
+        "canonical": "#FBE5E5",
+        "tonalRamp": [
+          "#140708",
+          "#302021",
+          "#4e3d3d",
+          "#6e5c5c",
+          "#907d7d",
+          "#b49f9f",
+          "#d9c3c3",
+          "#fee8e8"
+        ]
+      },
+      "light-status-fail-frame": {
+        "role": "tertiary",
+        "displayName": "Light Status Fail Frame",
+        "canonical": "#E2A5A5",
+        "tonalRamp": [
+          "#1f0003",
+          "#421317",
+          "#633133",
+          "#865051",
+          "#aa7171",
+          "#cf9393",
+          "#f5b7b7",
+          "#ffe8e8"
+        ]
+      },
+      "light-status-open": {
+        "role": "tertiary",
+        "displayName": "Light Status Open",
+        "canonical": "#4B3BA8",
+        "tonalRamp": [
+          "#0b002e",
+          "#24006b",
+          "#3d2895",
+          "#594cbb",
+          "#7870e1",
+          "#9a96fe",
+          "#c2c3fe",
+          "#ecedfe"
+        ]
+      },
+      "light-status-open-wash": {
+        "role": "tertiary",
+        "displayName": "Light Status Open Wash",
+        "canonical": "#ECE9FC",
+        "tonalRamp": [
+          "#0c0915",
+          "#252331",
+          "#42404f",
+          "#615f6f",
+          "#838091",
+          "#a5a2b4",
+          "#c9c6d9",
+          "#efecff"
+        ]
+      },
+      "light-status-open-frame": {
+        "role": "tertiary",
+        "displayName": "Light Status Open Frame",
+        "canonical": "#B7AEEB",
+        "tonalRamp": [
+          "#0e002b",
+          "#271a4b",
+          "#43386c",
+          "#62588f",
+          "#8279b2",
+          "#a59cd8",
+          "#c9c0fe",
+          "#eeecfe"
+        ]
+      },
+      "light-series-2": {
+        "role": "data",
+        "displayName": "Light Series 2",
+        "canonical": "#1E8C7E",
+        "tonalRamp": [
+          "#000f0c",
+          "#012c27",
+          "#044d45",
+          "#007165",
+          "#2b9587",
+          "#55b9aa",
+          "#7cdece",
+          "#bafff2"
+        ]
+      },
+      "light-series-3": {
+        "role": "data",
+        "displayName": "Light Series 3",
+        "canonical": "#B7791F",
+        "tonalRamp": [
+          "#140800",
+          "#361f00",
+          "#5d3902",
+          "#865504",
+          "#b17315",
+          "#d69643",
+          "#fdbb69",
+          "#ffebd4"
+        ]
+      },
+      "light-series-4": {
+        "role": "data",
+        "displayName": "Light Series 4",
+        "canonical": "#A2427F",
+        "tonalRamp": [
+          "#1c0012",
+          "#460132",
+          "#721154",
+          "#973875",
+          "#bd5a97",
+          "#e37dbb",
+          "#ffabdb",
+          "#ffe7f4"
+        ]
+      },
+      "light-series-5": {
+        "role": "data",
+        "displayName": "Light Series 5",
+        "canonical": "#5B6B7C",
+        "tonalRamp": [
+          "#020c18",
+          "#182635",
+          "#354453",
+          "#536374",
+          "#748496",
+          "#96a7ba",
+          "#b9cbdf",
+          "#e3f0fe"
+        ]
+      },
+      "light-series-6": {
+        "role": "data",
+        "displayName": "Light Series 6",
+        "canonical": "#5F7A1E",
+        "tonalRamp": [
+          "#080e00",
+          "#1e2a00",
+          "#374a01",
+          "#526c07",
+          "#728e36",
+          "#94b25a",
+          "#b8d77e",
+          "#dcfda2"
+        ]
+      },
+      "light-stage-top": {
+        "role": "data",
+        "displayName": "Light Stage Top",
+        "canonical": "#F3F5F8",
+        "tonalRamp": [
+          "#0a0b0d",
+          "#242527",
+          "#404244",
+          "#606164",
+          "#818285",
+          "#a3a5a8",
+          "#c7c9cc",
+          "#edeff1"
+        ]
+      },
+      "light-stage-bottom": {
+        "role": "data",
+        "displayName": "Light Stage Bottom",
+        "canonical": "#DCE1E8",
+        "tonalRamp": [
+          "#080b10",
+          "#22252a",
+          "#3e4248",
+          "#5d6268",
+          "#7e8389",
+          "#a1a5ac",
+          "#c5cad0",
+          "#eaeff6"
+        ]
+      },
+      "print-canvas": {
+        "role": "neutral",
+        "displayName": "Print Canvas",
+        "canonical": "#FBFBFA",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#252524",
+          "#424241",
+          "#616160",
+          "#828281",
+          "#a5a5a4",
+          "#c9c9c8",
+          "#eeeeed"
+        ]
+      },
+      "print-surface-2": {
+        "role": "neutral",
+        "displayName": "Print Surface 2",
+        "canonical": "#F4F5F6",
+        "tonalRamp": [
+          "#0b0b0c",
+          "#242526",
+          "#414243",
+          "#606162",
+          "#818283",
+          "#a4a5a6",
+          "#c8c9ca",
+          "#edeeef"
+        ]
+      },
+      "print-line": {
+        "role": "neutral",
+        "displayName": "Print Line",
+        "canonical": "#E3E5E8",
+        "tonalRamp": [
+          "#0a0b0d",
+          "#242527",
+          "#404244",
+          "#606164",
+          "#818285",
+          "#a3a5a8",
+          "#c7c9cc",
+          "#edeff2"
+        ]
+      },
+      "print-line-2": {
+        "role": "neutral",
+        "displayName": "Print Line 2",
+        "canonical": "#CBCFD4",
+        "tonalRamp": [
+          "#090b0f",
+          "#222529",
+          "#3f4246",
+          "#5e6266",
+          "#7f8387",
+          "#a2a5aa",
+          "#c5c9ce",
+          "#ebeff4"
+        ]
+      },
+      "print-line-3": {
+        "role": "neutral",
+        "displayName": "Print Line 3",
+        "canonical": "#9EA4AC",
+        "tonalRamp": [
+          "#080b11",
+          "#21252c",
+          "#3d4249",
+          "#5c6269",
+          "#7d838b",
+          "#a0a6ae",
+          "#c3cad2",
+          "#e9eff8"
+        ]
+      },
+      "print-text-primary": {
+        "role": "neutral",
+        "displayName": "Print Text Primary",
+        "canonical": "#16191D",
+        "tonalRamp": [
+          "#090b0f",
+          "#22252a",
+          "#3f4247",
+          "#5e6266",
+          "#7f8388",
+          "#a1a5ab",
+          "#c5c9cf",
+          "#eaeff5"
+        ]
+      },
+      "print-text-secondary": {
+        "role": "neutral",
+        "displayName": "Print Text Secondary",
+        "canonical": "#474E57",
+        "tonalRamp": [
+          "#060c12",
+          "#1f262e",
+          "#3c434b",
+          "#5b626b",
+          "#7b838d",
+          "#9ea6b0",
+          "#c2cad5",
+          "#e7effa"
+        ]
+      },
+      "print-text-tertiary": {
+        "role": "neutral",
+        "displayName": "Print Text Tertiary",
+        "canonical": "#6C737C",
+        "tonalRamp": [
+          "#070c12",
+          "#20262d",
+          "#3c434b",
+          "#5b626b",
+          "#7c838c",
+          "#9ea6af",
+          "#c2cad4",
+          "#e7effa"
+        ]
+      },
+      "print-status-met": {
+        "role": "tertiary",
+        "displayName": "Print Status Met",
+        "canonical": "#23744A",
+        "tonalRamp": [
+          "#001005",
+          "#012e18",
+          "#00502d",
+          "#217248",
+          "#479569",
+          "#6bb98a",
+          "#8fdeae",
+          "#c5ffda"
+        ]
+      },
+      "print-status-risk": {
+        "role": "tertiary",
+        "displayName": "Print Status Risk",
+        "canonical": "#94600A",
+        "tonalRamp": [
+          "#140800",
+          "#352001",
+          "#5c3900",
+          "#865502",
+          "#ab762b",
+          "#d09951",
+          "#f7bd75",
+          "#ffebd4"
+        ]
+      },
+      "print-status-fail": {
+        "role": "tertiary",
+        "displayName": "Print Status Fail",
+        "canonical": "#AD2A1F",
+        "tonalRamp": [
+          "#1f0000",
+          "#4d0100",
+          "#800301",
+          "#ad2a1f",
+          "#d55142",
+          "#fd7564",
+          "#feb4a7",
+          "#fee9e6"
+        ]
+      },
+      "print-status-open": {
+        "role": "tertiary",
+        "displayName": "Print Status Open",
+        "canonical": "#57489A",
+        "tonalRamp": [
+          "#0d002c",
+          "#270e5e",
+          "#423181",
+          "#6052a5",
+          "#8074ca",
+          "#a297f0",
+          "#c6c1ff",
+          "#edecff"
         ]
       }
     },
     "typographyMeta": {
-      "display-phone": {
-        "displayName": "Display (phone)",
-        "purpose": "Report title at 560px and below."
+      "cover-title": {
+        "displayName": "Cover Title",
+        "purpose": "Report title on Report info and in Report view."
       },
-      "headline-phone": {
-        "displayName": "Headline (phone)",
-        "purpose": "Section titles at 560px and below."
+      "page-title": {
+        "displayName": "Page Title",
+        "purpose": "Each page heading, after its mono chapter number; 1.375rem below 560px."
       },
-      "figure-phone": {
-        "displayName": "Figure (phone)",
-        "purpose": "KPI values at 560px and below."
+      "verdict-headline": {
+        "displayName": "Verdict Headline",
+        "purpose": "First bold sentence of the Overview verdict, capped at 34ch."
       },
-      "figure-small": {
-        "displayName": "Figure small",
-        "purpose": "Calculation-chain values."
-      },
-      "callout": {
-        "displayName": "Callout",
-        "purpose": "Decision questions, figure captions, measurement-box titles, previous/next links."
+      "section-title": {
+        "displayName": "Section Title",
+        "purpose": "Sub-section headings; they also become sub-tab labels."
       },
       "subhead": {
         "displayName": "Subhead",
-        "purpose": "h4 and title-block values."
-      },
-      "small": {
-        "displayName": "Small",
-        "purpose": "Tables, navigation, KPI qualifiers, buttons."
-      },
-      "display": {
-        "displayName": "Display",
-        "purpose": "The report title only."
-      },
-      "headline": {
-        "displayName": "Headline",
-        "purpose": "Section titles (h2)."
-      },
-      "title": {
-        "displayName": "Title",
-        "purpose": "Subsection titles (h3), each under a hairline."
-      },
-      "figure": {
-        "displayName": "Figure",
-        "purpose": "KPI values in the key-figure strip."
-      },
-      "body": {
-        "displayName": "Body",
-        "purpose": "Running text, max 70ch."
+        "purpose": "Panel and box headings."
       },
       "lede": {
         "displayName": "Lede",
-        "purpose": "Section-opening verdict paragraph, max 74ch."
+        "purpose": "Chapter verdict paragraphs, text-secondary with bold phrases in text-primary."
       },
-      "label": {
-        "displayName": "Label",
-        "purpose": "Mono caps for eyebrows, field names, KPI labels, table headers, chips."
+      "body": {
+        "displayName": "Body",
+        "purpose": "Prose to 72ch with tabular numerals."
       },
-      "source": {
-        "displayName": "Source",
-        "purpose": "Citation line under every claim block."
+      "ui-label": {
+        "displayName": "Ui Label",
+        "purpose": "Sidebar entries, sub-tabs, disclosure summaries, palette results."
+      },
+      "meta-label": {
+        "displayName": "Meta Label",
+        "purpose": "Sidebar group names, table headers, viewer control group labels."
+      },
+      "chip": {
+        "displayName": "Chip",
+        "purpose": "Status chips."
+      },
+      "data-value": {
+        "displayName": "Data Value",
+        "purpose": "Key-parameter values (chain values at 1.25rem)."
+      },
+      "table-number": {
+        "displayName": "Table Number",
+        "purpose": "Right-aligned numeric table cells."
+      },
+      "source-line": {
+        "displayName": "Source Line",
+        "purpose": "Every citation, prefixed \"Source\" in the sans."
+      },
+      "est-mark": {
+        "displayName": "Est Mark",
+        "purpose": "The uppercase EST estimate label."
+      },
+      "signature": {
+        "displayName": "Signature",
+        "purpose": "Approval signature lines only."
       }
     },
-    "shadows": [],
-    "motion": [
+    "shadows": [
       {
-        "name": "state",
-        "value": "0.12s–0.15s ease (colour and border only)",
-        "purpose": "Hover and pressed transitions on controls and links."
+        "name": "popover-dark",
+        "value": "0 12px 32px rgba(0,0,0,.45),0 2px 6px rgba(0,0,0,.3)",
+        "purpose": "Search palette, drawing lightbox, narrow-screen drawer and CAD tooltip in the dark theme."
       },
       {
-        "name": "camera",
-        "value": "450 ms ease-in-out quad",
-        "purpose": "SOLIDWORKS viewer camera moves and explode; both jump instantly under prefers-reduced-motion."
+        "name": "popover-light",
+        "value": "0 12px 32px rgba(15,20,25,.16),0 2px 6px rgba(15,20,25,.08)",
+        "purpose": "The same popovers in the light theme."
+      },
+      {
+        "name": "selected-ring",
+        "value": "inset 0 0 0 1px var(--accent-line)",
+        "purpose": "A 1px border drawn inside pressed toggles and the picked card; not elevation."
+      }
+    ],
+    "motion": [
+      {
+        "name": "state-change",
+        "value": ".12s",
+        "purpose": "Background, colour and border transitions on controls."
+      },
+      {
+        "name": "drawer",
+        "value": "transform .2s cubic-bezier(.2,.8,.2,1)",
+        "purpose": "Narrow-screen sidebar drawer slide."
+      },
+      {
+        "name": "disclosure",
+        "value": "transform .15s ease-out",
+        "purpose": "Disclosure chevron rotation."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "prefers-reduced-motion: reduce",
+        "purpose": "All transitions and animations off."
       }
     ],
     "breakpoints": [
@@ -1016,162 +1267,171 @@
         "value": "560px"
       },
       {
-        "name": "title-block-2x2",
-        "value": "760px"
+        "name": "drawer",
+        "value": "899px"
       },
       {
-        "name": "contents-column",
+        "name": "stack-workspaces",
         "value": "1100px"
       }
     ]
   },
   "components": [
     {
-      "name": "Segmented control",
+      "name": "Primary Button",
       "kind": "button",
-      "refersTo": "button-segment",
-      "description": "Toggle group; pressed segment fills with drafting ink.",
-      "html": "<div class=\"ds-seg\"><button class=\"ds-seg-b\" aria-pressed=\"true\">C0 4-lift</button><button class=\"ds-seg-b\">C1 8-lift</button><button class=\"ds-seg-b\">C2 coax X8</button></div>",
-      "css": ".ds-seg{display:inline-flex;border:1px solid #cbcfd4;border-radius:2px;overflow:hidden;background:#fff}.ds-seg-b{min-height:44px;padding:0 16px;border:0;border-right:1px solid #cbcfd4;background:#fff;color:#474e57;font:500 .875rem 'Source Sans 3',system-ui,sans-serif;cursor:pointer;transition:background .12s,color .12s}.ds-seg-b:last-child{border-right:0}.ds-seg-b:hover{background:#f4f5f6;color:#16191d}.ds-seg-b:focus-visible{outline:2px solid #b8481b;outline-offset:2px}.ds-seg-b[aria-pressed=true]{background:#16191d;color:#fff}"
+      "refersTo": "button-primary",
+      "description": "Links out to companion documents and downloads.",
+      "html": "<a class=\"ds-btn\" href=\"#\">Open the build manual</a>",
+      "css": ".ds-btn{display:inline-flex;align-items:center;min-height:38px;padding:0 16px;border:1px solid var(--accent,#5B9DFF);border-radius:6px;background:var(--accent,#5B9DFF);color:var(--accent-fg,#0E1116);font:500 .875rem \"IBM Plex Sans\",system-ui,sans-serif;text-decoration:none;transition:background .12s,border-color .12s}.ds-btn:hover{background:var(--accent-2,#8AB8FF);border-color:var(--accent-2,#8AB8FF)}.ds-btn:focus-visible{outline:2px solid var(--accent,#5B9DFF);outline-offset:2px}"
     },
     {
-      "name": "Theme button",
+      "name": "Quiet Button",
       "kind": "button",
-      "refersTo": "button-theme",
-      "description": "Transparent mono-label button for the theme toggle.",
-      "html": "<button class=\"ds-theme\">Theme: system</button>",
-      "css": ".ds-theme{min-height:44px;padding:0 14px;border:1px solid #cbcfd4;background:transparent;color:#474e57;border-radius:2px;font:500 .74rem 'Red Hat Mono',ui-monospace,monospace;letter-spacing:.04em;cursor:pointer;transition:border-color .15s,color .15s}.ds-theme:hover{border-color:#16191d;color:#16191d}.ds-theme:focus-visible{outline:2px solid #b8481b;outline-offset:2px}"
+      "refersTo": "button-quiet",
+      "description": "Secondary link-out beside a primary button.",
+      "html": "<a class=\"ds-btn-quiet\" href=\"#\">Download STEP</a>",
+      "css": ".ds-btn-quiet{display:inline-flex;align-items:center;min-height:38px;padding:0 16px;border:1px solid var(--line-2,#2A313C);border-radius:6px;background:transparent;color:var(--fg,#E6EAF0);font:500 .875rem \"IBM Plex Sans\",system-ui,sans-serif;text-decoration:none;transition:background .12s,border-color .12s}.ds-btn-quiet:hover{background:var(--surface-2,#1C222B);border-color:var(--line-3,#3A4250)}.ds-btn-quiet:focus-visible{outline:2px solid var(--accent,#5B9DFF);outline-offset:2px}"
     },
     {
-      "name": "Status chips",
+      "name": "Search Trigger",
+      "kind": "input",
+      "refersTo": "search-trigger",
+      "description": "Top-bar button that opens the Ctrl K search palette.",
+      "html": "<button class=\"ds-search\" type=\"button\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" aria-hidden=\"true\"><circle cx=\"10.5\" cy=\"10.5\" r=\"6\"/><path d=\"M15 15l5 5\"/></svg><span>Search</span><kbd class=\"ds-kbd\">Ctrl K</kbd></button>",
+      "css": ".ds-search{display:inline-flex;align-items:center;gap:8px;min-height:36px;min-width:220px;padding:0 9px;border:1px solid var(--line-2,#2A313C);border-radius:6px;background:var(--surface,#151A21);color:var(--fg-3,#828C9A);font:500 .8125rem \"IBM Plex Sans\",system-ui,sans-serif;cursor:pointer;transition:border-color .12s,color .12s}.ds-search:hover{border-color:var(--line-3,#3A4250);color:var(--fg-2,#A3ADBA)}.ds-search:focus-visible{outline:2px solid var(--accent,#5B9DFF);outline-offset:2px}.ds-kbd{margin-left:auto;font:500 .6875rem/1 \"IBM Plex Mono\",monospace;border:1px solid var(--line-2,#2A313C);border-radius:4px;padding:3px 5px;background:var(--surface,#151A21)}"
+    },
+    {
+      "name": "Sidebar Navigation",
+      "kind": "nav",
+      "refersTo": "nav-item",
+      "description": "Persistent left sidebar grouped by area; the current page has a raised fill and a blue icon.",
+      "html": "<nav class=\"ds-nav\"><p class=\"ds-nav-g\">Design</p><a href=\"#\" class=\"ds-nav-a\" aria-current=\"page\"><svg width=\"19\" height=\"19\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.4\" aria-hidden=\"true\"><path d=\"M12 3l8 4.5v9L12 21l-8-4.5v-9z\"/><path d=\"M4 7.5l8 4.5 8-4.5M12 12v9\"/></svg>CAD model</a><a href=\"#\" class=\"ds-nav-a\"><svg width=\"19\" height=\"19\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.4\" aria-hidden=\"true\"><path d=\"M3 10c4-1 7-1 10 0s5 1 8 0M3 15c4-1 7-1 10 0s5 1 8 0\"/></svg>Aerodynamics</a></nav>",
+      "css": ".ds-nav{width:248px;padding:4px 10px;background:var(--bg,#0E1116)}.ds-nav-g{margin:12px 10px 6px;font:500 .75rem/1 \"IBM Plex Sans\",system-ui,sans-serif;color:var(--fg-3,#828C9A);letter-spacing:.01em}.ds-nav-a{display:flex;align-items:center;gap:10px;min-height:34px;padding:0 10px;border-radius:6px;color:var(--fg-2,#A3ADBA);font:500 .875rem \"IBM Plex Sans\",system-ui,sans-serif;text-decoration:none}.ds-nav-a svg{color:var(--fg-3,#828C9A)}.ds-nav-a:hover{background:var(--surface-2,#1C222B);color:var(--fg,#E6EAF0)}.ds-nav-a[aria-current=\"page\"]{background:var(--surface-2,#1C222B);color:var(--fg,#E6EAF0)}.ds-nav-a[aria-current=\"page\"] svg{color:var(--accent,#5B9DFF)}.ds-nav-a:focus-visible{outline:2px solid var(--accent,#5B9DFF);outline-offset:2px}"
+    },
+    {
+      "name": "Sub-tabs",
+      "kind": "nav",
+      "refersTo": "sub-tab",
+      "description": "Tabs built from a long chapter's section headings; Summary is the lead-in.",
+      "html": "<div class=\"ds-tabs\" role=\"tablist\"><a role=\"tab\" aria-selected=\"true\" href=\"#\">Summary</a><a role=\"tab\" aria-selected=\"false\" href=\"#\">Drag</a><a role=\"tab\" aria-selected=\"false\" href=\"#\">CFD</a><a role=\"tab\" aria-selected=\"false\" href=\"#\">Flow field</a></div>",
+      "css": ".ds-tabs{display:flex;gap:2px;border-bottom:1px solid var(--line,#20262F)}.ds-tabs a{display:inline-flex;align-items:center;min-height:40px;padding:0 12px;margin-bottom:-1px;border-bottom:2px solid transparent;color:var(--fg-3,#828C9A);font:500 .875rem \"IBM Plex Sans\",system-ui,sans-serif;text-decoration:none}.ds-tabs a:hover{color:var(--fg,#E6EAF0)}.ds-tabs a[aria-selected=\"true\"]{color:var(--fg,#E6EAF0);border-bottom-color:var(--accent,#5B9DFF)}.ds-tabs a:focus-visible{outline:2px solid var(--accent,#5B9DFF);outline-offset:2px}"
+    },
+    {
+      "name": "Status Chips",
       "kind": "chip",
       "refersTo": "chip-met",
-      "description": "Requirement verdicts: outlined mono caps; fail adds its wash.",
-      "html": "<span class=\"ds-chip ds-met\">Met</span> <span class=\"ds-chip ds-risk\">Risk</span> <span class=\"ds-chip ds-fail\">Fail</span> <span class=\"ds-chip ds-open\">Open</span> <span class=\"ds-est\">EST</span>",
-      "css": ".ds-chip{display:inline-block;font:500 .75rem/1 'Red Hat Mono',ui-monospace,monospace;letter-spacing:.07em;text-transform:uppercase;padding:4px 6px;border-radius:2px;border:1px solid currentColor}.ds-met{color:#23744a}.ds-risk{color:#94600a}.ds-fail{color:#ad2a1f;background:#f8e9e7}.ds-open{color:#57489a}.ds-est{display:inline-block;font:500 .75rem/1 'Red Hat Mono',ui-monospace,monospace;letter-spacing:.06em;color:#94600a;border:1px solid currentColor;border-radius:2px;padding:2px 4px}"
+      "description": "Tinted, borderless verdict chips; EST is the one outlined mark.",
+      "html": "<span class=\"ds-chip ds-met\">Met</span> <span class=\"ds-chip ds-risk\">At risk</span> <span class=\"ds-chip ds-fail\">Fail</span> <span class=\"ds-chip ds-open\">Open</span> <span class=\"ds-est\">Est</span>",
+      "css": ".ds-chip{display:inline-block;font:600 .75rem/1 \"IBM Plex Sans\",system-ui,sans-serif;padding:4px 7px;border-radius:5px;white-space:nowrap}.ds-met{color:var(--ok,#5FD3A2);background:var(--ok-soft,#10301F)}.ds-risk{color:var(--warn,#F0C46E);background:var(--warn-soft,#33270F)}.ds-fail{color:var(--bad,#F59393);background:var(--bad-soft,#391B1D)}.ds-open{color:var(--open,#B9AEFF);background:var(--open-soft,#251F45)}.ds-est{display:inline-block;font:600 .6875rem/1 \"IBM Plex Mono\",monospace;letter-spacing:.04em;text-transform:uppercase;color:var(--fg-2,#A3ADBA);border:1px solid var(--line-3,#3A4250);border-radius:4px;padding:2px 4px}"
     },
     {
-      "name": "Title block",
-      "kind": "custom",
-      "refersTo": "title-block-cell",
-      "description": "Cover title block: ruled cells with mono field names over condensed values.",
-      "html": "<dl class=\"ds-tb\"><div><dt>Project</dt><dd>Design-Build-Fly</dd></div><div><dt>Review date</dt><dd>2026-10-13</dd></div><div><dt>Stage</dt><dd>Concept · budget redesign</dd></div><div><dt>Revision</dt><dd>v0.3.1</dd></div><div><dt>Sources</dt><dd>docs/ · analysis/ · cad/</dd></div></dl>",
-      "css": ".ds-tb{display:grid;grid-template-columns:1.3fr repeat(4,minmax(0,1fr));gap:1px;margin:0;border:1px solid #cbcfd4;background:#cbcfd4}.ds-tb>div{padding:10px 14px 12px;background:#fff}.ds-tb dt{font:500 .75rem/1 'Red Hat Mono',ui-monospace,monospace;letter-spacing:.08em;text-transform:uppercase;color:#6c737c;margin-bottom:7px}.ds-tb dd{margin:0;font:600 1rem/1.3 'Barlow Semi Condensed','Arial Narrow',sans-serif;color:#16191d}"
-    },
-    {
-      "name": "Key-figure strip",
-      "kind": "custom",
-      "refersTo": null,
-      "description": "Open KPI strip under a 2px ink rule; values coloured by verdict.",
-      "html": "<div class=\"ds-kpis\"><div class=\"ds-kpi\"><div class=\"ds-l\">Committed spend (R6)</div><div class=\"ds-v ds-ok\">$1,898</div><div class=\"ds-s\">cap $2,000 incl. tax + shipping</div></div><div class=\"ds-kpi\"><div class=\"ds-l\">Crash reserve (R7)</div><div class=\"ds-v ds-warn\">$102</div><div class=\"ds-s\">target ≥ $100: met, thin</div></div></div>",
-      "css": ".ds-kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));border-top:2px solid #16191d;border-bottom:1px solid #cbcfd4}.ds-kpi{padding:14px 18px 16px 0;margin-right:18px;border-right:1px solid #e3e5e8}.ds-kpi:last-child{border-right:0;margin-right:0}.ds-l{font:500 .75rem/1.35 'Red Hat Mono',ui-monospace,monospace;color:#6c737c;text-transform:uppercase;letter-spacing:.07em}.ds-v{font:600 2rem/1.05 'Barlow Semi Condensed','Arial Narrow',sans-serif;margin:10px 0 6px;font-variant-numeric:tabular-nums;color:#16191d}.ds-ok{color:#23744a}.ds-warn{color:#94600a}.ds-s{font:400 .875rem/1.45 'Source Sans 3',system-ui,sans-serif;color:#474e57}"
-    },
-    {
-      "name": "Decision card",
+      "name": "Key Parameter List",
       "kind": "card",
-      "refersTo": "decision-card",
-      "description": "Open (violet frame) or blocking (red frame) decision with recommendation panel.",
-      "html": "<div class=\"ds-dec ds-red\"><b class=\"ds-q\">Which legal path and which flying field?</b><div class=\"ds-body\">Only Richmond Field Station allows the 30 m a transition needs.</div><div class=\"ds-rec\"><b>Recommended:</b> request RFS by 2026-11-06.</div></div>",
-      "css": ".ds-dec{border:1px solid #a49ec5;border-radius:2px;padding:16px 20px 14px;background:#fff;color:#474e57;font:400 1rem/1.6 'Source Sans 3',system-ui,sans-serif}.ds-dec.ds-red{border-color:#c57e79}.ds-q{display:block;font:600 1.125rem/1.3 'Barlow Semi Condensed','Arial Narrow',sans-serif;color:#16191d;margin-bottom:8px}.ds-q::before{content:'Open';display:inline-block;border:1px solid currentColor;border-radius:2px;padding:4px 6px;margin-right:10px;vertical-align:.18em;font:500 .75rem/1 'Red Hat Mono',ui-monospace,monospace;letter-spacing:.09em;text-transform:uppercase;color:#57489a;}.ds-red .ds-q::before{content:'Blocking';color:#ad2a1f;background:#f8e9e7}.ds-rec{margin-top:12px;padding:10px 14px;background:#f4f5f6;border-radius:2px;color:#16191d}.ds-red .ds-rec{background:#f8e9e7}"
+      "refersTo": "key-parameter-row",
+      "description": "A bordered spec list of label, mono value and note; never hero tiles.",
+      "html": "<div class=\"ds-kpis\"><div class=\"ds-kpi\"><span class=\"ds-l\">Committed spend (R6)</span><span class=\"ds-v ds-ok\">$1,842</span><span class=\"ds-s\">cap $2,000 incl. tax + shipping</span></div><div class=\"ds-kpi\"><span class=\"ds-l\">Sized MTOW (R2)</span><span class=\"ds-v ds-warn\">7.42 kg</span><span class=\"ds-s\">below the 8 to 15 kg working target</span></div></div>",
+      "css": ".ds-kpis{border:1px solid var(--line,#20262F);border-radius:8px;background:var(--surface,#151A21);overflow:hidden;max-width:420px}.ds-kpi{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 18px;align-items:baseline;padding:10px 14px;border-bottom:1px solid var(--line,#20262F)}.ds-kpi:last-child{border-bottom:0}.ds-l{font:500 .8125rem/1.4 \"IBM Plex Sans\",system-ui,sans-serif;color:var(--fg-2,#A3ADBA)}.ds-v{font:500 1rem/1.3 \"IBM Plex Mono\",monospace;letter-spacing:-.01em;color:var(--fg,#E6EAF0);text-align:right}.ds-ok{color:var(--ok,#5FD3A2)}.ds-warn{color:var(--warn,#F0C46E)}.ds-s{grid-column:1/-1;font:400 .8125rem/1.45 \"IBM Plex Sans\",system-ui,sans-serif;color:var(--fg-3,#828C9A)}"
     },
     {
-      "name": "Ruled table",
+      "name": "Panel with Source",
+      "kind": "card",
+      "refersTo": "panel",
+      "description": "Flat 1px panel; every result names its source file in mono beneath.",
+      "html": "<div class=\"ds-panel\"><h4>Cruise drag build-up</h4><p>Total parasite drag at 20 m/s, with the leg fairings fitted.</p><p class=\"ds-src\"><b>Source</b> analysis/aero/out/drag_buildup.json</p></div>",
+      "css": ".ds-panel{background:var(--surface,#151A21);border:1px solid var(--line,#20262F);border-radius:8px;padding:16px 18px;color:var(--fg,#E6EAF0);font:400 .9375rem/1.6 \"IBM Plex Sans\",system-ui,sans-serif;max-width:520px}.ds-panel h4{margin:0 0 6px;font:600 .9375rem/1.15 \"IBM Plex Sans\",system-ui,sans-serif;letter-spacing:-.012em}.ds-panel p{margin:0 0 8px;color:var(--fg-2,#A3ADBA)}.ds-src{font:400 .75rem/1.55 \"IBM Plex Mono\",monospace;color:var(--fg-3,#828C9A)!important}.ds-src b{font-family:\"IBM Plex Sans\",system-ui,sans-serif;font-weight:600;margin-right:4px}"
+    },
+    {
+      "name": "Viewer Toggles",
       "kind": "custom",
-      "refersTo": "table-head",
-      "description": "Data table: ink rule top, mono caps sticky header, chosen row in orange wash.",
-      "html": "<table class=\"ds-t\"><thead><tr><th>Pack</th><th class=\"ds-n\">Cruise min</th><th class=\"ds-n\">Price</th></tr></thead><tbody><tr class=\"ds-ch\"><td>Ovonic 6S 6500 ×2</td><td class=\"ds-n\">11.9</td><td class=\"ds-n\">$69.50</td></tr><tr><td>HOOVO 6S 8000</td><td class=\"ds-n\">—</td><td class=\"ds-n\">—</td></tr></tbody></table>",
-      "css": ".ds-t{border-collapse:separate;border-spacing:0;width:100%;border-top:2px solid #16191d;border-bottom:1px solid #cbcfd4;font:400 .875rem/1.45 'Source Sans 3',system-ui,sans-serif;font-variant-numeric:tabular-nums;color:#16191d}.ds-t th:first-child,.ds-t td:first-child{padding-left:8px}.ds-t th,.ds-t td{padding:9px 12px;border-bottom:1px solid #e3e5e8;text-align:left}.ds-t th{font:500 .75rem/1.3 'Red Hat Mono',ui-monospace,monospace;letter-spacing:.06em;text-transform:uppercase;color:#474e57;border-bottom-color:#cbcfd4}.ds-t .ds-n{text-align:right}.ds-t tbody tr:hover td{background:#f4f5f6}.ds-t tr.ds-ch td{background:#f7ece6}.ds-t tr.ds-ch td:first-child{font-weight:600}"
-    },
-    {
-      "name": "Contents navigation",
-      "kind": "nav",
-      "refersTo": null,
-      "description": "Plain-text numbered contents; current section bold with orange number.",
-      "html": "<nav class=\"ds-nav\"><div class=\"ds-nh\">Contents</div><a><span>1</span>Overview</a><a class=\"ds-cur\"><span>2</span>CAD model</a><a><span>3</span>Concepts</a></nav>",
-      "css": ".ds-nav{width:220px;font:400 .875rem/1.3 'Source Sans 3',system-ui,sans-serif}.ds-nh{font:500 .75rem/1 'Red Hat Mono',ui-monospace,monospace;letter-spacing:.1em;text-transform:uppercase;color:#6c737c;padding-bottom:12px;border-bottom:1px solid #cbcfd4;margin-bottom:6px}.ds-nav a{display:flex;gap:12px;align-items:baseline;min-height:36px;padding:7px 0;color:#474e57;text-decoration:none;cursor:pointer;transition:color .12s}.ds-nav a span{font:500 .75rem 'Red Hat Mono',ui-monospace,monospace;color:#6c737c;width:1.5em;text-align:right}.ds-nav a:hover{color:#16191d}.ds-nav a.ds-cur{color:#16191d;font-weight:600}.ds-nav a.ds-cur span{color:#b8481b;font-weight:600}"
+      "refersTo": "viewer-toggle",
+      "description": "Segmented controls on the CAD and flow viewer bars; pressed = blue wash with a blue inset rule.",
+      "html": "<div class=\"ds-seg\"><button type=\"button\" aria-pressed=\"true\">Assembled</button><button type=\"button\" aria-pressed=\"false\">Exploded</button><button type=\"button\" aria-pressed=\"false\">X-ray</button></div>",
+      "css": ".ds-seg{display:inline-flex;gap:2px}.ds-seg button{min-height:34px;padding:0 15px;border:0;border-radius:5px;background:var(--surface-2,#1C222B);color:var(--fg-2,#A3ADBA);font:500 .8125rem \"IBM Plex Sans\",system-ui,sans-serif;cursor:pointer;transition:background .12s,color .12s}.ds-seg button:hover{background:var(--surface-3,#242B35);color:var(--fg,#E6EAF0)}.ds-seg button[aria-pressed=\"true\"]{background:var(--accent-soft,#15243A);color:var(--fg,#E6EAF0);box-shadow:inset 0 0 0 1px var(--accent-line,#2C4D7D)}.ds-seg button:focus-visible{outline:2px solid var(--accent,#5B9DFF);outline-offset:2px}"
     }
   ],
   "narrative": {
-    "northStar": "The Drawing Title Block",
-    "overview": "The review reads like a released engineering drawing, not a web page. Its cover is a title block: a ruled grid of cells for review date, stage, revision and sources, sitting under a heavy ink rule. Everything below follows the drawing sheet: black drafting ink on near-white vellum, square corners, hairline frames, and condensed technical lettering for headings. Authority comes from precision, so the system has no gradients, shadows or rounded cards, and nothing that reads as a marketing site or a generated template.\n\nThe page is dense on purpose. It carries numbers inline with units, cites a source under every claim, and puts structure in rules rather than boxes. A 2px ink rule opens each major block (key figures, tables, figures, the measurement list) and 1px hairlines divide what's inside. Colour is held back for meaning: International Orange marks where you are, and the four status colours mark verdicts. The client has to be able to trust what they're reading before they approve the spend, and the restraint is what earns that.\n\nThe page is precise and restrained. Detail shows in alignment, tabular numerals and consistent rules, never in ornament.",
+    "northStar": "The Engineering Workspace",
+    "overview": "The review is a tool the client and the team work inside, not a document they scroll. It borrows its presentation of geometry from Onshape, its organisation of analysis cases from SimScale, and its type, spacing and navigation from Linear. A sticky top bar and a persistent left sidebar frame a single workspace; each chapter is a page, long chapters split into sub-tabs, and wherever the project owns a viewer (the live SOLIDWORKS model, the drawing set, the CFD flow field) that viewer leads the page with an inspector beside it.\n\nThe surface is quiet so the engineering can be loud. Dark graphite is the default and a light theme is one click away; both are built from the same token names. One blue signal accent marks where the reader is and what is selected. Green, amber, red and violet are reserved for verdicts, and every other hue belongs to data. Panels are flat with 1px borders and 8px corners; nothing floats except popovers. Numbers, parameters and source paths are set in IBM Plex Mono so a reader can tell measured values from prose at a glance.\n\nThe traditional report is not abandoned. Report view and print render every page in order from the same content as one document, with a cover, revision record, approvals, contents and every disclosure open.",
     "keyCharacteristics": [
-      "A ruled title-block cover under a 2px ink rule",
-      "Ink on vellum, with one International Orange accent used sparingly",
-      "Square geometry (2px or less), no shadows, structure carried by rules",
-      "Condensed technical headings, a humanist sans body, mono labels and citations",
-      "Tabular numerals everywhere",
-      "Full light and dark themes from the same tokens"
+      "App shell: 52px sticky top bar, 248px sidebar, workspace capped at 1200px.",
+      "Pages are chapters; sub-tabs come from the chapter's own section headings; hash routes per page and tab.",
+      "Visual-first workspaces: the viewer leads, a 300px inspector sits beside it.",
+      "IBM Plex Sans for prose and UI, IBM Plex Mono for anything measured or cited.",
+      "One blue signal accent; verdict colours carry status only; other hues are data.",
+      "Flat 1px panels, 8px radius, shadows on popovers only.",
+      "Key parameters are a spec list, never hero metric tiles."
     ],
     "rules": [
       {
-        "name": "The Position-Not-Paint Rule",
-        "body": "International Orange marks where the reader is, or what the reader is acting on. It never fills a large area, never sits behind body text, and never stands in for a verdict.",
+        "name": "The One Signal Rule",
+        "body": "Blue means \"here\" or \"selected\" or \"follow this\". It is never a status, never a section fill and never decoration. A second accent hue is not added.",
         "section": "colors"
       },
       {
         "name": "The Verdict Colours Rule",
-        "body": "Green, amber, red and violet mean met, risk, fail and open, and nothing else. Never use them for decoration or chart series.",
+        "body": "Green, amber, red and violet mean met, at risk, fail and open, and nothing else. They never colour chart series or decoration, and no status is shown that the analysis has not established.",
         "section": "colors"
       },
       {
         "name": "The Never-Colour-Alone Rule",
-        "body": "Every status shown by colour is also stated in words or form. A status cell carries a short note (\"below margin\", \"within ±15 %\") in its own status colour. A chosen option is bold and named in its column header. Paired chart series differ in lightness or outline, not only hue.",
+        "body": "Every status shown by colour is also stated in words: chips carry their label, verdict cells carry a note, decision cards carry an \"Open\" or \"Blocking\" label.",
         "section": "colors"
       },
       {
+        "name": "The Data-Owns-Hue Rule",
+        "body": "Warm and cool hues beyond the accent and the verdicts are reserved for data: chart series, CFD ramps and the model stage.",
+        "section": "colors"
+      },
+      {
+        "name": "The Mono-for-Measured Rule",
+        "body": "Every key-parameter value, numeric table cell, formula, file path, source line, issue chip, revision date, measurement and figure number is IBM Plex Mono. Prose, labels and controls are IBM Plex Sans.",
+        "section": "typography"
+      },
+      {
         "name": "The Tabular Numbers Rule",
-        "body": "Every digit on the page uses tabular numerals, so columns of figures line up like a parts list.",
+        "body": "Every digit uses tabular numerals so columns of figures line up.",
         "section": "typography"
       },
       {
-        "name": "The Readable Floor Rule",
-        "body": "Nothing functional is set below 12 px, and citations are never below 13 px. The client has to be able to read the sources.",
+        "name": "The Generated Numbering Rule",
+        "body": "Chapter numbers are filled from page order at load and set in mono at text-tertiary; they are never typed by hand.",
         "section": "typography"
       },
       {
-        "name": "The Report Numbering Rule",
-        "body": "Sections, subsections and figures are numbered the way an engineering report numbers them: section 4, subsection 4.2, Figure 4.3. The numbers come from the page structure at load, never typed by hand, so inserting a subsection renumbers everything after it.",
-        "section": "typography"
-      },
-      {
-        "name": "The Lettering Rule",
-        "body": "Condensed display type is for headings and figures only. Running text never uses it, and labels are always mono caps, never small caps in the body face.",
-        "section": "typography"
-      },
-      {
-        "name": "The Ruled Block Rule",
-        "body": "A major block opens with a 2px Drafting Ink rule and closes with a 1px Frame Rule. This applies to the key-figure strip, data tables, figures, the measurement list and the section index. Don't wrap these blocks in boxes.",
+        "name": "The Visual-First Rule",
+        "body": "Where the project has a viewer, the page opens on it with its inspector beside; the chapter text follows below.",
         "section": "layout"
       },
       {
-        "name": "The Flat Sheet Rule",
-        "body": "Nothing floats. If an element needs to stand apart, give it a rule, a frame or an ink fill, never a shadow, glow or blur.",
-        "section": "elevation"
+        "name": "The Same-Content Report Rule",
+        "body": "Report view and print show the same chapters, in page order, as one document: cover with revision record and approvals, contents, every tab panel visible and every disclosure open. There is never a second copy of the content.",
+        "section": "layout"
       },
       {
-        "name": "The Square Corner Rule",
-        "body": "Radius never exceeds 2px.",
-        "section": "shapes"
+        "name": "The Popover-Only Shadow Rule",
+        "body": "Only surfaces that sit above the workspace temporarily cast a shadow. Panels, cards, tables, charts and viewers never do.",
+        "section": "elevation"
       }
     ],
     "dos": [
-      "**Do** open each major block with a 2px Drafting Ink rule and close it with a 1px Frame Rule.",
-      "**Do** keep International Orange to position, focus and selection.",
-      "**Do** set labels, IDs, units, field names and citations in Red Hat Mono caps with 0.06–0.1em tracking.",
-      "**Do** use tabular numerals and right-align number columns.",
-      "**Do** put a Source citation under every claim block, and mark estimates with the EST tag.",
-      "**Do** keep radii at 2px or less, and keep controls at least 44px tall.",
-      "**Do** define every colour as a token on `:root`, with dark values under `prefers-color-scheme` and `[data-theme]`."
+      "Do use Signal Blue only for links, focus, the current place and selection; show selection on controls as a blue wash with a 1px blue rule.",
+      "Do set every measured or cited value (parameters, numeric cells, formulas, paths, sources, dates, IDs) in IBM Plex Mono with tabular numerals.",
+      "Do bind every number to its repo source and print a Source line beneath it; mark estimates with the EST mark.",
+      "Do lead with the viewer where a page has one, with a 300px inspector beside it above 1100px.",
+      "Do build panels flat: panel-graphite, 1px hairline border, 8px radius.",
+      "Do give every interactive control a 44px target on touch widths (below 900px).",
+      "Do read theme tokens in charts and redraw them on theme change and before printing.",
+      "Do respect reduced motion: transitions and animations switch off."
     ],
     "donts": [
-      "**Don't** use box shadows, glows, gradients or blur. The system is flat (user direction: it must not look AI-generated).",
-      "**Don't** use rounded cards, pill badges, dot status icons or coloured side or top stripes on cards.",
-      "**Don't** return to the earlier indigo-on-blue-grey theme or the Archivo/IBM Plex pairing. That's the look this system replaced.",
-      "**Don't** use International Orange as a verdict colour or a large fill.",
-      "**Don't** use zebra stripes or filled header rows in tables.",
-      "**Don't** set running text in the condensed display face.",
-      "**Don't** put a small label or kicker above any heading. Section numbers go inside the heading, and status goes in a chip on the same line.",
-      "**Don't** set functional text below 12 px, or citations below 13 px."
+      "Don't show key parameters as hero metric tiles; they are a spec list.",
+      "Don't put shadows on panels, cards, tables, charts or viewers; only the palette, lightbox, drawer and CAD tooltip float.",
+      "Don't add a second accent or use the verdict colours for decoration or chart series.",
+      "Don't border status chips; only the EST mark is outlined.",
+      "Don't show a status the analysis has not established; the states are met, at risk, fail, open and EST.",
+      "Don't set UI or prose in a serif; STIX Two Text italic is for signature lines.",
+      "Don't keep a separate copy of content for Report view or print."
     ]
   }
 }

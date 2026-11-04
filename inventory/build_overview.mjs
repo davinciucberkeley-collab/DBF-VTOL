@@ -2,14 +2,14 @@
 // from inventory/inventory.json (built by inventory/build_inventory.mjs) + inventory/src/* + the CAD mesh (review/mesh.mjs).
 // Run: node inventory/build_overview.mjs     Every number on the page is read or computed here; none is typed into body.html.
 import { readFileSync, writeFileSync } from 'fs';
-import { packMesh } from '../review/mesh.mjs';
+import { packMesh } from './v031/review/mesh.mjs';
 import { buildElectrical } from './build_electrical.mjs';
 import { packFusionAll } from './build_fusion.mjs';
 import { buildVariants } from './build_variants.mjs';
 const r = p => readFileSync(new URL(p, import.meta.url), 'utf8');
 const INV = JSON.parse(r('./inventory.json')), S = INV.summary, ROWS = INV.rows;
 const NWA_MD = r('../docs/research/nautical-wings-props.md'), BEN_MD = r('../docs/research/budget-energy-test.md');
-const BOM_CSV = r('../docs/purchasing/C0_BOM.csv'), BASIS = r('../docs/DESIGN-BASIS.md');
+const BOM_CSV = r('./v031/docs/purchasing/C0_BOM.csv'), BASIS = r('./v031/docs/DESIGN-BASIS.md');
 const mustHave = (txt, s, f) => { if (!txt.includes(s)) throw new Error(`source check failed: "${s}" not found in ${f}`); };
 
 // ---------- helpers ----------

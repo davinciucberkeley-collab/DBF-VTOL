@@ -23,7 +23,7 @@ function parseCsv(text) {
 }
 const esc = v => { const s = v == null ? '' : String(v); return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; };
 
-const bomRows = parseCsv(r('../docs/purchasing/C0_BOM.csv'));
+const bomRows = parseCsv(r('./v031/docs/purchasing/C0_BOM.csv'));
 const H = bomRows[0];
 const col = n => H.indexOf(n);
 const items = bomRows.slice(1).filter(x => x.length >= 6 && x[col('Item')] && x[col('Qty')]);
@@ -71,8 +71,8 @@ const pid = re => { const row = out.find(o => re.test(o.Item)); if (!row) throw 
 
 // ---------- fabricated parts (one row per CAD part type; qty = assembly instances) ----------
 const comps = {};
-for (const l of r('../cad/params.txt').split(/\r?\n/)) if (l.startsWith('comp=')) { const p = l.slice(5).split('|')[0]; comps[p] = (comps[p] || 0) + 1; }
-const meta = JSON.parse(r('../cad/mesh/meta.json'));
+for (const l of r('./v031/cad/params.txt').split(/\r?\n/)) if (l.startsWith('comp=')) { const p = l.slice(5).split('|')[0]; comps[p] = (comps[p] || 0) + 1; }
+const meta = JSON.parse(r('./v031/cad/mesh/meta.json'));
 const MAKE = [
   // part, kit, made from (BOM line), process
   ['Wing_Panel_L', 'K1', /F-250 2 in/, 'Hot-wire XPS core, packing-tape skin'],

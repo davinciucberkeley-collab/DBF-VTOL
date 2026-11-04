@@ -1,0 +1,1284 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Test and evaluation plan: C0 lift + cruise VTOL</title>
+<script>try{if(localStorage.getItem('vtol-theme')==='light')document.documentElement.dataset.theme='light'}catch(e){}</script>
+<script>try{if(sessionStorage.getItem('dbf-full')!=='1')document.documentElement.classList.add('paged')}catch(e){document.documentElement.classList.add('paged')}</script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=STIX+Two+Text:ital@1&display=swap">
+<style>
+/* Engineering review platform: app shell (top bar, sidebar, workspace), flat 1 px panels, IBM Plex type.
+   Dark graphite by default, light on request; one blue accent for selection, links and focus; warm and cool hues are data. */
+:root{
+  --bg:#0E1116; --surface:#151A21; --surface-2:#1C222B; --surface-3:#242B35; --zebra:#12161C;
+  --line:#20262F; --line-2:#2A313C; --line-3:#3A4250;
+  --fg:#E6EAF0; --fg-2:#A3ADBA; --fg-3:#828C9A;
+  --accent:#5B9DFF; --accent-2:#8AB8FF; --accent-soft:#15243A; --accent-line:#2C4D7D; --accent-fg:#0E1116;
+  --ink:#E6EAF0; --ink-fg:#0E1116;
+  --ok:#5FD3A2; --ok-soft:#10301F; --warn:#F0C46E; --warn-soft:#33270F;
+  --bad:#F59393; --bad-soft:#391B1D; --open:#B9AEFF; --open-soft:#251F45; --open-line:#4A4290; --bad-line:#7A3A3D;
+  --c1:#6EA8FE; --c2:#5CC8B8; --c3:#E8B65A; --c4:#D98BC0; --c5:#9AA7B8; --c6:#A9C46A;
+  --band:#151A21; --band-line:#2A313C;
+  color-scheme:dark;
+  --f-title:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-display:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,"Cascadia Mono",Consolas,monospace;
+  --f-math:"STIX Two Text","Times New Roman",serif;
+  --stage-1:#1B212A; --stage-2:#0F1318; --stage-grid:#3A4250;
+  --r:8px; --r-s:5px;
+  --shadow:none; --shadow-2:none; --shadow-pop:0 12px 32px rgba(0,0,0,.45),0 2px 6px rgba(0,0,0,.3);
+  --topbar-h:52px; --sidebar-w:248px;
+}
+:root[data-theme="light"]{
+  --bg:#F7F8FA; --surface:#FFFFFF; --surface-2:#EEF1F5; --surface-3:#E3E7ED; --zebra:#FAFBFC;
+  --line:#E6E9EE; --line-2:#DADEE4; --line-3:#B9C0CA;
+  --fg:#0F1419; --fg-2:#4A5361; --fg-3:#616B79;
+  --accent:#2A66CC; --accent-2:#1F57B8; --accent-soft:#E7EFFC; --accent-line:#A9C3EE; --accent-fg:#FFFFFF;
+  --ink:#0F1419; --ink-fg:#FFFFFF;
+  --ok:#11734A; --ok-soft:#E3F5EC; --warn:#8A5A0B; --warn-soft:#FBF0D9;
+  --bad:#A42828; --bad-soft:#FBE5E5; --open:#4B3BA8; --open-soft:#ECE9FC; --open-line:#B7AEEB; --bad-line:#E2A5A5;
+  --c1:#2F6FDB; --c2:#1E8C7E; --c3:#B7791F; --c4:#A2427F; --c5:#5B6B7C; --c6:#5F7A1E;
+  --band:#FFFFFF; --band-line:#DADEE4;
+  color-scheme:light;
+  --stage-1:#F3F5F8; --stage-2:#DCE1E8; --stage-grid:#B9C0CA;
+  --shadow-pop:0 12px 32px rgba(15,20,25,.16),0 2px 6px rgba(15,20,25,.08);
+}
+/* ---------- base ---------- */
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{background:var(--bg);color:var(--fg);font:1rem/1.6 var(--f-body);font-variant-numeric:tabular-nums;margin:0;
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility}
+::selection{background:var(--accent-soft);color:var(--fg)}
+h1,h2,h3,h4{font-family:var(--f-display);line-height:1.15;text-wrap:balance;margin:0;color:var(--fg);font-weight:600}
+h1{font-family:var(--f-title);font-weight:700;font-size:2.625rem;letter-spacing:-.01em;line-height:1.05}
+h2{font-size:1.875rem;letter-spacing:-.005em}
+h2 .secno{font:inherit;color:var(--fg-3);margin-right:.25em}
+h3 .subno{font:inherit;color:var(--fg-3);margin-right:.2em;font-variant-numeric:tabular-nums}
+figcaption .figno{font-weight:600;color:var(--fg)}
+h3{font-size:1.25rem;margin-top:2.75rem;margin-bottom:.4rem;padding-top:1rem;border-top:1px solid var(--line);scroll-margin-top:64px}
+h4{font-size:1rem;letter-spacing:.005em}
+p,li{max-width:64ch;text-wrap:pretty}
+p{margin:.65rem 0}
+b,strong{font-weight:600}
+a{color:var(--fg);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px;text-decoration-color:var(--accent)}
+a:hover{color:var(--accent)}
+code,.mono{font-family:var(--f-mono);font-size:.84em}
+p code,li code,td code,dd code{background:var(--surface-2);border-radius:var(--r-s);padding:.05em .3em}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.wrap{max-width:1040px;margin:0 auto;padding-inline:24px;padding-block:0 96px}
+@media (max-width:560px){.wrap{padding-inline:16px}}
+
+/* ---------- cover: title + drawing title block ---------- */
+/* ---------- cover: report title page ---------- */
+header.top{padding-block:24px 34px;border-bottom:2px solid var(--ink)}
+.mast{display:flex;justify-content:space-between;align-items:center;gap:16px;padding-bottom:14px;margin-bottom:44px;border-bottom:1px solid var(--line-2)}
+.mast .org{font:600 .875rem/1.3 var(--f-body);color:var(--fg-2)}
+header.top h1{max-width:18ch}
+header.top .subtitle{margin:14px 0 0;color:var(--fg-2);font-size:1.125rem;line-height:1.5;max-width:56ch}
+.docref{margin:22px 0 0;max-width:62ch;color:var(--fg);font-size:1rem}
+.record{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:28px 48px;align-items:start;margin-top:38px}
+.record>*{min-width:0}
+table.revrec{border-top:1px solid var(--line-2);border-bottom:1px solid var(--line-2);font-size:.875rem}
+table.revrec caption,.so-title{caption-side:top;text-align:left;font:600 .875rem/1.3 var(--f-body);color:var(--fg);padding:0 0 8px;margin:0}
+table.revrec th{position:static;background:transparent;padding-block:7px}
+table.revrec td{padding-block:7px;color:var(--fg-2)}
+table.revrec td:nth-child(2){white-space:nowrap}
+.signoff{display:grid;gap:22px}
+.sig{display:grid;gap:5px}
+.sig-line{display:block;min-height:30px;padding-bottom:3px;border-bottom:1px solid var(--fg-2);font:italic 400 1rem/30px var(--f-body);color:var(--fg)}
+.sig-cap{font-size:.8125rem;color:var(--fg-3)}
+@media (max-width:760px){.record{grid-template-columns:minmax(0,1fr)}.mast{margin-bottom:30px}}
+.eyebrow{font:400 .8125rem/1.3 var(--f-body);color:var(--fg-3)}
+.meta{color:var(--fg-2);font-size:.875rem}
+
+/* ---------- sections ---------- */
+main{min-width:0}
+section.sec{display:block;scroll-margin-top:64px}
+section.sec+section.sec{margin-top:0}
+section.sec[hidden]{display:none}
+[id]{scroll-margin-top:64px}
+.sechead{padding-top:18px;padding-bottom:14px;margin-bottom:16px;border-top:2px solid var(--ink);border-bottom:1px solid var(--line-2)}
+.sechead h2{font-size:2rem}
+.sechead + h3,.sechead + * h3:first-child{border-top:0}
+.verdict{font-size:1.125rem;line-height:1.62;color:var(--fg);max-width:66ch}
+.lede{font-size:1.125rem;line-height:1.62}
+
+/* source citation */
+.src{font:.8125rem/1.55 var(--f-mono);color:var(--fg-3);margin:.35rem 0 1.3rem;max-width:72ch;word-break:break-word}
+.src::before{content:"Source  ";white-space:pre;font-weight:500;color:var(--fg-2);letter-spacing:.02em}
+.src a{color:var(--fg-2)}
+.est{display:inline-block;font:600 .75rem/1 var(--f-body);letter-spacing:.04em;text-transform:uppercase;color:var(--warn);border:1px solid var(--warn);border-radius:var(--r-s);padding:2px 4px;vertical-align:2px}
+
+/* ---------- key figures ---------- */
+.kpis{display:grid;grid-template-columns:1fr;margin:22px 0 26px;border-top:2px solid var(--ink);border-bottom:1px solid var(--line-2)}
+.kpi{display:grid;grid-template-columns:minmax(0,13rem) minmax(0,7rem) minmax(0,1fr);gap:4px 18px;align-items:baseline;padding:9px 8px;border-bottom:1px solid var(--line);min-width:0}
+.kpi:last-child{border-bottom:0}
+.kpi .l{font:600 .875rem/1.4 var(--f-body);color:var(--fg)}
+.kpi .v{font:600 1.25rem/1.2 var(--f-display);text-align:right;font-variant-numeric:tabular-nums;color:var(--fg)}
+.kpi .s{font-size:.875rem;line-height:1.45;color:var(--fg-2)}
+.v.ok,.ok-t{color:var(--ok)} .v.warn,.warn-t{color:var(--warn)} .v.bad,.bad-t{color:var(--bad)}
+
+/* ---------- status labels ---------- */
+.chip{display:inline-block;font:600 .8125rem/1 var(--f-body);padding:4px 7px;border-radius:var(--r-s);white-space:nowrap;border:1px solid currentColor;background:transparent}
+.chip.met{color:var(--ok);border-color:var(--ok)}
+.chip.risk{color:var(--warn);border-color:var(--warn)}
+.chip.fail{color:var(--bad);border-color:var(--bad);background:var(--bad-soft)}
+.chip.open{color:var(--open);border-color:var(--open)}
+
+/* ---------- panels ---------- */
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin:16px 0}
+#conceptCards{grid-template-columns:repeat(auto-fit,minmax(min(100%,22rem),1fr))}
+.grid2>*{min-width:0}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px}
+.card.pick{border-color:var(--ink);outline:1px solid var(--ink);outline-offset:-2px}
+.card h3{font-size:1rem;line-height:1.25;margin:0 0 8px;padding-top:0;border-top:0}
+.card .tag{float:right;margin-left:8px}
+
+/* decisions */
+.decision{color:var(--fg);border:1px solid var(--open-line);border-radius:var(--r);padding:16px 20px 14px;background:var(--surface);margin:16px 0}
+.decision.red{border-color:var(--bad-line)}
+.decision b.q{display:block;color:var(--fg);font:600 1.125rem/1.35 var(--f-display);letter-spacing:.003em;margin-bottom:8px;max-width:70ch}
+.decision b.q::before{content:"Open";display:inline-block;font:600 .8125rem/1 var(--f-body);color:var(--open);border:1px solid currentColor;border-radius:var(--r-s);padding:4px 6px;margin-right:10px;vertical-align:.18em}
+.decision.red b.q::before{content:"Blocking";color:var(--bad);background:var(--bad-soft)}
+.decision>div{max-width:78ch;color:var(--fg-2)}
+.decision>div b{color:var(--fg)}
+.decision .rec{max-width:70ch;margin-top:12px;padding:10px 14px;background:var(--surface-2);border-radius:var(--r-s);color:var(--fg)}
+.decision.red .rec{background:var(--bad-soft)}
+.decision .src{margin:12px 0 0;padding-top:10px;border-top:1px solid var(--line)}
+
+/* "What the team must measure" */
+.measure{margin:40px 0 10px;border-top:2px solid var(--ink);border-bottom:1px solid var(--line-2)}
+.measure h4{padding:12px 0 10px;border-bottom:1px solid var(--line-2);font-size:1.125rem}
+.measure ol{margin:0;padding:0;list-style:none;counter-reset:m}
+.measure li{padding:12px 0;border-bottom:1px solid var(--line);max-width:none;display:grid;grid-template-columns:3.4em minmax(0,1fr);gap:4px 12px;line-height:1.55}
+.measure li:last-child{border-bottom:0}
+.measure li .id{align-self:start;font:400 .8125rem/1.55 var(--f-mono);color:var(--accent)}
+.measure .how{color:var(--fg-2)}
+.measure .fail{color:var(--bad);font-weight:500}
+
+/* ---------- tables ---------- */
+.tbl{overflow:auto;background:transparent;margin:14px 0;max-height:640px;-webkit-overflow-scrolling:touch;scrollbar-width:thin}
+table{border-collapse:separate;border-spacing:0;width:100%;border-top:2px solid var(--ink);border-bottom:1px solid var(--line-2);font-size:.875rem;line-height:1.45}
+th,td{padding:9px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th:first-child,td:first-child{padding-left:8px}
+tbody tr:last-child td{border-bottom:0}
+thead th{position:sticky;top:0;background:var(--bg);font:600 .8125rem/1.3 var(--f-body);color:var(--fg);white-space:nowrap;z-index:1;border-bottom:1px solid var(--line-2);padding-block:10px}
+tbody tr:hover td{background:var(--surface-2)}
+thead th.sort{padding:0;user-select:none;transition:color .12s}
+th.sort:hover{color:var(--fg)}
+/* the sort control is a full-cell button; its arrow shows the sort state */
+.thbtn{all:unset;box-sizing:border-box;display:block;width:100%;padding:10px 12px;cursor:pointer;font:inherit;color:inherit;letter-spacing:inherit;text-transform:inherit;text-align:inherit;white-space:nowrap}
+thead th.sort:first-child .thbtn{padding-left:8px}
+.thbtn:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.thbtn::after{content:"↕";margin-left:5px;color:var(--line-3);font-size:.9em;letter-spacing:0}
+th.sort[aria-sort="ascending"] .thbtn::after{content:"↑";color:var(--accent)}
+th.sort[aria-sort="descending"] .thbtn::after{content:"↓";color:var(--accent)}
+th.sort[aria-sort="ascending"],th.sort[aria-sort="descending"]{color:var(--fg)}
+td.n,th.n{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+td.n{font-feature-settings:"tnum" 1}
+tbody tr.chosen td{background:var(--accent-soft)}
+tr.chosen td:first-child{font-weight:600}
+tbody tr.total td,tr.total td{font-weight:700;border-top:1px solid var(--ink);background:var(--surface)}
+td.ok{color:var(--ok);background:var(--ok-soft)}
+td.warn{color:var(--warn);background:var(--warn-soft)}
+td.bad{color:var(--bad);background:var(--bad-soft)}
+.morph td.ok{font-weight:600}
+small{font-size:.8125rem}
+td small,.small{color:var(--fg-3);font-size:.8125rem}
+td.ok small,td.warn small,td.bad small{color:inherit}
+
+/* ---------- back-calculation chain ---------- */
+.chain{display:flex;flex-wrap:wrap;gap:8px;align-items:stretch;margin:18px 0}
+.chain .box{flex:1 1 150px;min-width:0;background:var(--surface);border:1px solid var(--line-2);border-radius:var(--r-s);padding:11px 13px}
+.chain .box .l{font:600 .8125rem/1.3 var(--f-body);color:var(--fg-2)}
+.chain .box .v{font:600 1.5rem/1.15 var(--f-display);margin:6px 0 5px}
+.chain .box .f{font:.8125rem/1.45 var(--f-mono);color:var(--fg-2);word-break:break-word;padding-top:6px;border-top:1px solid var(--line)}
+.chain .arr{align-self:center;color:var(--fg-3);font-size:1rem}
+
+/* ---------- sliders / segmented ---------- */
+.sliders{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px 28px;background:var(--surface-2);border-radius:var(--r);padding:16px 18px;margin:16px 0}
+.sl label{display:flex;justify-content:space-between;align-items:baseline;font-size:.875rem;gap:8px;color:var(--fg-2)}
+.sl label output{font:400 .8125rem var(--f-mono);color:var(--fg)}
+.sl input[type=range]{width:100%;min-height:32px;accent-color:var(--accent)}
+.seg{display:inline-flex;gap:3px;padding:3px;border:1px solid var(--line-2);border-radius:var(--r-s);background:var(--surface-2);max-width:100%;flex-wrap:wrap}
+.seg button{min-height:44px;padding:0 16px;border:0;border-radius:var(--r-s);background:var(--surface);color:var(--fg-2);font:500 .875rem var(--f-body);cursor:pointer;transition:background .12s,color .12s}
+.seg button:hover{background:var(--surface-2);color:var(--fg)}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--ink-fg)}
+
+/* ---------- figures ---------- */
+figure.chart{margin:22px 0;background:var(--surface);border-top:2px solid var(--ink);border-bottom:1px solid var(--line-2);padding:0}
+figure.chart figcaption{font:600 1.125rem/1.35 var(--f-display);letter-spacing:.005em;padding:10px 0 8px;color:var(--fg)}
+figure.chart .svgwrap{padding:8px 0 12px}
+figure.chart svg{width:100%;max-width:880px;height:auto;display:block;margin-inline:auto}
+.svgwrap{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:thin}
+@media (max-width:640px){.svgwrap svg{min-width:700px}}
+svg text{fill:var(--fg-2);font:12px var(--f-body);font-variant-numeric:tabular-nums}
+svg .axis{stroke:var(--line-3)} svg .grid{stroke:var(--line);stroke-dasharray:2 3}
+
+/* ---------- 3D viewer ---------- */
+.viewer{position:relative;background:var(--surface);border:1px solid var(--line-3);border-radius:var(--r);overflow:hidden}
+.viewer canvas{display:block;width:100%;height:clamp(260px,calc(100vh - 140px),460px);height:clamp(260px,calc(100svh - 140px),460px);touch-action:none;cursor:grab;background:var(--surface)}
+.viewer canvas:active{cursor:grabbing}
+.viewer .lbl{position:absolute;left:12px;top:10px;font:500 .8125rem/1 var(--f-body);color:var(--fg-2);background:var(--surface);padding:5px 7px;border:1px solid var(--line-2);border-radius:var(--r-s)}
+.viewer .ctl{display:flex;flex-wrap:wrap;align-items:center;gap:10px 24px;padding:10px 12px;border-top:1px solid var(--line-3);background:var(--surface)}
+.cgrp{display:flex;align-items:center;gap:10px}
+.cgl{font:600 .8125rem/1 var(--f-body);color:var(--fg-2)}
+.segbar{display:inline-flex;gap:2px}
+.viewer .ctl button{min-height:44px;padding:0 15px;border:0;border-radius:var(--r-s);background:var(--surface);color:var(--fg-2);font:400 1rem var(--f-body);cursor:pointer;transition:background .12s,color .12s}
+.viewer .ctl button:hover{background:var(--surface-2);color:var(--fg)}
+.viewer .ctl button[aria-pressed="true"]{background:var(--ink);color:var(--ink-fg)}
+.cmeta{margin-left:auto;font:400 .8125rem/1.3 var(--f-body);color:var(--fg-3)}
+@media (max-width:560px){.cmeta{margin-left:0;flex-basis:100%}.cgrp{flex-basis:100%}.cgl{flex:none;width:4.2em}.segbar{flex:1;min-width:0}.viewer .ctl .segbar button{flex:auto;padding:0 6px}}
+
+/* ---------- in-section index + prev/next ---------- */
+
+/* ---------- contents page and running head ---------- */
+.toc{margin:28px 0 8px;padding-top:14px;border-top:1px solid var(--line-2)}
+.toc h2{font-size:1.25rem;margin-bottom:10px}
+.toc ol{list-style:none;margin:0;padding:0;columns:2 18rem;column-gap:40px}
+.toc li{break-inside:avoid;max-width:none}
+.toc a{display:flex;gap:14px;align-items:baseline;min-height:44px;padding:9px 0;border-bottom:1px solid var(--line);text-decoration:none;color:var(--fg)}
+.toc a .n{flex:none;width:1.6em;text-align:right;color:var(--fg-3);font-variant-numeric:tabular-nums}
+.toc a .t{font:600 1rem/1.3 var(--f-display)}
+.toc a:hover .t{color:var(--accent)}
+/* contents grouped in three parts, one column each */
+#tocList{display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:4px 36px;columns:auto}
+#tocList>li.part{font:600 .875rem/1.3 var(--f-body);color:var(--fg-2);padding-top:6px}
+#tocList>li.part .pn{display:block;font-size:.8125rem;color:var(--fg-3);font-weight:400;margin-bottom:2px}
+#tocList>li.part>ol{columns:auto;margin-top:6px;border-top:2px solid var(--ink)}
+#tocList>li.part .t{font-weight:600}
+
+/* ---------- design iterations chart ---------- */
+#tradeChart .tb.r1{fill:var(--c1)}
+#tradeChart .tb.nor1{fill:var(--c5)}
+#tradeChart .tb.out{fill:transparent;stroke:var(--line-3);stroke-width:1;stroke-dasharray:3 3}
+#tradeChart rect.tb.out{fill:var(--surface-2)}
+#tradeChart .lab.sel{fill:var(--fg);font-weight:700}
+#tradeChart .trow:hover text{fill:var(--fg)}
+
+/* ---------- links out to companion documents and files ---------- */
+.cta{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 6px;max-width:none}
+.btnlink{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border:1px solid var(--ink);border-radius:var(--r-s);background:var(--ink);color:var(--ink-fg);font:600 1rem var(--f-body);text-decoration:none}
+.btnlink:hover{background:var(--fg-2);border-color:var(--fg-2);color:var(--ink-fg)}
+.btnlink.quiet{background:transparent;color:var(--fg)}
+.btnlink.quiet:hover{background:var(--surface-2);color:var(--fg)}
+ul.files{list-style:none;margin:8px 0 18px;padding:0;border-top:1px solid var(--line-2);max-width:none}
+ul.files li{display:grid;grid-template-columns:minmax(0,14rem) minmax(0,1fr);gap:4px 18px;align-items:baseline;padding:10px 0;border-bottom:1px solid var(--line);max-width:none}
+ul.files a{display:inline-flex;align-items:center;min-height:44px;font-weight:600;color:var(--fg);text-decoration-color:var(--accent-line);text-underline-offset:2px}
+ul.files span{color:var(--fg-2);font-size:.875rem}
+@media (max-width:560px){ul.files li{grid-template-columns:minmax(0,1fr)}}
+.runhead{position:fixed;left:0;right:0;top:0;z-index:10;display:flex;gap:16px;align-items:center;padding:8px max(16px,calc((100vw - 1040px)/2 + 24px));padding-top:calc(8px + env(safe-area-inset-top,0px));background:var(--bg);border-bottom:1px solid var(--line-2);font:400 .8125rem/1.3 var(--f-body);color:var(--fg-3);transform:translateY(-110%);transition:transform .18s ease-out}
+.runhead.on{transform:none}
+.runhead .rh-sec{flex:1;min-width:0;color:var(--fg);font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.runhead .rh-toc{color:var(--fg-2);text-decoration:underline;text-decoration-color:var(--line-2)}
+@media (max-width:560px){.runhead .rh-doc{display:none}}
+
+/* ---------- requirement status grid ---------- */
+.reqsum{margin:8px 0 10px;color:var(--fg-2)}
+.reqsum b{color:var(--fg);font-variant-numeric:tabular-nums}
+.reqgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(15rem,1fr));gap:0 28px;margin:0 0 6px;border-top:1px solid var(--line-2)}
+.rq{display:grid;grid-template-columns:2.6em minmax(0,1fr) auto;gap:10px;align-items:baseline;padding:8px 0;border-bottom:1px solid var(--line);font-size:.875rem;line-height:1.35}
+.rq .rid{font-variant-numeric:tabular-nums;color:var(--fg-3);font-weight:600}
+.rq .rtx{color:var(--fg)}
+.decision details.facts{margin-top:12px}
+
+/* ---------- secondary detail behind a disclosure ---------- */
+details.more{margin:10px 0 4px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+details.more>summary{min-height:44px;display:flex;align-items:center;cursor:pointer;font:600 .875rem/1.3 var(--f-body);color:var(--fg)}
+details.more[open]>summary{border-bottom:1px solid var(--line)}
+details.more>summary{list-style:none}
+details.more>summary::-webkit-details-marker{display:none}
+details.more>summary::before{content:"";flex:none;width:7px;height:7px;margin:0 12px 0 2px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(-45deg);transition:transform .15s ease-out}
+details.more[open]>summary::before{transform:rotate(45deg)}
+details.more>summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* ---------- document control (cover) ---------- */
+
+/* ---------- drawing sheets ---------- */
+.drawings{display:grid;grid-template-columns:1fr;gap:18px;margin:16px 0}
+figure.sheet{margin:0}
+figure.sheet figcaption{padding:8px 0 0}
+.sheetbtn{all:unset;display:block;cursor:zoom-in;border:1px solid var(--line-2);background:#fff}
+.sheetbtn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.sheetbtn img{display:block;width:100%;height:auto;aspect-ratio:1614 / 1035}
+.lightbox{width:min(96vw,1700px);max-width:none;max-height:94vh;padding:0;border:1px solid var(--line-2);background:var(--surface);color:var(--fg)}
+.lightbox::backdrop{background:color-mix(in srgb,var(--bg) 82%,transparent)}
+.lb-bar{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:8px 12px;border-bottom:1px solid var(--line-2);font:600 .875rem var(--f-body)}
+.lb-bar button{min-height:44px;padding:0 16px;border:1px solid var(--line-2);background:var(--surface);color:var(--fg);font:500 .875rem var(--f-body);cursor:pointer}
+.lb-body{overflow:auto;max-height:calc(94vh - 62px);background:#fff}
+.lb-body img{display:block;width:1614px;max-width:none;height:auto}
+
+/* ---------- skip link + screen-reader text ---------- */
+.skip{position:absolute;left:16px;top:calc(env(safe-area-inset-top,0px) - 80px);z-index:20;display:inline-flex;align-items:center;min-height:44px;padding:0 14px;background:var(--ink);color:var(--ink-fg);font:600 .875rem var(--f-body);text-decoration:none;border-radius:var(--r-s)}
+.skip:focus{top:calc(env(safe-area-inset-top,0px) + 8px)}
+.skip:hover{color:var(--ink-fg)}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+/* ---------- misc ---------- */
+.cadimg{width:100%;height:auto;display:block;border-radius:var(--r-s)}
+.state{overflow-x:auto}
+ul.tight{padding-left:1.2em;margin:.5rem 0} ul.tight li{margin:.28rem 0}
+ul.tight li::marker{color:var(--fg-3)}
+dl.kv{display:grid;grid-template-columns:max-content minmax(0,1fr);gap:6px 18px;margin:10px 0;font-size:.875rem}
+dl.kv dt{color:var(--fg-3)} dl.kv dd{margin:0}
+
+/* ---------- small screens ---------- */
+@media (max-width:560px){
+  h1{font-size:2rem}
+  h2{font-size:1.5rem}
+  header.top{padding-block:20px 26px}
+  header.top .subtitle{font-size:1rem}
+  .kpi{grid-template-columns:minmax(0,1fr) auto}
+  .kpi .s{grid-column:1 / -1}
+  .viewer canvas{height:clamp(260px,calc(100svh - 140px),340px)}
+  .tbl{max-height:none}
+  .decision{padding:14px 14px 12px}
+  .thbtn{padding-block:14px;min-height:44px}
+}
+
+/* ---------- Windows High Contrast: charts and viewers keep their own palette so their encodings survive ---------- */
+@media (forced-colors: active){
+  figure.chart .svgwrap,.viewer canvas{forced-color-adjust:none;background:var(--surface)}
+  .cadview canvas{background:linear-gradient(180deg,var(--stage-1),var(--stage-2))}
+  .chip,.est,.thbtn:focus-visible,.decision{border-color:CanvasText}
+}
+
+/* ---------- print ---------- */
+/* the same paper palette while printing, so charts redrawn on beforeprint use it */
+:root.printing{--bg:#fbfbfa; --surface:#ffffff; --surface-2:#f4f5f6; --surface-3:#eceef0; --zebra:#fafafa; --line:#e3e5e8; --line-2:#cbcfd4; --line-3:#9ea4ac; --fg:#16191d; --fg-2:#474e57; --fg-3:#6c737c; --accent:#b8481b; --accent-2:#963a14; --accent-soft:#f7ece6; --accent-line:#e4bfae; --accent-fg:#ffffff; --ink:#16191d; --ink-fg:#ffffff; --ok:#23744a; --ok-soft:#e7f2ec; --warn:#94600a; --warn-soft:#f6efe1; --bad:#ad2a1f; --bad-soft:#f8e9e7; --open:#57489a; --open-soft:#efedf6; --open-line:#a49ec5; --bad-line:#c57e79; --c1:#2f5d8a; --c2:#2e7f78; --c3:#b7791f; --c4:#8e3b6e; --c5:#5b6b7c; --c6:#6b7f2a; --band:#ffffff; --band-line:#cbcfd4; color-scheme:light}
+@media print{
+  /* print always uses the light palette, whatever the screen theme */
+  :root{--bg:#fbfbfa; --surface:#ffffff; --surface-2:#f4f5f6; --surface-3:#eceef0; --zebra:#fafafa; --line:#e3e5e8; --line-2:#cbcfd4; --line-3:#9ea4ac; --fg:#16191d; --fg-2:#474e57; --fg-3:#6c737c; --accent:#b8481b; --accent-2:#963a14; --accent-soft:#f7ece6; --accent-line:#e4bfae; --accent-fg:#ffffff; --ink:#16191d; --ink-fg:#ffffff; --ok:#23744a; --ok-soft:#e7f2ec; --warn:#94600a; --warn-soft:#f6efe1; --bad:#ad2a1f; --bad-soft:#f8e9e7; --open:#57489a; --open-soft:#efedf6; --open-line:#a49ec5; --bad-line:#c57e79; --c1:#2f5d8a; --c2:#2e7f78; --c3:#b7791f; --c4:#8e3b6e; --c5:#5b6b7c; --c6:#6b7f2a; --band:#ffffff; --band-line:#cbcfd4; color-scheme:light}
+  .runhead,.toc,.themebtn,.skip,.gate,.viewer,.sliders,.seg,.cadparts,.loadmsg{display:none!important}
+  .tbl{border:0}
+  figure.chart,.decision,.measure,table,.kpis{break-inside:avoid}
+  section.sec{display:block!important;break-before:page}
+  .tbl{max-height:none;overflow:visible}
+  details>summary{list-style:none}
+  details>summary::-webkit-details-marker{display:none}
+}
+
+/* ---------- SOLIDWORKS model viewer ---------- */
+.cadview{margin-top:14px}
+.cadview canvas{height:clamp(260px,calc(100vh - 140px),540px);height:clamp(260px,calc(100svh - 140px),540px);background:linear-gradient(180deg,var(--stage-1),var(--stage-2))}
+.cadview .tip{position:absolute;right:12px;top:10px;max-width:min(340px,calc(100% - 24px));background:var(--surface);border:1px solid var(--line-2);border-radius:var(--r-s);padding:8px 10px;font-size:.875rem;line-height:1.4;color:var(--fg-2);pointer-events:none}
+.cadview .tip b{display:block;font:600 1rem/1.25 var(--f-display);color:var(--fg);margin-bottom:2px}
+.cadview .fallback{display:flex;flex-direction:column;align-items:center;gap:14px;padding:48px 20px;text-align:center;color:var(--fg-2)}
+.cadview .fallback p{margin:0;max-width:56ch}
+.cadview .fallback button{min-height:44px;padding:0 16px;border:1px solid var(--line-2);background:var(--surface);color:var(--fg);border-radius:var(--r-s);font:500 .875rem var(--f-body);cursor:pointer;transition:border-color .12s}
+.cadview .fallback button:hover{border-color:var(--fg)}
+.cadview.offline .ctl{display:none}
+.cadview .loadmsg{display:none;position:absolute;left:0;right:0;top:45%;margin:0;text-align:center;font:400 .875rem/1 var(--f-body);color:var(--fg-2);max-width:none}
+.cadview.loading .loadmsg{display:block}
+.cadparts{margin:12px 0 0;border-bottom:1px solid var(--line-2)}
+.cadparts summary{min-height:44px;display:flex;align-items:center;cursor:pointer;font:600 1rem/1.25 var(--f-display);color:var(--fg)}
+.cadparts ul{list-style:none;margin:0 0 12px;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+.cadparts li{max-width:none}
+.cadparts ul+.grp{margin:4px 0 8px;font-weight:600;color:var(--fg)}
+#cadFasteners{list-style:none;margin:0 0 12px;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+.cadparts button{min-height:44px;padding:0 12px;border:1px solid var(--line-2);background:var(--surface);color:var(--fg-2);border-radius:var(--r-s);font:400 .875rem var(--f-body);cursor:pointer;transition:border-color .12s,color .12s}
+.cadparts button:hover,.cadparts button:focus-visible{border-color:var(--fg);color:var(--fg)}
+/* touch gate: canvases take gestures only after a tap */
+.viewer .gate{display:none}
+@media (pointer:coarse){
+  .viewer:not(.armed) canvas{pointer-events:none}
+  .viewer .gate{display:flex;position:absolute;left:0;right:0;top:0;align-items:center;justify-content:center;padding:0;border:0;background:transparent;cursor:pointer}
+  .viewer .gate span{font:600 .875rem/1 var(--f-body);color:var(--fg);background:var(--surface);border:1px solid var(--line-2);border-radius:var(--r-s);padding:10px 12px}
+}
+@media (max-width:560px){.cadview canvas{height:clamp(260px,calc(100svh - 140px),380px)}.cadview .tip{top:auto;bottom:66px}}
+#tradeChart .ghead{fill:var(--fg);font-weight:600}
+svg text.phead{fill:var(--fg);font-weight:600;font-size:12px}
+
+/* ---------- overview additions: GA figure, measurement list, glossary ---------- */
+.gafig{margin:22px 0 6px}
+.mlist{margin:6px 0 14px;padding:0;list-style:none;border-top:1px solid var(--line-2)}
+.mlist li{display:grid;grid-template-columns:4.2em minmax(0,1fr) auto;gap:4px 14px;align-items:baseline;padding:8px 0;border-bottom:1px solid var(--line);max-width:none}
+.mlist .mid{color:var(--accent);font-variant-numeric:tabular-nums;font-weight:600}
+.mlist a{color:var(--fg);text-decoration-color:var(--line-3);text-underline-offset:2px}
+.mlist .mch{color:var(--fg-3);font-size:.875rem}
+dl.terms{display:grid;grid-template-columns:repeat(auto-fill,minmax(19rem,1fr));gap:0 32px;margin:8px 0 18px;border-top:1px solid var(--line-2)}
+dl.terms>div{display:grid;grid-template-columns:7.5rem minmax(0,1fr);gap:12px;padding:8px 0;border-bottom:1px solid var(--line)}
+dl.terms dt{font-weight:600;color:var(--fg)}
+dl.terms dd{margin:0;color:var(--fg-2)}
+.tbl:focus-visible,.svgwrap:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+@media (max-width:560px){.mlist li{grid-template-columns:4.2em minmax(0,1fr)}.mlist .mch{grid-column:2}dl.terms>div{grid-template-columns:minmax(0,1fr);gap:2px}}
+
+/* touch targets: the running-head link and the sliders reach 44 px without changing their look */
+.runhead .rh-toc{display:inline-flex;align-items:center;min-height:44px;margin:-12px 0}
+.sl input[type=range]{min-height:44px}
+/* bar charts drawn at the container width on phones render 1:1 instead of scrolling */
+.svgwrap svg.fitw{width:100%;min-width:0}
+
+/* ---------- closing: the ask and the next dates ---------- */
+.closing{margin:96px 0 24px;padding-top:18px;border-top:2px solid var(--ink)}
+.closing h2{font-size:1.875rem;margin-bottom:12px}
+ol.next{list-style:none;margin:10px 0 14px;padding:0;border-top:1px solid var(--line-2)}
+ol.next li{display:grid;grid-template-columns:7.5rem minmax(0,1fr);gap:4px 16px;padding:10px 0;border-bottom:1px solid var(--line);max-width:none}
+ol.next .d{font-weight:600;color:var(--fg);font-variant-numeric:tabular-nums}
+@media (max-width:560px){ol.next li{grid-template-columns:minmax(0,1fr);gap:2px}}
+
+/* phones: chapter, closing and companion headings step down with the h2 ramp */
+@media (max-width:560px){.sechead h2,.closing h2,.doc h2{font-size:1.5rem}}
+
+/* overview: render figure, the approval card leads, acceptances sit one step quieter */
+.gafig .render{background:#fff}
+h4.subhd{margin:28px 0 8px;font-size:1rem;color:var(--fg-2)}
+.minors .decision b.q{font-size:1rem}
+.minors .decision{padding-block:12px 10px}
+
+/* 44 px targets: the drawing button, narrow view buttons, back links */
+.btnlink.sheetbtn{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border:1px solid var(--ink);background:transparent;color:var(--fg);font:600 1rem var(--f-body);cursor:pointer;border-radius:var(--r-s)}
+.btnlink.sheetbtn:hover{background:var(--surface-2)}
+.viewer .ctl .segbar button{min-width:44px}
+.backlink{display:inline-flex;align-items:center;min-height:44px}
+
+/* audit: focus never hides under the running head; pressed toggles survive High Contrast */
+html{scroll-padding-top:120px}
+@media (forced-colors: active){[aria-pressed="true"]{forced-color-adjust:none;background:Highlight!important;color:HighlightText!important;outline:2px solid Highlight}}
+/* audit: grid minimums never exceed the column at large text */
+#tocList{grid-template-columns:repeat(auto-fit,minmax(min(100%,15rem),1fr))}
+.reqgrid{grid-template-columns:repeat(auto-fill,minmax(min(100%,15rem),1fr))}
+dl.terms{grid-template-columns:repeat(auto-fill,minmax(min(100%,19rem),1fr))}
+table.revrec td:nth-child(2){white-space:normal}
+@media (max-width:360px){.viewer .ctl .segbar button{padding:0 6px}}
+
+/* ---------- flow visualisation (aerodynamics) ---------- */
+.flowviz{margin:18px 0 8px;border:1px solid var(--line-3);border-radius:var(--r);background:var(--surface);overflow:hidden}
+.fv-bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;padding:10px 12px;border-bottom:1px solid var(--line-3)}
+.fv-bar .seg{border:0;background:none;padding:0;gap:2px}
+.fv-bar .seg button{padding:0 12px;background:var(--surface-2)}
+.fv-bar .seg button[aria-pressed="true"]{background:var(--ink);color:var(--ink-fg)}
+.fv-bar .seg[hidden]{display:none}
+.fv-play{margin-left:auto;min-height:44px;padding:0 16px;border:1px solid var(--line-2);border-radius:var(--r-s);background:var(--surface);color:var(--fg-2);font:500 .875rem var(--f-body);cursor:pointer}
+.fv-play:hover{color:var(--fg);border-color:var(--fg-2)}
+.fv-canvas{display:block;width:100%;aspect-ratio:2.22;background:var(--surface);touch-action:pan-y}
+.flowviz[data-mode="3d"] .fv-canvas{aspect-ratio:16/9;touch-action:none;cursor:grab}
+.flowviz[data-mode="3d"] .fv-canvas:active{cursor:grabbing}
+.fv-foot{display:grid;grid-template-columns:minmax(220px,340px) minmax(0,1fr);gap:12px 24px;align-items:start;padding:12px 14px 14px;border-top:1px solid var(--line-3)}
+.fv-legend{display:flex;flex-direction:column;gap:5px}
+.fvl-t{font-size:.8125rem;color:var(--fg-2)}
+.fvl-bar{display:block;height:10px;border:1px solid var(--line-2);border-radius:var(--r-s)}
+.fvl-k{display:flex;justify-content:space-between;font-size:.8125rem;color:var(--fg-3);font-variant-numeric:tabular-nums}
+.fvl-k.fvl-abs{position:relative;display:block;height:1.2em}
+.fvl-k.fvl-abs span{position:absolute;top:0;transform:translateX(-50%)}
+.fvl-k.fvl-abs span:first-child{transform:none}
+.fvl-k.fvl-abs span:last-child{transform:translateX(-100%)}
+.fv-read{margin:0;font-size:.875rem;color:var(--fg-2);max-width:72ch}
+@media (max-width:560px){
+  .fv-canvas{aspect-ratio:1.78}
+  .fv-foot{grid-template-columns:minmax(0,1fr)}
+  .fv-play{margin-left:0}
+}
+@media print{ .fv-bar{display:none} }
+/* viewer segmented groups sit straight on the bar (no inner tray); buttons carry the tint */
+.viewer .ctl .segbar button{background:var(--surface-2)}
+.viewer .ctl .segbar button:hover{background:var(--surface-3)}
+.viewer .ctl .segbar button[aria-pressed="true"]{background:var(--ink);color:var(--ink-fg)}
+
+/* =====================================================================================================
+   PLATFORM LAYER — app shell and component restyle. Later rules here override the document-era rules above.
+   ===================================================================================================== */
+body{font:400 .9375rem/1.6 var(--f-body);letter-spacing:-.003em}
+::selection{background:var(--accent-soft);color:var(--fg)}
+html{scrollbar-color:var(--line-3) transparent}
+*{scrollbar-width:thin}
+::-webkit-scrollbar{width:10px;height:10px} ::-webkit-scrollbar-thumb{background:var(--line-3);border-radius:10px;border:2px solid var(--bg)} ::-webkit-scrollbar-track{background:transparent}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:3px}
+a{color:var(--accent);text-decoration:none}
+a:hover{color:var(--accent-2);text-decoration:underline;text-underline-offset:3px}
+h1,h2,h3,h4{font-family:var(--f-display);font-weight:600;letter-spacing:-.012em;color:var(--fg)}
+h2{font-size:1.625rem;letter-spacing:-.02em}
+h3{font-size:1.125rem;margin-top:2.25rem;margin-bottom:.5rem;padding-top:0;border-top:0}
+h4{font-size:.9375rem}
+h2 .secno,h3 .subno{color:var(--fg-3);font-weight:500;font-family:var(--f-mono);font-size:.78em;letter-spacing:0}
+p,li{max-width:72ch}
+code,.mono{font-family:var(--f-mono);font-size:.86em}
+p code,li code,td code,dd code{background:var(--surface-2);border:1px solid var(--line);border-radius:4px;padding:.05em .35em}
+b,strong{font-weight:600}
+.msym{font-family:"Material Symbols Outlined";font-weight:300;font-style:normal;font-size:20px;line-height:1;display:inline-block;width:1em;height:1em;overflow:hidden;
+  letter-spacing:normal;text-transform:none;white-space:nowrap;direction:ltr;font-feature-settings:"liga";-webkit-font-smoothing:antialiased;flex:none;vertical-align:middle}
+kbd{font:500 .6875rem/1 var(--f-mono);color:var(--fg-3);border:1px solid var(--line-2);border-radius:4px;padding:3px 5px;background:var(--surface)}
+
+/* ---------- shell ---------- */
+.app{min-height:100vh;min-height:100svh}
+.topbar{position:sticky;top:0;z-index:30;height:var(--topbar-h);display:flex;align-items:center;gap:10px;padding:0 14px 0 12px;padding-top:env(safe-area-inset-top,0px);
+  background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:saturate(1.4) blur(10px);-webkit-backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:9px;min-height:44px;padding:0 6px;color:var(--fg);text-decoration:none;border-radius:6px}
+.brand:hover{color:var(--fg);text-decoration:none;background:var(--surface-2)}
+.brand .msym{font-size:22px;color:var(--accent);transform:rotate(45deg)}
+.b-name{font-weight:600;font-size:.9375rem;letter-spacing:-.01em}
+.b-sub{color:var(--fg-3);font-size:.875rem}
+.issue{font:500 .75rem/1 var(--f-mono);color:var(--fg-2);border:1px solid var(--line-2);border-radius:var(--r-s);padding:5px 7px;white-space:nowrap}
+.tb-gap{flex:1}
+.iconbtn,.tbbtn,.searchbtn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:36px;min-width:36px;padding:0 9px;border:1px solid transparent;border-radius:6px;
+  background:transparent;color:var(--fg-2);font:500 .8125rem var(--f-body);cursor:pointer;transition:background .12s,color .12s,border-color .12s}
+.iconbtn:hover,.tbbtn:hover{background:var(--surface-2);color:var(--fg)}
+.searchbtn{min-width:220px;justify-content:flex-start;border-color:var(--line-2);background:var(--surface);color:var(--fg-3)}
+.searchbtn:hover{border-color:var(--line-3);color:var(--fg-2)}
+.searchbtn kbd{margin-left:auto}
+.tbbtn{border-color:var(--line-2)}
+.tbbtn[aria-pressed="true"]{background:var(--accent-soft);border-color:var(--accent-line);color:var(--fg)}
+.navbtn{display:none}
+.sidebar{position:fixed;z-index:20;top:var(--topbar-h);left:0;bottom:0;width:var(--sidebar-w);overflow-y:auto;padding:12px 10px 32px;border-right:1px solid var(--line);background:var(--bg)}
+.sidebar ul{list-style:none;margin:0 0 6px;padding:0}
+.sidebar li{max-width:none}
+.sb-group{margin:18px 10px 6px;font:500 .75rem/1 var(--f-body);color:var(--fg-3);letter-spacing:.01em}
+.sidebar a{display:flex;align-items:center;gap:10px;min-height:34px;padding:0 10px;border-radius:6px;color:var(--fg-2);font-size:.875rem;font-weight:500;text-decoration:none}
+.sidebar a .msym{font-size:19px;color:var(--fg-3)}
+.sidebar a:hover{background:var(--surface-2);color:var(--fg);text-decoration:none}
+.sidebar a[aria-current="page"]{background:var(--surface-2);color:var(--fg)}
+.sidebar a[aria-current="page"] .msym{color:var(--accent)}
+.workspace{margin-left:var(--sidebar-w);min-width:0}
+.workspace main{max-width:1200px;margin:0 auto;padding:28px 40px 96px}
+.scrim{position:fixed;inset:0;z-index:19;background:color-mix(in srgb,var(--bg) 70%,transparent)}
+.skip{top:calc(env(safe-area-inset-top,0px) - 80px);background:var(--accent);color:var(--accent-fg);border-radius:6px}
+.skip:focus{top:8px}
+
+/* ---------- page header and sub-tabs ---------- */
+.sechead{padding:4px 0 0;margin:0 0 6px;border:0}
+.sechead h2{font-size:1.625rem}
+section.sec.has-tabs .sechead{margin-bottom:14px}
+.tabbar{display:flex;gap:2px;overflow-x:auto;margin:0 0 22px;border-bottom:1px solid var(--line);scrollbar-width:none}
+.tabbar::-webkit-scrollbar{display:none}
+.tabbar a{flex:none;display:inline-flex;align-items:center;min-height:40px;padding:0 12px;margin-bottom:-1px;border-bottom:2px solid transparent;color:var(--fg-3);font-size:.875rem;font-weight:500;text-decoration:none;white-space:nowrap}
+.tabbar a:hover{color:var(--fg);text-decoration:none}
+.tabbar a[aria-selected="true"]{color:var(--fg);border-bottom-color:var(--accent)}
+.tabpanel[hidden]{display:none}
+.tabpanel>h3:first-child{margin-top:0}
+.verdict{font-size:1rem;line-height:1.65;color:var(--fg-2);max-width:78ch}
+.verdict b{color:var(--fg);font-weight:600}
+.lede{font-size:1.0625rem}
+.verdict.lede{font-size:1.0625rem}
+.meta{color:var(--fg-3);font-size:.8125rem}
+
+/* ---------- source, estimate and status ---------- */
+.src{font:.75rem/1.55 var(--f-mono);color:var(--fg-3);max-width:96ch}
+.src::before{content:"Source ";font-family:var(--f-body);font-weight:600;color:var(--fg-3);letter-spacing:.01em}
+.src a{color:var(--fg-2)}
+.est{font:600 .6875rem/1 var(--f-mono);letter-spacing:.04em;color:var(--fg-2);border:1px solid var(--line-3);border-radius:4px;padding:2px 4px;text-transform:uppercase}
+.chip{font:600 .75rem/1 var(--f-body);padding:4px 7px;border-radius:var(--r-s);border:0}
+.chip.met{color:var(--ok);background:var(--ok-soft)}
+.chip.risk{color:var(--warn);background:var(--warn-soft)}
+.chip.fail{color:var(--bad);background:var(--bad-soft)}
+.chip.open{color:var(--open);background:var(--open-soft)}
+
+/* ---------- key parameters: a spec list, not hero numbers ---------- */
+.kpis{margin:18px 0 22px;border:1px solid var(--line);border-radius:var(--r);background:var(--surface);overflow:hidden}
+.kpi{padding:10px 14px;border-bottom:1px solid var(--line);grid-template-columns:minmax(0,12rem) minmax(0,7.5rem) minmax(0,1fr)}
+.kpi .l{font:500 .8125rem/1.4 var(--f-body);color:var(--fg-2)}
+.kpi .v{font:500 1rem/1.3 var(--f-mono);letter-spacing:-.01em;color:var(--fg)}
+.kpi .s{font-size:.8125rem;color:var(--fg-3)}
+.v.ok{color:var(--ok)} .v.warn{color:var(--warn)} .v.bad{color:var(--bad)}
+
+/* ---------- panels ---------- */
+.card{border-radius:var(--r);border-color:var(--line);background:var(--surface)}
+.card.pick{border-color:var(--accent-line);outline:0;box-shadow:inset 0 0 0 1px var(--accent-line)}
+.decision{border:1px solid var(--line-2);border-radius:var(--r);background:var(--surface);padding:16px 18px 14px}
+.decision.red{border-color:var(--bad-line)}
+.decision b.q{font:600 1rem/1.4 var(--f-display);letter-spacing:-.005em}
+.decision b.q::before{font:600 .6875rem/1 var(--f-body);border:0;background:var(--open-soft);color:var(--open);border-radius:4px;padding:4px 6px;vertical-align:.15em}
+.decision.red b.q::before{background:var(--bad-soft);color:var(--bad)}
+.decision .rec{background:var(--surface-2);border-radius:6px}
+.measure{margin:32px 0 10px;border:1px solid var(--line);border-radius:var(--r);background:var(--surface);padding:0 16px}
+.measure h4{border-bottom:1px solid var(--line);font-size:.9375rem;padding:12px 0 10px}
+.measure li .id{font:500 .75rem/1.6 var(--f-mono);color:var(--accent)}
+.measure li:last-child{border-bottom:0}
+details.more{border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+details.more>summary{font:500 .875rem/1.3 var(--f-body);color:var(--fg-2)}
+details.more>summary:hover{color:var(--fg)}
+
+/* ---------- tables ---------- */
+.tbl{border:1px solid var(--line);border-radius:var(--r);background:var(--surface)}
+.tbl.nofold{background:var(--surface)}
+table{border-top:0;border-bottom:0;font-size:.8125rem}
+th,td{border-bottom:1px solid var(--line);padding:8px 12px}
+th:first-child,td:first-child{padding-left:14px}
+thead th{background:var(--surface);color:var(--fg-3);font:500 .75rem/1.3 var(--f-body);letter-spacing:.01em;border-bottom:1px solid var(--line-2)}
+tbody tr:hover td{background:var(--surface-2)}
+td.n,th.n{font-family:var(--f-mono);font-size:.78rem;letter-spacing:-.01em}
+thead th.n{font-family:var(--f-body)}
+tbody tr.total td,tr.total td{font-weight:600;border-top:1px solid var(--line-3);background:var(--surface-2)}
+.thbtn::after{color:var(--fg-3)}
+
+/* ---------- figures and charts ---------- */
+figure.chart{margin:18px 0;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:0 16px 8px}
+figure.chart figcaption{font:500 .875rem/1.4 var(--f-body);color:var(--fg);padding:12px 0 6px}
+figcaption .figno{font-family:var(--f-mono);font-weight:500;color:var(--fg-3);font-size:.75rem;margin-right:2px}
+svg text{font:11.5px var(--f-body)}
+.chain .box{border-radius:6px;border-color:var(--line)}
+.chain .box .v{font:500 1.25rem/1.15 var(--f-mono)}
+.chain .box .f{font-family:var(--f-mono);font-size:.75rem}
+.sliders{border:1px solid var(--line);background:var(--surface);border-radius:var(--r)}
+.sl label output{font-family:var(--f-mono)}
+.seg{border-color:var(--line-2);background:var(--surface-2);border-radius:6px}
+.seg button{border-radius:4px;min-height:36px;font-size:.8125rem}
+.seg button[aria-pressed="true"]{background:var(--surface-3);color:var(--fg);box-shadow:inset 0 0 0 1px var(--line-3)}
+.btnlink{min-height:38px;border-radius:6px;font:500 .875rem var(--f-body);background:var(--accent);border-color:var(--accent);color:var(--accent-fg)}
+.btnlink:hover{background:var(--accent-2);border-color:var(--accent-2);color:var(--accent-fg);text-decoration:none}
+.btnlink.quiet{background:transparent;border-color:var(--line-2);color:var(--fg)}
+.btnlink.quiet:hover{background:var(--surface-2);border-color:var(--line-3);color:var(--fg)}
+ul.files{border-top:1px solid var(--line)}
+ul.files a{color:var(--accent);font-weight:500}
+
+/* ---------- workspace layouts: visual first, inspector beside ---------- */
+.workspace-grid{display:grid;gap:16px;align-items:start;margin:16px 0 20px}
+.ov-hero{grid-template-columns:minmax(0,1.55fr) minmax(300px,1fr)}
+.ov-hero .kpis{margin:0}
+.kp-side .kpi{grid-template-columns:minmax(0,1fr) auto}
+.kp-side .kpi .s{grid-column:1/-1}
+.cad-work{grid-template-columns:minmax(0,1fr) 300px}
+.inspector{border:1px solid var(--line);border-radius:var(--r);background:var(--surface);padding:4px 14px 12px;max-height:620px;overflow:auto}
+.inspector .cadparts{margin:0;border:0}
+.inspector .cadparts summary{font:600 .875rem/1.3 var(--f-body);min-height:40px}
+.inspector .cadparts button{min-height:32px;font-size:.8125rem;border-radius:5px;border-color:var(--line-2)}
+.model-slot:empty{display:none}
+.viewer{border:1px solid var(--line);border-radius:var(--r);background:var(--surface)}
+.viewer .ctl{border-top:1px solid var(--line);background:var(--surface);gap:8px 18px}
+.viewer .ctl button{font:500 .8125rem var(--f-body);min-height:34px;border-radius:5px}
+.viewer .ctl .segbar button[aria-pressed="true"]{background:var(--accent-soft);color:var(--fg);box-shadow:inset 0 0 0 1px var(--accent-line)}
+.cgl{font:500 .75rem/1 var(--f-body);color:var(--fg-3)}
+.cmeta{font:400 .75rem/1.3 var(--f-mono);color:var(--fg-3)}
+.cadview canvas{background:radial-gradient(120% 90% at 50% 35%,var(--stage-1),var(--stage-2))}
+.ov-hero .cadview{margin:0}
+.ov-hero .cadview canvas{height:clamp(300px,52vh,520px)}
+.cadview .tip{border-radius:6px;box-shadow:var(--shadow-pop)}
+
+/* flow viewer: canvas left, controls and legend as an inspector on wide screens */
+.flowviz{border:1px solid var(--line);border-radius:var(--r)}
+.fv-bar{border-bottom:1px solid var(--line)}
+.fv-bar .seg button[aria-pressed="true"]{background:var(--accent-soft);color:var(--fg);box-shadow:inset 0 0 0 1px var(--accent-line)}
+.fv-foot{border-top:1px solid var(--line)}
+.fv-play{border-radius:6px;min-height:36px}
+
+/* drawing sheets: one large sheet and a rail of the set */
+.drawings.sheetview{display:grid;grid-template-columns:220px minmax(0,1fr);gap:16px;align-items:start}
+.sheetrail{display:flex;flex-direction:column;gap:2px;position:sticky;top:calc(var(--topbar-h) + 16px)}
+.sheetrail button{display:flex;gap:10px;align-items:baseline;text-align:left;min-height:38px;padding:8px 10px;border:0;border-radius:6px;background:transparent;color:var(--fg-2);font:500 .8125rem/1.3 var(--f-body);cursor:pointer}
+.sheetrail button:hover{background:var(--surface-2);color:var(--fg)}
+.sheetrail button[aria-pressed="true"]{background:var(--surface-2);color:var(--fg);box-shadow:inset 0 0 0 1px var(--line-2)}
+.sheetrail .sr-n{font-family:var(--f-mono);color:var(--fg-3);min-width:1.2em}
+.drawings.sheetview figure.sheet{display:none;grid-column:2}
+.drawings.sheetview figure.sheet.cur{display:block}
+.sheetbtn{border-radius:6px;overflow:hidden;border-color:var(--line-2)}
+.lightbox{border-radius:var(--r);border-color:var(--line-2);box-shadow:var(--shadow-pop)}
+.lb-bar button{border-radius:6px}
+
+/* ---------- overview ---------- */
+/* the overview keeps its page heading for screen readers and focus, visually replaced by the hero */
+.on-home #overview .sechead{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+#overview .verdict.lede{font-size:1.125rem;line-height:1.6;color:var(--fg-2);max-width:80ch;margin-top:4px}
+#overview .verdict.lede b:first-child{display:block;font:600 1.5rem/1.3 var(--f-display);letter-spacing:-.02em;color:var(--fg);margin-bottom:8px;max-width:34ch}
+.closing{margin:48px 0 0;padding:18px 20px;border:1px solid var(--line);border-radius:var(--r);background:var(--surface)}
+.closing h2{font-size:1.125rem;letter-spacing:-.01em}
+ol.next{border-top:1px solid var(--line)}
+ol.next .d{font-family:var(--f-mono);font-weight:500;font-size:.8125rem}
+
+/* ---------- report info (cover) ---------- */
+.cover{border:1px solid var(--line);border-radius:var(--r);background:var(--surface);padding:22px 24px}
+.cover .mast{border-bottom:1px solid var(--line);margin-bottom:22px;padding-bottom:12px}
+.cover .mast .org{font:500 .8125rem/1.3 var(--f-mono);color:var(--fg-3)}
+.cover h1{font:600 1.875rem/1.15 var(--f-display);letter-spacing:-.025em;max-width:22ch}
+.cover .subtitle{color:var(--fg-2);font-size:1rem;margin:10px 0 0}
+.cover .docref{color:var(--fg-2);font-size:.875rem}
+.sig-line{font:italic 400 1rem/30px var(--f-math);border-bottom-color:var(--line-3)}
+.report-only{display:none}
+
+/* ---------- search palette ---------- */
+.palette{width:min(640px,calc(100vw - 32px));max-width:none;margin:12vh auto auto;padding:0;border:1px solid var(--line-2);border-radius:10px;background:var(--surface);color:var(--fg);box-shadow:var(--shadow-pop)}
+.palette::backdrop{background:color-mix(in srgb,var(--bg) 60%,transparent)}
+.pal-in{display:flex;align-items:center;gap:10px;padding:0 14px;border-bottom:1px solid var(--line)}
+.pal-in .msym{color:var(--fg-3)}
+.pal-in input{flex:1;min-height:50px;border:0;background:transparent;color:var(--fg);font:400 1rem var(--f-body);outline:none}
+.pal-in:focus-within{box-shadow:inset 0 -2px 0 var(--accent)}
+.pal-empty{margin:0;padding:0 16px;color:var(--fg-3);font-size:.875rem}
+.pal-empty:not(:empty){padding:14px 16px}
+.report #appTitle{display:none}
+.pal-in input::placeholder{color:var(--fg-3)}
+.pal-list{list-style:none;margin:0;padding:6px;max-height:min(420px,60vh);overflow:auto}
+.pal-list li{display:flex;align-items:center;gap:10px;min-height:40px;padding:0 10px;border-radius:6px;cursor:pointer;max-width:none}
+.pal-list li .msym{font-size:18px;color:var(--fg-3)}
+.pal-list li[aria-selected="true"]{background:var(--accent-soft)}
+.po-t{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:.875rem}
+.po-s{color:var(--fg-3);font-size:.75rem;white-space:nowrap}
+.po-none{color:var(--fg-3);font-size:.875rem;padding:14px 10px!important;cursor:default!important}
+
+/* ---------- report view: the traditional document from the same content ---------- */
+.report .sidebar,.report .tabbar,.report .searchbtn,.report .navbtn{display:none}
+.report .workspace{margin-left:0}
+.report .workspace main{max-width:900px;padding-top:32px}
+.report section.sec{display:block;margin-bottom:56px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+.report .tabpanel{display:block}
+.report .report-only{display:block}
+.report #overview .sechead{display:block}
+.report .drawings.sheetview{display:block}
+.report .sheetrail{display:none}
+.report .drawings.sheetview figure.sheet{display:block;margin-bottom:16px}
+
+/* ---------- narrow screens ---------- */
+@media (max-width:1100px){ .ov-hero,.cad-work{grid-template-columns:minmax(0,1fr)} .inspector{max-height:none} .workspace main{padding:24px 28px 80px} }
+@media (max-width:899px){
+  .navbtn{display:inline-flex}
+  .b-sub,.issue{display:none}
+  .searchbtn{min-width:0}
+  .searchbtn .sb-t,.searchbtn kbd,.tbbtn .rb-t{display:none}
+  .sidebar{top:var(--topbar-h);transform:translateX(-100%);visibility:hidden;transition:transform .2s cubic-bezier(.2,.8,.2,1),visibility 0s .2s;width:min(300px,86vw)}
+  .drawer-open .sidebar{transform:none;visibility:visible;box-shadow:var(--shadow-pop);transition:transform .2s cubic-bezier(.2,.8,.2,1)}
+  .workspace{margin-left:0}
+  .workspace main{padding:20px 16px 72px}
+  .drawings.sheetview{grid-template-columns:minmax(0,1fr)}
+  .sheetrail{position:static;flex-direction:row;overflow-x:auto}
+  .sheetrail button{flex:none}
+  .sheetrail .sr-t{display:none}
+  .drawings.sheetview figure.sheet{grid-column:1}
+}
+@media (max-width:560px){ .sechead h2{font-size:1.375rem} #overview .verdict.lede b:first-child{font-size:1.25rem} .kpi{grid-template-columns:minmax(0,1fr) auto} .cover{padding:16px} }
+@media (prefers-reduced-motion:reduce){ .sidebar{transition:none} }
+
+/* ---------- print: the report view on paper ---------- */
+@media print{
+  .topbar,.sidebar,.scrim,.tabbar,.palette,.sheetrail{display:none!important}
+  .workspace{margin-left:0!important}
+  main{max-width:none;padding:0}
+  .tabpanel,section.sec{display:block!important}
+  .report-only{display:block!important}
+  .kpis,.tbl,figure.chart,.decision,.measure,.cover,.closing,.inspector{border-color:#cbcfd4;background:#fff}
+}
+
+table.revrec td:nth-child(2){white-space:nowrap;font-family:var(--f-mono);font-size:.75rem}
+.b-name{white-space:nowrap}
+@media (max-width:899px){.iconbtn,.tbbtn,.searchbtn{min-height:44px;min-width:44px}.topbar{gap:4px}.tabbar a{min-height:44px}.sidebar a{min-height:44px}}
+/* the static render is the print and offline stand-in for the live model on the overview */
+.gafig{display:none}
+.report .gafig,main:has(.cadview.offline) .gafig{display:block}
+@media print{.gafig{display:block!important}}
+
+/* scan fixes: measure-box headings are h3 (they follow the page h2 directly); Plex sets more characters per ch than STIX did */
+.measure h3.mh{font-size:.9375rem;margin:0;padding:12px 0 10px;border-bottom:1px solid var(--line)}
+p,li{max-width:62ch}
+.verdict,#overview .verdict.lede{max-width:62ch}
+.src{max-width:76ch}
+.meta,.decision .rec,.fv-read{max-width:62ch}
+svg text{font-size:12px}
+
+/* documenter findings: 12 px floor for labels, one selection signal, loaded weights only, blue print accent */
+.est,kbd,.decision b.q::before{font-size:.75rem}
+h1{font-weight:600}
+.seg button[aria-pressed="true"]{background:var(--accent-soft);color:var(--fg);box-shadow:inset 0 0 0 1px var(--accent-line)}
+:root.printing{--accent:#1F57B8;--accent-2:#174a9c;--accent-soft:#e7effc;--accent-line:#a9c3ee}
+@media print{:root{--accent:#1F57B8;--accent-2:#174a9c;--accent-soft:#e7effc;--accent-line:#a9c3ee}}
+
+:root.printing{color-scheme:light}
+
+/* heat dissipation viewer: a thermal-camera stage, case selector above, note below */
+.thermviz{padding:0}
+.thermviz figcaption{padding:12px 16px 6px}
+.th-bar{display:flex;flex-wrap:wrap;gap:8px;padding:0 12px 10px;border-bottom:1px solid var(--line)}
+.th-bar .seg{border:0;background:none;padding:0;gap:2px}
+.th-bar .seg button{padding:0 12px;background:var(--surface-2)}
+.th-canvas{display:block;width:100%;aspect-ratio:16/9;background:#2a2f36;touch-action:none;cursor:grab}
+.th-canvas:active{cursor:grabbing}
+.th-note{margin:0;padding:10px 16px 12px;font-size:.875rem;color:var(--fg-2);border-top:1px solid var(--line);max-width:none}
+.th-gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,22rem),1fr));gap:12px;padding:12px 0}
+.th-gallery img{width:100%;height:auto;border-radius:6px;border:1px solid var(--line)}
+@media (max-width:560px){.th-canvas{aspect-ratio:4/3}}
+@media print{.th-bar,.th-canvas{display:none}}
+
+.th-img{display:block;width:100%;height:auto;background:#111}
+.th-img[hidden],.th-canvas[hidden]{display:none}
+
+/* ---------- companion document page ---------- */
+/* reader: one section (or work package) at a time; side contents on wide screens, a section menu on narrow ones.
+   Without the script, in "Full document" mode and in print every section shows. */
+.reader{display:block}
+.side h2{font:600 .75rem/1.3 var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--fg-3);margin:0 0 10px;border:0;padding:0}
+.side ol{list-style:none;margin:0;padding:0}
+.side ol ol{margin:2px 0 6px 1.9rem}
+.side a{display:flex;align-items:baseline;gap:8px;min-height:36px;padding:7px 10px;border-radius:var(--r-s);color:var(--fg-2);text-decoration:none;font-size:.875rem;line-height:1.35}
+.side ol ol a{min-height:32px;padding:5px 10px;font-size:.8125rem}
+.side a:hover{background:var(--surface-2);color:var(--fg)}
+.side a[aria-current="page"]{background:var(--accent-soft,var(--surface-2));color:var(--fg);font-weight:600}
+.side .n{flex:none;min-width:1.2rem;font-variant-numeric:tabular-nums;color:var(--fg-3)}
+.side .t{flex:1}
+.side .cnt{flex:none;font:500 .75rem var(--f-mono);color:var(--fg-3)}
+.side .cnt.all{color:var(--ok)}
+.pgbar{display:none}
+.pager{display:none}
+.pglist{margin:16px 0;padding-left:1.4em}
+.pglist li{margin:.35em 0}
+html.paged .pg{display:none}
+html.paged .pg.on{display:block}
+html.paged .pg>h2:first-child,html.paged .pg>h3:first-child{margin-top:8px;padding-top:0;border-top:0}
+html.paged .pager{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:40px 0 8px;padding-top:18px;border-top:1px solid var(--line)}
+.pager a{display:flex;flex-direction:column;gap:2px;padding:12px 14px;border:1px solid var(--line-2);border-radius:var(--r);color:var(--fg);text-decoration:none;font-size:.9375rem;line-height:1.35}
+.pager a span{font:500 .75rem var(--f-mono);color:var(--fg-3);text-transform:uppercase;letter-spacing:.05em}
+.pager a:hover{border-color:var(--accent)}
+.pager .nx{text-align:right;grid-column:2}
+@media (min-width:1100px){
+  html.paged .reader{display:grid;grid-template-columns:16.5rem minmax(0,1fr);gap:40px;align-items:start}
+  html.paged .side{position:sticky;top:12px;max-height:calc(100vh - 24px);overflow:auto;padding:4px 4px 16px 0;border-right:1px solid var(--line)}
+}
+@media (max-width:1099px){
+  html.paged .side{display:none}
+  html.paged .pgbar{display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:5;margin:0 0 16px;padding:10px 0;background:var(--bg);border-bottom:1px solid var(--line)}
+  .pgbar label{font:600 .8125rem var(--f-body);color:var(--fg-2)}
+  .pgbar select{flex:1;min-width:0;min-height:44px;padding:0 10px;border:1px solid var(--line-3);border-radius:var(--r-s);background:var(--surface);color:var(--fg);font:inherit;font-size:.9375rem}
+}
+html:not(.paged) .side{margin:0 0 32px}
+html:not(.paged) .side ol ol{display:flex;flex-wrap:wrap;gap:0 6px}
+@media print{html.paged .pg{display:block}.side,.pgbar,.pager,#allBtn{display:none!important}}
+/* figures: CAD renders on white in both themes, so the frame stays light */
+.docfig{margin:4px 0 24px;max-width:46rem}
+.docfig img{display:block;width:100%;height:auto;background:#fff;border:1px solid var(--line);border-radius:6px}
+.docfig figcaption{margin-top:6px;font-size:.8125rem;line-height:1.45;color:var(--fg-2);max-width:62ch}
+.doc h2{margin-top:64px;padding-top:18px;border-top:1px solid var(--line);font-size:1.5rem;letter-spacing:-.02em}
+.doc h3{margin-top:40px;padding-top:12px;border-top:1px solid var(--line-2);font-size:1.25rem}
+.doc h4{margin-top:28px;font-size:1.125rem}
+.doc p,.doc li{max-width:58ch;text-wrap:pretty}
+.doc td{text-wrap:pretty}
+.doc table{width:auto;max-width:100%}
+.doc td:not(.n){max-width:60ch}
+.doc p,.doc li,.doc dd,.doc td,.doc blockquote{overflow-wrap:break-word}
+.doc ul,.doc ol{padding-left:1.4em}
+.doc li{margin:.25em 0}
+.doc li.task{list-style:none;margin-left:-1.4em;display:flex;gap:10px;align-items:baseline}
+.doc .box{flex:none;width:14px;height:14px;border:1px solid var(--fg-2);border-radius:var(--r-s);transform:translateY(2px)}
+.doc .box.on{background:var(--ink)}
+.doc blockquote{margin:16px 0;padding:10px 14px;background:var(--surface-2);border-left:0;border-radius:var(--r-s);color:var(--fg)}
+.doc code{font-size:.92em}
+.doc pre.code{background:var(--surface);border:1px solid var(--line-2);border-radius:var(--r-s);padding:12px 14px;overflow:auto;font-size:.875rem;line-height:1.5}
+.doc .tbl{margin:14px 0 18px}
+.doc td{vertical-align:top}
+.doc a{color:var(--accent);text-underline-offset:2px}
+.doc h3{border-top:0;padding-top:0}
+header.top{border-bottom:1px solid var(--line);padding-block:20px 28px}
+header.top h1{font:600 2rem/1.15 var(--f-display);letter-spacing:-.025em;max-width:24ch}
+.mast{border-bottom:1px solid var(--line);margin-bottom:28px}
+.mast .org{font:500 .8125rem/1.3 var(--f-mono);color:var(--fg-3)}
+.mast .tbbtn{margin-left:12px}
+.doc a:hover{text-decoration-color:var(--accent)}
+.backlink{color:var(--fg-2)}
+.doc .step{margin:22px 0 0;padding:14px 16px 6px;background:var(--surface);border:1px solid var(--line-2);border-radius:var(--r)}
+.doc .step h4{margin:0 0 8px;font-size:1.125rem;line-height:1.35}
+.doc .step .sno{margin-right:.35em;color:var(--accent);font-variant-numeric:tabular-nums}
+.doc dl.stepf{margin:0;display:grid;gap:0}
+.doc dl.stepf>div{display:grid;grid-template-columns:7.5rem minmax(0,1fr);gap:12px;padding:8px 0;border-top:1px solid var(--line)}
+.doc dl.stepf dt{font-weight:600;font-size:.875rem;color:var(--fg-2);padding-top:2px}
+.doc dl.stepf dd{margin:0;max-width:58ch;text-wrap:pretty}
+.doc dl.stepf .chk dt{color:var(--ok)}
+.doc dl.stepf .warn dt{color:var(--warn)}
+.doc ol.proc{margin:0;padding-left:1.3em}
+.doc ol.proc li{margin:.15em 0}
+@media (max-width:560px){.doc dl.stepf>div{grid-template-columns:minmax(0,1fr);gap:2px}.doc .step{padding:12px 12px 4px}}
+.doctoc ol.sub{columns:auto;margin:2px 0 10px 2.2em;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:4px 14px}
+.doctoc ol.sub li{max-width:none}
+.doctoc ol.sub a{display:inline-flex;align-items:center;min-height:44px;font-size:.875rem;color:var(--fg-2);text-decoration:underline;text-decoration-color:var(--line-3);text-underline-offset:2px}
+.doc .step{position:relative}
+.doc .stepchk{min-height:44px;padding:0 14px;margin:0 0 8px;border:1px solid var(--line-3);border-radius:var(--r-s);background:transparent;color:var(--fg-2);font:600 .875rem var(--f-body);cursor:pointer}
+.doc .stepchk:hover{color:var(--fg);border-color:var(--fg-2)}
+.doc .stepchk[aria-pressed="true"]{background:var(--ok-soft);border-color:var(--ok);color:var(--ok)}
+.doc .step.isdone{border-color:var(--ok)}
+.doc h2,.doc h3,.doc h4{scroll-margin-top:64px}
+</style></head>
+<body>
+<a class="skip" href="#doc">Skip to content</a>
+<div class="wrap">
+<header class="top">
+  <div class="mast"><span class="org"><a class="backlink" href="./">← Design review DBF-RPT-001</a></span><span class="org">DBF-TP-001 <button type="button" class="tbbtn" id="allBtn" aria-pressed="false">Full document</button><button type="button" class="tbbtn" id="themeBtn"></button></span></div>
+  <h1>Test and evaluation plan: C0 lift + cruise VTOL</h1>
+</header>
+<div class="runhead" id="runhead" aria-hidden="true"><span class="rh-doc">DBF-TP-001</span><span class="rh-sec" id="rhSec"></span><a class="rh-toc" href="#contents" tabindex="-1">Contents</a></div>
+<div class="reader">
+<nav class="side" id="contents" aria-label="Contents"><h2 id="tocTitle">Contents</h2><ol>
+<li><a href="#about" data-pg="about"><span class="n"></span><span class="t">About this document</span><span class="cnt" aria-hidden="true"></span></a></li>
+<li><a href="#1-purpose-and-scope" data-pg="1-purpose-and-scope"><span class="n">1</span><span class="t">Purpose and scope</span><span class="cnt" aria-hidden="true"></span></a></li>
+<li><a href="#2-test-philosophy" data-pg="2-test-philosophy"><span class="n">2</span><span class="t">Test philosophy</span><span class="cnt" aria-hidden="true"></span></a></li>
+<li><a href="#3-roles" data-pg="3-roles"><span class="n">3</span><span class="t">Roles</span><span class="cnt" aria-hidden="true"></span></a></li>
+<li><a href="#4-safety-rules" data-pg="4-safety-rules"><span class="n">4</span><span class="t">Safety rules</span><span class="cnt" aria-hidden="true"></span></a></li>
+<li><a href="#5-abort-criteria-all-tests" data-pg="5-abort-criteria-all-tests"><span class="n">5</span><span class="t">Abort criteria (all tests)</span><span class="cnt" aria-hidden="true"></span></a></li>
+<li><a href="#6-go-no-go-and-weather-limits" data-pg="6-go-no-go-and-weather-limits"><span class="n">6</span><span class="t">Go/no-go and weather limits</span><span class="cnt" aria-hidden="true"></span></a></li>
+<li><a href="#7-range-setup" data-pg="7-range-setup"><span class="n">7</span><span class="t">Range setup</span><span class="cnt" aria-hidden="true"></span></a></li>
+<li><a href="#8-verification-cross-reference-matrix" data-pg="8-verification-cross-reference-matrix"><span class="n">8</span><span class="t">Verification cross-reference matrix</span><span class="cnt" aria-hidden="true"></span></a></li>
+<li><a href="#9-test-series" data-pg="9-test-series"><span class="n">9</span><span class="t">Test series</span><span class="cnt" aria-hidden="true"></span></a><ol><li><a href="#9-1-series-c-component-and-coupon-tests" data-pg="9-1-series-c-component-and-coupon-tests"><span class="t">9.1 Series C: component and coupon tests</span><span class="cnt" aria-hidden="true"></span></a></li><li><a href="#9-2-series-s-structural-tests-on-the-built-airframe" data-pg="9-2-series-s-structural-tests-on-the-built-airframe"><span class="t">9.2 Series S: structural tests on the built airframe</span><span class="cnt" aria-hidden="true"></span></a></li><li><a href="#9-3-series-e-electrical-and-avionics-bench-tests" data-pg="9-3-series-e-electrical-and-avionics-bench-tests"><span class="t">9.3 Series E: electrical and avionics bench tests</span><span class="cnt" aria-hidden="true"></span></a></li><li><a href="#9-4-series-g-ground-tests-on-the-complete-aircraft" data-pg="9-4-series-g-ground-tests-on-the-complete-aircraft"><span class="t">9.4 Series G: ground tests on the complete aircraft</span><span class="cnt" aria-hidden="true"></span></a></li><li><a href="#9-5-series-f-flight-tests" data-pg="9-5-series-f-flight-tests"><span class="t">9.5 Series F: flight tests</span><span class="cnt" aria-hidden="true"></span></a></li><li><a href="#9-6-series-i-documentary-inspections" data-pg="9-6-series-i-documentary-inspections"><span class="t">9.6 Series I: documentary inspections</span><span class="cnt" aria-hidden="true"></span></a></li></ol></li>
+<li><a href="#10-data-management" data-pg="10-data-management"><span class="n">10</span><span class="t">Data management</span><span class="cnt" aria-hidden="true"></span></a></li>
+<li><a href="#11-schedule" data-pg="11-schedule"><span class="n">11</span><span class="t">Schedule</span><span class="cnt" aria-hidden="true"></span></a></li>
+<li><a href="#13-gaps-equipment-not-in-the-bom" data-pg="13-gaps-equipment-not-in-the-bom"><span class="n">13</span><span class="t">Gaps: equipment not in the BOM</span><span class="cnt" aria-hidden="true"></span></a></li>
+<li><a href="#14-open-items-for-team-sign-off" data-pg="14-open-items-for-team-sign-off"><span class="n">14</span><span class="t">Open items for team sign-off</span><span class="cnt" aria-hidden="true"></span></a></li>
+<li><a href="#revision-notes" data-pg="revision-notes"><span class="n"></span><span class="t">Appendix A. Revision notes</span><span class="cnt" aria-hidden="true"></span></a></li>
+<li><a href="#12-inconsistencies-rev-a-list-and-their-rev-b-status" data-pg="12-inconsistencies-rev-a-list-and-their-rev-b-status"><span class="n"></span><span class="t">Appendix B. Inconsistencies: rev A list and their rev B status</span><span class="cnt" aria-hidden="true"></span></a></li>
+</ol></nav>
+<div class="readmain">
+<div class="pgbar"><label for="pgSel">Section</label><select id="pgSel"><option value="about">About this document</option><option value="1-purpose-and-scope">1. Purpose and scope</option><option value="2-test-philosophy">2. Test philosophy</option><option value="3-roles">3. Roles</option><option value="4-safety-rules">4. Safety rules</option><option value="5-abort-criteria-all-tests">5. Abort criteria (all tests)</option><option value="6-go-no-go-and-weather-limits">6. Go/no-go and weather limits</option><option value="7-range-setup">7. Range setup</option><option value="8-verification-cross-reference-matrix">8. Verification cross-reference matrix</option><option value="9-test-series">9. Test series</option><option value="9-1-series-c-component-and-coupon-tests"> 9.1 Series C: component and coupon tests</option><option value="9-2-series-s-structural-tests-on-the-built-airframe"> 9.2 Series S: structural tests on the built airframe</option><option value="9-3-series-e-electrical-and-avionics-bench-tests"> 9.3 Series E: electrical and avionics bench tests</option><option value="9-4-series-g-ground-tests-on-the-complete-aircraft"> 9.4 Series G: ground tests on the complete aircraft</option><option value="9-5-series-f-flight-tests"> 9.5 Series F: flight tests</option><option value="9-6-series-i-documentary-inspections"> 9.6 Series I: documentary inspections</option><option value="10-data-management">10. Data management</option><option value="11-schedule">11. Schedule</option><option value="13-gaps-equipment-not-in-the-bom">13. Gaps: equipment not in the BOM</option><option value="14-open-items-for-team-sign-off">14. Open items for team sign-off</option><option value="revision-notes">Appendix A. Revision notes</option><option value="12-inconsistencies-rev-a-list-and-their-rev-b-status">Appendix B. Inconsistencies: rev A list and their rev B status</option></select></div>
+<main id="doc" class="doc">
+<section class="pg" id="pg-about" data-id="about">
+<p><b>Document DBF-TP-001 rev B</b> · 2026-10-21 · Status: draft for team review Applies to: C0 4-lift twin-boom quadplane, design v0.4 (<code>analysis/results.json</code> generated 2026-10-25 at the 11.75 m/s design stall target, <code>docs/research/stall-margin.md</code>, with the aero build-up <code>analysis/aero/aero_results.json</code>; CAD model rev D and drawing DBF-DRW-001 rev E <code>cad/README.md</code>, <code>cad/verification.txt</code>; thermal analysis <code>docs/research/thermal.md</code>; firmware <code>firmware/vtol_c0.param</code> on ArduPlane 4.7.2 stable; BOM <code>docs/purchasing/C0_BOM.csv</code>).</p>
+<p>2026-10-25: values re-based on the R11 wing re-size, chord 266.6 mm, MTOW 6.45 kg (hover 892 W, cruise 298–325 W, cruise available 12.9–14.1 min, Vs 12.00 m/s predicted, neutral point 40.3 % MAC, R10 cruise threshold 420 W; CAD model rev C, drawing DBF-DRW-001 rev D). The rev B list above and the §12 log keep their old numbers.</p>
+<p>2026-10-25: re-based on the 11.75 m/s design stall target, chord 284.2 mm, MTOW 6.55 kg, CAD model rev D, drawing DBF-DRW-001 rev E (hover 916 W, cruise 302–337 W, cruise available 12.3–13.7 min, Vs 11.75 m/s predicted with a 2.1 % speed / 4.1 % CL_max margin to R11, neutral point 39.8 % MAC, R10 cruise threshold 414 W; FEA re-run on CAD rev D). Also new: thermal limits and hot-day rules from <code>docs/research/thermal.md</code> (§4 rule 9, §6, C08, C11, C13, F03, F08); SITL items now run against the C0 airframe model (<code>firmware/sitl/README.md</code> C0 section: E05, E06, the back-transition watch on F06–F13); pusher cap <code>THR_MAX</code> 85 and bench measurement M1 (C09). The notes above keep their numbers.</p>
+<p>Conventions: every number names its source as a repo file, a shown formula <i>(calc)</i>, or a URL with the date checked. <b>EST</b> = engineering estimate. <b>—</b> = unknown, never invented. Numbers quoted from <code>analysis/results.json</code> are <code>concepts.C0.*</code> unless stated; <code>aero_results.json</code> = <code>analysis/aero/aero_results.json</code>. Requirement IDs R1–R20 are from <code>docs/DESIGN-BASIS.md</code>. "Review §N" and "review MN.k" refer to the chapters and measurements of design review DBF-RPT-001.</p>
+<p>Companion files: <code>docs/test/test-matrix.csv</code> (one row per test), <code>docs/test/cards/</code> (printable test cards and data sheets), <code>docs/test/analysis/</code> (data-reduction scripts with sample data).</p>
+<nav class="pager" aria-label="Previous and next section"><span></span><a class="nx" href="#1-purpose-and-scope"><span>Next</span>Purpose and scope</a></nav></section>
+<section class="pg" id="pg-1-purpose-and-scope" data-id="1-purpose-and-scope">
+<h2 id="1-purpose-and-scope">1. Purpose and scope</h2>
+<p>This plan takes the aircraft from incoming parts to a verified full mission (R9) and closes every requirement R1–R20 by <b>T</b>est, <b>A</b>nalysis, <b>I</b>nspection or <b>D</b>emonstration with a numeric pass/fail criterion. It covers:</p>
+<ul><li>incoming inspection and coupon tests (series C),</li><li>structural proof and stiffness tests on the built airframe (series S),</li><li>electrical and avionics bench tests including SITL (series E),</li><li>ground tests on the complete aircraft (series G),</li><li>flight tests from first lift-off to the full mission (series F),</li><li>documentary inspections for budget, legal and configuration (series I).</li></ul>
+<p>Out of scope: the browser flight-simulator code (outside the project brief), destructive ultimate-load tests (no spare joiner or wing in the budget, <code>docs/purchasing/C0_BOM.csv</code>), and any test that needs equipment outside the BOM unless a zero-cost substitute is given here (§13 Gaps).</p>
+<nav class="pager" aria-label="Previous and next section"><a class="pv" href="#about"><span>Previous</span>About this document</a><a class="nx" href="#2-test-philosophy"><span>Next</span>Test philosophy</a></nav></section>
+<section class="pg" id="pg-2-test-philosophy" data-id="2-test-philosophy">
+<h2 id="2-test-philosophy">2. Test philosophy</h2>
+<ol><li><b>Build-up.</b> No test runs until its prerequisites have passed (matrix column "Prerequisites"). The order is component → structure → bench → ground → tethered → free hover → forward flight → transition → mission, matching the review's F0–F7 build-up (§13 "Build-up test matrix").</li><li><b>Predict before you measure.</b> Every test lists the analysis prediction (from <code>analysis/results.json</code>, <code>aero_results.json</code>, <code>cad/sim/results.txt</code>, <code>cad/verification.txt</code> or <code>firmware/vtol_c0.param</code>) so the result either validates the model or triggers a re-run of <code>analysis/sizing.mjs</code>.</li><li><b>Incremental risk.</b> Each flight card adds one new thing. Hover exposure is limited (≤ 5 m AGL, ≤ 60 s per hover on hover-only flights, §10 "Transition and threshold table") because C0 has no lift-motor-out tolerance (R14, <code>docs/DESIGN-BASIS.md</code> design outcomes).</li><li><b>Cheap instrumentation.</b> Everything uses BOM test gear (watt meter, IR thermometer, 20 kg load cell + HX711 + Nano, LiPo bag, ammo can: <code>docs/purchasing/C0_BOM.csv</code> "Test &amp; safety"), hand tools on hand (R6), household items (water jugs, sandbags, kitchen scale, phone) and the flight controller's own logs. Telemetry is CRSF to the handset or the ELRS MAVLink overlay (<code>docs/research/firmware.md</code> §4 R7/R9); no telemetry radio is needed or budgeted.</li><li><b>One owner per test, one sheet per run.</b> Results go on the data sheet in <code>docs/test/cards/</code>, then into the matrix status column.</li></ol>
+<nav class="pager" aria-label="Previous and next section"><a class="pv" href="#1-purpose-and-scope"><span>Previous</span>Purpose and scope</a><a class="nx" href="#3-roles"><span>Next</span>Roles</a></nav></section>
+<section class="pg" id="pg-3-roles" data-id="3-roles">
+<h2 id="3-roles">3. Roles</h2>
+<div class="tbl"><table><thead><tr><th>Role</th><th>Duties</th><th>Minimum qualification</th></tr></thead><tbody>
+<tr><td><b>Test director (TD)</b></td><td>Owns the test card, calls go/no-go, holds the abort authority, signs the data sheet.</td><td>Has read this plan and the card; not the pilot.</td></tr>
+<tr><td><b>Safety officer (SO)</b></td><td>Range clear, fire bag + extinguisher + first-aid kit, LiPo handling, crowd line, calls "abort" for any safety breach.</td><td>TRUST or Part 107 (R18).</td></tr>
+<tr><td><b>Pilot in command (PIC)</b></td><td>Flies; is the only person who touches the transmitter; has passed SITL rehearsal E06 (<a class="rref" href="./#flighttest">§12</a> M1 of the review).</td><td>TRUST (or Part 107), AMA member for liability (R19), ≥ 1 h SITL on <code>firmware/vtol_c0.param</code>.</td></tr>
+<tr><td><b>GCS operator (GCS)</b></td><td>Reads the handset CRSF telemetry (or Mission Planner over the ELRS MAVLink overlay / CoreWing BLE-WiFi near the pad): battery, mode, altitude, VIBE, EKF status every 30 s; saves logs.</td><td>Has run E06 scenarios.</td></tr>
+<tr><td>Visual observer (VO)</td><td>Keeps VLOS on the aircraft and the sky (R18); part of the 4-person team.</td><td>—</td></tr>
+</tbody></table></div>
+<p>Crew roles are the review's (<a class="rref" href="./#flighttest">§12</a> "Crew, field procedure and charging") with the test director added. Names: — (assign in the matrix "Crew" column at sign-off).</p>
+<nav class="pager" aria-label="Previous and next section"><a class="pv" href="#2-test-philosophy"><span>Previous</span>Test philosophy</a><a class="nx" href="#4-safety-rules"><span>Next</span>Safety rules</a></nav></section>
+<section class="pg" id="pg-4-safety-rules" data-id="4-safety-rules">
+<h2 id="4-safety-rules">4. Safety rules</h2>
+<ol><li><b>Props off</b> for every bench test unless the card says otherwise. Battery is plugged in last through the XT90-S (R20, §10) and unplugged first.</li><li><b>Arming.</b> RC arm switch (CH5, <code>RC5_OPTION,153</code>) only; no stick arming (<code>ARMING_RUDDER,0</code>); arming only in VTOL modes (<code>Q_OPTIONS</code> bit 18). Motor emergency stop on CH7 (<code>RC7_OPTION,31</code>). Source: <code>firmware/vtol_c0.param</code> §7–8.</li><li><b>LiPo.</b> Charge and store in the LiPo bag inside the ammo can; never unattended; crashed pack isolated outdoors 30 min (<a class="rref" href="./#flighttest">§12</a> review). Fire bag within 5 m of any powered test.</li><li><b>Thrust stand and tied-down runs.</b> Prop plane never in line with a person; 3 m clear radius; eye protection; stand bolted or sandbagged so that it cannot move at 3.13 kgf (X4110S max, <code>docs/research/budget-lift.md</code> A3) × 4.</li><li><b>Structural tests.</b> Nobody under a loaded wing; load in 1 kg steps; a second person watches the joiner region.</li><li><b>Flight.</b> VLOS at all times; geofence <code>FENCE_ALT_MAX,110</code> m home-relative (SITL breach peak 113.1 m, under the 121.9 m (400 ft) limit, <code>firmware/sitl/README.md</code> scenario F; R18); crowd line 30 m from the take-off point and never under the flight path; flight path over open ground only; no people downrange during transitions.</li><li><b>Ballast rule.</b> Without a payload, 0.5 kg of ballast is fitted in the payload bay for every flight (static margin 5.1 % at the empty-bay CG vs 11.8 % at 28 % MAC, <code>aero_results.json neutral_point.static_margin_pct</code>; <code>cad/README.md</code> operating rule; <code>cad/drawings/DBF-DRW-001.PDF</code> sheet 1 note 5).</li><li><b>Post-flight.</b> IR thermometer on every motor, ESC and the pack within 30 s of landing (<a class="rref" href="./#testing">§11</a> M1 of the review): pack &gt; 60 °C EST or any unit 15 °C hotter than its neighbours grounds the aircraft.</li><li><b>Heat</b> (<code>docs/research/thermal.md</code>; review <a class="rref" href="./#simulation">§10</a> "Heat dissipation across the aircraft"). The thermal model (35 °C day) leaves 17 K on the lift motor and 14 K on its ESC after a 60 s hover but only 2 K and 4 K at the end of the take-off hover + transition, and puts a pack at the C11 resistance limit at 64 °C at touchdown. So: the ≤ 60 s per hover rule (§2 item 3) is load-bearing and stays; the post-flight IR limits above stay; hot-day pack and hover rules are in §6.</li></ol>
+<nav class="pager" aria-label="Previous and next section"><a class="pv" href="#3-roles"><span>Previous</span>Roles</a><a class="nx" href="#5-abort-criteria-all-tests"><span>Next</span>Abort criteria (all tests)</a></nav></section>
+<section class="pg" id="pg-5-abort-criteria-all-tests" data-id="5-abort-criteria-all-tests">
+<h2 id="5-abort-criteria-all-tests">5. Abort criteria (all tests)</h2>
+<p>Any crew member can call "ABORT". The PIC then: in hover → land now (QLAND if ≥ 5 m); in forward flight → select QHOVER/QLAND if airspeed &lt; 13 m/s or RTL (CH9) otherwise. Universal abort triggers:</p>
+<div class="tbl"><table><thead><tr><th>Trigger</th><th>Threshold</th><th>Source</th></tr></thead><tbody>
+<tr><td>Vibration</td><td>VIBE X/Y/Z &gt; 30 m/s² sustained or clipping count rising</td><td>ArduPilot "Measuring Vibration" (ardupilot.org/plane/docs/common-measuring-vibration.html, checked 2026-10-21)</td></tr>
+<tr><td>Attitude error in hover</td><td>&gt; 15°</td><td>review <a class="rref" href="./#flighttest">§12</a> F2</td></tr>
+<tr><td>Oscillation</td><td>Any visible attitude or altitude oscillation</td><td>ArduPilot QuadPlane tuning step 5 (ardupilot.org/plane/docs/quadplane-vtol-tuning-process.html, checked 2026-10-21)</td></tr>
+<tr><td>Battery</td><td>Sag-compensated voltage &lt; 21.0 V (3.5 V/cell) or &lt; 1,950 mAh remaining on any non-mission flight (the firmware's low-battery RTL point)</td><td><code>firmware/vtol_c0.param</code> BATT_LOW_VOLT, BATT_LOW_MAH, BATT_FS_LOW_ACT 1 (RTL); critical 19.8 V / 1,300 mAh → QLAND</td></tr>
+<tr><td>Temperature</td><td>Motor can &gt; 80 °C EST after a hover; ESC &gt; 70 °C EST</td><td>review <a class="rref" href="./#testing">§11</a> T3; ESC limit EST (SoloGood publishes none, —)</td></tr>
+<tr><td>Wind</td><td>Steady &gt; 5 m/s or gusts &gt; 8 m/s (R16); for F01–F06, steady &gt; 3 m/s EST</td><td>R16; EST for early flights</td></tr>
+<tr><td>RC link</td><td>LQ &lt; 70 % EST or any failsafe message</td><td>EST</td></tr>
+<tr><td>GCS/EKF</td><td>"EKF variance", "GPS glitch", compass inconsistent</td><td>ArduPilot pre-arm/EKF messages</td></tr>
+<tr><td>Fence proximity</td><td>Aircraft within 50 m of the 300 m fence circle in fixed-wing flight (a straight transition reaches it ~6 s after "Transition done", <code>firmware/sitl/README.md</code>)</td><td><code>FENCE_RADIUS,300</code>; SITL finding</td></tr>
+<tr><td>People or animals inside the range</td><td>any</td><td>—</td></tr>
+<tr><td>Airspace</td><td>Any manned aircraft within sight and converging</td><td>R18 VLOS and right-of-way</td></tr>
+</tbody></table></div>
+<nav class="pager" aria-label="Previous and next section"><a class="pv" href="#4-safety-rules"><span>Previous</span>Safety rules</a><a class="nx" href="#6-go-no-go-and-weather-limits"><span>Next</span>Go/no-go and weather limits</a></nav></section>
+<section class="pg" id="pg-6-go-no-go-and-weather-limits" data-id="6-go-no-go-and-weather-limits">
+<h2 id="6-go-no-go-and-weather-limits">6. Go/no-go and weather limits</h2>
+<p>Go for any flight test requires all of:</p>
+<ul><li>Prerequisite tests passed and signed in the matrix.</li><li>Flight request approved (R19: ≥ 7 business days ahead; RFS for transition tests, ≥ 30 m AGL), Remote ID module powered and broadcasting (R18), registration marking on the airframe, PIC's TRUST/AMA documents on site.</li><li>Pre-flight checklist complete (<code>firmware/checklists.md</code> if present; otherwise card §"Pre-flight").</li><li>Weather: steady wind ≤ 5 m/s, gusts ≤ 8 m/s (R16); for first flights F01–F06 steady ≤ 3 m/s EST; visibility ≥ 3 sm and cloud clearance per 14 CFR 107.51 (<code>docs/DESIGN-BASIS.md</code> rule sources); no precipitation; air temperature 10–30 °C (ArduPilot tuning guide recommends 15–25 °C for first flights; the extended band is EST). Wind measured with a phone anemometer app or a hand-held anemometer if borrowed (§13 Gaps); otherwise the nearest METAR/NWS point, recorded on the card.</li><li>Daylight: 6 a.m. to sunset (R19 site rule).</li><li><b>Hot day</b> (ambient ≥ 25 °C EST, the top of the 10–30 °C band; <code>docs/research/thermal.md</code> §6.4 items 2–3): only packs whose C11 resistance is ≤ 5 mΩ/cell fly (&gt; 5 mΩ/cell is a hot-day no-go); packs and aircraft shaded until plug-in; pack start temperature by IR ≤ 60 − 3.9 × R_cell (mΩ) °C for a full mission <i>(calc: 29.1 K rise at 7.5 mΩ/cell over the mission, adiabatic bay, thermal.md §5)</i>; hovers stay ≤ 60 s, and if C08 measured the can &gt; 70 °C after 90 s, the take-off hover is limited to 45 s (thermal.md §6.4 item 3); abort at 80 °C can / 70 °C ESC as §5.</li><li>Ballast fitted (§4 rule 7) unless a ≥ 0.5 kg payload is carried; CG per G01/G09.</li><li>Two charged packs (≥ 4.15 V/cell), one spare prop set, spare motor, repair kit on site. (No spare servo or spare pushrods are in the BOM: a servo or pushrod failure ends the session until a replacement is bought from the reserve.)</li></ul>
+<nav class="pager" aria-label="Previous and next section"><a class="pv" href="#5-abort-criteria-all-tests"><span>Previous</span>Abort criteria (all tests)</a><a class="nx" href="#7-range-setup"><span>Next</span>Range setup</a></nav></section>
+<section class="pg" id="pg-7-range-setup" data-id="7-range-setup">
+<h2 id="7-range-setup">7. Range setup</h2>
+<ul><li>Take-off pad: 3 × 3 m flat mown grass or hard surface, clear of obstacles 20 m radius, marked with the geofence home point.</li><li>Crew line 30 m upwind of the pad; spectators behind the crew line. Fire bag, extinguisher and first-aid kit at the crew line.</li><li>Transition runway: a straight ≥ 200 m EST into wind at ≥ 30 m AGL (review <a class="rref" href="./#schedule">M15.1</a>: under 200 m or a ceiling under 30 m blocks R9 at that site). <b>Transitions start at the upwind field edge with an immediate turn after "Transition done"</b> (<code>firmware/README.md</code> §9.6; SITL: a straight transition reached the 300 m fence circle about 6 s after transition end). GPS-walk the field and set <code>FENCE_RADIUS</code> to the usable radius (default 300 m, <code>firmware/vtol_c0.param</code> §10).</li><li>Tether anchor (G05): two sandbag-weighted ground stakes, 2 × 4 m lines of ≥ 50 kg rated cord to the landing-leg clamps, slack so the aircraft can reach 1.5 m.</li><li>Site ceilings: RFS 400 ft, Clark Kerr 200 ft, La Loma 20 ft inside the fences (R19). Only RFS supports transition tests.</li></ul>
+<nav class="pager" aria-label="Previous and next section"><a class="pv" href="#6-go-no-go-and-weather-limits"><span>Previous</span>Go/no-go and weather limits</a><a class="nx" href="#8-verification-cross-reference-matrix"><span>Next</span>Verification cross-reference matrix</a></nav></section>
+<section class="pg" id="pg-8-verification-cross-reference-matrix" data-id="8-verification-cross-reference-matrix">
+<h2 id="8-verification-cross-reference-matrix">8. Verification cross-reference matrix</h2>
+<p>Method: T test, A analysis, I inspection, D demonstration. Status is "open" for every line at rev B except where a SITL portion is done (E05, E06).</p>
+<div class="tbl"><table><thead><tr><th>Req</th><th>Requirement (short)</th><th>Method</th><th>Test ID(s)</th><th>Pass criterion (numeric)</th><th>Status</th></tr></thead><tbody>
+<tr><td>R1</td><td>Lift rotors + pusher + wing; lift rotors stopped in cruise</td><td>I, D</td><td>I03, F07, F12</td><td>Built aircraft matches <code>cad/drawings/DBF-DRW-001.PDF</code> rev E sheet 1; log shows lift motor outputs (RCOU C5–C8) at <code>Q_M_PWM_MIN</code> (1000) for ≥ 95 % of cruise time</td><td>open</td></tr>
+<tr><td>R2</td><td>MTOW 8–15 kg target, &lt; 25 kg cap; outcome 6.55 kg</td><td>T</td><td>S09, G01</td><td>Take-off mass with pack and 0.5 kg ballast ≤ 6.55 × 1.15 = 7.53 kg <i>(calc, review <a class="rref" href="./#model3d">M3.1</a> margin; <code>sized.m</code>)</i> and &lt; 25 kg</td><td>open</td></tr>
+<tr><td>R3</td><td>Span 2–3 m</td><td>I</td><td>I03</td><td>Tip-to-tip 2.40 ± 0.02 m (<code>results.json base.span</code>)</td><td>open</td></tr>
+<tr><td>R4</td><td>Largest piece fits a standard car</td><td>D</td><td>S08</td><td>Longest piece ≤ 1.2 m (<code>geo.longestPiece</code>); pod piece ≤ 0.5 m with the joiner slid out (<code>cad/README.md</code> wing root); every piece fits in the team's car with the hatch closed</td><td>open</td></tr>
+<tr><td>R5</td><td>Two-person carry; assembly ≤ 15 min</td><td>D</td><td>S08, G07</td><td>Two people carry the assembled aircraft 50 m; median of 3 assembly runs ≤ 15 min</td><td>open</td></tr>
+<tr><td>R6</td><td>Spend ≤ $2,000 incl. tax and shipping</td><td>I</td><td>I01</td><td>Ledger of receipts ≤ $2,000.00 (BOM committed $1,896.79)</td><td>open</td></tr>
+<tr><td>R7</td><td>Second pack, spares, reserve ≥ $100 target</td><td>I</td><td>I01</td><td>Two packs, spare motor, spare ESCs (3 in the two 4-packs), spare props received; reserve = 2,000 − ledger ≥ $100 (BOM $103.21)</td><td>open</td></tr>
+<tr><td>R8</td><td>Flight-tested by 2027-04-30</td><td>D</td><td>F12</td><td>F12 passed and dated ≤ 2027-04-30</td><td>open</td></tr>
+<tr><td>R9</td><td>Mission: VTOL take-off → hover → transition → cruise → back-transition → hover → vertical land</td><td>D</td><td>F12</td><td>One continuous flight with all phases in the log, no failsafe, undamaged landing</td><td>open</td></tr>
+<tr><td>R10</td><td>≥ 10 min cruise + ≥ 2 min hover, ≥ 20 % energy reserve</td><td>T, A</td><td>C11, F08, F13, F12</td><td>F12 log: cruise ≥ 600 s, hover ≥ 120 s, remaining ≥ 20 % of measured usable capacity (C11) and ≥ 1,300 mAh (<code>BATT_CRT_MAH</code>); cruise power at 20 m/s ≤ 414 W <i>(calc: (0.8 × 144.3 × 0.95 − 915.7 × 160/3600) × 3600/600 = 414 W, <code>sized.P_hover</code>, <code>base</code>)</i></td><td>open</td></tr>
+<tr><td>R11</td><td>Cruise 18–22 m/s; stall ≤ 12 m/s; transition complete ≥ 1.3 × Vs</td><td>T, A</td><td>F08, F09, C09</td><td>Trimmed cruise at 20 ± 2 m/s calibrated airspeed; measured Vs ≤ 12.0 m/s (predicted 11.75 m/s at the design stall target, <code>aero_results.json stall</code>, 2.1 % speed margin; 12.0–12.5 = team decision, aero §9; &gt; 12.5 fail, <code>docs/research/aerodynamics.md</code> M2); <code>AIRSPEED_MIN</code> 16 ≥ 1.3 × measured Vs (Vs ≤ 12.3); airspeed calibration error ≤ 10 %</td><td>open</td></tr>
+<tr><td>R12</td><td>0.5 kg payload reserve and bay volume</td><td>I, D</td><td>G01, G09, S10, F12</td><td>0.5 kg ballast fits the bay, is retained at 2 × 8 g, and is flown in F12 within CG limits</td><td>open</td></tr>
+<tr><td>R13</td><td>Hover T/W ≥ 1.6 at MTOW, storage-low voltage</td><td>T</td><td>C07, F03</td><td>Each motor ≥ 2.62 kgf max at 3.7 V/cell (22.2 V) on the stand (= 1.6 × 6.55 / 4 <i>(calc)</i>; maker 3.13 kgf); learned <code>Q_M_THST_HOVER</code> ≤ 0.60</td><td>open</td></tr>
+<tr><td>R14</td><td>Lift motor-out: cruise continues (hard); hover (desired, not met by C0)</td><td>A, D, I</td><td>E06, F07, I03</td><td>SITL motor-fail scenario in hover (documents the accepted limitation; open — not in the A–G set); cruise with lift motors stopped shown in F07; hover limits ≤ 5 m AGL / ≤ 60 s written on every hover card</td><td>open</td></tr>
+<tr><td>R15</td><td>Pusher-out in cruise → re-enter hover and land</td><td>D</td><td>E06, F10</td><td>SITL D (transition timeout → QRTL) done; in flight: pusher to idle at ≥ 60 m, Q_ASSIST engages below 13 m/s, QLAND completes, altitude loss ≤ 30 m EST</td><td>SITL done; flight open</td></tr>
+<tr><td>R16</td><td>Operate in steady wind ≤ 5 m/s, gusts ≤ 8 m/s</td><td>D, A</td><td>F07, F12</td><td>At least one F07 or F12 flight in recorded steady wind 3–5 m/s with attitude error &lt; 15°; gusts to 8 m/s by analysis only (margin: <code>AIRSPEED_MIN</code> 16 vs Vs 11.75)</td><td>open</td></tr>
+<tr><td>R17</td><td>Open-source autopilot with maintained VTOL support</td><td>I</td><td>E11</td><td>Flight firmware is ArduPlane 4.7.2 stable for CoreWingF405WingV2 (<code>firmware/vtol_c0.param</code> header; <code>docs/research/firmware.md</code> §4 R10/R20: beta risk closed)</td><td>open (firmware identified; flash check pending)</td></tr>
+<tr><td>R18</td><td>FAA: 44809/Part 107, TRUST, registration, Remote ID, VLOS, ≤ 400 ft</td><td>I, T</td><td>I02, E12</td><td>Documents on file; BeeID serial on uasdoc.faa.gov; broadcast seen on a Remote ID app; <code>FENCE_ALT_MAX</code> 110 m (SITL peak 113.1 m)</td><td>open</td></tr>
+<tr><td>R19</td><td>Campus: flight request, post-flight report, $1M liability</td><td>I</td><td>I02</td><td>Approved request on file ≥ 7 business days before each on-campus flight; AMA card per pilot</td><td>open</td></tr>
+<tr><td>R20</td><td>Arming switch/kill, failsafe RTL-then-land, geofence</td><td>T, D</td><td>E05, E06, F05, F10</td><td>SITL B/C/E/F/G done (<code>firmware/sitl/results/summary.json</code>; repeated on the C0 airframe model 2026-10-25, <code>firmware/sitl/results_c0.json</code>); bench and in flight: RC loss → QLAND (hover) / RTL → QRTL (cruise); low battery → RTL, critical → QLAND; fence breach → RTL; XT90-S disconnect and CH7 E-stop demonstrated</td><td>SITL done; hardware/flight open</td></tr>
+</tbody></table></div>
+<p>Every requirement has at least one verifying test. R14 (hover motor-out) and R16 (8 m/s gusts) are closed by analysis plus a limited demonstration because a full test would risk the aircraft.</p>
+<nav class="pager" aria-label="Previous and next section"><a class="pv" href="#7-range-setup"><span>Previous</span>Range setup</a><a class="nx" href="#9-test-series"><span>Next</span>Test series</a></nav></section>
+<section class="pg" id="pg-9-test-series" data-id="9-test-series">
+<h2 id="9-test-series">9. Test series</h2>
+<p>Each test lists: objective · article/config · setup and instrumentation · procedure · data · pass/fail · predicted value · risk and mitigation · duration · crew · prerequisite tests. Dates are in <code>docs/test/test-matrix.csv</code> and §11.</p>
+<ol class="pglist"><li><a href="#9-1-series-c-component-and-coupon-tests">9.1 Series C: component and coupon tests</a></li><li><a href="#9-2-series-s-structural-tests-on-the-built-airframe">9.2 Series S: structural tests on the built airframe</a></li><li><a href="#9-3-series-e-electrical-and-avionics-bench-tests">9.3 Series E: electrical and avionics bench tests</a></li><li><a href="#9-4-series-g-ground-tests-on-the-complete-aircraft">9.4 Series G: ground tests on the complete aircraft</a></li><li><a href="#9-5-series-f-flight-tests">9.5 Series F: flight tests</a></li><li><a href="#9-6-series-i-documentary-inspections">9.6 Series I: documentary inspections</a></li></ol>
+<nav class="pager" aria-label="Previous and next section"><a class="pv" href="#8-verification-cross-reference-matrix"><span>Previous</span>Verification cross-reference matrix</a><a class="nx" href="#9-1-series-c-component-and-coupon-tests"><span>Next</span>Series C: component and coupon tests</a></nav></section>
+<section class="pg" id="pg-9-1-series-c-component-and-coupon-tests" data-id="9-1-series-c-component-and-coupon-tests">
+<h3 id="9-1-series-c-component-and-coupon-tests">9.1 Series C: component and coupon tests</h3>
+<h4 id="c01-printed-hole-and-bore-coupon-first-article">C01: Printed hole and bore coupon (first article)</h4>
+<ul><li><b>Objective.</b> Set the printer's as-printed offsets so every bore and insert hole meets <code>docs/research/hardware-spec.md</code> §5b (FT02, FT07, FT08) and the rev E drawing tolerance block (<code>cad/README.md</code> drawing set).</li><li><b>Article.</b> One coupon per material (ELEGOO PETG, Polymaker PA6-CF20) printed on the team printer: M3 clearance holes modelled 3.4 / 3.6 mm, insert holes 3.8 / 3.9 / 4.0 / 4.1 mm, a 25.4 mm bore ring modelled 25.5 / 25.6 / 25.7 mm (hardware-spec M2), plus a 22.4 mm joiner bore ring (FT06 slip fit, 22.455 ± 0.20).</li><li><b>Instrumentation.</b> Calipers (hand tools, R6) or drill-shank gauges.</li><li><b>Procedure.</b> (1) Print both coupons with the production profile. (2) Measure each hole at two diameters. (3) Choose the model value that prints 3.4, 4.0, 22.46 and 25.6 ± 0.1 mm. (4) Record the offsets in <code>cad/params.mjs</code> notes.</li><li><b>Data.</b> Hole ID vs modelled value, per material.</li><li><b>Pass.</b> A model value exists for each target within ± 0.1 mm; otherwise adjust flow/scale and reprint (fail = no setting reaches ± 0.2 mm).</li><li><b>Predicted.</b> Desktop FDM ± 0.5 %, floor ± 0.5 mm (Xometry FDM tolerances via hardware-spec §5b, checked 2026-10-21): expect holes 0.2–0.4 mm undersize.</li><li><b>Risk.</b> PA6-CF needs a hardened nozzle (review <a class="rref" href="./#build">§16</a> "Prints"); if the printer cannot, PETG mounts are not acceptable near motors (HDT ~68 °C, review <a class="rref" href="./#propulsion">M8.2</a>) → Gap list.</li><li><b>Duration</b> 3 h print + 0.5 h. <b>Crew</b> 1. <b>Prereq.</b> Filament received (Order B).</li></ul>
+<h4 id="c02-heat-set-insert-torque-out-petg-and-pa6-cf">C02: Heat-set insert torque-out, PETG and PA6-CF</h4>
+<ul><li><b>Objective.</b> Confirm the 0.5 N·m EST working torque (hardware-spec §2d) has ≥ 2× margin to insert spin-out.</li><li><b>Article.</b> 3 ruthex RX-M3x5.7 inserts per material in the C01 coupon (4.0 mm holes, boss Ø ≥ 8 mm, hardware-spec §2c).</li><li><b>Setup.</b> M3 × 12 screw, washer; hex key with a known arm; hanging masses (water bottles: 1.0 L = 1.00 kg, kitchen scale). Torque T = m g L (hardware-spec §2d: 0.6 N·m at L = 60 mm needs 1.02 kg).</li><li><b>Procedure.</b> (1) Install inserts with a soldering iron at the filament vendor's temperature. (2) Thread the screw to bottom against the washer. (3) Hang mass at L = 100 mm, increase in 0.1 kg steps (0.098 N·m) every 10 s until the insert turns. (4) Record the spin-out torque; repeat for all 6.</li><li><b>Data.</b> Spin-out torque per insert; failure mode (insert spins / plastic cracks).</li><li><b>Pass.</b> Every insert ≥ 1.0 N·m (hardware-spec M3: fails the 0.5 N·m working torque if any spins below 1.0 N·m).</li><li><b>Predicted.</b> — (torque-out in these plastics not published; hardware-spec "Unknowns").</li><li><b>Risk.</b> Coupon cracks at the boss: redesign the boss diameter before printing real parts.</li><li><b>Duration</b> 1 h. <b>Crew</b> 1. <b>Prereq.</b> C01.</li></ul>
+<h4 id="c03-heat-set-insert-pull-out-petg-and-pa6-cf">C03: Heat-set insert pull-out, PETG and PA6-CF</h4>
+<ul><li><b>Objective.</b> Measure the axial holding force of one M3 insert in each material.</li><li><b>Setup (zero-cost).</b> Lever rig: 1.2 m length of 2×4 pivoted on a block 0.2 m from one end (5:1 ratio); the coupon clamped under the short end with the screw hooked to the beam by a wire loop; water jugs hung from the long end. Or, where available, the thrust-stand load cell (C06) in series with a turnbuckle (not in BOM).</li><li><b>Procedure.</b> (1) Fit a M3 × 16 screw with a washer and a wire loop. (2) Add 1 kg steps at the long end (= 49 N at the insert) every 15 s. (3) Stop at pull-out or at 20 kg (981 N at the insert). (4) Three inserts per material.</li><li><b>Data.</b> Pull-out force per insert; failure mode.</li><li><b>Pass.</b> Minimum ≥ 300 N in PETG and ≥ 400 N in PA6-CF (EST: 10 × the 30.7 N full-thrust pull of one lift unit if a single screw carried it, <code>results.json struct.Tmax</code>; the PA6-CF figure adds margin for the motor mount's 0.6 N·m screw preload, hardware-spec J01).</li><li><b>Predicted.</b> — (not published).</li><li><b>Risk.</b> Lever rig slips: use a cleat under the coupon and keep hands clear.</li><li><b>Duration</b> 1 h. <b>Crew</b> 2. <b>Prereq.</b> C02.</li></ul>
+<h4 id="c04-motor-floor-crush-and-relaxation-pa6-cf">C04: Motor-floor crush and relaxation (PA6-CF)</h4>
+<ul><li><b>Objective.</b> Confirm the 4.5 mm PA6-CF motor floor holds a 0.6 N·m screw preload for 24 h (hardware-spec M3), with the rev B Ø7.5 counterbore and Ø7.0 washer (<code>cad/README.md</code> fasteners).</li><li><b>Procedure.</b> Torque an M3 × 8 with washer to 0.6 N·m (0.61 kg at L = 100 mm) through the coupon floor (printed with the Ø7.5 counterbore) into an aluminium nut plate; mark the head; wait 24 h at room temperature and again after 1 h at 60 °C EST in a sunny car or by a heat gun with the IR thermometer; re-apply 0.6 N·m and measure the angle turned.</li><li><b>Pass.</b> Re-torque angle ≤ 30° (hardware-spec M3); washer seats flat in the Ø7.5 counterbore with no edge contact.</li><li><b>Predicted.</b> — (PA6-CF compressive creep not published).</li><li><b>Duration</b> 0.5 h + 24 h. <b>Crew</b> 1. <b>Prereq.</b> C01.</li></ul>
+<h4 id="c05-tube-receipt-measurement-and-joiner-fit">C05: Tube receipt measurement and joiner fit</h4>
+<ul><li><b>Objective.</b> Verify the three 6061-T6 tube sizes against the fit table FT01–FT04 (hardware-spec §5b) before cutting.</li><li><b>Procedure.</b> (1) Calipers: OD at 3 points along each tube, wall at both ends; record. (2) Slide the 0.875 in joiner into both 1.000 × 0.058 in socket tubes by hand. (3) With one socket clamped, measure the free-end play of the joiner at 0.76 m: lever the tip and read the vertical movement with a ruler. (4) Check leg (FT03) and splice plug (FT04) fits.</li><li><b>Pass.</b> OD within ± 0.102 mm and wall within ± 0.051 mm of nominal (hardware-spec §5a); joiner enters by hand (diametral clearance −0.076 to +0.534 mm, FT01); wingtip-equivalent play ≤ 5 mm at 1.2 m (<code>docs/research/budget-airframe.md</code> M4). Tight: lap. Loose &gt; 0.30 mm: one tape wrap (FT01 action).</li><li><b>Predicted.</b> Nominal clearance 0.23 mm (<code>cad/README.md</code> joiner).</li><li><b>Duration</b> 1 h. <b>Crew</b> 1. <b>Prereq.</b> Order B received.</li></ul>
+<h4 id="c06-thrust-stand-build-and-calibration-review-t1-accuracy-2-of-reading">C06: Thrust-stand build and calibration (review T1, accuracy 2 % of reading)</h4>
+<ul><li><b>Objective.</b> Calibrate the 20 kg load cell + HX711 + Arduino Nano stand (BOM "Test &amp; safety") so lift and pusher thrust are trusted to ± 2 % of reading at the hover point.</li><li><b>Setup.</b> Pivot-beam stand: motor on one arm, load cell under the other, arms equal (1:1) so thrust = cell reading; the watt meter in the pack lead; a servo tester or the FC in motor-test mode drives the ESC (DShot150 per <code>firmware/vtol_c0.param</code> §3; for a servo tester use the ESC's PWM mode). Water jugs as masses: 1.00 L = 0.998 kg at 20 °C; verify each jug on a kitchen scale.</li><li><b>Procedure.</b> (1) Zero. (2) Load 0, 0.5, 1, 2, 3, 5, 10 kg (use the jug positions on the arm so the moment arm equals the motor's). (3) Read the HX711 at each step, up and down. (4) Fit a line; record gain and offset in the Nano sketch. (5) Repeat after 10 min powered to check drift. (6) Tare with the motor and prop fitted.</li><li><b>Pass.</b> Error ≤ 2 % of reading from 0.5 to 5 kg and ≤ 2 % FS (0.4 kg) above (review T1 "2 % FS" superseded: 2 % FS = 400 g is 24 % of the 1,638 g hover point). Hysteresis ≤ 1 %. Drift ≤ 20 g over 10 min.</li><li><b>Predicted.</b> HX711 24-bit on a 20 kg cell: resolution ≪ 1 g; linearity is set by the stand geometry (EST).</li><li><b>Risk.</b> Stand flexes under 3 kgf: brace it; re-check calibration with the motor arm loaded by a jug at the motor station.</li><li><b>Duration</b> 4 h build + 1 h. <b>Crew</b> 2. <b>Prereq.</b> Order A received.</li></ul>
+<h4 id="c07-lift-motor-thrust-curve-every-motor-review-t2-r13-strict">C07: Lift motor thrust curve, every motor (review T2, R13 strict)</h4>
+<ul><li><b>Objective.</b> Measure thrust, current, voltage and electrical power vs throttle for each of the 5 X4110S motors with the JeeFly 1755 prop and a SoloGood 45A ESC on the flight pack, and derive the hover operating point and FM·η.</li><li><b>Setup.</b> C06 stand; watt meter in the pack lead; IR thermometer; throttle in 10 % steps from 20 to 100 % (10 points), 5 s dwell, 20 s rest; pack voltage ≥ 24.0 V (4.0 V/cell) at the start and the 100 % point repeated at 22.2 V to match the maker table voltage.</li><li><b>Procedure.</b> (1) Tare. (2) Step throttle; log thrust, V, A, W at each dwell. (3) Note the throttle at 1,638 g (hover) and 3,130 g (maker max). (4) 100 % for 10 s: record max thrust and current. (5) IR temperature of the can after the sweep. (6) Repeat for every motor, same ESC; then one motor on each of the other ESCs.</li><li><b>Data.</b> 10-point table per motor; reduce with <code>docs/test/analysis/thrust_stand.py</code> (fits T = a·thr^b and P_elec vs T, reports throttle at hover, FM·η at hover, and <code>Q_M_THST_EXPO</code> fit).</li><li><b>Pass.</b> Max thrust ≥ 2.62 kgf per motor at 22.2 V (R13 strict: 1.6 × 6.55 kg / 4 <i>(calc, <code>sized.m</code>)</i>; the review's 2.4 kgf gave T/W 1.55 at 6.18 kg and 1.47 at 6.55 kg, so it is superseded); electrical power at 1,638 g ≤ 300 W per motor (= 1,202 W / 4, rounded down; 1,202 W is the hover power at which 10 min cruise at the sizing's 337 W is no longer available: (0.8 × 144.3 × 0.95 − 337.4 × 600/3600) × 3600 / 160 s <i>(calc, <code>results.json base</code>, <code>sized.P_cruise</code>)</i>); motor-to-motor spread at hover ≤ 5 % in thrust at equal throttle; max current ≤ 36 A (80 % of the 45 A ESC rating, EST).</li><li><b>Predicted.</b> Maker table at 22.2 V, 17 × 5.8: 1,500 g / 8.1 A / 180 W; 2,000 g / 13.1 A / 291 W; 3,130 g / 27.7 A / 615 W (<code>docs/research/budget-lift.md</code> A3). Sizing hover point: 1,638 g at 229 W, FM·η 0.516 (<code>sized.Tunit_g</code>, <code>P_hover_per_motor</code>, <code>FMeta</code>); ideal power 107.5 W = T^1.5 / √(2 ρ A), A = 0.1464 m² (<code>sized.Pi_unit</code>, <code>sized.A</code>). Expected hover throttle ≈ 0.52 = 1,638 / 3,130 <i>(calc)</i>; the param file comment says ~0.52 from the 6.45 kg value 1,612.6 g (same to two figures). The 17 × 5.5 JeeFly is not the maker's 17 × 5.8 (<code>docs/purchasing/C0_BOM.csv</code>): expect a few % less thrust at equal power (EST).</li><li><b>Risk.</b> ESC desync at full throttle on DShot150: lower <code>Q_M_SPIN_MIN</code>, check ESC timing in BLHeli configurator. Prop strike: cage the stand.</li><li><b>Duration</b> 0.5 h per motor, 4 h total. <b>Crew</b> 2. <b>Prereq.</b> C06.</li></ul>
+<h4 id="c08-hover-duty-heat-review-t3-expanded">C08: Hover-duty heat (review T3, expanded)</h4>
+<ul><li><b>Objective.</b> Validate the lift-unit thermal model (<code>docs/research/thermal.md</code> §6.1) and the lumped motor model (90 s hover ≈ 76 °C, <code>cad/README.md</code>), and replace the 20 % loss estimate that sets every lift-unit temperature (thermal.md §6.1 sensitivity) with a measured rise and time constant.</li><li><b>Setup.</b> C06 stand; thrust held at 1,638 g (hover) by throttle; IR thermometer on the motor can (bell) and ESC heat-shrink every 15 s; ambient logged.</li><li><b>Procedure.</b> (1) Start at ambient. (2) Hold hover thrust 90 s, reading temperatures every 15 s. (3) Cool with the prop at idle until the can &lt; 45 °C. (4) Repeat 3 times. (5) One run of 3 × 90 s with only 30 s rests (worst case, never flown) to find the limit. (6) Fit the time constant.</li><li><b>Pass.</b> Can ≤ 80 °C EST after one 90 s run; no ESC cut-out; ESC ≤ 70 °C EST; measured time constant ≥ 100 s (review <a class="rref" href="./#simulation">M10.2</a>: under 100 s invalidates the lumped model).</li><li><b>Predicted.</b> Lift-unit model (<code>docs/research/thermal.md</code> §6.1; SOLIDWORKS transient, motor + PA6-CF mount + boom + ESC in prop wash, 45.8 W = 20 % of 229 W per motor EST, ESC 4 % EST): rise above ambient at 30 / 60 / 90 s <b>can +15 / +28 / +39 K, ESC +11 / +21 / +28 K</b> (74 °C / 63 °C at 90 s on a 35 °C day, 59 °C / 48 °C on a 20 °C day); the can crosses 80 °C at ≈ 110 s and the ESC 70 °C at ≈ 125 s of continuous hover; τ ≈ 300 s. Motor-only lumped check 76 °C at 90 s (c 470 J/kgK EST, 74–83 °C for c 500–385, <code>cad/README.md</code>); steady upper bound 143.9 °C at 45.8 W, h = 50 W/m²K EST (<code>cad/sim/results.txt motor_T_steady</code>, re-run 2026-10-25 on CAD rev D). A can &gt; 70 °C after 90 s triggers the hot-day 45 s take-off hover limit (§6).</li><li><b>Duration</b> 2 h. <b>Crew</b> 2. <b>Prereq.</b> C07.</li></ul>
+<h4 id="c09-pusher-thrust-curve-x4110s-apc-14-8-5ep-review-t4-expanded">C09: Pusher thrust curve, X4110S + APC 14 × 8.5EP (review T4, expanded)</h4>
+<ul><li><b>Objective.</b> Static thrust and current of the pusher set; set <code>TKOFF_THR_MAX</code>, confirm the transition current budget, and confirm <code>THR_MAX</code> 85 by <b>bench measurement M1</b> (pusher power at full pack).</li><li><b>Setup.</b> C06 stand with the pusher adapter (M6 bolt-on, hardware-spec J03b); throttle 20–100 % in 10 % steps. <b>M1:</b> a pack at ≥ 25.0 V (full charge); 100 % for ≤ 3 s, then 85 % (<code>THR_MAX</code>) for 10 s; record W, A, V, thrust and the can temperature by IR.</li><li><b>Pass.</b> Static thrust ≥ 1.5 kgf at 60 % throttle (review T4); peak current ≤ 40 A (review <a class="rref" href="./#propulsion">M8.3</a>; above that drop to a 13 × 8 prop); prop runout by eye &lt; 1 mm at the tip (FT10 spin check); M1: electrical power at <code>THR_MAX</code> on a full pack ≤ 615 W (X4110S rating at 22.2 V, <code>docs/research/budget-lift.md</code> A3), else lower <code>THR_MAX</code> and re-check the level speed at full throttle ≥ <code>AIRSPEED_MAX</code> 25 m/s in F08.</li><li><b>Predicted.</b> — (no vendor table for 14 × 8.5EP on the X4110S, <code>docs/research/pusher-battery-servo.md</code> §1b). Cruise thrust needed 8.6 N = 0.88 kgf at 20 m/s (sizing, <code>sized.D_cruise</code>) or 7.7 N (aero build-up, <code>aero_results.json drag.cruise.D_N</code>); P_cruise 337 W / 15.2 A (sizing) or 302 W / 13.6 A (aero) at η_prop 0.6 EST (<code>sized.P_cruise</code>, <code>aero_results.json mission</code>). C0 SITL model (<code>firmware/sitl/README.md</code> trim validation, APC 14 × 8.5 data, EST motor model): cruise 233 W / 14.0 A at η_prop ≈ 0.74; static 3.35 kgf at 626 W / 28 A on 22.2 V; ≈ 890 W at 100 % on 25.2 V, so <code>THR_MAX</code> 85 ≈ 547 W (est., throttle³ scaling, <code>firmware/vtol_c0.param</code>).</li><li><b>Duration</b> 1 h. <b>Crew</b> 2. <b>Prereq.</b> C06.</li></ul>
+<h4 id="c10-stopped-prop-behaviour-and-drag-review-t5-iterations-m1">C10: Stopped-prop behaviour and drag (review T5 + <a class="rref" href="./#iterations">§14</a> M1)</h4>
+<ul><li><b>Objective.</b> Confirm an unpowered lift prop does not windmill at cruise speed and measure its drag.</li><li><b>Setup (zero-cost).</b> Motor + prop on a mast on a car roof rack (or held out of a window on a 1 m pole by a passenger — only on a closed lot), unpowered, 20 m/s = 72 km/h = 45 mph by the car speedometer; phone video; for drag, the unit on a pivot arm with a luggage scale (Gaps) or the HX711 load cell reading the arm force.</li><li><b>Pass.</b> No windmilling (review T5); prop stops ≤ 30° from the airflow direction (review <a class="rref" href="./#iterations">M14.1</a>); drag ≤ 0.8 N per stopped unit EST (model 0.54 N = ½ ρ V² CdA with CdA_rotor 0.00222 m², <code>aero_results.json drag.CdA_per_rotor_unit</code> <i>(calc)</i>; <code>docs/research/aerodynamics.md</code> M3: ΔP &gt; 60 W across four units means the prop Cd EST is low and a prop-parking scheme is needed).</li><li><b>Risk.</b> Road safety: closed lot, driver only drives, ≤ 72 km/h.</li><li><b>Duration</b> 1 h. <b>Crew</b> 3. <b>Prereq.</b> C07.</li></ul>
+<h4 id="c11-battery-capacity-sag-and-internal-resistance">C11: Battery capacity, sag and internal resistance</h4>
+<ul><li><b>Objective.</b> Measure usable energy, voltage sag at hover and transition current, and per-cell internal resistance of both Ovonic 6S 6500 packs.</li><li><b>Setup.</b> Discharge load = two lift motors on the C06 stand or the tied-down airframe at a constant current near cruise (15 A, <code>sized.I_cruise</code> 15.2 A; review <a class="rref" href="./#mass">M7.4</a> said 16 A) with the watt meter logging Wh, V, A; the IR thermometer on the pack; cell voltages by the charger's balance readout at rest.</li><li><b>Procedure.</b> (1) Full charge (4.20 V/cell). (2) Rest 30 min; record resting V. (3) Discharge at 15 ± 2 A until 3.50 V/cell under load (21.0 V); log Wh, Ah, V every 30 s (watt meter readout on phone video). (4) At 50 % delivered Ah, pause and apply a 10 s step to 41 A (hover, <code>sized.I_hover</code> 41.2 A) and a 3 s step to ≈ 76 A (<code>sized.I_trans</code> 75.7 A, four lift motors at ≈ 60 % plus pusher, or two motors at full): record V before and during. (5) Rest 30 min; record recovery voltage and pack temperature. (6) Recharge, log mAh returned. (7) Reduce with <code>docs/test/analysis/battery_test.py</code>.</li><li><b>Pass.</b> Delivered ≥ 110 Wh from 4.20 to 3.50 V/cell at 15 A (0.8 × 144.3 × 0.95 = 109.7 Wh <i>(calc)</i>: the energy the sizing assumes usable before the 20 % reserve); sag ≥ 3.4 V/cell at 41 A and ≥ 3.2 V/cell at the 76 A step (review <a class="rref" href="./#propulsion">M8.4</a>); per-cell internal resistance ≤ 7.3 mΩ (= (3.70 − 3.40) / 41.2 A <i>(calc)</i>, EST); <b>hot-day acceptance: &gt; 5 mΩ/cell is a hot-day no-go</b> (§6; <code>docs/research/thermal.md</code> §6.4 item 2: the XPS bay is adiabatic, so a pack at the 7.5 mΩ/cell limit ends a 35 °C mission at 64 °C; &gt; 5 mΩ/cell means a &gt; 20 K rise) — write the measured value on the pack label; pack ≤ 60 °C EST after discharge; both packs within 3 % of each other.</li><li><b>Predicted.</b> 144.3 Wh nameplate (<code>packs[0].Wh</code>); loaded-pack voltage 21.0 V at hover (<code>firmware/vtol_c0.param</code> BATT_LOW_VOLT comment); mission needs 102.0 Wh from the pack (96.93 / 0.95 <i>(calc, <code>sized.E_Wh</code>, <code>base.etaBatt</code>)</i>), landing at 29 % of nameplate <i>(calc: (144.3 − 102.0) / 144.3)</i>. Pack temperature rise over a full mission ≈ 3.9 K per mΩ/cell <i>(calc: 29.1 K at 7.5 mΩ/cell, thermal.md §5; 28 K at the 7.3 mΩ/cell pass limit)</i>; with the battery-bay vents (BUILD-MANUAL 8.2a) about 56 °C at touchdown from 35 °C at the limit pack (thermal.md §6.4 item 1, EST).</li><li><b>Risk.</b> Over-discharge: watch 3.5 V/cell; LiPo bag under the pack.</li><li><b>Duration</b> 2 h per pack. <b>Crew</b> 2. <b>Prereq.</b> C06.</li></ul>
+<h4 id="c12-servo-torque-speed-and-centering-emax-es3005hv-5-no-spare">C12: Servo torque, speed and centering (EMAX ES3005HV × 5, no spare)</h4>
+<ul><li><b>Objective.</b> Confirm each of the five flight servos (2 ailerons, elevator, 2 rudders; <code>docs/purchasing/C0_BOM.csv</code>) meets its rating at the FC servo-rail voltage and centres repeatably. The BOM carries no spare servo: a failed servo is replaced from the $103.21 reserve (BOM "Crash reserve").</li><li><b>Setup.</b> Servo on a bench block, 50 mm arm, luggage scale or hanging jug on a string over a pulley (zero-cost: masses only), bench 6.0 V from the FC BEC or a UBEC (hardware kit, BOM); servo tester or FC output.</li><li><b>Procedure.</b> (1) Centre at 1500 µs; mark. (2) Hang masses at 50 mm until the arm stalls (torque = m g × 0.05 m: 8 kg·cm = 0.785 N·m needs 1.60 kg at 50 mm <i>(calc)</i>); hold ≤ 2 s to avoid heating. (3) Command ± 45°, measure travel. (4) Return to centre 10 times from each side; measure the arm tip position. (5) Time a 60° sweep by phone video (30 fps).</li><li><b>Pass.</b> Stall ≥ 6.4 kg·cm at 6.0 V (80 % of the 8 kg·cm rating, EST; rating from <code>docs/research/budget-avionics.md</code> §6, shop.emax-usa.com checked 2026-10-13); centring repeatability ≤ 1° (≤ 0.9 mm at 50 mm <i>(calc)</i>, EST); no buzzing at centre under 1 kg·cm; all five within 10 % of each other.</li><li><b>Predicted.</b> 8 kg·cm at 6.0 V, 10 at 7.4 V (budget-avionics §6). Hinge-moment need: ≤ 4 kg·cm per aileron (review <a class="rref" href="./#controls">M17.3</a>; measured in S07). Pushrods: 2-56 Du-Bro Kwik-Link cut to the CAD lengths (ailerons 48 mm, elevator 40 mm, rudders 102 mm, <code>cad/mesh/meta.json</code>; <code>cad/params.txt</code> rodAileron / rodElevator / rodRudder); the 5-pack covers five surfaces with no spare pushrod.</li><li><b>Duration</b> 1.5 h. <b>Crew</b> 1. <b>Prereq.</b> Order B.</li></ul>
+<h4 id="c13-harness-connector-and-esc-heating">C13: Harness, connector and ESC heating</h4>
+<ul><li><b>Objective.</b> Confirm the 12 AWG ESC feeds, 14 AWG pusher/BEC feeds, XT90-S and XT60H connectors (BOM) stay cool at hover and transition current.</li><li><b>Setup.</b> Run during G03 (tied-down full-system run); IR thermometer on each connector, the pack lead, each ESC and the FC current-sensor board.</li><li><b>Pass.</b> Any connector or wire ≤ 60 °C EST after 60 s hover current + 10 s transition current; ESC ≤ 70 °C EST; no discolouration.</li><li><b>Predicted.</b> 10.3 A per lift ESC at hover (41.2 / 4 <i>(calc)</i>); pack lead 41.2 A hover (43.6 A at 21 V), 75.7 A transition (<code>sized.I_hover</code>, <code>I_hover_loaded</code>, <code>I_trans</code>); XT90 continuous rating — (not in repo). Lift ESC on the boom in prop wash (BUILD-MANUAL 7.8): 56 °C after a 60 s hover and 66 °C at the mission peak on a 35 °C day (<code>docs/research/thermal.md</code> §6.1, 4 % loss EST).</li><li><b>Duration</b> in G03. <b>Crew</b> 2. <b>Prereq.</b> G03 setup.</li></ul>
+<h4 id="c14-tape-skin-mass-sample-review-m-structures-4">C14: Tape-skin mass sample (review <a class="rref" href="./#structures">M6.4</a>)</h4>
+<ul><li><b>Objective.</b> Check the wing skin mass assumption before the sizing is frozen for the build.</li><li><b>Procedure.</b> Cut a 0.5 m² XPS sample, weigh on the kitchen scale, tape one side as per the build, weigh again.</li><li><b>Pass.</b> ≤ 0.1 kg/m² per side (review <a class="rref" href="./#structures">M6.4</a>); otherwise update <code>base.wGlass</code> (0.06 kg/m², <code>results.json</code>) and re-run <code>analysis/sizing.mjs</code>.</li><li><b>Duration</b> 0.5 h. <b>Crew</b> 1. <b>Prereq.</b> Foam and tape received.</li></ul>
+<h4 id="c15-prop-and-hub-inspection">C15: Prop and hub inspection</h4>
+<ul><li><b>Objective.</b> Hub thickness for screw length (hardware-spec M5), balance and runout.</li><li><b>Procedure.</b> Calipers on the JeeFly 1755 and APC 14 × 8.5EP hubs; static balance on a bolt through the hub between two glasses (zero-cost); spin each prop on its motor at 30 % with a card held near the tip to see runout.</li><li><b>Pass.</b> Prop screw engagement 4.5–8.0 mm (hardware-spec M5); balance: no preferred rest position after 3 trials or sanded until so; tip runout &lt; 1 mm by eye.</li><li><b>Duration</b> 1 h. <b>Crew</b> 1. <b>Prereq.</b> Order A.</li></ul>
+<h4 id="c16-gear-clamp-f05-m3-30-and-motor-counterbore-7-5-first-article-fit-new-in-rev-b">C16: Gear-clamp F05 M3 × 30 and motor counterbore Ø7.5 first-article fit (new in rev B)</h4>
+<ul><li><b>Objective.</b> Confirm the two spec values the CAD changed because they could not be built: F05 is M3 × 30 (its nut and head must clear the leg tube in the gear clamp) and the motor counterbores are Ø7.5 (the Ø7.0 washer does not fit Ø6.5) (<code>cad/README.md</code> fasteners; <code>cad/hardware.json</code>; <code>cad/drawings/DBF-DRW-001.PDF</code> sheet 5).</li><li><b>Article.</b> One printed gear clamp pair (PETG) with a 205 mm leg offcut; one motor-mount upper half (PA6-CF).</li><li><b>Procedure.</b> (1) Fit the leg in the gear clamp socket (FT03) and the F05 M3 × 30 cross-bolt with its nylock: check head and nut clearance to the leg tube and that the bolt passes through the leg's Ø3.4 hole (hardware-spec J07). (2) Torque to 0.5 N·m EST; mark. (3) Motor mount: drop a Ø7.0 washer into each Ø7.5 counterbore; fit an M3 × 8 from inside the bore and measure the tip proud of the 4.5 mm floor (hardware-spec M4). (4) Bolt a motor on and check the screw tip ≤ 3.2 mm proud.</li><li><b>Pass.</b> F05 passes with ≥ 0.5 mm clearance between the nut/head and the leg tube; nylock engages ≥ 2 threads past the nut; washers seat flat in all 4 counterbores; screw tip ≤ 3.2 mm (hardware-spec M4; &gt; 3.3 mm reaches the windings).</li><li><b>Predicted.</b> <code>cad/verification.txt</code> "rotation check F05 … box extents x 33.0 mm" (M3 × 30 modelled); 0 cut warnings.</li><li><b>Duration</b> 1 h. <b>Crew</b> 1. <b>Prereq.</b> C01.</li></ul>
+<h4 id="c17-joiner-slip-fit-and-joiner-stop-retention-new-in-rev-b">C17: Joiner slip fit and joiner-stop retention (new in rev B)</h4>
+<ul><li><b>Objective.</b> Verify the rev B change that the joiner is a slip fit (not bonded) in the saddle and sockets, slides out for transport (R4), and is captured by the two printed <code>Joiner_Stop</code> discs bonded 300 mm inside the spar sockets (<code>cad/README.md</code> wing root; <code>cad/hardware.json</code> J11/FT06 "SLIP FIT, NOT BONDED"; <code>cad/verification.txt</code> Joiner_Stop 2 × 5.0 g).</li><li><b>Procedure.</b> (1) With the saddle and both wing panels built, slide the joiner through the saddle bores and into both sockets by hand; measure the push force with the kitchen scale (push the joiner end against the scale). (2) Bolt both panels (M5 × 20, N02 nylock, 1.0 N·m EST, J10). (3) Push the joiner axially from each wingtip end with 10 kg (98 N) by hand on a bathroom scale: the stop disc must hold. (4) Unbolt one panel, slide the joiner out: time it and check the pod transport piece measures ≤ 0.5 m (R4 envelope). (5) Repeat the slide-in/out 10 times; re-measure the push force.</li><li><b>Pass.</b> Joiner enters and leaves by hand with ≤ 5 kg push (EST) and no tape wrap needed beyond FT01's rule; stop discs do not move at 98 N (≥ 2 × the ~50 N EST axial load from a one-wheel landing side load, EST); push force unchanged after 10 cycles (no wear &gt; 0.05 mm on the joiner OD); pod piece ≤ 0.5 m long with the joiner out.</li><li><b>Predicted.</b> FT06 band −0.072 to +0.532 mm (hardware-spec §5b); joiner engagement 0.30 m per side, 13.5 diameters (<code>struct.engage</code>, <code>engageD</code>).</li><li><b>Duration</b> 1 h. <b>Crew</b> 2. <b>Prereq.</b> C05, saddle and panels built.</li></ul>
+<nav class="pager" aria-label="Previous and next section"><a class="pv" href="#9-test-series"><span>Previous</span>Test series</a><a class="nx" href="#9-2-series-s-structural-tests-on-the-built-airframe"><span>Next</span>Series S: structural tests on the built airframe</a></nav></section>
+<section class="pg" id="pg-9-2-series-s-structural-tests-on-the-built-airframe" data-id="9-2-series-s-structural-tests-on-the-built-airframe">
+<h3 id="9-2-series-s-structural-tests-on-the-built-airframe">9.2 Series S: structural tests on the built airframe</h3>
+<h4 id="s01-wing-static-proof-load-limit-load-3-0-g">S01: Wing static proof load (limit load, 3.0 g)</h4>
+<ul><li><b>Objective.</b> Prove the wing, joiner, joiner stops, sockets and saddle at limit load and compare tip deflection with the FEA.</li><li><b>Article.</b> Complete wing (both panels on the saddle and joiner, M5 wing bolts torqued to 1.0 N·m EST, hardware-spec J10), no aileron servos needed.</li><li><b>Setup.</b> Wing inverted on two padded supports at the pod width (saddle edges, ≈ 0.1 m each side of centre); ruler or dial gauge at each tip against a fixed reference; sandbags or water jugs (kitchen-scale-weighed, ± 10 g) at six stations per side.</li><li><b>Load schedule.</b> Total 15.5 kg = n × (m − m_wing) = 3.0 × (6.55 − 1.39) <i>(calc; <code>sized.m</code>, <code>sized.m_wing</code>; the wing's own 1.39 kg already loads the spar in the inverted position, so this is slightly above 3.0 g at the root — conservative)</i>. Elliptic spanwise: per side, stations at 0.1 / 0.3 / 0.5 / 0.7 / 0.9 / 1.1 m from centre: 1.64 / 1.59 / 1.49 / 1.33 / 1.08 / 0.62 kg <i>(calc: elliptic integral over 0.2 m bins, data sheet <code>cards/DS-S01.md</code>)</i>. Chordwise at 30 % chord (spar line; chord 0.284 m, <code>sized.chord</code>).</li><li><b>Procedure.</b> (1) Zero the tip gauges. (2) Load symmetrically in four increments (25, 50, 75, 100 % of schedule), reading both tips each step; listen for cracking; look at the socket foam cover and the saddle bolts. (3) Hold 100 % for 30 s (review <a class="rref" href="./#structures">M6.1</a>). (4) Unload in the same steps. (5) Record residual tip deflection after 5 min. (6) Slide the joiner out and inspect for marks or bow against a straight edge; check the stop discs are still bonded.</li><li><b>Pass.</b> Tip deflection at 100 % ≤ 120 mm (10 % of the 1.2 m semi-span, review <a class="rref" href="./#structures">M6.1</a>); residual ≤ 2 mm EST; no permanent set in the joiner (straightness ≤ 0.5 mm over 0.76 m, EST); no foam crush at the sockets; no bolt loosening; stop discs intact.</li><li><b>Predicted.</b> Spar tip 15.5 mm at 3.0 g, scaled from the FEA 23.2 mm at 4.5 g (<code>cad/sim/results.txt spar_tip_disp</code> × 3/4.5 <i>(calc)</i>; FEA re-run 2026-10-25 on CAD rev D at the root moment 73.6 N·m, <code>struct.Mroot</code>, <code>cad/README.md</code> simulations). The FEA bonds an idealised joiner (OD = socket ID), so the real wing with 0.23 mm joiner clearance and foam compliance will deflect more; between 15 and 60 mm is the expected band (EST). Root moment at 3.0 g: 49.1 N·m = n W b / (3π) <i>(calc; <code>struct.Mroot</code> 73.6 × 3/4.5)</i>; joiner stress 105 MPa, RF 2.62 on 275 MPa yield (<code>struct.sigJ</code> 157.5 MPa × 3/4.5 <i>(calc)</i>).</li><li><b>Risk.</b> A failure drops 15 kg of bags: nobody under the wing; pad the floor.</li><li><b>Duration</b> 2 h. <b>Crew</b> 3. <b>Prereq.</b> C05, C17, wing built.</li></ul>
+<h4 id="s02-boom-static-stiffness-review-m-simulation-1">S02: Boom static stiffness (review <a class="rref" href="./#simulation">M10.1</a>)</h4>
+<ul><li><b>Objective.</b> Measure boom tip deflection under a known load with the real printed clamp to check the FEA boundary condition.</li><li><b>Setup.</b> One boom clamped in its front and rear wing clamps on the wing (or in a bench fixture using the real clamps); a jug of known mass hung at the front motor station (arm Lb = 0.462 m, <code>struct.Lb</code>); ruler/dial gauge at the motor station.</li><li><b>Procedure.</b> Hang 1.0, 2.0, 3.0 kg (9.8–29.4 N, up to the 30.7 N full-thrust case <code>struct.Tmax</code>); read deflection each step and after removal.</li><li><b>Pass.</b> Deflection at 3.0 kg ≤ 1.5 × prediction = 4.0 mm (review <a class="rref" href="./#simulation">M10.1</a> rule; 1.5 × FEA 2.70 mm = 4.05 mm <i>(calc)</i>, rounded down); residual 0; no clamp slip (witness line).</li><li><b>Predicted.</b> 2.84 mm hand (P L³ / 3EI, <code>struct.defl_max</code>), 2.70 mm FEA at 30.7 N (<code>cad/sim/results.txt boom_disp_max</code>, re-run 2026-10-25 on CAD rev D at the arm Lb 0.462 m).</li><li><b>Duration</b> 1 h. <b>Crew</b> 2. <b>Prereq.</b> Booms built.</li></ul>
+<h4 id="s03-boom-modal-tap-test-review-m-structures-2">S03: Boom modal tap test (review <a class="rref" href="./#structures">M6.2</a>)</h4>
+<ul><li><b>Objective.</b> First bending frequency of each boom with the lift unit fitted, vs the hand 32.3 Hz / FEA 34.4 Hz.</li><li><b>Setup.</b> Aircraft assembled on its gear; phone taped to the motor mount running a free accelerometer logging app (e.g. phyphox, phyphox.org, free; EST adequacy: phone IMU rates 100–400 Hz give ≤ 50–200 Hz bandwidth); tap the motor with a rubber mallet handle.</li><li><b>Procedure.</b> 10 taps per boom, vertical then lateral; export the accelerometer CSV; FFT in the app or with numpy; read the first peak.</li><li><b>Pass.</b> f1 within 26–41 Hz EST (hand 32.3 Hz − 20 % to FEA 34.4 Hz + 20 % <i>(calc)</i>) in both planes; and not within ± 15 % of the hover rotor frequency or twice it (review <a class="rref" href="./#structures">M6.2</a>). Hover rpm comes from C07 throttle and the no-load 8,880 rpm × throttle fraction EST (BLHeli_S has no telemetry on these ESCs, —).</li><li><b>Predicted.</b> 32.3 Hz hand at the 0.462 m arm (<code>struct.fn</code>), 34.4 Hz FEA (<code>cad/sim/results.txt boom_f1</code>, re-run 2026-10-25 on CAD rev D); a compliant clamp lowers it (<code>analysis/sizing.mjs</code> comment on fn).</li><li><b>Duration</b> 1 h. <b>Crew</b> 2. <b>Prereq.</b> S02.</li></ul>
+<h4 id="s04-boom-clamp-and-splice-slip-proof-hardware-spec-m7-review-m-structures-5">S04: Boom clamp and splice slip proof (hardware-spec M7, review <a class="rref" href="./#structures">M6.5</a>)</h4>
+<ul><li><b>Objective.</b> Prove the printed clamps and the rear splice do not slip under full thrust or torsion.</li><li><b>Procedure.</b> (1) Torsion: hang 2 kg on a 0.25 m lever (4.9 N·m, hardware-spec M7) from a motor mount, then from the tail clamp; check the paint witness line. (2) Bending: hang 1.5 × Tmax = 46.0 N (4.69 kg <i>(calc; <code>struct.Tmax</code>)</i>) from the front motor station with the rear free (review <a class="rref" href="./#structures">M6.5</a>); check rotation at the clamps with a protractor app.</li><li><b>Pass.</b> Witness line unmoved; rotation ≤ 1°; no crack (review <a class="rref" href="./#structures">M6.5</a>).</li><li><b>Predicted.</b> Clamp friction capacity about 16 N·m about the boom axis at 0.5 N·m per screw, μ 0.3 EST (hardware-spec J04); clamp moment 14.2 N·m (<code>struct.Mclamp</code>); socket shear 11.3 MPa (<code>struct.tauSock</code>).</li><li><b>Duration</b> 1 h. <b>Crew</b> 2. <b>Prereq.</b> C02, booms built.</li></ul>
+<h4 id="s05-motor-mount-pull-and-insert-test-on-real-parts">S05: Motor-mount pull and insert test on real parts</h4>
+<ul><li><b>Objective.</b> Confirm the as-printed PA6-CF motor mounts (rev B: upper half with the 4.5 mm floor + lower cap, <code>cad/README.md</code> printed clamps) and their inserts hold the motor at full thrust with margin.</li><li><b>Procedure.</b> With a motor bolted to its mount (0.6 N·m, Loctite 242, hardware-spec J01; screws from inside the bore) and the mount clamped on a boom, hang 2 × Tmax = 61.4 N (6.26 kg <i>(calc)</i>) from the motor bell in the thrust direction for 60 s; then torque one spare mount's insert to 1.0 N·m to confirm C02 on the real geometry.</li><li><b>Pass.</b> No crack, no insert movement, screws unchanged on re-torque (≤ 30°).</li><li><b>Predicted.</b> Lift unit reaction at full thrust 30.7 N (<code>struct.Tmax</code>).</li><li><b>Duration</b> 0.5 h. <b>Crew</b> 2. <b>Prereq.</b> C02, C03, C16, mounts printed.</li></ul>
+<h4 id="s06-landing-gear-drop-test-review-m-structures-3">S06: Landing-gear drop test (review <a class="rref" href="./#structures">M6.3</a>)</h4>
+<ul><li><b>Objective.</b> Measure peak deceleration in a 0.3 m drop and decide on compliant feet; check the leg fairings survive.</li><li><b>Setup.</b> Empty airframe (no pack; ballast to flight mass with a jug strapped in the bay, total 6.55 kg) with the FC powered by a bench battery and logging (<code>LOG_DISARMED,1</code> temporarily) or a phone accelerometer in the bay; grass surface; leg fairings fitted (<code>cad/README.md</code> gear: printed 3:1 teardrop, 170 mm, taped at the clamp).</li><li><b>Procedure.</b> Lift to 0.30 m under the feet (tape measure), release level, three drops; inspect legs, gear clamps, boom clamps, fairings and the ballast mount (S10) after each.</li><li><b>Pass.</b> Peak ≤ 8 g (review <a class="rref" href="./#structures">M6.3</a>) — otherwise fit softer feet (foam/TPU, about 100 mm travel keeps n ≤ 8, review <a class="rref" href="./#structures">§6</a> "Landing loads"); no crack or permanent bend in the 0.205 m legs; fairings undamaged and still taped.</li><li><b>Predicted.</b> Impact speed 2.43 m/s = √(2 g h) (review <a class="rref" href="./#structures">§6</a> Load cases); bare aluminium legs as springs: n = 2(1 + h/s) = 32 g at 20 mm stroke, 8 g at 100 mm (<code>struct.strokes</code>). So without compliant feet the test is expected to <b>fail</b>; run it first with the planned feet.</li><li><b>Risk.</b> Damage to the pod: the drop is onto the gear only, pad the pod with foam.</li><li><b>Duration</b> 1 h. <b>Crew</b> 2. <b>Prereq.</b> S01, S10, gear built.</li></ul>
+<h4 id="s07-control-surface-hinge-moment-and-joiner-spar-post-test-inspection">S07: Control-surface hinge moment and joiner/spar post-test inspection</h4>
+<ul><li><b>Objective.</b> (a) Measure the aileron hinge moment to size the servo margin (review <a class="rref" href="./#controls">M17.3</a>); (b) inspect the joiner, sockets and saddle after S01 and S06.</li><li><b>Procedure.</b> (a) Spring/luggage scale (Gaps; zero-cost: hang a jug from a string over the trailing edge) on a built aileron at 25 % of its chord behind the hinge with the surface held by the servo at 20° in a 20 m/s stream (car-roof, as C10) or, failing that, static estimate from Ch = ½ ρ V² S_a c_a Ch_δ δ with Ch_δ EST −0.5/rad and the hand calc on the card. (b) Slide the joiner out; straight-edge; look for socket foam crush and saddle bolt witness marks.</li><li><b>Pass.</b> (a) Hinge moment ≤ 4 kg·cm (review <a class="rref" href="./#controls">M17.3</a>, half of 8 kg·cm). (b) No set &gt; 0.5 mm; no crush.</li><li><b>Predicted.</b> — (hinge moment not computed in the repo, <code>docs/research/pusher-battery-servo.md</code> caveat 5).</li><li><b>Duration</b> 1.5 h. <b>Crew</b> 2. <b>Prereq.</b> S01.</li></ul>
+<h4 id="s08-transport-car-fit-and-two-person-carry-r4-r5">S08: Transport, car fit and two-person carry (R4, R5)</h4>
+<ul><li><b>Objective.</b> Demonstrate break-down into the measured car and the assembled carry.</li><li><b>Procedure.</b> (1) Measure the team car's load space (review <a class="rref" href="./#model3d">M3.2</a>). (2) Break the aircraft into its transport pieces (wing panels off the saddle, joiner slid out of the pod piece, booms off at the field breakdown joint — 4 screws per boom, hardware-spec J05; tail off with four screws, <code>cad/README.md</code> tail). (3) Load everything with the pack box and tools; close the hatch. (4) Two people carry the assembled aircraft 50 m over grass and set it down; no part touched the ground.</li><li><b>Pass.</b> All pieces fit; longest piece 1.20 m (<code>geo.longestPiece</code>) ≤ measured clear length (R4 working envelope 1.5 × 0.5 × 0.4 m, <code>docs/DESIGN-BASIS.md</code> R4); pod piece ≤ 0.5 m with the joiner out; carry completed without strain or contact.</li><li><b>Duration</b> 1 h. <b>Crew</b> 2. <b>Prereq.</b> C17, airframe built.</li></ul>
+<h4 id="s09-built-component-masses-and-empty-weight-review-m-model3d-1">S09: Built component masses and empty weight (review <a class="rref" href="./#model3d">M3.1</a>)</h4>
+<ul><li><b>Objective.</b> Weigh every part as it comes off the bench and the empty airframe, and compare with the sizing mass roll-up and the CAD roll-up.</li><li><b>Procedure.</b> Kitchen scale (5 kg, 1 g) per part; bathroom scale or two kitchen scales for the assembled airframe; log against <code>cad/verification.txt</code> "Mass roll-up" (modelled 6.36 kg incl. pack; fasteners 228 g, printed 1.38 kg, tubes 1.67 kg, foam 0.95 kg without skins, vendor 2.12 kg) and the sizing items (<code>cg.items</code>).</li><li><b>Pass.</b> Empty mass without pack and payload ≤ 5.23 kg × 1.15 = 6.02 kg (<code>sized.m</code> − 0.82 − 0.5 <i>(calc)</i>, review <a class="rref" href="./#model3d">M3.1</a>); otherwise re-run <code>analysis/sizing.mjs</code>.</li><li><b>Predicted.</b> Wing 1.39, booms + clamps 0.626, lift units 0.968, tail 0.141, pod 0.6 EST, gear 0.443 EST (CAD legs 433 g + fairings 101.5 g + clamps 210 g), avionics 0.25 EST, pusher set 0.227, servos (5) 0.216, wiring 0.37 EST kg (<code>cg.items</code>; <code>cad/verification.txt</code>).</li><li><b>Duration</b> ongoing. <b>Crew</b> 1. <b>Prereq.</b> none.</li></ul>
+<h4 id="s10-ballast-mount-retention-new-in-rev-b">S10: Ballast-mount retention (new in rev B)</h4>
+<ul><li><b>Objective.</b> Prove the 0.5 kg ballast (R12 payload allowance; §4 rule 7) cannot shift or leave the bay in a hard landing or a 4.5 g manoeuvre.</li><li><b>Article.</b> The ballast block (sand/lead in a printed or taped block, mass 0.500 ± 0.005 kg on the kitchen scale) in the payload bay on its mount/strap (battery-strap type, BOM "ShareGoo LiPo battery straps").</li><li><b>Procedure.</b> (1) Fit the ballast at the bay station (x = +0.15 m from the LE EST, <code>cg.items</code> "Payload allowance"). (2) Static pull: hang 8 kg (78 N = 2 × 0.5 kg × 8 g <i>(calc; S06 limit 8 g, factor 2 EST)</i>) from the ballast in the downward, forward and sideways directions via a string over the bay edge; check movement. (3) Shake test: hold the pod and shake 10 s; check position. (4) Include in the S06 drops.</li><li><b>Pass.</b> Movement ≤ 2 mm in any direction after each pull; no strap slip; position unchanged after S06.</li><li><b>Predicted.</b> 4.5 g ultimate manoeuvre load on 0.5 kg = 22 N; 8 g landing = 39 N <i>(calc)</i>.</li><li><b>Duration</b> 0.5 h. <b>Crew</b> 1. <b>Prereq.</b> Pod built.</li></ul>
+<nav class="pager" aria-label="Previous and next section"><a class="pv" href="#9-1-series-c-component-and-coupon-tests"><span>Previous</span>Series C: component and coupon tests</a><a class="nx" href="#9-3-series-e-electrical-and-avionics-bench-tests"><span>Next</span>Series E: electrical and avionics bench tests</a></nav></section>
+<section class="pg" id="pg-9-3-series-e-electrical-and-avionics-bench-tests" data-id="9-3-series-e-electrical-and-avionics-bench-tests">
+<h3 id="9-3-series-e-electrical-and-avionics-bench-tests">9.3 Series E: electrical and avionics bench tests</h3>
+<p>All E tests: <b>props off</b>, aircraft on a bench, pack through the XT90-S, fire bag at hand.</p>
+<h4 id="e01-power-up-smoke-test-and-sensor-calibration">E01: Power-up, smoke test and sensor calibration</h4>
+<ul><li><b>Objective.</b> First power-up of the integrated avionics; calibrate the FC voltage and current sensors.</li><li><b>Procedure.</b> (1) Continuity and polarity check of the harness with a multimeter (hand tools; Gaps if none). (2) Power through the XT90-S with the watt meter in line; watch for heat/smoke for 60 s. (3) Idle current. (4) Compare FC <code>BATT</code> voltage with a multimeter at the balance lead: set <code>BATT_VOLT_MULT</code>. (5) With motors at a steady 20 % (props off, brief) compare FC current with the watt meter at two points: set <code>BATT_AMP_PERVLT</code> (<code>firmware/vtol_c0.param</code> §9 says to calibrate both).</li><li><b>Pass.</b> Idle current ≤ 1.0 A EST; FC voltage within ± 0.1 V of the meter; current within ± 5 % at ≥ 5 A.</li><li><b>Predicted.</b> Board defaults 11.05 V/V and 64 A/V (<code>firmware/vtol_c0.param</code>).</li><li><b>Duration</b> 1 h. <b>Crew</b> 2. <b>Prereq.</b> C13 harness built, E11.</li></ul>
+<h4 id="e02-esc-protocol-motor-order-direction-and-spin-thresholds">E02: ESC protocol, motor order, direction and spin thresholds</h4>
+<ul><li><b>Procedure.</b> Mission Planner motor test in the ArduPilot order (Motor1 front-right CCW on S5, 2 rear-left CCW on S6, 3 front-left CW on S7, 4 rear-right CW on S8, pusher on S9; <code>firmware/vtol_c0.param</code> §2); set direction with DShot commands (<code>SERVO_DSHOT_ESC,2</code>) or BLHeli passthrough; find the lowest output that spins every motor (<code>Q_M_SPIN_ARM</code>) and that gives a little thrust (<code>Q_M_SPIN_MIN</code>) per the tuning guide step 4 (checked 2026-10-21); pusher on S9 responds to throttle only in fixed-wing modes.</li><li><b>Pass.</b> All four lift motors spin in the correct position/direction at the test's 10 % command; <code>Q_M_SPIN_ARM</code> ≥ the measured spin threshold + 0.02; no desync at 100 % for 3 s (props off).</li><li><b>Predicted.</b> <code>Q_M_SPIN_ARM</code> 0.10, <code>Q_M_SPIN_MIN</code> 0.15 (param file defaults).</li><li><b>Duration</b> 1 h. <b>Crew</b> 2. <b>Prereq.</b> E01.</li></ul>
+<h4 id="e03-servo-direction-throws-and-centering-on-the-airframe-5-servos">E03: Servo direction, throws and centering on the airframe (5 servos)</h4>
+<ul><li><b>Procedure.</b> In MANUAL and FBWA: stick right → right aileron up; stick back → elevator up; rudder right → both rudders (S4 left boom, S11 right boom) trailing edge right; in FBWA roll the aircraft and check surfaces counter the motion. Measure throws with a ruler at the trailing edge; set <code>SERVOn_MIN/MAX/TRIM/REVERSED</code>.</li><li><b>Pass.</b> Correct sense on all 5 servos; aileron ± 20° EST, elevator ± 20° EST, rudder ± 20° EST (no repo values, —; typical sport-plane throws); surfaces return to within 1 mm of neutral; no binding at full throw; servo current at full throw ≤ 1 A each EST. Elevator reserve at stall: trim needs about −8.2° elevator at Vs (<code>aero_results.json stall.trim_at_Vstall.elevator_deg</code>), so the elevator throw must be ≥ 15° EST.</li><li><b>Duration</b> 1 h. <b>Crew</b> 2. <b>Prereq.</b> C12, E01.</li></ul>
+<h4 id="e04-rc-link-channel-map-switches-telemetry-and-range-walk">E04: RC link: channel map, switches, telemetry and range walk</h4>
+<ul><li><b>Procedure.</b> Check AETR on CH1–4, arm CH5, mode CH6 six positions (<code>FLTMODE1–6</code>), E-stop CH7, Q_ASSIST CH8, RTL CH9. CRSF telemetry on the handset (battery V/A, mode, GPS, LQ) and, if used, the ELRS MAVLink overlay to Mission Planner (<code>docs/research/firmware.md</code> §4 R7/R9: switchable, not simultaneous with CRSF). Range walk: aircraft on the bench outdoors, powered; walk the transmitter 300 m away (the <code>FENCE_RADIUS</code>) with LQ/RSSI on the transmitter screen; the second person watches a servo move.</li><li><b>Pass.</b> All switches map; LQ ≥ 90 % EST at 300 m with the antenna vertical; handset telemetry shows battery voltage within 0.1 V of the FC and the mode name; failsafe not triggered.</li><li><b>Predicted.</b> — (ELRS range at the Pocket's output power not in repo).</li><li><b>Duration</b> 1 h. <b>Crew</b> 2. <b>Prereq.</b> E01.</li></ul>
+<h4 id="e05-failsafe-bench-test-hardware-portion-sitl-portion-done">E05: Failsafe bench test (hardware portion; SITL portion done)</h4>
+<ul><li><b>SITL evidence (done 2026-10-21).</b> <code>firmware/sitl/results/summary.json</code>: scenarios B (RC loss in cruise → RTL → QRTL), C (RC loss in hover → QLAND), D (transition timeout 15 s → QRTL), E (low battery → RTL → QRTL), F (fence 110 m → RTL, peak 113.1 m), G (ELRS MAVLink override loss → QLAND) all PASS on ArduPlane 4.7.2; 133 parameters read back equal. <b>Repeated 2026-10-25 on the C0 airframe model</b> (<code>firmware/sitl/c0_physics.py</code> on SITL's JSON interface; <code>firmware/sitl/results_c0.json</code>): 7/7 PASS with <code>vtol_c0.param</code> unchanged, 131 parameters checked, none mismatched (<code>firmware/sitl/README.md</code> C0 section).</li><li><b>Hardware procedure.</b> Props off, armed in QLOITER on the bench with GPS lock (outdoors): (1) switch the transmitter off → expect QLAND within <code>FS_LONG_TIMEOUT</code> 5 s + 1.5 s short; (2) set <code>BATT_LOW_MAH</code> temporarily to 6,400 → expect the low action RTL (<code>BATT_FS_LOW_ACT,1</code>); <code>BATT_CRT_MAH</code> to 6,400 → QLAND (<code>BATT_FS_CRT_ACT,4</code>); restore 1,950 / 1,300; (3) set <code>FENCE_ALT_MAX</code> to 1 m and lift the aircraft 2 m by hand → fence breach message; restore 110; (4) E-stop CH7 stops all motors at 20 % command; (5) XT90-S pull under load.</li><li><b>Pass.</b> Each failsafe produces the configured mode within the timeout; parameters restored and verified with <code>firmware/tools/check_params.py</code>.</li><li><b>Duration</b> 1.5 h. <b>Crew</b> 2. <b>Prereq.</b> E04.</li></ul>
+<h4 id="e06-sitl-rehearsal-review-f0-flighttest-m1-scripted-portion-done-pilot-portion-open">E06: SITL rehearsal (review F0, <a class="rref" href="./#flighttest">§12</a> M1): scripted portion done, pilot portion open</h4>
+<ul><li><b>Done.</b> Scripted scenarios A–G passed 2026-10-21 (<code>firmware/sitl/README.md</code>; <code>firmware/sitl/results/</code>): nominal AUTO mission with VTOL land 0.1 m from home, forward transition 10 s, "Transition airspeed reached 16.0" 5 s after start. Attitude-tracking RMS 0.67°/0.62° (VTOL), 4.5°/1.7° (fixed wing). <b>C0 airframe model, 2026-10-25</b> (<code>firmware/sitl/results_c0.json</code>): 7/7 again; scenario A forward transition 13 s / 144 m with no altitude loss, 17.5 m/s at "Transition done", peak 70.6 A; back-transition 7 s / 34 m with 1.7 m altitude loss and a −17°/+33° pitch swing (the airbrake phase pitches to the 30° VTOL limit and stalls the wing); VTOL land 0.0 m from home.</li><li><b>Open.</b> (1) Each pilot hand-flies the <b>C0 airframe model</b> (<code>firmware/sitl/run_c0_sitl.ps1</code>, Mission Planner on TCP 127.0.0.1:5760; the generic QuadPlane only if the model will not start) with the Pocket Crush as a joystick: three back-transitions from 20 m/s to see the airbrake pitch-up (F06–F13 watch item), QLOITER take-off, FBWA transition from the upwind edge with an immediate turn, failed transition (throttle low → QRTL), RC loss in cruise, RC loss in hover, low battery, fence; (2) <code>SIM_ENGINE_FAIL</code> on one lift motor in hover (documents the R14 limitation; not in the A–G set).</li><li><b>Pass.</b> Every pilot recovers a failed transition and a pusher-out without ground contact in 3 of 3 attempts and keeps inside the 300 m fence after a transition (review <a class="rref" href="./#flighttest">M12.1</a>: a pilot who cannot does not fly F06–F12).</li><li><b>Duration</b> 2 h per pilot. <b>Crew</b> PIC + GCS. <b>Prereq.</b> E11.</li></ul>
+<h4 id="e07-compass-and-gps-calibration">E07: Compass and GPS calibration</h4>
+<ul><li><b>Procedure.</b> Outdoors, away from steel; Mission Planner compass calibration (<code>COMPASS_AUTO_ROT,2</code> detects the external compass orientation); accelerometer calibration; check HDOP and satellite count after 2 min; heading vs a phone compass at 4 headings.</li><li><b>Pass.</b> Calibration fitness "good"; heading error ≤ 10° at all four headings EST; HDOP ≤ 1.5, satellites ≥ 10 EST; no "compass inconsistent".</li><li><b>Duration</b> 0.5 h. <b>Crew</b> 1. <b>Prereq.</b> E01.</li></ul>
+<h4 id="e08-airspeed-sensor-bench-check-ms5525dso-at-0x77">E08: Airspeed sensor bench check (MS5525DSO at 0x77)</h4>
+<ul><li><b>Procedure.</b> Before fitting: strap the MS5525DSO CSB low so it answers at I²C 0x77 (ships at 0x76, the onboard SPL06 baro's address; <code>firmware/vtol_c0.param</code> ARSPD_TYPE 5 comment; <code>docs/research/firmware.md</code> D4; <code>firmware/README.md</code> §4.3). On the bench: confirm the baro and the airspeed sensor are both detected (no "ARSPD: no sensor found", baro healthy); pitot fitted (hardware-spec J16); cover and uncover, blow gently: reading ≥ 6 m/s (ArduPilot airspeed calibration page, checked 2026-10-21); zero with the tube covered; leak check.</li><li><b>Pass.</b> Both sensors detected on bus 0; static reading 0 ± 1 m/s; blow test ≥ 6 m/s; reading holds for 10 s with the pitot sealed.</li><li><b>Duration</b> 0.5 h. <b>Crew</b> 1. <b>Prereq.</b> E01.</li></ul>
+<h4 id="e09-bench-vibration-and-esc-thermal-soak-tied-down-props-on">E09: Bench vibration and ESC thermal soak (tied-down, props on)</h4>
+<ul><li>Runs as part of G03; recorded separately. <b>Pass.</b> VIBE X/Y/Z &lt; 30 m/s² and clipping = 0 during a 60 s hover-throttle run (ArduPilot vibration page, checked 2026-10-21); ESC ≤ 70 °C EST.</li></ul>
+<h4 id="e10-telemetry-links">E10: Telemetry links</h4>
+<ul><li><b>Procedure.</b> (1) CRSF telemetry on the handset: confirm the sensors listed (battery, GPS, mode, LQ/RSSI) during the E04 range walk. (2) ELRS MAVLink overlay (if enabled on the RX/TX): Mission Planner connects; note that RC then arrives as <code>RC_CHANNELS_OVERRIDE</code> and that loss → QLAND (SITL G). (3) CoreWing BLE/WiFi (<code>SERIAL1_PROTOCOL,2</code>): bench link only; measure the drop-out range by walking away.</li><li><b>Pass.</b> Handset telemetry present at 300 m (E04); MAVLink overlay, if used, holds a GCS link at ≥ 300 m EST; BLE/WiFi range recorded (expected tens of metres, —).</li><li><b>Predicted.</b> — (ELRS MAVLink range not in repo). No SiK radio is planned (<code>docs/research/firmware.md</code> §4 R9).</li><li><b>Duration</b> 0.5 h. <b>Crew</b> 2. <b>Prereq.</b> E04.</li></ul>
+<h4 id="e11-firmware-and-parameter-inspection-r17">E11: Firmware and parameter inspection (R17)</h4>
+<ul><li><b>Procedure.</b> Flash ArduPlane 4.7.2 stable for CoreWingF405WingV2 (<code>firmware/vtol_c0.param</code> header: firmware.ardupilot.org/Plane/stable/CoreWingF405WingV2, checked 2026-10-21); load <code>firmware/vtol_c0.param</code> twice (Q_ENABLE reboot, per its header); run <code>firmware/tools/check_params.py</code>; record the firmware version string and git hash. The 2027-02-22 beta go/no-go is closed (stable 4.7.2 includes the target, <code>docs/research/firmware.md</code> §4 R20); the date stays as the integration milestone.</li><li><b>Pass.</b> Firmware is a stable release with QuadPlane; zero parameter mismatches (SITL read-back of 133 parameters was equal); all arming checks enabled (<code>ARMING_SKIPCHK,0</code>).</li><li><b>Duration</b> 1 h. <b>Crew</b> 1. <b>Prereq.</b> FC received.</li></ul>
+<h4 id="e12-remote-id-check-r18">E12: Remote ID check (R18)</h4>
+<ul><li><b>Procedure.</b> Look up the BeeID serial at uasdoc.faa.gov (review <a class="rref" href="./#schedule">M15.3</a>); power the module; confirm broadcast with a free Remote ID receiver app on a phone (e.g. OpenDroneID OSM, free, Android) showing the serial and position.</li><li><b>Pass.</b> Serial listed; broadcast received at 30 m EST.</li><li><b>Duration</b> 0.5 h. <b>Crew</b> 1. <b>Prereq.</b> BeeID received, registration done.</li></ul>
+<nav class="pager" aria-label="Previous and next section"><a class="pv" href="#9-2-series-s-structural-tests-on-the-built-airframe"><span>Previous</span>Series S: structural tests on the built airframe</a><a class="nx" href="#9-4-series-g-ground-tests-on-the-complete-aircraft"><span>Next</span>Series G: ground tests on the complete aircraft</a></nav></section>
+<section class="pg" id="pg-9-4-series-g-ground-tests-on-the-complete-aircraft" data-id="9-4-series-g-ground-tests-on-the-complete-aircraft">
+<h3 id="9-4-series-g-ground-tests-on-the-complete-aircraft">9.4 Series G: ground tests on the complete aircraft</h3>
+<h4 id="g01-weight-and-balance-review-m-cg-1">G01: Weight and balance (review <a class="rref" href="./#cg">M9.1</a>)</h4>
+<ul><li><b>Procedure.</b> Two kitchen scales under the wing at known stations (or one scale and a pivot): weigh with pack and 0.5 kg ballast; compute CG from the moments. Mark the CG target on the pod. Move the pack to bring the CG within 2 cm of the thrust centroid.</li><li><b>Pass.</b> Take-off mass ≤ 7.53 kg (R2 line); CG at 28 ± 2 % MAC (target <code>cg.pct.target</code> 28; ± 2 % MAC = ± 5.7 mm <i>(calc, MAC = chord 0.2842 m)</i>) with ballast; CG never aft of 31.8 % MAC (= neutral point 39.8 % − 8 % SM, <code>aero_results.json neutral_point.AVL_pod_pct_MAC</code>, review <a class="rref" href="./#cg">M9.1</a> rule <i>(calc)</i>); CG within 20 mm of the thrust centroid at x = −0.0796 m from the LE (<code>cg.thrustCentroid</code>).</li><li><b>Predicted.</b> CG at 26.7–29.3 % MAC over the battery travel (<code>cg.pctFwd</code>, <code>pctAft</code>); static margin 11.8 % at 28 % (aero, AVL with pod), 11.5 % by the sizing (<code>geo.SM</code>).</li><li><b>Duration</b> 1 h. <b>Crew</b> 2. <b>Prereq.</b> S09, avionics fitted.</li></ul>
+<h4 id="g09-cg-with-and-without-ballast-ballast-rule-check-new-in-rev-b">G09: CG with and without ballast; ballast rule check (new in rev B)</h4>
+<ul><li><b>Objective.</b> Confirm the empty-bay CG and that the 0.5 kg ballast restores the 28 % MAC target (<code>docs/research/aerodynamics.md</code> M4; <code>cad/README.md</code> operating rule).</li><li><b>Procedure.</b> Repeat G01 (1) with pack only, no ballast; (2) with pack + 0.5 kg ballast at the bay station; (3) with the ballast moved ± 30 mm to map the sensitivity; record the pack station for each.</li><li><b>Pass.</b> Empty-bay CG recorded and confirmed aft of 31.8 % MAC → the ballast rule is mandatory (expected); with ballast CG 28 ± 2 % MAC; the rule and the ballast station are written on the GA sheet note 5 and on every flight card.</li><li><b>Predicted.</b> 34.7 % MAC without payload (<code>cg.pct.noPayload</code>; <code>aero_results.json geometry.CG_no_payload_pct_MAC</code>), static margin 5.1 % (aero) / 4.9 % (sizing <code>cg.SM_noPayload</code>); 28 % with ballast.</li><li><b>Duration</b> 0.5 h. <b>Crew</b> 2. <b>Prereq.</b> G01, S10.</li></ul>
+<h4 id="g02-hand-carry-sensor-sanity-walk">G02: Hand-carry sensor sanity walk</h4>
+<ul><li><b>Procedure.</b> Powered, disarmed, logging on (<code>LOG_DISARMED,1</code> temporarily): carry the aircraft 50 m and back at walking speed, pitch and roll it ± 30° by hand; watch the handset/GCS HUD, airspeed and EKF.</li><li><b>Pass.</b> Attitude follows within 5°; GPS track matches the walk; no EKF or compass warnings; airspeed stays &lt; 3 m/s.</li><li><b>Duration</b> 0.5 h. <b>Crew</b> 2. <b>Prereq.</b> E07, E08.</li></ul>
+<h4 id="g03-full-system-tied-down-run-review-t6-expanded-includes-c13-e09">G03: Full-system tied-down run (review T6, expanded; includes C13, E09)</h4>
+<ul><li><b>Objective.</b> All four lift motors and the pusher under load on the airframe: pack sag, harness heat, vibration, EMI, and the pitch/roll authority check.</li><li><b>Setup.</b> Aircraft strapped to a heavy bench or to ground stakes by the landing-leg clamps with ≥ 4 ratchet or rope ties rated ≥ 50 kg each (total restraint &gt; 4 × 3.13 kgf = 12.5 kgf, <code>budget-lift.md</code> A3); props on; everyone ≥ 5 m away behind a barrier; watt meter in line; IR thermometer; logging.</li><li><b>Procedure.</b> (1) Arm in QSTABILIZE; raise throttle to the C07 hover throttle (~52 %) for 60 s; (2) 3 s at 100 % on all four (review <a class="rref" href="./#propulsion">M8.4</a> burst); (3) in FBWA, pusher to 100 % for 10 s (G06 may be combined); (4) full transition current: hover throttle plus pusher 75 % (<code>TKOFF_THR_MAX</code>) for 10 s; (5) read temperatures within 30 s; (6) download the log.</li><li><b>Pass.</b> Pack ≥ 3.4 V/cell at hover draw and ≥ 3.2 V/cell in the burst (review T6, <a class="rref" href="./#mass">§7</a> M1); hover current 41.2 A ± 15 % EST; transition current ≤ 85 A (<code>Q_M_BAT_CURR_MAX</code>); VIBE &lt; 30 m/s², clipping 0; motors/ESCs/connectors within the C08/C13 limits; no desync; no loose fasteners after (witness marks).</li><li><b>Predicted.</b> 41.2 A hover at 22.2 V, 43.6 A at 21 V, 75.7 A transition (<code>sized.I_hover</code>, <code>I_hover_loaded</code>, <code>I_trans</code>).</li><li><b>Risk.</b> Restraint failure: tie to the leg clamps not the legs; check knots; nobody in the rotor plane.</li><li><b>Duration</b> 2 h. <b>Crew</b> 3. <b>Prereq.</b> S04, E02, E03, E05, G01.</li></ul>
+<h4 id="g04-compass-interference-compassmot-check">G04: Compass interference (compassmot) check</h4>
+<ul><li><b>Procedure.</b> During G03 step 1, run Mission Planner's CompassMot with the throttle raised to hover; or read the compass field change in the log (<code>MAG</code> vs <code>RCOU</code>).</li><li><b>Pass.</b> Interference ≤ 30 % EST (the ArduPilot compassmot page returned HTTP 404 on 2026-10-21; 30 % is the figure commonly quoted by that page — treat as EST until re-checked); heading change &lt; 10° between idle and hover throttle.</li><li><b>Duration</b> in G03. <b>Prereq.</b> E07.</li></ul>
+<h4 id="g05-tethered-hover-review-f2">G05: Tethered hover (review F2)</h4>
+<ul><li><b>Setup.</b> Two 4 m tether lines to the leg clamps from stakes 3 m apart, slack to 1.5 m; grass; crew 10 m away; wind ≤ 3 m/s EST; ballast fitted.</li><li><b>Procedure.</b> QSTABILIZE: arm, throttle up slowly until light on the gear, back down (ArduPilot step 5 lift-off check); then lift to 1 m, hold 30 s, land. Then QHOVER, 1 m, 30 s. Three cycles, motors cooled &lt; 45 °C between (review F3).</li><li><b>Pass.</b> 30 s stable at 1 m; attitude error &lt; 15°; lift output &lt; 60 % (review F2); VIBE &lt; 30; no oscillation; tether never taut.</li><li><b>Predicted.</b> Hover throttle ≈ 0.52 (1,638 / 3,130 <i>(calc)</i>).</li><li><b>Duration</b> 2 h. <b>Crew</b> 4. <b>Prereq.</b> G03, G04, G09, flight request approved, I02.</li></ul>
+<h4 id="g06-pusher-ground-run-on-the-airframe">G06: Pusher ground run on the airframe</h4>
+<ul><li><b>Procedure.</b> Aircraft tail-tied to a stake through the luggage scale (Gaps; zero-cost: the HX711 load cell in line), nose free to pull: FBWA, throttle 60 % and 100 % for 10 s each; IR temperature on the pusher can and ESC; watch the tail boom stubs and fins for buffet.</li><li><b>Pass.</b> Static pull ≥ 1.5 kgf at 60 % (review T4) on the airframe; current ≤ 40 A; no tail buffet visible; stubs do not flex visibly; pusher prop ground clearance ≥ 40 mm with the aircraft loaded (CAD 41.9 mm, <code>cad/verification.txt</code>).</li><li><b>Duration</b> 0.5 h. <b>Crew</b> 3. <b>Prereq.</b> C09, G03.</li></ul>
+<h4 id="g07-assembly-and-breakdown-time-r5">G07: Assembly and breakdown time (R5)</h4>
+<ul><li><b>Procedure.</b> Stopwatch, two people, from the loaded car to armed pre-flight (review <a class="rref" href="./#model3d">M3.3</a>), including sliding the joiner in and bolting both panels (C17), the booms (4 screws each) and the tail (4 screws); three runs on different days; then breakdown back into the car.</li><li><b>Pass.</b> Median assembly ≤ 15 min; no tool other than the hex keys; witness marks aligned after assembly.</li><li><b>Duration</b> 1.5 h. <b>Crew</b> 2. <b>Prereq.</b> S08.</li></ul>
+<h4 id="g08-field-procedure-rehearsal">G08: Field procedure rehearsal</h4>
+<ul><li><b>Procedure.</b> Full dry run of a flight session at the site without arming: set-up, pre-flight checklist, crew calls, abort call, post-flight temperatures, log download, pack change, field charging (review <a class="rref" href="./#flighttest">M12.2</a>: time one full charge at the field supply).</li><li><b>Pass.</b> Checklist completed with no missed item; charge time per pack ≤ 1.5 h (review <a class="rref" href="./#flighttest">M12.2</a>) on the field supply (— source to be found, Gaps).</li><li><b>Duration</b> 2 h. <b>Crew</b> 4. <b>Prereq.</b> G05 planned.</li></ul>
+<nav class="pager" aria-label="Previous and next section"><a class="pv" href="#9-3-series-e-electrical-and-avionics-bench-tests"><span>Previous</span>Series E: electrical and avionics bench tests</a><a class="nx" href="#9-5-series-f-flight-tests"><span>Next</span>Series F: flight tests</a></nav></section>
+<section class="pg" id="pg-9-5-series-f-flight-tests" data-id="9-5-series-f-flight-tests">
+<h3 id="9-5-series-f-flight-tests">9.5 Series F: flight tests</h3>
+<p>All flight tests use the card in <code>docs/test/cards/</code>. Common rules: weight and CG per G01/G09 recorded on the card, ballast fitted; two packs; ≤ 5 m AGL and ≤ 60 s per hover on hover-only flights (R14 mitigation, §10); transitions start at the upwind field edge with an immediate turn (§7); post-flight temperatures within 30 s; logs downloaded and named before the next flight (§10). Hover tests at any approved site; F06 onward at RFS only (R19).</p>
+<div class="tbl"><table><thead><tr><th>ID</th><th>Title</th><th>Review step</th><th>Build-up points</th><th>Pass criteria (summary; full on the card)</th><th>Prereq</th></tr></thead><tbody>
+<tr><td>F01</td><td>First lift-off, QSTABILIZE hops</td><td>F3 start</td><td>lift-off and set down; 1 m hover 10 s; ± 5° roll/pitch inputs</td><td>no oscillation; attitude error &lt; 15°; VIBE &lt; 30; clipping 0</td><td>G05</td></tr>
+<tr><td>F02</td><td>QHOVER hover-throttle learn and notch log (two 60 s batch-logged hovers)</td><td>F3</td><td>1–3 m, 2 × 60 s with <code>INS_LOG_BAT_MASK,1</code>, <code>INS_LOG_BAT_OPT,4</code> (<code>docs/research/firmware.md</code> D13)</td><td>learned <code>Q_M_THST_HOVER</code> 0.3–0.6 and ≤ 0.60; FFT peak identified; front/rear output split ≤ 15 % (review <a class="rref" href="./#cg">M9.2</a>)</td><td>F01</td></tr>
+<tr><td>F03</td><td>QLOITER free hover, 3 × 60 s, thermal</td><td>F3</td><td>≤ 5 m AGL; position hold; 1 m/s translations</td><td>hold within 2 m EST; motors ≤ 80 °C; cooled &lt; 45 °C between; hover current 41.2 A ± 15 %</td><td>F02</td></tr>
+<tr><td>F04</td><td>Q-mode handling at low forward speed</td><td>F4</td><td>box pattern at 5–8 m/s, ≤ 10 m AGL</td><td>no unexpected Q_ASSIST; attitude error &lt; 15°; airspeed sensor reads 5–8 m/s ± 2</td><td>F03</td></tr>
+<tr><td>F05</td><td>Hover failsafes and R20 demonstration</td><td>—</td><td>at 20 m AGL EST over the pad: RC off → QLAND; <code>FENCE_ALT_MAX</code> temporarily 25 m, climb → RTL; low battery forced → RTL; critical forced → QLAND</td><td>each action within timeout; touchdown within 5 m of the pad EST</td><td>F04, E05</td></tr>
+<tr><td>F06</td><td>Partial transitions (Q_ASSIST on)</td><td>F5</td><td>≥ 30 m AGL from the upwind edge; FBWA with throttle until 12 m/s then back to QHOVER; × 3; watch the back-transition pitch-up (C0 SITL model, ≤ 2 m loss)</td><td>airspeed rising within 6 s (review F5); altitude loss ≤ 10 m EST; lift motors re-engage on back-transition</td><td>F05, I02 (RFS)</td></tr>
+<tr><td>F07</td><td>Full transition, circuit, back-transition, QLAND</td><td>F6</td><td>after 3 × F06: FBWA to <code>AIRSPEED_MIN</code> 16 from the upwind edge, immediate turn, one circuit at 18 m/s, back-transition, QLAND</td><td>transition ≤ 15 s and ≤ 100 m (review <a class="rref" href="./#controls">M17.2</a>); turn started ≤ 3 s after "Transition done"; lift outputs at min in cruise (R1); QLAND touchdown ≤ 1 m/s EST</td><td>F06 × 3</td></tr>
+<tr><td>F08</td><td>Airspeed calibration and cruise performance</td><td>F6+</td><td><code>ARSPD_AUTOCAL</code> 5 min circuits; then 2 × 60 s legs at 20 m/s reciprocal headings; record current</td><td><code>ARSPD_RATIO</code> 1.5–3.0 and airspeed vs GPS mean error ≤ 10 % (review <a class="rref" href="./#controls">M17.1</a>); cruise power ≤ 414 W / 18.6 A at 20 m/s <i>(calc, R10 line)</i>; predicted 302–337 W, 13.6–15.2 A; pusher can ≤ 80 °C EST by IR after the legs (thermal.md §6.3: 90 °C model bound)</td><td>F07</td></tr>
+<tr><td>F13</td><td>Gear-fairing A/B at 20 m/s (new in rev B)</td><td>—</td><td>same reciprocal legs as F08 with fairings on, then (separate flight) fairings removed; watt-meter/BAT power at 20 m/s</td><td>with fairings ≤ 414 W (R10); predicted 302 W faired vs 482 W bare (<code>aero_results.json drag.gear_faired_case</code>, <code>gear_round_case</code>); ΔP ≥ 100 W confirms the fairings are load-bearing for R10</td><td>F08</td></tr>
+<tr><td>F09</td><td>Stall-speed determination in fixed-wing mode (new in rev B; replaces the rev A margin approach)</td><td>aero M2</td><td>≥ 80 m AGL EST, Q_ASSIST forced off, FBWA, idle, decelerate ≤ 0.3 m/s² to the pitch break; three runs; recover; then with Q_ASSIST auto note the assist speed</td><td>measured Vs (calibrated) ≤ 12.0 m/s = pass (R11; predicted 11.75); 12.0–12.5 = team decision (aero §9 option: accept); &gt; 12.5 = fail; altitude loss ≤ 30 m EST; <code>AIRSPEED_MIN</code> 16 ≥ 1.3 × Vs (Vs ≤ 12.3)</td><td>F08</td></tr>
+<tr><td>F10</td><td>Fixed-wing failsafes: pusher-out (R15), RC loss in cruise (R20)</td><td>—</td><td>≥ 60 m AGL EST: pusher throttle to idle in FBWA → Q_ASSIST → QLAND; separate flight: RC off in cruise → RTL → QRTL</td><td>hover re-entered with altitude loss ≤ 30 m EST; RTL → QRTL → land within <code>RTL_RADIUS</code> 100 m of home</td><td>F09</td></tr>
+<tr><td>F11</td><td>Mission dress rehearsal (half duration)</td><td>F7 prep</td><td>1 min hover, transition, 5 min cruise at 20 m/s, back-transition, 1 min hover, land</td><td>energy used ≤ 60 % of C11 usable (predicted 58.6 Wh = 53 % <i>(calc)</i>); all phases logged; no failsafe</td><td>F10, F13</td></tr>
+<tr><td>F12</td><td>Full mission (R8, R9, R10)</td><td>F7</td><td>≥ 1 min hover, transition, ≥ 10 min cruise at 18–22 m/s, back-transition, ≥ 1 min hover, vertical land; with 0.5 kg ballast; fairings on; wind 3–5 m/s if available (R16)</td><td>landing ≥ 20 % of C11 usable energy and ≥ 1,300 mAh; no failsafe; aircraft undamaged; dated ≤ 2027-04-30</td><td>F11 × 2</td></tr>
+</tbody></table></div>
+<p>Cards: <code>docs/test/cards/FTC-F01.md</code> … <code>FTC-F13.md</code>.</p>
+<nav class="pager" aria-label="Previous and next section"><a class="pv" href="#9-4-series-g-ground-tests-on-the-complete-aircraft"><span>Previous</span>Series G: ground tests on the complete aircraft</a><a class="nx" href="#9-6-series-i-documentary-inspections"><span>Next</span>Series I: documentary inspections</a></nav></section>
+<section class="pg" id="pg-9-6-series-i-documentary-inspections" data-id="9-6-series-i-documentary-inspections">
+<h3 id="9-6-series-i-documentary-inspections">9.6 Series I: documentary inspections</h3>
+<div class="tbl"><table><thead><tr><th>ID</th><th>Title</th><th>Req</th><th>Procedure</th><th>Pass</th></tr></thead><tbody>
+<tr><td>I01</td><td>Budget ledger audit</td><td>R6, R7</td><td>Every receipt (goods, tax, shipping) logged against <code>docs/purchasing/C0_BOM.csv</code> "Actual USD"; sum; spares (motor, 3 ESCs, prop pair) and second pack checked in; note that no spare servo or pushrods are held</td><td>Total ≤ $2,000.00; reserve ≥ $100 target (BOM: $1,896.79 committed, $103.21 reserve); spares on the shelf</td></tr>
+<tr><td>I02</td><td>Legal and site compliance</td><td>R18, R19</td><td>Checklist from review <a class="rref" href="./#schedule">§15</a> "Compliance checklist": legal path chosen (by 2026-11-06), TRUST per pilot, registration + marking, BeeID serial (E12), AMA per pilot, flight request ≥ 7 business days, post-flight report ≤ 3 business days, site ceiling in <code>FENCE_ALT_MAX</code> (≤ 110)</td><td>All items "done" before the first flight; a request on file for each flight date</td></tr>
+<tr><td>I03</td><td>Configuration inspection</td><td>R1, R3, R14</td><td>Built aircraft against <code>cad/drawings/DBF-DRW-001.PDF</code> rev E sheet 1: 4 lift rotors, pusher, wing, tail with rudders; span 2.40 m; disc clearance pusher-to-rear-lift ≥ 20 mm (<code>cad/verification.txt</code> 79.0 mm); pusher ground clearance ≥ 40 mm (41.9 mm); ballast note 5 and hover limits printed on hover cards</td><td>Matches drawing; span 2.40 ± 0.02 m; clearances met; cards carry the limits</td></tr>
+</tbody></table></div>
+<nav class="pager" aria-label="Previous and next section"><a class="pv" href="#9-5-series-f-flight-tests"><span>Previous</span>Series F: flight tests</a><a class="nx" href="#10-data-management"><span>Next</span>Data management</a></nav></section>
+<section class="pg" id="pg-10-data-management" data-id="10-data-management">
+<h2 id="10-data-management">10. Data management</h2>
+<p><b>Log naming.</b> <code>YYYY-MM-DD_&lt;TestID&gt;_&lt;run&gt;_&lt;article&gt;.&lt;ext&gt;</code>, e.g. <code>2027-03-13_F01_r2_C0.bin</code>. Flight logs: copy the <code>.bin</code> from the FC SD card after every flight (<code>LOG_BITMASK,65535</code>, <code>firmware/vtol_c0.param</code>), never fly on a card you have not copied. Bench data: CSV from the watt-meter video transcription or the Nano serial log. Store under <code>docs/test/data/&lt;series&gt;/</code> (not created at rev B; add to git LFS or an external drive if &gt; 100 MB). SITL evidence stays in <code>firmware/sitl/results/</code> (generic model) and <code>firmware/sitl/results_c0/</code> (C0 airframe model).</p>
+<p><b>ArduPilot log extraction</b> (<code>docs/test/analysis/log_summary.py</code>, pymavlink if installed, else the text export from Mission Planner):</p>
+<div class="tbl"><table><thead><tr><th>Message</th><th>Fields</th><th>Used for</th></tr></thead><tbody>
+<tr><td><code>VIBE</code></td><td>VibeX/Y/Z, Clip0–2</td><td>abort criteria; &lt; 30 m/s², clipping 0</td></tr>
+<tr><td><code>BAT</code></td><td>Volt, VoltR, Curr, CurrTot, EnrgTot, Temp</td><td>sag, current per phase, energy for R10, cruise power for F08/F13</td></tr>
+<tr><td><code>RCOU</code></td><td>C1–C12</td><td>lift outputs (C5–C8) for hover throttle, front/rear split, "stopped in cruise" (R1); pusher C9</td></tr>
+<tr><td><code>CTUN</code></td><td>NavPitch, Pitch, ThrOut, As (airspeed), E2T</td><td>cruise throttle and airspeed</td></tr>
+<tr><td><code>QTUN</code></td><td>ThrOut, ThO, DAlt, Alt, DCRt, CRt, TrnMs (transition)</td><td>hover throttle, climb rate, transition timing</td></tr>
+<tr><td><code>ARSP</code></td><td>Airspeed, DiffPress, Temp, RawPress, Ratio</td><td>calibration (F08), stall speed (F09)</td></tr>
+<tr><td><code>MODE</code></td><td>Mode, ModeNum, Rsn</td><td>phase timing, failsafe actions</td></tr>
+<tr><td><code>GPS</code></td><td>Spd, HDop, NSats</td><td>ground speed for airspeed calibration</td></tr>
+<tr><td><code>ATT</code></td><td>Roll, Pitch, DesRoll, DesPitch</td><td>attitude error; pitch break in F09</td></tr>
+<tr><td><code>ISBH/ISBD</code></td><td>batch IMU samples</td><td>notch filter FFT (F02)</td></tr>
+<tr><td><code>MSG</code>, <code>EV</code>, <code>ERR</code></td><td>text</td><td>failsafe and arming events</td></tr>
+</tbody></table></div>
+<p><b>Reduction scripts</b> (each ships with a sample dataset and has been run on it):</p>
+<ul><li><code>thrust_stand.py</code> — fits thrust vs throttle (power law), thrust vs electrical power, reports throttle and power at the hover point (1,638 g), FM·η against the sizing 0.516, max thrust vs the 2.62 kgf pass, and a <code>Q_M_THST_EXPO</code> estimate.</li><li><code>battery_test.py</code> — integrates Wh and Ah from a discharge log, finds the sag at the 41 A and 76 A step loads, estimates per-cell internal resistance, applies the C11 pass criteria and flags the hot-day limit (&gt; 5 mΩ/cell).</li><li><code>log_summary.py</code> — parses a <code>.bin</code> (pymavlink) or a Mission Planner text export (<code>.log</code>) and prints hover throttle, VIBE max/clip, current and voltage min/mean per mode, airspeed stats, mode timeline and the R10 phase durations; cruise current pass 18.6 A.</li></ul>
+<p><b>Test report template</b> (<code>docs/test/cards/REPORT-TEMPLATE.md</code>): header (test ID, rev, date, site, crew, article serials, firmware hash, weather), configuration and deviations from the card, run table (run, time, condition, result), measured vs predicted table with pass/fail, anomalies, log file names, decision (pass / pass with limits / fail), sign-off (TD, SO).</p>
+<nav class="pager" aria-label="Previous and next section"><a class="pv" href="#9-6-series-i-documentary-inspections"><span>Previous</span>Series I: documentary inspections</a><a class="nx" href="#11-schedule"><span>Next</span>Schedule</a></nav></section>
+<section class="pg" id="pg-11-schedule" data-id="11-schedule">
+<h2 id="11-schedule">11. Schedule</h2>
+<p>Dates come from the review schedule (<code>review/src/app.js drawGantt</code> rows, §11) and the order-by table (§11 "Order-by dates"). Dates are the review's plan (EST).</p>
+<div class="tbl"><table><thead><tr><th>Window</th><th>Review milestone</th><th>Tests</th></tr></thead><tbody>
+<tr><td>2026-10-21</td><td>SITL scripted scenarios</td><td>E05 (SITL part), E06 (scripted part) — done</td></tr>
+<tr><td>2026-10-25</td><td>SITL on the C0 airframe model</td><td>E05, E06 scripted parts repeated 7/7 — done (<code>firmware/sitl/results_c0.json</code>)</td></tr>
+<tr><td>2026-11-02 → 11-09</td><td>Order A (2 motors, props, 1 ESC pack, test kit, packs, charger)</td><td>—</td></tr>
+<tr><td>2026-11-16 → 12-04</td><td>Thrust stand T1–T5</td><td>C06, C07 (2 motors), C08, C09, C10, C11, C15</td></tr>
+<tr><td>2026-12-07 → 12-14</td><td>Order B (airframe, propulsion, avionics)</td><td>—</td></tr>
+<tr><td>2026-12-15 → 2027-01-03</td><td>before build</td><td>C01, C02, C03, C04, C16 (coupons and first articles must precede printing the real parts), C05, C14, E11 (first flash), E12 (serial lookup)</td></tr>
+<tr><td>2027-01-04 → 02-19</td><td>Airframe build</td><td>C07 (remaining 3 motors + spare), C12, C17, S09 (ongoing), S02, S03, S04, S05, S10 as sub-assemblies finish</td></tr>
+<tr><td>2027-01-11 → 02-19</td><td>SITL rehearsal</td><td>E06 (every pilot, hand-flown)</td></tr>
+<tr><td>2027-02-19 → 02-26</td><td>Proof load, drop test, CG</td><td>S01, S06, S07, S08, G01, G09</td></tr>
+<tr><td>2027-02-22</td><td>integration milestone (former R17 go/no-go, closed)</td><td>E11 (final firmware)</td></tr>
+<tr><td>2027-02-22 → 03-12</td><td>Avionics integration + bench</td><td>E01–E05 (hardware), E07–E10, G02, G03 (+ C13, E09), G04, G06, G07, G08, I01, I03</td></tr>
+<tr><td>2027-03-03</td><td>first flight request filed (≥ 7 business days)</td><td>I02</td></tr>
+<tr><td>2027-03-13 → 03-31</td><td>Hover tests</td><td>G05, F01–F05</td></tr>
+<tr><td>2027-04-03 → 04-17</td><td>Transition tests (RFS)</td><td>F06–F11, F13</td></tr>
+<tr><td>2027-04-17 → 04-18</td><td>Full mission</td><td>F12</td></tr>
+<tr><td>2027-04-18 → 04-30</td><td>Buffer: repair, weather, re-fly</td><td>re-runs</td></tr>
+</tbody></table></div>
+<p>Critical dependencies: any Order B item arriving after 2027-02-15 pushes first hover past 2027-03-13 (review <a class="rref" href="./#schedule">M15.2</a>); the RFS approval decides whether F06–F13 can happen at all (review risk register).</p>
+<nav class="pager" aria-label="Previous and next section"><a class="pv" href="#10-data-management"><span>Previous</span>Data management</a><a class="nx" href="#13-gaps-equipment-not-in-the-bom"><span>Next</span>Gaps: equipment not in the BOM</a></nav></section>
+<section class="pg" id="pg-13-gaps-equipment-not-in-the-bom" data-id="13-gaps-equipment-not-in-the-bom">
+<h2 id="13-gaps-equipment-not-in-the-bom">13. Gaps: equipment not in the BOM</h2>
+<p>Zero-cost substitutes are used wherever possible; items below are only needed if the substitute fails. Prices are live reads with the date; none is in the $1,896.79 committed spend (R6 cannot be raised; these would come from the $103.21 reserve, BOM).</p>
+<div class="tbl"><table><thead><tr><th>Need</th><th>Zero-cost substitute used in this plan</th><th>If the substitute fails</th><th>Price, URL (date checked)</th></tr></thead><tbody>
+<tr><td>Masses for proof load and calibration</td><td>Water jugs (1 L = 1 kg) and sandbags weighed on a kitchen scale</td><td>—</td><td>$0</td></tr>
+<tr><td>Kitchen scale (5 kg, 1 g) and bathroom scale</td><td>Borrow; most households have one</td><td>Amazon kitchen scale</td><td>— (not priced; typical $10–15 EST)</td></tr>
+<tr><td>Luggage/spring scale (pusher pull, hinge moment, stopped-rotor drag)</td><td>HX711 load cell from the thrust stand in line</td><td>Hanging luggage scale 50 kg</td><td>— (not priced; typical $8–12 EST)</td></tr>
+<tr><td>Calipers, multimeter, hex keys</td><td>Hand tools on hand (R6 "hand tools")</td><td>—</td><td>$0 if on hand; otherwise —</td></tr>
+<tr><td>Torque wrench 0.1–1 N·m</td><td>Hanging-mass method on the hex key (hardware-spec §2d)</td><td>—</td><td>$0</td></tr>
+<tr><td>Phone accelerometer / spectrum app</td><td>phyphox (free, phyphox.org) or similar</td><td>—</td><td>$0</td></tr>
+<tr><td>Anemometer</td><td>Phone app + nearest METAR/NWS; improvised wind sock</td><td>Hand-held anemometer</td><td>— (typical $12–20 EST)</td></tr>
+<tr><td>Telemetry during transitions</td><td>CRSF telemetry on the handset; ELRS MAVLink overlay for a GCS (<code>docs/research/firmware.md</code> §4)</td><td>— (no radio needed)</td><td>$0</td></tr>
+<tr><td>Field power for the charger</td><td>Charge at home between sessions; two packs = 2 flights per session</td><td>Car 12 V (the HTRC C150 is AC/DC, <code>docs/research/budget-energy-test.md</code> §2) with a 12 V lead</td><td>—</td></tr>
+<tr><td>Compliant landing feet (S06)</td><td>FOAMULAR offcuts under the dome feet; TPU print if a spool is on hand</td><td>TPU filament</td><td>—</td></tr>
+<tr><td>Spare servo / pushrods (removed from the BOM)</td><td>None: a failure ends the session; buy from the reserve</td><td>EMAX ES3005HV $19.99 (shop.emax-usa.com, checked 2026-10-13 in <code>docs/research/budget-avionics.md</code> §6); Du-Bro 2-56 pushrods $12.48 (BOM line)</td><td>from the $103.21 reserve</td></tr>
+<tr><td>Ballast block</td><td>Sand or lead shot in a taped block, 0.500 kg on the kitchen scale</td><td>—</td><td>$0</td></tr>
+<tr><td>Tether lines and stakes</td><td>Rope and tent stakes on hand</td><td>—</td><td>$0</td></tr>
+<tr><td>Hardened nozzle for PA6-CF</td><td>Check the team printer (review <a class="rref" href="./#build">§16</a>)</td><td>Hardened steel nozzle</td><td>—</td></tr>
+<tr><td>Remote ID receiver app</td><td>OpenDroneID OSM (free Android app)</td><td>—</td><td>$0</td></tr>
+<tr><td>pymavlink for log reduction</td><td>Mission Planner text export + <code>log_summary.py</code> text mode</td><td><code>pip install pymavlink</code> (free; already used for SITL, <code>firmware/sitl/README.md</code>)</td><td>$0</td></tr>
+</tbody></table></div>
+<nav class="pager" aria-label="Previous and next section"><a class="pv" href="#11-schedule"><span>Previous</span>Schedule</a><a class="nx" href="#14-open-items-for-team-sign-off"><span>Next</span>Open items for team sign-off</a></nav></section>
+<section class="pg" id="pg-14-open-items-for-team-sign-off" data-id="14-open-items-for-team-sign-off">
+<h2 id="14-open-items-for-team-sign-off">14. Open items for team sign-off</h2>
+<ol><li>Accept the exposure of hovering to 30 m for transitions, 20 m for failsafe tests and 80 m for the stall determination, given the R14 limitation (§12 item 3).</li><li>Decide the R11 stall-speed acceptance band before F09 (design target 11.75 m/s, <code>docs/research/stall-margin.md</code> §5 measured-stall rule): pass ≤ 12.0 m/s; 12.0–12.5 m/s accept or add 5 % wing area (<code>docs/research/aerodynamics.md</code> §9 item 3).</li><li>Confirm the compliant-foot design before S06, and the ballast block design before S10.</li><li>Assign names to the roles and the matrix "Crew" column.</li><li>Confirm the test site(s) and file the first flight request by 2027-03-03.</li><li>Decide whether a spare servo is bought from the reserve before the flight phase (no spare in the BOM).</li></ol>
+<nav class="pager" aria-label="Previous and next section"><a class="pv" href="#13-gaps-equipment-not-in-the-bom"><span>Previous</span>Gaps: equipment not in the BOM</a><a class="nx" href="#revision-notes"><span>Next</span>Appendix A. Revision notes</a></nav></section>
+<section class="pg" id="pg-revision-notes" data-id="revision-notes">
+<h2 id="revision-notes">Appendix A. Revision notes</h2>
+<p>Rev B changes from rev A: all predictions re-based on v0.4 (MTOW 6.43 kg, hover 888 W, cruise 297–323 W, cruise available 13.1–14.2 min, Vs 12.05 m/s predicted, neutral point 40.4 % MAC); rev A inconsistencies 1, 2, 4, 6, 7, 9, 10, 11 resolved by the design (§12); new tests C16, C17, S10, G09, F13 and a real stall-speed determination (F09); SITL portions of E05/E06/F0 marked done with evidence; spare servo and spare pushrods removed from the BOM (reserve $103.21) and from every test's assumptions.</p>
+<nav class="pager" aria-label="Previous and next section"><a class="pv" href="#14-open-items-for-team-sign-off"><span>Previous</span>Open items for team sign-off</a><a class="nx" href="#12-inconsistencies-rev-a-list-and-their-rev-b-status"><span>Next</span>Appendix B. Inconsistencies: rev A list and their rev B status</a></nav></section>
+<section class="pg" id="pg-12-inconsistencies-rev-a-list-and-their-rev-b-status" data-id="12-inconsistencies-rev-a-list-and-their-rev-b-status">
+<h2 id="12-inconsistencies-rev-a-list-and-their-rev-b-status">Appendix B. Inconsistencies: rev A list and their rev B status</h2>
+<div class="tbl"><table><thead><tr><th>#</th><th>Rev A item</th><th>Rev B status</th></tr></thead><tbody>
+<tr><td>1</td><td>Thrust-stand accuracy "2 % FS"</td><td><b>Resolved:</b> C06 passes at 2 % of reading (0.5–5 kg).</td></tr>
+<tr><td>2</td><td>2-minute notch hover vs 60 s hover limit</td><td><b>Resolved by the firmware:</b> two 60 s batch-logged hovers (<code>INS_LOG_BAT_OPT,4</code>; <code>docs/research/firmware.md</code> D13); F02 card.</td></tr>
+<tr><td>3</td><td>5 m hover limit vs 30 m transition / 20 m failsafe altitudes</td><td><b>Open</b> (team acceptance at sign-off, §14).</td></tr>
+<tr><td>4</td><td>T2 pass 2.4 kgf vs R13</td><td><b>Resolved:</b> 2.57 kgf at 6.43 kg (C07). Note the coordinator's figure of 2.48 kgf corresponds to the former 6.18 kg MTOW (1.6 × 6.18 / 4 = 2.47); at 6.43 kg it is 2.57.</td></tr>
+<tr><td>5</td><td>17 × 5.8 maker data vs 17 × 5.5 BOM prop</td><td><b>Open:</b> C07 measures the real combination.</td></tr>
+<tr><td>6</td><td>Low battery QLAND (review) vs RTL (param)</td><td><b>Resolved:</b> low → RTL at 21.0 V / 1,950 mAh, critical → QLAND at 19.8 V / 1,300 mAh (<code>firmware/vtol_c0.param</code> §9; SITL E); E05/F05 test this.</td></tr>
+<tr><td>7</td><td>Fence 120 m vs 110 m</td><td><b>Resolved:</b> 110 m, SITL breach peak 113.1 m (&lt; 121.9 m).</td></tr>
+<tr><td>8</td><td>Drop test expected to fail on bare legs</td><td><b>Open:</b> compliant feet still not in the BOM (zero-cost foam offcuts); rev B adds leg fairings (S06 checks they survive).</td></tr>
+<tr><td>9</td><td>MS5525DSO I²C address conflict</td><td><b>Resolved:</b> sensor strapped to 0x77, <code>ARSPD_TYPE,5</code> (E08 checks both sensors are detected).</td></tr>
+<tr><td>10</td><td>No telemetry radio</td><td><b>Resolved:</b> CRSF telemetry to the handset or ELRS MAVLink overlay; SiK radio removed from the Gaps list (E04/E10).</td></tr>
+<tr><td>11</td><td>4 vs 5 servos</td><td><b>Resolved:</b> 5 servos everywhere (<code>results.json cg.items</code> "Servos (5)", BOM, param S4/S11); no spare servo (BOM change).</td></tr>
+<tr><td>12 (new)</td><td>Stall speed</td><td>Predicted Vs 12.05 m/s (<code>aero_results.json stall.V_stall_mps</code>, CL_max,3D 1.122) vs R11 ≤ 12: at the limit; the sizing's CL_max 1.132 gives 12.00. <b>F09 decides</b>; the pass band and the team-decision band are stated there.</td></tr>
+<tr><td>13 (new)</td><td>Static margin without payload</td><td>5.3 % (aero) / 4.3 % (sizing) at the empty-bay CG → mandatory 0.5 kg ballast (§4 rule 7, G09).</td></tr>
+<tr><td>14 (new)</td><td>Cruise power</td><td>Two predictions: 323 W (sizing) and 297 W (aero build-up); F08/F13 measure; the R10 threshold 421 W uses the sizing hover power. Bare legs: 477 W → R10 fails (8.8 min), so the fairings are flight-critical for R10 (F13).</td></tr>
+<tr><td>15 (new)</td><td>Param file header still says MTOW 6.18 kg and hover throttle 0.49</td><td>Cosmetic; expected learned hover throttle at 6.43 kg is 0.51 (C07, F02).</td></tr>
+<tr><td>16 (new, 2026-10-25)</td><td>Thermal margins (<code>docs/research/thermal.md</code>)</td><td><b>Open:</b> on a 35 °C day a pack at the C11 resistance limit ends the mission at 64 °C (&gt; 60 °C), the lift motor/ESC end the take-off hover + transition 2–4 K under their EST limits, and the pusher can reaches 90 °C in the closed cup (conservative loss). Mitigated by the hot-day pack limit (C11, §6), bay and canopy vents, ESC placement and cup slots (BUILD-MANUAL 2.7, 7.8, 8.2a, 8.3, 10.1); measured by C08, C11, C13, G03, F03, F08.</td></tr>
+<tr><td>17 (new, 2026-10-25)</td><td>Back-transition pitch-up in the C0 SITL model</td><td><b>Open:</b> the airbrake phase pitches to the 30° VTOL limit and briefly stalls the wing (−17°/+33° swing, ≤ 2 m loss, <code>firmware/sitl/README.md</code> Gains item 1). Watch item on F06–F13; first remedy lower <code>Q_TRANS_DECEL</code>.</td></tr>
+</tbody></table></div>
+<p><i>2026-10-25 (R11 wing re-size): item 12 is now Vs 12.00 m/s predicted (CL_max,3D 1.121 used by both the aero build-up and the sizing, margin to R11 0.0 %; F09 still decides); item 13 is 5.2 % (aero) / 4.9 % (sizing); item 14 is 325 W (sizing) / 298 W (aero) against the R10 threshold 420 W, bare legs 478 W (8.8 min); item 15: expected hover throttle at 6.45 kg is 0.52. The rev B wording above is kept as written.</i></p>
+<p><i>2026-10-25 (11.75 m/s design stall target re-base): item 4 is 2.62 kgf at 6.55 kg; item 12 is Vs 11.75 m/s predicted with CL_max 1.114 (<code>aero_results.json stall</code>; 2.1 % speed / 4.1 % CL_max margin to R11, <code>docs/research/stall-margin.md</code>; F09 still decides); item 13 is 5.1 % (aero) / 4.9 % (sizing); item 14 is 337 W (sizing) / 302 W (aero) against the R10 threshold 414 W, bare legs 482 W (8.6 min); item 15: the param file now quotes ~0.52 (1,612.6 g at 6.45 kg); expected at 6.55 kg is 0.52 (1,638 / 3,130).</i></p>
+<nav class="pager" aria-label="Previous and next section"><a class="pv" href="#revision-notes"><span>Previous</span>Appendix A. Revision notes</a></nav></section>
+</main>
+</div>
+</div>
+</div>
+<script>
+// theme: shared with the design review (same storage key)
+(()=>{ const b=document.getElementById('themeBtn'), r=document.documentElement; const lab=()=>{ b.textContent = r.dataset.theme==='light'?'Dark theme':'Light theme'; };
+  lab(); b.addEventListener('click',()=>{ r.dataset.theme = r.dataset.theme==='light'?'dark':'light'; try{ localStorage.setItem('vtol-theme', r.dataset.theme); }catch(e){} lab(); }); })();
+// reader: show the page holding the target of the address (a section, work package, step or any anchor)
+(()=>{ const R=document.documentElement, pgs=[...document.querySelectorAll('.pg')]; if(!pgs.length) return;
+  const sel=document.getElementById('pgSel'), all=document.getElementById('allBtn');
+  const links=[...document.querySelectorAll('.side a[data-pg]')];
+  let full=false; try{ full=sessionStorage.getItem('dbf-full')==='1'; }catch(e){}
+  const pageOf=el=>el?el.closest('.pg'):null;
+  function show(hash, scroll){
+    const id=decodeURIComponent((hash||'').replace(/^#/,'')); const el=id?document.getElementById(id):null;
+    const pg=pageOf(el)||pgs[0];
+    pgs.forEach(p=>p.classList.toggle('on', p===pg));
+    const pid=pg.dataset.id; sel.value=pid;
+    links.forEach(a=>{ if(a.dataset.pg===pid) a.setAttribute('aria-current','page'); else a.removeAttribute('aria-current'); });
+    if(scroll){ const first=pg.firstElementChild; if(!el || el===first || el.id===pid) scrollTo(0,0); else el.scrollIntoView(); }
+  }
+  function setFull(on){ full=on; R.classList.toggle('paged', !on); all.setAttribute('aria-pressed', on?'true':'false'); try{ sessionStorage.setItem('dbf-full', on?'1':'0'); }catch(e){} }
+  setFull(full); show(location.hash, !!location.hash);
+  addEventListener('hashchange',()=>show(location.hash, true));
+  sel.addEventListener('change',()=>{ location.hash=sel.value; });
+  all.addEventListener('click',()=>{ setFull(!full); show(location.hash, false); });
+  // per-page count of steps marked Done (from the check-off below); refreshed on every change
+  window.dbfCounts=()=>{ links.forEach(a=>{ const p=document.getElementById('pg-'+a.dataset.pg); if(!p) return; const st=p.querySelectorAll('.step'); const c=a.querySelector('.cnt'); if(!st.length){ c.textContent=''; return; } const d=p.querySelectorAll('.step.isdone').length; c.textContent=d+'/'+st.length; c.classList.toggle('all', d===st.length); }); };
+})();
+// running head: the section being read; step check-off kept in this browser only (a shop convenience, not a record)
+(()=>{ const rh=document.getElementById('runhead'), sec=document.getElementById('rhSec'), toc=document.getElementById('contents');
+  const hs=[...document.querySelectorAll('.doc h2, .doc h3')]; let raf=0;
+  const up=()=>{ raf=0; rh.classList.toggle('on', !document.documentElement.classList.contains('paged') && toc.getBoundingClientRect().bottom<0); let cur=null; for(const h of hs){ if(h.getBoundingClientRect().top<90) cur=h; } const t=cur?cur.textContent:''; if(sec.textContent!==t) sec.textContent=t; };
+  addEventListener('scroll',()=>{ if(!raf) raf=requestAnimationFrame(up); },{passive:true}); up();
+  const KEY='dbf-done-DBF-TP-001'; let done={}; try{ done=JSON.parse(localStorage.getItem(KEY)||'{}'); }catch(e){}
+  // wide tables scroll inside their own frame: give the frames a name and a tab stop when they actually scroll
+  document.querySelectorAll('.doc .tbl').forEach(w=>{ if(w.scrollWidth<=w.clientWidth+1) return; let h=w.previousElementSibling; while(h && !/^H[2-4]$/.test(h.tagName)) h=h.previousElementSibling; w.setAttribute('role','region'); w.setAttribute('tabindex','0'); w.setAttribute('aria-label', h?h.textContent.trim():'Table'); });
+  document.querySelectorAll('.doc .step').forEach(st=>{ const h=st.querySelector('h4'); if(!h) return; const id=h.id;
+    const b=document.createElement('button'); b.type='button'; b.className='stepchk'; b.setAttribute('aria-pressed', done[id]?'true':'false'); b.textContent='Done';
+    b.setAttribute('aria-label', 'Done: '+h.textContent.trim()); st.classList.toggle('isdone', !!done[id]);
+    b.addEventListener('click',()=>{ done[id]=!done[id]; if(!done[id]) delete done[id]; try{ localStorage.setItem(KEY, JSON.stringify(done)); }catch(e){}
+      b.setAttribute('aria-pressed', done[id]?'true':'false'); b.textContent='Done'; b.setAttribute('aria-label', 'Done: '+h.textContent.trim()); st.classList.toggle('isdone', !!done[id]); });
+    h.after(b); });
+  if(window.dbfCounts){ dbfCounts(); document.addEventListener('click',e=>{ if(e.target.closest('.stepchk')) dbfCounts(); }); }
+})();
+</script>
+</body></html>

@@ -1,0 +1,249 @@
+=== sheet 1 GA
+  view front elevation scale 1:20 outline [0.062,0.083]-[0.194,0.117]
+  view plan outline [0.062,0.149]-[0.194,0.243]
+  view side outline [0.243,0.083]-[0.337,0.117]
+  table revision table 6 rows [0.245,0.222]-[0.411,0.262]
+  view isometric scale 1:20 outline [0.245,0.129]-[0.399,0.241]
+  fit isometric scale 1:40 outline [0.285,0.149]-[0.367,0.211]
+  dim plan 867.4 (LIFT MOTOR SPACING) = 867.4 mm at (0.128,0.252) span 0.043
+  dim front elevation 2400.0 (SPAN) = 2400 mm at (0.128,0.127) span 0.120
+  dim plan 1486.0 (OVERALL LENGTH) = 1485.976 mm at (0.208,0.200) span 0.074
+  dim plan 941.0 (BOOM PITCH) = 941.014 mm at (0.048,0.189) span 0.047
+  dim front elevation 447.1 (HEIGHT) = 447.142 mm at (0.048,0.100) span 0.022
+  dim front elevation Ø355.6 (PUSHER PROP) = 355.6 mm at (0.210,0.100) span 0.018
+  dim side elevation Ø431.8 (LIFT PROP) = 431.8 mm at (0.260,0.127) span 0.022
+  note front elevation label [0.062,0.077]-[0.107,0.080] 1 lines
+  note plan label [0.062,0.143]-[0.082,0.146] 1 lines
+  note side elevation label [0.243,0.077]-[0.283,0.080] 1 lines
+  note isometric label [0.284,0.142]-[0.315,0.146] 1 lines
+  note notes [0.018,0.041]-[0.212,0.072] 9 lines
+  table tolerance table 5 rows [0.018,0.015]-[0.172,0.039]
+  OVERLAP revision table x plan [0.245,0.222]-[0.411,0.262] vs [0.018,0.149]-[0.246,0.262]
+sheet GA: 32 items registered, 1 layout problems
+=== sheet 2 EXPLODED
+  view exploded isometric scale 1:10 outline [0.034,0.026]-[0.400,0.310]
+  fit exploded isometric scale 1:20 outline [0.123,0.095]-[0.312,0.243]
+  note exploded isometric label [0.123,0.088]-[0.175,0.092] 1 lines
+  note notes [0.018,0.051]-[0.211,0.072] 6 lines
+=== sheet 3 PARTS
+  view reference elevation scale 1:50 outline [0.287,0.088]-[0.347,0.108]
+  bom True
+  bom rows 76
+  bom first row: '1' 'Fuselage_Pod'
+  bom split 3 ok, 26 rows at x 0.280
+  bom split 2 ok, 26 rows at x 0.149
+  note reference elevation label [0.287,0.081]-[0.356,0.085] 1 lines
+  note notes [0.018,0.084]-[0.203,0.112] 8 lines
+  table tolerance table 5 rows [0.018,0.015]-[0.172,0.039]
+sheet PARTS: 7 items registered, 0 layout problems
+  visible components 298
+  balloon 1 Fuselage_Pod at (0.091,0.229) attached at (0.219,0.173)
+  balloon 51 Fin at (0.091,0.217) attached at (0.223,0.172)
+  balloon 16 Wing_Saddle at (0.091,0.205) attached at (0.218,0.171)
+  balloon 2 Canopy at (0.091,0.193) attached at (0.224,0.168)
+  balloon 64 H_Tail at (0.091,0.181) attached at (0.225,0.167)
+  balloon 65 Elevator at (0.091,0.169) attached at (0.225,0.167)
+  balloon 11 Aileron_R at (0.091,0.157) attached at (0.209,0.164)
+  balloon 9 Wing_Panel_R at (0.091,0.145) attached at (0.192,0.154)
+  balloon 14 Wing_Joiner at (0.091,0.133) attached at (0.201,0.150)
+  balloon 13 Spar_Tube at (0.091,0.121) attached at (0.200,0.149)
+  balloon 10 Wing_Panel_L at (0.344,0.253) attached at (0.249,0.187)
+  balloon 44 Landing_Leg at (0.344,0.241) attached at (0.227,0.173)
+  balloon 45 Gear_Fairing at (0.344,0.229) attached at (0.226,0.170)
+  balloon 71 Pusher_Prop_14in at (0.344,0.217) attached at (0.227,0.169)
+  balloon 30 Lift_Motor at (0.344,0.205) attached at (0.228,0.167)
+  balloon 6 Battery_6S_LiPo at (0.344,0.193) attached at (0.227,0.166)
+  balloon 28 Motor_Mount_Upper at (0.344,0.181) attached at (0.227,0.166)
+  balloon 42 Gear_Clamp_Upper at (0.344,0.169) attached at (0.228,0.166)
+  balloon 22 Boom_Front at (0.344,0.157) attached at (0.228,0.166)
+  balloon 48 Tail_Clamp_Upper at (0.344,0.145) attached at (0.227,0.165)
+  balloon 55 Servo at (0.344,0.133) attached at (0.226,0.165)
+  balloon 68 Pusher_Motor at (0.344,0.121) attached at (0.227,0.165)
+  balloon 31 Lift_Prop at (0.344,0.109) attached at (0.231,0.163)
+  balloon 23 Boom_Rear_Stub at (0.344,0.097) attached at (0.245,0.156)
+balloons 24 (left 10, right 14)
+  table tolerance table 5 rows [0.018,0.015]-[0.172,0.039]
+sheet EXPLODED: 28 items registered, 0 layout problems
+=== sheet 4 WING
+  view wing panel plan scale 1:10 outline [0.074,0.108]-[0.114,0.232]
+  view root section scale 1:2 outline [0.185,0.212]-[0.339,0.244]
+  dim wing panel plan 1120.0 (PANEL) = 1120 mm at (0.059,0.170) span 0.112
+  dim wing panel plan 353.7 = 353.7 mm at (0.025,0.208) span 0.035
+  dim wing panel plan 616.0 = 616 mm at (0.129,0.139) span 0.062
+  dim wing panel plan 800.0 = 800 mm at (0.151,0.186) span 0.080
+  dim wing panel plan 85.3 = 85.253 mm at (0.142,0.241) span 0.009 (narrow: text outside, arrows outside)
+  dim wing panel plan 284.2 = 284.176 mm at (0.127,0.253) span 0.028 (narrow: text outside, arrows outside)
+  dim root section Ø25.4 (SPAR SOCKET = TUBE OD, BONDED FT05) = 25.4 mm at (0.316,0.254) span 0.013 (narrow: text outside, arrows outside)
+  dim root section 284.2 (CHORD) = 284.176 mm at (0.262,0.202) span 0.142
+  dim root section 42.6 = 42.639 mm at (0.354,0.228) span 0.021
+  view saddle plan scale 1:5 outline [0.181,0.127]-[0.249,0.173]
+  view saddle section scale 1:2 outline [0.260,0.099]-[0.414,0.143]
+  dim saddle plan 160.0 = 160 mm at (0.166,0.150) span 0.032
+  dim saddle plan 284.2 (CHORD) = 284.176 mm at (0.215,0.117) span 0.057
+  dim saddle plan 130.0 = 130 mm at (0.264,0.150) span 0.026
+  dim saddle section Ø22.5 (JOINER BORE, SLIP FIT FT06) = 22.455 mm at (0.390,0.153) span 0.011 (narrow: text outside, arrows outside)
+  dim saddle section 85.3 (JOINER AT 30 % CHORD) = 85.253 mm at (0.387,0.089) span 0.043
+  view bolt pillar scale 1:1 outline [0.361,0.204]-[0.389,0.242]
+  dim bolt pillar Ø16.0 = 16 mm at (0.396,0.195) span 0.016 (narrow: text outside, arrows outside)
+  dim bolt pillar 8.2 (M5 NUT POCKET, 9.6 DEEP) = 8.2 mm at (0.394,0.183) span 0.008 (narrow: text outside, arrows outside)
+  dim bolt pillar 26.0 = 26.03 mm at (0.403,0.223) span 0.026
+  dim bolt pillar Ø5.7 (THRU, M5 CLEARANCE (PRINT 5.7)) = 5.7 mm at (0.397,0.251) span 0.006 (narrow: text outside, arrows outside)
+  note wing panel plan label [0.074,0.102]-[0.154,0.105] 1 lines
+  note root section label [0.185,0.183]-[0.222,0.187] 1 lines
+  note saddle plan label [0.181,0.098]-[0.216,0.102] 1 lines
+  note saddle section label [0.260,0.070]-[0.300,0.074] 1 lines
+  note bolt pillar label [0.361,0.164]-[0.392,0.168] 1 lines
+  note notes [0.018,0.047]-[0.211,0.092] 13 lines
+  table tolerance table 5 rows [0.018,0.015]-[0.172,0.039]
+  OVERLAP saddle plan dim 130.0 x saddle section [0.257,0.148]-[0.271,0.152] vs [0.260,0.077]-[0.414,0.162]
+  OVERLAP saddle plan dimline 130.0 x saddle section [0.263,0.137]-[0.265,0.163] vs [0.260,0.077]-[0.414,0.162]
+  OVERLAP bolt pillar callout THRU, M5 CLEARANCE (PRINT 5.7) x root section [0.348,0.255]-[0.401,0.259] vs [0.185,0.189]-[0.362,0.264]
+  OVERLAP wing panel plan x saddle plan [0.017,0.108]-[0.159,0.257] vs [0.157,0.105]-[0.273,0.173]
+  OVERLAP root section x bolt pillar [0.185,0.189]-[0.362,0.264] vs [0.361,0.171]-[0.412,0.261]
+  OVERLAP saddle plan x saddle section [0.157,0.105]-[0.273,0.173] vs [0.260,0.077]-[0.414,0.162]
+sheet WING: 56 items registered, 6 layout problems
+=== sheet 5 MOUNT
+  view upper half section scale 1:1 outline [0.049,0.196]-[0.107,0.228]
+  view upper half top scale 1:1 outline [0.175,0.187]-[0.257,0.245]
+  view upper half side scale 1:1 outline [0.299,0.196]-[0.381,0.228]
+  dim upper half section 35.0 (CLAMP INSERTS) = 35 mm at (0.078,0.186) span 0.035
+  dim upper half section 46.0 = 46 mm at (0.078,0.166) span 0.046
+  dim upper half section 20.4 = 20.4 mm at (0.121,0.212) span 0.020
+  dim upper half section Ø25.6 (BORE FT02) = 25.6 mm at (0.110,0.238) span 0.026 (narrow: text outside, arrows outside)
+  dim upper half section 4.5 (FLOOR) = 4.5 mm at (0.149,0.228) span 0.004 (narrow: text outside, arrows outside)
+  dim upper half top 56.0 (4X Ø4.0 ±0.1 x 7.5 DEEP, I01) = 56 mm at (0.216,0.254) span 0.056
+  dim upper half top 17.7 (4X Ø3.4 THRU ON Ø25 B.C., POS Ø0.2) = 17.68 mm at (0.237,0.178) span 0.018 (narrow: text outside, arrows outside)
+  dim upper half side 70.0 = 70 mm at (0.340,0.238) span 0.070
+  dim upper half side 20.4 = 20.4 mm at (0.395,0.212) span 0.020
+  dim upper half side 36.0 (2X Ø3.4 THRU Z, SPLICE J04) = 36 mm at (0.340,0.186) span 0.036
+  view cap section scale 1:1 outline [0.049,0.112]-[0.107,0.138]
+  view cap bottom scale 1:1 outline [0.299,0.093]-[0.381,0.151]
+  dim cap section 14.4 = 14.4 mm at (0.121,0.125) span 0.014
+  dim cap section 35.0 (CLAMP SCREWS) = 35 mm at (0.078,0.102) span 0.035
+  dim cap bottom 56.0 (4X Ø3.4 THRU, CBORE Ø6.5 x 5.6) = 56 mm at (0.340,0.084) span 0.056
+  view splice plug scale 1:1 outline [0.159,0.107]-[0.251,0.142]
+  dim splice plug 80.0 = 80 mm at (0.205,0.151) span 0.080
+  dim splice plug Ø23.2 (FT04) = 23.2 mm at (0.272,0.125) span 0.023
+  dim splice plug 36.0 (2X Ø3.4 THRU) = 36 mm at (0.205,0.098) span 0.036
+  note upper half section label [0.049,0.156]-[0.098,0.159] 1 lines
+  note upper half top label [0.175,0.158]-[0.215,0.162] 1 lines
+  note upper half side label [0.299,0.167]-[0.340,0.171] 1 lines
+  note cap section label [0.049,0.083]-[0.084,0.087] 1 lines
+  note cap bottom label [0.299,0.064]-[0.334,0.068] 1 lines
+  note splice plug label [0.159,0.078]-[0.191,0.082] 1 lines
+  note notes [0.018,0.041]-[0.208,0.076] 10 lines
+  table tolerance table 5 rows [0.018,0.015]-[0.172,0.039]
+sheet MOUNT: 56 items registered, 0 layout problems
+=== sheet 6 CLAMPS
+  view boom clamp lower section scale 1:1 outline [0.023,0.218]-[0.081,0.246]
+  view boom clamp lower side scale 1:1 outline [0.115,0.218]-[0.161,0.246]
+  dim boom clamp lower section 46.0 = 46 mm at (0.052,0.209) span 0.046
+  dim boom clamp lower section Ø25.6 (BORE FT02) = 25.6 mm at (0.084,0.255) span 0.026 (narrow: text outside, arrows outside)
+  dim boom clamp lower side 34.0 = 34 mm at (0.138,0.255) span 0.034
+  dim boom clamp lower section 16.1 = 16.1 mm at (0.095,0.232) span 0.016
+  dim boom clamp lower side 24.0 (2X Ø3.4 THRU, CBORE Ø6.5 x 4.3 (FRONT) / x 7.5 (REAR)) = 24 mm at (0.138,0.209) span 0.024
+  view boom clamp upper section scale 1:1 outline [0.221,0.220]-[0.279,0.244]
+  view boom clamp upper side scale 1:1 outline [0.313,0.220]-[0.359,0.244]
+  dim boom clamp upper section 13.4 = 13.409 mm at (0.293,0.232) span 0.013
+  dim boom clamp upper side 24.0 (2X Ø3.4 THRU, DIAGONAL) = 24 mm at (0.336,0.210) span 0.024
+  view gear clamp lower section scale 1:1 outline [0.023,0.150]-[0.081,0.189]
+  view gear clamp lower side scale 1:1 outline [0.115,0.150]-[0.161,0.189]
+  dim gear clamp lower section 28.1 = 28.1 mm at (0.095,0.170) span 0.028
+  dim gear clamp lower side 24.0 (4X Ø3.4, CBORE Ø6.5 x 15.3) = 24 mm at (0.138,0.140) span 0.024
+  view gear clamp upper section scale 1:1 outline [0.221,0.156]-[0.279,0.183]
+  view gear clamp upper side scale 1:1 outline [0.313,0.156]-[0.359,0.183]
+  dim gear clamp upper section 16.1 = 16.1 mm at (0.293,0.170) span 0.016
+  dim gear clamp upper side 24.0 (4X Ø4.0 ±0.1 x 7.5 DEEP, I01) = 24 mm at (0.336,0.146) span 0.024
+  view tail clamp cap section scale 1:1 outline [0.023,0.094]-[0.081,0.119]
+  view tail clamp cap side scale 1:1 outline [0.107,0.094]-[0.169,0.119]
+  dim tail clamp cap section 14.4 = 14.4 mm at (0.095,0.107) span 0.014
+  dim tail clamp cap side 36.0 (4X Ø3.4, CBORE Ø6.5 x 5.6) = 36 mm at (0.138,0.084) span 0.036
+  view tail clamp upper section scale 1:1 outline [0.221,0.093]-[0.279,0.120]
+  view tail clamp upper side scale 1:1 outline [0.305,0.093]-[0.367,0.120]
+  dim tail clamp upper section 15.1 = 15.1 mm at (0.293,0.107) span 0.015
+  dim tail clamp upper side 36.0 (4X Ø4.0 x 7.5 DEEP (I01), 2 FROM TOP) = 36 mm at (0.336,0.084) span 0.036
+  note boom clamp lower section label [0.023,0.189]-[0.135,0.193] 1 lines
+  note boom clamp upper section label [0.221,0.191]-[0.311,0.195] 1 lines
+  note gear clamp lower section label [0.023,0.121]-[0.099,0.125] 1 lines
+  note gear clamp upper section label [0.221,0.127]-[0.295,0.131] 1 lines
+  note tail clamp cap section label [0.023,0.065]-[0.090,0.069] 1 lines
+  note tail clamp upper section label [0.221,0.064]-[0.292,0.068] 1 lines
+  note notes [0.018,0.039]-[0.213,0.063] 7 lines
+  table tolerance table 5 rows [0.018,0.015]-[0.172,0.039]
+sheet CLAMPS: 57 items registered, 0 layout problems
+=== sheet 7 TUBES
+  table tube cut list 6 rows [0.018,0.234]-[0.350,0.262]
+  view landing leg scale 1:2 outline [0.344,0.093]-[0.376,0.207]
+  dim landing leg 205.0 = 205 mm at (0.396,0.150) span 0.103
+  dim landing leg Ø25.4 = 25.4 mm at (0.385,0.217) span 0.013 (narrow: text outside, arrows outside)
+  dim landing leg 7.0 (Ø3.4 THRU (X)) = 7 mm at (0.324,0.207) span 0.004 (narrow: text outside, arrows outside)
+  view front boom scale 1:5 outline [0.045,0.174]-[0.255,0.190]
+  dim front boom 991.0 = 991.014 mm at (0.150,0.200) span 0.198
+  dim front boom 18.0 (Ø3.4 THRU (Z), SPLICE BOLT) = 18 mm at (0.072,0.164) span 0.004 (narrow: text outside, arrows outside)
+  view leg fairing scale 1:1 outline [0.039,0.105]-[0.131,0.143]
+  dim leg fairing 81.6 (CHORD) = 81.6 mm at (0.085,0.095) span 0.082
+  dim leg fairing 27.2 (LEG BORE 25.6) = 27.2 mm at (0.146,0.124) span 0.027
+  view gear clamp lower socket scale 1:1 outline [0.239,0.104]-[0.285,0.144]
+  dim gear clamp lower socket 14.0 (SOCKET DEPTH) = 14 mm at (0.299,0.117) span 0.014
+  dim gear clamp lower socket Ø25.7 (BLIND SOCKET FT03) = 25.7 mm at (0.294,0.095) span 0.026 (narrow: text outside, arrows outside)
+  dim gear clamp lower socket 7.0 (F05 CROSS-BOLT) = 7 mm at (0.225,0.123) span 0.007 (narrow: text outside, arrows outside)
+  note landing leg label [0.344,0.086]-[0.379,0.090] 1 lines
+  note front boom label [0.045,0.145]-[0.118,0.149] 1 lines
+  note leg fairing label [0.039,0.076]-[0.135,0.080] 1 lines
+  note gear clamp lower socket label [0.239,0.075]-[0.343,0.079] 1 lines
+  note notes [0.018,0.040]-[0.206,0.075] 10 lines
+  table tolerance table 5 rows [0.018,0.015]-[0.172,0.039]
+  OVERLAP gear clamp lower socket dim 14.0 (SOCKET DEPTH) x landing leg [0.293,0.115]-[0.306,0.119] vs [0.283,0.093]-[0.411,0.220]
+  OVERLAP gear clamp lower socket callout SOCKET DEPTH x landing leg [0.310,0.115]-[0.333,0.119] vs [0.283,0.093]-[0.411,0.220]
+  OVERLAP gear clamp lower socket dimline 14.0 (SOCKET DEPTH) x landing leg [0.298,0.110]-[0.300,0.124] vs [0.283,0.093]-[0.411,0.220]
+  OVERLAP gear clamp lower socket dim Ø25.7 (BLIND SOCKET FT03) x landing leg [0.280,0.093]-[0.307,0.096] vs [0.283,0.093]-[0.411,0.220]
+  OVERLAP landing leg x gear clamp lower socket [0.283,0.093]-[0.411,0.220] vs [0.187,0.082]-[0.333,0.144]
+sheet TUBES: 38 items registered, 5 layout problems
+=== sheet 8 FASTENERS
+  table fastener schedule 20 rows [0.018,0.122]-[0.414,0.262]
+  note notes [0.018,0.078]-[0.401,0.116] 11 lines
+  table tolerance table 5 rows [0.018,0.015]-[0.172,0.039]
+sheet FASTENERS: 3 items registered, 0 layout problems
+=== sheet 9 HARDPOINTS
+  view fin shoe scale 1:1 outline [0.018,0.193]-[0.192,0.251]
+  dim fin shoe 32.0 = 32 mm at (0.187,0.260) span 0.032 (narrow: text outside, arrows outside)
+  dim fin shoe 35.0 (2X Ø3.4 THRU) = 35 mm at (0.207,0.222) span 0.035
+  view spar collar scale 1:1 outline [0.240,0.191]-[0.284,0.239]
+  dim spar collar 32.0 = 32 mm at (0.262,0.181) span 0.032
+  dim spar collar 37.0 = 37.019 mm at (0.298,0.215) span 0.037
+  dim spar collar Ø25.6 (ON THE SPAR SOCKET, BONDED) = 25.6 mm at (0.294,0.249) span 0.026 (narrow: text outside, arrows outside)
+  view rear hardpoint scale 1:1 outline [0.314,0.204]-[0.386,0.226]
+  dim rear hardpoint 60.0 = 60 mm at (0.350,0.195) span 0.060
+  dim rear hardpoint 10.0 = 10 mm at (0.400,0.215) span 0.010
+  view pusher cup scale 1:1 outline [0.069,0.105]-[0.111,0.171]
+  dim pusher cup Ø55.6 (FT11) = 55.6 mm at (0.048,0.138) span 0.056
+  dim pusher cup 30.0 = 30 mm at (0.090,0.181) span 0.030
+  dim pusher cup 4.5 (FLOOR) = 4.5 mm at (0.097,0.095) span 0.005 (narrow: text outside, arrows outside)
+  view servo tray scale 1:1 outline [0.174,0.109]-[0.236,0.151]
+  dim servo tray 50.0 = 50 mm at (0.205,0.161) span 0.050
+  dim servo tray 46.0 (4X Ø2.6 + M2 NUT POCKET 4.2 AF x 2) = 46 mm at (0.205,0.099) span 0.046
+  view root tongue scale 1:1 outline [0.314,0.099]-[0.346,0.161]
+  dim root tongue 50.0 = 50 mm at (0.300,0.130) span 0.050
+  dim root tongue 20.0 = 20 mm at (0.330,0.170) span 0.020
+  dim root tongue 10.0 (WING BOLT Ø5.7) = 10 mm at (0.366,0.150) span 0.010
+  note fin shoe label [0.018,0.187]-[0.069,0.191] 1 lines
+  note spar collar label [0.240,0.170]-[0.300,0.175] 1 lines
+  note rear hardpoint label [0.314,0.184]-[0.381,0.188] 1 lines
+  note pusher cup label [0.069,0.076]-[0.131,0.080] 1 lines
+  note servo tray label [0.174,0.080]-[0.231,0.084] 1 lines
+  note root tongue label [0.314,0.092]-[0.376,0.097] 1 lines
+  note notes [0.018,0.044]-[0.207,0.075] 9 lines
+  table tolerance table 5 rows [0.018,0.015]-[0.172,0.039]
+  OVERLAP spar collar callout ON THE SPAR SOCKET, BONDED x fin shoe [0.238,0.253]-[0.289,0.256] vs [0.018,0.193]-[0.241,0.264]
+  OVERLAP spar collar label x root tongue [0.240,0.170]-[0.300,0.175] vs [0.291,0.099]-[0.409,0.174]
+sheet HARDPOINTS: 50 items registered, 2 layout problems
+png DBF-DRW-001_sheet1.png 29505
+png DBF-DRW-001_sheet2.png 34190
+png DBF-DRW-001_sheet3.png 52177
+png DBF-DRW-001_sheet4.png 32931
+png DBF-DRW-001_sheet5.png 31196
+png DBF-DRW-001_sheet6.png 29096
+png DBF-DRW-001_sheet7.png 31089
+png DBF-DRW-001_sheet8.png 41783
+png DBF-DRW-001_sheet9.png 28349
+saved C:\Users\dillo\Downloads\Berkeley\Fall\Capstone\Claude\Initial Drone Analysis\cad\drawings\DBF-DRW-001.SLDDRW

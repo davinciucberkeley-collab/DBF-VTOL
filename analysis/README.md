@@ -1,0 +1,10 @@
+# Analysis
+
+Sizing chain: `node analysis/sizing.mjs` → `results.json`; `node analysis/vlm.mjs` → `aero.json`; `node analysis/export_bom.mjs` → `docs/purchasing/C0_BOM.csv`; `node analysis/tradestudy.mjs` → `tradestudy.json`; `py analysis/verify.py` re-derives every stored number. The aerodynamic data package is `analysis/aero/` (`run_all.py`), the CAD build parameters come from `cad/params.mjs`.
+
+## Shared geometry (single sources)
+
+- `geometry.mjs` — the one definition of the wing/tail section family (NACA 24xx camber, NACA 0009 tail, the two trailing-edge coefficients `teCad` / `teAero`) and the fuselage-pod profile (`noseX`, `L`, `R`, `tailR`, `noseA`, `parallelTo`), with the reference formulas. A leaf module imported by `sizing.mjs`, `tradestudy.mjs` and `cad/params.mjs`, which writes the constants into `cad/params.txt` (`foilWing`, `foilTail`, `foilTE`, `podProfile`).
+- `geom.py` — the Python side: the one `cad/params.txt` reader (`read_params`, rules in the docstring), the constants read back from it, `naca4_surfaces` / `naca4_outline` (numpy, cosine spaced) and `pod_radius`. `aero/common.py` re-exports them (`naca4`, `pod_radius`), so every aero script and `docs/build/templates/make_templates.py` use this one implementation. The C# twin is `cad/Shared.cs` (see `cad/README.md`, "Single sources", also for the trailing-edge choice).
+
+Parity of the refactor (2026-10-25): the pre-refactor scripts were run on the same inputs in a scratch tree and compared with the refactored ones — `results.json`, `aero.json`, `tradestudy.json`, `C0_BOM.csv`, `cad/params.txt` (apart from the four added keys), all 12 templates and `section_coordinates.csv`, all 45 AVL files, `avl_results.json`, `asb_results.json` and `drag_buildup.json` byte-identical (only the `wall_s` runtimes differ); `common.naca4` bit-identical for every (code, n, closed_te) in use. One latent difference fixed: the old `common.py` reader decoded `params.txt` in the Windows code page (mojibake in the unused fastener text fields); `geom.read_params` reads UTF-8.

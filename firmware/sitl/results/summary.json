@@ -1,0 +1,192 @@
+{
+  "firmware": "4.7.2",
+  "params_checked": 133,
+  "params_missing_in_sitl": [
+    "SERVO_BLH_MASK",
+    "SERVO_BLH_OTYPE",
+    "SERVO_BLH_AUTO"
+  ],
+  "params_mismatch": [],
+  "scenarios": [
+    {
+      "scenario": "A_nominal_mission",
+      "expected": "QLOITER -> AUTO (transition, loop) -> VTOL land at home, disarm",
+      "passed": true,
+      "mode_sequence": [
+        "QSTABILIZE",
+        "QLOITER",
+        "AUTO"
+      ],
+      "max_alt_m": 73.64,
+      "max_airspeed_ms": 21.08,
+      "max_dist_home_m": 257.8,
+      "final_dist_home_m": 0.1,
+      "sim_duration_s": 202.0,
+      "key_messages": [
+        "197.0s Transition started airspeed 0.9",
+        "202.0s Transition airspeed reached 16.1",
+        "207.0s Transition done",
+        "270.0s Mission: 7 VTOLLand",
+        "290.0s Land descend started",
+        "349.0s Land final started",
+        "362.0s Land complete"
+      ],
+      "forward_transition_s": 10.0,
+      "learned_Q_M_THST_HOVER_sitl_model": 0.25
+    },
+    {
+      "scenario": "B_rc_loss_cruise",
+      "expected": "fixed-wing LOITER, RC lost -> RTL -> QRTL -> vertical land at home (no fence involvement)",
+      "passed": true,
+      "mode_sequence": [
+        "QLOITER",
+        "FBWA",
+        "LOITER",
+        "RTL",
+        "QRTL"
+      ],
+      "max_alt_m": 68.11,
+      "max_airspeed_ms": 23.44,
+      "max_dist_home_m": 220.3,
+      "final_dist_home_m": 0.1,
+      "sim_duration_s": 154.0,
+      "key_messages": [
+        "392.0s In landing sequence: mission reset",
+        "422.0s Transition started airspeed 0.3",
+        "427.0s Transition airspeed reached 16.3",
+        "432.0s Transition done",
+        "456.0s Throttle failsafe on",
+        "456.0s RC Short Failsafe On",
+        "460.0s RC Long Failsafe On: switched to RTL",
+        "478.0s Land descend started",
+        "532.0s Land final started",
+        "546.0s Land complete",
+        "546.0s PreArm: Radio failsafe on",
+        "546.0s PreArm: QRTL mode not armable"
+      ]
+    },
+    {
+      "scenario": "C_rc_loss_hover",
+      "expected": "QLOITER hover, RC lost -> QLAND in place",
+      "passed": true,
+      "mode_sequence": [
+        "QLOITER",
+        "QLAND"
+      ],
+      "max_alt_m": 17.71,
+      "max_airspeed_ms": 1.14,
+      "max_dist_home_m": 0.9,
+      "final_dist_home_m": 0.8,
+      "sim_duration_s": 43.0,
+      "key_messages": [
+        "572.0s Throttle failsafe on",
+        "572.0s RC Short Failsafe: switched to QLand",
+        "576.0s RC Long Failsafe On: switched to QLand",
+        "600.0s Land complete",
+        "600.0s PreArm: Radio failsafe on",
+        "600.0s PreArm: QLand mode not armable"
+      ]
+    },
+    {
+      "scenario": "D_transition_timeout",
+      "expected": "FBWA with no pusher -> Q_TRANS_FAIL 15 s -> QRTL -> land",
+      "passed": true,
+      "mode_sequence": [
+        "QLOITER",
+        "FBWA",
+        "QRTL"
+      ],
+      "max_alt_m": 43.36,
+      "max_airspeed_ms": 1.07,
+      "max_dist_home_m": 1.4,
+      "final_dist_home_m": 0.8,
+      "sim_duration_s": 90.0,
+      "key_messages": [
+        "641.0s Transition started airspeed 0.2",
+        "656.0s Transition failed, exceeded time limit",
+        "656.0s Land descend started",
+        "684.0s Land final started",
+        "701.0s Land complete"
+      ],
+      "time_to_QRTL_s": 15.0,
+      "timeout_message_seen": true
+    },
+    {
+      "scenario": "E_battery_low_cruise",
+      "expected": "fixed-wing LOITER, low battery -> RTL -> QRTL -> land at home (no fence involvement)",
+      "passed": true,
+      "mode_sequence": [
+        "QLOITER",
+        "FBWA",
+        "LOITER",
+        "RTL",
+        "QRTL"
+      ],
+      "max_alt_m": 63.35,
+      "max_airspeed_ms": 23.57,
+      "max_dist_home_m": 220.7,
+      "final_dist_home_m": 0.8,
+      "sim_duration_s": 127.0,
+      "key_messages": [
+        "745.0s Transition started airspeed 0.1",
+        "750.0s Transition airspeed reached 16.2",
+        "755.0s Transition done",
+        "771.0s Battery 1 is low 25.03V used 300 mAh",
+        "791.0s Land descend started",
+        "824.0s Land final started",
+        "841.0s Land complete",
+        "841.0s PreArm: Battery 1 low capacity failsafe",
+        "841.0s PreArm: QRTL mode not armable"
+      ]
+    },
+    {
+      "scenario": "F_fence_ceiling",
+      "expected": "QLOITER climb through FENCE_ALT_MAX=110.0 -> breach action RTL; peak < 121.9 m",
+      "passed": true,
+      "mode_sequence": [
+        "QLOITER",
+        "RTL",
+        "QRTL"
+      ],
+      "max_alt_m": 113.05,
+      "max_airspeed_ms": 3.71,
+      "max_dist_home_m": 8.1,
+      "final_dist_home_m": 0.8,
+      "sim_duration_s": 138.0,
+      "key_messages": [
+        "901.0s Max Alt fence breached",
+        "901.0s Transition started airspeed 0.4",
+        "902.0s Land descend started",
+        "976.0s Land final started",
+        "993.0s Land complete"
+      ],
+      "peak_alt_m": 113.05
+    },
+    {
+      "scenario": "G_elrs_mavlink_override_loss",
+      "expected": "RC only via MAVLink overrides; overrides stop in hover -> QLAND",
+      "passed": true,
+      "mode_sequence": [
+        "QRTL",
+        "QLOITER",
+        "QLAND"
+      ],
+      "max_alt_m": 17.21,
+      "max_airspeed_ms": 1.16,
+      "max_dist_home_m": 1.1,
+      "final_dist_home_m": 0.7,
+      "sim_duration_s": 51.0,
+      "key_messages": [
+        "1036.0s Throttle failsafe on",
+        "1036.0s RC Short Failsafe: switched to QLand",
+        "1040.0s RC Long Failsafe On: switched to QLand",
+        "1063.0s Land complete",
+        "1063.0s PreArm: Radio failsafe on",
+        "1063.0s PreArm: QLand mode not armable"
+      ],
+      "failsafe_delay_s": 2.0,
+      "RC_OVERRIDE_TIME": 3.0,
+      "RC_FS_TIMEOUT": 1.0
+    }
+  ]
+}

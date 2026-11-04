@@ -1,0 +1,149 @@
+  [    0.0] QAssist: Disabled
+  [    0.0] RCInput: decoding UDP (Pulses)
+  [    0.0] QuadPlane initialised, Frame: QUAD/X
+  [    0.0] Ground start
+  [    0.0] Skipping INS calibration
+  [    0.0] INS: alloc 6144 bytes for ISB (free=524288)
+  [    0.0] Calibrating barometer
+  [    0.0] Barometer 1 calibration complete
+  [    0.0] Barometer 2 calibration complete
+  [    0.0] Airspeed 1 calibration started
+  [    0.0] ArduPilot Ready
+  [    0.0] AHRS: DCM active
+  [    3.6] RC7: MotorEStop LOW
+  [    3.6] QAssist: Enabled
+  [    4.6] Airspeed 1 calibrated
+  [    4.6] EKF3 IMU0 initialised
+  [    4.6] EKF3 IMU1 initialised
+  [    6.7] EKF3 IMU1 tilt alignment complete
+  [    6.7] EKF3 IMU0 tilt alignment complete
+  [    6.7] EKF3 IMU1 MAG0 initial yaw alignment complete
+  [    6.7] EKF3 IMU0 MAG0 initial yaw alignment complete
+  [   10.7] GPS 1: probing for u-blox at 230400 baud
+  [   10.7] GPS 1: detected u-blox
+  [   20.6] EKF3 IMU1 origin set
+  [   20.6] EKF3 IMU0 origin set
+  [   20.6] Field Elevation Set: 5m
+  [   29.6] PreArm: AHRS: not using configured AHRS type
+  [   41.7] EKF3 IMU1 is using GPS
+  [   42.7] EKF3 IMU0 is using GPS
+  [   42.7] AHRS: EKF3 active
+params: 132 checked, 3 not present in SITL, 0 mismatched
+  [  253.7] Flight plan received
+  [  255.7] Throttle armed
+  [  293.6] Mission: 1 WP
+  [  293.6] Transition started airspeed 0.4
+  [  301.7] Transition airspeed reached 16.1
+  [  305.7] Reached waypoint #1 dist 68m
+  [  305.7] Mission: 2 WP
+  [  306.7] Transition done
+  [  313.7] Reached waypoint #2 dist 83m
+  [  313.7] Mission: 3 WP
+  [  329.6] Reached waypoint #3 dist 80m
+  [  329.6] Mission: 4 WP
+  [  345.7] Reached waypoint #4 dist 80m
+  [  345.7] Mission: 5 WP
+  [  361.6] Reached waypoint #5 dist 79m
+  [  361.6] Mission: 6 WP
+  [  366.6] Reached waypoint #6 dist 80m
+  [  366.6] Mission: 7 VTOLLand
+  [  366.6] VTOL approach d=214.4
+  [  373.7] VTOL airbrake v=18.6 d=123 sd=124 h=60.3
+  [  378.7] VTOL position1 v=16.7 d=47.9 h=60.5 dc=13.8
+  [  381.7] VTOL Overshoot d=0.7 cs=4.9 yerr=-62.0
+  [  381.7] VTOL position2 started v=9.0 d=5.0 h=64.7
+  [  386.6] Land descend started
+  [  427.6] Land final started
+  [  444.7] Land complete
+  [  444.7] Throttle disarmed
+==> A_nominal_mission: PASS  modes=['QSTABILIZE', 'QLOITER', 'AUTO']
+  [  462.6] PreArm: In landing sequence
+  [  462.6] PreArm: Auto not in VTOL takeoff
+  [  491.6] In landing sequence: mission reset
+  [  492.6] Throttle armed
+  [  533.6] Transition started airspeed 0.7
+  [  542.7] Transition airspeed reached 16.0
+  [  547.7] Transition done
+  [  577.7] Throttle failsafe on
+  [  577.7] RC Short Failsafe On
+  [  581.6] RC Long Failsafe On: switched to RTL
+  [  586.6] VTOL airbrake v=19.0 d=100 sd=91 h=49.2
+  [  589.6] VTOL position1 v=16.8 d=48.8 h=52.0 dc=14.0
+  [  592.6] VTOL Overshoot d=3.6 cs=5.7 yerr=-60.9
+  [  593.6] VTOL position2 started v=9.0 d=7.8 h=56.0
+  [  598.6] Land descend started
+  [  626.6] Land final started
+  [  644.7] Land complete
+  [  644.7] Throttle disarmed
+  [  644.7] PreArm: Radio failsafe on
+  [  644.7] PreArm: QRTL mode not armable
+==> B_rc_loss_cruise: PASS  modes=['AUTO', 'QLOITER', 'FBWA', 'LOITER', 'RTL', 'QRTL']
+  [  646.7] RC Long Failsafe Cleared
+  [  692.6] Throttle armed
+  [  719.6] Throttle failsafe on
+  [  719.6] RC Short Failsafe: switched to QLand
+  [  724.6] RC Long Failsafe On: switched to QLand
+  [  747.7] Land complete
+  [  747.7] Throttle disarmed
+  [  747.7] PreArm: Radio failsafe on
+  [  747.7] PreArm: QLand mode not armable
+==> C_rc_loss_hover: PASS  modes=['QSTABILIZE', 'QLOITER', 'QLAND']
+  [  749.6] RC Long Failsafe Cleared
+  [  795.6] Throttle armed
+  [  836.6] Transition started airspeed 0.4
+  [  851.6] Transition failed, exceeded time limit
+  [  851.6] VTOL position1 d=6.3 r=150.0
+  [  851.6] VTOL Position1 d=6.3
+  [  851.6] VTOL Overshoot d=6.3 cs=-0.8 yerr=160.4
+  [  851.6] VTOL position2 started v=0.8 d=6.3 h=42.5
+  [  855.6] Land descend started
+  [  877.7] Land final started
+  [  895.6] Land complete
+  [  895.6] Throttle disarmed
+==> D_transition_timeout: PASS  modes=['QLOITER', 'FBWA', 'QRTL']
+  [  902.6] PreArm: QRTL mode not armable
+  [  933.6] PreArm: QRTL mode not armable
+  [  943.7] Throttle armed
+  [  985.6] Transition started airspeed 0.3
+  [  994.6] Transition airspeed reached 16.1
+  [  999.6] Transition done
+  [ 1022.6] Battery 1 is low 24.53V used 663 mAh
+  [ 1031.6] VTOL airbrake v=20.4 d=102 sd=104 h=55.5
+  [ 1033.7] VTOL position1 v=18.2 d=57.6 h=56.1 dc=15.1
+  [ 1036.6] VTOL Overshoot d=2.9 cs=5.2 yerr=-62.3
+  [ 1037.6] VTOL position2 started v=9.0 d=5.2 h=61.6
+  [ 1042.7] Land descend started
+  [ 1075.7] Land final started
+  [ 1092.7] Land complete
+  [ 1092.7] Throttle disarmed
+==> E_battery_low_cruise: PASS  modes=['QLOITER', 'FBWA', 'LOITER', 'RTL', 'QRTL']
+  [ 1093.6] PreArm: QRTL mode not armable
+  [ 1124.6] PreArm: QRTL mode not armable
+  [ 1140.7] Throttle armed
+  [ 1186.7] Max Alt fence breached
+  [ 1186.7] Manual recovery started
+  [ 1186.7] Transition started airspeed 2.0
+  [ 1187.7] VTOL position1 d=0.2 r=150.0
+  [ 1187.7] VTOL Position1 d=0.2
+  [ 1187.7] Manual recovery started
+  [ 1187.7] VTOL Overshoot d=0.2 cs=-0.8 yerr=-176.6
+  [ 1187.7] VTOL position2 started v=0.8 d=0.2 h=113.0
+  [ 1187.7] Land descend started
+  [ 1261.7] Land final started
+  [ 1279.7] Land complete
+  [ 1279.7] Throttle disarmed
+  [ 1279.7] PreArm: QRTL mode not armable
+==> F_fence_ceiling: PASS  modes=['QLOITER', 'RTL', 'QRTL']
+  [ 1310.7] PreArm: QRTL mode not armable
+  [ 1341.7] PreArm: QRTL mode not armable
+  [ 1351.7] Throttle armed
+  [ 1379.7] Throttle failsafe on
+  [ 1379.7] RC Short Failsafe: switched to QLand
+  [ 1383.7] RC Long Failsafe On: switched to QLand
+  [ 1408.7] Land complete
+  [ 1408.7] Throttle disarmed
+  [ 1408.7] PreArm: Radio failsafe on
+  [ 1408.7] PreArm: QLand mode not armable
+==> G_elrs_mavlink_override_loss: PASS  modes=['QRTL', 'QLOITER', 'QLAND']
+  [ 1439.7] PreArm: QLand mode not armable
+7/7 scenarios passed

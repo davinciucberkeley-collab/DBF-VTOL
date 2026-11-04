@@ -1,0 +1,4737 @@
+{
+ "generated": "2026-10-13",
+ "base": {
+  "rho": 1.225,
+  "Vs": 12,
+  "Vc": 20,
+  "CLmax": 1.2,
+  "span": 2.4,
+  "e": 0.8,
+  "CD0_clean": 0.03,
+  "CdA_boom": 0.0015,
+  "etaProp": 0.6,
+  "etaMEc": 0.85,
+  "kCtrl": 1.1,
+  "kCoax": 1.282,
+  "tHover": 120,
+  "tCruise": 600,
+  "tTrans": 40,
+  "reserve": 0.2,
+  "etaBatt": 0.95,
+  "rhoFoam": 32,
+  "tc": 0.15,
+  "wGlass": 0.06,
+  "rResin": 0,
+  "sigmaTail": 0.93,
+  "tailAreaRatio": 0.25,
+  "VhTarget": 0.35,
+  "VvTarget": 0.03,
+  "boomLin": 0.185,
+  "boomClamp": 0.02,
+  "m_spar": 0.67524,
+  "mFus": 0.6,
+  "mGear": 0.32518,
+  "mAvionics": 0.25,
+  "mPusherSet": 0.227,
+  "mServos": 0.216,
+  "mWiring": 0.25,
+  "mWirePerLift": 0.03,
+  "mPayload": 0.5,
+  "eSpec": 176,
+  "Vpack": 22.2,
+  "m_guess": 7
+ },
+ "cruiseMarginMin": 11.5,
+ "packs": [
+  {
+   "id": "Ovonic 6S 6500 100C (2-pack)",
+   "chem": "LiPo",
+   "Wh": 144.3,
+   "kg": 0.82,
+   "usd": 69.495,
+   "contA": 60,
+   "pair": true
+  },
+  {
+   "id": "Ovonic Roam 6S 6500 150C",
+   "chem": "LiPo",
+   "Wh": 144.3,
+   "kg": 0.777,
+   "usd": 71.99,
+   "contA": 60
+  },
+  {
+   "id": "HOOVO 6S 8000 100C (2-pack)",
+   "chem": "LiPo",
+   "Wh": 177.6,
+   "kg": 0.9863,
+   "usd": 99.995,
+   "contA": 60,
+   "pair": true
+  },
+  {
+   "id": "Zeee 6S 9000 100C (2-pack)",
+   "chem": "LiPo",
+   "Wh": 199.8,
+   "kg": 1.136,
+   "usd": 121.045,
+   "contA": 60,
+   "pair": true
+  },
+  {
+   "id": "iFlight Fullsend E 6S 8000 60C",
+   "chem": "LiPo",
+   "Wh": 177.6,
+   "kg": 0.99,
+   "usd": 122.99,
+   "contA": 60
+  },
+  {
+   "id": "Zeee 6S 10000 120C (2-pack)",
+   "chem": "LiPo",
+   "Wh": 222,
+   "kg": 1.15,
+   "usd": 137.695,
+   "contA": 60,
+   "pair": true
+  }
+ ],
+ "concepts": {
+  "C0": {
+   "key": "C0",
+   "label": "4-lift twin boom (Alia-style)",
+   "motor": "SunnySky X4110S 400KV + SoloGood 45A + 17x5.5 prop",
+   "params": {
+    "rho": 1.225,
+    "Vs": 12,
+    "Vc": 20,
+    "CLmax": 1.2,
+    "span": 2.4,
+    "e": 0.8,
+    "CD0_clean": 0.03,
+    "CdA_boom": 0.0015,
+    "etaProp": 0.6,
+    "etaMEc": 0.85,
+    "kCtrl": 1.1,
+    "kCoax": 1.282,
+    "tHover": 120,
+    "tCruise": 600,
+    "tTrans": 40,
+    "reserve": 0.2,
+    "etaBatt": 0.95,
+    "rhoFoam": 32,
+    "tc": 0.15,
+    "wGlass": 0.06,
+    "rResin": 0,
+    "sigmaTail": 0.93,
+    "tailAreaRatio": 0.21314911,
+    "VhTarget": 0.35,
+    "VvTarget": 0.03,
+    "boomLin": 0.185,
+    "boomClamp": 0.02,
+    "m_spar": 0.67524,
+    "mFus": 0.6,
+    "mGear": 0.32518,
+    "mAvionics": 0.25,
+    "mPusherSet": 0.227,
+    "mServos": 0.216,
+    "mWiring": 0.25,
+    "mWirePerLift": 0.03,
+    "mPayload": 0.5,
+    "eSpec": 176,
+    "Vpack": 22.2,
+    "m_guess": 7,
+    "name": "SunnySky X4110S 400KV + SoloGood 45A + 17x5.5 prop",
+    "liftD": 0.4318,
+    "Tmax_g": 3130,
+    "mMotor": 0.165,
+    "mEsc": 0.025,
+    "mProp": 0.032,
+    "mMount": 0.02,
+    "thrustTable": [
+     [
+      1250,
+      135
+     ],
+     [
+      1500,
+      180
+     ],
+     [
+      2000,
+      291
+     ],
+     [
+      3130,
+      615
+     ]
+    ],
+    "ratedCont_W": null,
+    "CdA_rotor": 0.0034,
+    "station": 66.29,
+    "nLift": 4,
+    "nBooms": 2,
+    "coax": false,
+    "boomTotalLen": 2.8227844,
+    "mBattFixed": 0.82,
+    "EBattFixed": 144.3
+   },
+   "design": {
+    "m": 6.0566686,
+    "W": 59.395629,
+    "nUnits": 4,
+    "Tunit_N": 14.84905,
+    "Tunit_g": 1514.1817,
+    "Tmotor_g": 1514.1817,
+    "A": 0.14643846,
+    "FMeta": 0.52257326,
+    "Pi_unit": 95.529474,
+    "P_hover": 804.34596,
+    "S": 0.56118859,
+    "AR": 10.263929,
+    "chord": 0.23382858,
+    "CL": 0.432,
+    "CD0": 0.059580074,
+    "CDi": 0.007234591,
+    "LD": 6.4656464,
+    "D_cruise": 9.1864288,
+    "P_cruise": 360.25211,
+    "E_Wh": 95.790727,
+    "Epack_req_Wh": 126.04043,
+    "Epack_Wh": 126.04043,
+    "m_batt": 0.71613881,
+    "sigmaWing": 0.88321648,
+    "m_wing": 1.170891,
+    "S_tail": 0.11961685,
+    "m_tail": 0.11124367,
+    "m_booms": 0.60221512,
+    "m_lift": 0.968,
+    "m_fixed": 2.48818,
+    "CdA_extra": 0.0166,
+    "TW": 2.067143,
+    "TW_motorOut": 0,
+    "I_hover": 36.2318,
+    "I_cruise": 16.227572,
+    "P_hover_per_motor": 201.08649,
+    "endurance_ok": true,
+    "t_cruise_avail_min": 10,
+    "diskLoading": 101.4013,
+    "wingLoading": 105.84,
+    "iter": 18,
+    "converged": true
+   },
+   "pick": {
+    "id": "Ovonic 6S 6500 100C (2-pack)",
+    "chem": "LiPo",
+    "Wh": 144.3,
+    "kg": 0.82,
+    "usd": 69.495,
+    "contA": 60,
+    "pair": true
+   },
+   "sized": {
+    "m": 6.1821705,
+    "W": 60.626382,
+    "nUnits": 4,
+    "Tunit_N": 15.156827,
+    "Tunit_g": 1545.5662,
+    "Tmotor_g": 1545.5662,
+    "A": 0.14643846,
+    "FMeta": 0.52100751,
+    "Pi_unit": 98.514876,
+    "P_hover": 831.97545,
+    "S": 0.57282037,
+    "AR": 10.055508,
+    "chord": 0.23867515,
+    "CL": 0.432,
+    "CD0": 0.058979417,
+    "CDi": 0.0073845426,
+    "LD": 6.5095574,
+    "D_cruise": 9.3135837,
+    "P_cruise": 365.23858,
+    "E_Wh": 97.849783,
+    "Epack_req_Wh": 128.74971,
+    "Epack_Wh": 144.3,
+    "m_batt": 0.82,
+    "sigmaWing": 0.8990357,
+    "m_wing": 1.190226,
+    "S_tail": 0.12209615,
+    "m_tail": 0.11354942,
+    "m_booms": 0.60221512,
+    "m_lift": 0.968,
+    "m_fixed": 2.48818,
+    "CdA_extra": 0.0166,
+    "TW": 2.0251787,
+    "TW_motorOut": 0,
+    "I_hover": 37.476372,
+    "I_cruise": 16.452188,
+    "P_hover_per_motor": 207.99386,
+    "endurance_ok": true,
+    "t_cruise_avail_min": 11.941452,
+    "diskLoading": 103.50305,
+    "wingLoading": 105.84,
+    "iter": 14,
+    "converged": true,
+    "P_trans": 1562.4526,
+    "I_trans": 74.402505,
+    "I_hover_loaded": 39.617879
+   },
+   "geo": {
+    "D": 0.4318,
+    "xFront": 0.37091707,
+    "xRear": -0.50457515,
+    "xLEtoCG": -0.066829043,
+    "booms": [
+     {
+      "y": -0.4337,
+      "x0": -0.99047515,
+      "x1": 0.42091707,
+      "tail": true,
+      "rotors": [
+       {
+        "x": 0.37091707,
+        "coax": false
+       },
+       {
+        "x": -0.50457515,
+        "coax": false
+       }
+      ]
+     },
+     {
+      "y": 0.4337,
+      "x0": -0.99047515,
+      "x1": 0.42091707,
+      "tail": true,
+      "rotors": [
+       {
+        "x": 0.37091707,
+        "coax": false
+       },
+       {
+        "x": -0.50457515,
+        "coax": false
+       }
+      ]
+     }
+    ],
+    "segs": [
+     0.955,
+     0.516,
+     0.955,
+     0.516
+    ],
+    "boomTotal": 2.8227844,
+    "hSpan": 0.8674,
+    "hC": 0.075600739,
+    "vH": 0.18794958,
+    "vC": 0.15035966,
+    "Sh": 0.065576081,
+    "Sv": 0.056520072,
+    "lh": 0.72970655,
+    "Vh": 0.35,
+    "Vv": 0.03,
+    "aw": 5.1565599,
+    "at": 5.2826732,
+    "deda": 0.32646465,
+    "hn": 0.46735249,
+    "SM": 0.18735249,
+    "yIn": 0.4337,
+    "longestPiece": 1.2
+   },
+   "bom": {
+    "lines": [
+     {
+      "cat": "Lift propulsion",
+      "item": "SunnySky X4110S 400KV",
+      "qty": 4,
+      "unit": 46.99,
+      "ext": 187.96,
+      "src": "BL A3 sunnyskyusa.com",
+      "note": ""
+     },
+     {
+      "cat": "Lift propulsion",
+      "item": "JeeFly 1755 carbon prop (pair)",
+      "qty": 2,
+      "unit": 18.6,
+      "ext": 37.2,
+      "src": "BL props amazon.com/dp/B0FJ21V736",
+      "note": "$4.99 delivery, likely CN"
+     },
+     {
+      "cat": "Lift propulsion",
+      "item": "SoloGood 45A ESC (4-pack)",
+      "qty": 2,
+      "unit": 39.99,
+      "ext": 79.98,
+      "src": "BL ESCs amazon.com",
+      "note": "4 lift + pusher + 3 spare; low stock: fallback LANRC 35A"
+     },
+     {
+      "cat": "Cruise propulsion",
+      "item": "SunnySky X4110S 400KV (pusher)",
+      "qty": 1,
+      "unit": 46.99,
+      "ext": 46.99,
+      "src": "BL A3",
+      "note": "same motor as lift: one spare covers both"
+     },
+     {
+      "cat": "Cruise propulsion",
+      "item": "APC 14x8.5EP pusher prop",
+      "qty": 3,
+      "unit": 6.79,
+      "ext": 20.37,
+      "src": "PB 1c",
+      "note": ""
+     },
+     {
+      "cat": "Controls",
+      "item": "EMAX ES3005HV servo",
+      "qty": 5,
+      "unit": 19.99,
+      "ext": 99.95,
+      "src": "BA §6 shop.emax-usa.com",
+      "note": "2 ailerons, elevator, 2 rudders"
+     },
+     {
+      "cat": "Avionics",
+      "item": "CoreWing F405 Wing APP V2 (12 out, 90 A sensor)",
+      "qty": 1,
+      "unit": 67.26,
+      "ext": 67.26,
+      "src": "BA §2 readymaderc.com",
+      "note": "ArduPilot target beta-only (4.7.2-beta); fallback Matek F405-WMO $69.99"
+     },
+     {
+      "cat": "Avionics",
+      "item": "HGLRC M100-5883 GPS + compass",
+      "qty": 1,
+      "unit": 20.49,
+      "ext": 20.49,
+      "src": "BA §2 racedayquads.com",
+      "note": ""
+     },
+     {
+      "cat": "Avionics",
+      "item": "NewBeeDrone BeeID v1.1 Remote ID (FAA DoC RID000001995)",
+      "qty": 1,
+      "unit": 36.99,
+      "ext": 36.99,
+      "src": "BA §4 racedayquads.com",
+      "note": ""
+     },
+     {
+      "cat": "Avionics",
+      "item": "RadioMaster Pocket Crush ELRS",
+      "qty": 1,
+      "unit": 64.99,
+      "ext": 64.99,
+      "src": "BA §5 radiomasterrc.com",
+      "note": ""
+     },
+     {
+      "cat": "Avionics",
+      "item": "RadioMaster RP3 V2 ELRS receiver",
+      "qty": 1,
+      "unit": 19.99,
+      "ext": 19.99,
+      "src": "BA §5",
+      "note": ""
+     },
+     {
+      "cat": "Avionics",
+      "item": "Holybro MS5525DSO + PT40 airspeed",
+      "qty": 1,
+      "unit": 59.99,
+      "ext": 59.99,
+      "src": "BA §3 holybro.com",
+      "note": "ships CN"
+     },
+     {
+      "cat": "Energy",
+      "item": "Ovonic 6S 6500 100C — 2-pack listing (2 packs)",
+      "qty": 1,
+      "unit": 138.99,
+      "ext": 138.99,
+      "src": "BE §1 amazon.com",
+      "note": "second pack per R7; EC5 leads: re-terminate to XT90S"
+     },
+     {
+      "cat": "Energy",
+      "item": "HTRC C150 charger (150 W, ~6 A on 6S)",
+      "qty": 1,
+      "unit": 56.99,
+      "ext": 56.99,
+      "src": "BE §2 amazon.com/dp/B0H4QLJYHY",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "6061-T6 tube 1.000 x 0.035 in x 72 in (booms)",
+      "qty": 2,
+      "unit": 26.2,
+      "ext": 52.4,
+      "src": "BF §1 onlinemetals.com",
+      "note": "cut list 0.955 + 0.516 + 0.955 + 0.516 m"
+     },
+     {
+      "cat": "Airframe",
+      "item": "6061-T6 tube 1.000 x 0.058 in x 96 in (spar sockets + gear legs)",
+      "qty": 1,
+      "unit": 53.97,
+      "ext": 53.97,
+      "src": "BF §1",
+      "note": "2 x 0.8 m sockets + 4 x 0.205 m legs + kerf"
+     },
+     {
+      "cat": "Airframe",
+      "item": "6061-T6 tube 0.875 x 0.058 in x 36 in (joiner)",
+      "qty": 1,
+      "unit": 18.45,
+      "ext": 18.45,
+      "src": "BF §1",
+      "note": "0.76 m joiner, 0.30 m engagement per side; 0.23 mm clearance"
+     },
+     {
+      "cat": "Airframe",
+      "item": "FOAMULAR NGX F-250 2 in x 4 x 8 ft (wing cores)",
+      "qty": 1,
+      "unit": 59.97,
+      "ext": 59.97,
+      "src": "BF §2 homedepot.com",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "FOAMULAR 150 1 in x 4 x 8 ft (tail, pod)",
+      "qty": 1,
+      "unit": 30.97,
+      "ext": 30.97,
+      "src": "BF §2 homedepot.com",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "Scotch heavy-duty packing tape, 6 rolls (skin)",
+      "qty": 1,
+      "unit": 19.98,
+      "ext": 19.98,
+      "src": "BF §2 amazon.com",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "Hardware kit: XT90S, wire, extensions, screws, inserts, horns, pushrods, hinge tape, heat shrink, UBEC, epoxy",
+      "qty": 1,
+      "unit": 124.01,
+      "ext": 124.01,
+      "src": "BF §3 amazon.com (itemised in file)",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "ELEGOO PETG 1 kg (clamps, pod frames, gear clamps)",
+      "qty": 2,
+      "unit": 12.99,
+      "ext": 25.98,
+      "src": "BF §5",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "Polymaker PA6-CF20 500 g (motor mounts: HDT 173 °C)",
+      "qty": 1,
+      "unit": 39.99,
+      "ext": 39.99,
+      "src": "AM §2d",
+      "note": "PETG too close to motor heat (sec. 12)"
+     },
+     {
+      "cat": "Airframe",
+      "item": "BNTECHGO 12 AWG silicone wire, 2nd pack (ESC feeds)",
+      "qty": 1,
+      "unit": 14.98,
+      "ext": 14.98,
+      "src": "BF §3a item 3 amazon.com",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "14 AWG silicone wire (pusher / BEC feeds)",
+      "qty": 1,
+      "unit": 9.99,
+      "ext": 9.99,
+      "src": "BF §3b amazon.com",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "XT60H connectors 12 pairs (boom harness disconnects)",
+      "qty": 1,
+      "unit": 6.99,
+      "ext": 6.99,
+      "src": "BF §3b amazon.com",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "300 mm servo extension leads, 2nd pack",
+      "qty": 1,
+      "unit": 6.99,
+      "ext": 6.99,
+      "src": "BF §3a item 4 amazon.com",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "Foam-safe glue 4 oz",
+      "qty": 1,
+      "unit": 12.99,
+      "ext": 12.99,
+      "src": "BF §3b amazon.com",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "ShareGoo LiPo battery straps (10)",
+      "qty": 1,
+      "unit": 7.99,
+      "ext": 7.99,
+      "src": "BF §3b amazon.com",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "Hot-wire bow, nichrome + bench supply (wing cores)",
+      "qty": 1,
+      "unit": 40,
+      "ext": 40,
+      "src": "EST allowance",
+      "note": "not priced; borrow if a makerspace has one"
+     },
+     {
+      "cat": "Test & safety",
+      "item": "Tenergy LiPo bag",
+      "qty": 1,
+      "unit": 8.99,
+      "ext": 8.99,
+      "src": "BE §3",
+      "note": ""
+     },
+     {
+      "cat": "Test & safety",
+      "item": "Harbor Freight 0.50 cal ammo can (pack storage)",
+      "qty": 1,
+      "unit": 19.99,
+      "ext": 19.99,
+      "src": "BE §3",
+      "note": ""
+     },
+     {
+      "cat": "Test & safety",
+      "item": "Watt meter 150 A / 60 V",
+      "qty": 1,
+      "unit": 12.99,
+      "ext": 12.99,
+      "src": "BE §3",
+      "note": ""
+     },
+     {
+      "cat": "Test & safety",
+      "item": "IR thermometer",
+      "qty": 1,
+      "unit": 8.98,
+      "ext": 8.98,
+      "src": "BE §3",
+      "note": ""
+     },
+     {
+      "cat": "Test & safety",
+      "item": "20 kg load cell + HX711 kit (thrust stand)",
+      "qty": 1,
+      "unit": 8.98,
+      "ext": 8.98,
+      "src": "BE §4",
+      "note": ""
+     },
+     {
+      "cat": "Test & safety",
+      "item": "Arduino Nano clone (thrust stand)",
+      "qty": 1,
+      "unit": 8.99,
+      "ext": 8.99,
+      "src": "BE §4",
+      "note": ""
+     },
+     {
+      "cat": "Spares",
+      "item": "X4110S spare motor (lift or pusher)",
+      "qty": 1,
+      "unit": 46.99,
+      "ext": 46.99,
+      "src": "BL",
+      "note": ""
+     },
+     {
+      "cat": "Spares",
+      "item": "JeeFly 1755 spare pair (amazon.com)",
+      "qty": 1,
+      "unit": 18.6,
+      "ext": 18.6,
+      "src": "BL",
+      "note": ""
+     },
+     {
+      "cat": "Spares",
+      "item": "EMAX ES3005HV spare servo",
+      "qty": 1,
+      "unit": 19.99,
+      "ext": 19.99,
+      "src": "BA §6",
+      "note": ""
+     },
+     {
+      "cat": "Spares",
+      "item": "Du-Bro 230 pushrod 5-pack (spares)",
+      "qty": 1,
+      "unit": 12.48,
+      "ext": 12.48,
+      "src": "BF §3b amazon.com",
+      "note": ""
+     }
+    ],
+    "goods": 1630.77,
+    "shipping": 100,
+    "tax": 167.15,
+    "crash": 102.08,
+    "total": 1897.92,
+    "tubes25": 2,
+    "fees": [
+     {
+      "item": "FAA registration",
+      "usd": 5,
+      "src": "AV §5"
+     },
+     {
+      "item": "AMA Full membership (1 pilot; $2.5M liability covers UC $1M rule)",
+      "usd": 89,
+      "src": "AV §5"
+     }
+    ],
+    "cap": 2000
+   },
+   "bomLean": {
+    "lines": [
+     {
+      "cat": "Lift propulsion",
+      "item": "SunnySky X4110S 400KV",
+      "qty": 4,
+      "unit": 46.99,
+      "ext": 187.96,
+      "src": "BL A3 sunnyskyusa.com",
+      "note": ""
+     },
+     {
+      "cat": "Lift propulsion",
+      "item": "JeeFly 1755 carbon prop (pair)",
+      "qty": 2,
+      "unit": 18.6,
+      "ext": 37.2,
+      "src": "BL props amazon.com/dp/B0FJ21V736",
+      "note": "$4.99 delivery, likely CN"
+     },
+     {
+      "cat": "Lift propulsion",
+      "item": "SoloGood 45A ESC (4-pack)",
+      "qty": 2,
+      "unit": 39.99,
+      "ext": 79.98,
+      "src": "BL ESCs amazon.com",
+      "note": "4 lift + pusher + 3 spare; low stock: fallback LANRC 35A"
+     },
+     {
+      "cat": "Cruise propulsion",
+      "item": "SunnySky X4110S 400KV (pusher)",
+      "qty": 1,
+      "unit": 46.99,
+      "ext": 46.99,
+      "src": "BL A3",
+      "note": "same motor as lift: one spare covers both"
+     },
+     {
+      "cat": "Cruise propulsion",
+      "item": "APC 14x8.5EP pusher prop",
+      "qty": 3,
+      "unit": 6.79,
+      "ext": 20.37,
+      "src": "PB 1c",
+      "note": ""
+     },
+     {
+      "cat": "Controls",
+      "item": "EMAX ES3005HV servo",
+      "qty": 5,
+      "unit": 19.99,
+      "ext": 99.95,
+      "src": "BA §6 shop.emax-usa.com",
+      "note": "2 ailerons, elevator, 2 rudders"
+     },
+     {
+      "cat": "Avionics",
+      "item": "CoreWing F405 Wing APP V2 (12 out, 90 A sensor)",
+      "qty": 1,
+      "unit": 67.26,
+      "ext": 67.26,
+      "src": "BA §2 readymaderc.com",
+      "note": "ArduPilot target beta-only (4.7.2-beta); fallback Matek F405-WMO $69.99"
+     },
+     {
+      "cat": "Avionics",
+      "item": "HGLRC M100-5883 GPS + compass",
+      "qty": 1,
+      "unit": 20.49,
+      "ext": 20.49,
+      "src": "BA §2 racedayquads.com",
+      "note": ""
+     },
+     {
+      "cat": "Avionics",
+      "item": "NewBeeDrone BeeID v1.1 Remote ID (FAA DoC RID000001995)",
+      "qty": 1,
+      "unit": 36.99,
+      "ext": 36.99,
+      "src": "BA §4 racedayquads.com",
+      "note": ""
+     },
+     {
+      "cat": "Avionics",
+      "item": "RadioMaster Pocket Crush ELRS",
+      "qty": 1,
+      "unit": 64.99,
+      "ext": 64.99,
+      "src": "BA §5 radiomasterrc.com",
+      "note": ""
+     },
+     {
+      "cat": "Avionics",
+      "item": "RadioMaster RP3 V2 ELRS receiver",
+      "qty": 1,
+      "unit": 19.99,
+      "ext": 19.99,
+      "src": "BA §5",
+      "note": ""
+     },
+     {
+      "cat": "Energy",
+      "item": "Ovonic 6S 6500 100C — 2-pack listing (2 packs)",
+      "qty": 1,
+      "unit": 138.99,
+      "ext": 138.99,
+      "src": "BE §1 amazon.com",
+      "note": "second pack per R7; EC5 leads: re-terminate to XT90S"
+     },
+     {
+      "cat": "Energy",
+      "item": "HTRC C150 charger (150 W, ~6 A on 6S)",
+      "qty": 1,
+      "unit": 56.99,
+      "ext": 56.99,
+      "src": "BE §2 amazon.com/dp/B0H4QLJYHY",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "6061-T6 tube 1.000 x 0.035 in x 72 in (booms)",
+      "qty": 2,
+      "unit": 26.2,
+      "ext": 52.4,
+      "src": "BF §1 onlinemetals.com",
+      "note": "cut list 0.955 + 0.516 + 0.955 + 0.516 m"
+     },
+     {
+      "cat": "Airframe",
+      "item": "6061-T6 tube 1.000 x 0.058 in x 96 in (spar sockets + gear legs)",
+      "qty": 1,
+      "unit": 53.97,
+      "ext": 53.97,
+      "src": "BF §1",
+      "note": "2 x 0.8 m sockets + 4 x 0.205 m legs + kerf"
+     },
+     {
+      "cat": "Airframe",
+      "item": "6061-T6 tube 0.875 x 0.058 in x 36 in (joiner)",
+      "qty": 1,
+      "unit": 18.45,
+      "ext": 18.45,
+      "src": "BF §1",
+      "note": "0.76 m joiner, 0.30 m engagement per side; 0.23 mm clearance"
+     },
+     {
+      "cat": "Airframe",
+      "item": "FOAMULAR NGX F-250 2 in x 4 x 8 ft (wing cores)",
+      "qty": 1,
+      "unit": 59.97,
+      "ext": 59.97,
+      "src": "BF §2 homedepot.com",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "FOAMULAR 150 1 in x 4 x 8 ft (tail, pod)",
+      "qty": 1,
+      "unit": 30.97,
+      "ext": 30.97,
+      "src": "BF §2 homedepot.com",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "Scotch heavy-duty packing tape, 6 rolls (skin)",
+      "qty": 1,
+      "unit": 19.98,
+      "ext": 19.98,
+      "src": "BF §2 amazon.com",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "Minimum hardware kit (tape hinges)",
+      "qty": 1,
+      "unit": 117.32,
+      "ext": 117.32,
+      "src": "BF §3 amazon.com (itemised in file)",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "ELEGOO PETG 1 kg (clamps, pod frames, gear clamps)",
+      "qty": 2,
+      "unit": 12.99,
+      "ext": 25.98,
+      "src": "BF §5",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "Polymaker PA6-CF20 500 g (motor mounts: HDT 173 °C)",
+      "qty": 1,
+      "unit": 39.99,
+      "ext": 39.99,
+      "src": "AM §2d",
+      "note": "PETG too close to motor heat (sec. 12)"
+     },
+     {
+      "cat": "Airframe",
+      "item": "BNTECHGO 12 AWG silicone wire, 2nd pack (ESC feeds)",
+      "qty": 1,
+      "unit": 14.98,
+      "ext": 14.98,
+      "src": "BF §3a item 3 amazon.com",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "14 AWG silicone wire (pusher / BEC feeds)",
+      "qty": 1,
+      "unit": 9.99,
+      "ext": 9.99,
+      "src": "BF §3b amazon.com",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "XT60H connectors 12 pairs (boom harness disconnects)",
+      "qty": 1,
+      "unit": 6.99,
+      "ext": 6.99,
+      "src": "BF §3b amazon.com",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "300 mm servo extension leads, 2nd pack",
+      "qty": 1,
+      "unit": 6.99,
+      "ext": 6.99,
+      "src": "BF §3a item 4 amazon.com",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "Foam-safe glue 4 oz",
+      "qty": 1,
+      "unit": 12.99,
+      "ext": 12.99,
+      "src": "BF §3b amazon.com",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "ShareGoo LiPo battery straps (10)",
+      "qty": 1,
+      "unit": 7.99,
+      "ext": 7.99,
+      "src": "BF §3b amazon.com",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "Hot-wire bow, nichrome + bench supply (wing cores)",
+      "qty": 1,
+      "unit": 40,
+      "ext": 40,
+      "src": "EST allowance",
+      "note": "not priced; borrow if a makerspace has one"
+     },
+     {
+      "cat": "Test & safety",
+      "item": "Tenergy LiPo bag",
+      "qty": 1,
+      "unit": 8.99,
+      "ext": 8.99,
+      "src": "BE §3",
+      "note": ""
+     },
+     {
+      "cat": "Test & safety",
+      "item": "Harbor Freight 0.50 cal ammo can (pack storage)",
+      "qty": 1,
+      "unit": 19.99,
+      "ext": 19.99,
+      "src": "BE §3",
+      "note": ""
+     },
+     {
+      "cat": "Test & safety",
+      "item": "Watt meter 150 A / 60 V",
+      "qty": 1,
+      "unit": 12.99,
+      "ext": 12.99,
+      "src": "BE §3",
+      "note": ""
+     },
+     {
+      "cat": "Test & safety",
+      "item": "IR thermometer",
+      "qty": 1,
+      "unit": 8.98,
+      "ext": 8.98,
+      "src": "BE §3",
+      "note": ""
+     },
+     {
+      "cat": "Test & safety",
+      "item": "20 kg load cell + HX711 kit (thrust stand)",
+      "qty": 1,
+      "unit": 8.98,
+      "ext": 8.98,
+      "src": "BE §4",
+      "note": ""
+     },
+     {
+      "cat": "Test & safety",
+      "item": "Arduino Nano clone (thrust stand)",
+      "qty": 1,
+      "unit": 8.99,
+      "ext": 8.99,
+      "src": "BE §4",
+      "note": ""
+     },
+     {
+      "cat": "Spares",
+      "item": "X4110S spare motor (lift or pusher)",
+      "qty": 1,
+      "unit": 46.99,
+      "ext": 46.99,
+      "src": "BL",
+      "note": ""
+     },
+     {
+      "cat": "Spares",
+      "item": "JeeFly 1755 spare pair (amazon.com)",
+      "qty": 1,
+      "unit": 18.6,
+      "ext": 18.6,
+      "src": "BL",
+      "note": ""
+     }
+    ],
+    "goods": 1531.62,
+    "shipping": 100,
+    "tax": 156.99,
+    "crash": 211.39,
+    "total": 1788.61,
+    "tubes25": 2,
+    "fees": [
+     {
+      "item": "FAA registration",
+      "usd": 5,
+      "src": "AV §5"
+     },
+     {
+      "item": "AMA Full membership (1 pilot; $2.5M liability covers UC $1M rule)",
+      "usd": 89,
+      "src": "AV §5"
+     }
+    ],
+    "cap": 2000
+   },
+   "struct": {
+    "nLimit": 3,
+    "FS": 1.5,
+    "nUlt": 4.5,
+    "Mroot": 69.472717,
+    "sigJ": 148577790,
+    "MS_J": 1.8508823,
+    "sigS": 110917290,
+    "Mhover": 26.293662,
+    "Lb": 0.43058586,
+    "Tmax": 30.694814,
+    "Mb": 13.216753,
+    "sigB": 32607149,
+    "MS_B": 8.4337333,
+    "defl_max": 0.0022996317,
+    "defl_hover": 0.0011355377,
+    "fn": 36.005614,
+    "mTip": 0.242,
+    "mEff": 0.26079938,
+    "Ij_mm4": 5196.0362,
+    "Is_mm4": 7954.6075,
+    "Ib_mm4": 5147.7289,
+    "h": 0.3,
+    "strokes": [
+     {
+      "stroke": 0.02,
+      "n": 16,
+      "nSpring": 32
+     },
+     {
+      "stroke": 0.05,
+      "n": 7,
+      "nSpring": 14
+     },
+     {
+      "stroke": 0.1,
+      "n": 4,
+      "nSpring": 8
+     },
+     {
+      "stroke": 0.15,
+      "n": 3,
+      "nSpring": 6
+     }
+    ],
+    "Mclamp": 13.216753,
+    "tauSock": 10550663,
+    "engage": 0.3,
+    "engageD": 13.498313,
+    "E_DESIGN": 69000000000,
+    "SIG_DESIGN": 275000000
+   },
+   "cg": {
+    "items": [
+     {
+      "name": "Lift units, front",
+      "m": 0.484,
+      "x": 0.371,
+      "src": "LP"
+     },
+     {
+      "name": "Lift units, rear",
+      "m": 0.484,
+      "x": -0.505,
+      "src": "LP"
+     },
+     {
+      "name": "Booms + clamps",
+      "m": 0.602,
+      "x": -0.285,
+      "src": "AM"
+     },
+     {
+      "name": "Wing (foam/glass + spar)",
+      "m": 1.19,
+      "x": -0.095,
+      "src": "F11; centroid 40 % c EST"
+     },
+     {
+      "name": "Tail",
+      "m": 0.114,
+      "x": -0.801,
+      "src": "geometry"
+     },
+     {
+      "name": "Fuselage pod",
+      "m": 0.6,
+      "x": 0.025,
+      "src": "EST; centroid at mid-pod"
+     },
+     {
+      "name": "Landing gear",
+      "m": 0.325,
+      "x": -0.06,
+      "src": "EST"
+     },
+     {
+      "name": "Avionics",
+      "m": 0.25,
+      "x": 0.25,
+      "src": "EST"
+     },
+     {
+      "name": "Pusher set",
+      "m": 0.227,
+      "x": -0.418,
+      "src": "BL; at pod tail (same station as CAD)"
+     },
+     {
+      "name": "Servos (4)",
+      "m": 0.216,
+      "x": -0.107,
+      "src": "PB; 2 wing + 2 tail, mean EST"
+     },
+     {
+      "name": "Wiring",
+      "m": 0.37,
+      "x": -0.1,
+      "src": "EST"
+     },
+     {
+      "name": "Battery (placed for CG)",
+      "m": 0.82,
+      "x": 0.061,
+      "src": "PB"
+     },
+     {
+      "name": "Payload allowance (bay)",
+      "m": 0.5,
+      "x": 0.15,
+      "src": "R12; bay x EST"
+     }
+    ],
+    "target": -0.066829043,
+    "xb": 0.060549826,
+    "cgBattFwd": -0.062849748,
+    "cgBattAft": -0.070808338,
+    "pctFwd": 26.332757,
+    "pctAft": 29.667243,
+    "cgNoPayload": -0.085909388,
+    "thrustCentroid": -0.066829043,
+    "pct": {
+     "target": 28,
+     "noPayload": 35.994274,
+     "np": 46.735249,
+     "thrust": 28
+    },
+    "SM_noPayload": 0.10740976
+   }
+  },
+  "C1": {
+   "key": "C1",
+   "label": "8-lift, four booms",
+   "motor": "SunnySky V3508 KV380 + LANRC 35A + Eolo CN15x5.5",
+   "params": {
+    "rho": 1.225,
+    "Vs": 12,
+    "Vc": 20,
+    "CLmax": 1.2,
+    "span": 2.4,
+    "e": 0.8,
+    "CD0_clean": 0.03,
+    "CdA_boom": 0.0015,
+    "etaProp": 0.6,
+    "etaMEc": 0.85,
+    "kCtrl": 1.1,
+    "kCoax": 1.282,
+    "tHover": 120,
+    "tCruise": 600,
+    "tTrans": 40,
+    "reserve": 0.2,
+    "etaBatt": 0.95,
+    "rhoFoam": 32,
+    "tc": 0.15,
+    "wGlass": 0.06,
+    "rResin": 0,
+    "sigmaTail": 0.93,
+    "tailAreaRatio": 0.23854737,
+    "VhTarget": 0.35,
+    "VvTarget": 0.03,
+    "boomLin": 0.185,
+    "boomClamp": 0.02,
+    "m_spar": 0.67524,
+    "mFus": 0.6,
+    "mGear": 0.32518,
+    "mAvionics": 0.25,
+    "mPusherSet": 0.227,
+    "mServos": 0.216,
+    "mWiring": 0.25,
+    "mWirePerLift": 0.03,
+    "mPayload": 0.5,
+    "eSpec": 176,
+    "Vpack": 22.2,
+    "m_guess": 7,
+    "name": "SunnySky V3508 KV380 + LANRC 35A + Eolo CN15x5.5",
+    "liftD": 0.381,
+    "Tmax_g": 1840,
+    "mMotor": 0.097,
+    "mEsc": 0.015,
+    "mProp": 0.02,
+    "mMount": 0.015,
+    "thrustTable": [
+     [
+      700,
+      64
+     ],
+     [
+      800,
+      78
+     ],
+     [
+      900,
+      95
+     ],
+     [
+      1840,
+      297
+     ]
+    ],
+    "ratedCont_W": null,
+    "CdA_rotor": 0.0028,
+    "station": 59.12,
+    "nLift": 8,
+    "nBooms": 4,
+    "coax": false,
+    "boomTotalLen": 4.8246341,
+    "mBattFixed": 1.136,
+    "EBattFixed": 199.8
+   },
+   "design": {
+    "m": 7.303969,
+    "W": 71.627468,
+    "nUnits": 8,
+    "Tunit_N": 8.9533423,
+    "Tunit_g": 912.98683,
+    "Tmotor_g": 912.98683,
+    "A": 0.11400918,
+    "FMeta": 0.521769,
+    "Pi_unit": 50.690296,
+    "P_hover": 854.92739,
+    "S": 0.67674545,
+    "AR": 8.5113243,
+    "chord": 0.28197727,
+    "CL": 0.432,
+    "CD0": 0.071965557,
+    "CDi": 0.0087242981,
+    "LD": 5.3538329,
+    "D_cruise": 13.378591,
+    "P_cruise": 524.65062,
+    "E_Wh": 125.43854,
+    "Epack_req_Wh": 165.05071,
+    "Epack_Wh": 165.05071,
+    "m_batt": 0.93778814,
+    "sigmaWing": 1.0403738,
+    "m_wing": 1.3793082,
+    "S_tail": 0.16143585,
+    "m_tail": 0.15013534,
+    "m_booms": 1.0525573,
+    "m_lift": 1.176,
+    "m_fixed": 2.60818,
+    "CdA_extra": 0.0284,
+    "TW": 2.0153426,
+    "TW_motorOut": 1.511507,
+    "I_hover": 38.510243,
+    "I_cruise": 23.632911,
+    "P_hover_per_motor": 106.86592,
+    "endurance_ok": true,
+    "t_cruise_avail_min": 10,
+    "diskLoading": 78.531765,
+    "wingLoading": 105.84,
+    "iter": 16,
+    "converged": true
+   },
+   "pick": {
+    "id": "Zeee 6S 9000 100C (2-pack)",
+    "chem": "LiPo",
+    "Wh": 199.8,
+    "kg": 1.136,
+    "usd": 121.045,
+    "contA": 60,
+    "pair": true
+   },
+   "sized": {
+    "m": 7.5533299,
+    "W": 74.072863,
+    "nUnits": 8,
+    "Tunit_N": 9.2589866,
+    "Tunit_g": 944.15387,
+    "Tmotor_g": 944.15387,
+    "A": 0.11400918,
+    "FMeta": 0.52064418,
+    "Pi_unit": 53.30798,
+    "P_hover": 901.01886,
+    "S": 0.69984781,
+    "AR": 8.2303608,
+    "chord": 0.29160326,
+    "CL": 0.432,
+    "CD0": 0.070580251,
+    "CDi": 0.0090221234,
+    "LD": 5.4269738,
+    "D_cruise": 13.648839,
+    "P_cruise": 535.2486,
+    "E_Wh": 129.25338,
+    "Epack_req_Wh": 170.07024,
+    "Epack_Wh": 199.8,
+    "m_batt": 1.136,
+    "sigmaWing": 1.071793,
+    "m_wing": 1.425332,
+    "S_tail": 0.16694686,
+    "m_tail": 0.15526058,
+    "m_booms": 1.0525573,
+    "m_lift": 1.176,
+    "m_fixed": 2.60818,
+    "CdA_extra": 0.0284,
+    "TW": 1.9488094,
+    "TW_motorOut": 1.461607,
+    "I_hover": 40.586435,
+    "I_cruise": 24.110297,
+    "P_hover_per_motor": 112.62736,
+    "endurance_ok": true,
+    "t_cruise_avail_min": 12.532799,
+    "diskLoading": 81.212639,
+    "wingLoading": 105.84,
+    "iter": 14,
+    "converged": true,
+    "P_trans": 1971.516,
+    "I_trans": 93.881717,
+    "I_hover_loaded": 42.90566
+   },
+   "geo": {
+    "D": 0.381,
+    "xFront": 0.36880543,
+    "xRear": -0.53210326,
+    "xLEtoCG": -0.081648912,
+    "booms": [
+     {
+      "y": -0.4083,
+      "x0": -0.99260326,
+      "x1": 0.41880543,
+      "tail": true,
+      "rotors": [
+       {
+        "x": 0.36880543
+       },
+       {
+        "x": -0.53210326
+       }
+      ]
+     },
+     {
+      "y": 0.4083,
+      "x0": -0.99260326,
+      "x1": 0.41880543,
+      "tail": true,
+      "rotors": [
+       {
+        "x": 0.36880543
+       },
+       {
+        "x": -0.53210326
+       }
+      ]
+     },
+     {
+      "y": -0.8393,
+      "x0": -0.58210326,
+      "x1": 0.41880543,
+      "tail": false,
+      "rotors": [
+       {
+        "x": 0.36880543
+       },
+       {
+        "x": -0.53210326
+       }
+      ]
+     },
+     {
+      "y": 0.8393,
+      "x0": -0.58210326,
+      "x1": 0.41880543,
+      "tail": false,
+      "rotors": [
+       {
+        "x": 0.36880543
+       },
+       {
+        "x": -0.53210326
+       }
+      ]
+     }
+    ],
+    "segs": [
+     0.981,
+     0.491,
+     0.981,
+     0.491,
+     1.001,
+     1.001
+    ],
+    "boomTotal": 4.8246348,
+    "hSpan": 0.8166,
+    "hC": 0.11987469,
+    "vH": 0.20775165,
+    "vC": 0.16620132,
+    "Sh": 0.097889672,
+    "Sv": 0.069057198,
+    "lh": 0.72967111,
+    "Vh": 0.35,
+    "Vv": 0.03,
+    "aw": 4.9392056,
+    "at": 4.7036774,
+    "deda": 0.38204838,
+    "hn": 0.43537256,
+    "SM": 0.15537256,
+    "yIn": 0.4083,
+    "longestPiece": 1.2
+   },
+   "bom": {
+    "lines": [
+     {
+      "cat": "Lift propulsion",
+      "item": "SunnySky V3508 KV380",
+      "qty": 8,
+      "unit": 42.99,
+      "ext": 343.92,
+      "src": "BL B3 sunnyskyusa.com",
+      "note": ""
+     },
+     {
+      "cat": "Lift propulsion",
+      "item": "LANRC BLHeli_S 35A ESC (4-pack)",
+      "qty": 3,
+      "unit": 28.5,
+      "ext": 85.5,
+      "src": "BL ESCs amazon.com/dp/B0D2HQPNG9",
+      "note": "8 lift + 4 spare"
+     },
+     {
+      "cat": "Lift propulsion",
+      "item": "Eolo CN15x5.5 prop (pair)",
+      "qty": 4,
+      "unit": 17.99,
+      "ext": 71.96,
+      "src": "BL B3",
+      "note": ""
+     },
+     {
+      "cat": "Lift propulsion",
+      "item": "SoloGood 45A ESC (4-pack), pusher + spares",
+      "qty": 1,
+      "unit": 39.99,
+      "ext": 39.99,
+      "src": "BL ESCs amazon.com",
+      "note": ""
+     },
+     {
+      "cat": "Cruise propulsion",
+      "item": "SunnySky X4110S 400KV (pusher)",
+      "qty": 1,
+      "unit": 46.99,
+      "ext": 46.99,
+      "src": "BL A3",
+      "note": ""
+     },
+     {
+      "cat": "Cruise propulsion",
+      "item": "APC 14x8.5EP pusher prop",
+      "qty": 3,
+      "unit": 6.79,
+      "ext": 20.37,
+      "src": "PB 1c",
+      "note": ""
+     },
+     {
+      "cat": "Controls",
+      "item": "EMAX ES3005HV servo",
+      "qty": 5,
+      "unit": 19.99,
+      "ext": 99.95,
+      "src": "BA §6 shop.emax-usa.com",
+      "note": "2 ailerons, elevator, 2 rudders"
+     },
+     {
+      "cat": "Avionics",
+      "item": "CoreWing F405 Wing APP V2 (12 out, 90 A sensor)",
+      "qty": 1,
+      "unit": 67.26,
+      "ext": 67.26,
+      "src": "BA §2 readymaderc.com",
+      "note": "ArduPilot target beta-only (4.7.2-beta); fallback Matek F405-WMO $69.99"
+     },
+     {
+      "cat": "Avionics",
+      "item": "HGLRC M100-5883 GPS + compass",
+      "qty": 1,
+      "unit": 20.49,
+      "ext": 20.49,
+      "src": "BA §2 racedayquads.com",
+      "note": ""
+     },
+     {
+      "cat": "Avionics",
+      "item": "NewBeeDrone BeeID v1.1 Remote ID (FAA DoC RID000001995)",
+      "qty": 1,
+      "unit": 36.99,
+      "ext": 36.99,
+      "src": "BA §4 racedayquads.com",
+      "note": ""
+     },
+     {
+      "cat": "Avionics",
+      "item": "RadioMaster Pocket Crush ELRS",
+      "qty": 1,
+      "unit": 64.99,
+      "ext": 64.99,
+      "src": "BA §5 radiomasterrc.com",
+      "note": ""
+     },
+     {
+      "cat": "Avionics",
+      "item": "RadioMaster RP3 V2 ELRS receiver",
+      "qty": 1,
+      "unit": 19.99,
+      "ext": 19.99,
+      "src": "BA §5",
+      "note": ""
+     },
+     {
+      "cat": "Avionics",
+      "item": "Holybro MS5525DSO + PT40 airspeed",
+      "qty": 1,
+      "unit": 59.99,
+      "ext": 59.99,
+      "src": "BA §3 holybro.com",
+      "note": "ships CN"
+     },
+     {
+      "cat": "Energy",
+      "item": "Zeee 6S 9000 100C — 2-pack listing (2 packs)",
+      "qty": 1,
+      "unit": 242.09,
+      "ext": 242.09,
+      "src": "BE §1 amazon.com",
+      "note": "second pack per R7; EC5 leads: re-terminate to XT90S"
+     },
+     {
+      "cat": "Energy",
+      "item": "HTRC C150 charger (150 W, ~6 A on 6S)",
+      "qty": 1,
+      "unit": 56.99,
+      "ext": 56.99,
+      "src": "BE §2 amazon.com/dp/B0H4QLJYHY",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "6061-T6 tube 1.000 x 0.035 in x 72 in (booms)",
+      "qty": 3,
+      "unit": 26.2,
+      "ext": 78.6,
+      "src": "BF §1 onlinemetals.com",
+      "note": "cut list 0.981 + 0.491 + 0.981 + 0.491 + 1.001 + 1.001 m"
+     },
+     {
+      "cat": "Airframe",
+      "item": "6061-T6 tube 1.000 x 0.058 in x 96 in (spar sockets + gear legs)",
+      "qty": 1,
+      "unit": 53.97,
+      "ext": 53.97,
+      "src": "BF §1",
+      "note": "2 x 0.8 m sockets + 4 x 0.205 m legs + kerf"
+     },
+     {
+      "cat": "Airframe",
+      "item": "6061-T6 tube 0.875 x 0.058 in x 36 in (joiner)",
+      "qty": 1,
+      "unit": 18.45,
+      "ext": 18.45,
+      "src": "BF §1",
+      "note": "0.76 m joiner, 0.30 m engagement per side; 0.23 mm clearance"
+     },
+     {
+      "cat": "Airframe",
+      "item": "FOAMULAR NGX F-250 2 in x 4 x 8 ft (wing cores)",
+      "qty": 1,
+      "unit": 59.97,
+      "ext": 59.97,
+      "src": "BF §2 homedepot.com",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "FOAMULAR 150 1 in x 4 x 8 ft (tail, pod)",
+      "qty": 1,
+      "unit": 30.97,
+      "ext": 30.97,
+      "src": "BF §2 homedepot.com",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "Scotch heavy-duty packing tape, 6 rolls (skin)",
+      "qty": 1,
+      "unit": 19.98,
+      "ext": 19.98,
+      "src": "BF §2 amazon.com",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "Hardware kit: XT90S, wire, extensions, screws, inserts, horns, pushrods, hinge tape, heat shrink, UBEC, epoxy",
+      "qty": 1,
+      "unit": 124.01,
+      "ext": 124.01,
+      "src": "BF §3 amazon.com (itemised in file)",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "ELEGOO PETG 1 kg (clamps, pod frames, gear clamps)",
+      "qty": 2,
+      "unit": 12.99,
+      "ext": 25.98,
+      "src": "BF §5",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "Polymaker PA6-CF20 500 g (motor mounts: HDT 173 °C)",
+      "qty": 1,
+      "unit": 39.99,
+      "ext": 39.99,
+      "src": "AM §2d",
+      "note": "PETG too close to motor heat (sec. 12)"
+     },
+     {
+      "cat": "Airframe",
+      "item": "BNTECHGO 12 AWG silicone wire, 2nd pack (ESC feeds)",
+      "qty": 1,
+      "unit": 14.98,
+      "ext": 14.98,
+      "src": "BF §3a item 3 amazon.com",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "14 AWG silicone wire (pusher / BEC feeds)",
+      "qty": 1,
+      "unit": 9.99,
+      "ext": 9.99,
+      "src": "BF §3b amazon.com",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "XT60H connectors 12 pairs (boom harness disconnects)",
+      "qty": 1,
+      "unit": 6.99,
+      "ext": 6.99,
+      "src": "BF §3b amazon.com",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "300 mm servo extension leads, 2nd pack",
+      "qty": 1,
+      "unit": 6.99,
+      "ext": 6.99,
+      "src": "BF §3a item 4 amazon.com",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "Foam-safe glue 4 oz",
+      "qty": 1,
+      "unit": 12.99,
+      "ext": 12.99,
+      "src": "BF §3b amazon.com",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "ShareGoo LiPo battery straps (10)",
+      "qty": 1,
+      "unit": 7.99,
+      "ext": 7.99,
+      "src": "BF §3b amazon.com",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "Hot-wire bow, nichrome + bench supply (wing cores)",
+      "qty": 1,
+      "unit": 40,
+      "ext": 40,
+      "src": "EST allowance",
+      "note": "not priced; borrow if a makerspace has one"
+     },
+     {
+      "cat": "Test & safety",
+      "item": "Tenergy LiPo bag",
+      "qty": 1,
+      "unit": 8.99,
+      "ext": 8.99,
+      "src": "BE §3",
+      "note": ""
+     },
+     {
+      "cat": "Test & safety",
+      "item": "Harbor Freight 0.50 cal ammo can (pack storage)",
+      "qty": 1,
+      "unit": 19.99,
+      "ext": 19.99,
+      "src": "BE §3",
+      "note": ""
+     },
+     {
+      "cat": "Test & safety",
+      "item": "Watt meter 150 A / 60 V",
+      "qty": 1,
+      "unit": 12.99,
+      "ext": 12.99,
+      "src": "BE §3",
+      "note": ""
+     },
+     {
+      "cat": "Test & safety",
+      "item": "IR thermometer",
+      "qty": 1,
+      "unit": 8.98,
+      "ext": 8.98,
+      "src": "BE §3",
+      "note": ""
+     },
+     {
+      "cat": "Test & safety",
+      "item": "20 kg load cell + HX711 kit (thrust stand)",
+      "qty": 1,
+      "unit": 8.98,
+      "ext": 8.98,
+      "src": "BE §4",
+      "note": ""
+     },
+     {
+      "cat": "Test & safety",
+      "item": "Arduino Nano clone (thrust stand)",
+      "qty": 1,
+      "unit": 8.99,
+      "ext": 8.99,
+      "src": "BE §4",
+      "note": ""
+     },
+     {
+      "cat": "Spares",
+      "item": "V3508 spare motor",
+      "qty": 1,
+      "unit": 42.99,
+      "ext": 42.99,
+      "src": "BL",
+      "note": ""
+     },
+     {
+      "cat": "Spares",
+      "item": "Eolo CN15x5.5 spare pair",
+      "qty": 1,
+      "unit": 17.99,
+      "ext": 17.99,
+      "src": "BL",
+      "note": ""
+     },
+     {
+      "cat": "Spares",
+      "item": "EMAX ES3005HV spare servo",
+      "qty": 1,
+      "unit": 19.99,
+      "ext": 19.99,
+      "src": "BA §6",
+      "note": ""
+     },
+     {
+      "cat": "Spares",
+      "item": "Du-Bro 230 pushrod 5-pack (spares)",
+      "qty": 1,
+      "unit": 12.48,
+      "ext": 12.48,
+      "src": "BF §3b amazon.com",
+      "note": ""
+     }
+    ],
+    "goods": 1991.69,
+    "shipping": 100,
+    "tax": 204.15,
+    "crash": -295.84,
+    "total": 2295.84,
+    "tubes25": 3,
+    "fees": [
+     {
+      "item": "FAA registration",
+      "usd": 5,
+      "src": "AV §5"
+     },
+     {
+      "item": "AMA Full membership (1 pilot; $2.5M liability covers UC $1M rule)",
+      "usd": 89,
+      "src": "AV §5"
+     }
+    ],
+    "cap": 2000
+   },
+   "bomLean": {
+    "lines": [
+     {
+      "cat": "Lift propulsion",
+      "item": "SunnySky V3508 KV380",
+      "qty": 8,
+      "unit": 42.99,
+      "ext": 343.92,
+      "src": "BL B3 sunnyskyusa.com",
+      "note": ""
+     },
+     {
+      "cat": "Lift propulsion",
+      "item": "LANRC BLHeli_S 35A ESC (4-pack)",
+      "qty": 3,
+      "unit": 28.5,
+      "ext": 85.5,
+      "src": "BL ESCs amazon.com/dp/B0D2HQPNG9",
+      "note": "8 lift + 4 spare"
+     },
+     {
+      "cat": "Lift propulsion",
+      "item": "Eolo CN15x5.5 prop (pair)",
+      "qty": 4,
+      "unit": 17.99,
+      "ext": 71.96,
+      "src": "BL B3",
+      "note": ""
+     },
+     {
+      "cat": "Lift propulsion",
+      "item": "SoloGood 45A ESC (4-pack), pusher + spares",
+      "qty": 1,
+      "unit": 39.99,
+      "ext": 39.99,
+      "src": "BL ESCs amazon.com",
+      "note": ""
+     },
+     {
+      "cat": "Cruise propulsion",
+      "item": "SunnySky X4110S 400KV (pusher)",
+      "qty": 1,
+      "unit": 46.99,
+      "ext": 46.99,
+      "src": "BL A3",
+      "note": ""
+     },
+     {
+      "cat": "Cruise propulsion",
+      "item": "APC 14x8.5EP pusher prop",
+      "qty": 3,
+      "unit": 6.79,
+      "ext": 20.37,
+      "src": "PB 1c",
+      "note": ""
+     },
+     {
+      "cat": "Controls",
+      "item": "EMAX ES3005HV servo",
+      "qty": 5,
+      "unit": 19.99,
+      "ext": 99.95,
+      "src": "BA §6 shop.emax-usa.com",
+      "note": "2 ailerons, elevator, 2 rudders"
+     },
+     {
+      "cat": "Avionics",
+      "item": "CoreWing F405 Wing APP V2 (12 out, 90 A sensor)",
+      "qty": 1,
+      "unit": 67.26,
+      "ext": 67.26,
+      "src": "BA §2 readymaderc.com",
+      "note": "ArduPilot target beta-only (4.7.2-beta); fallback Matek F405-WMO $69.99"
+     },
+     {
+      "cat": "Avionics",
+      "item": "HGLRC M100-5883 GPS + compass",
+      "qty": 1,
+      "unit": 20.49,
+      "ext": 20.49,
+      "src": "BA §2 racedayquads.com",
+      "note": ""
+     },
+     {
+      "cat": "Avionics",
+      "item": "NewBeeDrone BeeID v1.1 Remote ID (FAA DoC RID000001995)",
+      "qty": 1,
+      "unit": 36.99,
+      "ext": 36.99,
+      "src": "BA §4 racedayquads.com",
+      "note": ""
+     },
+     {
+      "cat": "Avionics",
+      "item": "RadioMaster Pocket Crush ELRS",
+      "qty": 1,
+      "unit": 64.99,
+      "ext": 64.99,
+      "src": "BA §5 radiomasterrc.com",
+      "note": ""
+     },
+     {
+      "cat": "Avionics",
+      "item": "RadioMaster RP3 V2 ELRS receiver",
+      "qty": 1,
+      "unit": 19.99,
+      "ext": 19.99,
+      "src": "BA §5",
+      "note": ""
+     },
+     {
+      "cat": "Energy",
+      "item": "Zeee 6S 9000 100C — 2-pack listing (2 packs)",
+      "qty": 1,
+      "unit": 242.09,
+      "ext": 242.09,
+      "src": "BE §1 amazon.com",
+      "note": "second pack per R7; EC5 leads: re-terminate to XT90S"
+     },
+     {
+      "cat": "Energy",
+      "item": "HTRC C150 charger (150 W, ~6 A on 6S)",
+      "qty": 1,
+      "unit": 56.99,
+      "ext": 56.99,
+      "src": "BE §2 amazon.com/dp/B0H4QLJYHY",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "6061-T6 tube 1.000 x 0.035 in x 72 in (booms)",
+      "qty": 3,
+      "unit": 26.2,
+      "ext": 78.6,
+      "src": "BF §1 onlinemetals.com",
+      "note": "cut list 0.981 + 0.491 + 0.981 + 0.491 + 1.001 + 1.001 m"
+     },
+     {
+      "cat": "Airframe",
+      "item": "6061-T6 tube 1.000 x 0.058 in x 96 in (spar sockets + gear legs)",
+      "qty": 1,
+      "unit": 53.97,
+      "ext": 53.97,
+      "src": "BF §1",
+      "note": "2 x 0.8 m sockets + 4 x 0.205 m legs + kerf"
+     },
+     {
+      "cat": "Airframe",
+      "item": "6061-T6 tube 0.875 x 0.058 in x 36 in (joiner)",
+      "qty": 1,
+      "unit": 18.45,
+      "ext": 18.45,
+      "src": "BF §1",
+      "note": "0.76 m joiner, 0.30 m engagement per side; 0.23 mm clearance"
+     },
+     {
+      "cat": "Airframe",
+      "item": "FOAMULAR NGX F-250 2 in x 4 x 8 ft (wing cores)",
+      "qty": 1,
+      "unit": 59.97,
+      "ext": 59.97,
+      "src": "BF §2 homedepot.com",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "FOAMULAR 150 1 in x 4 x 8 ft (tail, pod)",
+      "qty": 1,
+      "unit": 30.97,
+      "ext": 30.97,
+      "src": "BF §2 homedepot.com",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "Scotch heavy-duty packing tape, 6 rolls (skin)",
+      "qty": 1,
+      "unit": 19.98,
+      "ext": 19.98,
+      "src": "BF §2 amazon.com",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "Minimum hardware kit (tape hinges)",
+      "qty": 1,
+      "unit": 117.32,
+      "ext": 117.32,
+      "src": "BF §3 amazon.com (itemised in file)",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "ELEGOO PETG 1 kg (clamps, pod frames, gear clamps)",
+      "qty": 2,
+      "unit": 12.99,
+      "ext": 25.98,
+      "src": "BF §5",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "Polymaker PA6-CF20 500 g (motor mounts: HDT 173 °C)",
+      "qty": 1,
+      "unit": 39.99,
+      "ext": 39.99,
+      "src": "AM §2d",
+      "note": "PETG too close to motor heat (sec. 12)"
+     },
+     {
+      "cat": "Airframe",
+      "item": "BNTECHGO 12 AWG silicone wire, 2nd pack (ESC feeds)",
+      "qty": 1,
+      "unit": 14.98,
+      "ext": 14.98,
+      "src": "BF §3a item 3 amazon.com",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "14 AWG silicone wire (pusher / BEC feeds)",
+      "qty": 1,
+      "unit": 9.99,
+      "ext": 9.99,
+      "src": "BF §3b amazon.com",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "XT60H connectors 12 pairs (boom harness disconnects)",
+      "qty": 1,
+      "unit": 6.99,
+      "ext": 6.99,
+      "src": "BF §3b amazon.com",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "300 mm servo extension leads, 2nd pack",
+      "qty": 1,
+      "unit": 6.99,
+      "ext": 6.99,
+      "src": "BF §3a item 4 amazon.com",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "Foam-safe glue 4 oz",
+      "qty": 1,
+      "unit": 12.99,
+      "ext": 12.99,
+      "src": "BF §3b amazon.com",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "ShareGoo LiPo battery straps (10)",
+      "qty": 1,
+      "unit": 7.99,
+      "ext": 7.99,
+      "src": "BF §3b amazon.com",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "Hot-wire bow, nichrome + bench supply (wing cores)",
+      "qty": 1,
+      "unit": 40,
+      "ext": 40,
+      "src": "EST allowance",
+      "note": "not priced; borrow if a makerspace has one"
+     },
+     {
+      "cat": "Test & safety",
+      "item": "Tenergy LiPo bag",
+      "qty": 1,
+      "unit": 8.99,
+      "ext": 8.99,
+      "src": "BE §3",
+      "note": ""
+     },
+     {
+      "cat": "Test & safety",
+      "item": "Harbor Freight 0.50 cal ammo can (pack storage)",
+      "qty": 1,
+      "unit": 19.99,
+      "ext": 19.99,
+      "src": "BE §3",
+      "note": ""
+     },
+     {
+      "cat": "Test & safety",
+      "item": "Watt meter 150 A / 60 V",
+      "qty": 1,
+      "unit": 12.99,
+      "ext": 12.99,
+      "src": "BE §3",
+      "note": ""
+     },
+     {
+      "cat": "Test & safety",
+      "item": "IR thermometer",
+      "qty": 1,
+      "unit": 8.98,
+      "ext": 8.98,
+      "src": "BE §3",
+      "note": ""
+     },
+     {
+      "cat": "Test & safety",
+      "item": "20 kg load cell + HX711 kit (thrust stand)",
+      "qty": 1,
+      "unit": 8.98,
+      "ext": 8.98,
+      "src": "BE §4",
+      "note": ""
+     },
+     {
+      "cat": "Test & safety",
+      "item": "Arduino Nano clone (thrust stand)",
+      "qty": 1,
+      "unit": 8.99,
+      "ext": 8.99,
+      "src": "BE §4",
+      "note": ""
+     },
+     {
+      "cat": "Spares",
+      "item": "V3508 spare motor",
+      "qty": 1,
+      "unit": 42.99,
+      "ext": 42.99,
+      "src": "BL",
+      "note": ""
+     },
+     {
+      "cat": "Spares",
+      "item": "Eolo CN15x5.5 spare pair",
+      "qty": 1,
+      "unit": 17.99,
+      "ext": 17.99,
+      "src": "BL",
+      "note": ""
+     }
+    ],
+    "goods": 1892.54,
+    "shipping": 100,
+    "tax": 193.99,
+    "crash": -186.53,
+    "total": 2186.53,
+    "tubes25": 3,
+    "fees": [
+     {
+      "item": "FAA registration",
+      "usd": 5,
+      "src": "AV §5"
+     },
+     {
+      "item": "AMA Full membership (1 pilot; $2.5M liability covers UC $1M rule)",
+      "usd": 89,
+      "src": "AV §5"
+     }
+    ],
+    "cap": 2000
+   },
+   "struct": {
+    "nLimit": 3,
+    "FS": 1.5,
+    "nUlt": 4.5,
+    "Mroot": 84.881248,
+    "sigJ": 181531240,
+    "MS_J": 1.5148908,
+    "sigS": 135517920,
+    "Mhover": 30.24395,
+    "Lb": 0.44170625,
+    "Tmax": 18.044236,
+    "Mb": 7.9702518,
+    "sigB": 19663467,
+    "MS_B": 13.985326,
+    "defl_max": 0.0014593287,
+    "defl_hover": 0.00074882109,
+    "fn": 43.39967,
+    "mTip": 0.147,
+    "mEff": 0.16628489,
+    "Ij_mm4": 5196.0362,
+    "Is_mm4": 7954.6075,
+    "Ib_mm4": 5147.7289,
+    "h": 0.3,
+    "strokes": [
+     {
+      "stroke": 0.02,
+      "n": 16,
+      "nSpring": 32
+     },
+     {
+      "stroke": 0.05,
+      "n": 7,
+      "nSpring": 14
+     },
+     {
+      "stroke": 0.1,
+      "n": 4,
+      "nSpring": 8
+     },
+     {
+      "stroke": 0.15,
+      "n": 3,
+      "nSpring": 6
+     }
+    ],
+    "Mclamp": 7.9702518,
+    "tauSock": 6362488.5,
+    "engage": 0.3,
+    "engageD": 13.498313,
+    "E_DESIGN": 69000000000,
+    "SIG_DESIGN": 275000000
+   },
+   "cg": {
+    "items": [
+     {
+      "name": "Lift units, front",
+      "m": 0.588,
+      "x": 0.369,
+      "src": "LP"
+     },
+     {
+      "name": "Lift units, rear",
+      "m": 0.588,
+      "x": -0.532,
+      "src": "LP"
+     },
+     {
+      "name": "Booms + clamps",
+      "m": 1.053,
+      "x": -0.202,
+      "src": "AM"
+     },
+     {
+      "name": "Wing (foam/glass + spar)",
+      "m": 1.425,
+      "x": -0.117,
+      "src": "F11; centroid 40 % c EST"
+     },
+     {
+      "name": "Tail",
+      "m": 0.155,
+      "x": -0.821,
+      "src": "geometry"
+     },
+     {
+      "name": "Fuselage pod",
+      "m": 0.6,
+      "x": 0.025,
+      "src": "EST; centroid at mid-pod"
+     },
+     {
+      "name": "Landing gear",
+      "m": 0.325,
+      "x": -0.073,
+      "src": "EST"
+     },
+     {
+      "name": "Avionics",
+      "m": 0.25,
+      "x": 0.25,
+      "src": "EST"
+     },
+     {
+      "name": "Pusher set",
+      "m": 0.227,
+      "x": -0.418,
+      "src": "BL; at pod tail (same station as CAD)"
+     },
+     {
+      "name": "Servos (4)",
+      "m": 0.216,
+      "x": -0.131,
+      "src": "PB; 2 wing + 2 tail, mean EST"
+     },
+     {
+      "name": "Wiring",
+      "m": 0.49,
+      "x": -0.1,
+      "src": "EST"
+     },
+     {
+      "name": "Battery (placed for CG)",
+      "m": 1.136,
+      "x": 0.026,
+      "src": "PB"
+     },
+     {
+      "name": "Payload allowance (bay)",
+      "m": 0.5,
+      "x": 0.15,
+      "src": "R12; bay x EST"
+     }
+    ],
+    "target": -0.081648912,
+    "xb": 0.025741875,
+    "cgBattFwd": -0.077136797,
+    "cgBattAft": -0.086161026,
+    "pctFwd": 26.452653,
+    "pctAft": 29.547347,
+    "cgNoPayload": -0.098070924,
+    "thrustCentroid": -0.081648912,
+    "pct": {
+     "target": 28,
+     "noPayload": 33.631629,
+     "np": 43.537256,
+     "thrust": 28
+    },
+    "SM_noPayload": 0.099056275
+   }
+  },
+  "C2": {
+   "key": "C2",
+   "label": "Coaxial X8, twin boom",
+   "motor": "SunnySky V3508 KV380 + LANRC 35A + Eolo CN15x5.5",
+   "params": {
+    "rho": 1.225,
+    "Vs": 12,
+    "Vc": 20,
+    "CLmax": 1.2,
+    "span": 2.4,
+    "e": 0.8,
+    "CD0_clean": 0.03,
+    "CdA_boom": 0.0015,
+    "etaProp": 0.6,
+    "etaMEc": 0.85,
+    "kCtrl": 1.1,
+    "kCoax": 1.282,
+    "tHover": 120,
+    "tCruise": 600,
+    "tTrans": 40,
+    "reserve": 0.2,
+    "etaBatt": 0.95,
+    "rhoFoam": 32,
+    "tc": 0.15,
+    "wGlass": 0.06,
+    "rResin": 0,
+    "sigmaTail": 0.93,
+    "tailAreaRatio": 0.23131388,
+    "VhTarget": 0.35,
+    "VvTarget": 0.03,
+    "boomLin": 0.185,
+    "boomClamp": 0.02,
+    "m_spar": 0.67524,
+    "mFus": 0.6,
+    "mGear": 0.32518,
+    "mAvionics": 0.25,
+    "mPusherSet": 0.227,
+    "mServos": 0.216,
+    "mWiring": 0.25,
+    "mWirePerLift": 0.03,
+    "mPayload": 0.5,
+    "eSpec": 176,
+    "Vpack": 22.2,
+    "m_guess": 7,
+    "name": "SunnySky V3508 KV380 + LANRC 35A + Eolo CN15x5.5",
+    "liftD": 0.381,
+    "Tmax_g": 1840,
+    "mMotor": 0.097,
+    "mEsc": 0.015,
+    "mProp": 0.02,
+    "mMount": 0.015,
+    "thrustTable": [
+     [
+      700,
+      64
+     ],
+     [
+      800,
+      78
+     ],
+     [
+      900,
+      95
+     ],
+     [
+      1840,
+      297
+     ]
+    ],
+    "ratedCont_W": null,
+    "CdA_rotor": 0.0028,
+    "station": 59.12,
+    "nLift": 8,
+    "nBooms": 2,
+    "coax": true,
+    "boomTotalLen": 2.7134192,
+    "mBattFixed": 0.82,
+    "EBattFixed": 144.3
+   },
+   "design": {
+    "m": 6.4693625,
+    "W": 63.442773,
+    "nUnits": 4,
+    "Tunit_N": 15.860869,
+    "Tunit_g": 1617.3585,
+    "Tmotor_g": 1036.7268,
+    "A": 0.11400918,
+    "FMeta": 0.53211212,
+    "Pi_unit": 84.512801,
+    "P_hover": 895.90106,
+    "S": 0.59942814,
+    "AR": 9.6091584,
+    "chord": 0.24976173,
+    "CL": 0.432,
+    "CD0": 0.053689245,
+    "CDi": 0.0077275581,
+    "LD": 7.0339057,
+    "D_cruise": 9.0196652,
+    "P_cruise": 353.71236,
+    "E_Wh": 98.769885,
+    "Epack_req_Wh": 129.96038,
+    "Epack_Wh": 129.96038,
+    "m_batt": 0.73841122,
+    "sigmaWing": 0.93522227,
+    "m_wing": 1.2358386,
+    "S_tail": 0.13865605,
+    "m_tail": 0.12895013,
+    "m_booms": 0.58198255,
+    "m_lift": 1.176,
+    "m_fixed": 2.60818,
+    "CdA_extra": 0.0142,
+    "TW": 1.7748363,
+    "TW_motorOut": 1.3311272,
+    "I_hover": 40.355904,
+    "I_cruise": 15.932989,
+    "P_hover_per_motor": 111.98763,
+    "endurance_ok": true,
+    "t_cruise_avail_min": 10,
+    "diskLoading": 139.11922,
+    "wingLoading": 105.84,
+    "iter": 17,
+    "converged": true
+   },
+   "pick": {
+    "id": "Ovonic 6S 6500 100C (2-pack)",
+    "chem": "LiPo",
+    "Wh": 144.3,
+    "kg": 0.82,
+    "usd": 69.495,
+    "contA": 60,
+    "pair": true
+   },
+   "sized": {
+    "m": 6.5692581,
+    "W": 64.422415,
+    "nUnits": 4,
+    "Tunit_N": 16.105744,
+    "Tunit_g": 1642.3288,
+    "Tmotor_g": 1052.7328,
+    "A": 0.11400918,
+    "FMeta": 0.53076211,
+    "Pi_unit": 86.47752,
+    "P_hover": 919.06032,
+    "S": 0.60868268,
+    "AR": 9.4630587,
+    "chord": 0.25361779,
+    "CL": 0.432,
+    "CD0": 0.053329068,
+    "CDi": 0.0078468635,
+    "LD": 7.0616006,
+    "D_cruise": 9.122999,
+    "P_cruise": 357.76467,
+    "E_Wh": 100.47457,
+    "Epack_req_Wh": 132.20338,
+    "Epack_Wh": 144.3,
+    "m_batt": 0.82,
+    "sigmaWing": 0.94780845,
+    "m_wing": 1.2521546,
+    "S_tail": 0.14079676,
+    "m_tail": 0.13094098,
+    "m_booms": 0.58198255,
+    "m_lift": 1.176,
+    "m_fixed": 2.60818,
+    "CdA_extra": 0.0142,
+    "TW": 1.7478472,
+    "TW_motorOut": 1.3108854,
+    "I_hover": 41.399113,
+    "I_cruise": 16.115525,
+    "P_hover_per_motor": 114.88254,
+    "endurance_ok": true,
+    "t_cruise_avail_min": 11.541812,
+    "diskLoading": 141.26708,
+    "wingLoading": 105.84,
+    "iter": 14,
+    "converged": true,
+    "P_trans": 1634.5897,
+    "I_trans": 77.837602,
+    "I_hover_loaded": 43.764777
+   },
+   "geo": {
+    "D": 0.381,
+    "xFront": 0.35209183,
+    "xRear": -0.49411779,
+    "xLEtoCG": -0.07101298,
+    "booms": [
+     {
+      "y": -0.4083,
+      "x0": -0.95461779,
+      "x1": 0.40209183,
+      "tail": true,
+      "rotors": [
+       {
+        "x": 0.35209183,
+        "coax": true
+       },
+       {
+        "x": -0.49411779,
+        "coax": true
+       }
+      ]
+     },
+     {
+      "y": 0.4083,
+      "x0": -0.95461779,
+      "x1": 0.40209183,
+      "tail": true,
+      "rotors": [
+       {
+        "x": 0.35209183,
+        "coax": true
+       },
+       {
+        "x": -0.49411779,
+        "coax": true
+       }
+      ]
+     }
+    ],
+    "segs": [
+     0.926,
+     0.491,
+     0.926,
+     0.491
+    ],
+    "boomTotal": 2.7134192,
+    "hSpan": 0.8166,
+    "hC": 0.095199838,
+    "vH": 0.19852041,
+    "vC": 0.15881633,
+    "Sh": 0.077740188,
+    "Sv": 0.063056568,
+    "lh": 0.6950133,
+    "Vh": 0.35,
+    "Vv": 0.03,
+    "aw": 5.0940415,
+    "at": 4.9867187,
+    "deda": 0.3426976,
+    "hn": 0.45268806,
+    "SM": 0.17268806,
+    "yIn": 0.4083,
+    "longestPiece": 1.2
+   },
+   "bom": {
+    "lines": [
+     {
+      "cat": "Lift propulsion",
+      "item": "SunnySky V3508 KV380",
+      "qty": 8,
+      "unit": 42.99,
+      "ext": 343.92,
+      "src": "BL B3 sunnyskyusa.com",
+      "note": ""
+     },
+     {
+      "cat": "Lift propulsion",
+      "item": "LANRC BLHeli_S 35A ESC (4-pack)",
+      "qty": 3,
+      "unit": 28.5,
+      "ext": 85.5,
+      "src": "BL ESCs amazon.com/dp/B0D2HQPNG9",
+      "note": "8 lift + 4 spare"
+     },
+     {
+      "cat": "Lift propulsion",
+      "item": "Eolo CN15x5.5 prop (pair)",
+      "qty": 4,
+      "unit": 17.99,
+      "ext": 71.96,
+      "src": "BL B3",
+      "note": ""
+     },
+     {
+      "cat": "Lift propulsion",
+      "item": "SoloGood 45A ESC (4-pack), pusher + spares",
+      "qty": 1,
+      "unit": 39.99,
+      "ext": 39.99,
+      "src": "BL ESCs amazon.com",
+      "note": ""
+     },
+     {
+      "cat": "Cruise propulsion",
+      "item": "SunnySky X4110S 400KV (pusher)",
+      "qty": 1,
+      "unit": 46.99,
+      "ext": 46.99,
+      "src": "BL A3",
+      "note": ""
+     },
+     {
+      "cat": "Cruise propulsion",
+      "item": "APC 14x8.5EP pusher prop",
+      "qty": 3,
+      "unit": 6.79,
+      "ext": 20.37,
+      "src": "PB 1c",
+      "note": ""
+     },
+     {
+      "cat": "Controls",
+      "item": "EMAX ES3005HV servo",
+      "qty": 5,
+      "unit": 19.99,
+      "ext": 99.95,
+      "src": "BA §6 shop.emax-usa.com",
+      "note": "2 ailerons, elevator, 2 rudders"
+     },
+     {
+      "cat": "Avionics",
+      "item": "Holybro Kakute H743-Wing (OctaQuad needs H7 build)",
+      "qty": 1,
+      "unit": 105,
+      "ext": 105,
+      "src": "BA §2 holybro.com",
+      "note": "ships CN, duty —"
+     },
+     {
+      "cat": "Avionics",
+      "item": "HGLRC M100-5883 GPS + compass",
+      "qty": 1,
+      "unit": 20.49,
+      "ext": 20.49,
+      "src": "BA §2 racedayquads.com",
+      "note": ""
+     },
+     {
+      "cat": "Avionics",
+      "item": "NewBeeDrone BeeID v1.1 Remote ID (FAA DoC RID000001995)",
+      "qty": 1,
+      "unit": 36.99,
+      "ext": 36.99,
+      "src": "BA §4 racedayquads.com",
+      "note": ""
+     },
+     {
+      "cat": "Avionics",
+      "item": "RadioMaster Pocket Crush ELRS",
+      "qty": 1,
+      "unit": 64.99,
+      "ext": 64.99,
+      "src": "BA §5 radiomasterrc.com",
+      "note": ""
+     },
+     {
+      "cat": "Avionics",
+      "item": "RadioMaster RP3 V2 ELRS receiver",
+      "qty": 1,
+      "unit": 19.99,
+      "ext": 19.99,
+      "src": "BA §5",
+      "note": ""
+     },
+     {
+      "cat": "Avionics",
+      "item": "Holybro MS5525DSO + PT40 airspeed",
+      "qty": 1,
+      "unit": 59.99,
+      "ext": 59.99,
+      "src": "BA §3 holybro.com",
+      "note": "ships CN"
+     },
+     {
+      "cat": "Energy",
+      "item": "Ovonic 6S 6500 100C — 2-pack listing (2 packs)",
+      "qty": 1,
+      "unit": 138.99,
+      "ext": 138.99,
+      "src": "BE §1 amazon.com",
+      "note": "second pack per R7; EC5 leads: re-terminate to XT90S"
+     },
+     {
+      "cat": "Energy",
+      "item": "HTRC C150 charger (150 W, ~6 A on 6S)",
+      "qty": 1,
+      "unit": 56.99,
+      "ext": 56.99,
+      "src": "BE §2 amazon.com/dp/B0H4QLJYHY",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "6061-T6 tube 1.000 x 0.035 in x 72 in (booms)",
+      "qty": 2,
+      "unit": 26.2,
+      "ext": 52.4,
+      "src": "BF §1 onlinemetals.com",
+      "note": "cut list 0.926 + 0.491 + 0.926 + 0.491 m"
+     },
+     {
+      "cat": "Airframe",
+      "item": "6061-T6 tube 1.000 x 0.058 in x 96 in (spar sockets + gear legs)",
+      "qty": 1,
+      "unit": 53.97,
+      "ext": 53.97,
+      "src": "BF §1",
+      "note": "2 x 0.8 m sockets + 4 x 0.205 m legs + kerf"
+     },
+     {
+      "cat": "Airframe",
+      "item": "6061-T6 tube 0.875 x 0.058 in x 36 in (joiner)",
+      "qty": 1,
+      "unit": 18.45,
+      "ext": 18.45,
+      "src": "BF §1",
+      "note": "0.76 m joiner, 0.30 m engagement per side; 0.23 mm clearance"
+     },
+     {
+      "cat": "Airframe",
+      "item": "FOAMULAR NGX F-250 2 in x 4 x 8 ft (wing cores)",
+      "qty": 1,
+      "unit": 59.97,
+      "ext": 59.97,
+      "src": "BF §2 homedepot.com",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "FOAMULAR 150 1 in x 4 x 8 ft (tail, pod)",
+      "qty": 1,
+      "unit": 30.97,
+      "ext": 30.97,
+      "src": "BF §2 homedepot.com",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "Scotch heavy-duty packing tape, 6 rolls (skin)",
+      "qty": 1,
+      "unit": 19.98,
+      "ext": 19.98,
+      "src": "BF §2 amazon.com",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "Hardware kit: XT90S, wire, extensions, screws, inserts, horns, pushrods, hinge tape, heat shrink, UBEC, epoxy",
+      "qty": 1,
+      "unit": 124.01,
+      "ext": 124.01,
+      "src": "BF §3 amazon.com (itemised in file)",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "ELEGOO PETG 1 kg (clamps, pod frames, gear clamps)",
+      "qty": 2,
+      "unit": 12.99,
+      "ext": 25.98,
+      "src": "BF §5",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "Polymaker PA6-CF20 500 g (motor mounts: HDT 173 °C)",
+      "qty": 1,
+      "unit": 39.99,
+      "ext": 39.99,
+      "src": "AM §2d",
+      "note": "PETG too close to motor heat (sec. 12)"
+     },
+     {
+      "cat": "Airframe",
+      "item": "BNTECHGO 12 AWG silicone wire, 2nd pack (ESC feeds)",
+      "qty": 1,
+      "unit": 14.98,
+      "ext": 14.98,
+      "src": "BF §3a item 3 amazon.com",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "14 AWG silicone wire (pusher / BEC feeds)",
+      "qty": 1,
+      "unit": 9.99,
+      "ext": 9.99,
+      "src": "BF §3b amazon.com",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "XT60H connectors 12 pairs (boom harness disconnects)",
+      "qty": 1,
+      "unit": 6.99,
+      "ext": 6.99,
+      "src": "BF §3b amazon.com",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "300 mm servo extension leads, 2nd pack",
+      "qty": 1,
+      "unit": 6.99,
+      "ext": 6.99,
+      "src": "BF §3a item 4 amazon.com",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "Foam-safe glue 4 oz",
+      "qty": 1,
+      "unit": 12.99,
+      "ext": 12.99,
+      "src": "BF §3b amazon.com",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "ShareGoo LiPo battery straps (10)",
+      "qty": 1,
+      "unit": 7.99,
+      "ext": 7.99,
+      "src": "BF §3b amazon.com",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "Hot-wire bow, nichrome + bench supply (wing cores)",
+      "qty": 1,
+      "unit": 40,
+      "ext": 40,
+      "src": "EST allowance",
+      "note": "not priced; borrow if a makerspace has one"
+     },
+     {
+      "cat": "Test & safety",
+      "item": "Tenergy LiPo bag",
+      "qty": 1,
+      "unit": 8.99,
+      "ext": 8.99,
+      "src": "BE §3",
+      "note": ""
+     },
+     {
+      "cat": "Test & safety",
+      "item": "Harbor Freight 0.50 cal ammo can (pack storage)",
+      "qty": 1,
+      "unit": 19.99,
+      "ext": 19.99,
+      "src": "BE §3",
+      "note": ""
+     },
+     {
+      "cat": "Test & safety",
+      "item": "Watt meter 150 A / 60 V",
+      "qty": 1,
+      "unit": 12.99,
+      "ext": 12.99,
+      "src": "BE §3",
+      "note": ""
+     },
+     {
+      "cat": "Test & safety",
+      "item": "IR thermometer",
+      "qty": 1,
+      "unit": 8.98,
+      "ext": 8.98,
+      "src": "BE §3",
+      "note": ""
+     },
+     {
+      "cat": "Test & safety",
+      "item": "20 kg load cell + HX711 kit (thrust stand)",
+      "qty": 1,
+      "unit": 8.98,
+      "ext": 8.98,
+      "src": "BE §4",
+      "note": ""
+     },
+     {
+      "cat": "Test & safety",
+      "item": "Arduino Nano clone (thrust stand)",
+      "qty": 1,
+      "unit": 8.99,
+      "ext": 8.99,
+      "src": "BE §4",
+      "note": ""
+     },
+     {
+      "cat": "Spares",
+      "item": "V3508 spare motor",
+      "qty": 1,
+      "unit": 42.99,
+      "ext": 42.99,
+      "src": "BL",
+      "note": ""
+     },
+     {
+      "cat": "Spares",
+      "item": "Eolo CN15x5.5 spare pair",
+      "qty": 1,
+      "unit": 17.99,
+      "ext": 17.99,
+      "src": "BL",
+      "note": ""
+     },
+     {
+      "cat": "Spares",
+      "item": "EMAX ES3005HV spare servo",
+      "qty": 1,
+      "unit": 19.99,
+      "ext": 19.99,
+      "src": "BA §6",
+      "note": ""
+     },
+     {
+      "cat": "Spares",
+      "item": "Du-Bro 230 pushrod 5-pack (spares)",
+      "qty": 1,
+      "unit": 12.48,
+      "ext": 12.48,
+      "src": "BF §3b amazon.com",
+      "note": ""
+     }
+    ],
+    "goods": 1900.13,
+    "shipping": 100,
+    "tax": 194.76,
+    "crash": -194.89,
+    "total": 2194.89,
+    "tubes25": 2,
+    "fees": [
+     {
+      "item": "FAA registration",
+      "usd": 5,
+      "src": "AV §5"
+     },
+     {
+      "item": "AMA Full membership (1 pilot; $2.5M liability covers UC $1M rule)",
+      "usd": 89,
+      "src": "AV §5"
+     }
+    ],
+    "cap": 2000
+   },
+   "bomLean": {
+    "lines": [
+     {
+      "cat": "Lift propulsion",
+      "item": "SunnySky V3508 KV380",
+      "qty": 8,
+      "unit": 42.99,
+      "ext": 343.92,
+      "src": "BL B3 sunnyskyusa.com",
+      "note": ""
+     },
+     {
+      "cat": "Lift propulsion",
+      "item": "LANRC BLHeli_S 35A ESC (4-pack)",
+      "qty": 3,
+      "unit": 28.5,
+      "ext": 85.5,
+      "src": "BL ESCs amazon.com/dp/B0D2HQPNG9",
+      "note": "8 lift + 4 spare"
+     },
+     {
+      "cat": "Lift propulsion",
+      "item": "Eolo CN15x5.5 prop (pair)",
+      "qty": 4,
+      "unit": 17.99,
+      "ext": 71.96,
+      "src": "BL B3",
+      "note": ""
+     },
+     {
+      "cat": "Lift propulsion",
+      "item": "SoloGood 45A ESC (4-pack), pusher + spares",
+      "qty": 1,
+      "unit": 39.99,
+      "ext": 39.99,
+      "src": "BL ESCs amazon.com",
+      "note": ""
+     },
+     {
+      "cat": "Cruise propulsion",
+      "item": "SunnySky X4110S 400KV (pusher)",
+      "qty": 1,
+      "unit": 46.99,
+      "ext": 46.99,
+      "src": "BL A3",
+      "note": ""
+     },
+     {
+      "cat": "Cruise propulsion",
+      "item": "APC 14x8.5EP pusher prop",
+      "qty": 3,
+      "unit": 6.79,
+      "ext": 20.37,
+      "src": "PB 1c",
+      "note": ""
+     },
+     {
+      "cat": "Controls",
+      "item": "EMAX ES3005HV servo",
+      "qty": 5,
+      "unit": 19.99,
+      "ext": 99.95,
+      "src": "BA §6 shop.emax-usa.com",
+      "note": "2 ailerons, elevator, 2 rudders"
+     },
+     {
+      "cat": "Avionics",
+      "item": "Holybro Kakute H743-Wing (OctaQuad needs H7 build)",
+      "qty": 1,
+      "unit": 105,
+      "ext": 105,
+      "src": "BA §2 holybro.com",
+      "note": "ships CN, duty —"
+     },
+     {
+      "cat": "Avionics",
+      "item": "HGLRC M100-5883 GPS + compass",
+      "qty": 1,
+      "unit": 20.49,
+      "ext": 20.49,
+      "src": "BA §2 racedayquads.com",
+      "note": ""
+     },
+     {
+      "cat": "Avionics",
+      "item": "NewBeeDrone BeeID v1.1 Remote ID (FAA DoC RID000001995)",
+      "qty": 1,
+      "unit": 36.99,
+      "ext": 36.99,
+      "src": "BA §4 racedayquads.com",
+      "note": ""
+     },
+     {
+      "cat": "Avionics",
+      "item": "RadioMaster Pocket Crush ELRS",
+      "qty": 1,
+      "unit": 64.99,
+      "ext": 64.99,
+      "src": "BA §5 radiomasterrc.com",
+      "note": ""
+     },
+     {
+      "cat": "Avionics",
+      "item": "RadioMaster RP3 V2 ELRS receiver",
+      "qty": 1,
+      "unit": 19.99,
+      "ext": 19.99,
+      "src": "BA §5",
+      "note": ""
+     },
+     {
+      "cat": "Energy",
+      "item": "Ovonic 6S 6500 100C — 2-pack listing (2 packs)",
+      "qty": 1,
+      "unit": 138.99,
+      "ext": 138.99,
+      "src": "BE §1 amazon.com",
+      "note": "second pack per R7; EC5 leads: re-terminate to XT90S"
+     },
+     {
+      "cat": "Energy",
+      "item": "HTRC C150 charger (150 W, ~6 A on 6S)",
+      "qty": 1,
+      "unit": 56.99,
+      "ext": 56.99,
+      "src": "BE §2 amazon.com/dp/B0H4QLJYHY",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "6061-T6 tube 1.000 x 0.035 in x 72 in (booms)",
+      "qty": 2,
+      "unit": 26.2,
+      "ext": 52.4,
+      "src": "BF §1 onlinemetals.com",
+      "note": "cut list 0.926 + 0.491 + 0.926 + 0.491 m"
+     },
+     {
+      "cat": "Airframe",
+      "item": "6061-T6 tube 1.000 x 0.058 in x 96 in (spar sockets + gear legs)",
+      "qty": 1,
+      "unit": 53.97,
+      "ext": 53.97,
+      "src": "BF §1",
+      "note": "2 x 0.8 m sockets + 4 x 0.205 m legs + kerf"
+     },
+     {
+      "cat": "Airframe",
+      "item": "6061-T6 tube 0.875 x 0.058 in x 36 in (joiner)",
+      "qty": 1,
+      "unit": 18.45,
+      "ext": 18.45,
+      "src": "BF §1",
+      "note": "0.76 m joiner, 0.30 m engagement per side; 0.23 mm clearance"
+     },
+     {
+      "cat": "Airframe",
+      "item": "FOAMULAR NGX F-250 2 in x 4 x 8 ft (wing cores)",
+      "qty": 1,
+      "unit": 59.97,
+      "ext": 59.97,
+      "src": "BF §2 homedepot.com",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "FOAMULAR 150 1 in x 4 x 8 ft (tail, pod)",
+      "qty": 1,
+      "unit": 30.97,
+      "ext": 30.97,
+      "src": "BF §2 homedepot.com",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "Scotch heavy-duty packing tape, 6 rolls (skin)",
+      "qty": 1,
+      "unit": 19.98,
+      "ext": 19.98,
+      "src": "BF §2 amazon.com",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "Minimum hardware kit (tape hinges)",
+      "qty": 1,
+      "unit": 117.32,
+      "ext": 117.32,
+      "src": "BF §3 amazon.com (itemised in file)",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "ELEGOO PETG 1 kg (clamps, pod frames, gear clamps)",
+      "qty": 2,
+      "unit": 12.99,
+      "ext": 25.98,
+      "src": "BF §5",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "Polymaker PA6-CF20 500 g (motor mounts: HDT 173 °C)",
+      "qty": 1,
+      "unit": 39.99,
+      "ext": 39.99,
+      "src": "AM §2d",
+      "note": "PETG too close to motor heat (sec. 12)"
+     },
+     {
+      "cat": "Airframe",
+      "item": "BNTECHGO 12 AWG silicone wire, 2nd pack (ESC feeds)",
+      "qty": 1,
+      "unit": 14.98,
+      "ext": 14.98,
+      "src": "BF §3a item 3 amazon.com",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "14 AWG silicone wire (pusher / BEC feeds)",
+      "qty": 1,
+      "unit": 9.99,
+      "ext": 9.99,
+      "src": "BF §3b amazon.com",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "XT60H connectors 12 pairs (boom harness disconnects)",
+      "qty": 1,
+      "unit": 6.99,
+      "ext": 6.99,
+      "src": "BF §3b amazon.com",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "300 mm servo extension leads, 2nd pack",
+      "qty": 1,
+      "unit": 6.99,
+      "ext": 6.99,
+      "src": "BF §3a item 4 amazon.com",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "Foam-safe glue 4 oz",
+      "qty": 1,
+      "unit": 12.99,
+      "ext": 12.99,
+      "src": "BF §3b amazon.com",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "ShareGoo LiPo battery straps (10)",
+      "qty": 1,
+      "unit": 7.99,
+      "ext": 7.99,
+      "src": "BF §3b amazon.com",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "Hot-wire bow, nichrome + bench supply (wing cores)",
+      "qty": 1,
+      "unit": 40,
+      "ext": 40,
+      "src": "EST allowance",
+      "note": "not priced; borrow if a makerspace has one"
+     },
+     {
+      "cat": "Test & safety",
+      "item": "Tenergy LiPo bag",
+      "qty": 1,
+      "unit": 8.99,
+      "ext": 8.99,
+      "src": "BE §3",
+      "note": ""
+     },
+     {
+      "cat": "Test & safety",
+      "item": "Harbor Freight 0.50 cal ammo can (pack storage)",
+      "qty": 1,
+      "unit": 19.99,
+      "ext": 19.99,
+      "src": "BE §3",
+      "note": ""
+     },
+     {
+      "cat": "Test & safety",
+      "item": "Watt meter 150 A / 60 V",
+      "qty": 1,
+      "unit": 12.99,
+      "ext": 12.99,
+      "src": "BE §3",
+      "note": ""
+     },
+     {
+      "cat": "Test & safety",
+      "item": "IR thermometer",
+      "qty": 1,
+      "unit": 8.98,
+      "ext": 8.98,
+      "src": "BE §3",
+      "note": ""
+     },
+     {
+      "cat": "Test & safety",
+      "item": "20 kg load cell + HX711 kit (thrust stand)",
+      "qty": 1,
+      "unit": 8.98,
+      "ext": 8.98,
+      "src": "BE §4",
+      "note": ""
+     },
+     {
+      "cat": "Test & safety",
+      "item": "Arduino Nano clone (thrust stand)",
+      "qty": 1,
+      "unit": 8.99,
+      "ext": 8.99,
+      "src": "BE §4",
+      "note": ""
+     },
+     {
+      "cat": "Spares",
+      "item": "V3508 spare motor",
+      "qty": 1,
+      "unit": 42.99,
+      "ext": 42.99,
+      "src": "BL",
+      "note": ""
+     },
+     {
+      "cat": "Spares",
+      "item": "Eolo CN15x5.5 spare pair",
+      "qty": 1,
+      "unit": 17.99,
+      "ext": 17.99,
+      "src": "BL",
+      "note": ""
+     }
+    ],
+    "goods": 1800.98,
+    "shipping": 100,
+    "tax": 184.6,
+    "crash": -85.58,
+    "total": 2085.58,
+    "tubes25": 2,
+    "fees": [
+     {
+      "item": "FAA registration",
+      "usd": 5,
+      "src": "AV §5"
+     },
+     {
+      "item": "AMA Full membership (1 pilot; $2.5M liability covers UC $1M rule)",
+      "usd": 89,
+      "src": "AV §5"
+     }
+    ],
+    "cap": 2000
+   },
+   "struct": {
+    "nLimit": 3,
+    "FS": 1.5,
+    "nUlt": 4.5,
+    "Mroot": 73.82265,
+    "sigJ": 157880770,
+    "MS_J": 1.7418207,
+    "sigS": 117862220,
+    "Mhover": 26.303672,
+    "Lb": 0.41549627,
+    "Tmax": 28.150134,
+    "Mb": 11.696276,
+    "sigB": 28855969,
+    "MS_B": 9.5300907,
+    "defl_max": 0.0018949417,
+    "defl_hover": 0.001084167,
+    "fn": 47.734849,
+    "mTip": 0.147,
+    "mEff": 0.16514057,
+    "Ij_mm4": 5196.0362,
+    "Is_mm4": 7954.6075,
+    "Ib_mm4": 5147.7289,
+    "h": 0.3,
+    "strokes": [
+     {
+      "stroke": 0.02,
+      "n": 16,
+      "nSpring": 32
+     },
+     {
+      "stroke": 0.05,
+      "n": 7,
+      "nSpring": 14
+     },
+     {
+      "stroke": 0.1,
+      "n": 4,
+      "nSpring": 8
+     },
+     {
+      "stroke": 0.15,
+      "n": 3,
+      "nSpring": 6
+     }
+    ],
+    "Mclamp": 11.696276,
+    "tauSock": 9336897.1,
+    "engage": 0.3,
+    "engageD": 13.498313,
+    "E_DESIGN": 69000000000,
+    "SIG_DESIGN": 275000000
+   },
+   "cg": {
+    "items": [
+     {
+      "name": "Lift units, front",
+      "m": 0.588,
+      "x": 0.352,
+      "src": "LP"
+     },
+     {
+      "name": "Lift units, rear",
+      "m": 0.588,
+      "x": -0.494,
+      "src": "LP"
+     },
+     {
+      "name": "Booms + clamps",
+      "m": 0.582,
+      "x": -0.276,
+      "src": "AM"
+     },
+     {
+      "name": "Wing (foam/glass + spar)",
+      "m": 1.252,
+      "x": -0.101,
+      "src": "F11; centroid 40 % c EST"
+     },
+     {
+      "name": "Tail",
+      "m": 0.131,
+      "x": -0.773,
+      "src": "geometry"
+     },
+     {
+      "name": "Fuselage pod",
+      "m": 0.6,
+      "x": 0.025,
+      "src": "EST; centroid at mid-pod"
+     },
+     {
+      "name": "Landing gear",
+      "m": 0.325,
+      "x": -0.063,
+      "src": "EST"
+     },
+     {
+      "name": "Avionics",
+      "m": 0.25,
+      "x": 0.25,
+      "src": "EST"
+     },
+     {
+      "name": "Pusher set",
+      "m": 0.227,
+      "x": -0.418,
+      "src": "BL; at pod tail (same station as CAD)"
+     },
+     {
+      "name": "Servos (4)",
+      "m": 0.216,
+      "x": -0.114,
+      "src": "PB; 2 wing + 2 tail, mean EST"
+     },
+     {
+      "name": "Wiring",
+      "m": 0.49,
+      "x": -0.1,
+      "src": "EST"
+     },
+     {
+      "name": "Battery (placed for CG)",
+      "m": 0.82,
+      "x": 0.051,
+      "src": "PB"
+     },
+     {
+      "name": "Payload allowance (bay)",
+      "m": 0.5,
+      "x": 0.15,
+      "src": "R12; bay x EST"
+     }
+    ],
+    "target": -0.07101298,
+    "xb": 0.051028945,
+    "cgBattFwd": -0.067268118,
+    "cgBattAft": -0.074757842,
+    "pctFwd": 26.523423,
+    "pctAft": 29.476577,
+    "cgNoPayload": -0.089221332,
+    "thrustCentroid": -0.07101298,
+    "pct": {
+     "target": 28,
+     "noPayload": 35.179446,
+     "np": 45.268806,
+     "thrust": 28
+    },
+    "SM_noPayload": 0.1008936
+   }
+  },
+  "C3": {
+   "key": "C3",
+   "label": "4-lift, X3515S 16 in (alternative motor)",
+   "motor": "SunnySky X3515S 400KV + SoloGood 45A + APC 16x5.5MR",
+   "params": {
+    "rho": 1.225,
+    "Vs": 12,
+    "Vc": 20,
+    "CLmax": 1.2,
+    "span": 2.4,
+    "e": 0.8,
+    "CD0_clean": 0.03,
+    "CdA_boom": 0.0015,
+    "etaProp": 0.6,
+    "etaMEc": 0.85,
+    "kCtrl": 1.1,
+    "kCoax": 1.282,
+    "tHover": 120,
+    "tCruise": 600,
+    "tTrans": 40,
+    "reserve": 0.2,
+    "etaBatt": 0.95,
+    "rhoFoam": 32,
+    "tc": 0.15,
+    "wGlass": 0.06,
+    "rResin": 0,
+    "sigmaTail": 0.93,
+    "tailAreaRatio": 0.22046767,
+    "VhTarget": 0.35,
+    "VvTarget": 0.03,
+    "boomLin": 0.185,
+    "boomClamp": 0.02,
+    "m_spar": 0.67524,
+    "mFus": 0.6,
+    "mGear": 0.32518,
+    "mAvionics": 0.25,
+    "mPusherSet": 0.227,
+    "mServos": 0.216,
+    "mWiring": 0.25,
+    "mWirePerLift": 0.03,
+    "mPayload": 0.5,
+    "eSpec": 176,
+    "Vpack": 22.2,
+    "m_guess": 7,
+    "name": "SunnySky X3515S 400KV + SoloGood 45A + APC 16x5.5MR",
+    "liftD": 0.4064,
+    "Tmax_g": 3360,
+    "mMotor": 0.17,
+    "mEsc": 0.025,
+    "mProp": 0.03,
+    "mMount": 0.02,
+    "thrustTable": [
+     [
+      1250,
+      153.18
+     ],
+     [
+      1500,
+      199.8
+     ],
+     [
+      2000,
+      293.04
+     ],
+     [
+      3360,
+      634.92
+     ]
+    ],
+    "ratedCont_W": null,
+    "CdA_rotor": 0.0032,
+    "station": 63.72,
+    "nLift": 4,
+    "nBooms": 2,
+    "coax": false,
+    "boomTotalLen": 2.7468334,
+    "mBattFixed": 0.82,
+    "EBattFixed": 144.3
+   },
+   "design": {
+    "m": 6.085823,
+    "W": 59.681536,
+    "nUnits": 4,
+    "Tunit_N": 14.920604,
+    "Tunit_g": 1521.4782,
+    "Tmotor_g": 1521.4782,
+    "A": 0.12971711,
+    "FMeta": 0.50195808,
+    "Pi_unit": 102.23461,
+    "P_hover": 896.15504,
+    "S": 0.56389282,
+    "AR": 10.214707,
+    "chord": 0.23495534,
+    "CL": 0.432,
+    "CD0": 0.058019509,
+    "CDi": 0.0072694528,
+    "LD": 6.6167387,
+    "D_cruise": 9.0199144,
+    "P_cruise": 353.72213,
+    "E_Wh": 98.782801,
+    "Epack_req_Wh": 129.97737,
+    "Epack_Wh": 129.97737,
+    "m_batt": 0.73850779,
+    "sigmaWing": 0.88689424,
+    "m_wing": 1.1753533,
+    "S_tail": 0.12432014,
+    "m_tail": 0.11561773,
+    "m_booms": 0.58816418,
+    "m_lift": 0.98,
+    "m_fixed": 2.48818,
+    "CdA_extra": 0.0158,
+    "TW": 2.2084113,
+    "TW_motorOut": 0,
+    "I_hover": 40.367344,
+    "I_cruise": 15.933429,
+    "P_hover_per_motor": 224.03876,
+    "endurance_ok": true,
+    "t_cruise_avail_min": 10,
+    "diskLoading": 115.02418,
+    "wingLoading": 105.84,
+    "iter": 17,
+    "converged": true
+   },
+   "pick": {
+    "id": "Ovonic 6S 6500 100C (2-pack)",
+    "chem": "LiPo",
+    "Wh": 144.3,
+    "kg": 0.82,
+    "usd": 69.495,
+    "contA": 60,
+    "pair": true
+   },
+   "sized": {
+    "m": 6.1844091,
+    "W": 60.648335,
+    "nUnits": 4,
+    "Tunit_N": 15.162317,
+    "Tunit_g": 1546.126,
+    "Tmotor_g": 1546.126,
+    "A": 0.12971711,
+    "FMeta": 0.50318594,
+    "Pi_unit": 104.72893,
+    "P_hover": 915.77934,
+    "S": 0.57302785,
+    "AR": 10.051868,
+    "chord": 0.2387616,
+    "CL": 0.432,
+    "CD0": 0.057572831,
+    "CDi": 0.0073872173,
+    "LD": 6.6502413,
+    "D_cruise": 9.1198596,
+    "P_cruise": 357.64155,
+    "E_Wh": 100.30823,
+    "Epack_req_Wh": 131.98451,
+    "Epack_Wh": 144.3,
+    "m_batt": 0.82,
+    "sigmaWing": 0.89931787,
+    "m_wing": 1.1905742,
+    "S_tail": 0.12633412,
+    "m_tail": 0.11749073,
+    "m_booms": 0.58816418,
+    "m_lift": 0.98,
+    "m_fixed": 2.48818,
+    "CdA_extra": 0.0158,
+    "TW": 2.1732068,
+    "TW_motorOut": 0,
+    "I_hover": 41.251322,
+    "I_cruise": 16.10998,
+    "P_hover_per_motor": 228.94484,
+    "endurance_ok": true,
+    "t_cruise_avail_min": 11.570249,
+    "diskLoading": 116.88756,
+    "wingLoading": 105.84,
+    "iter": 14,
+    "converged": true,
+    "P_trans": 1631.0624,
+    "I_trans": 77.66964,
+    "I_hover_loaded": 43.60854
+   },
+   "geo": {
+    "D": 0.4064,
+    "xFront": 0.3582551,
+    "xRear": -0.4919616,
+    "xLEtoCG": -0.066853249,
+    "booms": [
+     {
+      "y": -0.421,
+      "x0": -0.9651616,
+      "x1": 0.4082551,
+      "tail": true,
+      "rotors": [
+       {
+        "x": 0.3582551,
+        "coax": false
+       },
+       {
+        "x": -0.4919616,
+        "coax": false
+       }
+      ]
+     },
+     {
+      "y": 0.421,
+      "x0": -0.9651616,
+      "x1": 0.4082551,
+      "tail": true,
+      "rotors": [
+       {
+        "x": 0.3582551,
+        "coax": false
+       },
+       {
+        "x": -0.4919616,
+        "coax": false
+       }
+      ]
+     }
+    ],
+    "segs": [
+     0.93,
+     0.503,
+     0.93,
+     0.503
+    ],
+    "boomTotal": 2.7468334,
+    "hSpan": 0.842,
+    "hC": 0.080598106,
+    "vH": 0.19116503,
+    "vC": 0.15293203,
+    "Sh": 0.067863605,
+    "Sv": 0.058470511,
+    "lh": 0.70562073,
+    "Vh": 0.35,
+    "Vv": 0.03,
+    "aw": 5.1561956,
+    "at": 5.1944108,
+    "deda": 0.32655982,
+    "hn": 0.46370589,
+    "SM": 0.18370589,
+    "yIn": 0.421,
+    "longestPiece": 1.2
+   },
+   "bom": {
+    "lines": [
+     {
+      "cat": "Lift propulsion",
+      "item": "SunnySky X3515S 400KV",
+      "qty": 4,
+      "unit": 44.99,
+      "ext": 179.96,
+      "src": "BL A2 sunnyskyusa.com",
+      "note": ""
+     },
+     {
+      "cat": "Lift propulsion",
+      "item": "APC 16x5.5MR prop",
+      "qty": 4,
+      "unit": 8.73,
+      "ext": 34.92,
+      "src": "BL A2",
+      "note": "adapter rings not included (—)"
+     },
+     {
+      "cat": "Lift propulsion",
+      "item": "SoloGood 45A ESC (4-pack)",
+      "qty": 2,
+      "unit": 39.99,
+      "ext": 79.98,
+      "src": "BL ESCs amazon.com",
+      "note": "4 lift + pusher + 3 spare; low stock: fallback LANRC 35A"
+     },
+     {
+      "cat": "Cruise propulsion",
+      "item": "SunnySky X4110S 400KV (pusher)",
+      "qty": 1,
+      "unit": 46.99,
+      "ext": 46.99,
+      "src": "BL A3",
+      "note": ""
+     },
+     {
+      "cat": "Cruise propulsion",
+      "item": "APC 14x8.5EP pusher prop",
+      "qty": 3,
+      "unit": 6.79,
+      "ext": 20.37,
+      "src": "PB 1c",
+      "note": ""
+     },
+     {
+      "cat": "Controls",
+      "item": "EMAX ES3005HV servo",
+      "qty": 5,
+      "unit": 19.99,
+      "ext": 99.95,
+      "src": "BA §6 shop.emax-usa.com",
+      "note": "2 ailerons, elevator, 2 rudders"
+     },
+     {
+      "cat": "Avionics",
+      "item": "CoreWing F405 Wing APP V2 (12 out, 90 A sensor)",
+      "qty": 1,
+      "unit": 67.26,
+      "ext": 67.26,
+      "src": "BA §2 readymaderc.com",
+      "note": "ArduPilot target beta-only (4.7.2-beta); fallback Matek F405-WMO $69.99"
+     },
+     {
+      "cat": "Avionics",
+      "item": "HGLRC M100-5883 GPS + compass",
+      "qty": 1,
+      "unit": 20.49,
+      "ext": 20.49,
+      "src": "BA §2 racedayquads.com",
+      "note": ""
+     },
+     {
+      "cat": "Avionics",
+      "item": "NewBeeDrone BeeID v1.1 Remote ID (FAA DoC RID000001995)",
+      "qty": 1,
+      "unit": 36.99,
+      "ext": 36.99,
+      "src": "BA §4 racedayquads.com",
+      "note": ""
+     },
+     {
+      "cat": "Avionics",
+      "item": "RadioMaster Pocket Crush ELRS",
+      "qty": 1,
+      "unit": 64.99,
+      "ext": 64.99,
+      "src": "BA §5 radiomasterrc.com",
+      "note": ""
+     },
+     {
+      "cat": "Avionics",
+      "item": "RadioMaster RP3 V2 ELRS receiver",
+      "qty": 1,
+      "unit": 19.99,
+      "ext": 19.99,
+      "src": "BA §5",
+      "note": ""
+     },
+     {
+      "cat": "Avionics",
+      "item": "Holybro MS5525DSO + PT40 airspeed",
+      "qty": 1,
+      "unit": 59.99,
+      "ext": 59.99,
+      "src": "BA §3 holybro.com",
+      "note": "ships CN"
+     },
+     {
+      "cat": "Energy",
+      "item": "Ovonic 6S 6500 100C — 2-pack listing (2 packs)",
+      "qty": 1,
+      "unit": 138.99,
+      "ext": 138.99,
+      "src": "BE §1 amazon.com",
+      "note": "second pack per R7; EC5 leads: re-terminate to XT90S"
+     },
+     {
+      "cat": "Energy",
+      "item": "HTRC C150 charger (150 W, ~6 A on 6S)",
+      "qty": 1,
+      "unit": 56.99,
+      "ext": 56.99,
+      "src": "BE §2 amazon.com/dp/B0H4QLJYHY",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "6061-T6 tube 1.000 x 0.035 in x 72 in (booms)",
+      "qty": 2,
+      "unit": 26.2,
+      "ext": 52.4,
+      "src": "BF §1 onlinemetals.com",
+      "note": "cut list 0.93 + 0.503 + 0.93 + 0.503 m"
+     },
+     {
+      "cat": "Airframe",
+      "item": "6061-T6 tube 1.000 x 0.058 in x 96 in (spar sockets + gear legs)",
+      "qty": 1,
+      "unit": 53.97,
+      "ext": 53.97,
+      "src": "BF §1",
+      "note": "2 x 0.8 m sockets + 4 x 0.205 m legs + kerf"
+     },
+     {
+      "cat": "Airframe",
+      "item": "6061-T6 tube 0.875 x 0.058 in x 36 in (joiner)",
+      "qty": 1,
+      "unit": 18.45,
+      "ext": 18.45,
+      "src": "BF §1",
+      "note": "0.76 m joiner, 0.30 m engagement per side; 0.23 mm clearance"
+     },
+     {
+      "cat": "Airframe",
+      "item": "FOAMULAR NGX F-250 2 in x 4 x 8 ft (wing cores)",
+      "qty": 1,
+      "unit": 59.97,
+      "ext": 59.97,
+      "src": "BF §2 homedepot.com",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "FOAMULAR 150 1 in x 4 x 8 ft (tail, pod)",
+      "qty": 1,
+      "unit": 30.97,
+      "ext": 30.97,
+      "src": "BF §2 homedepot.com",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "Scotch heavy-duty packing tape, 6 rolls (skin)",
+      "qty": 1,
+      "unit": 19.98,
+      "ext": 19.98,
+      "src": "BF §2 amazon.com",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "Hardware kit: XT90S, wire, extensions, screws, inserts, horns, pushrods, hinge tape, heat shrink, UBEC, epoxy",
+      "qty": 1,
+      "unit": 124.01,
+      "ext": 124.01,
+      "src": "BF §3 amazon.com (itemised in file)",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "ELEGOO PETG 1 kg (clamps, pod frames, gear clamps)",
+      "qty": 2,
+      "unit": 12.99,
+      "ext": 25.98,
+      "src": "BF §5",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "Polymaker PA6-CF20 500 g (motor mounts: HDT 173 °C)",
+      "qty": 1,
+      "unit": 39.99,
+      "ext": 39.99,
+      "src": "AM §2d",
+      "note": "PETG too close to motor heat (sec. 12)"
+     },
+     {
+      "cat": "Airframe",
+      "item": "BNTECHGO 12 AWG silicone wire, 2nd pack (ESC feeds)",
+      "qty": 1,
+      "unit": 14.98,
+      "ext": 14.98,
+      "src": "BF §3a item 3 amazon.com",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "14 AWG silicone wire (pusher / BEC feeds)",
+      "qty": 1,
+      "unit": 9.99,
+      "ext": 9.99,
+      "src": "BF §3b amazon.com",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "XT60H connectors 12 pairs (boom harness disconnects)",
+      "qty": 1,
+      "unit": 6.99,
+      "ext": 6.99,
+      "src": "BF §3b amazon.com",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "300 mm servo extension leads, 2nd pack",
+      "qty": 1,
+      "unit": 6.99,
+      "ext": 6.99,
+      "src": "BF §3a item 4 amazon.com",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "Foam-safe glue 4 oz",
+      "qty": 1,
+      "unit": 12.99,
+      "ext": 12.99,
+      "src": "BF §3b amazon.com",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "ShareGoo LiPo battery straps (10)",
+      "qty": 1,
+      "unit": 7.99,
+      "ext": 7.99,
+      "src": "BF §3b amazon.com",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "Hot-wire bow, nichrome + bench supply (wing cores)",
+      "qty": 1,
+      "unit": 40,
+      "ext": 40,
+      "src": "EST allowance",
+      "note": "not priced; borrow if a makerspace has one"
+     },
+     {
+      "cat": "Test & safety",
+      "item": "Tenergy LiPo bag",
+      "qty": 1,
+      "unit": 8.99,
+      "ext": 8.99,
+      "src": "BE §3",
+      "note": ""
+     },
+     {
+      "cat": "Test & safety",
+      "item": "Harbor Freight 0.50 cal ammo can (pack storage)",
+      "qty": 1,
+      "unit": 19.99,
+      "ext": 19.99,
+      "src": "BE §3",
+      "note": ""
+     },
+     {
+      "cat": "Test & safety",
+      "item": "Watt meter 150 A / 60 V",
+      "qty": 1,
+      "unit": 12.99,
+      "ext": 12.99,
+      "src": "BE §3",
+      "note": ""
+     },
+     {
+      "cat": "Test & safety",
+      "item": "IR thermometer",
+      "qty": 1,
+      "unit": 8.98,
+      "ext": 8.98,
+      "src": "BE §3",
+      "note": ""
+     },
+     {
+      "cat": "Test & safety",
+      "item": "20 kg load cell + HX711 kit (thrust stand)",
+      "qty": 1,
+      "unit": 8.98,
+      "ext": 8.98,
+      "src": "BE §4",
+      "note": ""
+     },
+     {
+      "cat": "Test & safety",
+      "item": "Arduino Nano clone (thrust stand)",
+      "qty": 1,
+      "unit": 8.99,
+      "ext": 8.99,
+      "src": "BE §4",
+      "note": ""
+     },
+     {
+      "cat": "Spares",
+      "item": "X3515S spare motor",
+      "qty": 1,
+      "unit": 44.99,
+      "ext": 44.99,
+      "src": "BL",
+      "note": ""
+     },
+     {
+      "cat": "Spares",
+      "item": "APC 16x5.5MR spare props",
+      "qty": 2,
+      "unit": 8.73,
+      "ext": 17.46,
+      "src": "BL",
+      "note": ""
+     },
+     {
+      "cat": "Spares",
+      "item": "EMAX ES3005HV spare servo",
+      "qty": 1,
+      "unit": 19.99,
+      "ext": 19.99,
+      "src": "BA §6",
+      "note": ""
+     },
+     {
+      "cat": "Spares",
+      "item": "Du-Bro 230 pushrod 5-pack (spares)",
+      "qty": 1,
+      "unit": 12.48,
+      "ext": 12.48,
+      "src": "BF §3b amazon.com",
+      "note": ""
+     }
+    ],
+    "goods": 1617.35,
+    "shipping": 100,
+    "tax": 165.78,
+    "crash": 116.87,
+    "total": 1883.13,
+    "tubes25": 2,
+    "fees": [
+     {
+      "item": "FAA registration",
+      "usd": 5,
+      "src": "AV §5"
+     },
+     {
+      "item": "AMA Full membership (1 pilot; $2.5M liability covers UC $1M rule)",
+      "usd": 89,
+      "src": "AV §5"
+     }
+    ],
+    "cap": 2000
+   },
+   "bomLean": {
+    "lines": [
+     {
+      "cat": "Lift propulsion",
+      "item": "SunnySky X3515S 400KV",
+      "qty": 4,
+      "unit": 44.99,
+      "ext": 179.96,
+      "src": "BL A2 sunnyskyusa.com",
+      "note": ""
+     },
+     {
+      "cat": "Lift propulsion",
+      "item": "APC 16x5.5MR prop",
+      "qty": 4,
+      "unit": 8.73,
+      "ext": 34.92,
+      "src": "BL A2",
+      "note": "adapter rings not included (—)"
+     },
+     {
+      "cat": "Lift propulsion",
+      "item": "SoloGood 45A ESC (4-pack)",
+      "qty": 2,
+      "unit": 39.99,
+      "ext": 79.98,
+      "src": "BL ESCs amazon.com",
+      "note": "4 lift + pusher + 3 spare; low stock: fallback LANRC 35A"
+     },
+     {
+      "cat": "Cruise propulsion",
+      "item": "SunnySky X4110S 400KV (pusher)",
+      "qty": 1,
+      "unit": 46.99,
+      "ext": 46.99,
+      "src": "BL A3",
+      "note": ""
+     },
+     {
+      "cat": "Cruise propulsion",
+      "item": "APC 14x8.5EP pusher prop",
+      "qty": 3,
+      "unit": 6.79,
+      "ext": 20.37,
+      "src": "PB 1c",
+      "note": ""
+     },
+     {
+      "cat": "Controls",
+      "item": "EMAX ES3005HV servo",
+      "qty": 5,
+      "unit": 19.99,
+      "ext": 99.95,
+      "src": "BA §6 shop.emax-usa.com",
+      "note": "2 ailerons, elevator, 2 rudders"
+     },
+     {
+      "cat": "Avionics",
+      "item": "CoreWing F405 Wing APP V2 (12 out, 90 A sensor)",
+      "qty": 1,
+      "unit": 67.26,
+      "ext": 67.26,
+      "src": "BA §2 readymaderc.com",
+      "note": "ArduPilot target beta-only (4.7.2-beta); fallback Matek F405-WMO $69.99"
+     },
+     {
+      "cat": "Avionics",
+      "item": "HGLRC M100-5883 GPS + compass",
+      "qty": 1,
+      "unit": 20.49,
+      "ext": 20.49,
+      "src": "BA §2 racedayquads.com",
+      "note": ""
+     },
+     {
+      "cat": "Avionics",
+      "item": "NewBeeDrone BeeID v1.1 Remote ID (FAA DoC RID000001995)",
+      "qty": 1,
+      "unit": 36.99,
+      "ext": 36.99,
+      "src": "BA §4 racedayquads.com",
+      "note": ""
+     },
+     {
+      "cat": "Avionics",
+      "item": "RadioMaster Pocket Crush ELRS",
+      "qty": 1,
+      "unit": 64.99,
+      "ext": 64.99,
+      "src": "BA §5 radiomasterrc.com",
+      "note": ""
+     },
+     {
+      "cat": "Avionics",
+      "item": "RadioMaster RP3 V2 ELRS receiver",
+      "qty": 1,
+      "unit": 19.99,
+      "ext": 19.99,
+      "src": "BA §5",
+      "note": ""
+     },
+     {
+      "cat": "Energy",
+      "item": "Ovonic 6S 6500 100C — 2-pack listing (2 packs)",
+      "qty": 1,
+      "unit": 138.99,
+      "ext": 138.99,
+      "src": "BE §1 amazon.com",
+      "note": "second pack per R7; EC5 leads: re-terminate to XT90S"
+     },
+     {
+      "cat": "Energy",
+      "item": "HTRC C150 charger (150 W, ~6 A on 6S)",
+      "qty": 1,
+      "unit": 56.99,
+      "ext": 56.99,
+      "src": "BE §2 amazon.com/dp/B0H4QLJYHY",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "6061-T6 tube 1.000 x 0.035 in x 72 in (booms)",
+      "qty": 2,
+      "unit": 26.2,
+      "ext": 52.4,
+      "src": "BF §1 onlinemetals.com",
+      "note": "cut list 0.93 + 0.503 + 0.93 + 0.503 m"
+     },
+     {
+      "cat": "Airframe",
+      "item": "6061-T6 tube 1.000 x 0.058 in x 96 in (spar sockets + gear legs)",
+      "qty": 1,
+      "unit": 53.97,
+      "ext": 53.97,
+      "src": "BF §1",
+      "note": "2 x 0.8 m sockets + 4 x 0.205 m legs + kerf"
+     },
+     {
+      "cat": "Airframe",
+      "item": "6061-T6 tube 0.875 x 0.058 in x 36 in (joiner)",
+      "qty": 1,
+      "unit": 18.45,
+      "ext": 18.45,
+      "src": "BF §1",
+      "note": "0.76 m joiner, 0.30 m engagement per side; 0.23 mm clearance"
+     },
+     {
+      "cat": "Airframe",
+      "item": "FOAMULAR NGX F-250 2 in x 4 x 8 ft (wing cores)",
+      "qty": 1,
+      "unit": 59.97,
+      "ext": 59.97,
+      "src": "BF §2 homedepot.com",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "FOAMULAR 150 1 in x 4 x 8 ft (tail, pod)",
+      "qty": 1,
+      "unit": 30.97,
+      "ext": 30.97,
+      "src": "BF §2 homedepot.com",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "Scotch heavy-duty packing tape, 6 rolls (skin)",
+      "qty": 1,
+      "unit": 19.98,
+      "ext": 19.98,
+      "src": "BF §2 amazon.com",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "Minimum hardware kit (tape hinges)",
+      "qty": 1,
+      "unit": 117.32,
+      "ext": 117.32,
+      "src": "BF §3 amazon.com (itemised in file)",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "ELEGOO PETG 1 kg (clamps, pod frames, gear clamps)",
+      "qty": 2,
+      "unit": 12.99,
+      "ext": 25.98,
+      "src": "BF §5",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "Polymaker PA6-CF20 500 g (motor mounts: HDT 173 °C)",
+      "qty": 1,
+      "unit": 39.99,
+      "ext": 39.99,
+      "src": "AM §2d",
+      "note": "PETG too close to motor heat (sec. 12)"
+     },
+     {
+      "cat": "Airframe",
+      "item": "BNTECHGO 12 AWG silicone wire, 2nd pack (ESC feeds)",
+      "qty": 1,
+      "unit": 14.98,
+      "ext": 14.98,
+      "src": "BF §3a item 3 amazon.com",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "14 AWG silicone wire (pusher / BEC feeds)",
+      "qty": 1,
+      "unit": 9.99,
+      "ext": 9.99,
+      "src": "BF §3b amazon.com",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "XT60H connectors 12 pairs (boom harness disconnects)",
+      "qty": 1,
+      "unit": 6.99,
+      "ext": 6.99,
+      "src": "BF §3b amazon.com",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "300 mm servo extension leads, 2nd pack",
+      "qty": 1,
+      "unit": 6.99,
+      "ext": 6.99,
+      "src": "BF §3a item 4 amazon.com",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "Foam-safe glue 4 oz",
+      "qty": 1,
+      "unit": 12.99,
+      "ext": 12.99,
+      "src": "BF §3b amazon.com",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "ShareGoo LiPo battery straps (10)",
+      "qty": 1,
+      "unit": 7.99,
+      "ext": 7.99,
+      "src": "BF §3b amazon.com",
+      "note": ""
+     },
+     {
+      "cat": "Airframe",
+      "item": "Hot-wire bow, nichrome + bench supply (wing cores)",
+      "qty": 1,
+      "unit": 40,
+      "ext": 40,
+      "src": "EST allowance",
+      "note": "not priced; borrow if a makerspace has one"
+     },
+     {
+      "cat": "Test & safety",
+      "item": "Tenergy LiPo bag",
+      "qty": 1,
+      "unit": 8.99,
+      "ext": 8.99,
+      "src": "BE §3",
+      "note": ""
+     },
+     {
+      "cat": "Test & safety",
+      "item": "Harbor Freight 0.50 cal ammo can (pack storage)",
+      "qty": 1,
+      "unit": 19.99,
+      "ext": 19.99,
+      "src": "BE §3",
+      "note": ""
+     },
+     {
+      "cat": "Test & safety",
+      "item": "Watt meter 150 A / 60 V",
+      "qty": 1,
+      "unit": 12.99,
+      "ext": 12.99,
+      "src": "BE §3",
+      "note": ""
+     },
+     {
+      "cat": "Test & safety",
+      "item": "IR thermometer",
+      "qty": 1,
+      "unit": 8.98,
+      "ext": 8.98,
+      "src": "BE §3",
+      "note": ""
+     },
+     {
+      "cat": "Test & safety",
+      "item": "20 kg load cell + HX711 kit (thrust stand)",
+      "qty": 1,
+      "unit": 8.98,
+      "ext": 8.98,
+      "src": "BE §4",
+      "note": ""
+     },
+     {
+      "cat": "Test & safety",
+      "item": "Arduino Nano clone (thrust stand)",
+      "qty": 1,
+      "unit": 8.99,
+      "ext": 8.99,
+      "src": "BE §4",
+      "note": ""
+     },
+     {
+      "cat": "Spares",
+      "item": "X3515S spare motor",
+      "qty": 1,
+      "unit": 44.99,
+      "ext": 44.99,
+      "src": "BL",
+      "note": ""
+     },
+     {
+      "cat": "Spares",
+      "item": "APC 16x5.5MR spare props",
+      "qty": 2,
+      "unit": 8.73,
+      "ext": 17.46,
+      "src": "BL",
+      "note": ""
+     }
+    ],
+    "goods": 1518.2,
+    "shipping": 100,
+    "tax": 155.62,
+    "crash": 226.18,
+    "total": 1773.82,
+    "tubes25": 2,
+    "fees": [
+     {
+      "item": "FAA registration",
+      "usd": 5,
+      "src": "AV §5"
+     },
+     {
+      "item": "AMA Full membership (1 pilot; $2.5M liability covers UC $1M rule)",
+      "usd": 89,
+      "src": "AV §5"
+     }
+    ],
+    "cap": 2000
+   },
+   "struct": {
+    "nLimit": 3,
+    "FS": 1.5,
+    "nUlt": 4.5,
+    "Mroot": 69.497873,
+    "sigJ": 148631590,
+    "MS_J": 1.8502123,
+    "sigS": 110957450,
+    "Mhover": 25.532949,
+    "Lb": 0.41794551,
+    "Tmax": 32.950344,
+    "Mb": 13.771448,
+    "sigB": 33975642,
+    "MS_B": 8.094034,
+    "defl_max": 0.0022575268,
+    "defl_hover": 0.0010388158,
+    "fn": 37.475852,
+    "mTip": 0.245,
+    "mEff": 0.2632475,
+    "Ij_mm4": 5196.0362,
+    "Is_mm4": 7954.6075,
+    "Ib_mm4": 5147.7289,
+    "h": 0.3,
+    "strokes": [
+     {
+      "stroke": 0.02,
+      "n": 16,
+      "nSpring": 32
+     },
+     {
+      "stroke": 0.05,
+      "n": 7,
+      "nSpring": 14
+     },
+     {
+      "stroke": 0.1,
+      "n": 4,
+      "nSpring": 8
+     },
+     {
+      "stroke": 0.15,
+      "n": 3,
+      "nSpring": 6
+     }
+    ],
+    "Mclamp": 13.771448,
+    "tauSock": 10993465,
+    "engage": 0.3,
+    "engageD": 13.498313,
+    "E_DESIGN": 69000000000,
+    "SIG_DESIGN": 275000000
+   },
+   "cg": {
+    "items": [
+     {
+      "name": "Lift units, front",
+      "m": 0.49,
+      "x": 0.358,
+      "src": "LP"
+     },
+     {
+      "name": "Lift units, rear",
+      "m": 0.49,
+      "x": -0.492,
+      "src": "LP"
+     },
+     {
+      "name": "Booms + clamps",
+      "m": 0.588,
+      "x": -0.278,
+      "src": "AM"
+     },
+     {
+      "name": "Wing (foam/glass + spar)",
+      "m": 1.191,
+      "x": -0.096,
+      "src": "F11; centroid 40 % c EST"
+     },
+     {
+      "name": "Tail",
+      "m": 0.117,
+      "x": -0.777,
+      "src": "geometry"
+     },
+     {
+      "name": "Fuselage pod",
+      "m": 0.6,
+      "x": 0.025,
+      "src": "EST; centroid at mid-pod"
+     },
+     {
+      "name": "Landing gear",
+      "m": 0.325,
+      "x": -0.06,
+      "src": "EST"
+     },
+     {
+      "name": "Avionics",
+      "m": 0.25,
+      "x": 0.25,
+      "src": "EST"
+     },
+     {
+      "name": "Pusher set",
+      "m": 0.227,
+      "x": -0.418,
+      "src": "BL; at pod tail (same station as CAD)"
+     },
+     {
+      "name": "Servos (4)",
+      "m": 0.216,
+      "x": -0.107,
+      "src": "PB; 2 wing + 2 tail, mean EST"
+     },
+     {
+      "name": "Wiring",
+      "m": 0.37,
+      "x": -0.1,
+      "src": "EST"
+     },
+     {
+      "name": "Battery (placed for CG)",
+      "m": 0.82,
+      "x": 0.052,
+      "src": "PB"
+     },
+     {
+      "name": "Payload allowance (bay)",
+      "m": 0.5,
+      "x": 0.15,
+      "src": "R12; bay x EST"
+     }
+    ],
+    "target": -0.066853249,
+    "xb": 0.052373793,
+    "cgBattFwd": -0.062875241,
+    "cgBattAft": -0.070831256,
+    "pctFwd": 26.3339,
+    "pctAft": 29.6661,
+    "cgNoPayload": -0.085929009,
+    "thrustCentroid": -0.066853249,
+    "pct": {
+     "target": 28,
+     "noPayload": 35.989459,
+     "np": 46.370589,
+     "thrust": 28
+    },
+    "SM_noPayload": 0.1038113
+   }
+  }
+ },
+ "sweepC0": [
+  {
+   "pack": "Ovonic 6S 6500 100C (2-pack)",
+   "Wh": 144.3,
+   "usd": 69.495,
+   "m": 6.182,
+   "cruise_min": 11.94,
+   "ok": true
+  },
+  {
+   "pack": "Ovonic Roam 6S 6500 150C",
+   "Wh": 144.3,
+   "usd": 71.99,
+   "m": 6.13,
+   "cruise_min": 12.09,
+   "ok": true
+  },
+  {
+   "pack": "HOOVO 6S 8000 100C (2-pack)",
+   "Wh": 177.6,
+   "usd": 99.995,
+   "m": 6.384,
+   "cruise_min": 15.43,
+   "ok": true
+  },
+  {
+   "pack": "Zeee 6S 9000 100C (2-pack)",
+   "Wh": 199.8,
+   "usd": 121.045,
+   "m": 6.567,
+   "cruise_min": 17.49,
+   "ok": true
+  },
+  {
+   "pack": "iFlight Fullsend E 6S 8000 60C",
+   "Wh": 177.6,
+   "usd": 122.99,
+   "m": 6.389,
+   "cruise_min": 15.41,
+   "ok": true
+  },
+  {
+   "pack": "Zeee 6S 10000 120C (2-pack)",
+   "Wh": 222,
+   "usd": 137.695,
+   "m": 6.584,
+   "cruise_min": 20.09,
+   "ok": true
+  }
+ ]
+}

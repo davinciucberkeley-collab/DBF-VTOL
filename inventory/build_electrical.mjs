@@ -10,7 +10,7 @@ export function buildElectrical(h) {
   const COMPS = JSON.parse(rd('./electrical/components.json'));
   const WIR = JSON.parse(rd('./electrical/wiring.json'));
   const PROP = JSON.parse(rd('./electrical/proposed_lines.json'));
-  const RES = JSON.parse(rd('../analysis/results.json'));
+  const RES = JSON.parse(rd('./v031/analysis/results.json'));
   const cby = Object.fromEntries(COMPS.map(c => [c.id, c]));
   const WIRES = WIR.wires, wby = Object.fromEntries(WIRES.map(w => [w.id, w]));
   const num = (v, d = 2) => Number(v).toFixed(d);

@@ -1,451 +1,491 @@
 ---
-name: Design-Build-Fly Design Review
-description: Client-facing engineering design review for a student lift + cruise VTOL, styled as a released engineering drawing.
+name: Design-Build-Fly Review Platform
+description: Interactive engineering review platform for a student lift + cruise VTOL; an app shell of sidebar, sub-tabs and visual-first workspaces, dark graphite by default with a light theme, one blue signal accent.
 colors:
-  international-orange: "#b8481b"
-  international-orange-deep: "#963a14"
-  international-orange-wash: "#f7ece6"
-  international-orange-rule: "#e4bfae"
-  drafting-ink: "#16191d"
-  ink-graphite: "#474e57"
-  ink-pencil: "#6c737c"
-  vellum: "#fbfbfa"
-  sheet-white: "#ffffff"
-  sheet-tint: "#f4f5f6"
-  sheet-tint-2: "#eceef0"
-  hairline: "#e3e5e8"
-  frame-rule: "#cbcfd4"
-  construction-line: "#9ea4ac"
-  status-met: "#23744a"
-  status-met-wash: "#e7f2ec"
-  status-risk: "#94600a"
-  status-risk-wash: "#f6efe1"
-  status-fail: "#ad2a1f"
-  status-fail-wash: "#f8e9e7"
-  status-open: "#57489a"
-  status-open-wash: "#efedf6"
-  status-open-frame: "#a49ec5"
-  status-fail-frame: "#c57e79"
-  international-orange-dark: "#ec8a58"
-  international-orange-deep-dark: "#f4a77f"
-  international-orange-wash-dark: "#2b1e17"
-  international-orange-rule-dark: "#6b3d27"
-  drafting-ink-dark: "#e6e8ea"
-  ink-graphite-dark: "#b2b8bf"
-  ink-pencil-dark: "#89909a"
-  vellum-dark: "#111315"
-  sheet-white-dark: "#16191c"
-  sheet-tint-dark: "#1c2024"
-  sheet-tint-2-dark: "#23282d"
-  zebra-dark: "#181b1e"
-  hairline-dark: "#2a2f35"
-  frame-rule-dark: "#3a4048"
-  construction-line-dark: "#5f6670"
-  status-met-dark: "#6cc595"
-  status-met-wash-dark: "#15261d"
-  status-risk-dark: "#dcae5a"
-  status-risk-wash-dark: "#2a2213"
-  status-fail-dark: "#ef8a7f"
-  status-fail-wash-dark: "#321917"
-  status-open-dark: "#a99be0"
-  status-open-wash-dark: "#221e33"
-  status-open-frame-dark: "#636082"
-  status-fail-frame-dark: "#96615e"
-  series-1-dark: "#7fa8d1"
-  series-2-dark: "#6cbdb4"
-  series-3-dark: "#dcae5a"
-  series-4-dark: "#cf86b4"
-  series-5-dark: "#9aaabb"
-  series-6-dark: "#a8bf62"
-  zebra: "#fafafa"
-  series-1: "#2f5d8a"
-  series-2: "#2e7f78"
-  series-3: "#b7791f"
-  series-4: "#8e3b6e"
-  series-5: "#5b6b7c"
-  series-6: "#6b7f2a"
+  signal-blue: "#5B9DFF"
+  signal-blue-hover: "#8AB8FF"
+  signal-blue-wash: "#15243A"
+  signal-blue-rule: "#2C4D7D"
+  on-signal: "#0E1116"
+  night-graphite: "#0E1116"
+  panel-graphite: "#151A21"
+  raised-graphite: "#1C222B"
+  pressed-graphite: "#242B35"
+  hairline: "#20262F"
+  divider: "#2A313C"
+  strong-rule: "#3A4250"
+  text-primary: "#E6EAF0"
+  text-secondary: "#A3ADBA"
+  text-tertiary: "#828C9A"
+  status-met: "#5FD3A2"
+  status-met-wash: "#10301F"
+  status-risk: "#F0C46E"
+  status-risk-wash: "#33270F"
+  status-fail: "#F59393"
+  status-fail-wash: "#391B1D"
+  status-fail-frame: "#7A3A3D"
+  status-open: "#B9AEFF"
+  status-open-wash: "#251F45"
+  status-open-frame: "#4A4290"
+  series-1: "#6EA8FE"
+  series-2: "#5CC8B8"
+  series-3: "#E8B65A"
+  series-4: "#D98BC0"
+  series-5: "#9AA7B8"
+  series-6: "#A9C46A"
+  stage-top: "#1B212A"
+  stage-bottom: "#0F1318"
+  drawing-paper: "#FFFFFF"
+  light-canvas: "#F7F8FA"
+  light-panel: "#FFFFFF"
+  light-raised: "#EEF1F5"
+  light-pressed: "#E3E7ED"
+  light-hairline: "#E6E9EE"
+  light-divider: "#DADEE4"
+  light-strong-rule: "#B9C0CA"
+  light-text-primary: "#0F1419"
+  light-text-secondary: "#4A5361"
+  light-text-tertiary: "#616B79"
+  light-signal-blue: "#2A66CC"
+  light-signal-blue-hover: "#1F57B8"
+  light-signal-blue-wash: "#E7EFFC"
+  light-signal-blue-rule: "#A9C3EE"
+  light-status-met: "#11734A"
+  light-status-met-wash: "#E3F5EC"
+  light-status-risk: "#8A5A0B"
+  light-status-risk-wash: "#FBF0D9"
+  light-status-fail: "#A42828"
+  light-status-fail-wash: "#FBE5E5"
+  light-status-fail-frame: "#E2A5A5"
+  light-status-open: "#4B3BA8"
+  light-status-open-wash: "#ECE9FC"
+  light-status-open-frame: "#B7AEEB"
+  light-series-2: "#1E8C7E"
+  light-series-3: "#B7791F"
+  light-series-4: "#A2427F"
+  light-series-5: "#5B6B7C"
+  light-series-6: "#5F7A1E"
+  light-stage-top: "#F3F5F8"
+  light-stage-bottom: "#DCE1E8"
+  print-canvas: "#FBFBFA"
+  print-surface-2: "#F4F5F6"
+  print-line: "#E3E5E8"
+  print-line-2: "#CBCFD4"
+  print-line-3: "#9EA4AC"
+  print-text-primary: "#16191D"
+  print-text-secondary: "#474E57"
+  print-text-tertiary: "#6C737C"
+  print-status-met: "#23744A"
+  print-status-risk: "#94600A"
+  print-status-fail: "#AD2A1F"
+  print-status-open: "#57489A"
 typography:
-  display:
-    fontFamily: "Sofia Sans Semi Condensed, Barlow Semi Condensed, Arial Narrow, sans-serif"
-    fontSize: "2.625rem"
-    fontWeight: 700
-    lineHeight: 1.05
-    letterSpacing: "-0.01em"
-  display-phone:
-    fontFamily: "Sofia Sans Semi Condensed, Barlow Semi Condensed, Arial Narrow, sans-serif"
-    fontSize: "2rem"
-    fontWeight: 700
-    lineHeight: 1.05
-    letterSpacing: "-0.01em"
-  figure:
-    fontFamily: "Barlow Semi Condensed, Arial Narrow, Helvetica Neue, Arial, sans-serif"
-    fontSize: "2rem"
-    fontWeight: 600
-    lineHeight: 1.05
-    fontFeature: "\"tnum\" 1"
-  headline:
-    fontFamily: "Barlow Semi Condensed, Arial Narrow, Helvetica Neue, Arial, sans-serif"
+  cover-title:
+    fontFamily: "IBM Plex Sans, system-ui, -apple-system, Segoe UI, sans-serif"
     fontSize: "1.875rem"
     fontWeight: 600
     lineHeight: 1.15
-    letterSpacing: "-0.005em"
-  figure-phone:
-    fontFamily: "Barlow Semi Condensed, Arial Narrow, Helvetica Neue, Arial, sans-serif"
-    fontSize: "1.875rem"
+    letterSpacing: "-0.025em"
+  page-title:
+    fontFamily: "IBM Plex Sans, system-ui, -apple-system, Segoe UI, sans-serif"
+    fontSize: "1.625rem"
     fontWeight: 600
-    lineHeight: 1.05
-    fontFeature: "\"tnum\" 1"
-  headline-phone:
-    fontFamily: "Barlow Semi Condensed, Arial Narrow, Helvetica Neue, Arial, sans-serif"
+    lineHeight: 1.15
+    letterSpacing: "-0.02em"
+  verdict-headline:
+    fontFamily: "IBM Plex Sans, system-ui, -apple-system, Segoe UI, sans-serif"
     fontSize: "1.5rem"
     fontWeight: 600
-    lineHeight: 1.15
-  figure-small:
-    fontFamily: "Barlow Semi Condensed, Arial Narrow, Helvetica Neue, Arial, sans-serif"
-    fontSize: "1.5rem"
-    fontWeight: 600
-    lineHeight: 1.15
-  title:
-    fontFamily: "Barlow Semi Condensed, Arial Narrow, Helvetica Neue, Arial, sans-serif"
-    fontSize: "1.25rem"
-    fontWeight: 600
-    lineHeight: 1.15
-  callout:
-    fontFamily: "Barlow Semi Condensed, Arial Narrow, Helvetica Neue, Arial, sans-serif"
+    lineHeight: 1.3
+    letterSpacing: "-0.02em"
+  section-title:
+    fontFamily: "IBM Plex Sans, system-ui, -apple-system, Segoe UI, sans-serif"
     fontSize: "1.125rem"
     fontWeight: 600
-    lineHeight: 1.35
-  lede:
-    fontFamily: "Source Sans 3, Segoe UI, system-ui, -apple-system, sans-serif"
-    fontSize: "1.125rem"
-    fontWeight: 400
-    lineHeight: 1.62
+    lineHeight: 1.15
+    letterSpacing: "-0.012em"
   subhead:
-    fontFamily: "Barlow Semi Condensed, Arial Narrow, Helvetica Neue, Arial, sans-serif"
-    fontSize: "1rem"
+    fontFamily: "IBM Plex Sans, system-ui, -apple-system, Segoe UI, sans-serif"
+    fontSize: "0.9375rem"
     fontWeight: 600
-    lineHeight: 1.25
+    lineHeight: 1.15
+    letterSpacing: "-0.012em"
+  lede:
+    fontFamily: "IBM Plex Sans, system-ui, -apple-system, Segoe UI, sans-serif"
+    fontSize: "1.0625rem"
+    fontWeight: 400
+    lineHeight: 1.65
   body:
-    fontFamily: "Source Sans 3, Segoe UI, system-ui, -apple-system, sans-serif"
-    fontSize: "1rem"
+    fontFamily: "IBM Plex Sans, system-ui, -apple-system, Segoe UI, sans-serif"
+    fontSize: "0.9375rem"
     fontWeight: 400
     lineHeight: 1.6
-    fontFeature: "\"tnum\" 1"
-  small:
-    fontFamily: "Source Sans 3, Segoe UI, system-ui, -apple-system, sans-serif"
+    letterSpacing: "-0.003em"
+    fontFeature: "tnum"
+  ui-label:
+    fontFamily: "IBM Plex Sans, system-ui, -apple-system, Segoe UI, sans-serif"
     fontSize: "0.875rem"
-    fontWeight: 400
-    lineHeight: 1.45
-    fontFeature: "\"tnum\" 1"
-  source:
-    fontFamily: "Red Hat Mono, ui-monospace, Consolas, monospace"
-    fontSize: "0.8125rem"
-    fontWeight: 400
-    lineHeight: 1.55
-  label:
-    fontFamily: "Red Hat Mono, ui-monospace, Consolas, monospace"
+    fontWeight: 500
+    lineHeight: 1.3
+  meta-label:
+    fontFamily: "IBM Plex Sans, system-ui, -apple-system, Segoe UI, sans-serif"
     fontSize: "0.75rem"
     fontWeight: 500
     lineHeight: 1.3
-    letterSpacing: "0.07em"
+    letterSpacing: "0.01em"
+  chip:
+    fontFamily: "IBM Plex Sans, system-ui, -apple-system, Segoe UI, sans-serif"
+    fontSize: "0.75rem"
+    fontWeight: 600
+    lineHeight: 1
+  data-value:
+    fontFamily: "IBM Plex Mono, ui-monospace, Cascadia Mono, Consolas, monospace"
+    fontSize: "1rem"
+    fontWeight: 500
+    lineHeight: 1.3
+    letterSpacing: "-0.01em"
+  table-number:
+    fontFamily: "IBM Plex Mono, ui-monospace, Cascadia Mono, Consolas, monospace"
+    fontSize: "0.78rem"
+    fontWeight: 400
+    letterSpacing: "-0.01em"
+  source-line:
+    fontFamily: "IBM Plex Mono, ui-monospace, Cascadia Mono, Consolas, monospace"
+    fontSize: "0.75rem"
+    fontWeight: 400
+    lineHeight: 1.55
+  est-mark:
+    fontFamily: "IBM Plex Mono, ui-monospace, Cascadia Mono, Consolas, monospace"
+    fontSize: "0.75rem"
+    fontWeight: 600
+    lineHeight: 1
+    letterSpacing: "0.04em"
+  signature:
+    fontFamily: "STIX Two Text, Times New Roman, serif"
+    fontSize: "1rem"
+    fontWeight: 400
+    lineHeight: "30px"
+  icon:
+    fontFamily: "Material Symbols Outlined"
+    fontSize: "20px"
+    fontWeight: 300
+    lineHeight: 1
 rounded:
-  none: "0px"
-  hairline: "2px"
+  mark: "4px"
+  chip: "5px"
+  control: "6px"
+  panel: "8px"
+  popover: "10px"
 spacing:
-  gutter-phone: "16px"
-  gutter: "24px"
-  cell: "12px"
-  panel: "18px"
-  block: "26px"
-  section: "64px"
+  unit: "4px"
+  tight: "8px"
+  snug: "12px"
+  base: "16px"
+  roomy: "28px"
+  gutter: "40px"
+  topbar-height: "52px"
+  sidebar-width: "248px"
+  inspector-width: "300px"
+  workspace-max: "1200px"
 components:
-  button-segment:
-    backgroundColor: "{colors.sheet-white}"
-    textColor: "{colors.ink-graphite}"
-    rounded: "{rounded.hairline}"
+  button-primary:
+    backgroundColor: "{colors.signal-blue}"
+    textColor: "{colors.on-signal}"
+    typography: "{typography.ui-label}"
+    rounded: "{rounded.control}"
     padding: "0 16px"
-    height: "44px"
-  button-segment-active:
-    backgroundColor: "{colors.drafting-ink}"
-    textColor: "{colors.sheet-white}"
-    rounded: "{rounded.hairline}"
-    padding: "0 16px"
-    height: "44px"
-  button-theme:
+    height: "38px"
+  button-primary-hover:
+    backgroundColor: "{colors.signal-blue-hover}"
+    textColor: "{colors.on-signal}"
+  button-quiet:
     backgroundColor: "transparent"
-    textColor: "{colors.ink-graphite}"
-    typography: "{typography.label}"
-    rounded: "{rounded.hairline}"
-    padding: "0 14px"
-    height: "44px"
+    textColor: "{colors.text-primary}"
+    rounded: "{rounded.control}"
+    padding: "0 16px"
+    height: "38px"
+  button-quiet-hover:
+    backgroundColor: "{colors.raised-graphite}"
+  toolbar-button:
+    backgroundColor: "transparent"
+    textColor: "{colors.text-secondary}"
+    rounded: "{rounded.control}"
+    padding: "0 9px"
+    height: "36px"
+  toolbar-button-pressed:
+    backgroundColor: "{colors.signal-blue-wash}"
+    textColor: "{colors.text-primary}"
+  search-trigger:
+    backgroundColor: "{colors.panel-graphite}"
+    textColor: "{colors.text-tertiary}"
+    rounded: "{rounded.control}"
+    padding: "0 9px"
+    height: "36px"
+    width: "220px"
+  nav-item:
+    backgroundColor: "transparent"
+    textColor: "{colors.text-secondary}"
+    typography: "{typography.ui-label}"
+    rounded: "{rounded.control}"
+    padding: "0 10px"
+    height: "34px"
+  nav-item-current:
+    backgroundColor: "{colors.raised-graphite}"
+    textColor: "{colors.text-primary}"
+  sub-tab:
+    backgroundColor: "transparent"
+    textColor: "{colors.text-tertiary}"
+    typography: "{typography.ui-label}"
+    padding: "0 12px"
+    height: "40px"
+  sub-tab-selected:
+    textColor: "{colors.text-primary}"
+  viewer-toggle:
+    backgroundColor: "{colors.raised-graphite}"
+    textColor: "{colors.text-secondary}"
+    rounded: "{rounded.chip}"
+    padding: "0 15px"
+    height: "34px"
+  viewer-toggle-pressed:
+    backgroundColor: "{colors.signal-blue-wash}"
+    textColor: "{colors.text-primary}"
   chip-met:
-    backgroundColor: "transparent"
+    backgroundColor: "{colors.status-met-wash}"
     textColor: "{colors.status-met}"
-    typography: "{typography.label}"
-    rounded: "{rounded.hairline}"
-    padding: "4px 6px"
+    typography: "{typography.chip}"
+    rounded: "{rounded.chip}"
+    padding: "4px 7px"
+  chip-risk:
+    backgroundColor: "{colors.status-risk-wash}"
+    textColor: "{colors.status-risk}"
+    typography: "{typography.chip}"
+    rounded: "{rounded.chip}"
+    padding: "4px 7px"
   chip-fail:
     backgroundColor: "{colors.status-fail-wash}"
     textColor: "{colors.status-fail}"
-    typography: "{typography.label}"
-    rounded: "{rounded.hairline}"
-    padding: "4px 6px"
-  title-block-cell:
-    backgroundColor: "{colors.sheet-white}"
-    textColor: "{colors.drafting-ink}"
-    padding: "10px 14px 12px"
-  decision-card:
-    backgroundColor: "{colors.sheet-white}"
-    textColor: "{colors.ink-graphite}"
-    rounded: "{rounded.hairline}"
-    padding: "16px 20px 14px"
-  table-head:
-    backgroundColor: "{colors.sheet-white}"
-    textColor: "{colors.ink-graphite}"
-    typography: "{typography.label}"
-    padding: "10px 12px"
-  table-row-chosen:
-    backgroundColor: "{colors.international-orange-wash}"
-    textColor: "{colors.drafting-ink}"
-    padding: "9px 12px"
+    typography: "{typography.chip}"
+    rounded: "{rounded.chip}"
+    padding: "4px 7px"
+  chip-open:
+    backgroundColor: "{colors.status-open-wash}"
+    textColor: "{colors.status-open}"
+    typography: "{typography.chip}"
+    rounded: "{rounded.chip}"
+    padding: "4px 7px"
+  est-mark:
+    backgroundColor: "transparent"
+    textColor: "{colors.text-secondary}"
+    typography: "{typography.est-mark}"
+    rounded: "{rounded.mark}"
+    padding: "2px 4px"
+  panel:
+    backgroundColor: "{colors.panel-graphite}"
+    textColor: "{colors.text-primary}"
+    rounded: "{rounded.panel}"
+    padding: "16px 18px"
+  key-parameter-row:
+    backgroundColor: "{colors.panel-graphite}"
+    textColor: "{colors.text-primary}"
+    typography: "{typography.data-value}"
+    padding: "10px 14px"
+  search-palette:
+    backgroundColor: "{colors.panel-graphite}"
+    textColor: "{colors.text-primary}"
+    rounded: "{rounded.popover}"
+    width: "640px"
 ---
 
-# Design System: Design-Build-Fly Design Review
+# Design System: Design-Build-Fly Review Platform
 
 ## Overview
 
-**Creative North Star: "The Drawing Title Block"**
+**Creative North Star: "The Engineering Workspace"**
 
-The review reads like a released engineering drawing, not a web page. Its cover is a title block: a ruled grid of cells for review date, stage, revision and sources, sitting under a heavy ink rule. Everything below follows the drawing sheet: black drafting ink on near-white vellum, square corners, hairline frames, and condensed technical lettering for headings. Authority comes from precision, so the system has no gradients, shadows or rounded cards, and nothing that reads as a marketing site or a generated template.
+The review is a tool the client and the team work inside, not a document they scroll. It borrows its presentation of geometry from Onshape, its organisation of analysis cases from SimScale, and its type, spacing and navigation from Linear. A sticky top bar and a persistent left sidebar frame a single workspace; each chapter is a page, long chapters split into sub-tabs, and wherever the project owns a viewer (the live SOLIDWORKS model, the drawing set, the CFD flow field) that viewer leads the page with an inspector beside it.
 
-The page is dense on purpose. It carries numbers inline with units, cites a source under every claim, and puts structure in rules rather than boxes. A 2px ink rule opens each major block (key figures, tables, figures, the measurement list) and 1px hairlines divide what's inside. Colour is held back for meaning: International Orange marks where you are, and the four status colours mark verdicts. The client has to be able to trust what they're reading before they approve the spend, and the restraint is what earns that.
+The surface is quiet so the engineering can be loud. Dark graphite is the default and a light theme is one click away; both are built from the same token names. One blue signal accent marks where the reader is and what is selected. Green, amber, red and violet are reserved for verdicts, and every other hue belongs to data. Panels are flat with 1px borders and 8px corners; nothing floats except popovers. Numbers, parameters and source paths are set in IBM Plex Mono so a reader can tell measured values from prose at a glance.
 
-The page is precise and restrained. Detail shows in alignment, tabular numerals and consistent rules, never in ornament.
+The traditional report is not abandoned. Report view and print render every page in order from the same content as one document, with a cover, revision record, approvals, contents and every disclosure open.
 
 **Key Characteristics:**
-- A ruled title-block cover under a 2px ink rule
-- Ink on vellum, with one International Orange accent used sparingly
-- Square geometry (2px or less), no shadows, structure carried by rules
-- Condensed technical headings, a humanist sans body, mono labels and citations
-- Tabular numerals everywhere
-- Full light and dark themes from the same tokens
+- App shell: 52px sticky top bar, 248px sidebar, workspace capped at 1200px.
+- Pages are chapters; sub-tabs come from the chapter's own section headings; hash routes per page and tab.
+- Visual-first workspaces: the viewer leads, a 300px inspector sits beside it.
+- IBM Plex Sans for prose and UI, IBM Plex Mono for anything measured or cited.
+- One blue signal accent; verdict colours carry status only; other hues are data.
+- Flat 1px panels, 8px radius, shadows on popovers only.
+- Key parameters are a spec list, never hero metric tiles.
 
 ## Colors
 
-Drafting ink on cool, neutral vellum, with one International Orange accent and a four-colour verdict set. The accent never doubles as a verdict colour.
+A cool, low-chroma graphite (or near-white) field, one blue signal, four tinted verdict hues and a separate data palette.
 
 ### Primary
-- **International Orange** (#b8481b; dark theme #ec8a58): the aerospace high-visibility orange. It marks position and focus only:
-  - the current section number in the contents
-  - the active tab underline
-  - section eyebrows
-  - measurement item IDs (M1, M2 …)
-  - link underlines and link hover
-  - sort arrows on sorted columns
-  - the focus outline
-  - the range-slider thumb
-- **International Orange Deep** (#963a14): the pressed or darker step of the accent.
-- **International Orange Wash** (#f7ece6; dark #2b1e17): the background of the chosen row in a trade table, and text selection.
-- **International Orange Rule** (#e4bfae): a soft accent line, reserved for accent-tinted rules.
-
-### Neutral
-- **Drafting Ink** (#16191d; dark #e6e8ea): body text, headings, the 2px opening rules and active controls. In light mode it doubles as the fill for pressed buttons.
-- **Ink Graphite** (#474e57): secondary text, table headers and button labels.
-- **Ink Pencil** (#6c737c): tertiary text, eyebrows, mono labels and citations.
-- **Vellum** (#fbfbfa; dark #111315): the page ground.
-- **Sheet White** (#ffffff; dark #16191c): surfaces sitting on the vellum, such as tables, title-block cells, cards and the 3D viewer.
-- **Sheet Tint** (#f4f5f6) and **Sheet Tint 2** (#eceef0): table-row hover, slider panels and inline code.
-- **Hairline** (#e3e5e8): 1px dividers inside blocks.
-- **Frame Rule** (#cbcfd4): 1px frames around the title block, the bottom of blocks and control borders.
-- **Construction Line** (#9ea4ac): chart axes and unsorted-column arrows.
+- **Signal Blue** (signal-blue; light theme light-signal-blue): links, keyboard focus rings, the selected sub-tab underline, the current sidebar entry's icon, the brand mark, pressed viewer toggles (as a wash with a blue rule), the highlighted row in the search palette, measurement IDs, and the fill of the one primary button style. It is never a status and never a large area.
+- **Signal Blue Hover** (signal-blue-hover): link and primary-button hover.
+- **Signal Blue Wash / Rule** (signal-blue-wash, signal-blue-rule): the selected state of toggles, the chosen table row, the picked concept card and the active Report view button. A wash with a 1px blue rule is how selection looks on any control larger than a link.
 
 ### Tertiary (verdicts)
-- **Status Met** (#23744a, wash #e7f2ec): a requirement met, or a KPI inside its limit.
-- **Status Risk** (#94600a, wash #f6efe1): met but thin, or an estimate (EST tags).
-- **Status Fail** (#ad2a1f, wash #f8e9e7): a failed requirement or blocking decision. Fail is the only status that also gets a filled wash.
-- **Status Open** (#57489a, wash #efedf6): an open decision.
-- **Status Open Frame** (#a49ec5) and **Status Fail Frame** (#c57e79): the 1px frames around open and blocking decision cards, and around the blocked banner.
+- **Met** (status-met, on status-met-wash), **At risk** (status-risk, on status-risk-wash), **Fail** (status-fail, on status-fail-wash, framed by status-fail-frame on blocking decisions), **Open** (status-open, on status-open-wash, framed by status-open-frame). Light-theme equivalents carry the light- prefix. These colour status chips, verdict table cells, key-parameter values and decision-card labels, and nothing else.
 
-Every colour has a dark-theme partner token with the suffix `-dark`, for example `drafting-ink-dark`. The dark set mirrors the light one role for role, with lighter accents and verdicts so they hold contrast on the dark vellum.
+### Data
+- **Series 1 to 6** (series-1 to series-6; light theme uses light-signal-blue as series 1 and light-series-2 to 6): chart series, the design-iterations bars and the CFD colour ramps. Warm and cool hues outside the accent and verdict sets appear only here.
+- **Model stage** (stage-top to stage-bottom): the radial gradient behind the live CAD model.
+- **Drawing Paper** (drawing-paper): drawing sheets and the static render sit on white in both themes, because the shop drawings are white sheets.
 
-### Chart series
-- Six muted categorical colours, **Series 1–6** (#2f5d8a ink blue, #2e7f78 teal, #b7791f ochre, #8e3b6e plum, #5b6b7c slate, #6b7f2a olive), for charts and the concept viewer only. Each has a lighter dark-theme value.
+### Neutral
+- **Night Graphite** (night-graphite): page canvas, top bar (at 92% with a blur), sidebar and table header background in dark.
+- **Panel Graphite** (panel-graphite): every panel: key parameters, tables, charts, viewers, inspector, decision cards, cover, palette.
+- **Raised Graphite** (raised-graphite): hover fills, the current sidebar entry, inline code, recommendation boxes, total rows.
+- **Pressed Graphite** (pressed-graphite): pressed segmented buttons and viewer-toggle hover.
+- **Hairline** (hairline): panel borders, row dividers, the top bar and sidebar edges, the sub-tab baseline.
+- **Divider** (divider): control borders, table header underline, decision-card frames.
+- **Strong Rule** (strong-rule): the EST outline, scrollbar thumbs, signature lines, total-row rules, chart axes.
+- **Text Primary / Secondary / Tertiary** (text-primary, text-secondary, text-tertiary): headings and values; prose summaries, labels and inactive controls; meta, captions, sources, group labels and numbering.
+- The light theme mirrors every neutral with the light- prefix.
+
+### Print
+Print and the printing state switch to a fixed warm-white paper palette (print- tokens) regardless of screen theme, so charts redrawn before printing use it.
 
 ### Named Rules
-**The Position-Not-Paint Rule.** International Orange marks where the reader is, or what the reader is acting on. It never fills a large area, never sits behind body text, and never stands in for a verdict.
+**The One Signal Rule.** Blue means "here" or "selected" or "follow this". It is never a status, never a section fill and never decoration. A second accent hue is not added.
 
-**The Verdict Colours Rule.** Green, amber, red and violet mean met, risk, fail and open, and nothing else. Never use them for decoration or chart series.
+**The Verdict Colours Rule.** Green, amber, red and violet mean met, at risk, fail and open, and nothing else. They never colour chart series or decoration, and no status is shown that the analysis has not established.
 
-**The Never-Colour-Alone Rule.** Every status shown by colour is also stated in words or form. A status cell carries a short note ("below margin", "within ±15 %") in its own status colour. A chosen option is bold and named in its column header. Paired chart series differ in lightness or outline, not only hue.
+**The Never-Colour-Alone Rule.** Every status shown by colour is also stated in words: chips carry their label, verdict cells carry a note, decision cards carry an "Open" or "Blocking" label.
+
+**The Data-Owns-Hue Rule.** Warm and cool hues beyond the accent and the verdicts are reserved for data: chart series, CFD ramps and the model stage.
 
 ## Typography
 
-**Title Font:** Sofia Sans Semi Condensed 700 (with Barlow Semi Condensed, Arial Narrow), for the report title only (chosen in live review, 2026-10-18)
-**Display Font:** Barlow Semi Condensed (with Arial Narrow, Helvetica Neue, Arial)
-**Body Font:** Source Sans 3 (with Segoe UI, system-ui)
-**Label/Mono Font:** Red Hat Mono (with ui-monospace, Consolas)
+**Display Font:** IBM Plex Sans (with system-ui, -apple-system, Segoe UI, sans-serif)
+**Body Font:** IBM Plex Sans 400/500/600
+**Label/Mono Font:** IBM Plex Mono 400/500 (with ui-monospace, Cascadia Mono, Consolas)
+**Signature Font:** STIX Two Text italic, loaded only in italic
+**Icons:** Material Symbols Outlined, weight 300, unfilled, 19 to 22px
 
-**Character:** The condensed grotesk recalls the lettering on aircraft markings and drawing title blocks. The humanist sans keeps long technical paragraphs easy to read. The mono face gives labels, units, IDs and citations the look of a drawing's notes.
+**Character:** A neutral, engineered sans that stays out of the way, paired with its own mono so values and file paths read as a different register without a different personality.
 
 ### Hierarchy
-The type scale has ten steps: 12, 13, 14, 16, 18, 20, 24, 30, 32 and 42 px. Don't add a step between them.
-- **Display** (Sofia Sans Semi Condensed 700, 2.625rem / 42 px, 1.05; 2rem on phones): the report title only.
-- **Headline** (600, 1.875rem / 30 px, 1.15; 1.5rem on phones): section titles (h2). Each starts with its section number in mono orange at 0.75em, so the sheet number sits on the same line as the title.
-- **Figure** (600, 2rem / 32 px, tabular; 1.875rem on phones): KPI values. **Figure small** (1.5rem) is used for the calculation-chain values.
-- **Title** (600, 1.25rem / 20 px, 1.15): subsection titles (h3). A hairline sits above each one, with about 2.75rem before it.
-- **Callout** (600, 1.125rem / 18 px): decision questions, figure captions, measurement-box titles and previous/next links.
-- **Lede** (400, 1.125rem / 18 px, 1.62): the cover subtitle and the verdict paragraph that opens each section, capped at 74ch.
-- **Body** (400, 16 px, 1.6, tabular): running text, capped at 70ch.
-- **Small** (400, 0.875rem / 14 px): tables, navigation, KPI qualifiers, buttons, slider labels and the viewer's part label.
-- **Source** (mono 400, 0.8125rem / 13 px, 1.55): citation lines prefixed "Source", formulas, measurement IDs and subsection links.
-- **Label** (body 600, 0.8125rem / 13 px, sentence case): table headers, key-parameter names, status chips and control captions. Title-block field names are the one place labels stay uppercase (body 600, 0.75rem, 0.04em tracking), as on a drawing title block. Never set a label smaller than 12 px.
-- **Mono** (Red Hat Mono): data only: file paths, citations, measurement IDs (M1 …), code. Mono is never used to make a label look technical.
+- **Cover title** (600, 1.875rem, 1.15, -0.025em): the report title on Report info and in Report view.
+- **Page title** (600, 1.625rem, 1.15, -0.02em; 1.375rem below 560px): each page's heading, preceded by its chapter number in mono at text-tertiary. Hidden on the Overview home page, where the verdict headline leads.
+- **Verdict headline** (600, 1.5rem, 1.3, -0.02em; 1.25rem on phones): the first bold sentence of the Overview verdict, capped at 34ch.
+- **Section title** (600, 1.125rem): sub-section headings; these also become the sub-tab labels.
+- **Subhead** (600, 0.9375rem): panel and box headings such as "What the team must measure".
+- **Lede** (400, 1.0625rem, 1.65): chapter verdict paragraphs in text-secondary with bold phrases in text-primary, to 78ch.
+- **Body** (400, 0.9375rem, 1.6, -0.003em): prose to 72ch, tabular numerals throughout.
+- **UI label** (500, 0.875rem): sidebar entries, sub-tabs, disclosure summaries, palette results.
+- **Meta label** (500, 0.75rem, 0.01em): sidebar group names, table headers, viewer control group labels.
+- **Chip** (600, 0.75rem): status chips.
+- **Data value** (Mono 500, 1rem, -0.01em): key-parameter values; chain values at 1.25rem.
+- **Table number** (Mono 400, 0.78rem): right-aligned numeric cells.
+- **Source line** (Mono 400, 0.75rem, 1.55): every citation, prefixed "Source" in the sans at 600.
+- **EST mark** (Mono 600, 0.75rem, 0.04em, uppercase): the estimate label.
+- **Signature** (STIX Two Text italic 400, 1rem on a 30px line): approval signature lines only.
 
 ### Named Rules
-**The Tabular Numbers Rule.** Every digit on the page uses tabular numerals, so columns of figures line up like a parts list.
+**The Mono-for-Measured Rule.** Every key-parameter value, numeric table cell, formula, file path, source line, issue chip, revision date, measurement and figure number is IBM Plex Mono. Prose, labels and controls are IBM Plex Sans.
 
-**The Readable Floor Rule.** Nothing functional is set below 12 px, and citations are never below 13 px. The client has to be able to read the sources.
+**The Tabular Numbers Rule.** Every digit uses tabular numerals so columns of figures line up.
 
-**The Report Numbering Rule.** Sections, subsections and figures are numbered the way an engineering report numbers them: section 4, subsection 4.2, Figure 4.3. The numbers come from the page structure at load, never typed by hand, so inserting a subsection renumbers everything after it.
-
-**The Lettering Rule.** Condensed display type is for headings and figures only. Running text never uses it, and labels are always mono caps, never small caps in the body face.
+**The Generated Numbering Rule.** Chapter numbers are filled from page order at load and set in mono at text-tertiary; they are never typed by hand.
 
 ## Layout
 
-The page is a single column of report sheets.
-- **Width and gutters:** a 1280px maximum, with 24px side gutters (16px at 560px and below).
-- **Cover:** the title and subtitle, then the title-block grid across the full width. The title block has five cells (Project, Review date, Stage, Revision, Sources), with the Project cell slightly wider. At 760px and below it becomes two columns, with Project spanning the full width.
-- **Desktop (1100px and wider):** a 220px contents column sits on the left and stays in view while scrolling. It lists the numbered sections in plain text, and the current one expands to show its subsections.
-- **Below 1100px:** a horizontally scrolling tab strip replaces the contents column and stays fixed to the top while scrolling.
-- **One section at a time:** only one section is shown. Each ends with an in-section index and previous/next links.
-- **Spacing:**
-  - 12px table cells
-  - 16–18px panel padding
-  - about 26px around the key-figure strip
-  - 40–64px before closing blocks such as the measurement list and section index
-- **Phones:** charts, tables and code scroll sideways inside their own containers, never the page.
+The shell is a 52px sticky top bar over a fixed 248px left sidebar; the workspace beside it centres its content at a 1200px maximum with 28px top and 40px side padding (24px/28px below 1100px, 20px/16px below 900px). The sidebar groups pages as an ungrouped Overview and Requirements block, then Design, Verification, Program, Build and software, and Documentation, each with a 0.75rem group label.
 
-**The Ruled Block Rule.** A major block opens with a 2px Drafting Ink rule and closes with a 1px Frame Rule. This applies to the key-figure strip, data tables, figures, the measurement list and the section index. Don't wrap these blocks in boxes.
+A chapter with four or more section headings gets a sub-tab bar: its lead-in becomes the Summary tab, each section becomes a tab, routes read `#page/tab`, and legacy anchors resolve to the page and tab that now hold them. The CAD page opens on its model tab.
+
+Workspaces put the visual first: a two-column grid with a 16px gap. The Overview pairs the shared live model (about 1.55fr) with the key-parameter list (minimum 300px); the CAD page pairs the model with a 300px parts inspector; the drawing viewer pairs a 220px sticky sheet rail with one large sheet. One SOLIDWORKS viewport is moved between the Overview and CAD slots rather than duplicated.
+
+Below 1100px workspaces stack. Below 900px the sidebar becomes a focus-trapped drawer (up to 300px, 86vw) opened from a menu button, the issue chip and subtitle hide, the search and Report view buttons collapse to icons, and the sheet rail becomes a horizontal strip. Below 900px every top-bar control, sidebar entry and sub-tab grows to 44px. Spacing steps on a 4px unit, mostly 8, 12, 16 and 28px.
+
+### Named Rules
+**The Visual-First Rule.** Where the project has a viewer, the page opens on it with its inspector beside; the chapter text follows below.
+
+**The Same-Content Report Rule.** Report view and print show the same chapters, in page order, as one document: cover with revision record and approvals, contents, every tab panel visible and every disclosure open. There is never a second copy of the content.
 
 ## Elevation & Depth
 
-The system is flat. It has no shadows at all (`--shadow: none`). Depth comes from the drawing conventions instead:
-- Sheet White surfaces sit on the Vellum ground.
-- 2px ink rules open a block and hairlines subdivide it.
-- Pressed controls fill with Drafting Ink.
+The platform is flat. Depth comes from tonal steps (canvas, panel, raised, pressed) and 1px borders. A 1px inset ring (`box-shadow: inset 0 0 0 1px`) marks a pressed or picked control; it is a border drawn inside the box, not elevation. The top bar uses a translucent canvas with a 10px blur so content passing under it stays legible.
 
-Sticky elements (the contents column and tab strip) separate from the content with a 1px rule, not a shadow.
+### Shadow Vocabulary
+- **Popover** (`box-shadow: 0 12px 32px rgba(0,0,0,.45), 0 2px 6px rgba(0,0,0,.3)` in dark; `0 12px 32px rgba(15,20,25,.16), 0 2px 6px rgba(15,20,25,.08)` in light): the search palette, the drawing lightbox, the narrow-screen drawer and the CAD part tooltip.
 
-**The Flat Sheet Rule.** Nothing floats. If an element needs to stand apart, give it a rule, a frame or an ink fill, never a shadow, glow or blur.
+### Named Rules
+**The Popover-Only Shadow Rule.** Only surfaces that sit above the workspace temporarily cast a shadow. Panels, cards, tables, charts and viewers never do.
 
 ## Shapes
 
-Every corner is square or nearly so: a 2px radius on controls, cards, chips and the viewer, and 0 on rules and tables. Frames are 1px. The only heavier line is the 2px ink rule that opens a block, plus the 2px border under the cover.
-
-The selected concept card is marked with a doubled ink outline (a 1px border plus a 1px inset outline), like a boxed callout on a drawing.
-
-There are no pills, circles, dots or status lights.
-
-**The Square Corner Rule.** Radius never exceeds 2px.
+Gently rounded rectangles on a fixed ladder: 4px for inline marks (code, keyboard hints, the EST mark, decision labels), 5px for status chips and viewer toggles, 6px for controls (buttons, sidebar entries, sheet rail, palette rows), 8px for panels, 10px for the search palette. Borders are always 1px; the only 2px line is the selected sub-tab's blue underline and the focus ring.
 
 ## Components
 
-### Buttons and segmented controls
-- **Character:** precise and restrained, like the switches on a test rig.
-- **Shape:** near-square (2px), at least 44px tall. A segmented control is a Sheet Tint tray with a 1px Frame Rule border and 3px inset, holding Sheet White segments 3px apart.
-- **Default:** a Sheet White fill with Ink Graphite labels in the body face.
-- **Hover:** the border darkens to Drafting Ink and the label to full ink.
-- **Pressed or active** (`aria-pressed="true"`): a Drafting Ink fill with white text. Pressed buttons never use orange.
-- **Theme toggle:** a transparent button with a mono label, such as "Theme: system".
+### Buttons
+- **Shape:** control radius (6px), 38px tall, 16px side padding, UI label type.
+- **Primary:** Signal Blue fill with on-signal text, for links out to companion documents and downloads.
+- **Hover / Focus:** fill steps to Signal Blue Hover; focus is a 2px Signal Blue ring offset 2px.
+- **Quiet:** transparent with a divider border and text-primary; hover adds a raised fill and strong-rule border.
 
-### Chips (requirement status)
-- **Style:** mono caps (0.66rem) in the status colour, with a 1px border in the same colour and a 2px radius.
-- **Fill:** transparent, except Fail, which adds its wash.
-- **States:** the four states are met, risk, fail and open.
-- **EST tag:** the same shape in Status Risk, used inline to flag an estimate.
+### Top bar controls
+- **Icon and toolbar buttons:** 36px, transparent, text-secondary, 6px radius; hover adds a raised fill. The Report view toggle carries a divider border and, when on, a blue wash with a blue rule.
+- **Search trigger:** a 220px field-like button on panel-graphite with a divider border, a search icon, "Search" and a Ctrl K hint in a mono keyboard mark. It opens the search palette.
+- **Issue chip:** mono 0.75rem in text-secondary with a divider border and chip radius, naming the document and issue.
 
-### Document control (page cover)
-- **Style:** under the title block, two ruled tables side by side: issue history (issue, date, design revision, change) and approval (role, name, date). Roles not yet signed show "—". On phones they stack and the issue history drops its design-revision column.
+### Chips
+- **Style:** tinted wash with the verdict colour as text, no border, chip type, 4px 7px padding.
+- **State:** met, at risk, fail and open only. The EST mark is the one outlined chip: mono uppercase in text-secondary inside a strong-rule border.
 
-### Drawing sheets
-- **Style:** SOLIDWORKS sheets shown as numbered figures on a white sheet with a 1px Frame Rule border; selecting one opens it at full size in a dialog with a title bar and a Close button.
+### Cards / Containers
+- **Corner Style:** panel radius (8px).
+- **Background:** panel-graphite on the canvas.
+- **Shadow Strategy:** none (see Elevation & Depth).
+- **Border:** 1px hairline; decision cards use the divider, and a blocking decision uses status-fail-frame. A picked option adds a blue inset ring.
+- **Internal Padding:** 16px 18px; tables pad cells 8px 12px.
 
-### Title block
-- **Style:** a five-cell ruled grid on Sheet White. The 1px Frame Rule lines come from 1px gaps over a Frame Rule ground, so the rules stay clean at any column count.
-- **Cells:** each has a mono caps field name above a condensed value, for example PROJECT / Design-Build-Fly or REVIEW DATE / 2026-10-13. The project name lives here, not in a label above the title.
-- **Placement:** at the foot of the cover, under the subtitle, with a 2px ink rule below the whole cover.
+### Key parameters
+A bordered spec list, not hero numbers: each row pairs a UI label in text-secondary, a mono value (in a verdict colour when it carries one) and a 0.8125rem note in text-tertiary, divided by hairlines.
 
-### Key-parameter table
-- **Style:** a ruled table under a 2px ink rule, one parameter per row: name (body 600), value (condensed 600, 1.25rem, right-aligned, coloured by verdict where one applies) and a one-line qualifier. It is a data-sheet table, not a strip of big numbers.
-- **Phones:** name and value on one line, qualifier below.
-
-### Decision cards
-- **Style:** a full 1px frame in Status Open Frame, or Status Fail Frame when the decision is blocking. There is no side stripe.
-- **Header:** the question as a Callout title, led on the same line by a status chip ("Open", or "Blocking" with the Fail wash). The status is never a separate label above the question.
-- **Recommendation:** sits in a Sheet Tint panel (a Fail wash when blocking).
-- **Citation:** below a hairline.
-
-### Tables
-- **Frame:** the table itself carries a 2px ink rule on top and a 1px Frame Rule at the bottom; its scroll wrapper has no border. There are no side borders, no fill and no zebra stripes. Cells are inset 12px, and the first column 8px from the left edge.
-- **Header:** mono caps and sticky, on the Vellum ground. A sortable header holds a full-cell button (no visual change) whose arrow shows the state: ↕ unsorted, an orange ↑ or ↓ when sorted.
-- **Columns and rows:** number columns are right-aligned and tabular. Rows show a Sheet Tint on hover. Sortable headers show ↕, and the sorted column shows an orange arrow.
-- **Chosen row:** International Orange Wash.
-- **Status cells:** a Status Met, Risk or Fail wash with the value in the status colour and a short note in words, also in the status colour.
-- **Total row:** a 1px ink rule above it.
-
-### "What the team must measure" list
-- **Frame:** a ruled block.
-- **Rows:** a mono orange ID in the left column (M1, M2 …), then what to measure, how to measure it, and the failure threshold in Status Fail.
-
-### Section headings
-- **Style:** the h2 carries its own section number in mono International Orange, followed by the title. The numbers are real references: the text cites §3 or §12. There is no small label above any heading.
-
-### Skip link
-- **Style:** a Drafting Ink tag with white mono text, hidden above the page until focused, then shown at the top left. Activating it moves focus to the current section heading.
-
-### Windows High Contrast
-- **Style:** text, frames and controls follow the system colours. Chart drawing areas and 3D canvases opt out (`forced-color-adjust: none`) and keep their own token palette on Sheet White, so the chart encodings survive.
-
-### Print
-- **Style:** printing drops the interactive-only parts (viewers, sliders, segmented controls, parts list, skip link, touch gates), shows every section, keeps the static renders, and avoids breaking figures, decisions, tables and measurement lists across pages.
+### Inputs / Fields
+- **Search palette input:** borderless, 50px tall, 1rem body type on the palette panel, separated from results by a hairline. Results are 40px rows with an icon, title and group; the active row takes the blue wash.
+- **Sliders:** native range inputs tinted Signal Blue in a bordered panel, with mono output values.
 
 ### Navigation
-- **Contents column:**
-  - A mono "CONTENTS" label sits above a rule.
-  - Each section has a right-aligned mono number and a plain-text title.
-  - The current section is bold, with an International Orange number.
-  - Subsections hang off a 1px rule.
-- **Tab strip:** the same content in a sticky horizontal strip, with a 2px orange underline under the active tab.
+- **Sidebar:** 34px entries (44px on touch widths) with a 19px outlined icon in text-tertiary and a UI label in text-secondary. Hover and current both use a raised fill; the current entry's icon turns Signal Blue and the entry carries `aria-current`.
+- **Sub-tabs:** 40px text tabs on a hairline baseline, text-tertiary; the selected tab is text-primary with a 2px Signal Blue underline. Arrow keys move between them.
+- **Narrow screens:** the sidebar slides in as a drawer over a canvas-tinted scrim, with the popover shadow, closed by Escape or the scrim.
 
-### Interactive SOLIDWORKS viewer
-- **Frame:** a framed Sheet White canvas with a mono caption tag in the corner.
-- **Controls:** a Sheet Tint control bar, with buttons following the segmented-control rules.
-- **Part label:** hovering over a part shows a small framed label with a condensed part name and a body-text description.
-- **Rendering:** CAD colours, hairline feature edges in the theme's ink, and a faint ground grid in Frame Rule.
-- **Size:** the canvas height is capped by both the width breakpoints and the screen height (`clamp(260px, 100svh − 140px, 540px)`), so a landscape phone shows the model and its controls together.
-- **Rendering on demand:** the viewer draws frames only while something moves (orbit, damping, camera move, explode) and stops when idle.
-- **Offline:** if the library cannot load, the frame shows only a short note pointing to the static renders and a "Try again" button. The control bar and the parts list are hidden, so no control is ever shown without something behind it.
-- **Loading:** the 3D library loads only when the CAD section opens. Until then a mono "Loading the 3D model…" caption sits on the empty frame.
-- **Touch:** on touch screens the canvas ignores gestures until the reader taps a "Tap to rotate the model" tag (mono caps on Sheet White, Frame Rule border). Tapping outside the viewer, or scrolling it out of view, turns gestures off again, so swipes always scroll the page.
-- **Parts list:** a "Parts in the model" disclosure under the controls holds one 44px button per part. Hover or keyboard focus highlights that part in International Orange and shows its label.
+### Model viewport and inspector
+The live SOLIDWORKS model renders on a radial stage gradient inside a panel, with a control bar of 34px viewer toggles (raised fill; pressed = blue wash with a blue rule) and mono meta text. The inspector beside it lists parts as small bordered buttons. Touch devices tap once to arm the canvas before it takes gestures.
+
+### Drawing sheet viewer
+A sticky rail of numbered sheets (mono numbers) beside one large sheet on white paper; selecting a sheet shows it, and clicking the sheet opens a lightbox at full resolution.
+
+### Flow viewer
+The CFD view on a panel: a control bar of segmented toggles and a play button, a canvas, and a footer pairing a colour-ramp legend with a reading note.
+
+### Report view cover
+A panel holding a mono masthead, the cover title, subtitle, document reference, a revision record table and three approval signature lines in STIX italic over a strong-rule line.
 
 ## Do's and Don'ts
 
 ### Do:
-- **Do** open each major block with a 2px Drafting Ink rule and close it with a 1px Frame Rule.
-- **Do** keep International Orange to position, focus and selection.
-- **Do** set labels, IDs, units, field names and citations in Red Hat Mono caps with 0.06–0.1em tracking.
-- **Do** use tabular numerals and right-align number columns.
-- **Do** put a Source citation under every claim block, and mark estimates with the EST tag.
-- **Do** keep radii at 2px or less, and keep controls at least 44px tall.
-- **Do** define every colour as a token on `:root`, with dark values under `prefers-color-scheme` and `[data-theme]`.
+- **Do** use Signal Blue only for links, focus, the current place and selection; show selection on controls as a blue wash with a 1px blue rule.
+- **Do** set every measured or cited value (parameters, numeric cells, formulas, paths, sources, dates, IDs) in IBM Plex Mono with tabular numerals.
+- **Do** bind every number to its repo source and print a Source line beneath it; mark estimates with the EST mark.
+- **Do** lead with the viewer where a page has one, with a 300px inspector beside it above 1100px.
+- **Do** build panels flat: panel-graphite, 1px hairline border, 8px radius.
+- **Do** give every interactive control a 44px target on touch widths (below 900px).
+- **Do** read theme tokens in charts and redraw them on theme change and before printing.
+- **Do** respect reduced motion: transitions and animations switch off.
 
 ### Don't:
-- **Don't** use box shadows, glows, gradients or blur. The system is flat (user direction: it must not look AI-generated).
-- **Don't** use rounded cards, pill badges, dot status icons or coloured side or top stripes on cards.
-- **Don't** return to the earlier indigo-on-blue-grey theme or the Archivo/IBM Plex pairing. That's the look this system replaced.
-- **Don't** use International Orange as a verdict colour or a large fill.
-- **Don't** use zebra stripes or filled header rows in tables.
-- **Don't** set running text in the condensed display face.
-- **Don't** put a small label or kicker above any heading. Section numbers go inside the heading, and status goes in a chip on the same line.
-- **Don't** set functional text below 12 px, or citations below 13 px.
+- **Don't** show key parameters as hero metric tiles; they are a spec list.
+- **Don't** put shadows on panels, cards, tables, charts or viewers; only the palette, lightbox, drawer and CAD tooltip float.
+- **Don't** add a second accent or use the verdict colours for decoration or chart series.
+- **Don't** border status chips; only the EST mark is outlined.
+- **Don't** show a status the analysis has not established; the states are met, at risk, fail, open and EST.
+- **Don't** set UI or prose in a serif; STIX Two Text italic is for signature lines.
+- **Don't** keep a separate copy of content for Report view or print.
+- **Don't** set any label, chip or chart text below 12 px (0.75rem); the EST mark, key hints and decision labels sit at that floor.

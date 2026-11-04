@@ -1,0 +1,143 @@
+launch: ../sitlbin/ArduPlane.exe --model quadplane --speedup 5 -w --home 37.9156,-122.3366,5.0,0.0 --defaults C:\Users\dillo\AppData\Local\Temp\claude\C--Users-dillo-Downloads-Berkeley-Fall-Capstone-Claude-Initial-Drone-Analysis\3ad58a76-b457-4450-b4ce-27a4d653db24\scratchpad\dl\autotest\quadplane.parm,C:\Users\dillo\Downloads\Berkeley\Fall\Capstone\Claude\Initial Drone Analysis\firmware\vtol_c0.param,C:\Users\dillo\Downloads\Berkeley\Fall\Capstone\Claude\Initial Drone Analysis\firmware\sitl\sitl_overrides.param
+connected; waiting for EKF/GPS
+  [    0.0] Barometer 1 calibration complete
+  [    0.0] Barometer 2 calibration complete
+  [    0.0] Airspeed 1 calibration started
+  [    0.0] ArduPilot Ready
+  [    0.0] AHRS: DCM active
+  [    2.0] RC7: MotorEStop LOW
+  [    2.0] QAssist: Enabled
+  [    3.0] Airspeed 1 calibrated
+  [    3.0] EKF3 IMU0 initialised
+  [    3.0] EKF3 IMU1 initialised
+  [    5.0] EKF3 IMU1 tilt alignment complete
+  [    5.0] EKF3 IMU0 tilt alignment complete
+  [    5.0] EKF3 IMU1 MAG0 initial yaw alignment complete
+  [    5.0] EKF3 IMU0 MAG0 initial yaw alignment complete
+  [    9.0] GPS 1: probing for u-blox at 230400 baud
+  [    9.0] GPS 1: detected u-blox
+  [   19.0] EKF3 IMU1 origin set
+  [   19.0] Field Elevation Set: 5m
+  [   19.0] EKF3 IMU0 origin set
+  [   30.0] PreArm: AHRS: not using configured AHRS type
+  [   41.0] EKF3 IMU0 is using GPS
+  [   41.0] AHRS: EKF3 active
+  [   41.0] EKF3 IMU1 is using GPS
+params: 133 checked, 3 not present in SITL, 0 mismatched
+  [  165.0] Flight plan received
+  [  166.0] Throttle armed
+  [  197.0] Mission: 1 WP
+  [  197.0] Transition started airspeed 0.9
+  [  202.0] Transition airspeed reached 16.1
+  [  207.0] Reached waypoint #1 dist 67m
+  [  207.0] Mission: 2 WP
+  [  207.0] Transition done
+  [  215.0] Reached waypoint #2 dist 67m
+  [  215.0] Mission: 3 WP
+  [  232.0] Reached waypoint #3 dist 66m
+  [  232.0] Mission: 4 WP
+  [  248.0] Reached waypoint #4 dist 67m
+  [  248.0] Mission: 5 WP
+  [  264.0] Reached waypoint #5 dist 66m
+  [  264.0] Mission: 6 WP
+  [  270.0] Reached waypoint #6 dist 67m
+  [  270.0] Mission: 7 VTOLLand
+  [  270.0] VTOL approach d=217.3
+  [  276.0] VTOL airbrake v=19.1 d=129 sd=129 h=59.4
+  [  281.0] VTOL position1 v=16.8 d=50.1 h=60.0 dc=14.0
+  [  284.0] VTOL position2 started v=5.7 d=9.4 h=69.9
+  [  290.0] Land descend started
+  [  349.0] Land final started
+  [  357.0] SIM Hit ground at 0.503155 m/s
+  [  362.0] Land complete
+  [  362.0] Throttle disarmed
+==> A_nominal_mission: PASS  modes=['QSTABILIZE', 'QLOITER', 'AUTO']
+  [  370.0] PreArm: In landing sequence
+  [  370.0] PreArm: Auto not in VTOL takeoff
+  [  392.0] In landing sequence: mission reset
+  [  393.0] Throttle armed
+  [  422.0] Transition started airspeed 0.3
+  [  427.0] Transition airspeed reached 16.3
+  [  432.0] Transition done
+  [  456.0] Throttle failsafe on
+  [  456.0] RC Short Failsafe On
+  [  460.0] RC Long Failsafe On: switched to RTL
+  [  465.0] VTOL airbrake v=19.6 d=100 sd=96 h=56.1
+  [  468.0] VTOL position1 v=15.1 d=39.8 h=57.0 dc=12.6
+  [  471.0] VTOL position2 started v=7.7 d=9.5 h=62.9
+  [  478.0] Land descend started
+  [  532.0] Land final started
+  [  541.0] SIM Hit ground at 0.503163 m/s
+  [  546.0] Land complete
+  [  546.0] Throttle disarmed
+  [  546.0] PreArm: Radio failsafe on
+  [  546.0] PreArm: QRTL mode not armable
+==> B_rc_loss_cruise: PASS  modes=['QLOITER', 'FBWA', 'LOITER', 'RTL', 'QRTL']
+  [  547.0] RC Long Failsafe Cleared
+  [  558.0] Throttle armed
+  [  572.0] Throttle failsafe on
+  [  572.0] RC Short Failsafe: switched to QLand
+  [  576.0] RC Long Failsafe On: switched to QLand
+  [  594.0] SIM Hit ground at 0.498746 m/s
+  [  600.0] Land complete
+  [  600.0] Throttle disarmed
+  [  600.0] PreArm: Radio failsafe on
+  [  600.0] PreArm: QLand mode not armable
+==> C_rc_loss_hover: PASS  modes=['QLOITER', 'QLAND']
+  [  601.0] RC Long Failsafe Cleared
+  [  612.0] Throttle armed
+  [  641.0] Transition started airspeed 0.2
+  [  656.0] Transition failed, exceeded time limit
+  [  656.0] VTOL position1 d=1.7 r=150.0
+  [  656.0] VTOL Position1 d=1.7
+  [  656.0] VTOL Overshoot d=1.7 cs=-0.1 yerr=104.4
+  [  656.0] VTOL position2 started v=0.2 d=1.7 h=42.6
+  [  656.0] Land descend started
+  [  684.0] Land final started
+  [  696.0] SIM Hit ground at 0.504442 m/s
+  [  701.0] Land complete
+  [  701.0] Throttle disarmed
+==> D_transition_timeout: PASS  modes=['QLOITER', 'FBWA', 'QRTL']
+  [  714.0] Throttle armed
+  [  745.0] Transition started airspeed 0.1
+  [  750.0] Transition airspeed reached 16.2
+  [  755.0] Transition done
+  [  771.0] Battery 1 is low 25.03V used 300 mAh
+  [  779.0] VTOL airbrake v=20.6 d=104 sd=106 h=54.7
+  [  781.0] VTOL position1 v=17.1 d=52.0 h=55.1 dc=14.2
+  [  785.0] VTOL position2 started v=5.6 d=9.4 h=62.7
+  [  791.0] Land descend started
+  [  824.0] Land final started
+  [  836.0] SIM Hit ground at 0.503205 m/s
+  [  841.0] Land complete
+  [  841.0] Throttle disarmed
+  [  841.0] PreArm: QRTL mode not armable
+==> E_battery_low_cruise: PASS  modes=['QLOITER', 'FBWA', 'LOITER', 'RTL', 'QRTL']
+  [  855.0] Throttle armed
+  [  901.0] Max Alt fence breached
+  [  901.0] Manual recovery started
+  [  901.0] Transition started airspeed 0.4
+  [  902.0] VTOL position1 d=1.1 r=150.0
+  [  902.0] VTOL Position1 d=1.1
+  [  902.0] Manual recovery started
+  [  902.0] VTOL Overshoot d=1.1 cs=-2.6 yerr=-178.9
+  [  902.0] VTOL position2 started v=2.6 d=1.1 h=113.0
+  [  902.0] Land descend started
+  [  976.0] Land final started
+  [  988.0] SIM Hit ground at 0.508837 m/s
+  [  993.0] Land complete
+  [  993.0] Throttle disarmed
+==> F_fence_ceiling: PASS  modes=['QLOITER', 'RTL', 'QRTL']
+  [  996.0] PreArm: QRTL mode not armable
+  [ 1019.0] Throttle armed
+  [ 1036.0] Throttle failsafe on
+  [ 1036.0] RC Short Failsafe: switched to QLand
+  [ 1040.0] RC Long Failsafe On: switched to QLand
+  [ 1058.0] SIM Hit ground at 0.494455 m/s
+  [ 1063.0] Land complete
+  [ 1063.0] Throttle disarmed
+  [ 1063.0] PreArm: Radio failsafe on
+  [ 1063.0] PreArm: QLand mode not armable
+==> G_elrs_mavlink_override_loss: PASS  modes=['QRTL', 'QLOITER', 'QLAND']
+
+7/7 scenarios passed

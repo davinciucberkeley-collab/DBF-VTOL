@@ -1,0 +1,1137 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>C0 flight software package: from a blank flight controller to the first transition</title>
+<script>try{if(localStorage.getItem('vtol-theme')==='light')document.documentElement.dataset.theme='light'}catch(e){}</script>
+<script>try{if(sessionStorage.getItem('dbf-full')!=='1')document.documentElement.classList.add('paged')}catch(e){document.documentElement.classList.add('paged')}</script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=STIX+Two+Text:ital@1&display=swap">
+<style>
+/* Engineering review platform: app shell (top bar, sidebar, workspace), flat 1 px panels, IBM Plex type.
+   Dark graphite by default, light on request; one blue accent for selection, links and focus; warm and cool hues are data. */
+:root{
+  --bg:#0E1116; --surface:#151A21; --surface-2:#1C222B; --surface-3:#242B35; --zebra:#12161C;
+  --line:#20262F; --line-2:#2A313C; --line-3:#3A4250;
+  --fg:#E6EAF0; --fg-2:#A3ADBA; --fg-3:#828C9A;
+  --accent:#5B9DFF; --accent-2:#8AB8FF; --accent-soft:#15243A; --accent-line:#2C4D7D; --accent-fg:#0E1116;
+  --ink:#E6EAF0; --ink-fg:#0E1116;
+  --ok:#5FD3A2; --ok-soft:#10301F; --warn:#F0C46E; --warn-soft:#33270F;
+  --bad:#F59393; --bad-soft:#391B1D; --open:#B9AEFF; --open-soft:#251F45; --open-line:#4A4290; --bad-line:#7A3A3D;
+  --c1:#6EA8FE; --c2:#5CC8B8; --c3:#E8B65A; --c4:#D98BC0; --c5:#9AA7B8; --c6:#A9C46A;
+  --band:#151A21; --band-line:#2A313C;
+  color-scheme:dark;
+  --f-title:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-display:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,"Cascadia Mono",Consolas,monospace;
+  --f-math:"STIX Two Text","Times New Roman",serif;
+  --stage-1:#1B212A; --stage-2:#0F1318; --stage-grid:#3A4250;
+  --r:8px; --r-s:5px;
+  --shadow:none; --shadow-2:none; --shadow-pop:0 12px 32px rgba(0,0,0,.45),0 2px 6px rgba(0,0,0,.3);
+  --topbar-h:52px; --sidebar-w:248px;
+}
+:root[data-theme="light"]{
+  --bg:#F7F8FA; --surface:#FFFFFF; --surface-2:#EEF1F5; --surface-3:#E3E7ED; --zebra:#FAFBFC;
+  --line:#E6E9EE; --line-2:#DADEE4; --line-3:#B9C0CA;
+  --fg:#0F1419; --fg-2:#4A5361; --fg-3:#616B79;
+  --accent:#2A66CC; --accent-2:#1F57B8; --accent-soft:#E7EFFC; --accent-line:#A9C3EE; --accent-fg:#FFFFFF;
+  --ink:#0F1419; --ink-fg:#FFFFFF;
+  --ok:#11734A; --ok-soft:#E3F5EC; --warn:#8A5A0B; --warn-soft:#FBF0D9;
+  --bad:#A42828; --bad-soft:#FBE5E5; --open:#4B3BA8; --open-soft:#ECE9FC; --open-line:#B7AEEB; --bad-line:#E2A5A5;
+  --c1:#2F6FDB; --c2:#1E8C7E; --c3:#B7791F; --c4:#A2427F; --c5:#5B6B7C; --c6:#5F7A1E;
+  --band:#FFFFFF; --band-line:#DADEE4;
+  color-scheme:light;
+  --stage-1:#F3F5F8; --stage-2:#DCE1E8; --stage-grid:#B9C0CA;
+  --shadow-pop:0 12px 32px rgba(15,20,25,.16),0 2px 6px rgba(15,20,25,.08);
+}
+/* ---------- base ---------- */
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{background:var(--bg);color:var(--fg);font:1rem/1.6 var(--f-body);font-variant-numeric:tabular-nums;margin:0;
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility}
+::selection{background:var(--accent-soft);color:var(--fg)}
+h1,h2,h3,h4{font-family:var(--f-display);line-height:1.15;text-wrap:balance;margin:0;color:var(--fg);font-weight:600}
+h1{font-family:var(--f-title);font-weight:700;font-size:2.625rem;letter-spacing:-.01em;line-height:1.05}
+h2{font-size:1.875rem;letter-spacing:-.005em}
+h2 .secno{font:inherit;color:var(--fg-3);margin-right:.25em}
+h3 .subno{font:inherit;color:var(--fg-3);margin-right:.2em;font-variant-numeric:tabular-nums}
+figcaption .figno{font-weight:600;color:var(--fg)}
+h3{font-size:1.25rem;margin-top:2.75rem;margin-bottom:.4rem;padding-top:1rem;border-top:1px solid var(--line);scroll-margin-top:64px}
+h4{font-size:1rem;letter-spacing:.005em}
+p,li{max-width:64ch;text-wrap:pretty}
+p{margin:.65rem 0}
+b,strong{font-weight:600}
+a{color:var(--fg);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px;text-decoration-color:var(--accent)}
+a:hover{color:var(--accent)}
+code,.mono{font-family:var(--f-mono);font-size:.84em}
+p code,li code,td code,dd code{background:var(--surface-2);border-radius:var(--r-s);padding:.05em .3em}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.wrap{max-width:1040px;margin:0 auto;padding-inline:24px;padding-block:0 96px}
+@media (max-width:560px){.wrap{padding-inline:16px}}
+
+/* ---------- cover: title + drawing title block ---------- */
+/* ---------- cover: report title page ---------- */
+header.top{padding-block:24px 34px;border-bottom:2px solid var(--ink)}
+.mast{display:flex;justify-content:space-between;align-items:center;gap:16px;padding-bottom:14px;margin-bottom:44px;border-bottom:1px solid var(--line-2)}
+.mast .org{font:600 .875rem/1.3 var(--f-body);color:var(--fg-2)}
+header.top h1{max-width:18ch}
+header.top .subtitle{margin:14px 0 0;color:var(--fg-2);font-size:1.125rem;line-height:1.5;max-width:56ch}
+.docref{margin:22px 0 0;max-width:62ch;color:var(--fg);font-size:1rem}
+.record{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:28px 48px;align-items:start;margin-top:38px}
+.record>*{min-width:0}
+table.revrec{border-top:1px solid var(--line-2);border-bottom:1px solid var(--line-2);font-size:.875rem}
+table.revrec caption,.so-title{caption-side:top;text-align:left;font:600 .875rem/1.3 var(--f-body);color:var(--fg);padding:0 0 8px;margin:0}
+table.revrec th{position:static;background:transparent;padding-block:7px}
+table.revrec td{padding-block:7px;color:var(--fg-2)}
+table.revrec td:nth-child(2){white-space:nowrap}
+.signoff{display:grid;gap:22px}
+.sig{display:grid;gap:5px}
+.sig-line{display:block;min-height:30px;padding-bottom:3px;border-bottom:1px solid var(--fg-2);font:italic 400 1rem/30px var(--f-body);color:var(--fg)}
+.sig-cap{font-size:.8125rem;color:var(--fg-3)}
+@media (max-width:760px){.record{grid-template-columns:minmax(0,1fr)}.mast{margin-bottom:30px}}
+.eyebrow{font:400 .8125rem/1.3 var(--f-body);color:var(--fg-3)}
+.meta{color:var(--fg-2);font-size:.875rem}
+
+/* ---------- sections ---------- */
+main{min-width:0}
+section.sec{display:block;scroll-margin-top:64px}
+section.sec+section.sec{margin-top:0}
+section.sec[hidden]{display:none}
+[id]{scroll-margin-top:64px}
+.sechead{padding-top:18px;padding-bottom:14px;margin-bottom:16px;border-top:2px solid var(--ink);border-bottom:1px solid var(--line-2)}
+.sechead h2{font-size:2rem}
+.sechead + h3,.sechead + * h3:first-child{border-top:0}
+.verdict{font-size:1.125rem;line-height:1.62;color:var(--fg);max-width:66ch}
+.lede{font-size:1.125rem;line-height:1.62}
+
+/* source citation */
+.src{font:.8125rem/1.55 var(--f-mono);color:var(--fg-3);margin:.35rem 0 1.3rem;max-width:72ch;word-break:break-word}
+.src::before{content:"Source  ";white-space:pre;font-weight:500;color:var(--fg-2);letter-spacing:.02em}
+.src a{color:var(--fg-2)}
+.est{display:inline-block;font:600 .75rem/1 var(--f-body);letter-spacing:.04em;text-transform:uppercase;color:var(--warn);border:1px solid var(--warn);border-radius:var(--r-s);padding:2px 4px;vertical-align:2px}
+
+/* ---------- key figures ---------- */
+.kpis{display:grid;grid-template-columns:1fr;margin:22px 0 26px;border-top:2px solid var(--ink);border-bottom:1px solid var(--line-2)}
+.kpi{display:grid;grid-template-columns:minmax(0,13rem) minmax(0,7rem) minmax(0,1fr);gap:4px 18px;align-items:baseline;padding:9px 8px;border-bottom:1px solid var(--line);min-width:0}
+.kpi:last-child{border-bottom:0}
+.kpi .l{font:600 .875rem/1.4 var(--f-body);color:var(--fg)}
+.kpi .v{font:600 1.25rem/1.2 var(--f-display);text-align:right;font-variant-numeric:tabular-nums;color:var(--fg)}
+.kpi .s{font-size:.875rem;line-height:1.45;color:var(--fg-2)}
+.v.ok,.ok-t{color:var(--ok)} .v.warn,.warn-t{color:var(--warn)} .v.bad,.bad-t{color:var(--bad)}
+
+/* ---------- status labels ---------- */
+.chip{display:inline-block;font:600 .8125rem/1 var(--f-body);padding:4px 7px;border-radius:var(--r-s);white-space:nowrap;border:1px solid currentColor;background:transparent}
+.chip.met{color:var(--ok);border-color:var(--ok)}
+.chip.risk{color:var(--warn);border-color:var(--warn)}
+.chip.fail{color:var(--bad);border-color:var(--bad);background:var(--bad-soft)}
+.chip.open{color:var(--open);border-color:var(--open)}
+
+/* ---------- panels ---------- */
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin:16px 0}
+#conceptCards{grid-template-columns:repeat(auto-fit,minmax(min(100%,22rem),1fr))}
+.grid2>*{min-width:0}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px}
+.card.pick{border-color:var(--ink);outline:1px solid var(--ink);outline-offset:-2px}
+.card h3{font-size:1rem;line-height:1.25;margin:0 0 8px;padding-top:0;border-top:0}
+.card .tag{float:right;margin-left:8px}
+
+/* decisions */
+.decision{color:var(--fg);border:1px solid var(--open-line);border-radius:var(--r);padding:16px 20px 14px;background:var(--surface);margin:16px 0}
+.decision.red{border-color:var(--bad-line)}
+.decision b.q{display:block;color:var(--fg);font:600 1.125rem/1.35 var(--f-display);letter-spacing:.003em;margin-bottom:8px;max-width:70ch}
+.decision b.q::before{content:"Open";display:inline-block;font:600 .8125rem/1 var(--f-body);color:var(--open);border:1px solid currentColor;border-radius:var(--r-s);padding:4px 6px;margin-right:10px;vertical-align:.18em}
+.decision.red b.q::before{content:"Blocking";color:var(--bad);background:var(--bad-soft)}
+.decision>div{max-width:78ch;color:var(--fg-2)}
+.decision>div b{color:var(--fg)}
+.decision .rec{max-width:70ch;margin-top:12px;padding:10px 14px;background:var(--surface-2);border-radius:var(--r-s);color:var(--fg)}
+.decision.red .rec{background:var(--bad-soft)}
+.decision .src{margin:12px 0 0;padding-top:10px;border-top:1px solid var(--line)}
+
+/* "What the team must measure" */
+.measure{margin:40px 0 10px;border-top:2px solid var(--ink);border-bottom:1px solid var(--line-2)}
+.measure h4{padding:12px 0 10px;border-bottom:1px solid var(--line-2);font-size:1.125rem}
+.measure ol{margin:0;padding:0;list-style:none;counter-reset:m}
+.measure li{padding:12px 0;border-bottom:1px solid var(--line);max-width:none;display:grid;grid-template-columns:3.4em minmax(0,1fr);gap:4px 12px;line-height:1.55}
+.measure li:last-child{border-bottom:0}
+.measure li .id{align-self:start;font:400 .8125rem/1.55 var(--f-mono);color:var(--accent)}
+.measure .how{color:var(--fg-2)}
+.measure .fail{color:var(--bad);font-weight:500}
+
+/* ---------- tables ---------- */
+.tbl{overflow:auto;background:transparent;margin:14px 0;max-height:640px;-webkit-overflow-scrolling:touch;scrollbar-width:thin}
+table{border-collapse:separate;border-spacing:0;width:100%;border-top:2px solid var(--ink);border-bottom:1px solid var(--line-2);font-size:.875rem;line-height:1.45}
+th,td{padding:9px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th:first-child,td:first-child{padding-left:8px}
+tbody tr:last-child td{border-bottom:0}
+thead th{position:sticky;top:0;background:var(--bg);font:600 .8125rem/1.3 var(--f-body);color:var(--fg);white-space:nowrap;z-index:1;border-bottom:1px solid var(--line-2);padding-block:10px}
+tbody tr:hover td{background:var(--surface-2)}
+thead th.sort{padding:0;user-select:none;transition:color .12s}
+th.sort:hover{color:var(--fg)}
+/* the sort control is a full-cell button; its arrow shows the sort state */
+.thbtn{all:unset;box-sizing:border-box;display:block;width:100%;padding:10px 12px;cursor:pointer;font:inherit;color:inherit;letter-spacing:inherit;text-transform:inherit;text-align:inherit;white-space:nowrap}
+thead th.sort:first-child .thbtn{padding-left:8px}
+.thbtn:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.thbtn::after{content:"↕";margin-left:5px;color:var(--line-3);font-size:.9em;letter-spacing:0}
+th.sort[aria-sort="ascending"] .thbtn::after{content:"↑";color:var(--accent)}
+th.sort[aria-sort="descending"] .thbtn::after{content:"↓";color:var(--accent)}
+th.sort[aria-sort="ascending"],th.sort[aria-sort="descending"]{color:var(--fg)}
+td.n,th.n{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+td.n{font-feature-settings:"tnum" 1}
+tbody tr.chosen td{background:var(--accent-soft)}
+tr.chosen td:first-child{font-weight:600}
+tbody tr.total td,tr.total td{font-weight:700;border-top:1px solid var(--ink);background:var(--surface)}
+td.ok{color:var(--ok);background:var(--ok-soft)}
+td.warn{color:var(--warn);background:var(--warn-soft)}
+td.bad{color:var(--bad);background:var(--bad-soft)}
+.morph td.ok{font-weight:600}
+small{font-size:.8125rem}
+td small,.small{color:var(--fg-3);font-size:.8125rem}
+td.ok small,td.warn small,td.bad small{color:inherit}
+
+/* ---------- back-calculation chain ---------- */
+.chain{display:flex;flex-wrap:wrap;gap:8px;align-items:stretch;margin:18px 0}
+.chain .box{flex:1 1 150px;min-width:0;background:var(--surface);border:1px solid var(--line-2);border-radius:var(--r-s);padding:11px 13px}
+.chain .box .l{font:600 .8125rem/1.3 var(--f-body);color:var(--fg-2)}
+.chain .box .v{font:600 1.5rem/1.15 var(--f-display);margin:6px 0 5px}
+.chain .box .f{font:.8125rem/1.45 var(--f-mono);color:var(--fg-2);word-break:break-word;padding-top:6px;border-top:1px solid var(--line)}
+.chain .arr{align-self:center;color:var(--fg-3);font-size:1rem}
+
+/* ---------- sliders / segmented ---------- */
+.sliders{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px 28px;background:var(--surface-2);border-radius:var(--r);padding:16px 18px;margin:16px 0}
+.sl label{display:flex;justify-content:space-between;align-items:baseline;font-size:.875rem;gap:8px;color:var(--fg-2)}
+.sl label output{font:400 .8125rem var(--f-mono);color:var(--fg)}
+.sl input[type=range]{width:100%;min-height:32px;accent-color:var(--accent)}
+.seg{display:inline-flex;gap:3px;padding:3px;border:1px solid var(--line-2);border-radius:var(--r-s);background:var(--surface-2);max-width:100%;flex-wrap:wrap}
+.seg button{min-height:44px;padding:0 16px;border:0;border-radius:var(--r-s);background:var(--surface);color:var(--fg-2);font:500 .875rem var(--f-body);cursor:pointer;transition:background .12s,color .12s}
+.seg button:hover{background:var(--surface-2);color:var(--fg)}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--ink-fg)}
+
+/* ---------- figures ---------- */
+figure.chart{margin:22px 0;background:var(--surface);border-top:2px solid var(--ink);border-bottom:1px solid var(--line-2);padding:0}
+figure.chart figcaption{font:600 1.125rem/1.35 var(--f-display);letter-spacing:.005em;padding:10px 0 8px;color:var(--fg)}
+figure.chart .svgwrap{padding:8px 0 12px}
+figure.chart svg{width:100%;max-width:880px;height:auto;display:block;margin-inline:auto}
+.svgwrap{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:thin}
+@media (max-width:640px){.svgwrap svg{min-width:700px}}
+svg text{fill:var(--fg-2);font:12px var(--f-body);font-variant-numeric:tabular-nums}
+svg .axis{stroke:var(--line-3)} svg .grid{stroke:var(--line);stroke-dasharray:2 3}
+
+/* ---------- 3D viewer ---------- */
+.viewer{position:relative;background:var(--surface);border:1px solid var(--line-3);border-radius:var(--r);overflow:hidden}
+.viewer canvas{display:block;width:100%;height:clamp(260px,calc(100vh - 140px),460px);height:clamp(260px,calc(100svh - 140px),460px);touch-action:none;cursor:grab;background:var(--surface)}
+.viewer canvas:active{cursor:grabbing}
+.viewer .lbl{position:absolute;left:12px;top:10px;font:500 .8125rem/1 var(--f-body);color:var(--fg-2);background:var(--surface);padding:5px 7px;border:1px solid var(--line-2);border-radius:var(--r-s)}
+.viewer .ctl{display:flex;flex-wrap:wrap;align-items:center;gap:10px 24px;padding:10px 12px;border-top:1px solid var(--line-3);background:var(--surface)}
+.cgrp{display:flex;align-items:center;gap:10px}
+.cgl{font:600 .8125rem/1 var(--f-body);color:var(--fg-2)}
+.segbar{display:inline-flex;gap:2px}
+.viewer .ctl button{min-height:44px;padding:0 15px;border:0;border-radius:var(--r-s);background:var(--surface);color:var(--fg-2);font:400 1rem var(--f-body);cursor:pointer;transition:background .12s,color .12s}
+.viewer .ctl button:hover{background:var(--surface-2);color:var(--fg)}
+.viewer .ctl button[aria-pressed="true"]{background:var(--ink);color:var(--ink-fg)}
+.cmeta{margin-left:auto;font:400 .8125rem/1.3 var(--f-body);color:var(--fg-3)}
+@media (max-width:560px){.cmeta{margin-left:0;flex-basis:100%}.cgrp{flex-basis:100%}.cgl{flex:none;width:4.2em}.segbar{flex:1;min-width:0}.viewer .ctl .segbar button{flex:auto;padding:0 6px}}
+
+/* ---------- in-section index + prev/next ---------- */
+
+/* ---------- contents page and running head ---------- */
+.toc{margin:28px 0 8px;padding-top:14px;border-top:1px solid var(--line-2)}
+.toc h2{font-size:1.25rem;margin-bottom:10px}
+.toc ol{list-style:none;margin:0;padding:0;columns:2 18rem;column-gap:40px}
+.toc li{break-inside:avoid;max-width:none}
+.toc a{display:flex;gap:14px;align-items:baseline;min-height:44px;padding:9px 0;border-bottom:1px solid var(--line);text-decoration:none;color:var(--fg)}
+.toc a .n{flex:none;width:1.6em;text-align:right;color:var(--fg-3);font-variant-numeric:tabular-nums}
+.toc a .t{font:600 1rem/1.3 var(--f-display)}
+.toc a:hover .t{color:var(--accent)}
+/* contents grouped in three parts, one column each */
+#tocList{display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:4px 36px;columns:auto}
+#tocList>li.part{font:600 .875rem/1.3 var(--f-body);color:var(--fg-2);padding-top:6px}
+#tocList>li.part .pn{display:block;font-size:.8125rem;color:var(--fg-3);font-weight:400;margin-bottom:2px}
+#tocList>li.part>ol{columns:auto;margin-top:6px;border-top:2px solid var(--ink)}
+#tocList>li.part .t{font-weight:600}
+
+/* ---------- design iterations chart ---------- */
+#tradeChart .tb.r1{fill:var(--c1)}
+#tradeChart .tb.nor1{fill:var(--c5)}
+#tradeChart .tb.out{fill:transparent;stroke:var(--line-3);stroke-width:1;stroke-dasharray:3 3}
+#tradeChart rect.tb.out{fill:var(--surface-2)}
+#tradeChart .lab.sel{fill:var(--fg);font-weight:700}
+#tradeChart .trow:hover text{fill:var(--fg)}
+
+/* ---------- links out to companion documents and files ---------- */
+.cta{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 6px;max-width:none}
+.btnlink{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border:1px solid var(--ink);border-radius:var(--r-s);background:var(--ink);color:var(--ink-fg);font:600 1rem var(--f-body);text-decoration:none}
+.btnlink:hover{background:var(--fg-2);border-color:var(--fg-2);color:var(--ink-fg)}
+.btnlink.quiet{background:transparent;color:var(--fg)}
+.btnlink.quiet:hover{background:var(--surface-2);color:var(--fg)}
+ul.files{list-style:none;margin:8px 0 18px;padding:0;border-top:1px solid var(--line-2);max-width:none}
+ul.files li{display:grid;grid-template-columns:minmax(0,14rem) minmax(0,1fr);gap:4px 18px;align-items:baseline;padding:10px 0;border-bottom:1px solid var(--line);max-width:none}
+ul.files a{display:inline-flex;align-items:center;min-height:44px;font-weight:600;color:var(--fg);text-decoration-color:var(--accent-line);text-underline-offset:2px}
+ul.files span{color:var(--fg-2);font-size:.875rem}
+@media (max-width:560px){ul.files li{grid-template-columns:minmax(0,1fr)}}
+.runhead{position:fixed;left:0;right:0;top:0;z-index:10;display:flex;gap:16px;align-items:center;padding:8px max(16px,calc((100vw - 1040px)/2 + 24px));padding-top:calc(8px + env(safe-area-inset-top,0px));background:var(--bg);border-bottom:1px solid var(--line-2);font:400 .8125rem/1.3 var(--f-body);color:var(--fg-3);transform:translateY(-110%);transition:transform .18s ease-out}
+.runhead.on{transform:none}
+.runhead .rh-sec{flex:1;min-width:0;color:var(--fg);font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.runhead .rh-toc{color:var(--fg-2);text-decoration:underline;text-decoration-color:var(--line-2)}
+@media (max-width:560px){.runhead .rh-doc{display:none}}
+
+/* ---------- requirement status grid ---------- */
+.reqsum{margin:8px 0 10px;color:var(--fg-2)}
+.reqsum b{color:var(--fg);font-variant-numeric:tabular-nums}
+.reqgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(15rem,1fr));gap:0 28px;margin:0 0 6px;border-top:1px solid var(--line-2)}
+.rq{display:grid;grid-template-columns:2.6em minmax(0,1fr) auto;gap:10px;align-items:baseline;padding:8px 0;border-bottom:1px solid var(--line);font-size:.875rem;line-height:1.35}
+.rq .rid{font-variant-numeric:tabular-nums;color:var(--fg-3);font-weight:600}
+.rq .rtx{color:var(--fg)}
+.decision details.facts{margin-top:12px}
+
+/* ---------- secondary detail behind a disclosure ---------- */
+details.more{margin:10px 0 4px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+details.more>summary{min-height:44px;display:flex;align-items:center;cursor:pointer;font:600 .875rem/1.3 var(--f-body);color:var(--fg)}
+details.more[open]>summary{border-bottom:1px solid var(--line)}
+details.more>summary{list-style:none}
+details.more>summary::-webkit-details-marker{display:none}
+details.more>summary::before{content:"";flex:none;width:7px;height:7px;margin:0 12px 0 2px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(-45deg);transition:transform .15s ease-out}
+details.more[open]>summary::before{transform:rotate(45deg)}
+details.more>summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* ---------- document control (cover) ---------- */
+
+/* ---------- drawing sheets ---------- */
+.drawings{display:grid;grid-template-columns:1fr;gap:18px;margin:16px 0}
+figure.sheet{margin:0}
+figure.sheet figcaption{padding:8px 0 0}
+.sheetbtn{all:unset;display:block;cursor:zoom-in;border:1px solid var(--line-2);background:#fff}
+.sheetbtn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.sheetbtn img{display:block;width:100%;height:auto;aspect-ratio:1614 / 1035}
+.lightbox{width:min(96vw,1700px);max-width:none;max-height:94vh;padding:0;border:1px solid var(--line-2);background:var(--surface);color:var(--fg)}
+.lightbox::backdrop{background:color-mix(in srgb,var(--bg) 82%,transparent)}
+.lb-bar{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:8px 12px;border-bottom:1px solid var(--line-2);font:600 .875rem var(--f-body)}
+.lb-bar button{min-height:44px;padding:0 16px;border:1px solid var(--line-2);background:var(--surface);color:var(--fg);font:500 .875rem var(--f-body);cursor:pointer}
+.lb-body{overflow:auto;max-height:calc(94vh - 62px);background:#fff}
+.lb-body img{display:block;width:1614px;max-width:none;height:auto}
+
+/* ---------- skip link + screen-reader text ---------- */
+.skip{position:absolute;left:16px;top:calc(env(safe-area-inset-top,0px) - 80px);z-index:20;display:inline-flex;align-items:center;min-height:44px;padding:0 14px;background:var(--ink);color:var(--ink-fg);font:600 .875rem var(--f-body);text-decoration:none;border-radius:var(--r-s)}
+.skip:focus{top:calc(env(safe-area-inset-top,0px) + 8px)}
+.skip:hover{color:var(--ink-fg)}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+/* ---------- misc ---------- */
+.cadimg{width:100%;height:auto;display:block;border-radius:var(--r-s)}
+.state{overflow-x:auto}
+ul.tight{padding-left:1.2em;margin:.5rem 0} ul.tight li{margin:.28rem 0}
+ul.tight li::marker{color:var(--fg-3)}
+dl.kv{display:grid;grid-template-columns:max-content minmax(0,1fr);gap:6px 18px;margin:10px 0;font-size:.875rem}
+dl.kv dt{color:var(--fg-3)} dl.kv dd{margin:0}
+
+/* ---------- small screens ---------- */
+@media (max-width:560px){
+  h1{font-size:2rem}
+  h2{font-size:1.5rem}
+  header.top{padding-block:20px 26px}
+  header.top .subtitle{font-size:1rem}
+  .kpi{grid-template-columns:minmax(0,1fr) auto}
+  .kpi .s{grid-column:1 / -1}
+  .viewer canvas{height:clamp(260px,calc(100svh - 140px),340px)}
+  .tbl{max-height:none}
+  .decision{padding:14px 14px 12px}
+  .thbtn{padding-block:14px;min-height:44px}
+}
+
+/* ---------- Windows High Contrast: charts and viewers keep their own palette so their encodings survive ---------- */
+@media (forced-colors: active){
+  figure.chart .svgwrap,.viewer canvas{forced-color-adjust:none;background:var(--surface)}
+  .cadview canvas{background:linear-gradient(180deg,var(--stage-1),var(--stage-2))}
+  .chip,.est,.thbtn:focus-visible,.decision{border-color:CanvasText}
+}
+
+/* ---------- print ---------- */
+/* the same paper palette while printing, so charts redrawn on beforeprint use it */
+:root.printing{--bg:#fbfbfa; --surface:#ffffff; --surface-2:#f4f5f6; --surface-3:#eceef0; --zebra:#fafafa; --line:#e3e5e8; --line-2:#cbcfd4; --line-3:#9ea4ac; --fg:#16191d; --fg-2:#474e57; --fg-3:#6c737c; --accent:#b8481b; --accent-2:#963a14; --accent-soft:#f7ece6; --accent-line:#e4bfae; --accent-fg:#ffffff; --ink:#16191d; --ink-fg:#ffffff; --ok:#23744a; --ok-soft:#e7f2ec; --warn:#94600a; --warn-soft:#f6efe1; --bad:#ad2a1f; --bad-soft:#f8e9e7; --open:#57489a; --open-soft:#efedf6; --open-line:#a49ec5; --bad-line:#c57e79; --c1:#2f5d8a; --c2:#2e7f78; --c3:#b7791f; --c4:#8e3b6e; --c5:#5b6b7c; --c6:#6b7f2a; --band:#ffffff; --band-line:#cbcfd4; color-scheme:light}
+@media print{
+  /* print always uses the light palette, whatever the screen theme */
+  :root{--bg:#fbfbfa; --surface:#ffffff; --surface-2:#f4f5f6; --surface-3:#eceef0; --zebra:#fafafa; --line:#e3e5e8; --line-2:#cbcfd4; --line-3:#9ea4ac; --fg:#16191d; --fg-2:#474e57; --fg-3:#6c737c; --accent:#b8481b; --accent-2:#963a14; --accent-soft:#f7ece6; --accent-line:#e4bfae; --accent-fg:#ffffff; --ink:#16191d; --ink-fg:#ffffff; --ok:#23744a; --ok-soft:#e7f2ec; --warn:#94600a; --warn-soft:#f6efe1; --bad:#ad2a1f; --bad-soft:#f8e9e7; --open:#57489a; --open-soft:#efedf6; --open-line:#a49ec5; --bad-line:#c57e79; --c1:#2f5d8a; --c2:#2e7f78; --c3:#b7791f; --c4:#8e3b6e; --c5:#5b6b7c; --c6:#6b7f2a; --band:#ffffff; --band-line:#cbcfd4; color-scheme:light}
+  .runhead,.toc,.themebtn,.skip,.gate,.viewer,.sliders,.seg,.cadparts,.loadmsg{display:none!important}
+  .tbl{border:0}
+  figure.chart,.decision,.measure,table,.kpis{break-inside:avoid}
+  section.sec{display:block!important;break-before:page}
+  .tbl{max-height:none;overflow:visible}
+  details>summary{list-style:none}
+  details>summary::-webkit-details-marker{display:none}
+}
+
+/* ---------- SOLIDWORKS model viewer ---------- */
+.cadview{margin-top:14px}
+.cadview canvas{height:clamp(260px,calc(100vh - 140px),540px);height:clamp(260px,calc(100svh - 140px),540px);background:linear-gradient(180deg,var(--stage-1),var(--stage-2))}
+.cadview .tip{position:absolute;right:12px;top:10px;max-width:min(340px,calc(100% - 24px));background:var(--surface);border:1px solid var(--line-2);border-radius:var(--r-s);padding:8px 10px;font-size:.875rem;line-height:1.4;color:var(--fg-2);pointer-events:none}
+.cadview .tip b{display:block;font:600 1rem/1.25 var(--f-display);color:var(--fg);margin-bottom:2px}
+.cadview .fallback{display:flex;flex-direction:column;align-items:center;gap:14px;padding:48px 20px;text-align:center;color:var(--fg-2)}
+.cadview .fallback p{margin:0;max-width:56ch}
+.cadview .fallback button{min-height:44px;padding:0 16px;border:1px solid var(--line-2);background:var(--surface);color:var(--fg);border-radius:var(--r-s);font:500 .875rem var(--f-body);cursor:pointer;transition:border-color .12s}
+.cadview .fallback button:hover{border-color:var(--fg)}
+.cadview.offline .ctl{display:none}
+.cadview .loadmsg{display:none;position:absolute;left:0;right:0;top:45%;margin:0;text-align:center;font:400 .875rem/1 var(--f-body);color:var(--fg-2);max-width:none}
+.cadview.loading .loadmsg{display:block}
+.cadparts{margin:12px 0 0;border-bottom:1px solid var(--line-2)}
+.cadparts summary{min-height:44px;display:flex;align-items:center;cursor:pointer;font:600 1rem/1.25 var(--f-display);color:var(--fg)}
+.cadparts ul{list-style:none;margin:0 0 12px;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+.cadparts li{max-width:none}
+.cadparts ul+.grp{margin:4px 0 8px;font-weight:600;color:var(--fg)}
+#cadFasteners{list-style:none;margin:0 0 12px;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+.cadparts button{min-height:44px;padding:0 12px;border:1px solid var(--line-2);background:var(--surface);color:var(--fg-2);border-radius:var(--r-s);font:400 .875rem var(--f-body);cursor:pointer;transition:border-color .12s,color .12s}
+.cadparts button:hover,.cadparts button:focus-visible{border-color:var(--fg);color:var(--fg)}
+/* touch gate: canvases take gestures only after a tap */
+.viewer .gate{display:none}
+@media (pointer:coarse){
+  .viewer:not(.armed) canvas{pointer-events:none}
+  .viewer .gate{display:flex;position:absolute;left:0;right:0;top:0;align-items:center;justify-content:center;padding:0;border:0;background:transparent;cursor:pointer}
+  .viewer .gate span{font:600 .875rem/1 var(--f-body);color:var(--fg);background:var(--surface);border:1px solid var(--line-2);border-radius:var(--r-s);padding:10px 12px}
+}
+@media (max-width:560px){.cadview canvas{height:clamp(260px,calc(100svh - 140px),380px)}.cadview .tip{top:auto;bottom:66px}}
+#tradeChart .ghead{fill:var(--fg);font-weight:600}
+svg text.phead{fill:var(--fg);font-weight:600;font-size:12px}
+
+/* ---------- overview additions: GA figure, measurement list, glossary ---------- */
+.gafig{margin:22px 0 6px}
+.mlist{margin:6px 0 14px;padding:0;list-style:none;border-top:1px solid var(--line-2)}
+.mlist li{display:grid;grid-template-columns:4.2em minmax(0,1fr) auto;gap:4px 14px;align-items:baseline;padding:8px 0;border-bottom:1px solid var(--line);max-width:none}
+.mlist .mid{color:var(--accent);font-variant-numeric:tabular-nums;font-weight:600}
+.mlist a{color:var(--fg);text-decoration-color:var(--line-3);text-underline-offset:2px}
+.mlist .mch{color:var(--fg-3);font-size:.875rem}
+dl.terms{display:grid;grid-template-columns:repeat(auto-fill,minmax(19rem,1fr));gap:0 32px;margin:8px 0 18px;border-top:1px solid var(--line-2)}
+dl.terms>div{display:grid;grid-template-columns:7.5rem minmax(0,1fr);gap:12px;padding:8px 0;border-bottom:1px solid var(--line)}
+dl.terms dt{font-weight:600;color:var(--fg)}
+dl.terms dd{margin:0;color:var(--fg-2)}
+.tbl:focus-visible,.svgwrap:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+@media (max-width:560px){.mlist li{grid-template-columns:4.2em minmax(0,1fr)}.mlist .mch{grid-column:2}dl.terms>div{grid-template-columns:minmax(0,1fr);gap:2px}}
+
+/* touch targets: the running-head link and the sliders reach 44 px without changing their look */
+.runhead .rh-toc{display:inline-flex;align-items:center;min-height:44px;margin:-12px 0}
+.sl input[type=range]{min-height:44px}
+/* bar charts drawn at the container width on phones render 1:1 instead of scrolling */
+.svgwrap svg.fitw{width:100%;min-width:0}
+
+/* ---------- closing: the ask and the next dates ---------- */
+.closing{margin:96px 0 24px;padding-top:18px;border-top:2px solid var(--ink)}
+.closing h2{font-size:1.875rem;margin-bottom:12px}
+ol.next{list-style:none;margin:10px 0 14px;padding:0;border-top:1px solid var(--line-2)}
+ol.next li{display:grid;grid-template-columns:7.5rem minmax(0,1fr);gap:4px 16px;padding:10px 0;border-bottom:1px solid var(--line);max-width:none}
+ol.next .d{font-weight:600;color:var(--fg);font-variant-numeric:tabular-nums}
+@media (max-width:560px){ol.next li{grid-template-columns:minmax(0,1fr);gap:2px}}
+
+/* phones: chapter, closing and companion headings step down with the h2 ramp */
+@media (max-width:560px){.sechead h2,.closing h2,.doc h2{font-size:1.5rem}}
+
+/* overview: render figure, the approval card leads, acceptances sit one step quieter */
+.gafig .render{background:#fff}
+h4.subhd{margin:28px 0 8px;font-size:1rem;color:var(--fg-2)}
+.minors .decision b.q{font-size:1rem}
+.minors .decision{padding-block:12px 10px}
+
+/* 44 px targets: the drawing button, narrow view buttons, back links */
+.btnlink.sheetbtn{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border:1px solid var(--ink);background:transparent;color:var(--fg);font:600 1rem var(--f-body);cursor:pointer;border-radius:var(--r-s)}
+.btnlink.sheetbtn:hover{background:var(--surface-2)}
+.viewer .ctl .segbar button{min-width:44px}
+.backlink{display:inline-flex;align-items:center;min-height:44px}
+
+/* audit: focus never hides under the running head; pressed toggles survive High Contrast */
+html{scroll-padding-top:120px}
+@media (forced-colors: active){[aria-pressed="true"]{forced-color-adjust:none;background:Highlight!important;color:HighlightText!important;outline:2px solid Highlight}}
+/* audit: grid minimums never exceed the column at large text */
+#tocList{grid-template-columns:repeat(auto-fit,minmax(min(100%,15rem),1fr))}
+.reqgrid{grid-template-columns:repeat(auto-fill,minmax(min(100%,15rem),1fr))}
+dl.terms{grid-template-columns:repeat(auto-fill,minmax(min(100%,19rem),1fr))}
+table.revrec td:nth-child(2){white-space:normal}
+@media (max-width:360px){.viewer .ctl .segbar button{padding:0 6px}}
+
+/* ---------- flow visualisation (aerodynamics) ---------- */
+.flowviz{margin:18px 0 8px;border:1px solid var(--line-3);border-radius:var(--r);background:var(--surface);overflow:hidden}
+.fv-bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;padding:10px 12px;border-bottom:1px solid var(--line-3)}
+.fv-bar .seg{border:0;background:none;padding:0;gap:2px}
+.fv-bar .seg button{padding:0 12px;background:var(--surface-2)}
+.fv-bar .seg button[aria-pressed="true"]{background:var(--ink);color:var(--ink-fg)}
+.fv-bar .seg[hidden]{display:none}
+.fv-play{margin-left:auto;min-height:44px;padding:0 16px;border:1px solid var(--line-2);border-radius:var(--r-s);background:var(--surface);color:var(--fg-2);font:500 .875rem var(--f-body);cursor:pointer}
+.fv-play:hover{color:var(--fg);border-color:var(--fg-2)}
+.fv-canvas{display:block;width:100%;aspect-ratio:2.22;background:var(--surface);touch-action:pan-y}
+.flowviz[data-mode="3d"] .fv-canvas{aspect-ratio:16/9;touch-action:none;cursor:grab}
+.flowviz[data-mode="3d"] .fv-canvas:active{cursor:grabbing}
+.fv-foot{display:grid;grid-template-columns:minmax(220px,340px) minmax(0,1fr);gap:12px 24px;align-items:start;padding:12px 14px 14px;border-top:1px solid var(--line-3)}
+.fv-legend{display:flex;flex-direction:column;gap:5px}
+.fvl-t{font-size:.8125rem;color:var(--fg-2)}
+.fvl-bar{display:block;height:10px;border:1px solid var(--line-2);border-radius:var(--r-s)}
+.fvl-k{display:flex;justify-content:space-between;font-size:.8125rem;color:var(--fg-3);font-variant-numeric:tabular-nums}
+.fvl-k.fvl-abs{position:relative;display:block;height:1.2em}
+.fvl-k.fvl-abs span{position:absolute;top:0;transform:translateX(-50%)}
+.fvl-k.fvl-abs span:first-child{transform:none}
+.fvl-k.fvl-abs span:last-child{transform:translateX(-100%)}
+.fv-read{margin:0;font-size:.875rem;color:var(--fg-2);max-width:72ch}
+@media (max-width:560px){
+  .fv-canvas{aspect-ratio:1.78}
+  .fv-foot{grid-template-columns:minmax(0,1fr)}
+  .fv-play{margin-left:0}
+}
+@media print{ .fv-bar{display:none} }
+/* viewer segmented groups sit straight on the bar (no inner tray); buttons carry the tint */
+.viewer .ctl .segbar button{background:var(--surface-2)}
+.viewer .ctl .segbar button:hover{background:var(--surface-3)}
+.viewer .ctl .segbar button[aria-pressed="true"]{background:var(--ink);color:var(--ink-fg)}
+
+/* =====================================================================================================
+   PLATFORM LAYER — app shell and component restyle. Later rules here override the document-era rules above.
+   ===================================================================================================== */
+body{font:400 .9375rem/1.6 var(--f-body);letter-spacing:-.003em}
+::selection{background:var(--accent-soft);color:var(--fg)}
+html{scrollbar-color:var(--line-3) transparent}
+*{scrollbar-width:thin}
+::-webkit-scrollbar{width:10px;height:10px} ::-webkit-scrollbar-thumb{background:var(--line-3);border-radius:10px;border:2px solid var(--bg)} ::-webkit-scrollbar-track{background:transparent}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:3px}
+a{color:var(--accent);text-decoration:none}
+a:hover{color:var(--accent-2);text-decoration:underline;text-underline-offset:3px}
+h1,h2,h3,h4{font-family:var(--f-display);font-weight:600;letter-spacing:-.012em;color:var(--fg)}
+h2{font-size:1.625rem;letter-spacing:-.02em}
+h3{font-size:1.125rem;margin-top:2.25rem;margin-bottom:.5rem;padding-top:0;border-top:0}
+h4{font-size:.9375rem}
+h2 .secno,h3 .subno{color:var(--fg-3);font-weight:500;font-family:var(--f-mono);font-size:.78em;letter-spacing:0}
+p,li{max-width:72ch}
+code,.mono{font-family:var(--f-mono);font-size:.86em}
+p code,li code,td code,dd code{background:var(--surface-2);border:1px solid var(--line);border-radius:4px;padding:.05em .35em}
+b,strong{font-weight:600}
+.msym{font-family:"Material Symbols Outlined";font-weight:300;font-style:normal;font-size:20px;line-height:1;display:inline-block;width:1em;height:1em;overflow:hidden;
+  letter-spacing:normal;text-transform:none;white-space:nowrap;direction:ltr;font-feature-settings:"liga";-webkit-font-smoothing:antialiased;flex:none;vertical-align:middle}
+kbd{font:500 .6875rem/1 var(--f-mono);color:var(--fg-3);border:1px solid var(--line-2);border-radius:4px;padding:3px 5px;background:var(--surface)}
+
+/* ---------- shell ---------- */
+.app{min-height:100vh;min-height:100svh}
+.topbar{position:sticky;top:0;z-index:30;height:var(--topbar-h);display:flex;align-items:center;gap:10px;padding:0 14px 0 12px;padding-top:env(safe-area-inset-top,0px);
+  background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:saturate(1.4) blur(10px);-webkit-backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:9px;min-height:44px;padding:0 6px;color:var(--fg);text-decoration:none;border-radius:6px}
+.brand:hover{color:var(--fg);text-decoration:none;background:var(--surface-2)}
+.brand .msym{font-size:22px;color:var(--accent);transform:rotate(45deg)}
+.b-name{font-weight:600;font-size:.9375rem;letter-spacing:-.01em}
+.b-sub{color:var(--fg-3);font-size:.875rem}
+.issue{font:500 .75rem/1 var(--f-mono);color:var(--fg-2);border:1px solid var(--line-2);border-radius:var(--r-s);padding:5px 7px;white-space:nowrap}
+.tb-gap{flex:1}
+.iconbtn,.tbbtn,.searchbtn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:36px;min-width:36px;padding:0 9px;border:1px solid transparent;border-radius:6px;
+  background:transparent;color:var(--fg-2);font:500 .8125rem var(--f-body);cursor:pointer;transition:background .12s,color .12s,border-color .12s}
+.iconbtn:hover,.tbbtn:hover{background:var(--surface-2);color:var(--fg)}
+.searchbtn{min-width:220px;justify-content:flex-start;border-color:var(--line-2);background:var(--surface);color:var(--fg-3)}
+.searchbtn:hover{border-color:var(--line-3);color:var(--fg-2)}
+.searchbtn kbd{margin-left:auto}
+.tbbtn{border-color:var(--line-2)}
+.tbbtn[aria-pressed="true"]{background:var(--accent-soft);border-color:var(--accent-line);color:var(--fg)}
+.navbtn{display:none}
+.sidebar{position:fixed;z-index:20;top:var(--topbar-h);left:0;bottom:0;width:var(--sidebar-w);overflow-y:auto;padding:12px 10px 32px;border-right:1px solid var(--line);background:var(--bg)}
+.sidebar ul{list-style:none;margin:0 0 6px;padding:0}
+.sidebar li{max-width:none}
+.sb-group{margin:18px 10px 6px;font:500 .75rem/1 var(--f-body);color:var(--fg-3);letter-spacing:.01em}
+.sidebar a{display:flex;align-items:center;gap:10px;min-height:34px;padding:0 10px;border-radius:6px;color:var(--fg-2);font-size:.875rem;font-weight:500;text-decoration:none}
+.sidebar a .msym{font-size:19px;color:var(--fg-3)}
+.sidebar a:hover{background:var(--surface-2);color:var(--fg);text-decoration:none}
+.sidebar a[aria-current="page"]{background:var(--surface-2);color:var(--fg)}
+.sidebar a[aria-current="page"] .msym{color:var(--accent)}
+.workspace{margin-left:var(--sidebar-w);min-width:0}
+.workspace main{max-width:1200px;margin:0 auto;padding:28px 40px 96px}
+.scrim{position:fixed;inset:0;z-index:19;background:color-mix(in srgb,var(--bg) 70%,transparent)}
+.skip{top:calc(env(safe-area-inset-top,0px) - 80px);background:var(--accent);color:var(--accent-fg);border-radius:6px}
+.skip:focus{top:8px}
+
+/* ---------- page header and sub-tabs ---------- */
+.sechead{padding:4px 0 0;margin:0 0 6px;border:0}
+.sechead h2{font-size:1.625rem}
+section.sec.has-tabs .sechead{margin-bottom:14px}
+.tabbar{display:flex;gap:2px;overflow-x:auto;margin:0 0 22px;border-bottom:1px solid var(--line);scrollbar-width:none}
+.tabbar::-webkit-scrollbar{display:none}
+.tabbar a{flex:none;display:inline-flex;align-items:center;min-height:40px;padding:0 12px;margin-bottom:-1px;border-bottom:2px solid transparent;color:var(--fg-3);font-size:.875rem;font-weight:500;text-decoration:none;white-space:nowrap}
+.tabbar a:hover{color:var(--fg);text-decoration:none}
+.tabbar a[aria-selected="true"]{color:var(--fg);border-bottom-color:var(--accent)}
+.tabpanel[hidden]{display:none}
+.tabpanel>h3:first-child{margin-top:0}
+.verdict{font-size:1rem;line-height:1.65;color:var(--fg-2);max-width:78ch}
+.verdict b{color:var(--fg);font-weight:600}
+.lede{font-size:1.0625rem}
+.verdict.lede{font-size:1.0625rem}
+.meta{color:var(--fg-3);font-size:.8125rem}
+
+/* ---------- source, estimate and status ---------- */
+.src{font:.75rem/1.55 var(--f-mono);color:var(--fg-3);max-width:96ch}
+.src::before{content:"Source ";font-family:var(--f-body);font-weight:600;color:var(--fg-3);letter-spacing:.01em}
+.src a{color:var(--fg-2)}
+.est{font:600 .6875rem/1 var(--f-mono);letter-spacing:.04em;color:var(--fg-2);border:1px solid var(--line-3);border-radius:4px;padding:2px 4px;text-transform:uppercase}
+.chip{font:600 .75rem/1 var(--f-body);padding:4px 7px;border-radius:var(--r-s);border:0}
+.chip.met{color:var(--ok);background:var(--ok-soft)}
+.chip.risk{color:var(--warn);background:var(--warn-soft)}
+.chip.fail{color:var(--bad);background:var(--bad-soft)}
+.chip.open{color:var(--open);background:var(--open-soft)}
+
+/* ---------- key parameters: a spec list, not hero numbers ---------- */
+.kpis{margin:18px 0 22px;border:1px solid var(--line);border-radius:var(--r);background:var(--surface);overflow:hidden}
+.kpi{padding:10px 14px;border-bottom:1px solid var(--line);grid-template-columns:minmax(0,12rem) minmax(0,7.5rem) minmax(0,1fr)}
+.kpi .l{font:500 .8125rem/1.4 var(--f-body);color:var(--fg-2)}
+.kpi .v{font:500 1rem/1.3 var(--f-mono);letter-spacing:-.01em;color:var(--fg)}
+.kpi .s{font-size:.8125rem;color:var(--fg-3)}
+.v.ok{color:var(--ok)} .v.warn{color:var(--warn)} .v.bad{color:var(--bad)}
+
+/* ---------- panels ---------- */
+.card{border-radius:var(--r);border-color:var(--line);background:var(--surface)}
+.card.pick{border-color:var(--accent-line);outline:0;box-shadow:inset 0 0 0 1px var(--accent-line)}
+.decision{border:1px solid var(--line-2);border-radius:var(--r);background:var(--surface);padding:16px 18px 14px}
+.decision.red{border-color:var(--bad-line)}
+.decision b.q{font:600 1rem/1.4 var(--f-display);letter-spacing:-.005em}
+.decision b.q::before{font:600 .6875rem/1 var(--f-body);border:0;background:var(--open-soft);color:var(--open);border-radius:4px;padding:4px 6px;vertical-align:.15em}
+.decision.red b.q::before{background:var(--bad-soft);color:var(--bad)}
+.decision .rec{background:var(--surface-2);border-radius:6px}
+.measure{margin:32px 0 10px;border:1px solid var(--line);border-radius:var(--r);background:var(--surface);padding:0 16px}
+.measure h4{border-bottom:1px solid var(--line);font-size:.9375rem;padding:12px 0 10px}
+.measure li .id{font:500 .75rem/1.6 var(--f-mono);color:var(--accent)}
+.measure li:last-child{border-bottom:0}
+details.more{border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+details.more>summary{font:500 .875rem/1.3 var(--f-body);color:var(--fg-2)}
+details.more>summary:hover{color:var(--fg)}
+
+/* ---------- tables ---------- */
+.tbl{border:1px solid var(--line);border-radius:var(--r);background:var(--surface)}
+.tbl.nofold{background:var(--surface)}
+table{border-top:0;border-bottom:0;font-size:.8125rem}
+th,td{border-bottom:1px solid var(--line);padding:8px 12px}
+th:first-child,td:first-child{padding-left:14px}
+thead th{background:var(--surface);color:var(--fg-3);font:500 .75rem/1.3 var(--f-body);letter-spacing:.01em;border-bottom:1px solid var(--line-2)}
+tbody tr:hover td{background:var(--surface-2)}
+td.n,th.n{font-family:var(--f-mono);font-size:.78rem;letter-spacing:-.01em}
+thead th.n{font-family:var(--f-body)}
+tbody tr.total td,tr.total td{font-weight:600;border-top:1px solid var(--line-3);background:var(--surface-2)}
+.thbtn::after{color:var(--fg-3)}
+
+/* ---------- figures and charts ---------- */
+figure.chart{margin:18px 0;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:0 16px 8px}
+figure.chart figcaption{font:500 .875rem/1.4 var(--f-body);color:var(--fg);padding:12px 0 6px}
+figcaption .figno{font-family:var(--f-mono);font-weight:500;color:var(--fg-3);font-size:.75rem;margin-right:2px}
+svg text{font:11.5px var(--f-body)}
+.chain .box{border-radius:6px;border-color:var(--line)}
+.chain .box .v{font:500 1.25rem/1.15 var(--f-mono)}
+.chain .box .f{font-family:var(--f-mono);font-size:.75rem}
+.sliders{border:1px solid var(--line);background:var(--surface);border-radius:var(--r)}
+.sl label output{font-family:var(--f-mono)}
+.seg{border-color:var(--line-2);background:var(--surface-2);border-radius:6px}
+.seg button{border-radius:4px;min-height:36px;font-size:.8125rem}
+.seg button[aria-pressed="true"]{background:var(--surface-3);color:var(--fg);box-shadow:inset 0 0 0 1px var(--line-3)}
+.btnlink{min-height:38px;border-radius:6px;font:500 .875rem var(--f-body);background:var(--accent);border-color:var(--accent);color:var(--accent-fg)}
+.btnlink:hover{background:var(--accent-2);border-color:var(--accent-2);color:var(--accent-fg);text-decoration:none}
+.btnlink.quiet{background:transparent;border-color:var(--line-2);color:var(--fg)}
+.btnlink.quiet:hover{background:var(--surface-2);border-color:var(--line-3);color:var(--fg)}
+ul.files{border-top:1px solid var(--line)}
+ul.files a{color:var(--accent);font-weight:500}
+
+/* ---------- workspace layouts: visual first, inspector beside ---------- */
+.workspace-grid{display:grid;gap:16px;align-items:start;margin:16px 0 20px}
+.ov-hero{grid-template-columns:minmax(0,1.55fr) minmax(300px,1fr)}
+.ov-hero .kpis{margin:0}
+.kp-side .kpi{grid-template-columns:minmax(0,1fr) auto}
+.kp-side .kpi .s{grid-column:1/-1}
+.cad-work{grid-template-columns:minmax(0,1fr) 300px}
+.inspector{border:1px solid var(--line);border-radius:var(--r);background:var(--surface);padding:4px 14px 12px;max-height:620px;overflow:auto}
+.inspector .cadparts{margin:0;border:0}
+.inspector .cadparts summary{font:600 .875rem/1.3 var(--f-body);min-height:40px}
+.inspector .cadparts button{min-height:32px;font-size:.8125rem;border-radius:5px;border-color:var(--line-2)}
+.model-slot:empty{display:none}
+.viewer{border:1px solid var(--line);border-radius:var(--r);background:var(--surface)}
+.viewer .ctl{border-top:1px solid var(--line);background:var(--surface);gap:8px 18px}
+.viewer .ctl button{font:500 .8125rem var(--f-body);min-height:34px;border-radius:5px}
+.viewer .ctl .segbar button[aria-pressed="true"]{background:var(--accent-soft);color:var(--fg);box-shadow:inset 0 0 0 1px var(--accent-line)}
+.cgl{font:500 .75rem/1 var(--f-body);color:var(--fg-3)}
+.cmeta{font:400 .75rem/1.3 var(--f-mono);color:var(--fg-3)}
+.cadview canvas{background:radial-gradient(120% 90% at 50% 35%,var(--stage-1),var(--stage-2))}
+.ov-hero .cadview{margin:0}
+.ov-hero .cadview canvas{height:clamp(300px,52vh,520px)}
+.cadview .tip{border-radius:6px;box-shadow:var(--shadow-pop)}
+
+/* flow viewer: canvas left, controls and legend as an inspector on wide screens */
+.flowviz{border:1px solid var(--line);border-radius:var(--r)}
+.fv-bar{border-bottom:1px solid var(--line)}
+.fv-bar .seg button[aria-pressed="true"]{background:var(--accent-soft);color:var(--fg);box-shadow:inset 0 0 0 1px var(--accent-line)}
+.fv-foot{border-top:1px solid var(--line)}
+.fv-play{border-radius:6px;min-height:36px}
+
+/* drawing sheets: one large sheet and a rail of the set */
+.drawings.sheetview{display:grid;grid-template-columns:220px minmax(0,1fr);gap:16px;align-items:start}
+.sheetrail{display:flex;flex-direction:column;gap:2px;position:sticky;top:calc(var(--topbar-h) + 16px)}
+.sheetrail button{display:flex;gap:10px;align-items:baseline;text-align:left;min-height:38px;padding:8px 10px;border:0;border-radius:6px;background:transparent;color:var(--fg-2);font:500 .8125rem/1.3 var(--f-body);cursor:pointer}
+.sheetrail button:hover{background:var(--surface-2);color:var(--fg)}
+.sheetrail button[aria-pressed="true"]{background:var(--surface-2);color:var(--fg);box-shadow:inset 0 0 0 1px var(--line-2)}
+.sheetrail .sr-n{font-family:var(--f-mono);color:var(--fg-3);min-width:1.2em}
+.drawings.sheetview figure.sheet{display:none;grid-column:2}
+.drawings.sheetview figure.sheet.cur{display:block}
+.sheetbtn{border-radius:6px;overflow:hidden;border-color:var(--line-2)}
+.lightbox{border-radius:var(--r);border-color:var(--line-2);box-shadow:var(--shadow-pop)}
+.lb-bar button{border-radius:6px}
+
+/* ---------- overview ---------- */
+/* the overview keeps its page heading for screen readers and focus, visually replaced by the hero */
+.on-home #overview .sechead{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+#overview .verdict.lede{font-size:1.125rem;line-height:1.6;color:var(--fg-2);max-width:80ch;margin-top:4px}
+#overview .verdict.lede b:first-child{display:block;font:600 1.5rem/1.3 var(--f-display);letter-spacing:-.02em;color:var(--fg);margin-bottom:8px;max-width:34ch}
+.closing{margin:48px 0 0;padding:18px 20px;border:1px solid var(--line);border-radius:var(--r);background:var(--surface)}
+.closing h2{font-size:1.125rem;letter-spacing:-.01em}
+ol.next{border-top:1px solid var(--line)}
+ol.next .d{font-family:var(--f-mono);font-weight:500;font-size:.8125rem}
+
+/* ---------- report info (cover) ---------- */
+.cover{border:1px solid var(--line);border-radius:var(--r);background:var(--surface);padding:22px 24px}
+.cover .mast{border-bottom:1px solid var(--line);margin-bottom:22px;padding-bottom:12px}
+.cover .mast .org{font:500 .8125rem/1.3 var(--f-mono);color:var(--fg-3)}
+.cover h1{font:600 1.875rem/1.15 var(--f-display);letter-spacing:-.025em;max-width:22ch}
+.cover .subtitle{color:var(--fg-2);font-size:1rem;margin:10px 0 0}
+.cover .docref{color:var(--fg-2);font-size:.875rem}
+.sig-line{font:italic 400 1rem/30px var(--f-math);border-bottom-color:var(--line-3)}
+.report-only{display:none}
+
+/* ---------- search palette ---------- */
+.palette{width:min(640px,calc(100vw - 32px));max-width:none;margin:12vh auto auto;padding:0;border:1px solid var(--line-2);border-radius:10px;background:var(--surface);color:var(--fg);box-shadow:var(--shadow-pop)}
+.palette::backdrop{background:color-mix(in srgb,var(--bg) 60%,transparent)}
+.pal-in{display:flex;align-items:center;gap:10px;padding:0 14px;border-bottom:1px solid var(--line)}
+.pal-in .msym{color:var(--fg-3)}
+.pal-in input{flex:1;min-height:50px;border:0;background:transparent;color:var(--fg);font:400 1rem var(--f-body);outline:none}
+.pal-in:focus-within{box-shadow:inset 0 -2px 0 var(--accent)}
+.pal-empty{margin:0;padding:0 16px;color:var(--fg-3);font-size:.875rem}
+.pal-empty:not(:empty){padding:14px 16px}
+.report #appTitle{display:none}
+.pal-in input::placeholder{color:var(--fg-3)}
+.pal-list{list-style:none;margin:0;padding:6px;max-height:min(420px,60vh);overflow:auto}
+.pal-list li{display:flex;align-items:center;gap:10px;min-height:40px;padding:0 10px;border-radius:6px;cursor:pointer;max-width:none}
+.pal-list li .msym{font-size:18px;color:var(--fg-3)}
+.pal-list li[aria-selected="true"]{background:var(--accent-soft)}
+.po-t{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:.875rem}
+.po-s{color:var(--fg-3);font-size:.75rem;white-space:nowrap}
+.po-none{color:var(--fg-3);font-size:.875rem;padding:14px 10px!important;cursor:default!important}
+
+/* ---------- report view: the traditional document from the same content ---------- */
+.report .sidebar,.report .tabbar,.report .searchbtn,.report .navbtn{display:none}
+.report .workspace{margin-left:0}
+.report .workspace main{max-width:900px;padding-top:32px}
+.report section.sec{display:block;margin-bottom:56px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+.report .tabpanel{display:block}
+.report .report-only{display:block}
+.report #overview .sechead{display:block}
+.report .drawings.sheetview{display:block}
+.report .sheetrail{display:none}
+.report .drawings.sheetview figure.sheet{display:block;margin-bottom:16px}
+
+/* ---------- narrow screens ---------- */
+@media (max-width:1100px){ .ov-hero,.cad-work{grid-template-columns:minmax(0,1fr)} .inspector{max-height:none} .workspace main{padding:24px 28px 80px} }
+@media (max-width:899px){
+  .navbtn{display:inline-flex}
+  .b-sub,.issue{display:none}
+  .searchbtn{min-width:0}
+  .searchbtn .sb-t,.searchbtn kbd,.tbbtn .rb-t{display:none}
+  .sidebar{top:var(--topbar-h);transform:translateX(-100%);visibility:hidden;transition:transform .2s cubic-bezier(.2,.8,.2,1),visibility 0s .2s;width:min(300px,86vw)}
+  .drawer-open .sidebar{transform:none;visibility:visible;box-shadow:var(--shadow-pop);transition:transform .2s cubic-bezier(.2,.8,.2,1)}
+  .workspace{margin-left:0}
+  .workspace main{padding:20px 16px 72px}
+  .drawings.sheetview{grid-template-columns:minmax(0,1fr)}
+  .sheetrail{position:static;flex-direction:row;overflow-x:auto}
+  .sheetrail button{flex:none}
+  .sheetrail .sr-t{display:none}
+  .drawings.sheetview figure.sheet{grid-column:1}
+}
+@media (max-width:560px){ .sechead h2{font-size:1.375rem} #overview .verdict.lede b:first-child{font-size:1.25rem} .kpi{grid-template-columns:minmax(0,1fr) auto} .cover{padding:16px} }
+@media (prefers-reduced-motion:reduce){ .sidebar{transition:none} }
+
+/* ---------- print: the report view on paper ---------- */
+@media print{
+  .topbar,.sidebar,.scrim,.tabbar,.palette,.sheetrail{display:none!important}
+  .workspace{margin-left:0!important}
+  main{max-width:none;padding:0}
+  .tabpanel,section.sec{display:block!important}
+  .report-only{display:block!important}
+  .kpis,.tbl,figure.chart,.decision,.measure,.cover,.closing,.inspector{border-color:#cbcfd4;background:#fff}
+}
+
+table.revrec td:nth-child(2){white-space:nowrap;font-family:var(--f-mono);font-size:.75rem}
+.b-name{white-space:nowrap}
+@media (max-width:899px){.iconbtn,.tbbtn,.searchbtn{min-height:44px;min-width:44px}.topbar{gap:4px}.tabbar a{min-height:44px}.sidebar a{min-height:44px}}
+/* the static render is the print and offline stand-in for the live model on the overview */
+.gafig{display:none}
+.report .gafig,main:has(.cadview.offline) .gafig{display:block}
+@media print{.gafig{display:block!important}}
+
+/* scan fixes: measure-box headings are h3 (they follow the page h2 directly); Plex sets more characters per ch than STIX did */
+.measure h3.mh{font-size:.9375rem;margin:0;padding:12px 0 10px;border-bottom:1px solid var(--line)}
+p,li{max-width:62ch}
+.verdict,#overview .verdict.lede{max-width:62ch}
+.src{max-width:76ch}
+.meta,.decision .rec,.fv-read{max-width:62ch}
+svg text{font-size:12px}
+
+/* documenter findings: 12 px floor for labels, one selection signal, loaded weights only, blue print accent */
+.est,kbd,.decision b.q::before{font-size:.75rem}
+h1{font-weight:600}
+.seg button[aria-pressed="true"]{background:var(--accent-soft);color:var(--fg);box-shadow:inset 0 0 0 1px var(--accent-line)}
+:root.printing{--accent:#1F57B8;--accent-2:#174a9c;--accent-soft:#e7effc;--accent-line:#a9c3ee}
+@media print{:root{--accent:#1F57B8;--accent-2:#174a9c;--accent-soft:#e7effc;--accent-line:#a9c3ee}}
+
+:root.printing{color-scheme:light}
+
+/* heat dissipation viewer: a thermal-camera stage, case selector above, note below */
+.thermviz{padding:0}
+.thermviz figcaption{padding:12px 16px 6px}
+.th-bar{display:flex;flex-wrap:wrap;gap:8px;padding:0 12px 10px;border-bottom:1px solid var(--line)}
+.th-bar .seg{border:0;background:none;padding:0;gap:2px}
+.th-bar .seg button{padding:0 12px;background:var(--surface-2)}
+.th-canvas{display:block;width:100%;aspect-ratio:16/9;background:#2a2f36;touch-action:none;cursor:grab}
+.th-canvas:active{cursor:grabbing}
+.th-note{margin:0;padding:10px 16px 12px;font-size:.875rem;color:var(--fg-2);border-top:1px solid var(--line);max-width:none}
+.th-gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,22rem),1fr));gap:12px;padding:12px 0}
+.th-gallery img{width:100%;height:auto;border-radius:6px;border:1px solid var(--line)}
+@media (max-width:560px){.th-canvas{aspect-ratio:4/3}}
+@media print{.th-bar,.th-canvas{display:none}}
+
+.th-img{display:block;width:100%;height:auto;background:#111}
+.th-img[hidden],.th-canvas[hidden]{display:none}
+
+/* ---------- companion document page ---------- */
+/* reader: one section (or work package) at a time; side contents on wide screens, a section menu on narrow ones.
+   Without the script, in "Full document" mode and in print every section shows. */
+.reader{display:block}
+.side h2{font:600 .75rem/1.3 var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--fg-3);margin:0 0 10px;border:0;padding:0}
+.side ol{list-style:none;margin:0;padding:0}
+.side ol ol{margin:2px 0 6px 1.9rem}
+.side a{display:flex;align-items:baseline;gap:8px;min-height:36px;padding:7px 10px;border-radius:var(--r-s);color:var(--fg-2);text-decoration:none;font-size:.875rem;line-height:1.35}
+.side ol ol a{min-height:32px;padding:5px 10px;font-size:.8125rem}
+.side a:hover{background:var(--surface-2);color:var(--fg)}
+.side a[aria-current="page"]{background:var(--accent-soft,var(--surface-2));color:var(--fg);font-weight:600}
+.side .n{flex:none;min-width:1.2rem;font-variant-numeric:tabular-nums;color:var(--fg-3)}
+.side .t{flex:1}
+.side .cnt{flex:none;font:500 .75rem var(--f-mono);color:var(--fg-3)}
+.side .cnt.all{color:var(--ok)}
+.pgbar{display:none}
+.pager{display:none}
+.pglist{margin:16px 0;padding-left:1.4em}
+.pglist li{margin:.35em 0}
+html.paged .pg{display:none}
+html.paged .pg.on{display:block}
+html.paged .pg>h2:first-child,html.paged .pg>h3:first-child{margin-top:8px;padding-top:0;border-top:0}
+html.paged .pager{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:40px 0 8px;padding-top:18px;border-top:1px solid var(--line)}
+.pager a{display:flex;flex-direction:column;gap:2px;padding:12px 14px;border:1px solid var(--line-2);border-radius:var(--r);color:var(--fg);text-decoration:none;font-size:.9375rem;line-height:1.35}
+.pager a span{font:500 .75rem var(--f-mono);color:var(--fg-3);text-transform:uppercase;letter-spacing:.05em}
+.pager a:hover{border-color:var(--accent)}
+.pager .nx{text-align:right;grid-column:2}
+@media (min-width:1100px){
+  html.paged .reader{display:grid;grid-template-columns:16.5rem minmax(0,1fr);gap:40px;align-items:start}
+  html.paged .side{position:sticky;top:12px;max-height:calc(100vh - 24px);overflow:auto;padding:4px 4px 16px 0;border-right:1px solid var(--line)}
+}
+@media (max-width:1099px){
+  html.paged .side{display:none}
+  html.paged .pgbar{display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:5;margin:0 0 16px;padding:10px 0;background:var(--bg);border-bottom:1px solid var(--line)}
+  .pgbar label{font:600 .8125rem var(--f-body);color:var(--fg-2)}
+  .pgbar select{flex:1;min-width:0;min-height:44px;padding:0 10px;border:1px solid var(--line-3);border-radius:var(--r-s);background:var(--surface);color:var(--fg);font:inherit;font-size:.9375rem}
+}
+html:not(.paged) .side{margin:0 0 32px}
+html:not(.paged) .side ol ol{display:flex;flex-wrap:wrap;gap:0 6px}
+@media print{html.paged .pg{display:block}.side,.pgbar,.pager,#allBtn{display:none!important}}
+/* figures: CAD renders on white in both themes, so the frame stays light */
+.docfig{margin:4px 0 24px;max-width:46rem}
+.docfig img{display:block;width:100%;height:auto;background:#fff;border:1px solid var(--line);border-radius:6px}
+.docfig figcaption{margin-top:6px;font-size:.8125rem;line-height:1.45;color:var(--fg-2);max-width:62ch}
+.doc h2{margin-top:64px;padding-top:18px;border-top:1px solid var(--line);font-size:1.5rem;letter-spacing:-.02em}
+.doc h3{margin-top:40px;padding-top:12px;border-top:1px solid var(--line-2);font-size:1.25rem}
+.doc h4{margin-top:28px;font-size:1.125rem}
+.doc p,.doc li{max-width:58ch;text-wrap:pretty}
+.doc td{text-wrap:pretty}
+.doc table{width:auto;max-width:100%}
+.doc td:not(.n){max-width:60ch}
+.doc p,.doc li,.doc dd,.doc td,.doc blockquote{overflow-wrap:break-word}
+.doc ul,.doc ol{padding-left:1.4em}
+.doc li{margin:.25em 0}
+.doc li.task{list-style:none;margin-left:-1.4em;display:flex;gap:10px;align-items:baseline}
+.doc .box{flex:none;width:14px;height:14px;border:1px solid var(--fg-2);border-radius:var(--r-s);transform:translateY(2px)}
+.doc .box.on{background:var(--ink)}
+.doc blockquote{margin:16px 0;padding:10px 14px;background:var(--surface-2);border-left:0;border-radius:var(--r-s);color:var(--fg)}
+.doc code{font-size:.92em}
+.doc pre.code{background:var(--surface);border:1px solid var(--line-2);border-radius:var(--r-s);padding:12px 14px;overflow:auto;font-size:.875rem;line-height:1.5}
+.doc .tbl{margin:14px 0 18px}
+.doc td{vertical-align:top}
+.doc a{color:var(--accent);text-underline-offset:2px}
+.doc h3{border-top:0;padding-top:0}
+header.top{border-bottom:1px solid var(--line);padding-block:20px 28px}
+header.top h1{font:600 2rem/1.15 var(--f-display);letter-spacing:-.025em;max-width:24ch}
+.mast{border-bottom:1px solid var(--line);margin-bottom:28px}
+.mast .org{font:500 .8125rem/1.3 var(--f-mono);color:var(--fg-3)}
+.mast .tbbtn{margin-left:12px}
+.doc a:hover{text-decoration-color:var(--accent)}
+.backlink{color:var(--fg-2)}
+.doc .step{margin:22px 0 0;padding:14px 16px 6px;background:var(--surface);border:1px solid var(--line-2);border-radius:var(--r)}
+.doc .step h4{margin:0 0 8px;font-size:1.125rem;line-height:1.35}
+.doc .step .sno{margin-right:.35em;color:var(--accent);font-variant-numeric:tabular-nums}
+.doc dl.stepf{margin:0;display:grid;gap:0}
+.doc dl.stepf>div{display:grid;grid-template-columns:7.5rem minmax(0,1fr);gap:12px;padding:8px 0;border-top:1px solid var(--line)}
+.doc dl.stepf dt{font-weight:600;font-size:.875rem;color:var(--fg-2);padding-top:2px}
+.doc dl.stepf dd{margin:0;max-width:58ch;text-wrap:pretty}
+.doc dl.stepf .chk dt{color:var(--ok)}
+.doc dl.stepf .warn dt{color:var(--warn)}
+.doc ol.proc{margin:0;padding-left:1.3em}
+.doc ol.proc li{margin:.15em 0}
+@media (max-width:560px){.doc dl.stepf>div{grid-template-columns:minmax(0,1fr);gap:2px}.doc .step{padding:12px 12px 4px}}
+.doctoc ol.sub{columns:auto;margin:2px 0 10px 2.2em;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:4px 14px}
+.doctoc ol.sub li{max-width:none}
+.doctoc ol.sub a{display:inline-flex;align-items:center;min-height:44px;font-size:.875rem;color:var(--fg-2);text-decoration:underline;text-decoration-color:var(--line-3);text-underline-offset:2px}
+.doc .step{position:relative}
+.doc .stepchk{min-height:44px;padding:0 14px;margin:0 0 8px;border:1px solid var(--line-3);border-radius:var(--r-s);background:transparent;color:var(--fg-2);font:600 .875rem var(--f-body);cursor:pointer}
+.doc .stepchk:hover{color:var(--fg);border-color:var(--fg-2)}
+.doc .stepchk[aria-pressed="true"]{background:var(--ok-soft);border-color:var(--ok);color:var(--ok)}
+.doc .step.isdone{border-color:var(--ok)}
+.doc h2,.doc h3,.doc h4{scroll-margin-top:64px}
+</style></head>
+<body>
+<a class="skip" href="#doc">Skip to content</a>
+<div class="wrap">
+<header class="top">
+  <div class="mast"><span class="org"><a class="backlink" href="./">← Design review DBF-RPT-001</a></span><span class="org">DBF-SW-001 <button type="button" class="tbbtn" id="allBtn" aria-pressed="false">Full document</button><button type="button" class="tbbtn" id="themeBtn"></button></span></div>
+  <h1>C0 flight software package: from a blank flight controller to the first transition</h1>
+</header>
+<div class="runhead" id="runhead" aria-hidden="true"><span class="rh-doc">DBF-SW-001</span><span class="rh-sec" id="rhSec"></span><a class="rh-toc" href="#contents" tabindex="-1">Contents</a></div>
+<div class="reader">
+<nav class="side" id="contents" aria-label="Contents"><h2 id="tocTitle">Contents</h2><ol>
+<li><a href="#about" data-pg="about"><span class="n"></span><span class="t">About this document</span><span class="cnt" aria-hidden="true"></span></a></li>
+<li><a href="#0-verified-facts-this-package-relies-on" data-pg="0-verified-facts-this-package-relies-on"><span class="n">0</span><span class="t">Verified facts this package relies on</span><span class="cnt" aria-hidden="true"></span></a></li>
+<li><a href="#1-install-the-tools-windows" data-pg="1-install-the-tools-windows"><span class="n">1</span><span class="t">Install the tools (Windows)</span><span class="cnt" aria-hidden="true"></span></a></li>
+<li><a href="#2-firmware-target-and-files" data-pg="2-firmware-target-and-files"><span class="n">2</span><span class="t">Firmware target and files</span><span class="cnt" aria-hidden="true"></span></a></li>
+<li><a href="#3-first-flash-dfu" data-pg="3-first-flash-dfu"><span class="n">3</span><span class="t">First flash (DFU)</span><span class="cnt" aria-hidden="true"></span></a></li>
+<li><a href="#4-wiring-fc-pad-device" data-pg="4-wiring-fc-pad-device"><span class="n">4</span><span class="t">Wiring (FC pad → device)</span><span class="cnt" aria-hidden="true"></span></a></li>
+<li><a href="#5-load-the-parameters" data-pg="5-load-the-parameters"><span class="n">5</span><span class="t">Load the parameters</span><span class="cnt" aria-hidden="true"></span></a></li>
+<li><a href="#6-calibrations-props-off-battery-on-only-where-stated" data-pg="6-calibrations-props-off-battery-on-only-where-stated"><span class="n">6</span><span class="t">Calibrations (props off, battery on only where stated)</span><span class="cnt" aria-hidden="true"></span></a></li>
+<li><a href="#7-motor-order-direction-and-servo-checks" data-pg="7-motor-order-direction-and-servo-checks"><span class="n">7</span><span class="t">Motor order, direction and servo checks</span><span class="cnt" aria-hidden="true"></span></a></li>
+<li><a href="#8-failsafe-configuration-and-bench-tests" data-pg="8-failsafe-configuration-and-bench-tests"><span class="n">8</span><span class="t">Failsafe configuration and bench tests</span><span class="cnt" aria-hidden="true"></span></a></li>
+<li><a href="#9-first-flight-build-up" data-pg="9-first-flight-build-up"><span class="n">9</span><span class="t">First-flight build-up</span><span class="cnt" aria-hidden="true"></span></a></li>
+<li><a href="#10-decisions-that-changed-the-review-s-controls-chapter" data-pg="10-decisions-that-changed-the-review-s-controls-chapter"><span class="n">10</span><span class="t">Decisions that changed the review's controls chapter</span><span class="cnt" aria-hidden="true"></span></a></li>
+<li><a href="#11-sitl-validation-summary-2026-10-21" data-pg="11-sitl-validation-summary-2026-10-21"><span class="n">11</span><span class="t">SITL validation summary (2026-10-21)</span><span class="cnt" aria-hidden="true"></span></a></li>
+</ol></nav>
+<div class="readmain">
+<div class="pgbar"><label for="pgSel">Section</label><select id="pgSel"><option value="about">About this document</option><option value="0-verified-facts-this-package-relies-on">0. Verified facts this package relies on</option><option value="1-install-the-tools-windows">1. Install the tools (Windows)</option><option value="2-firmware-target-and-files">2. Firmware target and files</option><option value="3-first-flash-dfu">3. First flash (DFU)</option><option value="4-wiring-fc-pad-device">4. Wiring (FC pad → device)</option><option value="5-load-the-parameters">5. Load the parameters</option><option value="6-calibrations-props-off-battery-on-only-where-stated">6. Calibrations (props off, battery on only where stated)</option><option value="7-motor-order-direction-and-servo-checks">7. Motor order, direction and servo checks</option><option value="8-failsafe-configuration-and-bench-tests">8. Failsafe configuration and bench tests</option><option value="9-first-flight-build-up">9. First-flight build-up</option><option value="10-decisions-that-changed-the-review-s-controls-chapter">10. Decisions that changed the review's controls chapter</option><option value="11-sitl-validation-summary-2026-10-21">11. SITL validation summary (2026-10-21)</option></select></div>
+<main id="doc" class="doc">
+<section class="pg" id="pg-about" data-id="about">
+<p>ArduPlane QuadPlane on the CoreWing F405 Wing APP V2. This package holds everything the team needs to program and configure each programmable part of the C0 lift + cruise VTOL, in the order the work is done. Every number has a source key; the full source list with check dates is in <a href="../docs/research/firmware.md">docs/research/firmware.md</a>. Values marked (est.) are engineering estimates. "—" means the value is unknown.</p>
+<p><b>Status, 2026-10-21.</b> The parameter file passes the checker against the current ArduPlane metadata and the 4.7.1 stable metadata. All seven SITL scenarios passed on ArduPlane 4.7.2 (§11). Nothing here has run on the real board yet. Treat every gain as a starting value.</p>
+<div class="tbl"><table><thead><tr><th>File</th><th>What it is</th></tr></thead><tbody>
+<tr><td><code>vtol_c0.param</code></td><td>Full parameter set for the aircraft, with a comment and source on every line</td></tr>
+<tr><td><code>vtol_c0_hover_phase.param</code></td><td>Overlay for hover-only sessions: 10 m fence, no fixed-wing modes on the switch</td></tr>
+<tr><td><code>vtol_c0_elrs_mavlink.param</code></td><td>Overlay: switch the ELRS receiver from CRSF to MAVLink mode for a $0 Mission Planner link</td></tr>
+<tr><td><code>tools/check_params.py</code></td><td>Validator: syntax, names, ranges and the CoreWing DShot timer groups</td></tr>
+<tr><td><code>sitl/</code></td><td>SITL overrides, the scripted mission <code>mission_test.py</code>, results from 2026-10-21 (generic QuadPlane model) and 2026-10-25 (<code>results_c0/</code>, C0 airframe model)</td></tr>
+<tr><td><code>sitl/c0_physics.py</code></td><td>6-DOF physics model of C0 for ArduPilot SITL's JSON interface (reads mass, geometry and aero from <code>analysis/</code> and <code>cad/</code>); <code>--validate</code> prints the trim checks</td></tr>
+<tr><td><code>sitl/run_c0_sitl.ps1</code></td><td>Starts the C0 model + SITL for hand-flying from Mission Planner (TCP 127.0.0.1:5760)</td></tr>
+<tr><td><code>peripherals.md</code></td><td>ESCs (BLHeli_S / Bluejay), ELRS receiver and transmitter, GPS/compass, airspeed, Remote ID, telemetry</td></tr>
+<tr><td><code>checklists.md</code></td><td>Bench, pre-flight, failsafe-test and post-flight log-review checklists</td></tr>
+<tr><td><code>scripts/README.md</code></td><td>Why there are no Lua scripts: this firmware build does not include scripting</td></tr>
+</tbody></table></div>
+<nav class="pager" aria-label="Previous and next section"><span></span><a class="nx" href="#0-verified-facts-this-package-relies-on"><span>Next</span>Verified facts this package relies on</a></nav></section>
+<section class="pg" id="pg-0-verified-facts-this-package-relies-on" data-id="0-verified-facts-this-package-relies-on">
+<h2 id="0-verified-facts-this-package-relies-on">0. Verified facts this package relies on</h2>
+<div class="tbl"><table><thead><tr><th>Fact</th><th>Value</th><th>Source (checked 2026-10-21)</th></tr></thead><tbody>
+<tr><td>Board</td><td>CoreWing F405 Wing APP V2, STM32F405 with 1 MB flash</td><td>BOM; hwdef <code>FLASH_SIZE_KB 1024</code></td></tr>
+<tr><td>ArduPilot target</td><td><code>CoreWingF405WingV2</code> (hwdef folder exists on ArduPilot master)</td><td>github.com/ArduPilot/ardupilot <code>libraries/AP_HAL_ChibiOS/hwdef/CoreWingF405WingV2</code></td></tr>
+<tr><td>Stable firmware</td><td><b>ArduPlane 4.7.2 stable now includes this target.</b> It was beta-only in the review; that risk is closed</td><td>firmware.ardupilot.org/Plane/stable/CoreWingF405WingV2/firmware-version.txt and git-version.txt ("Plane: version to 4.7.2", 2026-10-11)</td></tr>
+<tr><td>QuadPlane in the build</td><td>yes (<code>HAL_QUADPLANE_ENABLED</code>); Quad, Hexa and Octa frames</td><td>features.txt (stable); hwdef include <code>minimize_fpv_osd.inc</code></td></tr>
+<tr><td>Lua scripting</td><td><b>not in the build</b> (<code>!AP_SCRIPTING_ENABLED</code>)</td><td>features.txt (stable)</td></tr>
+<tr><td>DShot</td><td>outputs 1–10. Bi-directional DShot only on 1–4. Outputs 11–12 are PWM only</td><td>hwdef PWM lines; board README; ardupilot.org board page</td></tr>
+<tr><td>Output groups</td><td>S1-2, S3-4, S5-7, S8-10, S11-12. "If any DShot-capable output in a group uses DShot then all DShot-capable outputs in that group need to use DShot"</td><td>hwdef README</td></tr>
+<tr><td>Battery-power limiter <code>BATT_WATT_MAX</code></td><td><b>not in the build</b> (<code>!AP_BATTERY_WATT_MAX_ENABLED</code>)</td><td>features.txt (stable)</td></tr>
+<tr><td>MAVLink-radio RC input (<code>RADIO_RC_CHANNELS</code>)</td><td>not in the build (<code>!AP_RCPROTOCOL_MAVLINK_RADIO_ENABLED</code>)</td><td>features.txt (stable)</td></tr>
+<tr><td>Gyro FFT</td><td>not in the build (<code>!HAL_GYROFFT_ENABLED</code>). Use the throttle-based notch</td><td>features.txt</td></tr>
+<tr><td>QAUTOTUNE / QuickTune</td><td>both in the build</td><td>hwdef (<code>QAUTOTUNE_ENABLED 1</code>); features.txt <code>AP_QUICKTUNE_ENABLED</code></td></tr>
+<tr><td>Barometer</td><td>SPL06 at I²C bus 0, address 0x76 — the <b>only</b> I²C bus, shared with the external I²C/airspeed connector</td><td>hwdef <code>BARO SPL06 I2C:0:0x76</code>, <code>I2C_ORDER I2C1</code></td></tr>
+<tr><td>Lift/pusher ESCs</td><td>SoloGood 45A BLHeli_S, "Support D-Shot 150/300/600". ESC MCU: —</td><td>BOM; amazon.com/dp/B0DJQVGSBC listing title</td></tr>
+<tr><td>RC receiver</td><td>RadioMaster RP3 V2, ESP8285, CRSF output, ships with ELRS 3.0</td><td>BOM; radiomasterrc.com product page</td></tr>
+</tbody></table></div>
+<nav class="pager" aria-label="Previous and next section"><a class="pv" href="#about"><span>Previous</span>About this document</a><a class="nx" href="#1-install-the-tools-windows"><span>Next</span>Install the tools (Windows)</a></nav></section>
+<section class="pg" id="pg-1-install-the-tools-windows" data-id="1-install-the-tools-windows">
+<h2 id="1-install-the-tools-windows">1. Install the tools (Windows)</h2>
+<ol><li><b>Mission Planner</b> (primary ground station; parameter files, motor test, logs): installer <a href="https://firmware.ardupilot.org/Tools/MissionPlanner/MissionPlanner-latest.msi" rel="noopener" target="_blank">firmware.ardupilot.org/Tools/MissionPlanner/MissionPlanner-latest.msi</a>, guide <a href="https://ardupilot.org/planner/docs/mission-planner-installation.html" rel="noopener" target="_blank">ardupilot.org/planner/docs/mission-planner-installation.html</a>.</li><li><b>QGroundControl</b> (optional second ground station): <a href="https://docs.qgroundcontrol.com/master/en/qgc-user-guide/getting_started/download_and_install.html" rel="noopener" target="_blank">docs.qgroundcontrol.com/master/en/qgc-user-guide/getting_started/download_and_install.html</a>. This package's parameter files use the Mission Planner/MAVProxy <code>NAME,VALUE</code> format. Load them with Mission Planner.</li><li><b>STM32CubeProgrammer</b> (needed once, for the first DFU flash): <a href="https://www.st.com/en/development-tools/stm32cubeprog.html" rel="noopener" target="_blank">st.com/en/development-tools/stm32cubeprog.html</a>. The ArduPilot page says it installs the DFU driver and may need Java (<a href="https://ardupilot.org/plane/docs/common-loading-firmware-onto-chibios-only-boards.html" rel="noopener" target="_blank">ardupilot.org/plane/docs/common-loading-firmware-onto-chibios-only-boards.html</a>).</li><li><b>ESC Configurator</b> (web, Chrome/Edge): <a href="https://esc-configurator.com/" rel="noopener" target="_blank">esc-configurator.com</a> — BLHeli_S/Bluejay settings through the FC.</li><li><b>ExpressLRS Configurator</b>: <a href="https://github.com/ExpressLRS/ExpressLRS-Configurator/releases" rel="noopener" target="_blank">github.com/ExpressLRS/ExpressLRS-Configurator/releases</a> — receiver firmware and bind phrase.</li><li><b>Python 3 + pymavlink</b> for the tools in this folder: <code>py -m pip install pymavlink</code>. The checker uses only the standard library.</li></ol>
+<nav class="pager" aria-label="Previous and next section"><a class="pv" href="#0-verified-facts-this-package-relies-on"><span>Previous</span>Verified facts this package relies on</a><a class="nx" href="#2-firmware-target-and-files"><span>Next</span>Firmware target and files</a></nav></section>
+<section class="pg" id="pg-2-firmware-target-and-files" data-id="2-firmware-target-and-files">
+<h2 id="2-firmware-target-and-files">2. Firmware target and files</h2>
+<ul><li>Target folder: <a href="https://firmware.ardupilot.org/Plane/stable/CoreWingF405WingV2/" rel="noopener" target="_blank">firmware.ardupilot.org/Plane/stable/CoreWingF405WingV2</a><ul><li><code>arduplane_with_bl.hex</code> — bootloader plus firmware. <b>First flash only, over DFU.</b></li><li><code>arduplane.apj</code> — later updates from Mission Planner ("Install Firmware" &gt; "Load custom firmware").</li></ul></li><li>Do <b>not</b> use <code>CoreWingF405WMiniV2</code>. That target is for the Wing Mini V2, which has a different current-sensor scale (<code>BATT_AMP_PERVLT</code> 51 vs 64, board page).</li><li>Pin the firmware version for the season. Record <code>ArduPlane V4.7.2 (git hash)</code> from the Mission Planner Messages tab in the build log. Retest in SITL before any upgrade.</li></ul>
+<nav class="pager" aria-label="Previous and next section"><a class="pv" href="#1-install-the-tools-windows"><span>Previous</span>Install the tools (Windows)</a><a class="nx" href="#3-first-flash-dfu"><span>Next</span>First flash (DFU)</a></nav></section>
+<section class="pg" id="pg-3-first-flash-dfu" data-id="3-first-flash-dfu">
+<h2 id="3-first-flash-dfu">3. First flash (DFU)</h2>
+<p>The board ships without an ArduPilot bootloader (hwdef README "Loading Firmware").</p>
+<ol><li>Remove the props. Unplug the flight battery. Leave only USB connected.</li><li>Enter DFU mode. The board has <b>no boot button</b>. The hwdef README says to "pull the <code>BOOT0</code> pin on the USB extender connector low while powering the board over USB, or hold the BOOT button on the wireless USB extender module if one is fitted". The included wireless module has that BOOT button, so use it. (On STM32 parts, BOOT0 is normally pulled <i>high</i> for DFU. The extender may invert it. Check the CoreWing Wing V2 user manual linked from the ArduPilot board page before bridging any pin.)</li><li>In Device Manager, check for "STM32 BOOTLOADER" under Universal Serial Bus devices.</li><li>STM32CubeProgrammer: connection <b>USB</b> &gt; Connect &gt; Open file <code>arduplane_with_bl.hex</code> &gt; Download.</li><li>Power-cycle. In Mission Planner, connect over USB (COM port, 115200, or auto). Messages should show <code>ArduPlane V4.7.2</code> and the board name.</li><li>Later updates: Mission Planner &gt; Setup &gt; Install Firmware &gt; "Load custom firmware" &gt; <code>arduplane.apj</code> (or pick Plane from the list once the board is detected).</li></ol>
+<nav class="pager" aria-label="Previous and next section"><a class="pv" href="#2-firmware-target-and-files"><span>Previous</span>Firmware target and files</a><a class="nx" href="#4-wiring-fc-pad-device"><span>Next</span>Wiring (FC pad → device)</a></nav></section>
+<section class="pg" id="pg-4-wiring-fc-pad-device" data-id="4-wiring-fc-pad-device">
+<h2 id="4-wiring-fc-pad-device">4. Wiring (FC pad → device)</h2>
+<p>Pad names come from the hwdef README and the ArduPilot board page. Before soldering, check every pad on the board's own pinout images: the GPS pads and the GPS connector use different pin orders (hwdef README).</p>
+<h3 id="4-1-signal-and-power">4.1 Signal and power</h3>
+<div class="tbl"><table><thead><tr><th>FC pad / connector</th><th>Device</th><th>Notes</th></tr></thead><tbody>
+<tr><td>BAT+/BAT− (board power input, through the 90 A sensor)</td><td>6S pack via XT90-S anti-spark</td><td>Board input 3–6S, 10–28 V. Fit the included 35 V 470 µF capacitor on the input (board page)</td></tr>
+<tr><td>S1 header</td><td>Aileron servo, left</td><td>Servo rail powered by the onboard servo BEC (8 A cont / 14 A peak). <b>Set the rail to 6 V</b>: the ES3005HV has no 5 V rating (budget-avionics §6)</td></tr>
+<tr><td>S2 header</td><td>Aileron servo, right</td><td></td></tr>
+<tr><td>S3 header</td><td>Elevator servo</td><td></td></tr>
+<tr><td>S4 header</td><td>Rudder servo, left boom</td><td></td></tr>
+<tr><td>S5 header</td><td>Lift ESC 1 — front-right, CCW (signal + GND only)</td><td>DShot150. Do <b>not</b> connect an ESC BEC red wire to the servo rail (board page)</td></tr>
+<tr><td>S6 header</td><td>Lift ESC 2 — rear-left, CCW</td><td></td></tr>
+<tr><td>S7 header</td><td>Lift ESC 3 — front-left, CW</td><td></td></tr>
+<tr><td>S8 header</td><td>Lift ESC 4 — rear-right, CW</td><td></td></tr>
+<tr><td>S9 header</td><td>Pusher ESC (SoloGood 45A)</td><td>DShot150 via <code>SERVO_BLH_MASK</code>/<code>OTYPE</code></td></tr>
+<tr><td>S10 header</td><td>— leave empty</td><td>In the DShot group with S8–S9</td></tr>
+<tr><td>S11 header</td><td>Rudder servo, right boom</td><td>PWM-only output</td></tr>
+<tr><td>LED pad (PWM12)</td><td>spare</td><td>PWM only; no serial LED (no DMA, hwdef README)</td></tr>
+<tr><td>TX6 / RX6 (+5 V, GND)</td><td>RP3 V2 ELRS receiver: RX6 ← receiver TX, TX6 → receiver RX</td><td>SERIAL6 = CRSF (default)</td></tr>
+<tr><td>GPS connector (UART5 + I²C + 4V5)</td><td>HGLRC M100-5883: GPS TX → R5, GPS RX → T5, SDA/SCL → I²C</td><td>4V5 is also live on USB, which makes bench work easier</td></tr>
+<tr><td>I²C airspeed connector</td><td>Airspeed sensor (see §4.3)</td><td>Same bus as the barometer</td></tr>
+<tr><td>5 V pad (FC BEC, 5.2 V / 4 A)</td><td>NewBeeDrone BeeID Remote ID module</td><td>Power only; BeeID uses its own GPS. Do not use the 4V5 USB rail</td></tr>
+<tr><td>TELEM2/4 (GH1.25 6-pin: GND RX2 TX2 RX4 TX4 4V5) or pads T4/R4</td><td>spare, reserved for a SiK telemetry radio</td><td>SERIAL4 = MAVLink2</td></tr>
+<tr><td>USB extender connector</td><td>CoreWing BLE/WiFi module</td><td>SERIAL1 = MAVLink2 at 115200 (bench and field laptop link)</td></tr>
+</tbody></table></div>
+<h3 id="4-2-uart-assignments">4.2 UART assignments</h3>
+<div class="tbl"><table><thead><tr><th class="n">SERIALn</th><th>UART</th><th>Pads</th><th>Protocol in <code>vtol_c0.param</code></th><th>Device</th></tr></thead><tbody>
+<tr><td class="n">0</td><td>USB</td><td>USB-C</td><td>MAVLink2 (fixed)</td><td>Laptop</td></tr>
+<tr><td class="n">1</td><td>USART1</td><td>extender connector / T1, R1</td><td>2 = MAVLink2, 115200</td><td>CoreWing WiFi/BLE module</td></tr>
+<tr><td class="n">2</td><td>USART2</td><td>SBUS pad (inverted RX)</td><td>— (unused)</td><td>—</td></tr>
+<tr><td class="n">3</td><td>USART3</td><td>VTX connectors</td><td>−1 = none</td><td>—</td></tr>
+<tr><td class="n">4</td><td>UART4</td><td>TELEM2/4, T4/R4</td><td>2 = MAVLink2</td><td>spare (SiK radio)</td></tr>
+<tr><td class="n">5</td><td>UART5</td><td>GPS connector</td><td>5 = GPS</td><td>HGLRC M100-5883</td></tr>
+<tr><td class="n">6</td><td>USART6</td><td>TX6/RX6</td><td>23 = RCIN</td><td>RP3 V2 (CRSF)</td></tr>
+</tbody></table></div>
+<h3 id="4-3-airspeed-sensor-i-c-address-ms5525dso-must-run-at-0x77">4.3 Airspeed sensor: I²C address: MS5525DSO must run at 0x77</h3>
+<p>The BOM buys the <b>Holybro MS5525DSO + PT40</b> (BOM line "Holybro MS5525DSO + PT40 airspeed"). Holybro's product page gives its I²C address as <b>0x76</b> (holybro.com/products/digital-air-speed-sensor-standard, 2026-10-21). That is the address of this board's SPL06 barometer, which sits on the <b>same and only</b> I²C bus (hwdef <code>BARO SPL06 I2C:0:0x76</code>, <code>I2C_ORDER I2C1</code>). Two devices cannot share an address on one bus.</p>
+<p>The MS5525DSO has two addresses. The TE datasheet says "MS5525DSO address is 111011Cx, where C is the complementary value of the pin CSB" (farnell.com/datasheets/2722597.pdf, checked 2026-10-21): CSB high → 0x76, CSB low → <b>0x77</b>. The ArduPilot driver probes both (<code>AP_Airspeed_MS5525.cpp</code>: <code>0x76</code>, <code>0x77</code>), and <code>ARSPD_TYPE</code> can pin one: 3 = auto, 4 = 0x76, 5 = 0x77 (apm.pdef.xml).</p>
+<p><b>Setting used: <code>ARSPD_TYPE,5</code> (MS5525 at 0x77), <code>ARSPD_BUS,0</code>.</b> Forcing 0x77 also stops the driver from probing 0x76, where it would find the barometer. Hardware step required:</p>
+<ol><li>On the Holybro breakout, find the MS5525DSO CSB pin (pin assignment in the TE datasheet). Re-strap it from VDD to GND: lift the pull-up or cut the trace, then bridge to GND. Whether the Holybro PCB has a jumper or solder bridge for this: — (inspect the board when it arrives; photograph it for the build log).</li><li>Bench check: power the FC on USB with only the airspeed sensor on I²C. Mission Planner Messages must show <code>MS5525[0]: Found on bus 0 addr 0x77</code> (driver text). The barometer must still read altitude (HUD). If the message shows 0x76, or the baro reads nonsense, the strap is wrong. Do not fly.</li><li>Blow gently into the pitot: airspeed must rise. Then do the offset calibration (§6.8).</li></ol>
+<p><b>Fallback if the re-strap is not practical:</b> buy Holybro MS4525DO sensor-only (SKU 19007, $46.59) + PT40 pitot-only (SKU 32022, $7.99) = $54.58, address 0x28, and set <code>ARSPD_TYPE,1</code>. That is $5.41 below the MS5525DSO/PT40 kit at $59.99 (holybro.com product JSON, 2026-10-21). Whether the sensor-only kit includes cable and tubing: —.</p>
+<h3 id="4-4-output-map-servon-function-and-why-it-differs-from-the-review">4.4 Output map (SERVOn_FUNCTION) and why it differs from the review</h3>
+<div class="tbl"><table><thead><tr><th>Output</th><th>Group</th><th>Function</th><th class="n">Value</th></tr></thead><tbody>
+<tr><td>S1, S2</td><td>1 (TIM4)</td><td>Aileron L, R</td><td class="n">4</td></tr>
+<tr><td>S3</td><td>2 (TIM3)</td><td>Elevator</td><td class="n">19</td></tr>
+<tr><td>S4</td><td>2</td><td>Rudder L</td><td class="n">21</td></tr>
+<tr><td>S5, S6, S7</td><td>3 (TIM8)</td><td>Motor1, Motor2, Motor3 (DShot150)</td><td class="n">33, 34, 35</td></tr>
+<tr><td>S8</td><td>4 (TIM2)</td><td>Motor4 (DShot150)</td><td class="n">36</td></tr>
+<tr><td>S9</td><td>4</td><td>Throttle / pusher (DShot150)</td><td class="n">70</td></tr>
+<tr><td>S10</td><td>4</td><td>unused</td><td class="n">0</td></tr>
+<tr><td>S11</td><td>5 (TIM1)</td><td>Rudder R</td><td class="n">21</td></tr>
+<tr><td>S12 (LED)</td><td>5</td><td>unused</td><td class="n">0</td></tr>
+</tbody></table></div>
+<p>The review (<a class="rref" href="./#controls">§17</a> "Outputs and wiring") puts the lift motors on S7–S10 and the rudders on S5–S6. S7 shares timer group S5–S7 with S5 and S6, so DShot on S7 would force both rudder outputs into DShot. The map above keeps every servo out of a DShot group. It also matches ArduPilot's QuadPlane convention of lift motors on outputs 5–8 (quadplane-frame-setup.html). <code>tools/check_params.py --corewing</code> checks this automatically.</p>
+<nav class="pager" aria-label="Previous and next section"><a class="pv" href="#3-first-flash-dfu"><span>Previous</span>First flash (DFU)</a><a class="nx" href="#5-load-the-parameters"><span>Next</span>Load the parameters</a></nav></section>
+<section class="pg" id="pg-5-load-the-parameters" data-id="5-load-the-parameters">
+<h2 id="5-load-the-parameters">5. Load the parameters</h2>
+<ol><li>Validate first: <code>py firmware/tools/check_params.py firmware/vtol_c0.param --corewing --require-every-line-commented</code>.</li><li>Mission Planner &gt; Config &gt; Full Parameter List &gt; <b>Load from file</b> &gt; <code>vtol_c0.param</code> &gt; Write Params.</li><li><b>Reboot.</b> <code>Q_ENABLE</code> and the DShot settings (<code>Q_M_PWM_TYPE</code>, <code>SERVO_BLH_*</code>) take effect only after a reboot, and the <code>Q_</code> parameters do not exist until then.</li><li>Load the same file <b>a second time</b>, Write Params, and reboot again. Then use "Compare Params" against the file: every row should match.</li><li>Hover-only sessions: also load <code>vtol_c0_hover_phase.param</code>. Reload <code>vtol_c0.param</code> before the first transition session.</li><li>Save the full parameter list (<code>Save to file</code>) after each session as <code>params_&lt;date&gt;.param</code> in the team log.</li></ol>
+<nav class="pager" aria-label="Previous and next section"><a class="pv" href="#4-wiring-fc-pad-device"><span>Previous</span>Wiring (FC pad → device)</a><a class="nx" href="#6-calibrations-props-off-battery-on-only-where-stated"><span>Next</span>Calibrations (props off, battery on only where stated)</a></nav></section>
+<section class="pg" id="pg-6-calibrations-props-off-battery-on-only-where-stated" data-id="6-calibrations-props-off-battery-on-only-where-stated">
+<h2 id="6-calibrations-props-off-battery-on-only-where-stated">6. Calibrations (props off, battery on only where stated)</h2>
+<div class="tbl"><table><thead><tr><th class="n">#</th><th>Step</th><th>How</th><th>Pass condition</th></tr></thead><tbody>
+<tr><td class="n">6.1</td><td>Board orientation</td><td>FC arrow forward, top up → <code>AHRS_ORIENTATION,0</code></td><td>HUD horizon matches the airframe</td></tr>
+<tr><td class="n">6.2</td><td>Accelerometer</td><td>Setup &gt; Mandatory Hardware &gt; Accel Calibration (6 positions), then "Calibrate Level" with the wing at cruise attitude (common-accelerometer-calibration.html)</td><td>"Calibration successful"</td></tr>
+<tr><td class="n">6.3</td><td>Compass</td><td>Setup &gt; Compass &gt; Start, rotate the assembled airframe on all axes. On a 2.4 m aircraft, use "Large Vehicle MagCal" with GPS lock and the nose pointed at a known heading (common-compass-calibration-in-mission-planner.html). <code>COMPASS_AUTO_ROT,2</code> detects the module orientation</td><td>Fitness passes; the heading matches a phone compass within about 10° (est.)</td></tr>
+<tr><td class="n">6.4</td><td>Radio</td><td>Setup &gt; Radio Calibration: move all sticks and switches to their ends (common-radio-control-calibration.html). Check CH5 arm, CH6 six modes, CH7 E-stop, CH8 QAssist, CH9 RTL</td><td>Modes 1–6 show QSTABILIZE, QHOVER, QLOITER, FBWA, CRUISE, QLAND</td></tr>
+<tr><td class="n">6.5</td><td>ESCs</td><td><b>No throttle calibration under DShot</b>. DShot always uses 1000–2000 (common-dshot-escs.html). Configure ESC settings via passthrough, <code>peripherals.md</code> §1</td><td>All 5 ESCs read and save in ESC Configurator</td></tr>
+<tr><td class="n">6.6</td><td>Battery voltage</td><td>Measure the pack with a multimeter and adjust <code>BATT_VOLT_MULT</code> until the GCS matches within 0.05 V (est.)</td><td>—</td></tr>
+<tr><td class="n">6.7</td><td>Battery current</td><td>Watt meter in series. Hold one lift motor at a steady load (props on, aircraft tethered) and adjust <code>BATT_AMP_PERVLT</code></td><td>GCS current within 5 % of the watt meter (est.)</td></tr>
+<tr><td class="n">6.8</td><td>Airspeed offset</td><td>Cover the pitot loosely (foam) during boot or press "Calibrate Airspeed" (calibrating-an-airspeed-sensor.html)</td><td>Reads 0 ± 1 m/s (est.) still air</td></tr>
+</tbody></table></div>
+<nav class="pager" aria-label="Previous and next section"><a class="pv" href="#5-load-the-parameters"><span>Previous</span>Load the parameters</a><a class="nx" href="#7-motor-order-direction-and-servo-checks"><span>Next</span>Motor order, direction and servo checks</a></nav></section>
+<section class="pg" id="pg-7-motor-order-direction-and-servo-checks" data-id="7-motor-order-direction-and-servo-checks">
+<h2 id="7-motor-order-direction-and-servo-checks">7. Motor order, direction and servo checks</h2>
+<p><b>Motor test (props OFF, battery ON, aircraft restrained).</b> Mission Planner &gt; Setup &gt; Optional Hardware &gt; Motor Test, 5–10 % throttle, 2 s. Buttons go clockwise from front-right (copter/docs/connect-escs-and-motors.html):</p>
+<div class="tbl"><table><thead><tr><th>Button</th><th>Must spin</th><th>Output</th><th>Direction (seen from above)</th></tr></thead><tbody>
+<tr><td>A</td><td>Front-right</td><td>S5 (Motor1)</td><td>CCW</td></tr>
+<tr><td>B</td><td>Rear-right</td><td>S8 (Motor4)</td><td>CW</td></tr>
+<tr><td>C</td><td>Rear-left</td><td>S6 (Motor2)</td><td>CCW</td></tr>
+<tr><td>D</td><td>Front-left</td><td>S7 (Motor3)</td><td>CW</td></tr>
+</tbody></table></div>
+<ul><li>Wrong motor spins: fix the signal wire at the header, not the parameters.</li><li>Wrong direction: swap two of the three motor phase wires, or reverse it in ESC Configurator (<code>peripherals.md</code> §1).</li><li>With the props on and the aircraft tethered, find the lowest test % that spins all four cleanly → <code>Q_M_SPIN_ARM</code>. The lowest that gives a little thrust → <code>Q_M_SPIN_MIN</code> (quadplane-vtol-tuning-process.html step 4).</li><li>Props: check CW/CCW prop handedness against motor direction. Air must blow <b>down</b>.</li></ul>
+<p><b>Servo direction checks</b> (FBWA or MANUAL, disarmed, rail at 6 V):</p>
+<div class="tbl"><table><thead><tr><th>Input</th><th>Correct surface motion</th><th>If wrong</th></tr></thead><tbody>
+<tr><td>Right roll stick</td><td>right aileron up, left aileron down</td><td><code>SERVO1_REVERSED</code> / <code>SERVO2_REVERSED</code></td></tr>
+<tr><td>Pull back (pitch up)</td><td>elevator trailing edge up</td><td><code>SERVO3_REVERSED</code></td></tr>
+<tr><td>Right yaw stick</td><td>both rudders trailing edge right</td><td><code>SERVO4_REVERSED</code> / <code>SERVO11_REVERSED</code></td></tr>
+<tr><td>Stabilization (FBWA, sticks centered): roll the airframe right</td><td>ailerons command a roll left</td><td>Fix the reversals above, never <code>RLL2SRV</code> signs</td></tr>
+<tr><td>Pitch the nose down</td><td>elevator moves up</td><td>as above</td></tr>
+</tbody></table></div>
+<p>Then set throws: <code>SERVOn_MIN/MAX/TRIM</code> so that no linkage binds at full stick. Check that the 5 servos together stay under the 8 A servo BEC (budget-avionics M3).</p>
+<p><b>Pusher check:</b> QSTABILIZE, armed, props on, tethered. The pusher must stay <b>stopped</b> in Q modes. In FBWA the throttle stick drives it. Air must blow aft.</p>
+<nav class="pager" aria-label="Previous and next section"><a class="pv" href="#6-calibrations-props-off-battery-on-only-where-stated"><span>Previous</span>Calibrations (props off, battery on only where stated)</a><a class="nx" href="#8-failsafe-configuration-and-bench-tests"><span>Next</span>Failsafe configuration and bench tests</a></nav></section>
+<section class="pg" id="pg-8-failsafe-configuration-and-bench-tests" data-id="8-failsafe-configuration-and-bench-tests">
+<h2 id="8-failsafe-configuration-and-bench-tests">8. Failsafe configuration and bench tests</h2>
+<div class="tbl"><table><thead><tr><th>Event</th><th>Mode on event</th><th>Parameters</th><th>Bench test (props off)</th></tr></thead><tbody>
+<tr><td>RC loss in a Q mode</td><td><b>QLAND</b> in place (ArduPilot forces this in QSTABILIZE, QHOVER, QLOITER)</td><td><code>THR_FAILSAFE,1</code>; <code>Q_OPTIONS</code> bit 5 clear (apms-failsafe-function.html)</td><td>Arm in QLOITER, switch the TX off → GCS shows "RC Short Failsafe: switched to QLand"</td></tr>
+<tr><td>RC loss in fixed-wing modes</td><td>CIRCLE (short), then <b>RTL</b> at 5 s, then QRTL inside <code>RTL_RADIUS</code> 100 m, then vertical land</td><td><code>FS_SHORT_ACTN,0</code>; <code>FS_LONG_ACTN,1</code>; <code>FS_LONG_TIMEOUT,5</code>; <code>Q_RTL_MODE,1</code></td><td>SITL scenario B</td></tr>
+<tr><td>Battery low (30 %, or 21.0 V sag-compensated)</td><td>RTL → QRTL</td><td><code>BATT_LOW_MAH,1950</code>; <code>BATT_LOW_VOLT,21.0</code>; <code>BATT_FS_LOW_ACT,1</code></td><td>Set <code>BATT_LOW_VOLT</code> above pack voltage → warning + mode change; restore</td></tr>
+<tr><td>Battery critical (20 %, or 19.8 V)</td><td>QLAND</td><td><code>BATT_CRT_MAH,1300</code>; <code>BATT_FS_CRT_ACT,4</code></td><td>as above</td></tr>
+<tr><td>Forward transition not done in 15 s</td><td>QRTL</td><td><code>Q_TRANS_FAIL,15</code>; <code>Q_TRANS_FAIL_ACT,1</code></td><td>SITL scenario D</td></tr>
+<tr><td>Geofence: 110 m above home or 300 m radius</td><td>RTL (→ QRTL near home)</td><td><code>FENCE_*</code></td><td>SITL scenario F; on the bench, <code>FENCE_RADIUS</code> shows on the map</td></tr>
+<tr><td>Motor emergency stop</td><td>Lift motors and pusher stop at once</td><td><code>RC7_OPTION,31</code></td><td>Arm, flip CH7 → all motors stop</td></tr>
+<tr><td>Arming</td><td>Only from the CH5 switch, only in VTOL modes, only with a charged pack (≥ 23.4 V)</td><td><code>RC5_OPTION,153</code>; <code>ARMING_RUDDER,0</code>; <code>Q_OPTIONS,262144</code>; <code>BATT_ARM_VOLT,23.4</code></td><td>Try to arm in FBWA → refused</td></tr>
+</tbody></table></div>
+<p><b>Receiver failsafe setting:</b> set the receiver to output <b>no pulses</b> on link loss. ArduPilot recommends this over a preset failsafe throttle (apms-failsafe-function.html). Check the RP3 V2 failsafe option in its WiFi/Lua settings (<code>peripherals.md</code> §2). Do not set a failsafe position on the handset.</p>
+<nav class="pager" aria-label="Previous and next section"><a class="pv" href="#7-motor-order-direction-and-servo-checks"><span>Previous</span>Motor order, direction and servo checks</a><a class="nx" href="#9-first-flight-build-up"><span>Next</span>First-flight build-up</a></nav></section>
+<section class="pg" id="pg-9-first-flight-build-up" data-id="9-first-flight-build-up">
+<h2 id="9-first-flight-build-up">9. First-flight build-up</h2>
+<p>Fly at a site that allows the test (review <a class="rref" href="./#schedule">§15</a>). Hover tests: ≤ 5 m AGL, ≤ 60 s per hover (review <a class="rref" href="./#controls">§17</a>, R14). Transitions: ≥ 30 m AGL, into wind. Wind ≤ 5 m/s, gusts ≤ 8 m/s (R16). The full checklists are in <code>checklists.md</code>.</p>
+<h3 id="9-1-sitl-rehearsal-every-pilot-before-any-flight">9.1 SITL rehearsal (every pilot, before any flight)</h3>
+<p>Use the <b>C0 airframe model</b>, not the generic QuadPlane: <code>sitl\run_c0_sitl.ps1 -SitlExe &lt;ArduPlane.exe&gt;</code> starts <code>sitl/c0_physics.py</code> (a 6-DOF model built from the repo's mass, geometry, AVL aero, motor and prop data) and ArduPlane 4.7.2 SITL on its JSON physics interface; connect Mission Planner to TCP 127.0.0.1:5760 and fly with the Pocket Crush as a USB joystick: QSTABILIZE take-off, QLOITER, FBWA transition, CRUISE, QLOITER back-transition, QLAND. Practise the E-stop and RTL switches. Expect what the model shows (<code>sitl/README.md</code>, C0 section): hover at about 0.62–0.66 output, 37–38 A; forward transition 13–15 s and 140–170 m; a 30° nose-up, stalled-wing "airbrake" phase at the start of every back-transition; cruise at 20 m/s with the pusher at about 0.7. <code>sitl/mission_test.py --model JSON:127.0.0.1 --physics sitl/c0_physics.py ...</code> runs the seven scripted scenarios (§11). Add <code>-Wind "5,270"</code> (5 m/s from the west) to rehearse the R16 wind limit.</p>
+<h3 id="9-2-tethered-bench-run">9.2 Tethered bench run</h3>
+<p>Props on, aircraft tied down to a heavy base, battery on, <code>vtol_c0_hover_phase.param</code> loaded. QSTABILIZE, arm, raise throttle to light the skids. Check for oscillation, vibration and current (≈ 41.2 A hover at full weight; results.json <code>C0.sized.I_hover</code>).</p>
+<h3 id="9-3-first-lift-off-qstabilize-tuning-process-steps-5-6">9.3 First lift-off (QSTABILIZE): tuning-process steps 5–6</h3>
+<ol><li>Arm, disarm at once (proves the disarm path), arm again.</li><li>Raise the throttle slowly. At lift-off, set it straight back down. Disarm and look for oscillation.</li><li>If it oscillated: reduce <code>Q_A_RAT_RLL_P/I/D</code> and <code>Q_A_RAT_PIT_P/I/D</code> by 50 % and repeat (tuning-process step 6).</li><li>Hover at about 1 m and give 5° roll/pitch inputs. Land at any oscillation.</li></ol>
+<h3 id="9-4-qhover-hover-throttle-notch">9.4 QHOVER, hover throttle, notch</h3>
+<ol><li>Take off in QSTABILIZE to 5 m, switch to QHOVER for ≥ 30 s with no inputs. <code>Q_M_HOVER_LEARN,2</code> saves the hover throttle. Expect about 0.52 (est.) from 1637.9 g needed / 3130 g max per motor (results.json <code>C0.sized.Tunit_g</code>, <code>params.Tmax_g</code>). Above 0.6 means the thrust margin is short (tuning-process step 7, "should be ~0.3–0.6").</li><li>Then set <code>Q_P_D_ACC_P = 0.1 × Q_M_THST_HOVER</code> and <code>Q_P_D_ACC_I = 0.2 × Q_M_THST_HOVER</code> (tuning-process step 7).</li><li><b>Notch setup within the 60 s hover limit.</b> The tuning-process page asks for a 2-minute no-input hover. The review limits test hovers to 60 s (R14 mitigation). Two other ArduPilot sources cover the shorter hover:<ul><li>The batch-sampler page asks for "a regular flight (not just a gentle hover) of at least 1 minute" (common-imu-batchsampling.html). One 60 s QHOVER with <code>INS_LOG_BAT_MASK,1</code> and <code>INS_LOG_BAT_OPT,4</code> (pre + post filter, both already set) meets that.</li><li>Throttle-based notch tracking needs only the hover noise frequency and the hover thrust. Hover-thrust learning needs "no pilot stick input for at least 10 seconds" (same page; <code>Q_M_HOVER_LEARN,2</code>).</li><li>Procedure: fly two separate 60 s no-input QHOVER flights on a calm day. Open each .BIN in <a href="https://firmware.ardupilot.org/Tools/WebTools/FilterReview/" rel="noopener" target="_blank">firmware.ardupilot.org/Tools/WebTools/FilterReview</a> (or Mission Planner &gt; Setup &gt; Advanced &gt; FFT &gt; "IMU Batch Sample"). Accept the peak only if both flights agree within about 10 % (est.); the average is <code>hover_freq</code>. More batches per flight are available by lowering <code>INS_LOG_BAT_LGIN</code> (batch page: "can be lowered to increase accuracy").</li><li>Set the throttle-based notch (common-throttle-based-notch.html): <code>INS_HNTCH_ENABLE,1</code>, reboot, <code>INS_HNTCH_MODE,1</code>, <code>INS_HNTCH_FREQ</code> = hover_freq, <code>INS_HNTCH_BW</code> = hover_freq/2, <code>INS_HNTCH_REF</code> = learned <code>Q_M_THST_HOVER</code>. Leave <code>INS_HNTCH_HMNCS</code> at its default 3 (1st + 2nd harmonic). The in-flight FFT auto-setup is not available (<code>!HAL_GYROFFT_ENABLED</code>).</li><li>Fly one more 60 s hover and check that the post-filter spectrum shows the peak attenuated. Then set <code>INS_LOG_BAT_MASK,0</code> to free RAM (batch page note).</li></ul></li><li>Then QLOITER: position hold within about 2 m in light wind (est.).</li><li>Manual roll/pitch tune, then QAUTOTUNE (in the build) per tuning-process steps 10+ and qautotune-mode.html.</li></ol>
+<h3 id="9-5-fixed-wing-preparation">9.5 Fixed-wing preparation</h3>
+<ul><li>Airspeed ratio: <code>ARSPD_AUTOCAL,1</code> for a 5-minute loiter, then back to 0 (calibrating-an-airspeed-sensor.html). Review <a class="rref" href="./#controls">M17.1</a> failure threshold: &gt; 10 % error puts the real transition speed under R11's 15.6 m/s.</li><li>Fixed-wing gains start at firmware defaults. Run AUTOTUNE in FBWA after the first transitions (automatic-tuning-with-autotune.html).</li></ul>
+<h3 id="9-6-first-transitions">9.6 First transitions</h3>
+<ol><li>Load <code>vtol_c0.param</code> again (removes the hover-phase overlay). Check <code>Q_ASSIST_SPEED</code> = 13.</li><li>QLOITER to ≥ 30 m, nose into wind, with the longest clear line ahead.</li><li>Switch to <b>FBWA</b> and push the throttle to about 70 %. The lift motors hold height. At <code>AIRSPEED_MIN</code> 16 m/s they taper out over 5 s. In SITL this took 10–11 s from mode change to "Transition done" on the generic model (sitl/results) and 13–15 s, 140–170 m on the C0 airframe model (sitl/results_c0.json).</li><li><b>Start the turn as soon as "Transition done" appears.</b> In SITL, a straight FBWA transition reached the 300 m fence circle about 6 s after transition end (first SITL run, scenario B, 2026-10-21). Start transitions from the upwind edge of the field.</li><li>Back-transition: select QLOITER (or QHOVER). The pusher stops at once and the lift motors brake the aircraft (quadplane-transitions.html). Allow about 100 m stopping distance at 20 m/s (2 m/s² decel). In the C0 airframe model the airbrake phase pitches to the 30° VTOL limit and briefly stalls the wing (−17°/+33° swing, ≤ 2 m altitude loss, sitl/README.md Gains item 1); if the aircraft does this, lower <code>Q_TRANS_DECEL</code> first (gentler, longer stop), then <code>Q_ANGLE_MAX</code>, before any attitude gain. The test cards F06–F13 carry this as a watch item.</li><li>Check in the log: the transition current peak against the 75.7 A estimate (results.json <code>C0.sized.I_trans</code>), battery sag, and time to <code>AIRSPEED_MIN</code>. Review <a class="rref" href="./#controls">M17.2</a> failure threshold: &gt; 15 s or &gt; 100 m.</li><li>Only then: CRUISE circuits, RTL test at altitude, and the full R9 mission in AUTO (<code>sitl/mission_test.py</code> scenario A is the template: NAV_WAYPOINTs then NAV_VTOL_LAND).</li></ol>
+<nav class="pager" aria-label="Previous and next section"><a class="pv" href="#8-failsafe-configuration-and-bench-tests"><span>Previous</span>Failsafe configuration and bench tests</a><a class="nx" href="#10-decisions-that-changed-the-review-s-controls-chapter"><span>Next</span>Decisions that changed the review's controls chapter</a></nav></section>
+<section class="pg" id="pg-10-decisions-that-changed-the-review-s-controls-chapter" data-id="10-decisions-that-changed-the-review-s-controls-chapter">
+<h2 id="10-decisions-that-changed-the-review-s-controls-chapter">10. Decisions that changed the review's controls chapter</h2>
+<p>Details and rationale are in docs/research/firmware.md. They should be folded into the review:</p>
+<ol><li><b>Output map</b>: lift on S5–S8, pusher S9, rudder 2 on S11 (DShot timer-group conflict in the review map).</li><li><b>Airspeed sensor</b>: the MS5525DSO ships at 0x76, the onboard baro's address. Run it at 0x77 (CSB strapped low, <code>ARSPD_TYPE,5</code>) or swap to MS4525DO (§4.3). The review row "I²C MS5525DSO airspeed" needs this note.</li><li><b>Telemetry (no radio in the BOM, $0)</b>: one RP3 V2 runs either CRSF or ELRS-MAVLink, not both (review row "CRSF + MAVLink"). Baseline for hover phases: CRSF (<code>SERIAL6_PROTOCOL,23</code>), with telemetry on the Pocket Crush. GCS link for transition flights: ELRS MAVLink mode (<code>SERIAL6_PROTOCOL,2</code>, <code>SERIAL6_BAUD,460</code>, <code>RSSI_TYPE,5</code>, ELRS ≥ 3.5 on TX and RX, Mission Planner on UDP 14550 via the Pocket Crush backpack WiFi). The RX then sends RC as RC_CHANNELS_OVERRIDE; SITL scenario G showed RC-loss failsafe 1 s after the overrides stop. Details and limits: peripherals.md §2.3–2.4.</li><li><b>Transition threshold</b>: the state diagram labels say "≥ 15 m/s" and "&lt; 12 m/s". The table says AIRSPEED_MIN 16 and Q_ASSIST_SPEED 13. The parameters use 16 and 13.</li><li><b>Battery current limit</b>: <code>BATT_WATT_MAX</code> is not in this build. <code>Q_M_BAT_CURR_MAX</code> limits only the lift motors, so it is set to 85 A as a fault guard, not 60 A. Transition current is managed with <code>TKOFF_THR_MAX</code> 75 % and the pilot's throttle. Bench test M4 decides. <b><code>THR_MAX</code> 85</b> caps the pusher in every fixed-wing mode: the C0 SITL model gives about 890 W at 100 % throttle on a full 25.2 V pack (<code>sitl/validation_c0.json</code>, estimated motor model) against the X4110S 615 W rating; power scales roughly as throttle³, so 85 % is about 0.85³ × 890 = 547 W (est.). Cruise needs 233–302 W (SITL model / aero build-up). Bench test M1 (pusher power at full pack, TEST-PLAN C09) re-sets it; if <code>THR_MAX</code> is lowered, re-check that level speed at full throttle still exceeds <code>AIRSPEED_MAX</code> 25 m/s.</li><li><b>Low-battery action, two stages</b>: low (30 % / 1950 mAh, or 21.0 V sag-compensated) → RTL, which ends in QRTL and a vertical landing at home (<code>Q_RTL_MODE,1</code>). Critical (20 % / 1300 mAh, or 19.8 V) → QLAND in place. ArduPilot's failsafe page calls "BATT_FS_LOW_ACT = 1 (RTL) and BATT_FS_CRT_ACT = 2 (Land)" a reasonable setup. 4 = QLand is used for the explicit VTOL landing. The review had low = QLAND. The hover-phase overlay sets low → QLAND, because RTL would start a fixed-wing return. (Note: the parameter is <code>BATT_FS_LOW_ACT</code>; <code>BATT_FS_LLOW_ACT</code> does not exist.)</li><li><b>Fence ceiling</b>: 110 m above home, 12 m below the 400 ft (121.9 m) limit, so the climb overshoot after a breach stays legal. SITL peaked at 113.1 m, 3.1 m over the fence. Review wording: "fence 110 m, 12 m below the 400 ft limit".</li><li><b>RC loss in hover</b>: QLAND in place (ArduPilot behaviour in Q modes). The review's "RC loss → RTL then QLAND" applies to fixed-wing modes only.</li><li><b>Firmware</b>: stable 4.7.2 now covers the CoreWing. The 2027-02-22 go/no-go can close early.</li></ol>
+<nav class="pager" aria-label="Previous and next section"><a class="pv" href="#9-first-flight-build-up"><span>Previous</span>First-flight build-up</a><a class="nx" href="#11-sitl-validation-summary-2026-10-21"><span>Next</span>SITL validation summary (2026-10-21)</a></nav></section>
+<section class="pg" id="pg-11-sitl-validation-summary-2026-10-21" data-id="11-sitl-validation-summary-2026-10-21">
+<h2 id="11-sitl-validation-summary-2026-10-21">11. SITL validation summary (2026-10-21)</h2>
+<p>ArduPlane <b>V4.7.2</b> SITL (the Windows build Mission Planner uses, from firmware.ardupilot.org/Tools/MissionPlanner/sitl/PlaneStable), model <code>quadplane</code>, <code>vtol_c0.param</code> + <code>sitl/sitl_overrides.param</code>. 133 parameters read back. All match. Only the 3 BLHeli passthrough parameters (<code>SERVO_BLH_*</code>) are absent, because SITL has no BLHeli support. <b>7/7 scenarios passed.</b> Results and limits are in <code>sitl/README.md</code>. The SITL airframe is ArduPilot's generic QuadPlane model, not C0. Its learned hover throttle was 0.15, against about 0.52 (est.) for C0. So SITL validates modes, thresholds, failsafes and the fence. It does not validate gains or performance.</p>
+<p><b>Update 2026-10-25 — C0 airframe model.</b> The same seven scenarios were re-run on <code>sitl/c0_physics.py</code>, a 6-DOF model of C0 itself (SITL <code>--model JSON</code>; mass, geometry, AVL derivatives, CL_max, drag polar, motor thrust/power table, APC 14x8.5 prop data and the output map all read from the repo files). <b>7/7 passed with <code>vtol_c0.param</code> unchanged</b>; no <code>vtol_c0_sitl_tuned.param</code> was needed. Trims match the analysis: hover 0.523 thrust fraction at 22.2 V (TEST-PLAN 0.52), cruise α 2.84° / elevator −3.45° / 7.69 N (AVL 2.86° / −3.45° / 7.70 N), stall 11.75 m/s (target 11.75). SITL learned <code>Q_M_THST_HOVER</code> 0.44 on a full pack (the model predicts 0.45 at 25.2 V, because ArduPilot references thrust to <code>Q_M_BAT_VOLT_MAX</code>; 0.52 is the 22.2 V figure). Forward transition 13–15 s and 140–170 m with ≤ 2 m altitude loss, peak 71–75 A; back-transition ≤ 2 m loss with a −17°/+33° pitch swing during ArduPilot's airbrake stop (the C0 wing stalls at the 30° VTOL pitch limit). Model limitations (no prop wash, no rotor inflow, estimated inertia, reversed-flow aero) are listed in <code>sitl/README.md</code>. Re-run 2026-10-25 on the final data (results.json MTOW 6.552 kg, chord 0.2842 m; corrected AVL model with rudder derivatives Cnδr +0.000736/deg; CAD rev D): 7/7 again, same transition times (13–14 s), losses ≤ 2 m, peak 69–75 A; the model now takes all control derivatives from the AVL st file.</p>
+<nav class="pager" aria-label="Previous and next section"><a class="pv" href="#10-decisions-that-changed-the-review-s-controls-chapter"><span>Previous</span>Decisions that changed the review's controls chapter</a></nav></section>
+</main>
+</div>
+</div>
+</div>
+<script>
+// theme: shared with the design review (same storage key)
+(()=>{ const b=document.getElementById('themeBtn'), r=document.documentElement; const lab=()=>{ b.textContent = r.dataset.theme==='light'?'Dark theme':'Light theme'; };
+  lab(); b.addEventListener('click',()=>{ r.dataset.theme = r.dataset.theme==='light'?'dark':'light'; try{ localStorage.setItem('vtol-theme', r.dataset.theme); }catch(e){} lab(); }); })();
+// reader: show the page holding the target of the address (a section, work package, step or any anchor)
+(()=>{ const R=document.documentElement, pgs=[...document.querySelectorAll('.pg')]; if(!pgs.length) return;
+  const sel=document.getElementById('pgSel'), all=document.getElementById('allBtn');
+  const links=[...document.querySelectorAll('.side a[data-pg]')];
+  let full=false; try{ full=sessionStorage.getItem('dbf-full')==='1'; }catch(e){}
+  const pageOf=el=>el?el.closest('.pg'):null;
+  function show(hash, scroll){
+    const id=decodeURIComponent((hash||'').replace(/^#/,'')); const el=id?document.getElementById(id):null;
+    const pg=pageOf(el)||pgs[0];
+    pgs.forEach(p=>p.classList.toggle('on', p===pg));
+    const pid=pg.dataset.id; sel.value=pid;
+    links.forEach(a=>{ if(a.dataset.pg===pid) a.setAttribute('aria-current','page'); else a.removeAttribute('aria-current'); });
+    if(scroll){ const first=pg.firstElementChild; if(!el || el===first || el.id===pid) scrollTo(0,0); else el.scrollIntoView(); }
+  }
+  function setFull(on){ full=on; R.classList.toggle('paged', !on); all.setAttribute('aria-pressed', on?'true':'false'); try{ sessionStorage.setItem('dbf-full', on?'1':'0'); }catch(e){} }
+  setFull(full); show(location.hash, !!location.hash);
+  addEventListener('hashchange',()=>show(location.hash, true));
+  sel.addEventListener('change',()=>{ location.hash=sel.value; });
+  all.addEventListener('click',()=>{ setFull(!full); show(location.hash, false); });
+  // per-page count of steps marked Done (from the check-off below); refreshed on every change
+  window.dbfCounts=()=>{ links.forEach(a=>{ const p=document.getElementById('pg-'+a.dataset.pg); if(!p) return; const st=p.querySelectorAll('.step'); const c=a.querySelector('.cnt'); if(!st.length){ c.textContent=''; return; } const d=p.querySelectorAll('.step.isdone').length; c.textContent=d+'/'+st.length; c.classList.toggle('all', d===st.length); }); };
+})();
+// running head: the section being read; step check-off kept in this browser only (a shop convenience, not a record)
+(()=>{ const rh=document.getElementById('runhead'), sec=document.getElementById('rhSec'), toc=document.getElementById('contents');
+  const hs=[...document.querySelectorAll('.doc h2, .doc h3')]; let raf=0;
+  const up=()=>{ raf=0; rh.classList.toggle('on', !document.documentElement.classList.contains('paged') && toc.getBoundingClientRect().bottom<0); let cur=null; for(const h of hs){ if(h.getBoundingClientRect().top<90) cur=h; } const t=cur?cur.textContent:''; if(sec.textContent!==t) sec.textContent=t; };
+  addEventListener('scroll',()=>{ if(!raf) raf=requestAnimationFrame(up); },{passive:true}); up();
+  const KEY='dbf-done-DBF-SW-001'; let done={}; try{ done=JSON.parse(localStorage.getItem(KEY)||'{}'); }catch(e){}
+  // wide tables scroll inside their own frame: give the frames a name and a tab stop when they actually scroll
+  document.querySelectorAll('.doc .tbl').forEach(w=>{ if(w.scrollWidth<=w.clientWidth+1) return; let h=w.previousElementSibling; while(h && !/^H[2-4]$/.test(h.tagName)) h=h.previousElementSibling; w.setAttribute('role','region'); w.setAttribute('tabindex','0'); w.setAttribute('aria-label', h?h.textContent.trim():'Table'); });
+  document.querySelectorAll('.doc .step').forEach(st=>{ const h=st.querySelector('h4'); if(!h) return; const id=h.id;
+    const b=document.createElement('button'); b.type='button'; b.className='stepchk'; b.setAttribute('aria-pressed', done[id]?'true':'false'); b.textContent='Done';
+    b.setAttribute('aria-label', 'Done: '+h.textContent.trim()); st.classList.toggle('isdone', !!done[id]);
+    b.addEventListener('click',()=>{ done[id]=!done[id]; if(!done[id]) delete done[id]; try{ localStorage.setItem(KEY, JSON.stringify(done)); }catch(e){}
+      b.setAttribute('aria-pressed', done[id]?'true':'false'); b.textContent='Done'; b.setAttribute('aria-label', 'Done: '+h.textContent.trim()); st.classList.toggle('isdone', !!done[id]); });
+    h.after(b); });
+  if(window.dbfCounts){ dbfCounts(); document.addEventListener('click',e=>{ if(e.target.closest('.stepchk')) dbfCounts(); }); }
+})();
+</script>
+</body></html>

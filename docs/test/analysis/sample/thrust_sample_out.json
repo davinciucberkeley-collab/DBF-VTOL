@@ -1,0 +1,53 @@
+{
+ "n_points": 9,
+ "fit_a": 2.4040626458199403,
+ "fit_b": 1.5495201044182805,
+ "q_m_thst_expo": 0.7495649199871568,
+ "hover_g": 1637.8933,
+ "hover_throttle_pct": 68.37171625344352,
+ "hover_curr_A": 10.503357256198347,
+ "hover_P_W": 236.1340242831405,
+ "hover_P_ideal_W": 107.47285897815024,
+ "FMeta": 0.45513499930566165,
+ "FMeta_sizing": 0.5164014,
+ "max_thrust_g": 3172.0,
+ "max_curr_A": 27.84,
+ "maker": [
+  {
+   "thrust_g": 1250,
+   "maker_A": 6.1,
+   "maker_W": 135,
+   "meas_A": 6.916987951807229,
+   "meas_W": 156.21620602409638,
+   "dW_pct": 15.71570816599732
+  },
+  {
+   "thrust_g": 1500,
+   "maker_A": 8.1,
+   "maker_W": 180,
+   "meas_A": 9.181404958677685,
+   "meas_W": 206.7180785123967,
+   "dW_pct": 14.843376951331493
+  },
+  {
+   "thrust_g": 2000,
+   "maker_A": 13.1,
+   "maker_W": 291,
+   "meas_A": 14.041605995717346,
+   "meas_W": 314.09331713062096,
+   "dW_pct": 7.935847811209952
+  },
+  {
+   "thrust_g": 3130,
+   "maker_A": 27.7,
+   "maker_W": 615,
+   "meas_A": 27.331655172413793,
+   "meas_W": 600.5348317241379,
+   "dW_pct": -2.3520598822539975
+  }
+ ],
+ "pass_max_thrust": true,
+ "pass_hover_power": true,
+ "pass_max_current": true,
+ "pass_all": true
+}

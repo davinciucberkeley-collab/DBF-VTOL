@@ -1,0 +1,295 @@
+{
+ "generated": "2026-10-25",
+ "sources": {
+  "results": "analysis/results.json generated 2026-10-25 (C0 sized: P_hover 915.7 W, P_hover_per_motor 228.9 W, P_cruise 337.4 W, P_trans 1590 W, I_hover_loaded 43.6 A, I_trans 75.7 A, I_cruise 15.2 A, Tunit 16.06 N, A 0.1464 m2, MTOW 6.55 kg)",
+  "params": "cad/params.txt (motorD, motorH, boomOD, boomID, battL/H/W, fusL, fusR, pushMotorD/L, bay*, batt*)",
+  "air": "Incropera & DeWitt, Fundamentals of Heat and Mass Transfer, Table A.4 at ~308 K"
+ },
+ "ambient": {
+  "hot_C": 35.0,
+  "hot_K": 308.15,
+  "std_C": 20.0,
+  "std_K": 293.15,
+  "src": "hot day 35 C = cad/params.mjs thermAmbK (EST, no R-number); standard 20 C EST (ISA +5, Berkeley spring)"
+ },
+ "mission": {
+  "phases": [
+   {
+    "name": "hover",
+    "dt_s": 60.0
+   },
+   {
+    "name": "transition",
+    "dt_s": 20.0
+   },
+   {
+    "name": "cruise",
+    "dt_s": 600
+   },
+   {
+    "name": "transition",
+    "dt_s": 20.0
+   },
+   {
+    "name": "hover",
+    "dt_s": 60.0
+   }
+  ],
+  "total_s": 760.0,
+  "t_end_hover1_s": 60.0,
+  "t_end_trans1_s": 80.0,
+  "t_end_cruise_s": 680.0,
+  "t_end_trans2_s": 700.0,
+  "cruise_s": 600,
+  "hover_transient_s": 120.0,
+  "pod_dt_s": 10.0,
+  "cruise_avail_min": 12.265676,
+  "batt_curve": [
+   {
+    "t": 0,
+    "f": 1.0
+   },
+   {
+    "t": 59.99,
+    "f": 1.0
+   },
+   {
+    "t": 60.0,
+    "f": 3.01666
+   },
+   {
+    "t": 79.99,
+    "f": 3.01666
+   },
+   {
+    "t": 80.0,
+    "f": 0.12146
+   },
+   {
+    "t": 679.99,
+    "f": 0.12146
+   },
+   {
+    "t": 680.0,
+    "f": 3.01666
+   },
+   {
+    "t": 699.99,
+    "f": 3.01666
+   },
+   {
+    "t": 700.0,
+    "f": 1.0
+   },
+   {
+    "t": 759.99,
+    "f": 1.0
+   }
+  ],
+  "lift_curve": [
+   {
+    "t": 0,
+    "f": 1.0
+   },
+   {
+    "t": 59.99,
+    "f": 1.0
+   },
+   {
+    "t": 60.0,
+    "f": 1.73685
+   },
+   {
+    "t": 79.99,
+    "f": 1.73685
+   },
+   {
+    "t": 80.0,
+    "f": 0.0
+   },
+   {
+    "t": 679.99,
+    "f": 0.0
+   },
+   {
+    "t": 680.0,
+    "f": 1.73685
+   },
+   {
+    "t": 699.99,
+    "f": 1.73685
+   },
+   {
+    "t": 700.0,
+    "f": 1.0
+   },
+   {
+    "t": 759.99,
+    "f": 1.0
+   }
+  ],
+  "src": "analysis/sizing.mjs tHover 120 s / tTrans 40 s / tCruise 600 s (R10) split as review/src/app.js drawDuty: 60-20-600-20-60 s; F12 (docs/test/TEST-PLAN.md) >= 1 min hover each end; hover-only flights <= 60 s per hover (test plan rule 3), bench C08 90 s"
+ },
+ "loads": {
+  "lift_motor_W": 45.786146,
+  "lift_motor_trans_W": 79.52380500000001,
+  "lift_esc_W": 9.157229200000002,
+  "lift_esc_trans_W": 15.904761,
+  "batt_hover_W": 85.56616871359242,
+  "batt_trans_W": 258.1239063192194,
+  "batt_cruise_W": 10.392893359053119,
+  "batt_curve_ref_W": 85.56616871359242,
+  "pusher_motor_W": 37.954867500000006,
+  "pusher_esc_W": 12.651622500000002,
+  "fc_W": 3.5,
+  "R_pack_ohm": 0.045,
+  "R_cell_test_plan_now_ohm": 0.0073,
+  "V_bus": 21.0,
+  "src": {
+   "lift_motor": "EST 20 % of P_hover_per_motor 228.9 W (cad/params.mjs thermQ rule, 80 % motor+ESC efficiency); the same figure cad/sim/results.txt motor_Q uses",
+   "lift_esc": "EST 4 % of unit input (no SoloGood efficiency published; TI SSZTB57: FET conduction loss = I_rms^2 R_ds(on), 60-80 % of inverter loss)",
+   "battery": "I^2 R with R_pack = 6 x 7.5 mOhm (docs/test/TEST-PLAN.md C11 pass limit at run time; now 7.3 mOhm, so the result is 2.7 % conservative); I from results.json sized I_hover_loaded / I_trans / I_cruise (P / 21 V, sizing.mjs line 155)",
+   "pusher": "P_cruise x (1 - etaMEc 0.85) = 50.6 W (results.json base.etaMEc), split 75/25 motor/ESC EST; the pusher is a SunnySky X4110S 400KV, the same motor as the lift units (docs/purchasing/C0_BOM.csv line \"X4110S 400KV (pusher)\", analysis/sizing.mjs PUSHER = X4110S); SunnySky publishes no thermal data (\u2014)",
+   "fc": "EST 3.5 W: CoreWing F405 + RP3 + M100 GPS + BeeID ~0.5 A at 5 V plus ZORZA UBEC loss"
+  }
+ },
+ "flow": {
+  "v_i_mps": 6.6910229240095624,
+  "v_wake_mps": 13.382045848019125,
+  "V_cruise_mps": 20,
+  "src": "v_i = sqrt(T / (2 rho A)) with T = sized.Tunit_N 16.06 N, A = sized.A 0.1464 m2, rho 1.225 (momentum theory); far wake 2 v_i"
+ },
+ "h": {
+  "motor_hover": 42.93473788191047,
+  "boom_hover": 54.75155886970273,
+  "mount_hover": 38.1381574363151,
+  "esc_hover": 43.02564429491726,
+  "motor_cruise": 91.94172662177616,
+  "boom_cruise": 107.71561120923903,
+  "mount_cruise": 65.93688801280507,
+  "esc_cruise": 74.38684195192344,
+  "pod_cruise": 42.672863750064714,
+  "pod_hover": 3.443855758019372,
+  "pod_mission_avg": 34.41412522542359,
+  "pusher_motor_cruise": 97.5219725332649,
+  "cup_inner_cruise": 48.76098626663245,
+  "bay_natural": 5.0,
+  "radiation_equiv": 7.33546044,
+  "detail": {
+   "motor_hover": "Hilpert cylinder crossflow at v_i, D 0.048 m: Re 19465, Nu 76.9",
+   "boom_hover": "Hilpert at v_i, D 0.0254 m: Re 10300, Nu 51.9",
+   "mount_hover": "laminar flat plate at v_i, L 0.070 m: Re 28386, Nu 99.6",
+   "esc_hover": "laminar flat plate at v_i, L 0.055 m: Re 22303, Nu 88.3",
+   "pod_cruise": "mixed flat plate at V_c, L 0.85 m: Re 1.03e+06, Nu 1353",
+   "pod_hover": "Churchill-Chu horizontal cylinder D 0.16 m, dT 10 K: Ra 3.38e+06 (pod sits between the rotors, wash on the pod neglected)",
+   "pusher_motor_cruise": "laminar flat plate at V_c over the can length 0.032 m: Re 38788, Nu 116.4 (axial flow + prop inflow, EST)",
+   "cup_inner": "EST half the motor value (sheltered annulus)",
+   "bay_natural": "EST 5 W/m2K (closed bay, free convection in gases 2-25 W/m2K, Incropera Table 1.1)",
+   "radiation_equiv": "linearised 4 eps sigma T^3 at 330 K, eps 0.9 EST (black heat-shrink / anodised); not applied in the FEA (conservative), shown for scale"
+  },
+  "src": "Incropera & DeWitt, Fundamentals of Heat and Mass Transfer, 6th ed.: eq. 7.52 + Table 7.2 (Hilpert), eq. 7.30 / 7.38 (flat plate), eq. 9.34 (Churchill-Chu)"
+ },
+ "materials": {
+  "motor": {
+   "k": 30.0,
+   "cp": 470.0,
+   "rho": 2849.453733741616,
+   "cp_lo": 385.0,
+   "cp_hi": 500.0,
+   "src": "lumped motor: mass 0.165 kg (params.txt motorMass, SunnySky X4110S 165 g, budget-lift.md A3) over the modelled can volume 57.9 cm3; cp 470 J/kgK EST mass-weighted copper 385 / steel 460 / aluminium 896 (review/src/app.js TH, band 385-500); k 30 W/mK EST (laminated steel + copper + air gaps, well below solid aluminium)"
+  },
+  "pusher": {
+   "rho": 2849.453733741616,
+   "src": "SunnySky X4110S 165 g (cad/params.txt motorMass, budget-lift.md A3; sizing.mjs mPusherSet: pusher = lift motor type) over the modelled can volume (params.txt pushMotorD/L = motorD/H)"
+  },
+  "al6061": {
+   "k": 167.0,
+   "cp": 896.0,
+   "rho": 2700.0,
+   "src": "SOLIDWORKS material library \"6061-T6 (SS)\" (cad/params.txt matLib): k 167 W/mK, c 896 J/kgK, rho 2700"
+  },
+  "pa6cf": {
+   "k": 0.35,
+   "cp": 1500.0,
+   "rho": 1170.0,
+   "HDT_C": 173.0,
+   "src": "density 1.17 g/cm3 and HDT 173 C at 1.8 MPa: Polymaker Fiberon PA6-CF20 TDS v1.1 (docs/research/airframe-materials.md); k 0.35 W/mK and cp 1500 J/kgK EST (unfilled PA6 ~0.25 W/mK, 1600 J/kgK; CF raises k)"
+  },
+  "petg": {
+   "HDT_C": 68.0,
+   "Tg_C": 80.0,
+   "src": "Prusament PETG TDS v1.1 (2022): HDT 68 C at 0.45 and 1.80 MPa; Tg ~80 C (MatterHackers PETG sheet), checked 2026-10-25"
+  },
+  "xps": {
+   "k": 0.0289,
+   "cp": 1300.0,
+   "rho": 32,
+   "max_use_C": 74.0,
+   "src": "Owens Corning FOAMULAR 150: R-5 per inch (RSI 0.88 m2K/W per 25.4 mm -> k = 0.0254/0.88 = 0.0289 W/mK), max use 165 F = 74 C (product data sheet, checked 2026-10-25); cp 1300 J/kgK EST (polystyrene); rho 32 kg/m3 = sizing rhoFoam"
+  },
+  "lipo": {
+   "k": 1.0,
+   "cp": 1100.0,
+   "rho": 2204.301075268817,
+   "limit_C": 60.0,
+   "src": "cp ~1100 J/kgK: Lin et al., arXiv 2112.09768 (20 Ah LFP pouch, 541 J/K / 0.489 kg) and Chalmers calorimetry; k 1.0 W/mK EST (through-plane 0.5-1, in-plane 20-30); rho = pack mass 0.82 kg (results.json pick.kg) / box 155 x 50 x 48 (params.mjs EST); 60 C limit docs/test/TEST-PLAN.md C11 / post-flight rule 8"
+  },
+  "foam": {
+   "k": 0.04,
+   "cp": 1300.0,
+   "rho": 40.0,
+   "src": "EST: 3 mm foam mounting pad (hardware-spec J15)"
+  },
+  "esc": {
+   "k": 5.0,
+   "cp": 800.0,
+   "rho": 1500.0,
+   "src": "EST lump: FR4 + FETs + heat-shrink"
+  }
+ },
+ "limits": {
+  "motor_can_C": 80.0,
+  "esc_C": 70.0,
+  "lipo_C": 60.0,
+  "pa6cf_HDT_C": 173.0,
+  "petg_HDT_C": 68.0,
+  "xps_C": 74.0,
+  "wire_connector_C": 60.0,
+  "src": "motor can 80 C EST and ESC 70 C EST: docs/test/TEST-PLAN.md abort table and C08 (X4110S and SoloGood publish no limit, \"\u2014\"); LiPo 60 C: TEST-PLAN rule 8 / C11; connectors 60 C: G04; PA6-CF HDT 173 C: Polymaker TDS; PETG HDT 68 C: Prusament TDS; XPS 74 C: FOAMULAR data sheet"
+ },
+ "mount": {
+  "len_m": 0.07,
+  "width_m": 0.046,
+  "top_m": 0.021,
+  "bot_m": 0.015,
+  "bore_m": 0.0256,
+  "src": "docs/research/hardware-spec.md J02: block 70 x 46, cap y -15.0..-0.6, upper +0.6..+21.0, bore 25.6"
+ },
+ "esc": {
+  "len_m": 0.055,
+  "width_m": 0.028,
+  "height_m": 0.012,
+  "pad_m": 0.003,
+  "x_m": 0.075,
+  "src": "EST dims (SoloGood listing gives none, hardware-spec J15 \"\u2014\"); 3 mm foam pad on the boom underside ahead of the mount (J15)"
+ },
+ "fc": {
+  "len_m": 0.052,
+  "width_m": 0.032,
+  "height_m": 0.017,
+  "src": "hardware-spec.md J15: CoreWing F405 Wing V2 52 x 32 x 17 mm"
+ },
+ "cup": {
+  "od_m": 0.0556,
+  "floor_m": 0.0045,
+  "wall_m": 0.003,
+  "len_m": 0.03,
+  "ring_od_m": 0.08,
+  "src": "cad/mesh/meta.json Pusher_Cup: PA6-CF cup dia 55.6 x 30 long with a 4.5 mm floor, inside the 56 pod tail ring (hardware-spec J12); wall 3.0 and foam ring OD 80 EST; the 32 mm can protrudes 6.5 mm past the cup rim"
+ },
+ "boom": {
+  "segment_m": 0.4,
+  "src": "modelled boom segment 0.40 m centred on the mount (EST; front boom 0.966 m, params.txt segF)"
+ },
+ "geometry_src": "cad/params.txt: motorD 0.048, motorH 0.032, boomOD 0.0254, boomID 0.0236, battL/H/W 0.155/0.050/0.048, fusL 0.85, fusR 0.08, pushMotorD/L 0.048/0.032"
+}

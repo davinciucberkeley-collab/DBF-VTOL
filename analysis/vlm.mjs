@@ -84,9 +84,9 @@ function spanEff() {
 const wing = analyse(false), full = analyse(true), se = spanEff();
 const helmbold = 2 * Math.PI * s.AR / (2 + Math.sqrt(s.AR * s.AR + 4));
 const out = {
-  generated: '2026-10-13', method: 'vortex lattice, horseshoe vortices, wing 48x4 + tail 16x2 panels (analysis/vlm.mjs)',
+  generated: '2026-10-25', method: 'vortex lattice, horseshoe vortices, wing 48x4 + tail 16x2 panels (analysis/vlm.mjs)',
   wing_CLa_per_rad: wing.CLa, helmbold_CLa_per_rad: helmbold,
-  full_CLa_per_rad: full.CLa, neutral_point_pct_mac: full.hn * 100, sizing_neutral_point_pct_mac: g.hn * 100,
+  full_CLa_per_rad: full.CLa, neutral_point_pct_mac: full.hn * 100, sizing_neutral_point_pct_mac: (g.hn_nopod != null ? g.hn_nopod : g.hn) * 100, sizing_neutral_point_with_pod_pct_mac: g.hn * 100,
   static_margin_pct_at_28: (full.hn - 0.28) * 100, wing_span_efficiency_inviscid: se.e, sizing_e: R.base.e, AR: se.AR,
   notes: 'Inviscid span efficiency; real Oswald e is lower (viscous + fuselage + boom interference). Fuselage destabilising moment not modelled.'
 };

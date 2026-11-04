@@ -1,0 +1,17 @@
+#
+# vtol_c0_hover_phase.param  -  overlay for the hover-only test sessions (load AFTER vtol_c0.param)
+#
+# Purpose: enforce the test-phase hover limits (<= 5 m AGL, <= 60 s; review section 10, R14 mitigation)
+# with the tightest fence the firmware allows, and stop any accidental forward transition.
+# Restore by reloading vtol_c0.param before the first transition session.
+# Sources: [PD] parameter ranges in apm.pdef.xml (checked 2026-10-21); [RV] review/src/body.html section 10.
+#
+FENCE_ALT_MAX,10          # minimum allowed value (range 10-1000 m) [PD]; hover limit is 5 m [RV], 10 m is the firmware floor
+FENCE_RADIUS,30           # minimum allowed value (range 30-10000 m) [PD]
+FENCE_ACTION,0            # report only: an RTL from a hover test would try to transition. Pilot lands on the breach alarm [PD values]
+Q_ASSIST_SPEED,-1         # -1 = assist off except in transitions; no fixed-wing flight in this phase [PD]
+FLTMODE4,17               # replace FBWA with QSTABILIZE: no fixed-wing mode on the mode switch [PD]
+FLTMODE5,18               # replace CRUISE with QHOVER [PD]
+RC9_OPTION,0              # RTL switch off in this phase (RTL would start a fixed-wing return) [PD]
+BATT_FS_LOW_ACT,4         # low battery -> QLAND (RTL is a fixed-wing mode) [PD values]
+FS_LONG_ACTN,0            # Q modes force QLAND on RC loss anyway [FS: apms-failsafe-function.html]

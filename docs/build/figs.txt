@@ -1,0 +1,30 @@
+# Build-manual figures rendered from the CAD assembly by cad/BuildFigs.cs (format in that file's header).
+# Instance numbers: -1 = right side (+Z), -2 = left side; rear lift units are Lift_Motor-2 (right) and -4 (left).
+# id | asm | view | rotX | rotY | zoom | focus | context | ghost
+fig00_aircraft      | C | *Isometric | 0 | 0 | all   | | * |
+fig04_wing_tubes    | C | *Isometric | 0 | 0 | all   | Joiner_Stop,Spar_Tube,Wing_Joiner | | Wing_Panel_L,Wing_Panel_R
+fig04_hardpoints    | C | *Isometric | 0 | 0 | focus:4 | Spar_Collar-2,Rear_Hardpoint-2 | Spar_Tube-2 | Wing_Panel_L
+fig04_root_pockets  | C | *Isometric | 0 | 0 | focus:2 | Root_Tongue-2,Horn_Hardpoint-2,Servo_Tray-4 | | Wing_Panel_L
+fig05_ailerons      | C | *Isometric | 0 | 0 | all   | Aileron_L,Aileron_R | Wing_Panel_L,Wing_Panel_R |
+fig05_aileron_servo | C | *Bottom    | 0 | 0 | focus:3 | Servo-4,Servo_Tray-4,Pushrod_Aileron-2,Control_Horn-4,Horn_Hardpoint-2 | Aileron_L | Wing_Panel_L
+fig05_saddle        | C | *Isometric | 0 | 0 | focus | Wing_Saddle,Bolt_Pillar | Wing_Panel_L,Wing_Panel_R,Root_Tongue,Wing_Joiner |
+fig05_pitot         | C | *Isometric | 0 | 0 | focus:3 | Pitot_Clamp,Pitot_Tube | | Wing_Panel_L
+fig06_stabiliser    | C | *Isometric | 0 | 0 | focus | H_Tail,Elevator,Crush_Sleeve | |
+fig06_fins          | C | *Isometric | 0 | 0 | all   | Fin,Rudder,Fin_Shoe | H_Tail,Elevator,Crush_Sleeve |
+fig06_tail_servos   | C | *Isometric | 0 | 0 | focus | Servo-1,Servo-3,Servo-5,Servo_Tray-1,Servo_Tray-3,Servo_Tray-5,Control_Horn-1,Control_Horn-3,Control_Horn-5,Horn_Backplate,Pushrod_Elevator,Pushrod_Rudder | H_Tail,Elevator,Fin,Rudder,Fin_Shoe,Crush_Sleeve |
+fig06_tail_clamps   | C | *Isometric | 0 | 0 | focus:3 | Tail_Clamp_Upper-1,Tail_Clamp_Cap-1 | H_Tail,Elevator,Fin,Rudder,Fin_Shoe,Crush_Sleeve,Boom_Rear_Stub,Servo-1,Servo-3,Servo-5,Servo_Tray-1,Servo_Tray-3,Servo_Tray-5 |
+fig07_motor_mount   | C | *Isometric | 0 | 0 | focus:1 | Lift_Motor-1,Motor_Mount_Upper-1 | |
+fig07_prop          | C | *Isometric | 0 | 0 | focus | Prop_Plate-1,Lift_Prop-1 | Lift_Motor-1,Motor_Mount_Upper-1 |
+fig07_gear_clamps   | C | *Isometric | 0 | 0 | all   | Gear_Clamp_Upper-1,Gear_Clamp_Lower-1,Gear_Clamp_Upper-2,Gear_Clamp_Lower-2 | Boom_Front-1,Boom_Rear_Stub-1 |
+fig07_front_mount   | C | *Isometric | 0 | 0 | focus:3 | Motor_Mount_Cap-1 | Boom_Front-1,Motor_Mount_Upper-1,Lift_Motor-1,Gear_Clamp_Upper-1,Gear_Clamp_Lower-1 |
+fig07_splice        | C | *Isometric | 0 | 0 | focus | Splice_Plug-1,Motor_Mount_Upper-2,Motor_Mount_Cap-2 | Lift_Motor-2,Boom_Rear_Stub-1 | Boom_Front-1
+fig07_boom          | C | *Isometric | 0 | 0 | all   | | Boom_Front-1,Boom_Rear_Stub-1,Splice_Plug-1,Motor_Mount_Upper-1,Motor_Mount_Cap-1,Motor_Mount_Upper-2,Motor_Mount_Cap-2,Lift_Motor-1,Lift_Motor-2,Prop_Plate-1,Prop_Plate-2,Lift_Prop-1,Lift_Prop-2,Gear_Clamp_Upper-1,Gear_Clamp_Lower-1,Gear_Clamp_Upper-2,Gear_Clamp_Lower-2 |
+fig08_pod           | C | *Isometric | 0 | 0 | focus | Fuselage_Pod | |
+fig08_canopy        | C | *Isometric | 0 | 0 | focus | Canopy | Fuselage_Pod |
+fig08_saddle_pod    | C | *Isometric | 0 | 0 | focus | Wing_Saddle,Bolt_Pillar | Fuselage_Pod,Canopy |
+fig08_battery       | C | *Front     | 0 | 0 | focus | Battery_Tray,Battery_6S_LiPo | | Fuselage_Pod,Canopy
+fig08_pusher        | C | *Isometric | 0 | 0 | focus | Pusher_Cup,Pusher_Adapter,Pusher_Motor,Prop_Washer,Pusher_Prop_14in | Fuselage_Pod |
+fig08_legs          | C | *Isometric | 0 | 0 | all   | Landing_Leg,Gear_Fairing | Boom_Front,Boom_Rear_Stub,Gear_Clamp_Upper,Gear_Clamp_Lower |
+fig10_fc            | C | *Front     | 0 | 0 | focus | FC_Tray,Flight_Controller | Battery_Tray,Battery_6S_LiPo | Fuselage_Pod,Canopy
+fig14_boom_clamps   | C | *Bottom    | 0 | 0 | focus:3 | Boom_Clamp_F_Upper-1,Boom_Clamp_F_Lower-1,Boom_Clamp_R_Upper-1,Boom_Clamp_R_Lower-1 | * |
+fig14_exploded      | X | *Isometric | 0 | 0 | all   | | * |

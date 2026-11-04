@@ -1,0 +1,46 @@
+{
+ "points": 57,
+ "Ah_total": 6.231527777777784,
+ "Wh_total": 138.69847111111113,
+ "t_cutoff_s": 1213.0,
+ "Ah_at_cutoff": 5.831527777777783,
+ "Wh_at_cutoff": 130.39067111111112,
+ "Wh_nameplate": 144.3,
+ "usable_fraction": 0.9036082544082544,
+ "steps": [
+  {
+   "label": "hover",
+   "t0": 600.0,
+   "dur_s": 9.0,
+   "I_A": 40.0,
+   "V_before": 22.601,
+   "V_min": 21.637,
+   "Vcell_min": 3.6061666666666667,
+   "dI_A": 24.0,
+   "R_pack_mohm": 40.16666666666661,
+   "R_cell_mohm": 6.694444444444435
+  },
+  {
+   "label": "transition",
+   "t0": 730.0,
+   "dur_s": 2.0,
+   "I_A": 73.0,
+   "V_before": 22.201,
+   "V_min": 20.16,
+   "Vcell_min": 3.36,
+   "dI_A": 57.0,
+   "R_pack_mohm": 35.80701754385966,
+   "R_cell_mohm": 5.967836257309943
+  }
+ ],
+ "Vcell_min_hover": 3.6061666666666667,
+ "Vcell_min_trans": 3.36,
+ "R_cell_mohm_max": 6.694444444444435,
+ "pass_Wh": true,
+ "pass_hover_sag": true,
+ "pass_trans_sag": true,
+ "pass_R": true,
+ "hot_day_ok": false,
+ "max_start_C_full_mission": 33.89166666666671,
+ "pass_all": true
+}

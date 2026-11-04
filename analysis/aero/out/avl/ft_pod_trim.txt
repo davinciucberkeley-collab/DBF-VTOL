@@ -1,0 +1,34 @@
+ ---------------------------------------------------------------
+ Vortex Lattice Output -- Total Forces
+
+ Configuration: C0 lift+cruise VTOL (analysis/aero/avl_run.py from results.j
+     # Surfaces =   6
+     # Strips   = 112
+     # Vortices =1440
+
+  Sref = 0.68202       Cref = 0.28418       Bref =  2.4000    
+  Xref = 0.79570E-01   Yref =  0.0000       Zref =  0.0000    
+
+ Standard axis orientation,  X fwd, Z down         
+
+ Run case:  -unnamed-                              
+
+  Alpha =   2.86415     pb/2V =  -0.00000     p'b/2V =  -0.00000
+  Beta  =   0.00000     qc/2V =   0.00000
+  Mach  =     0.000     rb/2V =  -0.00000     r'b/2V =  -0.00000
+
+  CXtot =   0.00232     Cltot =   0.00000     Cl'tot =   0.00000
+  CYtot =   0.00000     Cmtot =   0.00000
+  CZtot =  -0.38486     Cntot =  -0.00000     Cn'tot =  -0.00000
+
+  CLtot =   0.38450
+  CDtot =   0.01691
+  CDvis =   0.01094     CDind = 0.0059702
+  CLff  =   0.38438     CDff  = 0.0060392    | Trefftz
+  CYff  =   0.00000         e =    0.9221    | Plane  
+
+   aileron         =   0.00000
+   elevator        =  -3.45344
+   rudder          =   0.00000
+
+ ---------------------------------------------------------------

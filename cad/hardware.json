@@ -1,0 +1,1023 @@
+{
+  "meta": {
+    "design": "C0 4-lift twin-boom quadplane, v0.4.0 (CAD rev D)",
+    "spec": "docs/research/hardware-spec.md",
+    "checked": "2026-10-21",
+    "units": "mm, N*m, USD",
+    "frame": "Same as cad/params.txt: X forward, Y up, Z right. Joint coordinates in the md are local to each part (boom axis = local X, split plane = local y 0).",
+    "notes": [
+      "Every head dimension is the maximum from the vendor product page (Bolt Depot 'Product details', checked 2026-10-21).",
+      "clearance_hole_mm is the ISO 273 normal (H13) value; the printed-part model value is clearance_hole_mm + 0.2 (FDM compensation, see fits FT07).",
+      "torque_Nm values marked EST in torque_basis are engineering estimates to be confirmed by measurement item M3 in the md.",
+      "qty is per aircraft; order_qty includes spares.",
+      "Entries with length_mm marked provisional depend on a part dimension not published (listed in 'unknowns')."
+    ]
+  },
+  "fasteners": [
+    {
+      "id": "F01",
+      "description": "Motor to motor plate (4 lift + pusher), from below through the PA6-CF floor into the motor base",
+      "standard": "ISO 4762 (DIN 912)",
+      "thread": "M3x0.5",
+      "length_mm": 8,
+      "head_d_mm": 5.68,
+      "head_h_mm": 3.0,
+      "drive": "hex socket 2.5 mm",
+      "material": "A2 (18-8) stainless",
+      "clearance_hole_mm": 3.4,
+      "tap_drill_mm": null,
+      "counterbore": {
+        "d_mm": 6.5,
+        "note": "opens from the boom bore up to the 4.5 mm floor (lift); from the cup interior (pusher)"
+      },
+      "grip_mm": 5.0,
+      "thread_engagement_mm": 3.0,
+      "engagement_limit_mm": 3.3,
+      "insert": null,
+      "nut": null,
+      "washer": {
+        "id": "W01",
+        "standard": "DIN 125-A",
+        "size": "M3",
+        "od_mm": 7.0,
+        "id_mm": 3.2,
+        "t_mm": 0.5,
+        "qty_per_screw": 1
+      },
+      "threadlocker": "Loctite 242, one drop on the last 2-3 threads only; keep off the PA6-CF (TDS: not for thermoplastics)",
+      "torque_Nm": 0.6,
+      "torque_basis": "EST: limited by bearing pressure on the printed floor (F = T/(K d) = 0.6/(0.16 x 0.003) = 1250 N; 41 MPa on the washer). Fastenal A2-70 M3 lubricated max 0.81.",
+      "qty": 20,
+      "order_qty": 30,
+      "joints": [
+        "J01 lift motor to motor plate (x4 motors, 4 each)",
+        "J12 pusher motor to cup (4)"
+      ],
+      "vendor": "Bolt Depot",
+      "part_no": "6379",
+      "url": "https://boltdepot.com/Product-Details?product=6379",
+      "unit_usd": 0.06,
+      "checked": "2026-10-21"
+    },
+    {
+      "id": "F02",
+      "description": "Split-clamp screws (motor mounts, tail clamps), stabiliser/fin shoe screws, provisional lift-prop screws",
+      "standard": "ISO 4762 (DIN 912)",
+      "thread": "M3x0.5",
+      "length_mm": 16,
+      "head_d_mm": 5.68,
+      "head_h_mm": 3.0,
+      "drive": "hex socket 2.5 mm",
+      "material": "A2 (18-8) stainless",
+      "clearance_hole_mm": 3.4,
+      "tap_drill_mm": null,
+      "counterbore": {
+        "d_mm": 6.5,
+        "depth_mm": 5.6,
+        "note": "clamp caps; none on fin shoe flange"
+      },
+      "thread_engagement_mm": 6.0,
+      "insert": {
+        "id": "I01",
+        "model": "ruthex RX-M3x5.7",
+        "hole_d_mm": 4.0,
+        "hole_depth_mm": 7.5,
+        "od_mm": 4.6,
+        "length_mm": 5.7,
+        "min_wall_mm": 1.6
+      },
+      "nut": null,
+      "washer": null,
+      "threadlocker": "none (brass insert in plastic); witness mark",
+      "torque_Nm": 0.5,
+      "torque_basis": "EST: insert torque-out in PETG/PA6-CF not published; confirm >= 2x by coupon test M3",
+      "qty": 36,
+      "qty_breakdown": {
+        "motor mount clamps": 16,
+        "tail clamps": 8,
+        "stab + fin shoe": 4,
+        "lift prop plates (provisional length)": 8
+      },
+      "order_qty": 50,
+      "joints": [
+        "J02 motor mount upper/lower clamp (4 per mount x4)",
+        "J08 tail clamp to rear stub (4 per side)",
+        "J09 fin shoe + stabiliser to tail clamp (2 per side)",
+        "J03 lift prop plate to motor hub (2 per motor, provisional)"
+      ],
+      "vendor": "Bolt Depot",
+      "part_no": "6382",
+      "url": "https://boltdepot.com/Product-Details?product=6382",
+      "unit_usd": 0.06,
+      "checked": "2026-10-21"
+    },
+    {
+      "id": "F03",
+      "description": "Gear clamp split screws",
+      "standard": "ISO 4762 (DIN 912)",
+      "thread": "M3x0.5",
+      "length_mm": 20,
+      "head_d_mm": 5.68,
+      "head_h_mm": 3.0,
+      "drive": "hex socket 2.5 mm",
+      "material": "A2 (18-8) stainless",
+      "clearance_hole_mm": 3.4,
+      "tap_drill_mm": null,
+      "counterbore": {
+        "d_mm": 6.5,
+        "depth_mm": 15.3
+      },
+      "thread_engagement_mm": 6.0,
+      "insert": {
+        "id": "I01",
+        "model": "ruthex RX-M3x5.7",
+        "hole_d_mm": 4.0,
+        "hole_depth_mm": 7.5,
+        "od_mm": 4.6,
+        "length_mm": 5.7,
+        "min_wall_mm": 1.6
+      },
+      "nut": null,
+      "washer": null,
+      "threadlocker": "none",
+      "torque_Nm": 0.5,
+      "torque_basis": "EST, as F02",
+      "qty": 16,
+      "order_qty": 24,
+      "joints": [
+        "J06 gear clamp halves on boom (4 per clamp x4)"
+      ],
+      "vendor": "Bolt Depot",
+      "part_no": "6383",
+      "url": "https://boltdepot.com/Product-Details?product=6383",
+      "unit_usd": 0.07,
+      "checked": "2026-10-21"
+    },
+    {
+      "id": "F04",
+      "description": "Boom splice cross-bolts (rear motor mount) and rear boom-clamp bolts to the wing hardpoint",
+      "standard": "ISO 4762 (DIN 912)",
+      "thread": "M3x0.5",
+      "length_mm": 40,
+      "head_d_mm": 5.68,
+      "head_h_mm": 3.0,
+      "drive": "hex socket 2.5 mm",
+      "material": "A2 (18-8) stainless",
+      "clearance_hole_mm": 3.4,
+      "tap_drill_mm": null,
+      "counterbore": {
+        "d_mm": 7.5,
+        "depth_mm": 5.0,
+        "note": "splice: head + washer; rear wing clamp: d 6.5, depth 7.5, no washer"
+      },
+      "insert": {
+        "id": "I01",
+        "model": "ruthex RX-M3x5.7",
+        "hole_d_mm": 4.0,
+        "hole_depth_mm": 7.5,
+        "od_mm": 4.6,
+        "length_mm": 5.7,
+        "min_wall_mm": 1.6,
+        "applies_to": "rear wing clamp only"
+      },
+      "nut": {
+        "id": "N01",
+        "standard": "DIN 985 nylon-insert lock nut",
+        "size": "M3",
+        "af_mm": 5.5,
+        "h_mm": 4.0,
+        "pocket_af_mm": 5.7,
+        "pocket_depth_mm": 8.0,
+        "applies_to": "splice only"
+      },
+      "washer": {
+        "id": "W01",
+        "standard": "DIN 125-A",
+        "size": "M3",
+        "od_mm": 7.0,
+        "t_mm": 0.5,
+        "qty_per_screw": 1,
+        "applies_to": "splice, under head"
+      },
+      "threadlocker": "none (nylock)",
+      "torque_Nm": 0.5,
+      "torque_basis": "EST: clamp passes through a printed block and a crush plug; Fastenal A2-70 M3 lubricated max 0.81",
+      "qty": 8,
+      "qty_breakdown": {
+        "splice cross-bolts": 4,
+        "rear boom clamp to wing": 4
+      },
+      "order_qty": 12,
+      "joints": [
+        "J04 boom splice at rear motor mount (2 per side)",
+        "J05b rear boom clamp to wing hardpoint (2 per side)"
+      ],
+      "vendor": "Bolt Depot",
+      "part_no": "6387",
+      "url": "https://boltdepot.com/Product-Details?product=6387",
+      "unit_usd": 0.15,
+      "checked": "2026-10-21"
+    },
+    {
+      "id": "F05",
+      "description": "Landing-leg retaining cross-bolt through gear clamp and leg",
+      "standard": "ISO 4762 (DIN 912)",
+      "thread": "M3x0.5",
+      "length_mm": 30,
+      "head_d_mm": 5.68,
+      "head_h_mm": 3.0,
+      "drive": "hex socket 2.5 mm",
+      "material": "A2 (18-8) stainless",
+      "clearance_hole_mm": 3.4,
+      "tap_drill_mm": null,
+      "counterbore": {
+        "d_mm": 7.5,
+        "depth_mm": 4.0,
+        "note": "4.0 deep so the head and washer stay outside the leg tube (CAD rev B)"
+      },
+      "insert": null,
+      "nut": {
+        "id": "N01",
+        "standard": "DIN 985",
+        "size": "M3",
+        "af_mm": 5.5,
+        "h_mm": 4.0,
+        "pocket_af_mm": 5.7,
+        "pocket_depth_mm": 4.3,
+        "note": "pocket 4.3 deep: the nut bears just outside the leg tube; an 8.0 pocket would cut into the leg socket (CAD rev B)"
+      },
+      "washer": {
+        "id": "W01",
+        "standard": "DIN 125-A",
+        "size": "M3",
+        "od_mm": 7.0,
+        "t_mm": 0.5,
+        "qty_per_screw": 1
+      },
+      "threadlocker": "none (nylock)",
+      "torque_Nm": 0.5,
+      "torque_basis": "EST, as F04",
+      "qty": 4,
+      "order_qty": 8,
+      "joints": [
+        "J07 landing leg in gear clamp socket (1 per leg)"
+      ],
+      "vendor": "Bolt Depot",
+      "part_no": "6385 (M3 x 30 socket cap; number and price not verified, EST)",
+      "url": "https://boltdepot.com/Product-Details?product=6385",
+      "unit_usd": 0.1,
+      "checked": "2026-10-21",
+      "cad_change": "hardware-spec J07 gave M3 x 25 with an 8.0 nut pocket in the 34 mm block: the pocket would reach x -9, inside the leg tube (radius 12.7). With the nut outside the tube (bearing at -12.7) and the head seat at +13.0 the screw must be 30 long (CAD rev B, 2026-10-21)."
+    },
+    {
+      "id": "F06",
+      "description": "Front boom clamp bolts to the spar-collar hardpoint in the wing",
+      "standard": "ISO 4762 (DIN 912)",
+      "thread": "M3x0.5",
+      "length_mm": 35,
+      "head_d_mm": 5.68,
+      "head_h_mm": 3.0,
+      "drive": "hex socket 2.5 mm",
+      "material": "A2 (18-8) stainless",
+      "clearance_hole_mm": 3.4,
+      "tap_drill_mm": null,
+      "counterbore": {
+        "d_mm": 6.5,
+        "depth_mm": 4.3
+      },
+      "thread_engagement_mm": 6.0,
+      "insert": {
+        "id": "I01",
+        "model": "ruthex RX-M3x5.7",
+        "hole_d_mm": 4.0,
+        "hole_depth_mm": 7.5,
+        "od_mm": 4.6,
+        "length_mm": 5.7,
+        "min_wall_mm": 1.6
+      },
+      "nut": null,
+      "washer": null,
+      "threadlocker": "none",
+      "torque_Nm": 0.5,
+      "torque_basis": "EST, as F02",
+      "qty": 4,
+      "order_qty": 8,
+      "joints": [
+        "J05a front boom clamp to wing spar collar (2 per side)"
+      ],
+      "vendor": "Bolt Depot",
+      "part_no": "6386",
+      "url": "https://boltdepot.com/Product-Details?product=6386",
+      "unit_usd": 0.15,
+      "checked": "2026-10-21"
+    },
+    {
+      "id": "F07",
+      "description": "Light-duty screws into inserts: pusher cup radial screws, canopy hatch, pitot clamp, FC tray (provisional)",
+      "standard": "ISO 7380-1 button head (vendor lists no standard; dims match)",
+      "thread": "M3x0.5",
+      "length_mm": 8,
+      "head_d_mm": 5.7,
+      "head_h_mm": 1.65,
+      "drive": "hex socket 2.0 mm",
+      "material": "A2 (18-8) stainless",
+      "clearance_hole_mm": 3.4,
+      "tap_drill_mm": null,
+      "counterbore": null,
+      "thread_engagement_mm": 6.0,
+      "insert": {
+        "id": "I01",
+        "model": "ruthex RX-M3x5.7",
+        "hole_d_mm": 4.0,
+        "hole_depth_mm": 7.0,
+        "od_mm": 4.6,
+        "length_mm": 5.7,
+        "min_wall_mm": 1.6
+      },
+      "nut": null,
+      "washer": null,
+      "threadlocker": "none",
+      "torque_Nm": 0.4,
+      "torque_basis": "EST: 2.0 mm thin flanges",
+      "qty": 11,
+      "qty_breakdown": {
+        "pusher cup radial": 4,
+        "canopy hatch": 2,
+        "pitot clamp pinch": 1,
+        "FC tray (provisional)": 4
+      },
+      "order_qty": 20,
+      "joints": [
+        "J12 pusher cup to pod tail ring",
+        "J13 canopy hatch to pod frame",
+        "J16 pitot clamp",
+        "J15 FC to tray (provisional)"
+      ],
+      "vendor": "Bolt Depot",
+      "part_no": "7219",
+      "url": "https://boltdepot.com/Product-Details?product=7219",
+      "unit_usd": 0.06,
+      "checked": "2026-10-21"
+    },
+    {
+      "id": "F08",
+      "description": "Wing saddle to pod frame",
+      "standard": "ISO 4762 (DIN 912)",
+      "thread": "M3x0.5",
+      "length_mm": 12,
+      "head_d_mm": 5.68,
+      "head_h_mm": 3.0,
+      "drive": "hex socket 2.5 mm",
+      "material": "A2 (18-8) stainless",
+      "clearance_hole_mm": 3.4,
+      "tap_drill_mm": null,
+      "counterbore": null,
+      "grip_mm": 6.0,
+      "thread_engagement_mm": 6.0,
+      "insert": {
+        "id": "I01",
+        "model": "ruthex RX-M3x5.7",
+        "hole_d_mm": 4.0,
+        "hole_depth_mm": 7.0,
+        "od_mm": 4.6,
+        "length_mm": 5.7,
+        "min_wall_mm": 1.6
+      },
+      "nut": null,
+      "washer": null,
+      "threadlocker": "none",
+      "torque_Nm": 0.5,
+      "torque_basis": "EST, as F02",
+      "qty": 4,
+      "order_qty": 12,
+      "note": "extra 8 cover a shorter lift-prop screw if the measured hub is thin (see F02 provisional)",
+      "joints": [
+        "J11 wing saddle root-plate flange to pod frame (4)"
+      ],
+      "vendor": "Bolt Depot",
+      "part_no": "6381",
+      "url": "https://boltdepot.com/Product-Details?product=6381",
+      "unit_usd": 0.06,
+      "checked": "2026-10-21"
+    },
+    {
+      "id": "F09",
+      "description": "Wing panel retention bolt (one per side, 70 % chord, through the saddle bolt pillar and the panel root tongue)",
+      "standard": "ISO 7380-1 button head (vendor lists no standard; dims match)",
+      "thread": "M5x0.8",
+      "length_mm": 20,
+      "head_d_mm": 9.5,
+      "head_h_mm": 2.75,
+      "drive": "hex socket 3.0 mm",
+      "material": "A2 (18-8) stainless",
+      "clearance_hole_mm": 5.5,
+      "tap_drill_mm": null,
+      "counterbore": {
+        "d_mm": 10.3,
+        "depth_mm": 1.0
+      },
+      "grip_mm": 12.8,
+      "insert": null,
+      "nut": {
+        "id": "N02",
+        "standard": "DIN 985 nylon-insert lock nut",
+        "size": "M5",
+        "af_mm": 8.0,
+        "h_mm": 5.0,
+        "pocket_af_mm": 8.2,
+        "pocket_depth_mm": 8.0
+      },
+      "washer": null,
+      "threadlocker": "none (nylock)",
+      "torque_Nm": 1.0,
+      "torque_basis": "EST: PETG pillar bearing (F = 1.0/(0.16 x 0.005) = 1250 N on 47 mm2 = 27 MPa)",
+      "qty": 2,
+      "order_qty": 6,
+      "joints": [
+        "J10 wing panel to saddle (1 per side)"
+      ],
+      "vendor": "Bolt Depot",
+      "part_no": "6635",
+      "url": "https://boltdepot.com/Product-Details?product=6635",
+      "unit_usd": 0.18,
+      "checked": "2026-10-21",
+      "cad_change": "Wing_Bolt in BuildVtol.cs is M5 x 30; the section is 21.8 mm thick at 70 % chord (calc), so a 30 mm screw protrudes. Use 20 mm."
+    },
+    {
+      "id": "F10",
+      "description": "Servo mounting screws (provisional: servo tab hole size and spacing not published)",
+      "standard": "ISO 4762 (DIN 912)",
+      "thread": "M2x0.4",
+      "length_mm": 10,
+      "head_d_mm": 3.98,
+      "head_h_mm": 2.0,
+      "drive": "hex socket 1.5 mm",
+      "material": "A2 (18-8) stainless",
+      "clearance_hole_mm": 2.4,
+      "tap_drill_mm": null,
+      "counterbore": null,
+      "insert": null,
+      "nut": {
+        "id": "N03",
+        "standard": "DIN 934 hex nut",
+        "size": "M2",
+        "af_mm": 4.0,
+        "h_mm": 1.6,
+        "pocket_af_mm": 4.2,
+        "pocket_depth_mm": 2.0
+      },
+      "washer": null,
+      "threadlocker": "none",
+      "torque_Nm": 0.15,
+      "torque_basis": "EST: snug against servo rubber grommets/tabs; no published value",
+      "qty": 20,
+      "order_qty": 30,
+      "joints": [
+        "J14 servo to printed servo tray (4 per servo x5)"
+      ],
+      "vendor": "Bolt Depot",
+      "part_no": "6365",
+      "url": "https://boltdepot.com/Product-Details?product=6365",
+      "unit_usd": 0.12,
+      "checked": "2026-10-21"
+    },
+    {
+      "id": "F11",
+      "description": "Control-horn screws (supplied with the horn kit, kit item 7)",
+      "standard": "— (supplier states M2x14 only)",
+      "thread": "M2x0.4",
+      "length_mm": 14,
+      "head_d_mm": null,
+      "head_h_mm": null,
+      "drive": "—",
+      "material": "—",
+      "clearance_hole_mm": 2.4,
+      "tap_drill_mm": null,
+      "insert": null,
+      "nut": {
+        "id": "N03",
+        "standard": "DIN 934 hex nut",
+        "size": "M2",
+        "af_mm": 4.0,
+        "h_mm": 1.6,
+        "pocket_af_mm": 4.2,
+        "pocket_depth_mm": 2.0
+      },
+      "washer": null,
+      "threadlocker": "none (nylon horn)",
+      "torque_Nm": 0.15,
+      "torque_basis": "EST: snug; nylon horn base",
+      "qty": 10,
+      "order_qty": 0,
+      "joints": [
+        "J17 horn to aileron hardpoint (2 per horn x2)",
+        "J17 horn through elevator and rudders with kit backplate (2 per horn x3)"
+      ],
+      "vendor": "Amazon (kit item 7)",
+      "part_no": "B0B58ZSC8J",
+      "url": "https://www.amazon.com/dp/B0B58ZSC8J",
+      "unit_usd": 0.0,
+      "checked": "2026-10-21"
+    },
+    {
+      "id": "F12",
+      "description": "Lift prop clamp-plate screws: length = 2.5 (plate) + hub thickness (—) + 5.0 engagement, max engagement 8.0 (maker drawing). Order covered by F02/F08 lengths.",
+      "standard": "ISO 4762 (DIN 912)",
+      "thread": "M3x0.5",
+      "length_mm": null,
+      "length_provisional_mm": 16,
+      "head_d_mm": 5.68,
+      "head_h_mm": 3.0,
+      "drive": "hex socket 2.5 mm",
+      "material": "A2 (18-8) stainless",
+      "clearance_hole_mm": 3.2,
+      "tap_drill_mm": null,
+      "insert": null,
+      "nut": null,
+      "washer": null,
+      "threadlocker": "Loctite 242 on the screw tip (metal into motor hub)",
+      "torque_Nm": 0.8,
+      "torque_basis": "Fastenal A2-70 M3 lubricated 0.81 N*m (K 0.16); threadlocker acts as lubricant",
+      "qty": 8,
+      "order_qty": 0,
+      "joints": [
+        "J03 JeeFly 1755 prop to X4110S hub (2 of the 4 M3 holes on the 12 mm circle)"
+      ],
+      "vendor": "Bolt Depot (from F02 or F08 stock)",
+      "part_no": "6382 / 6381",
+      "url": "https://boltdepot.com/Product-Details?product=6382",
+      "unit_usd": 0.0,
+      "checked": "2026-10-21"
+    },
+    {
+      "id": "F13",
+      "description": "Pusher M6 bolt-on adapter to the X4110S hub: 4 screws supplied with the motor (maker drawing View A-A, dia 3.2 / dia 5.7 counterbores on dia 12). Length not published: 8 mm EST in the CAD (flange 5.0 EST, counterbore 3.0, engagement 6.0 < 8.0 limit)",
+      "standard": "— (supplied; ISO 4762 geometry assumed in the CAD)",
+      "thread": "M3x0.5",
+      "length_mm": 8,
+      "head_d_mm": 5.68,
+      "head_h_mm": 3.0,
+      "drive": "hex socket 2.5 mm (EST)",
+      "material": "— (supplied)",
+      "clearance_hole_mm": 3.2,
+      "tap_drill_mm": null,
+      "counterbore": {
+        "d_mm": 5.7,
+        "depth_mm": 3.0,
+        "note": "in the adapter flange (maker drawing)"
+      },
+      "insert": null,
+      "nut": null,
+      "washer": null,
+      "threadlocker": "Loctite 242 (metal to metal)",
+      "torque_Nm": 0.8,
+      "torque_basis": "as F12 (Fastenal A2-70 M3 lubricated 0.81)",
+      "qty": 4,
+      "order_qty": 0,
+      "joints": [
+        "J03b adapter to pusher hub (4)"
+      ],
+      "vendor": "SunnySky (in motor box)",
+      "part_no": "—",
+      "url": "https://cdn.shopify.com/s/files/1/2024/0305/files/X4110S.jpg?v=1553581346",
+      "unit_usd": 0.0,
+      "checked": "2026-10-21"
+    }
+  ],
+  "nuts": [
+    {
+      "id": "N01",
+      "standard": "DIN 985 nylon-insert lock nut (vendor: hex nylon insert lock nut)",
+      "thread": "M3x0.5",
+      "af_mm": 5.5,
+      "h_mm": 4.0,
+      "material": "A2 (18-8) stainless",
+      "qty": 8,
+      "order_qty": 16,
+      "joints": [
+        "J04 splice cross-bolts (4)",
+        "J07 leg cross-bolts (4)"
+      ],
+      "vendor": "Bolt Depot",
+      "part_no": "4792",
+      "url": "https://boltdepot.com/Product-Details?product=4792",
+      "unit_usd": 0.07,
+      "checked": "2026-10-21"
+    },
+    {
+      "id": "N02",
+      "standard": "DIN 985 nylon-insert lock nut",
+      "thread": "M5x0.8",
+      "af_mm": 8.0,
+      "h_mm": 5.0,
+      "material": "A2 (18-8) stainless",
+      "qty": 2,
+      "order_qty": 6,
+      "joints": [
+        "J10 wing bolts"
+      ],
+      "vendor": "Bolt Depot",
+      "part_no": "4794",
+      "url": "https://boltdepot.com/Product-Details?product=4794",
+      "unit_usd": 0.09,
+      "checked": "2026-10-21"
+    },
+    {
+      "id": "N03",
+      "standard": "DIN 934 hex nut",
+      "thread": "M2x0.4",
+      "af_mm": 4.0,
+      "h_mm": 1.6,
+      "material": "A2 (18-8) stainless",
+      "qty": 30,
+      "order_qty": 100,
+      "joints": [
+        "J14 servo screws (20)",
+        "J17 horn screws (10)"
+      ],
+      "vendor": "Bolt Depot",
+      "part_no": "7362",
+      "url": "https://boltdepot.com/Product-Details?product=7362",
+      "unit_usd": 0.0221,
+      "pack_usd": 2.21,
+      "checked": "2026-10-21"
+    },
+    {
+      "id": "N04",
+      "standard": "M6x1.0 bullet (acorn) prop nut, supplied with motor",
+      "thread": "M6x1.0",
+      "af_mm": null,
+      "h_mm": 19.5,
+      "material": "—",
+      "qty": 1,
+      "order_qty": 0,
+      "joints": [
+        "J03b pusher prop on M6 adapter"
+      ],
+      "vendor": "SunnySky (in motor box)",
+      "part_no": "—",
+      "url": "https://cdn.shopify.com/s/files/1/2024/0305/files/X4110S.jpg?v=1553581346",
+      "unit_usd": 0.0,
+      "checked": "2026-10-21"
+    }
+  ],
+  "washers": [
+    {
+      "id": "W01",
+      "standard": "DIN 125 (vendor)",
+      "size": "M3",
+      "od_mm": 7.0,
+      "id_mm": 3.2,
+      "t_mm": 0.5,
+      "material": "A2 (18-8) stainless",
+      "qty": 28,
+      "order_qty": 100,
+      "joints": [
+        "J01/J12 motor screws (20)",
+        "J04/J07 cross-bolt heads (8)"
+      ],
+      "vendor": "Bolt Depot",
+      "part_no": "4513",
+      "url": "https://boltdepot.com/Product-Details?product=4513",
+      "unit_usd": 0.0145,
+      "pack_usd": 1.45,
+      "checked": "2026-10-21"
+    }
+  ],
+  "inserts": [
+    {
+      "id": "I01",
+      "model": "ruthex RX-M3x5.7",
+      "thread": "M3",
+      "od_mm": 4.6,
+      "length_mm": 5.7,
+      "hole_d_mm": 4.0,
+      "hole_depth_min_mm": 7.0,
+      "min_wall_mm": 1.6,
+      "boss_od_min_mm": 8.0,
+      "material": "brass, lead free",
+      "qty": 67,
+      "order_qty": 100,
+      "qty_breakdown": {
+        "motor mounts": 16,
+        "tail clamps": 8,
+        "stab/fin": 4,
+        "gear clamps": 16,
+        "wing hardpoints": 8,
+        "pusher cup": 4,
+        "saddle to pod": 4,
+        "canopy": 2,
+        "pitot": 1,
+        "FC tray": 4
+      },
+      "vendor": "Amazon (ruthex)",
+      "part_no": "B08BCRZZS3",
+      "url": "https://www.amazon.com/dp/B08BCRZZS3",
+      "unit_usd": 0.0999,
+      "pack_usd": 9.99,
+      "checked": "2026-10-21",
+      "sources": [
+        "hole 4.0 mm and length 5.7 mm: ruthex comparison table on https://www.amazon.com/dp/B08K1BVGN9 (checked 2026-10-21)",
+        "OD 4.6 mm, min wall 1.6 mm: https://3djake.com/ruthex/threaded-insert-m3-100-pieces (search snippet, 2026-10-21)",
+        "hole depth = length + >= 1.3 mm: EST rule, cf. JLC3DP M4x8 insert -> 10 mm hole, https://jlc3dp.com/help/article/threaded-insert-service"
+      ]
+    }
+  ],
+  "consumables": [
+    {
+      "id": "C01",
+      "item": "Loctite 242 blue threadlocker 6 ml",
+      "use": "metal-to-metal threads only: F01 motor screws, F12 prop screws",
+      "vendor": "Amazon",
+      "part_no": "B000I1RSNS",
+      "url": "https://www.amazon.com/dp/B000I1RSNS",
+      "unit_usd": 7.03,
+      "checked": "2026-10-21"
+    }
+  ],
+  "fits": [
+    {
+      "id": "FT01",
+      "joint": "Wing joiner 0.875 x 0.058 in in spar socket 1.000 x 0.058 in",
+      "nominal_mm": 22.225,
+      "hole": {
+        "nominal_mm": 22.454,
+        "tol_mm": [
+          -0.203,
+          0.203
+        ]
+      },
+      "shaft": {
+        "nominal_mm": 22.225,
+        "tol_mm": [
+          -0.102,
+          0.102
+        ]
+      },
+      "min_clearance_mm": -0.076,
+      "max_clearance_mm": 0.534,
+      "nominal_clearance_mm": 0.229,
+      "action": "measure every tube on receipt (M1); if tight, lap the joiner with 400-grit; if > 0.30 mm, shim with one wrap of packing tape",
+      "source": "OD +-0.004 in, wall +-0.002 in (Zoro listing for 1.000 x 0.035 6061-T6 drawn tube, search 2026-10-21; same tolerance assumed for 0.875 and 0.058 wall, EST); ID tol = OD tol + 2 x wall tol (calc). Alcobra lists +-0.008 in for 5/8-1 in OD (https://alcobrametals.com/?p=91925): if that applies the band doubles. ASTM B210 table not accessed (—)."
+    },
+    {
+      "id": "FT02",
+      "joint": "1.000 in boom in printed split clamp bore (motor mounts, boom clamps, gear clamps, tail clamps)",
+      "nominal_mm": 25.4,
+      "hole": {
+        "nominal_mm": 25.6,
+        "tol_mm": [
+          -0.2,
+          0.2
+        ]
+      },
+      "shaft": {
+        "nominal_mm": 25.4,
+        "tol_mm": [
+          -0.102,
+          0.102
+        ]
+      },
+      "min_clearance_mm": -0.102,
+      "max_clearance_mm": 0.502,
+      "split_gap_mm": 1.2,
+      "action": "split halves stand 0.6 mm off the centreline each side; when the screws close the gap the bore clamps before the halves touch for any printed bore error < 1.0 mm",
+      "source": "boom OD tol as FT01; FDM bore tol +-0.2 mm (EST, well-tuned desktop FDM is +-0.1-0.3, Xometry desktop spec +-0.5 % lower limit +-0.5 mm, https://xometry.pro/en/articles/3d-printing-tolerances/)"
+    },
+    {
+      "id": "FT03",
+      "joint": "Landing leg 1.000 x 0.058 in in gear clamp socket (blind, 14.0 deep)",
+      "nominal_mm": 25.4,
+      "hole": {
+        "nominal_mm": 25.7,
+        "tol_mm": [
+          -0.2,
+          0.2
+        ]
+      },
+      "shaft": {
+        "nominal_mm": 25.4,
+        "tol_mm": [
+          -0.102,
+          0.102
+        ]
+      },
+      "min_clearance_mm": -0.002,
+      "max_clearance_mm": 0.602,
+      "action": "slip fit; ream or sand if tight; retained by F05 cross-bolt",
+      "source": "as FT02"
+    },
+    {
+      "id": "FT04",
+      "joint": "Printed splice plug inside boom (rear motor mount), 80 mm long, 40 mm each tube",
+      "nominal_mm": 23.622,
+      "hole": {
+        "nominal_mm": 23.622,
+        "tol_mm": [
+          -0.203,
+          0.203
+        ]
+      },
+      "shaft": {
+        "nominal_mm": 23.2,
+        "tol_mm": [
+          -0.2,
+          0.2
+        ]
+      },
+      "min_clearance_mm": 0.019,
+      "max_clearance_mm": 0.825,
+      "action": "plug carries the cross-bolt crush load and aligns the tubes; cross-bolts carry axial and torsional load",
+      "source": "boom ID 0.930 in (OnlineMetals pid 1211); tol from FT01 rule"
+    },
+    {
+      "id": "FT05",
+      "joint": "Spar socket tube in hot-wired/drilled foam channel, bonded",
+      "nominal_mm": 25.4,
+      "hole": {
+        "nominal_mm": 26.0,
+        "tol_mm": [
+          -0.5,
+          0.5
+        ]
+      },
+      "shaft": {
+        "nominal_mm": 25.4,
+        "tol_mm": [
+          -0.102,
+          0.102
+        ]
+      },
+      "min_clearance_mm": 0.098,
+      "max_clearance_mm": 1.202,
+      "action": "bond line filled with foam-safe adhesive (BOM line 'Foam-safe glue 4 oz')",
+      "source": "channel tolerance EST (hand hot-wire); tube tol as FT01"
+    },
+    {
+      "id": "FT06",
+      "joint": "Joiner in wing saddle root-plate bores, slip fit (rev B)",
+      "nominal_mm": 22.225,
+      "hole": {
+        "nominal_mm": 22.455,
+        "tol_mm": [
+          -0.2,
+          0.2
+        ]
+      },
+      "shaft": {
+        "nominal_mm": 22.225,
+        "tol_mm": [
+          -0.102,
+          0.102
+        ]
+      },
+      "min_clearance_mm": -0.072,
+      "max_clearance_mm": 0.532,
+      "action": "SLIP FIT, NOT BONDED (CAD rev B, 2026-10-21): the joiner slides out of the saddle so the pod transport piece stays inside the R4 0.5 m envelope; with both panels bolted on (F09) it is captured between two printed Joiner_Stop discs bonded in the spar sockets at 300 mm from the root faces. Lap the joiner or drill the bore to 22.6 if tight",
+      "source": "CAD bore = joinOD + 0.23 mm (cad/BuildVtol.cs WingSaddle); FDM tol EST; retention: cad/params.mjs Joiner_Stop"
+    },
+    {
+      "id": "FT07",
+      "joint": "Screw clearance holes in printed parts",
+      "nominal_mm": 3.0,
+      "hole": {
+        "model_mm": "ISO 273 normal + 0.2: M2 2.6, M3 3.6, M5 5.7",
+        "as_printed_mm": "ISO 273 normal: M2 2.4, M3 3.4, M5 5.5",
+        "tol_mm": [
+          -0.2,
+          0.2
+        ]
+      },
+      "shaft": {
+        "nominal_mm": 3.0
+      },
+      "min_clearance_mm": 0.2,
+      "max_clearance_mm": 0.6,
+      "action": "print a hole coupon first (M2); motor-pattern holes: drill to 3.4 after printing",
+      "source": "ISO 273 H13 table (Albany County Fasteners chart, https://www.albanycountyfasteners.com/media/6b/b8/g0/1764944339/clearance-hole-chart.pdf); +0.2 mm compensation: https://pollen.am/design_for_3d_printing_holes"
+    },
+    {
+      "id": "FT08",
+      "joint": "ruthex M3 heat-set insert in printed hole",
+      "nominal_mm": 4.0,
+      "hole": {
+        "nominal_mm": 4.0,
+        "tol_mm": [
+          -0.1,
+          0.1
+        ]
+      },
+      "shaft": {
+        "nominal_mm": 4.6,
+        "note": "insert knurl OD"
+      },
+      "min_clearance_mm": -0.7,
+      "max_clearance_mm": -0.5,
+      "action": "interference is intended (melt-in); tune the modelled hole on the coupon so the as-printed hole is 4.0",
+      "source": "ruthex table (B08K1BVGN9 page); OD 3djake"
+    },
+    {
+      "id": "FT09",
+      "joint": "Lift prop 4 mm centre hole on X4110S shaft (dia 4, 0/-0.03)",
+      "nominal_mm": 4.0,
+      "hole": {
+        "nominal_mm": 4.0,
+        "tol_mm": null
+      },
+      "shaft": {
+        "nominal_mm": 4.0,
+        "tol_mm": [
+          -0.03,
+          0.0
+        ]
+      },
+      "min_clearance_mm": null,
+      "max_clearance_mm": null,
+      "action": "prop hole tolerance not published (—); must slide on by hand",
+      "source": "SunnySky X4110S drawing (https://cdn.shopify.com/s/files/1/2024/0305/files/X4110S.jpg?v=1553581346); JeeFly listing (https://www.amazon.com/dp/B0FJ21V736)"
+    },
+    {
+      "id": "FT10",
+      "joint": "APC 14x8.5EP 6.35 mm bore on 6 mm adapter shaft (dia 6, 0/-0.03)",
+      "nominal_mm": 6.0,
+      "hole": {
+        "nominal_mm": 6.35,
+        "note": "use the APC adapter ring that fits 6 mm; ring sizes not published (—)"
+      },
+      "shaft": {
+        "nominal_mm": 6.0,
+        "tol_mm": [
+          -0.03,
+          0.0
+        ]
+      },
+      "min_clearance_mm": null,
+      "max_clearance_mm": null,
+      "action": "fit ring, check the prop runs true by spinning by hand",
+      "source": "Motion RC LP14085EP listing (search 2026-10-21); SunnySky drawing"
+    },
+    {
+      "id": "FT11",
+      "joint": "Pusher motor cup in pod tail ring",
+      "nominal_mm": 56.0,
+      "hole": {
+        "nominal_mm": 56.0,
+        "tol_mm": [
+          -0.2,
+          0.2
+        ]
+      },
+      "shaft": {
+        "nominal_mm": 55.6,
+        "tol_mm": [
+          -0.2,
+          0.2
+        ]
+      },
+      "min_clearance_mm": 0.0,
+      "max_clearance_mm": 0.8,
+      "action": "4 radial F07 screws locate and retain",
+      "source": "pod tail dia 60 mm (cad/params.txt tailR 0.030) less 2.0 mm wall (EST)"
+    }
+  ],
+  "general_tolerances": {
+    "printed_parts_default": {
+      "rule": "+-0.5 % of size, lower limit +-0.5 mm (desktop FDM)",
+      "source": "https://xometry.pro/en/articles/3d-printing-tolerances/ (checked 2026-10-21)"
+    },
+    "printed_parts_controlled": {
+      "bores": "FT02/FT03",
+      "insert_holes": "FT08",
+      "motor_floor_thickness_mm": [
+        4.35,
+        4.65
+      ],
+      "motor_pattern_position_mm": "dia 0.2 to the motor pilot (fixed-fastener rule T = (H - F)/2 with H 3.4, F 3.0)",
+      "other_hole_position_mm": "dia 0.4 (floating fastener T = H - F)"
+    },
+    "cut_tubes": {
+      "class": "ISO 2768-m",
+      "lengths": {
+        "boom front 991.0": 0.8,
+        "boom stub 485.9": 0.8,
+        "spar socket 800": 0.8,
+        "joiner 760": 0.8,
+        "leg 205": 0.5
+      },
+      "end_squareness_mm": 0.5,
+      "cross_hole_position_from_end_mm": 0.3,
+      "source": "ISO 2768-1 m column (https://amesweb.info/fits-tolerances/iso-2768-linear-dimensions-tolerances.aspx, checked 2026-10-21); squareness EST"
+    },
+    "torque_method": "No torque driver on hand: hang a known mass from a hex key, T = m g L (e.g. 0.6 N*m = 1.02 kg at L 60 mm). Makerspace torque driver is an assumption."
+  },
+  "unknowns": [
+    "JeeFly 1755 hub thickness (sets F12 length)",
+    "APC 14x8.5EP hub thickness and adapter ring sizes",
+    "EMAX ES3005HV mounting-tab hole size and spacing; whether screws are supplied",
+    "CoreWing F405 Wing V2 hole pattern: GetFPV says 30x30 mm but ArduPilot gives a 52 x 32 mm board, which cannot carry a 30 mm square of M3 holes",
+    "Holybro PT40 pitot tube OD and MS5525 board hole spacing",
+    "X4110S base-boss detail (drawing shows dia 5 x 0.9 at the base centre)",
+    "Insert torque-out in PETG and PA6-CF (sets all insert torques)",
+    "Bolt Depot shipping charge (shown only at checkout)"
+  ]
+}

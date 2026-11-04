@@ -11,7 +11,7 @@ function vendor(l) {
   const dom = (l.src.match(/([a-z0-9-]+\.(?:com|net|org))/i) || [])[1];
   if (/harbor freight/i.test(l.item)) return 'Harbor Freight';
   const NAMES = { 'amazon.com':'Amazon', 'emax-usa.com':'EMAX USA', 'holybro.com':'Holybro (ships CN)', 'homedepot.com':'Home Depot', 'onlinemetals.com':'OnlineMetals',
-    'racedayquads.com':'RaceDayQuads', 'radiomasterrc.com':'RadioMaster', 'readymaderc.com':'ReadyMadeRC', 'sunnyskyusa.com':'SunnySky USA', 'apcprop.com':'APC Propellers' };
+    'racedayquads.com':'RaceDayQuads', 'radiomasterrc.com':'RadioMaster', 'readymaderc.com':'ReadyMadeRC', 'sunnyskyusa.com':'SunnySky USA', 'apcprop.com':'APC Propellers', 'boltdepot.com':'Bolt Depot' };
   if (/(amazon.com)/.test(l.item)) return 'Amazon';
   if (dom) return NAMES[dom.toLowerCase()] || dom;
   const tag = Object.keys(VENDOR_BY_TAG).sort((x, y) => y.length - x.length).find(t => l.src.startsWith(t));

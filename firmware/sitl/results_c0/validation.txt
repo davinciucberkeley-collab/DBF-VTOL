@@ -1,0 +1,66 @@
+C0 physics model - trim validation against the analysis predictions
+  data: results.json generated 2026-10-25, aero_results.json generated 2026-10-25
+  mass 6.552 kg, S 0.6820 m2, b 2.40 m, c 0.2842 m, AR 8.45
+  inertia EST (kg m2): Ixx 1.096  Iyy 0.765  Izz 1.833
+  rotors (x fwd, y right, z down, m from CG): M1 (+0.471,+0.434,-0.023), M2 (-0.471,-0.434,-0.023), M3 (+0.471,-0.434,-0.023), M4 (-0.471,+0.434,-0.023)
+  leg contacts: [[0.381, 0.434, 0.25], [0.381, -0.434, 0.25], [-0.381, 0.434, 0.25], [-0.381, -0.434, 0.25]]
+  pusher at [-0.357, 0.0, 0.03] m, D 0.3556 m, KV 400
+  controls per deg (+ = roll right / nose up / nose right command): CLde 0.00739 Cmde -0.01841 Clda 0.00672 Cnda -0.00029 CYda -0.00028 CYdr -0.00212 Cndr 0.00074 Cldr -0.000056
+  rudder derivatives: AVL st_pod_trim.txt Cnd03/CYd03/Cld03
+  output map: S1=4, S2=4, S3=19, S4=21, S5=33, S6=34, S7=35, S8=36, S9=70, S11=21
+
+ hover at 22.2 V (maker table voltage, TEST-PLAN C07): per-motor thrust 16.06 N (1638 gf), Tmax 30.69 N
+  hover thrust fraction (AP throttle) @22.2V   model     0.523  predicted     0.523 -       -0.0 %  TEST-PLAN C07 0.52 = Tunit_g/Tmax_g at 22.2 V
+  hover PWM fraction (expo 0.72) @22.2V        model     0.680  predicted       nan -        -  EST expo
+
+ hover at 25.2 V (Q_M_BAT_VOLT_MAX ref.): per-motor thrust 16.06 N (1638 gf), Tmax 35.63 N
+  hover thrust fraction (AP throttle) @25.2V   model     0.451  predicted       nan -        -  what Q_M_THST_HOVER learns at full pack
+  hover PWM fraction (expo 0.72) @25.2V        model     0.620  predicted       nan -        -  EST expo
+  hover electrical power, 4 motors             model   842.437  predicted   915.723 W       -8.0 %  maker table interp vs sizing FM*eta model
+  hover current at 22.2 V                      model    37.948  predicted    41.249 A       -8.0 %  
+
+ level cruise at 20.0 m/s, 22.2 V
+  alpha                                        model     2.842  predicted     2.864 deg     -0.8 %  AVL trim
+  elevator (AVL sign, + TE down)               model    -3.449  predicted    -3.454 deg     +0.2 %  AVL trim
+  CL                                           model     0.382  predicted     0.385 -       -0.6 %  
+  drag / pusher thrust                         model     7.694  predicted     7.699 N       -0.1 %  aero build-up D_N
+  pusher throttle (PWM fraction)               model     0.748  predicted       nan -        -  EST motor model
+  pusher rpm                                   model  6197.915  predicted       nan rpm      -  EST motor model (R, I0)
+  pusher electrical power                      model   232.632  predicted   301.909 W      -22.9 %  build-up assumes etaProp 0.60; APC data gives ~0.74 at this J
+  pusher current at 22.2 V                     model    14.001  predicted    13.600 A       +3.0 %  
+  pusher advance ratio J                       model     0.544  predicted       nan -        -  
+  pusher static thrust, full throttle 22.2 V   model  3354.096  predicted       nan gf       -  7977 rpm, 28.2 A, 626 W (EST); maker motor max 615 W
+  pusher static elec. power, full throttle 25.2 V model   889.822  predicted       nan W        -  EST: exceeds the motor's 615 W rating - do not hold full pusher static on a full pack
+
+ stall (1 g, trimmed)
+  stall speed                                  model    11.750  predicted    11.750 m/s     +0.0 %  R11 12.0
+  alpha at stall                               model    11.213  predicted    10.822 deg     +3.6 %  
+  elevator at stall (AVL sign)                 model    -8.371  predicted    -8.196 deg     -2.1 %  
+  static margin Cma/CLa                        model    11.799  predicted    11.799 %MAC    -0.0 %  aero_results static_margin CG_28pct
+
+ estimates (EST) used by the model:
+  expo_phys                  0.72
+  lift_motor_tau_s           0.06
+  lift_rpm_max               7100.0
+  pusher_R_ohm               0.08
+  pusher_I0_A                0.8
+  pusher_tau_s               0.2
+  eta_motor                  0.85
+  de_max_deg                 20.0
+  da_max_deg                 20.0
+  dr_max_deg                 20.0
+  cg_z_m                     0.0
+  CL_min                     -0.8
+  post_stall_slope           2.5
+  flat_plate_CN              1.1
+  rudder_tau                 0.661
+  fin_z_arm_m                0.1
+  ground_k                   8000.0
+  ground_c                   250.0
+  ground_mu                  0.6
+  leg_contact_below_ref_m    0.25
+  pack_R_ohm                 0.03
+  pack_cells                 6
+  wiring_mass_spread_m       0.6
+
+ written validation_c0.json

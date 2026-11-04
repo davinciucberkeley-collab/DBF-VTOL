@@ -1,0 +1,35 @@
+#
+# sitl_overrides.param  -  load AFTER vtol_c0.param when running ArduPilot SITL (model "quadplane").
+#
+# The SITL "quadplane" model reads its control surfaces from fixed outputs: 1 aileron, 2 elevator,
+# 3 throttle, 4 rudder, and lift motors from outputs 5-8 (ArduPilot libraries/SITL/SIM_Plane.cpp and
+# SIM_QuadPlane.cpp: "leave first 4 servos free for plane", motor_offset = 4; checked 2026-10-21).
+# The real aircraft uses a different map (vtol_c0.param section 2), so SITL needs this remap.
+# Board-only items (DShot, BLHeli passthrough, CoreWing ADC pins, UART map, real airspeed driver)
+# are replaced by SITL equivalents. Values marked "SITL default" come from a parameter dump of the
+# ArduPlane 4.7.2 SITL binary (firmware/sitl/README.md). Nothing here is for the real aircraft.
+#
+SERVO1_FUNCTION,4         # SITL model: output 1 = aileron
+SERVO2_FUNCTION,19        # SITL model: output 2 = elevator
+SERVO3_FUNCTION,70        # SITL model: output 3 = throttle (pusher)
+SERVO4_FUNCTION,21        # SITL model: output 4 = rudder
+SERVO9_FUNCTION,0         # real pusher output not used in SITL
+SERVO11_FUNCTION,0        # real second rudder not used in SITL
+SERVO3_MIN,1000           # SITL quadplane.parm value
+SERVO3_MAX,2000           # SITL quadplane.parm value
+Q_M_PWM_TYPE,0            # normal PWM in SITL (DShot is a hardware output type)
+SERVO_BLH_MASK,0          # no BLHeli in SITL
+SERVO_BLH_OTYPE,0         # no BLHeli in SITL
+SERVO_DSHOT_ESC,0         # SITL default
+ARSPD_TYPE,100            # SITL simulated airspeed sensor
+ARSPD_BUS,1               # SITL default
+BATT_VOLT_PIN,13          # SITL default analog pin
+BATT_CURR_PIN,12          # SITL default analog pin
+BATT_VOLT_MULT,10.1       # SITL default
+BATT_AMP_PERVLT,17        # SITL default
+SIM_BATT_VOLTAGE,25.2     # simulate a full 6S pack (4.2 V x 6)
+SIM_BATT_CAP_AH,6.5       # simulate 6500 mAh
+SERIAL3_PROTOCOL,5        # SITL GPS port (SITL default)
+SERIAL4_PROTOCOL,5        # SITL default
+SERIAL5_PROTOCOL,-1       # SITL default
+SERIAL6_PROTOCOL,-1       # SITL default
