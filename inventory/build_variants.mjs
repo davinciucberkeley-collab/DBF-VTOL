@@ -222,7 +222,7 @@ export function buildVariants(ctx){
       viewer = `<div class="v3dgrid"><div class="viewer cadview fview altviewer" id="av-${id}" data-card="avcard-${id}" data-var="${id}">
   <canvas aria-label="Rotatable Autodesk Fusion model of ${v.ID}: the C0 aircraft with this variant's new and changed parts; drag to orbit, scroll to zoom, click a part for its card"></canvas>
   <span class="lbl">Autodesk Fusion · ${esc(vmesh.doc || id)}</span><div class="tip" hidden></div>
-  <div class="fvstart"><p>${nvar} new or changed bod${nvar > 1 ? 'ies' : 'y'} (${vmesh.tris.toLocaleString('en-US')} triangles) on top of the C0 model${names.length ? `, with ${names.length} C0 bod${names.length > 1 ? 'ies' : 'y'} hidden` : ''}. It takes a few seconds to build.</p><button type="button" class="altload" data-var="${id}">Load the 3D model</button></div>
+  <div class="fvstart"><p>${nvar} new or changed parts on the C0 model.</p><button type="button" class="altload" data-var="${id}">Load the 3D model</button></div>
   <div class="fallback" hidden><p>The 3D viewer needs an internet connection to load its graphics library (three.js).</p></div><p class="loadmsg">Building the ${v.ID} model…</p>
   <div class="ctl" role="group" aria-label="${v.ID} model controls" hidden>
     <div class="grp" role="group" aria-label="Changes"><button type="button" data-vact="hl" aria-pressed="true">Highlight changes</button>${names.length ? '<button type="button" data-vact="removed" aria-pressed="false">Show removed C0 parts</button>' : ''}</div>
@@ -231,8 +231,7 @@ export function buildVariants(ctx){
     <p class="altlegend"><i class="sw sw-acc"></i> new or changed in ${v.ID} <i class="sw sw-c0"></i> C0, unchanged (ghosted while highlighting)${names.length ? ' <i class="sw sw-rm"></i> C0 part removed or replaced' : ''}</p>
   </div></div>
   <aside class="pcard" id="avcard-${id}" aria-live="polite" aria-label="Selected part card"></aside></div>
-  <ul class="altparts" aria-label="New and changed bodies in ${v.ID}"></ul>
-  <p class="meta">${nvar} new or changed bod${nvar > 1 ? 'ies' : 'y'}; hides ${names.length ? names.map(n => `<code>${esc(n)}</code>`).join(', ') : 'nothing from C0'}. Meshes: <code>concepts/variants/${id}/fusion/stl/</code>, packed on the same grid as C0 (${(vmesh.bytes / 1024).toFixed(0)} KB).${vmesh.missing ? ` ${vmesh.missing} listed STL file(s) were missing and are left out.` : ''}</p>`;
+  <ul class="altparts" aria-label="New and changed bodies in ${v.ID}"></ul>`;
     } else {
       viewer = `<div class="altnomodel" role="status"><b>3D model being built in Fusion</b><p>The ${v.ID} meshes are not in the repo yet (<code>concepts/variants/${id}/fusion/variant_manifest.json</code>). Rebuild the page with <code>node inventory/build_overview.mjs</code> once they land: the viewer appears with no other change. Until then the inventory table, the hardware delta and the design note below carry the geometry.</p></div>`;
     }
@@ -241,9 +240,8 @@ export function buildVariants(ctx){
     const lit = con.claim ? `Literature claim: <i>${esc(con.claim)}</i> ${srcLink ? `<a href="${esc(srcLink)}" target="_blank" rel="noopener">${esc(srcTxt)}</a>` : esc(srcTxt || '')}` : '';
     const dm = round2(m.mass_kg.value - c0.mass), pct = (a, b) => ((a / b - 1) * 100);
     const cr = m.cruise_power_W.value, c0cr = c0of(m.cruise_power_W);
-    const sumP = `<p>${esc(con.what || '')} ${esc(con.note || '')} ${lit}</p>
-<p><b>On this aircraft</b> ${est}: MTOW ${f(m.mass_kg.value, 2)} kg (${sgn(dm, 2, ' kg')}), hover ${f(m.hover_power_W.value, 0)} W (${sgn(pct(m.hover_power_W.value, c0of(m.hover_power_W)), 0, ' %')}), cruise ${f(cr, 0)} W (${sgn(pct(cr, c0cr), 1, ' %')}), cruise endurance ${f(m.endurance_min.value, 1)} min against ${missionMin} needed, committed ${usd(sm.committed)} and reserve ${usd(sm.reserve)} (${reserveOk(sm.reserve) ? 'meets' : 'below'} the $${reserveTarget} target).</p>`;
-    const bl = v.verdict ? `<p class="verdict altbl"><b>Bottom line.</b> ${esc(firstSentences(v.verdict, 3))}</p>` : '';
+    const sumP = `<p>${esc((con.what || '').split(/(?<=\.)\s/)[0])}</p>${lit ? `<details class="more"><summary>Literature claim</summary><p>${lit}</p></details>` : ''}`;
+    const bl = v.verdict ? `<p class="verdict altbl"><b>Bottom line.</b> ${esc(firstSentences(v.verdict, 1))}</p>` : '';
     const ek = m.endurance_min.value, ekc = ek >= missionMin * 1.1 ? 'ok' : ek >= missionMin ? 'warn' : 'bad';
     const kp = `<div class="altkpis">${[
       kpiTile('MTOW', `${f(m.mass_kg.value, 2)} <small>kg</small>`, `C0 ${f(c0.mass, 2)} · ${sgn(dm, 2, ' kg')}${tag(m.mass_kg)}`),
@@ -253,18 +251,18 @@ export function buildVariants(ctx){
       kpiTile('Cruise endurance', `${f(ek, 1)} <small>min</small>`, `C0 ${f(c0.end, 1)} · need ${missionMin}${tag(m.endurance_min)}`, ekc),
       kpiTile('Committed / reserve', `${usd(sm.committed)}`, `reserve ${usd(sm.reserve)} · ${reserveOk(sm.reserve) ? 'meets' : 'below'} the $${reserveTarget} target`, reserveOk(sm.reserve) ? 'ok' : 'bad'),
       kpiTile('Hardware pieces', `${sgn(v.hw.net, 0)}`, `+${v.hw.nAdd} / \u2212${v.hw.nRem} vs ${v.hw.base}`)].join('')}</div>`;
-    const riskP = `<p><span class="chip ${riskCls(m.risk)}">risk: ${esc(m.risk)}</span> ${esc(m.risk_basis || '')} ${m.trl_note ? `<br><small>${esc(m.trl_note)}</small>` : ''}</p>`;
-    const mdHtml = v.md ? `<details class="more altnote"><summary>Read the design note</summary><div class="md">${mdToHtml(v.md)}</div><p class="src">concepts/variants/${id}/design.md</p></details>` : '';
+    const riskP = `<p><span class="chip ${riskCls(m.risk)}">risk: ${esc(m.risk)}</span> ${esc(firstSentences(m.risk_basis || '', 1))}</p>`;
+    const mdHtml = v.md ? `<p><a href="https://github.com/davinciucberkeley-collab/DBF-VTOL/blob/main/concepts/variants/${id}/design.md" target="_blank" rel="noopener">Full design note</a> (concepts/variants/${id}/design.md)</p>` : '';
     const srcs = `<p class="src">concepts/variants/${id}/metrics.json (every figure; each carries its own source and EST flag, shown on hover in the table), inventory.json (rows, summary: goods ${f(sm.goods, 2)}, tax ${f(sm.tax, 2)}, shipping ${f(sm.shipping, 2)}, committed ${f(sm.committed, 2)}), design.md; concepts/concepts.json ${id} (what, claim, source)</p>`;
     tabs.push(`<button type="button" role="tab" id="tab-${id}" aria-selected="${vi === 0}" aria-controls="alt-${id}" tabindex="${vi === 0 ? 0 : -1}" data-alt="${id}"><span class="mono">${v.ID}</span> ${esc(v.name)}</button>`);
     panels.push(`<div role="tabpanel" id="alt-${id}" class="altpanel" aria-labelledby="tab-${id}" tabindex="0"${vi === 0 ? '' : ' hidden'}>
 <h4>${v.ID}: ${esc(v.name)}</h4>${bl}${sumP}${kp}
 <h4>3D model</h4>${viewer}
-<h4>Inventory lines</h4><p class="small">${v.rows.length} lines: ${v.counts.same} same as C0, ${v.counts.changed} changed, ${v.counts.new} new, ${v.counts.removed} removed.${sm.removed_note ? ' ' + esc(sm.removed_note) : ''}</p>${invTable}
+<h4>Inventory lines</h4><p class="small">${v.counts.changed} changed, ${v.counts.new} new, ${v.counts.removed} removed against C0.</p>${invTable}
 <h4>Budget</h4><figure class="chart"><figcaption>${v.ID}: goods, tax, shipping, committed, reserve (USD)</figcaption><div class="svgwrap">${wfSvg}</div></figure>
-<p class="small">${esc(sm.shipping_note || '')}${sm.unquoted ? ' Not yet quoted (—): ' + esc(sm.unquoted.join('; ')) + '.' : ''}</p>
-<h4>Hardware delta</h4>${hwHtml}
-<h4>Risk and maturity</h4>${riskP}
+${sm.unquoted ? '<p class="small">Shipping from new vendors not quoted (—).</p>' : ''}
+<details class="more"><summary>Hardware delta: ${sgn(v.hw.net, 0)} pieces</summary>${hwHtml}</details>
+<h4>Risk</h4>${riskP}
 ${mdHtml}${srcs}</div>`);
     META[id] = { name: v.name, built: !!(vmesh && vmesh.parts.length), rows: Object.fromEntries(v.rows.filter(r => r.st !== 'same').map(r => [r.ID, { id: r.ID, item: r.Item, qty: +r['Qty needed'] || 0, unit: r['Unit USD'] === '' || r['Unit USD'] == null ? 0 : +r['Unit USD'], ext: +r['Ext USD'] || 0 }])) };
   });
@@ -272,8 +270,8 @@ ${mdHtml}${srcs}</div>`);
   const built = ids.filter(id => META[id].built);
 
   // ---------- section text ----------
-  const lede = `<b>${['Zero','One','Two','Three','Four','Five','Six'][V.length] || V.length} of the group A concepts, built out as full variants of C0.</b> ${V.map(v => `<b>${v.ID}</b> ${esc(v.name.toLowerCase())}: ${esc(firstSentences(v.verdict || '', 1).replace(/\.$/, '').replace(/^./, c => c.toLowerCase()))}`).join('; ')}.`;
-  const why = `<p>The concept page (<a href="Concept-Models.html">Concept-Models.html</a>, by James Guymon) sorts literature concepts into three groups. Group A, “${esc(grpA.title)}”, is the least experimental: it keeps the lift rotors for hover and the fixed wing and pusher for cruise, so the lift-and-cruise architecture, the span, the lift motors and the flight controller stay C0's, and each change is one subsystem. Concepts a1, a2 and a3 are the three group A ideas with a published or physical basis for a drag or power gain (Sinnige 2019 for wingtip props, IMAV 2017 for boundary-layer ingestion, the project's own drag estimate for the stopped rotors). Each was then costed line by line against the C0 inventory, sized with the C0 model (analysis/model.js, results.json), and drawn in Fusion on top of the C0 model so the new parts can be checked against the hardware already there.</p>`;
+  const lede = `<b>${V.length} low-risk variants of C0.</b> ${(() => { const b = V.filter(v => /^build/i.test(v.verdict || '')).map(v => v.ID); return b.length ? `Build only ${b.join(', ')}.` : 'None is worth building yet.'; })()}`;
+  const why = `<p>Group A of <a href="Concept-Models.html">the concept page</a> keeps the lift + cruise layout: one subsystem changes per variant.</p>`;
   const notes = `<ul class="tight"><li><b>Everything but cost is an estimate.</b> Mass, power, endurance and static margin come from the C0 sizing model with each variant's changes; cells tagged ${est} say so in their own source field (hover a cell for it). Prices are checked on the date in each design note; an unquoted shipping cost is “—”, not $0.</li>
 <li><b>Same C0 baseline everywhere.</b> The C0 column is the reference value carried by every variant's metrics.json (they agree), and its money is the C0 inventory summary: ${usd(S.committed)} committed, ${usd(S.reserve)} reserve.</li>
 <li><b>“New parts” is counted three ways.</b> a1 counts CAD occurrences (its hardware pieces are listed separately), a2 counts 3 CAD parts plus 20 hardware pieces, a3 counts 12 printed parts plus 84 hardware pieces. Compare the “Hardware pieces vs C0” row, which uses the hardware schedule's own piece count (${c0Pieces}), not the “New parts” row.</li>

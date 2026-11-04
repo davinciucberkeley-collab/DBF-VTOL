@@ -2,6 +2,7 @@
 // and analysis/results.json at build time and returns HTML strings (placeholders for body.html) plus the data the 3D viewer needs.
 // Nothing here is typed into the page by hand except wording; every number is read, parsed or computed.
 import { readFileSync } from 'fs';
+import { ic, flow, ratioBars, hbars } from './visuals.mjs';
 const rd = p => readFileSync(new URL(p, import.meta.url), 'utf8');
 
 export function buildElectrical(h) {
@@ -168,7 +169,8 @@ export function buildElectrical(h) {
     ['Peripheral rail', '—', '—', 'GPS, receiver current —', 'research file §4'],
     ['Remote ID UBEC', '—', '—', 'module current not on page read', 'research file §4']];
   const budgetTable = `<div class="tbl"><table><thead><tr><th>Branch</th><th class="n">Hover</th><th class="n">Cruise</th><th>Formula</th></tr></thead><tbody>${budgetRows.map(r => `<tr><td>${esc(r[0])}</td><td class="n">${esc(r[1])}</td><td class="n">${esc(r[2] || '—')}</td><td>${esc(r[3])}</td></tr>`).join('')}</tbody></table></div>`;
-  const lim = (name, rating, worst, wl, b) => { const r = round2(worst / b), bad = worst > b;
+  const limData = [];
+  const lim = (name, rating, worst, wl, b) => { const r = round2(worst / b), bad = worst > b; limData.push({ label: esc(name.replace(/ \(.*\)$/, '')), sub: esc(wl) + ' (' + esc(name.match(/\((.*)\)$/)?.[1] || '') + ')', val: worst, rating: b, valTxt: `${num(worst, 1)} A of ${esc(rating)}` });
     return `<tr><td>${esc(name)}</td><td class="n">${esc(rating)}</td><td>${esc(wl)}</td><td class="n">${num(worst, 1)} A</td><td class="n">×${num(r)}</td><td><span class="chip ${bad ? 'bad' : 'ok'}">${bad ? 'exceeds' : 'within'}</span></td></tr>`; };
   const limRows = [
     lim('FC current sensor (continuous)', `${sensorC} A`, iWorst, `full throttle, full pack: ${nFull} × ${aWorst} A`, sensorC),
@@ -182,6 +184,8 @@ export function buildElectrical(h) {
     lim('Servo rail (continuous)', `${becC} A`, +svRun[1], `5 servos running at ${svRun[2]} V`, becC)];
   const limTable = `<div class="tbl"><table><thead><tr><th>Limit</th><th class="n">Rating</th><th>Worst case</th><th class="n">Current</th><th class="n">Ratio</th><th>Verdict</th></tr></thead><tbody>${limRows.join('')}</tbody></table></div>`;
 
+  const limBars = ratioBars(limData, 'Worst-case current as a share of each rating; the line marks 100 % of the rating and the red part is over it', 'rating = 100 %') + `<details class="more"><summary>Table</summary>${limTable}</details>`;
+  const budgetBars = hbars([{ label: '4 lift ESCs, hover', val: Ih, txt: num(Ih, 1) + ' A' }, { label: 'Pusher, cruise', val: Ic, txt: num(Ic, 1) + ' A' }, { label: 'Transition peak', val: It, txt: num(It, 1) + ' A' }, { label: `Full throttle, nominal ${Vp} V`, val: iFull, txt: num(iFull, 1) + ' A', cls: 'warn' }, { label: 'Full throttle, full pack 25 V', val: iWorst, txt: num(iWorst, 1) + ' A', cls: 'bad' }], 'Current by branch in amps: hover, cruise, transition peak, full throttle nominal and worst case');
   // ===================== conflicts =====================
   const rbul = Object.fromEntries([...S3.matchAll(/^- (R-[A-F])\. (.*)$/gm)].map(m => [m[1], m[2]]));
   for (const k of ['R-A', 'R-B', 'R-C', 'R-D', 'R-E', 'R-F']) if (!rbul[k]) throw new Error('missing ' + k);
@@ -198,11 +202,11 @@ export function buildElectrical(h) {
     ['warn', 'Risk', clean(rbul['R-F']), 'Measure contact heating at the stall test; the stall test is test 7.', 'R-F, §3'],
     ['open', 'Unresolved', clean(rbul['R-C']).replace(/\s*Unresolved which is right\.?/, ''), '— (both ranges pass at full pack voltage; which listing is right is unresolved)', 'R-C, §3'],
     ['open', 'Setup', 'ArduPilot QuadPlane defaults the lift motors to outputs 5–8; this design uses outputs 1–4 (functions 33–36) and the pusher on S5', 'Set SERVO1–4_FUNCTION = 33–36 and set SERVO5–8 explicitly (S5 = 70; S6, S7 spare).', '§3 (ardupilot.org/plane/docs/quadplane-frame-setup.html)']];
-  const confRow = c => `<tr><td><span class="chip ${c[0]}">${c[1]}</span></td><td>${esc(c[2])}</td><td>${esc(c[3])}</td><td><small>${esc(c[4])}</small></td></tr>`;
-  const confTbl = cs => `<div class="tbl"><table><thead><tr><th>Severity</th><th>Conflict</th><th>Recommended action</th><th>Source</th></tr></thead><tbody>${cs.map(confRow).join('')}</tbody></table></div>`;
-  // safety-critical rows (exceeds a rating, or interference with the GPS) stay visible; the rest sit behind a disclosure
-  const critical = c => c[1] === 'Exceeds rating' || c[1] === 'Interference';
-  const confTable = confTbl(conflicts.filter(critical)) + `<details class="more"><summary>${conflicts.filter(c => !critical(c)).length} more risks and open items</summary>${confTbl(conflicts.filter(c => !critical(c)))}</details>`;
+  const CSHORT = [['bolt', 'Lift current exceeds sensor and motor limits'], ['plug', 'Transition current exceeds XT90S rating'], ['rotate', 'Servo stall exceeds servo rail rating'], ['pin', 'GPS too close to power trunk'], ['help', 'Pusher DShot output unverified'],
+    ['sliders', 'Rudder output pad conflict on board'], ['help', 'Servo V+ pad voltage to confirm'], ['hot', 'Connector contact heating at stall'], ['info', 'XT90S rating listings disagree'], ['sliders', 'QuadPlane motor output defaults differ']];
+  if (CSHORT.length !== conflicts.length) throw new Error('conflict labels out of step with conflicts');
+  const confChip = (c, i) => `<details class="cchip sev-${c[0]}"><summary>${ic(CSHORT[i][0])}<span class="cl">${CSHORT[i][1]}</span><span class="cs">${esc(c[1])}</span></summary><div class="cbody"><p>${esc(c[2])}</p><p><b>Action:</b> ${esc(c[3])}</p><small>${esc(c[4])}</small></div></details>`;
+  const confTable = `<div class="cchips">${conflicts.map(confChip).join('')}</div><div class="keyline"><span class="bad">exceeds a rating</span><span class="warn">check or confirm</span><span class="open">open item</span></div>`;
 
   // ===================== wiring blueprint (SVG generated from wiring.json) =====================
   const ENDP = /^(ESC|MOT|SRV|ASPD|PITOT)/, isEnd = id => ENDP.test(id);
@@ -312,8 +316,12 @@ ${T(tx0 + 8, ty0 + 17, 'DBF-ELE-001 · Wiring blueprint', 'idt')}${T(tx0 + 8, ty
   const gaugeTable = `<div class="tbl"><table><thead><tr><th>Gauge</th><th class="n">Wires</th><th class="n">Route length EST</th><th class="n">Conductor length EST</th><th>Note</th></tr></thead><tbody>${gRows.map(([n, ws, note]) => `<tr><td>${esc(n)}</td><td class="n">${ws.length}</td><td class="n">${num(round2(sum(ws.map(w => w.length_m_est))))} m</td><td class="n">${num(round2(sum(ws.map(w => w.length_m_est * w.conductors))))} m</td><td>${esc(note)}</td></tr>`).join('')}<tr class="total"><td>All wires</td><td class="n">${WIRES.length}</td><td class="n">${num(lenTotal)} m</td><td class="n">${num(condBy(() => true))} m</td><td>route length matches the research file §5 (${num(lenTotal)} m EST); conductor length = route length × conductors</td></tr></tbody></table></div>`;
   const ampRows = [10, 12, 14].map(g => { const ws = WIRES.filter(w => w.gauge_awg === g); const peak = w => (w.id === 'W02' || w.id === 'W03') ? iWorst : /^W0[4-7]$/.test(w.id) ? aWorst : w.current_A_max; const worst = Math.max(...ws.map(peak)), nom = Math.max(...ws.map(w => w.current_A_max));
     const ex = worst > AMP[g]; return `<tr><td>${g} AWG</td><td class="n">${AMP[g]} A</td><td>${ws.map(w => w.id).join(', ')}</td><td class="n">${nom} A</td><td class="n">${num(worst, 1)} A</td><td><span class="chip ${ex ? 'bad' : 'ok'}">${ex ? 'exceeds' : 'within'}</span></td></tr>`; }).join('');
-  const ampTable = `<div class="tbl"><table><thead><tr><th>Gauge</th><th class="n">Table ampacity</th><th>Wires</th><th class="n">I max in wiring.json</th><th class="n">Worst case</th><th>Verdict</th></tr></thead><tbody>${ampRows}</tbody></table></div>
-<p>Worst case = ${nFull} × ${aWorst} A = ${num(iWorst, 1)} A at the 10 AWG trunk and ${aWorst} A per 12 AWG lift branch (full pack, uncapped). The 10 AWG trunk exceeds its table value: keep it only because it is ${num(round2(sum(WIRES.filter(w => w.gauge_awg === 10).map(w => w.length_m_est))), 2)} m long and the high current is intermittent, and cap the lift throttle; if the cap is not enforced, use 8 AWG (ampacity not looked up, —). A 14 AWG wire must not carry a motor current (${aFull} A exceeds ${AMP[14]} A): use 12 AWG. The 14 AWG wire here feeds only the UBEC.</p>`;
+  const ampData = [10, 12, 14].map(g => { const ws = WIRES.filter(w => w.gauge_awg === g); const peak = w => (w.id === 'W02' || w.id === 'W03') ? iWorst : /^W0[4-7]$/.test(w.id) ? aWorst : w.current_A_max; const worst = Math.max(...ws.map(peak));
+    return { label: `${g} AWG`, sub: esc(ws.map(w => w.id).join(', ')), val: worst, rating: AMP[g], valTxt: `${num(worst, 1)} A of ${AMP[g]} A` }; });
+  const ampBars = ratioBars(ampData, 'Worst-case current as a share of the table ampacity for each wire gauge', 'ampacity = 100 %');
+  const lenRows = [...gRows.slice(0, 3).map(([n, ws]) => ({ label: n, val: round2(sum(ws.map(w => w.length_m_est * w.conductors))), txt: `${num(round2(sum(ws.map(w => w.length_m_est * w.conductors))))} m <small>${ws.length} wires</small>` }))];
+  const lenBars = hbars(lenRows, 'Conductor length to cut and buy for each gauge, in metres (EST)');
+  const gaugeNote = `<h4 class="kh">Current against ampacity</h4>${ampBars}<h4 class="kh">Conductor length to buy ${est}</h4>${lenBars}<p class="meta">Total ${num(lenTotal)} m route. Worst ${num(iWorst, 1)} A on the 10 AWG trunk: cap the lift throttle or go to 8 AWG. Motor currents need 12 AWG; 14 AWG feeds only the UBEC.</p><details class="more"><summary>Table</summary>${gaugeTable}</details>`;
   const fnOpts = WCATS.map(([k, n]) => `<option value="${k}">${esc(n)}</option>`).join(''), znOpts = ZORD.map(z => `<option value="${z}">${ZN[z]}</option>`).join('');
   const ep = e => `${esc(e.component)}.${esc(e.pin)}`;
   const wcols = [['ID', 's'], ['Function', 's'], ['From', 's'], ['To', 's'], ['Gauge AWG', 'n'], ['Colour', 's'], ['Connectors', 's'], ['Joint', 's'], ['Length m EST', 'n'], ['I max A', 'n'], ['Source', 's']];
@@ -324,16 +332,27 @@ ${T(tx0 + 8, ty0 + 17, 'DBF-ELE-001 · Wiring blueprint', 'idt')}${T(tx0 + 8, ty
 
   // ===================== harness by joint =====================
   const jointIds = [...new Set(WIR.connectors.map(c => c.joint).filter(Boolean))].sort((a, b) => a[1] - b[1] || b[3].localeCompare(a[3]));
+  const jinfo = j => { const cs = WIR.connectors.filter(c => c.joint === j); return { pairs: sum(cs.map(c => c.mated_pairs)), wires: new Set(cs.flatMap(c => c.wires)).size, where: cs[0].location }; };
   const jcards = jointIds.map(j => { const cs = WIR.connectors.filter(c => c.joint === j), ws = [...new Set(cs.flatMap(c => c.wires))].sort();
     const side = j.endsWith('R') ? 'right' : 'left';
     return `<div class="card jcard"><h4><span class="mono-id">${j.replace('_', ' ')}</span> ${side} · ${esc(cs[0].location)}</h4><p class="meta">${sum(cs.map(c => c.mated_pairs))} mated pairs · ${ws.length} wire${ws.length > 1 ? 's' : ''} cross</p><ul>${cs.map(c => `<li><span class="mono-id">${c.id}</span><span>${esc(c.type)}: ${c.wires.map(id => `${id} <small>${esc(shortName(wby[id].function))}</small>`).join(', ')}</span><span class="q">${c.mated_pairs}×</span></li>`).join('')}</ul></div>`; }).join('');
-  const fixed = WIR.connectors.filter(c => !c.joint).map(c => `<li><span class="mono-id">${c.id}</span> ${esc(c.type)} (${esc(c.location)}): ${c.wires.join(', ')}</li>`).join('');
+  const fixed = WIR.connectors.filter(c => !c.joint).map(c => `<li><span class="mono-id">${c.id}</span> ${esc(c.type)} <small>(${esc(c.location)}: ${c.wires.join(', ')})</small></li>`).join('');
+  // top-view schematic: nose up, right wing on the right; markers carry the number of mated connector pairs
+  const sch = (() => {
+    const JP = { J1: [[170, 122], [310, 122]], J2: [[105, 122], [375, 122]], J3: [[105, 215], [375, 215]] }, o = [];
+    o.push('<rect class="sh-wing" x="20" y="100" width="440" height="46" rx="5"/><rect class="sh-boom" x="100" y="55" width="10" height="245"/><rect class="sh-boom" x="370" y="55" width="10" height="245"/><rect class="sh-wing" x="68" y="288" width="344" height="20" rx="3"/><rect class="sh-pod" x="205" y="28" width="70" height="262" rx="35"/>');
+    o.push(T(240, 62, 'Pod', 'shl', 'middle'), T(240, 304, 'Tail', 'shl', 'middle'), T(36, 94, 'Wing', 'shl'), T(240, 16, 'nose', 'sm', 'middle'), T(10, 330, 'left', 'sm'), T(470, 330, 'right', 'sm', 'end'));
+    for (const [J, pts] of Object.entries(JP)) pts.forEach(([x, y], i) => { const id = `${J}_${i ? 'R' : 'L'}`, inf = jinfo(id);
+      o.push(`<g class="shj"><title>${id.replace('_', ' ')}: ${inf.pairs} mated pairs, ${inf.wires} wires, ${esc(inf.where)}</title><circle cx="${x}" cy="${y}" r="16"/>${T(x, y + 5, J, 'jn', 'middle')}<rect class="pill" x="${x - 30}" y="${y + 22}" width="60" height="22" rx="11"/>${T(x, y + 38, inf.pairs + (inf.pairs === 1 ? ' pair' : ' pairs'), 'pc', 'middle')}</g>`); });
+    return `<svg viewBox="0 0 480 340" class="sch" role="img" aria-label="Top view of the aircraft, nose up: pod, wing, two booms and tail. Joint J1 at each wing root, J2 at each boom clamp, J3 at each boom splice. Mated connector pairs: ${Object.entries(JP).map(([J]) => ['L', 'R'].map(sd => J + ' ' + (sd === 'L' ? 'left' : 'right') + ' ' + jinfo(J + '_' + sd).pairs).join(', ')).join('; ')}."><title>Harness joints, top view</title>${o.join('')}</svg>`;
+  })();
+  const jointsHtml = `<figure class="chart schfig"><figcaption>Where the harness unplugs (mated connector pairs)</figcaption>${sch}</figure><details class="more"><summary>Wires at each joint</summary><div class="grid2">${jcards}</div></details><details class="more"><summary>Fixed connections (not broken for transport)</summary><ul class="tight fixlist">${fixed}</ul></details>`;
   need(/Harness segmentation \(R4\)/, MD, 'R4 harness heading');
 
   // ===================== tests and measurements =====================
   const tests = [...S10.matchAll(/^(\d+)\. (.*)$/gm)].map(m => m[2]); if (tests.length < 6) throw new Error('test plan items');
   const checklist = `<ul class="check">${tests.map((t, i) => `<li><input type="checkbox" id="et${i + 1}"><label for="et${i + 1}"><b>${i + 1}.</b> ${esc(t)}</label></li>`).join('')}</ul>`;
-  const measure = `<div class="measure"><h4>What the team must measure</h4><ol>
+  const measureFull = `<div class="measure"><ol>
 <li><span class="id">E1</span><div><b>Continuity and polarity on all ${WIRES.length} wires.</b> <span class="how">Before any pack is connected: every wire in the schedule, then XT90S, XT60H and ESC pads.</span> <span class="fail">Any short or reversed pole fails. Numeric threshold: —.</span></div></li>
 <li><span class="id">E2</span><div><b>Smoke-stopper first power-up.</b> <span class="how">A bulb in series on the pack side.</span> <span class="fail">Pass or fail threshold: —.</span></div></li>
 <li><span class="id">E3</span><div><b>Current-sensor calibration.</b> <span class="how">Start from BATT_VOLT_MULT ${esc(sel(S10, /BATT_VOLT_MULT ([\d.]+)/))} and BATT_AMP_PERVLT ${esc(sel(S10, /BATT_AMP_PERVLT (\d+)/))} (vendor defaults); trim against a clamp meter at a known load.</span> <span class="fail">Tolerance: —.</span></div></li>
@@ -342,6 +361,14 @@ ${T(tx0 + 8, ty0 + 17, 'DBF-ELE-001 · Wiring blueprint', 'idt')}${T(tx0 + 8, ty
 <li><span class="id">E6</span><div><b>DShot on the pusher output (R-A).</b> <span class="how">Confirm the function-70 output drives the pusher ESC.</span> <span class="fail">If it does not, fall back to PWM throttle plus ESC calibration. Threshold: —.</span></div></li>
 <li><span class="id">E7</span><div><b>Motor direction, props off.</b> <span class="how">Motors 1 and 2 CCW, 3 and 4 CW (quad-X order).</span> <span class="fail">Any reversed motor fails. Threshold: —.</span></div></li>
 </ol></div>`;
+  const measure = flow([
+    { n: 'E1', icon: 'plug', title: 'Continuity and polarity', sub: `All ${WIRES.length} wires, XT90S, XT60H, ESC pads; no pack yet`, badge: 'Short or reversed pole = fail', badgeCls: 'bad' },
+    { n: 'E2', icon: 'bulb', title: 'Smoke-stopper power-up', sub: 'Bulb in series, pack side', badge: 'Threshold —' },
+    { n: 'E3', icon: 'sliders', title: 'Current-sensor calibration', sub: `Start ${esc(sel(S10, /BATT_VOLT_MULT ([\d.]+)/))} V mult, ${esc(sel(S10, /BATT_AMP_PERVLT (\d+)/))} A/V; trim with a clamp meter`, badge: 'Tolerance —' },
+    { n: 'E4', icon: 'rotate', title: 'Servo stall current', sub: 'Stall each servo at 7.2 V, clamp meter', badge: `Fail above ${becP} A peak`, badgeCls: 'bad' },
+    { n: 'E5', icon: 'gauge', title: 'Lift throttle-cap current', sub: `Thrust stand, motor output max set; uncapped budget ${num(iWorst, 1)} A`, badge: `Fail at ${sensorC} A total or ${motorLim} A / motor (30 s)`, badgeCls: 'bad' },
+    { n: 'E6', icon: 'wave', title: 'DShot on pusher output (R-A)', sub: 'Function-70 output drives the pusher ESC', badge: 'Else PWM + ESC calibration', badgeCls: 'warn' },
+    { n: 'E7', icon: 'prop', title: 'Motor direction, props off', sub: 'Motors 1, 2 CCW; 3, 4 CW (quad-X)', badge: 'Any reversed = fail', badgeCls: 'bad' }], 'Electrical tests E1 to E7 in order') + `<details class="more"><summary>Full wording</summary>${measureFull}</details>`;
   const unknowns = S12.trim().replace(/\.$/, '');
 
   // ===================== landing gear =====================
@@ -365,12 +392,16 @@ ${gearLines.map(x => `<tr><td>${findBtn(x.ID)} ${esc(x.Item.split(' (')[0])}</td
     len: w.length_m_est, cur: w.current_A_max, joint: w.js, cat: w.cat, pair: isPair(w), route: w.route, zone: w.zone, source: w.source }));
   const EL = { comps: clientComps, wires: clientWires, wcats: WCATS, ccats: CCATS, gear: Object.assign(gear, { wheelItem: byId['G-01'].Item, wheelRowIds: gearLines.map(x => x.ID), limits: { boom: limitsTxt[1], stab: limitsTxt[2] }, price: wheelPrice }), date: WIR.date_checked };
 
+  const treeNotes = `<div class="itiles">
+<div class="itile">${ic('remote')}<b>Remote ID on its own UBEC</b><span>A servo brownout cannot drop the FAA broadcast.</span></div>
+<div class="itile">${ic('cap')}<b>470 µF 35 V at FC and 5 ESCs</b><span>Inventory G-04, proposed, not committed.</span></div>
+<div class="itile">${ic('ground')}<b>Single star ground at BUS1</b><span>UBEC ground returns to the same star.</span></div></div>`;
   // ---------- placeholders ----------
   const T2 = {
-    EL_N_COMP: COMPS.length, EL_N_WIRE: WIRES.length, EL_LEN: num(lenTotal), EL_N_RENDER: clientComps.length, EL_N_JOINT: jointIds.length,
-    EL_DIAGRAM: dgSvg, EL_FCMAP: fcTable, EL_UART: uartTable, EL_BUDGET: budgetTable, EL_LIMITS: limTable, EL_CONFLICTS: confTable,
+    EL_TREE_NOTES: treeNotes, EL_N_COMP: COMPS.length, EL_N_WIRE: WIRES.length, EL_LEN: num(lenTotal), EL_N_RENDER: clientComps.length, EL_N_JOINT: jointIds.length,
+    EL_DIAGRAM: dgSvg, EL_FCMAP: fcTable, EL_UART: uartTable, EL_BUDGET: budgetBars + budgetTable, EL_LIMITS: limBars, EL_CONFLICTS: confTable,
     EL_FULL_A: num(iWorst, 1), EL_FULL_NOM: num(iFull, 1), EL_A_WORST: aWorst, EL_A_NOM: aFull, EL_MOTOR_LIM: motorLim, EL_XT_RATIO: num(ratioXt), EL_GPS_D: num(gpsD2, 3), EL_GPS_D3: num(gpsD3, 3), EL_BFIELD: Math.round(bField), EL_TRUNK_A: trunkI, EL_SENSOR_A: sensorC, EL_RATIO: num(ratioSensor), EL_TRANS_A: num(It, 1), EL_HOVER_A: num(Ih, 1), EL_XT_C: xtC, EL_BEC_C: becC, EL_BEC_P: becP, EL_STALL_LO: svStall[1], EL_STALL_HI: svStall[3], EL_VP: Vp,
-    EL_BLUEPRINT: bpSvg, EL_WKEY: wLegend, EL_WSCHED: wsched, EL_GAUGE: gaugeTable + ampTable, EL_JOINTS: jcards, EL_FIXED: fixed, EL_TESTS: checklist, EL_MEASURE: measure, EL_UNKNOWNS: esc(unknowns),
+    EL_BLUEPRINT: bpSvg, EL_WKEY: wLegend, EL_WSCHED: wsched, EL_GAUGE: gaugeNote, EL_JOINTS: jointsHtml, EL_FIXED: fixed, EL_TESTS: checklist, EL_MEASURE: measure, EL_UNKNOWNS: esc(unknowns),
     GEAR_GEO: geoTable, GEAR_COST: gearCost, GEAR_MASS: gearMass, GEAR_DROP_MM: Math.round(dropM * 1000), GEAR_BOOM: limitsTxt[1], GEAR_STAB: limitsTxt[2], GEAR_ROLL: rollover, GEAR_SLACK1: slack[1], GEAR_SLACK2: slack[2],
     GEAR_D_IN: wheelD_in.toFixed(2), GEAR_G: wheelG, GEAR_PRICE: wheelPrice, GEAR_E: axleOffset, GEAR_PUSH_BEFORE: need(/(\d+)\s*mm/, geoRow('Pusher disc')[1], 'pusher clearance')[1], GEAR_PUSH_AFTER: need(/(\d+)\s*mm/, geoRow('Pusher disc')[2], 'pusher clearance')[1],
     GEAR_GOODS: usd(gearGoods), PROP_GOODS: usd(P.goods), PROP_TAX_TOTAL: usd(P.withTax), PROP_AFTER: usd(P.reserveAfter), PROP_AFTER_NWA: usd(P.reserveAfterWithNwa), PROP_N: propRows.length,
