@@ -94,15 +94,34 @@ Download and double-click the file. It needs web fonts and the three.js library 
 
 ### Published versions (Claude artifacts)
 
-The pages are also published as Claude artifacts, so they can be opened from a link without downloading anything:
+Every page published as a Claude artifact from the team account. Public pages open for anyone with the link. A private page opens only for the team account until someone switches it to "Anyone with the link" in its Share menu; "—" means the access has not been checked.
 
-| Page | Link |
-|---|---|
-| Lift + Cruise VTOL Review | https://claude.ai/artifact/5VFFp3Xv1u88pdJkyqS6dd |
-| DBF Inventory Overview (public) | https://claude.ai/artifact/C6JEuXWN4B4Aoay5zHU3Pg |
-| Lift + Cruise VTOL Sim | https://claude.ai/artifact/221H8qjqH89NDempeZCqnT |
+**Project pages**
 
-The links are view only. If one doesn't open for you, use `VTOL-Review.html`, `Inventory-Overview.html` or `sim/` from this repo instead.
+| Page | What it is | In the repo | Link | Access |
+|---|---|---|---|---|
+| Lift + Cruise VTOL Review | The design review (§1 above) | `VTOL-Review.html` | https://claude.ai/artifact/5VFFp3Xv1u88pdJkyqS6dd | Public |
+| DBF Inventory Overview | Inventory and electrical overview, Fusion model with all hardware, alternative designs (§3 above) | `Inventory-Overview.html` | https://claude.ai/artifact/C6JEuXWN4B4Aoay5zHU3Pg | Public |
+| Lift + Cruise VTOL Sim | Browser flight game (§4 above) | `sim/` | https://claude.ai/artifact/221H8qjqH89NDempeZCqnT | Public |
+| Concept Models | Eleven literature concepts as 3D models on the C0 envelope (§5 above) | `Concept-Models.html` | https://claude.ai/artifact/RmtnqVwQwzGtr5uR8NeNmD | — |
+| VTOL Concept Atlas | Atlas of VTOL concepts | — | https://claude.ai/artifact/MUwcV6DA63V6CELbSu1nuU | — |
+| Lift+Cruise VTOL — Phase 0–1 Review | Slide deck for the phase 0–1 review | — | https://claude.ai/artifact/W3H44ZixNDq3kHi9U3G4xY | Private |
+
+**Team tracking**
+
+| Page | What it is | Link | Access |
+|---|---|---|---|
+| Program Status Wall | Program status board | https://claude.ai/artifact/YaMQS7AE6VnxFRDzhsQBUN | — |
+| Prediction Wall | Team prediction board | https://claude.ai/artifact/UotDJxRj63HPV1EKpi6q9H | — |
+
+**Earlier exploration**
+
+| Page | What it is | Link | Access |
+|---|---|---|---|
+| Tilt-Wing VTOL Design Report | Tilt-wing design report | https://claude.ai/artifact/P1anPjH3fBxVVbGBEpLHUg | — |
+| Tilt-Wing Designer | Tilt-wing design tool | https://claude.ai/artifact/PQmwyLZZRQxfzAyzwcWGxL | — |
+
+If a link doesn't open for you, use the repo file next to it where there is one. Access checked 2026-11-04.
 
 ## Current design (v0.3.1, 2026-10-13)
 
