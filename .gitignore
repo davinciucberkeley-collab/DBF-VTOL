@@ -50,3 +50,6 @@ cad/sim/thermal/PerformanceLog.txt
 cad/sim/thermal/PROBE_*
 # exported thermal fields (5-8 MB each; the page uses the downsampled copy in analysis/thermal/thermal_results.json)
 cad/sim/thermal/fields/
+
+# graphify knowledge-graph output (generated, rebuild with /graphify .)
+graphify-out/
